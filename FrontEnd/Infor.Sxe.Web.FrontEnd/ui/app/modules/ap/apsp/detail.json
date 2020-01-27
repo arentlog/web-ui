@@ -1,0 +1,401 @@
+{
+  "viewId": "ap-apsp-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.purchase.history",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.apsp.vendno",
+                              "label": "global.vendor.number",
+                              "required": true,
+                              "meta": "Vendor",
+                              "readonly": false,
+                              "conditionReadonly": "!base.isCreate()",
+                              "eventChange": "dtl.loadColumnLabels()",
+                              "autoFocus": true
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.apsp.whse",
+                              "label": "global.warehouse",
+                              "required": true,
+                              "meta": "Warehouse",
+                              "conditionReadonly": "!base.isCreate()",
+                              "eventChange": "dtl.loadColumnLabels()"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.apsp.prodline",
+                              "label": "global.product.line",
+                              "meta": "ProdLine",
+                              "required": true,
+                              "conditionReadonly": "!base.isCreate()",
+                              "eventChange": "dtl.loadColumnLabels()",
+                              "options": {
+                                "searchParams": {
+                                  "vendno": {
+                                    "type": "REF",
+                                    "value": "dtl.apsp.vendno"
+                                  },
+                                  "whse": {
+                                    "type": "REF",
+                                    "value": "dtl.apsp.whse"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.apsp.yr",
+                              "label": "global.year",
+                              "conditionReadonly": "!base.isCreate()",
+                              "required": false,
+                              "dataFormat": "YEAR",
+                              "size": "XS",
+                              "subFormat": "2Digit"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 24,
+                  "type": "EXP_AREA",
+                  "label": "global.purchase.history",
+                  "children": [
+                    {
+                      "id": 46,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 47,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 40,
+                              "type": "GRID",
+                              "model": "dtl.purchaseHistory",
+                              "options": {
+                                "editable": true,
+                                "paging": false,
+                                "events": {
+                                  "cellchange": "dtl.calculateTotals()"
+                                },
+                                "showRowCount": false
+                              },
+                              "controls": {
+                                "toolbar": {
+                                  "id": 42,
+                                  "type": "TOOLBAR",
+                                  "label": "global.purchase.history"
+                                }
+                              },
+                              "children": [
+                                {
+                                  "id": 41,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "month",
+                                  "label": "global.month"
+                                },
+                                {
+                                  "id": 43,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "purchamt",
+                                  "label": "{{dtl.purchaseHistoryLabel1}}",
+                                  "editable": true,
+                                  "decimals": 2,
+                                  "digits": 10,
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 45,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "qtysold",
+                                  "label": "{{dtl.purchaseHistoryLabel2}}",
+                                  "editable": true,
+                                  "decimals": 2,
+                                  "digits": 10,
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 48,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "salesamt",
+                                  "label": "{{dtl.purchaseHistoryLabel3}}",
+                                  "editable": true,
+                                  "decimals": 2,
+                                  "digits": 10,
+                                  "dataFormat": "CURRENCY"
+                                },
+                                {
+                                  "id": 49,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "cogamt",
+                                  "label": "{{dtl.purchaseHistoryLabel4}}",
+                                  "editable": true,
+                                  "dataFormat": "CURRENCY"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 55,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 56,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 50,
+                              "type": "FIELD_SET",
+                              "label": "global.totals",
+                              "children": [
+                                {
+                                  "id": 51,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "dtl.purchamt",
+                                  "label": "global.amount.purchased",
+                                  "dataFormat": "CURRENCY"
+                                },
+                                {
+                                  "id": 53,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "dtl.qtysold",
+                                  "label": "global.amount.sold",
+                                  "dataFormat": "CURRENCY"
+                                },
+                                {
+                                  "id": 52,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "dtl.salesamt",
+                                  "label": "global.sales",
+                                  "dataFormat": "CURRENCY"
+                                },
+                                {
+                                  "id": 54,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "dtl.cogamt",
+                                  "label": "global.cost.of.sales",
+                                  "dataFormat": "CURRENCY"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 57,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 58,
+                              "type": "FIELD_SET",
+                              "label": "global.counts",
+                              "children": [
+                                {
+                                  "id": 59,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.apsp.noinvbill",
+                                  "label": "symbol.pound.of.pos.ytd",
+                                  "dataFormat": "INTEGER",
+                                  "sign": "+",
+                                  "digits": 7,
+                                  "size": "SM"
+                                },
+                                {
+                                  "id": 60,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.apsp.nolinebill",
+                                  "label": "symbol.pound.of.lines.ytd",
+                                  "dataFormat": "INTEGER",
+                                  "sign": "+",
+                                  "digits": 7,
+                                  "size": "SM"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "apsp",
+                        "objectRef": "dtl.apsp",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

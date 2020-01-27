@@ -1,0 +1,108 @@
+<div id="lookup-options" style="width: 800px;" initialize>
+
+   <div class="row">
+      <div class="one-third column">
+         <!-- Allow Entry -->
+         <div class="compound-field">
+            <div class="field" style="width: 200px;" ng-show="!isString(activeControl.options.allowEntry)" title="Allow user to enter values that don't exist. You can defer to the default for this type of lookup, or you can specify yes or no for this particular lookup field.">
+               <label for="lookup-allow-entry" class="label" translate>Allow Entry</label>
+               <select dropdown id="lookup-allow-entry" class="dropdown" ng-model="activeControl.options.allowEntry" ng-options="opt.value as opt.label for opt in yesNoDefaultConditionOptions">
+               </select>
+            </div>
+
+            <!-- Allow Entry Condition (show when is a string) -->
+            <div class="field" style="width: 200px;" ng-show="isString(activeControl.options.allowEntry)" title="Allow user to enter values that don't exist based on a condition (i.e. dtl.allowProductEntry)">
+               <label class="inline">
+                  <span class="label-text">Allow Entry Condition</span>
+                  <input type="text" ng-model="activeControl.options.allowEntry" ng-change="forceDeleteIfBlank('options.allowEntry')" ng-model-options='{"updateOn": "blur"}' />
+               </label>
+            </div>
+         </div>
+
+         <!-- Search Criteria Function -->
+         <div class="field" title="A function (invoked before every search) that returns the latest criteria object to use as the body of the http search call (this is an alternative to using the Search Criteria Params when that list is not sufficient)">
+            <label for="lookup-search-criteria-fn" translate>Search Criteria Function</label>
+            <input id="lookup-search-criteria-fn" type="text" ng-model="activeControl.options.searchCriteriaFunction" ng-change="deleteIfBlank('options.searchCriteriaFunction')" />
+         </div>
+      </div>
+
+      <div class="one-third column">
+         <!-- Auto Select -->
+         <div class="field" style="width: 200px;" title="Attempt to validate and select the user's input when type and tab away. Use 'Default' except for special circumstances.">
+            <label for="lookup-auto-select" class="label" translate>Auto Select</label>
+            <select dropdown id="lookup-auto-select" class="dropdown" ng-model="activeControl.options.autoSelect" ng-options="opt.value as opt.label for opt in yesNoDefaultOptions">
+            </select>
+         </div>
+
+         <!-- Auto Fetch Metadata -->
+         <div class="field" style="width: 200px;" title="Automatically fetch the record metadata (full label and notes indicator) when the model value changes programmatically. This should always be left as 'Default' except for rare cases.">
+            <label for="lookup-auto-fetch-metadata" class="label" translate>Auto Fetch Metadata</label>
+            <select dropdown id="lookup-auto-fetch-metadata" class="dropdown" ng-model="activeControl.options.autoFetchMetadata" ng-options="opt.value as opt.label for opt in yesNoDefaultOptions">
+            </select>
+         </div>
+      </div>
+
+      <div class="one-third column">
+         <!-- Autocomplete Width -->
+         <div class="field" title="The width (in pixels) of the autocomplete list so that it displays larger than the input field (i.e. 450). It can be defined here for this field, but it is usually best to define it on the lookup definition.">
+            <label for="lookup-auto-complete-width" translate>Autocomplete Width</label>
+            <input id="lookup-auto-complete-width" type="text" class="input-sm" ng-model="activeControl.options.autoCompleteWidth" field-format="INTEGER" data-sign="+" data-digits="4" ng-change="forceDeleteIfNull('options.autoCompleteWidth')" />
+         </div>
+
+         <!-- MRU List Key -->
+         <div class="field" ng-show="isExtendMode || isNewMode"  title="The MRU list to use for this lookup (i.e. ZSalesRep). This is for the most recently used functionality that appears when clicking on a lookup field.">
+            <label for="lookup-mru-list-key" translate>MRU List Key</label>
+            <input id="lookup-mru-list-key" type="text" ng-model="activeControl.options.mruListKey" ng-change="deleteIfBlank('options.mruListKey')" />
+         </div>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="full column">
+         <h4 style="padding-top: 20px;">Additional Search Criteria</h4>
+
+         <a class="hyperlink" ng-click="searchParamsArray.push({type: 'REF'})">Add Parameter</a>
+      </div>
+   </div>
+
+   <div class="scrollable-y" style="height: 200px;">
+      <div class="row" ng-repeat="param in searchParamsArray track by $index">
+         <div class="one columns" style="padding: 20px 0 0 10px;">
+            <a class="hyperlink" ng-click="searchParamsArray.splice($index, 1)" title="Delete">X</a>
+         </div>
+
+         <div class="three columns">
+            <div class="field">
+               <label for="lookup-param-name-{{$index}}" class="required">Name</label>
+               <input type="text" id="lookup-param-name-{{$index}}" class="input-sm" ng-model="param.name" />
+            </div>
+         </div>
+
+         <div class="three columns">
+            <div class="field" initialize>
+               <label for="lookup-param-type-{{$index}}" class="label required">Type</label>
+               <select dropdown id="lookup-param-type-{{$index}}" class="dropdown dropdown-sm" ng-model="param.type">
+                  <optgroup label="Dynamic">
+                     <option value="REF">Reference</option>
+                     <option value="ITEM">Row Item Field</option>
+                  </optgroup>
+                  <optgroup label="Static">
+                     <option value="array">Array</option>
+                     <option value="boolean">Boolean</option>
+                     <option value="number">Number</option>
+                     <option value="object">Object</option>
+                     <option value="string">String</option>
+                  </optgroup>
+               </select>
+            </div>
+         </div>
+
+         <div class="five columns">
+            <div class="field">
+               <label for="lookup-param-value-{{$index}}" class="required">Value</label>
+               <input type="text" id="lookup-param-value-{{$index}}" ng-model="param.value" />
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

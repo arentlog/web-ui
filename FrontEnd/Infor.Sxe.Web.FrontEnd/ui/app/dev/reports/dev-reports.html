@@ -1,0 +1,99 @@
+﻿<div id="dev-reports-view" class="page-container scrollable-y" initialize>
+   <div class="row">
+      <div class="six columns">
+         <h2 style="margin-top: 30px; margin-bottom: 15px;">Dev Reports</h2>
+      </div>
+   </div>
+
+   <form form-control data-validate-on="submit" style="height: auto;">
+      <div class="row">
+         <div class="six columns">
+            <div class="field" title="Select the 'modules' folder from '/ui/app/modules'">
+               <label class="fileupload">
+                  <span class="audible">Folder</span>
+                  <input type="file" onchange="angular.element(this).scope().devrep.selectFolder(event)" webkitdirectory directory data-validate="required" />
+               </label>
+               <span class="data-description">
+                  {{devrep.jsonViewFiles.length ? devrep.fileCount + ' json view files' : ''}}
+               </span>
+            </div>
+         </div>
+
+         <div class="six columns">
+            <!-- Available Reports -->
+            <div class="field">
+               <label class="label inline inline-dropdown">
+                  <span class="label-text">Report</span>
+                  <select dropdown class="dropdown" ng-model="devrep.report" ng-options="opt as opt.name group by opt.group for opt in devrep.reports" data-validate="required">
+                  </select>
+               </label>
+            </div>
+         </div>
+      </div>
+
+      <div class="row">
+         <div class="six columns">
+            <button type="submit" class="btn-primary" data-on-validated="devrep.runReport()" ng-disabled="devrep.isRunning">
+               <span>Run Report</span>
+            </button>
+            <br/><br/><br/>
+         </div>
+      </div>
+   </form>
+
+   <div class="row" ng-show="devrep.isRunning">
+      <div class="six columns">
+         <label id="dev-report-progress-label">Running...</label>
+         <div class="progress">
+            <div id="dev-report-progress-bar" class="progress-bar" data-value="0"></div>
+         </div>
+      </div>
+   </div>
+
+   <div class="row" ng-show="devrep.report.hasContent">
+      <div class="twelve columns">
+         <div class="toolbar">
+            <div class="title">Results</div>
+         </div>
+
+         <div class="field">
+            <label for="dev-report-content" class="hidden">Report Content</label>
+            <textarea id="dev-report-content" class="textarea-full textarea-height-lg resizable" ng-model="devrep.reportContent"></textarea>
+         </div>
+      </div>
+   </div>
+
+   <div class="row" ng-show="!devrep.report.hasContent">
+      <div class="full column">
+         <div class="toolbar">
+            <div class="title">Results ({{devrep.results.length || '0'}})</div>
+         </div>
+
+         <div class="listview tableview" data-options="{selectable: false}">
+            <table role="grid" class="listview-table show-headers">
+               <thead>
+                  <tr>
+                     <th scope="col" role="columnheader">File</th>
+                     <th scope="col" role="columnheader">Controls</th>
+                  </tr>
+               </thead>
+               <tbody>
+               <tr ng-repeat="fileResult in devrep.results">
+                  <td>
+                     {{fileResult.viewPath}}
+                  </td>
+                  <td>
+                     <div style="line-height: 175%;" ng-repeat="control in fileResult.flaggedControls">
+                        <span>{{control.id}}</span>
+                        <span ng-show="control.model">- {{control.model}}</span>
+                        <span ng-show="control.label">- {{control.label | translate}}</span>
+                        <span ng-show="control.reportName"> ({{control.reportName}})</span>
+                     </div>
+                  </td>
+               </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>

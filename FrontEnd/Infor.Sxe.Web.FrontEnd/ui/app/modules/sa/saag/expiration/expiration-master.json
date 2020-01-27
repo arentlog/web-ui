@@ -1,0 +1,131 @@
+{
+  "viewId": "sa-saag-expirationmaster",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "menu.saag",
+          "subLabel": "global.expiration",
+          "children": [
+            {
+              "id": 8,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.compliance",
+              "conditionShow": "base.securityLevelCOMP >= 2",
+              "stateRef": "^.complianceMaster"
+            },
+            {
+              "id": 9,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.history",
+              "conditionShow": "base.securityLevelHIST >= 2",
+              "stateRef": "^.historyMaster"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 5,
+              "type": "GRID",
+              "controlRef": "base.egrid",
+              "model": "base.edataset",
+              "options": {
+                "showCheckboxes": true,
+                "selectable": "multiple"
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.expiration",
+                  "subLabel": "",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.enable",
+                      "icon": "icon-refresh",
+                      "conditionDisabled": "base.egrid.isNoRowSelected()",
+                      "eventClick": "emst.enable()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "statusty",
+                  "label": "global.status",
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "GdprStatusType",
+                  "blankOption": false
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "expiredt",
+                  "label": "global.expiration.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "cono",
+                  "label": "global.company.number",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "recordnm",
+                  "label": "global.function",
+                  "customFormatter": "base.recordFormatter"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "key1",
+                  "label": "global.primary.key"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "key2",
+                  "label": "global.secondary.key"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "fieldnmdisp",
+                  "label": "global.field"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,290 @@
+{
+  "viewId": "twl-twlocs-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "menu.twlocs",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail() || ((!base.criteria.whNum) && (!base.criteriaUsed.whNum))",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlocs.rowStatus",
+                              "label": "global.active"
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlocs.description",
+                              "label": "global.description"
+                            },
+                            {
+                              "id": 33,
+                              "type": "FIELD_SET",
+                              "label": "global.dimensions",
+                              "children": [
+                                {
+                                  "id": 31,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 19,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dtl.twlocs.length",
+                                      "label": "global.length",
+                                      "dataFormat": "DECIMAL",
+                                      "sign": "+",
+                                      "digits": 3,
+                                      "decimals": 2,
+                                      "eventChange": "dtl.calculateCube()",
+                                      "size": "XS",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 20,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dtl.twlocs.width",
+                                      "label": "global.width",
+                                      "dataFormat": "DECIMAL",
+                                      "sign": "+",
+                                      "digits": 3,
+                                      "decimals": 2,
+                                      "eventChange": "dtl.calculateCube()",
+                                      "size": "XS",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 21,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dtl.twlocs.height",
+                                      "label": "global.height",
+                                      "dataFormat": "DECIMAL",
+                                      "sign": "+",
+                                      "digits": 3,
+                                      "decimals": 2,
+                                      "eventChange": "dtl.calculateCube()",
+                                      "size": "XS",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 24,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "dtl.twlocs.cube",
+                                      "label": "global.cube",
+                                      "readonly": true,
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 22,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dtl.twlocs.sizeFactor",
+                                      "label": "global.size.factor",
+                                      "dataFormat": "DECIMAL",
+                                      "sign": "+",
+                                      "digits": 2,
+                                      "decimals": 2,
+                                      "size": "XS",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 23,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dtl.twlocs.weight",
+                                      "label": "global.maximum.weight",
+                                      "dataFormat": "DECIMAL",
+                                      "sign": "+",
+                                      "digits": 6,
+                                      "decimals": 2,
+                                      "size": "SM",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 34,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlocs.preferred",
+                              "label": "global.preferred",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.twlocs.carrierId",
+                              "label": "global.carrier",
+                              "meta": "TWLCarrier",
+                              "size": "SM",
+                              "options": {
+                                "searchParams": {
+                                  "coNum": {
+                                    "type": "REF",
+                                    "value": "dtl.twlocs.coNum"
+                                  },
+                                  "whNum": {
+                                    "type": "REF",
+                                    "value": "dtl.twlocs.whNum"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

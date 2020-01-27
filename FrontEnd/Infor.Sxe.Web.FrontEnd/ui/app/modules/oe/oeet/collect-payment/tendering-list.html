@@ -1,0 +1,106 @@
+<div class="listview tableview" style="overflow: auto;" data-options="{selectable: false}" initialize>
+   <table role="grid" class="listview-table show-headers">
+      <thead>
+         <tr>
+            <th scope="col" role="columnheader" translate>global.payment.type</th>
+            <th scope="col" role="columnheader" translate>global.payment.numberrefer</th>
+            <th scope="col" role="columnheader" translate>global.amount</th>
+            <th scope="col" role="columnheader" translate>global.addoncheck</th>
+            <th scope="col" role="columnheader" translate>global.hold.cc</th>
+            <th scope="col" role="columnheader" translate>global.details</th>
+            <th scope="col" role="columnheader" translate>global.actions</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr ng-repeat="item in cp.tenderingCollection">
+            <td initialize>
+               <div class="field">
+                  <select id="openReferenceDropdown-{{$index}}"
+                          class="dropdown dropdown-sm"
+                          ng-model="item.iMediaCd"
+                          ng-change="cp.tenderingLineReferenceChanged(item)"
+                          ng-options="opt.codeval as opt.descrip for opt in cp.completePaymentTypeList"
+                          data-options-model="cp.completePaymentTypeList"
+                          data-watch-options-model
+                          data-options-value-field="codeval"
+                          dropdown></select>
+               </div>
+            </td>
+            <td initialize>
+               <div class="field" ng-show="item.paymentInfo.lIsCreditCard || item.paymentInfo.lIsACH">
+                  <select id="paymentNumberDropdown-{{$index}}"
+                          class="dropdown dropdown-sm"
+                          ng-model="item.cUnMaskCardNo"
+                          ng-change="cp.tenderingLinePaymentNumberChanged(item)"
+                          ng-options="opt.cUnmaskCardNo as opt.displayPaymentNo disable when opt.isInUse for opt in item.paymentInfo.matchedPaymentNumbers"
+                          data-options-model="item.paymentInfo.matchedPaymentNumbers"
+                          data-watch-options-model
+                          data-options-value-field="cUnmaskCardNo"
+                          dropdown></select>
+               </div>
+               <div class="field" ng-show="!item.paymentInfo.lIsCreditCard && !item.paymentInfo.lIsACH">
+                  <input type="text"
+                         id="refer-{{$index}}"
+                         class="input-sm"
+                         ng-model="item.cRefer" />
+               </div>
+            </td>
+            <td initialize>
+               <div class="field">
+                  <input type="text"
+                         id="amount-{{$index}}"
+                         class="input-sm"
+                         field-format="CURRENCY"
+                         data-digits="8"
+                         data-decimals="2"
+                         ng-model="item.dAmount"
+                         ng-change="cp.tenderingLineAmountChanged(item)"
+                         ng-disabled="!item.iMediaCd" />
+               </div>
+            </td>
+            <td initialize>
+               <div class="field" ng-show="item.paymentInfo.lIsCreditCard || item.paymentInfo.lIsACH">
+                  <input type="text"
+                         id="addlAuth-{{$index}}"
+                         class="input-sm"
+                         field-format="CURRENCY"
+                         data-digits="7"
+                         data-decimals="2"
+                         data-sign="+"
+                         ng-model="item.dAddlAuth"
+                         ng-disabled="cp.enableAddlAmount === 'no'" />
+               </div>
+               <div class="field" ng-show="!item.paymentInfo.lIsCreditCard && !item.paymentInfo.lIsACH">
+                  <input type="text"
+                         id="checkno-{{$index}}"
+                         class="input-sm"
+                         ng-model="item.dCheckNo"
+                         field-format="INTEGER_TEXT"
+                         data-digits="8"
+                         data-sign="+" />
+               </div>
+            </td>
+            <td initialize>
+               <div class="field" ng-show="item.paymentInfo.lIsCreditCard || item.lIsACH">
+                  <input type="checkbox" id="holdcc-{{$index}}" class="checkbox" ng-model="item.lCCHoldBofl" ng-disabled="item.paymentInfo.isHoldCCReadOnly" />
+                  <label class="checkbox-label" for="holdcc-{{$index}}"></label>
+               </div>
+            </td>
+            <td initialize>
+               <ul class="info">
+                  <li ng-show="item.paymentInfo.tenderingErrorMessage"><span>{{item.paymentInfo.tenderingErrorMessage}}</span></li>
+                  <li ng-show="!item.paymentInfo.tenderingErrorMessage && (item.paymentInfo.lIsCreditCard || item.paymentInfo.lIsACH) && item.paymentInfo.cCardholderName"><span translate>global.cardholder.name</span>: <strong>{{item.paymentInfo.cCardholderName}}</strong></li>
+                  <li ng-show="!item.paymentInfo.tenderingErrorMessage && (item.paymentInfo.lIsCreditCard || item.paymentInfo.lIsACH) && item.paymentInfo.cCardholderName"><span translate>global.card.number</span>: <strong>{{item.paymentInfo.cPaymentNo}}</strong></li>
+                  <li ng-show="!item.paymentInfo.tenderingErrorMessage && (item.paymentInfo.lIsCreditCard || item.paymentInfo.lIsACH) && item.paymentInfo.cCardholderName"><span translate>global.ship.to</span>: <strong ng-show="item.paymentInfo.cShipto">{{item.paymentInfo.cShipto}}</strong><strong ng-show="!item.paymentInfo.cShipto" translate>global.none</strong></li>
+               </ul>
+            </td>
+            <td class="l-right-text" initialize>
+               <button class="btn-primary" type="button" ng-click="cp.oneTimeTransClicked(item)" ng-disabled="!item.paymentInfo.isFullDownPaymentTendered" ng-show="(item.paymentInfo.lIsCreditCard || item.paymentInfo.lIsACH) && !item.paymentInfo.tenderingErrorMessage && item.paymentInfo.oneTimeButtonLabel">{{item.paymentInfo.oneTimeButtonLabel}}</button>
+               <button class="btn-primary" type="button" ng-click="cp.oneTimeAuthClicked(item)" ng-disabled="!item.paymentInfo.isOneTimeAuthEnabled" ng-show="(item.paymentInfo.lIsCreditCard || item.paymentInfo.lIsACH) && !item.paymentInfo.tenderingErrorMessage" translate>global.one.time.authorization</button>
+               <button class="btn-secondary" type="button" ng-click="cp.addNewCardClicked(item)" ng-disabled="!item.paymentInfo.isAddNewCardEnabled" ng-show="(item.paymentInfo.lIsCreditCard || item.paymentInfo.lIsACH) && !item.paymentInfo.tenderingErrorMessage && item.paymentInfo.addNewButtonLabel">{{item.paymentInfo.addNewButtonLabel}}</button>
+               <button class="btn-secondary" type="button" ng-click="cp.modifyCardClicked(item)" ng-disabled="!item.paymentInfo.isModifyCardEnabled || !item.cRefer" ng-show="(item.paymentInfo.lIsCreditCard || item.paymentInfo.lIsACH) && item.paymentInfo.isModifyCardEnabled && !item.paymentInfo.tenderingErrorMessage" translate>cenpos.popup.onetimecardmodify</button>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>

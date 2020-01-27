@@ -1,0 +1,145 @@
+{
+  "viewId": "pd-pdsp-vendorcreate",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.vendor.records",
+              "subLabel": "{{vdtl.subtitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 8,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "",
+                      "eventClick": "vdtl.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "vdtl.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "SEC",
+                  "label": "global.cancel",
+                  "eventClick": "vdtl.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 39,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "vdtl.pdsv.vendno",
+                          "label": "global.vendor.number",
+                          "meta": "Vendor",
+                          "required": true,
+                          "controls": {
+                            "actionBtn": {
+                              "id": 41,
+                              "type": "BTN",
+                              "subType": "ICON",
+                              "label": "global.inquire",
+                              "icon": "icon-drilldown",
+                              "isLabelTooltip": true,
+                              "conditionDisabled": "!vdtl.pdsv.vendno",
+                              "stateRef": "apiv.detail ({pk: vdtl.pdsv.vendno})",
+                              "conditionShow": "base.srchVendNoFl"
+                            }
+                          }
+                        },
+                        {
+                          "id": 25,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "vdtl.pdsv.startdt",
+                          "label": "global.start.date",
+                          "dataFormat": "DATE",
+                          "required": true
+                        }
+                      ]
+                    },
+                    {
+                      "id": 18,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 37,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "vdtl.pdsv.prod",
+                          "label": "global.product",
+                          "meta": "ProdAll",
+                          "required": true,
+                          "options": {
+                            "allowEntry": true
+                          },
+                          "controls": {
+                            "actionBtn": {
+                              "id": 42,
+                              "type": "BTN",
+                              "subType": "ICON",
+                              "label": "global.inquire",
+                              "icon": "icon-drilldown",
+                              "isLabelTooltip": true,
+                              "conditionDisabled": "!vdtl.pdsv.prod",
+                              "conditionShow": "base.srchProdFl",
+                              "stateRef": "icip.detail ({pk: vdtl.pdsv.prod, pk2: vdtl.pdsv.whse})"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

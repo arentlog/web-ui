@@ -1,0 +1,142 @@
+{
+  "viewId": "twl-twlceod-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isMaster()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.twlceod",
+          "subLabel": "{{base.getSubTitle()}}",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "type": "GRID",
+              "id": 5,
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "selectable": "multiple",
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.end.of.day",
+                  "children": [
+                    {
+                      "id": 18,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-new-document",
+                      "label": "global.new",
+                      "eventClick": "mst.create()",
+                      "conditionDisabled": "base.grid.isAnyRowSelected() || ((!base.criteria.whNum) && (!base.criteriaUsed.whNum))",
+                      "securityLevel": 4
+                    },
+                    {
+                      "id": 19,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-edit",
+                      "label": "global.edit",
+                      "eventClick": "mst.edit()",
+                      "conditionDisabled": "!base.grid.isOneRowSelected()",
+                      "securityLevel": 3
+                    },
+                    {
+                      "id": 20,
+                      "type": "BTN",
+                      "subType": "PRI",
+                      "label": "global.item.history.created",
+                      "eventClick": "mst.viewEndOfDayHistory()",
+                      "children": []
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "itemHistfl",
+                  "label": "global.eod.item.history",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 10,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "fileretfl",
+                  "label": "global.eod.cleanup",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 41,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "cyclecntfl",
+                  "label": "global.create.cycle.counts",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 9,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "discCyclefl",
+                  "label": "global.eod.discrepancy.count",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "allocfxfl",
+                  "label": "global.eod.item.alloc",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "transrptfl",
+                  "label": "global.eod.trans.reports",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "commentclrfl",
+                  "label": "global.eod.untied.comments",
+                  "dataFormat": "LOGICAL"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 40,
+      "type": "VIEW_CNTR",
+      "viewName": "masterExtendView"
+    }
+  ]
+}

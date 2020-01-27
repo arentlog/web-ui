@@ -1,0 +1,207 @@
+{
+  "viewId": "shared-lookups-replenishmentlookupmodal",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "LOOKUP_MODAL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "lkupmdl.criteria.recordtype",
+                  "label": "global.record.type",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "RecordType",
+                  "blankOptionLabel": "global.all"
+                },
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "lkupmdl.criteria.whse",
+                  "label": "global.warehouse",
+                  "meta": "Warehouse",
+                  "conditionShow": "lkupmdl.criteria.recordtype === 'w' || lkupmdl.criteria.recordtype === 'p'"
+                }
+              ]
+            },
+            {
+              "id": 6,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "lkupmdl.criteria.vendno",
+                  "label": "global.vendor",
+                  "meta": "Vendor",
+                  "conditionShow": "lkupmdl.criteria.recordtype === 'v' || lkupmdl.criteria.recordtype === 'p'"
+                },
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "lkupmdl.criteria.prodline",
+                  "label": "global.product.line",
+                  "meta": "ProdLine",
+                  "conditionShow": "lkupmdl.criteria.recordtype === 'p'",
+                  "options": {
+                    "searchParams": {
+                      "vendno": {
+                        "type": "REF",
+                        "value": "lkupmdl.criteria.vendno"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 9,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "lkupmdl.search()"
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "lkupmdl.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "type": "GRID",
+      "subType": "LOOKUP_GRID",
+      "model": "lkupmdl.dataset",
+      "controls": {
+        "toolbar": {
+          "id": 13,
+          "type": "TOOLBAR",
+          "label": "global.replenishments"
+        }
+      },
+      "children": [
+        {
+          "id": 16,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "recordtype",
+          "label": "global.record.type",
+          "dataFormat": "IcRecordTypeICSR"
+        },
+        {
+          "id": 17,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cono",
+          "label": "global.company",
+          "dataFormat": "INTEGER_TEXT"
+        },
+        {
+          "id": 18,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "whse",
+          "label": "global.warehouse"
+        },
+        {
+          "id": 19,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "vendno",
+          "label": "global.vendor",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 20,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "prodline",
+          "label": "global.product.line"
+        },
+        {
+          "id": 21,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "conoranks",
+          "label": "global.co.number.ranks",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 23,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "ranksusedfl",
+          "label": "global.ranks.used",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 22,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "recranks",
+          "label": "global.rec.number.ranks",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 25,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "basedon",
+          "label": "global.based.on",
+          "type3": "SET",
+          "metaGroup": "IC",
+          "meta": "BasedOn"
+        },
+        {
+          "id": 24,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "recpcttot",
+          "label": "global.total.percent",
+          "dataFormat": "PERCENT",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        }
+      ]
+    }
+  ]
+}

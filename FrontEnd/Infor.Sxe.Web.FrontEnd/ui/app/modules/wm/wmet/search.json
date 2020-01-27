@@ -1,0 +1,84 @@
+{
+  "viewId": "wm-wmet-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.whse",
+                  "label": "global.warehouse",
+                  "required": true,
+                  "meta": "Warehouse",
+                  "conditionReadonly": "!base.isSearchEnabled"
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.binloc",
+                  "label": "global.bin.location",
+                  "meta": "BinLocation",
+                  "required": true,
+                  "conditionReadonly": "!base.isSearchEnabled",
+                  "options": {
+                    "searchParams": {
+                      "whse": {
+                        "type": "REF",
+                        "value": "base.criteria.whse"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.adjtype",
+                  "label": "global.adjustment.type",
+                  "meta": "AdjustmentTypesProvider",
+                  "required": true,
+                  "type3": "SET",
+                  "metaGroup": "WM",
+                  "conditionReadonly": "!base.isSearchEnabled"
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()",
+                  "conditionDisabled": "!base.isSearchEnabled"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()",
+                  "conditionDisabled": "!base.isSearchEnabled"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

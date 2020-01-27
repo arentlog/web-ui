@@ -1,0 +1,129 @@
+{
+  "viewId": "ic-icspr-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.restricttype",
+                  "label": "global.restriction.type",
+                  "autoFocus": true,
+                  "type3": "MANUAL",
+                  "blankOption": false,
+                  "optionsModel": "base.restrictTypeList",
+                  "eventChange": "setResetRestrictDefaults()"
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.whse",
+                  "label": "global.warehouse",
+                  "meta": "Warehouse",
+                  "conditionShow": "base.allowWhseField()"
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.product",
+                  "label": "global.product",
+                  "meta": "ProdAll",
+                  "conditionShow": "base.criteria.restricttype === 'PR'"
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.prodline",
+                  "label": "global.product.line",
+                  "meta": "ProdLine",
+                  "conditionShow": "base.criteria.restricttype === 'PL'",
+                  "options": {
+                    "searchParams": {
+                      "vendno": {
+                        "type": "REF",
+                        "value": "base.criteria.vendno"
+                      },
+                      "prodline": {
+                        "type": "REF",
+                        "value": "base.criteria.prodline"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.vendno",
+                  "label": "global.vendor.number",
+                  "meta": "Vendor",
+                  "conditionShow": "base.criteria.restricttype === 'PL'"
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.prodcat",
+                  "label": "global.product.category",
+                  "meta": "ProdCat",
+                  "conditionShow": "base.criteria.restricttype === 'PC'"
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.prodprctype",
+                  "label": "global.product.price.type",
+                  "meta": "ProdPriceTy",
+                  "conditionShow": "base.criteria.restricttype === 'PT'"
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.brandcd",
+                  "label": "global.brand.code",
+                  "meta": "BrandCode",
+                  "conditionShow": "base.criteria.restricttype === 'BC'"
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

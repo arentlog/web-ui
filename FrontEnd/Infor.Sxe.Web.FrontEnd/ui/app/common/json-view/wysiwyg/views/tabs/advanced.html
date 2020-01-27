@@ -1,0 +1,129 @@
+<div class="row" initialize>
+   <div class="one-third column">
+      <fieldset>
+         <legend>General</legend>
+
+         <div class="compound-field">
+            <!-- Control Id -->
+            <div class="field">
+               <label for="control-id" translate>Control ID</label>
+               <input id="control-id" class="input-sm" type="text" ng-model="activeControl.id" readonly="readonly" />
+            </div>
+
+            <!-- Tab Id -->
+            <div class="field" ng-if="isType(['TAB'])" title="An identifier for this tab (i.e. general, taxing, supplier-access, etc.) using all lowercase and hyphens between words. This is used when forming the screenId to be published in the business context message for the contextual help feature.">
+               <label for="tab-id" translate>Tab ID</label>
+               <input id="tab-id" class="input-sm" type="text" ng-model="activeControl.tabId" custom-mask="[a-z0-9-]" maxlength="50" ng-change="deleteIfBlank('tabId')" />
+            </div>
+         </div>
+
+         <!-- Important! We are purposely not using HTML ids, except in the case of tabs that need it for certain functionality. -->
+         <div class="field" ng-if="isType(['TAB'])" title="Important! This should only be used if it necessary to set a specific html id in order to implement needed functionality. This should not be used if the element may appear in another function (navigation tab) at the same time. Use lower case with hyphens (i.e. arsc-detail-tab-credit).">
+            <label for="control-html-id" translate>HTML ID</label>
+            <input id="control-html-id" type="text" ng-model="activeControl.htmlId" ng-change="deleteIfBlank('htmlId')" />
+         </div>
+
+         <!-- Grid Column Id -->
+         <div class="field" ng-if="isType(['GRID_COL'])" title="Set a specific column identifier if you need to refer to this grid column by id in your code. Use something simple and unique within this grid, like the data model property (i.e. custno).">
+            <label for="grid-column-id" translate>Column ID</label>
+            <input id="grid-column-id" type="text" ng-model="activeControl.columnId" ng-change="deleteIfBlank('columnId')" />
+         </div>
+
+         <!-- Control Reference -->
+         <div class="field" ng-if="isType(['TAB_SET', 'EXP_AREA', 'GRID', 'FORM', 'VIEW'])" title="Reference for where to set the underlying control API (after it's ready)">
+            <label for="control-reference" translate>Control Reference</label>
+            <input id="control-reference" type="text" ng-model="activeControl.controlRef" ng-change="deleteIfBlank('controlRef')" />
+         </div>
+
+         <!-- Default vs. Extra -->
+         <div class="field" ng-if="!isType(['ROW', 'COL'])" title="This is for extra controls (fields, grid columns, etc.) that are only meant to be included if the user chooses to via personalization.">
+            <input type="checkbox" id="control-extra" class="checkbox" ng-model="activeControl.extra" ng-change="deleteIfFalse('extra')" />
+            <label class="checkbox-label" for="control-extra">Extra / Hidden</label>
+         </div>
+      </fieldset>
+   </div>
+
+   <div class="one-third column">
+      <fieldset>
+         <legend>Security</legend>
+
+         <!-- Sub Function Name (for security purposes) -->
+         <div class="field" ng-if="activeControl.type === 'TAB'" title="The name of the sub function for this tab/view. This is used for user security.">
+            <label for="control-sub-function-name">Sub Function Name</label>
+            <input id="control-sub-function-name" type="text" ng-model="activeControl.subFunction" sub-function-autocomplete />
+         </div>
+
+         <!-- Security Level (for removing a control from view if user does not have sufficient security) -->
+         <div class="field" style="width: 150px;" ng-if="activeControl.type === 'BTN' || activeControl.type === 'MENU_OPT' || activeControl.type === 'FIELD'" title="The minimum security level needed by the user in order to see this control. Use with caution!">
+            <label for="control-security-level" class="label" translate>Security Level (SASO)</label>
+            <select dropdown id="control-security-level" class="dropdown" ng-model="activeControl.securityLevel" ng-change="securityLevelChanged(); deleteIfBlank('securityLevel');" ng-options="opt.value as opt.label for opt in securityLevelOptions">
+               <option value="">&nbsp;</option>
+            </select>
+         </div>
+      </fieldset>
+   </div>
+
+   <div class="one-third column">
+      <fieldset>
+         <legend>Other</legend>
+
+         <!-- CSS Class -->
+         <div class="field" ng-if="!isType(['ROW', 'COL', 'COMP_FLD', 'CONTAINER', 'CONTEXT_FIELD', 'GRID_COL', 'HTML_CONTROL', 'TAB', 'VIEW_CNTR'])" title="CSS class for styling (i.e. image-large, chart-small, special-field, etc.)">
+            <label for="control-css-class">CSS Class</label>
+            <input id="control-css-class" type="text" ng-model="activeControl.cssClass" ng-change="deleteIfBlank('cssClass')" />
+         </div>
+
+         <div class="compound-field">
+            <!-- Mask Pattern -->
+            <div class="field" ng-show="isType(['FIELD', 'GRID_COL']) && !isFieldType(['INFO'])" title="Mask pattern for fields that need a specific mask that is not part of a shared format. You can specify any Soho pattern (####-####, xx/xx, etc.), or you can bind to a dynamic value via the double curly brace syntax.">
+               <label for="control-mask" translate>Mask Pattern</label>
+               <input id="control-mask" type="text" class="input-sm" ng-model="activeControl.mask" ng-change="deleteIfBlank('mask')" />
+            </div>
+
+            <!-- Mask Mode -->
+            <div class="field" ng-show="isType(['FIELD', 'GRID_COL']) && !isFieldType(['INFO'])" title="The mode used for the mask pattern.">
+               <label for="control-mask-mode" class="label" translate>Mask Mode</label>
+               <select dropdown id="control-mask-mode" class="dropdown dropdown-sm" ng-model="activeControl.maskMode" ng-change="deleteIfBlank('maskMode')">
+                  <option value=""></option>
+                  <option value="group">Group</option>
+                  <option value="number">Number</option>
+                  <option value="date">Date</option>
+                  <option value="time">Time</option>
+               </select>
+            </div>
+         </div>
+
+         <!-- Custom Mask -->
+         <div class="field" ng-show="isType(['FIELD']) && !isFieldType(['INFO'])" title="A regular expression to use for constraining the user's input (i.e. [a-z0-9-] would allow only lower-case letters, numbers, and hyphens). This can be used together with a Max Length, or it can be used with the character 'c' in a mask pattern.">
+            <label for="control-custom-mask" translate>Custom Mask Definition</label>
+            <input id="control-custom-mask" type="text" class="input-sm" ng-model="activeControl.customMask" ng-change="deleteIfBlank('customMask')" />
+         </div>
+
+         <!-- Getter / Setter Model (ng-model-options) -->
+         <div class="field" ng-if="isType(['FIELD']) && !isFieldType(['INFO'])" title="Treat model binding as a getter/setter function (see ng-model-options). This should only be used in rare cases of dynamic model binding.">
+            <input type="checkbox" id="control-model-getter-setter" class="checkbox" ng-model="activeControl.modelOptions.getterSetter" />
+            <label class="checkbox-label" for="control-model-getter-setter" translate>Getter / Setter Model</label>
+         </div>
+
+         <!-- Controller -->
+         <div class="field" ng-if="(isExtendMode || isNewMode) && isType(['VIEW', 'MODAL', 'ACTION_PANEL'])" title="Attach a custom controller to this view (i.e. CustomAricDetailCtrl as zdtl). The controller will run in addition to the standard controller.">
+            <label class="inline">
+               <span class="label-text" translate>Controller</span>
+               <input type="text" ng-model="activeControl.controller" ng-change="deleteIfBlank('controller')" />
+            </label>
+         </div>
+
+         <!-- Allow Cross Container Personalization Moves -->
+         <div class="field" ng-if="isType(['VIEW'])" title="Warning! This should only be used in rare cases when we need to allow user to move controls freely across containers and we know that such moves won't break anything.">
+            <input type="checkbox" id="control-allow-cross-container" class="checkbox" ng-model="activeControl.allowCrossContainer" ng-change="deleteIfFalse('allowCrossContainer')" />
+            <label class="checkbox-label" for="control-allow-cross-container" translate>Allow Cross Container Personalization</label>
+         </div>
+
+         <!-- Collapsed Model (reference for collapsible-section-button) -->
+         <div class="field" ng-if="isType(['MOD_SIDEBAR'])" title="The model reference for the collapsed boolean value. This defaults to base.moduleSidebarCollapsed in order for all views within the tab to synchronize their collapsed/expanded state, but it can be set to something different per view if synchronization is not wanted (i.e. base.someViewSidebarCollapsed).">
+            <label for="control-collapsed-model">Collapsed Model</label>
+            <input id="control-collapsed-model" type="text" ng-model="activeControl.collapsedModel" ng-change="deleteIfBlank('collapsedModel')" />
+         </div>
+      </fieldset>
+   </div>
+</div>

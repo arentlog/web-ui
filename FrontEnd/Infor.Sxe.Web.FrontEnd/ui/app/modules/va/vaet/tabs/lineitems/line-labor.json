@@ -1,0 +1,190 @@
+{
+  "viewId": "va-vaet-tabs-lineitems-linelabor",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.labor.product.estimated.actual",
+              "subLabel": "{{linelabor.detailSubTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "linelabor.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "linelabor.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "linelabor.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.lineUpdateRecord.shipprod",
+                          "label": "global.product",
+                          "meta": "ProdIcspOnly",
+                          "eventChange": "linelabor.fieldChange('shipprod')",
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          }
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.lineUpdateRecord.timeslsrep",
+                          "label": "global.operator",
+                          "meta": "SalesRep"
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.lineUpdateRecord.timeworkdt",
+                          "label": "global.date",
+                          "dataFormat": "DATE"
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.lineUpdateRecord.timecomment",
+                          "label": "global.comment",
+                          "maxLength": 30
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.lineUpdateRecord.prodcost",
+                          "label": "global.charge",
+                          "dataFormat": "DECIMAL",
+                          "digits": 7,
+                          "decimals": 5,
+                          "conditionShow": "base.lineUpdateRecord.seecostfl",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 18,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.lineUpdateRecord.hours",
+                              "label": "global.estimated.hours",
+                              "size": "XS",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 3,
+                              "maxLength": 3
+                            },
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.lineUpdateRecord.minutes",
+                              "label": "global.minutes",
+                              "dataFormat": "INTEGER",
+                              "digits": 2,
+                              "sign": "+",
+                              "maxLength": 2,
+                              "size": "XS"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.lineUpdateRecord.timeactty",
+                          "label": "global.time.type",
+                          "type3": "SET",
+                          "metaGroup": "VA",
+                          "meta": "TimeTypeNoVar",
+                          "blankOption": false
+                        },
+                        {
+                          "id": 22,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.lineUpdateRecord.qtybasetotfl",
+                          "label": "global.is.estimated.time.based.on.units.produced",
+                          "dataFormat": "LOGICAL",
+                          "eventChange": "linelabor.fieldChange('qtybasetotfl')"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

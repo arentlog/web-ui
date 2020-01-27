@@ -1,0 +1,128 @@
+{
+  "viewId": "po-poei-receivingreport",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.receiving.report",
+              "subLabel": "{{rr.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "rr.back()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 15,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "submitForm": true,
+                  "eventValidated": "rr.submit()"
+                },
+                {
+                  "id": 16,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "rr.back()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "rr.poReceiptReport.linesort",
+                  "label": "global.line.sort.option",
+                  "type3": "SET",
+                  "metaGroup": "PO",
+                  "meta": "LineSortType",
+                  "blankOption": false,
+                  "eventChange": "rr.changeMe()",
+                  "autoFocus": true
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "rr.poReceiptReport.qtyfl",
+                  "label": "question.only.print.po.lines.with.a.recv.qty",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "rr.poReceiptReport.brkbypofl",
+                  "label": "question.page.break.by.purchase.order.number",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 12,
+                  "type": "EXP_AREA",
+                  "label": "global.printing.information",
+                  "children": [
+                    {
+                      "id": 13,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 11,
+                              "type": "CUSTOM",
+                              "subType": "Printer",
+                              "options": {
+                                "controlRef": "rr.receiptReportPrinterControl",
+                                "functionName": "poei",
+                                "subFunctionName": "",
+                                "defaultPrintType": "p"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

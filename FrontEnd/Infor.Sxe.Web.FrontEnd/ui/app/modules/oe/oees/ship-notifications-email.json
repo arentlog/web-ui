@@ -1,0 +1,129 @@
+{
+  "viewId": "oe-oees-shipnotificationsemail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "shipnot.create",
+      "conditionShow": "!shipnot.create",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.email.notifications",
+              "controls": {
+                "navBtns": {
+                  "id": 11,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 14,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "securityLevel": 3,
+                  "eventClick": "shipnot.submit()"
+                },
+                {
+                  "id": 13,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "shipnot.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "GRID",
+                  "model": "shipnot.dataset",
+                  "controlRef": "shipnot.grid",
+                  "options": {
+                    "showCheckboxes": false,
+                    "showDrilldown": false,
+                    "editable": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 7,
+                      "type": "TOOLBAR",
+                      "label": "global.shipment.notifications",
+                      "children": [
+                        {
+                          "id": 15,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-new-document",
+                          "label": "global.new",
+                          "securityLevel": 4,
+                          "eventClick": "shipnot.newButton()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "lselect",
+                      "label": "Column",
+                      "dataFormat": "LOGICAL",
+                      "editable": true
+                    },
+                    {
+                      "id": 8,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.first.name",
+                      "model": "firstnm"
+                    },
+                    {
+                      "id": 9,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.last.name",
+                      "model": "lastnm"
+                    },
+                    {
+                      "id": 10,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.email",
+                      "model": "email"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "type": "SUB_VIEW",
+      "subType": "JSON",
+      "viewPath": "oe/oees/email-create.json",
+      "controller": "OeesEmailShipmentNotificationsCreateCtrl as emcreate",
+      "conditionShow": "shipnot.create"
+    }
+  ]
+}

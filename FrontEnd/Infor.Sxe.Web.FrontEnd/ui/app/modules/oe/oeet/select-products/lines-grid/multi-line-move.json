@@ -1,0 +1,389 @@
+{
+  "viewId": "oe-oeet-selectproducts-linesgrid-multilinemove",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "lgMlm.isMultiLineMove()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.order.entry",
+              "subLabel": "global.multi.line.move",
+              "controls": {
+                "navBtns": {
+                  "id": 9,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.submit",
+                  "eventClick": "lgMlm.submit()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "lgMlm.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 293,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 294,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 297,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "lg.showComments",
+                          "label": "global.show.comment.lines",
+                          "dataFormat": "LOGICAL",
+                          "eventChange": "lgMlm.setLineMoveDisplayCollection()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 296,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 298,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "lg.showInactive",
+                          "label": "global.show.inactive.lines",
+                          "dataFormat": "LOGICAL",
+                          "eventChange": "lgMlm.setLineMoveDisplayCollection()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 295,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 299,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "lg.showSubTotal",
+                          "label": "global.show.sub.total.lines",
+                          "dataFormat": "LOGICAL",
+                          "eventChange": "lgMlm.setLineMoveDisplayCollection()"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 6,
+                  "type": "GRID",
+                  "model": "lgMlm.oelineMoveDisplayCollection",
+                  "controlRef": "lgMlm.grid",
+                  "options": {
+                    "showCheckboxes": false,
+                    "selectable": "",
+                    "editable": true,
+                    "events": {
+                      "selected": ""
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 7,
+                      "type": "TOOLBAR",
+                      "label": "global.lines",
+                      "children": [
+                        {
+                          "id": 284,
+                          "type": "BTN",
+                          "subType": "MENU",
+                          "label": "global.move",
+                          "conditionDisabled": "!lgMlm.isAnyLineSelected",
+                          "children": [
+                            {
+                              "id": 81,
+                              "type": "MENU_OPT",
+                              "label": "global.to.top",
+                              "icon": "icon-upload",
+                              "eventClick": "lgMlm.moveClicked('top')"
+                            },
+                            {
+                              "id": 82,
+                              "type": "MENU_OPT",
+                              "label": "global.up.one",
+                              "icon": "icon-sort-up",
+                              "eventClick": "lgMlm.moveClicked('up')",
+                              "conditionDisabled": "!lgMlm.isAnyLineSelected"
+                            },
+                            {
+                              "id": 83,
+                              "type": "MENU_OPT",
+                              "label": "global.down.one",
+                              "icon": "icon-sort-down",
+                              "eventClick": "lgMlm.moveClicked('down')",
+                              "conditionDisabled": "!lgMlm.isAnyLineSelected"
+                            },
+                            {
+                              "id": 84,
+                              "type": "MENU_OPT",
+                              "label": "global.to.bottom",
+                              "icon": "icon-download",
+                              "eventClick": "lgMlm.moveClicked('bottom')",
+                              "conditionDisabled": "!lgMlm.isAnyLineSelected"
+                            },
+                            {
+                              "id": 85,
+                              "type": "MENU_OPT",
+                              "label": "global.after",
+                              "icon": "icon-clockwise-90",
+                              "eventClick": "lgMlm.moveAfterClicked()",
+                              "conditionDisabled": "!lgMlm.isAnyLineSelected"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 290,
+                          "type": "BTN",
+                          "subType": "MENU",
+                          "label": "global.print.flag",
+                          "conditionDisabled": "!lgMlm.isAnyLineSelected",
+                          "children": [
+                            {
+                              "id": 291,
+                              "type": "MENU_OPT",
+                              "label": "global.set.to.yes",
+                              "icon": "icon-check",
+                              "eventClick": "lgMlm.setPrintFlagButton(true)"
+                            },
+                            {
+                              "id": 292,
+                              "type": "MENU_OPT",
+                              "label": "global.set.to.no",
+                              "icon": "icon-cancel",
+                              "eventClick": "lgMlm.setPrintFlagButton(false)"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 285,
+                          "type": "BTN",
+                          "subType": "MENU",
+                          "label": "global.sub.lines",
+                          "children": [
+                            {
+                              "id": 286,
+                              "type": "MENU_OPT",
+                              "label": "global.create",
+                              "icon": "icon-new-document",
+                              "eventClick": "lgMlm.createSubLine()"
+                            },
+                            {
+                              "id": 287,
+                              "type": "MENU_OPT",
+                              "label": "global.edit",
+                              "icon": "icon-edit",
+                              "conditionDisabled": "!lgMlm.isOneSubLineSelected",
+                              "eventClick": "lgMlm.editSubLine()"
+                            },
+                            {
+                              "id": 288,
+                              "type": "MENU_OPT",
+                              "label": "global.delete",
+                              "icon": "icon-delete",
+                              "conditionDisabled": "!lgMlm.isOneSubLineSelected",
+                              "eventClick": "lgMlm.deleteSubLine()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "selectedfl",
+                      "label": "global.selected",
+                      "dataFormat": "LOGICAL",
+                      "editable": true,
+                      "eventChange": "lgMlm.setButtonsEnabled()"
+                    },
+                    {
+                      "id": 34,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "dsplnewlineno",
+                      "label": "global.new.line.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 35,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "dsploriglineno",
+                      "label": "global.original.line.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 45,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "specnstype",
+                      "label": "global.line.type",
+                      "dataFormat": "LineType"
+                    },
+                    {
+                      "id": 53,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "shipprod",
+                      "label": "global.product"
+                    },
+                    {
+                      "id": 54,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "descrip",
+                      "label": "global.description"
+                    },
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "actlprintpricefl",
+                      "label": "global.print",
+                      "dataFormat": "LOGICAL",
+                      "editable": true,
+                      "eventChange": "lgMlm.setPrintFlag()"
+                    },
+                    {
+                      "id": 37,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "dsplprice",
+                      "label": "global.price",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 40,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "dsplnetord",
+                      "label": "global.net.ordered",
+                      "dataFormat": "DECIMAL"
+                    },
+                    {
+                      "id": 36,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "dsplqtyord",
+                      "label": "global.quantity.ordered",
+                      "dataFormat": "DECIMAL"
+                    },
+                    {
+                      "id": 55,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "lastupdate",
+                      "label": "global.last.update"
+                    },
+                    {
+                      "id": 38,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "dspldiscamt",
+                      "label": "global.discount",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 39,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "dspldisctype",
+                      "label": "global.discount.type"
+                    },
+                    {
+                      "id": 62,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "commentfl",
+                      "label": "global.comments",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 63,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "notesfl",
+                      "label": "global.notes",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 42,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "dsplcost",
+                      "label": "global.cost",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 43,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "dsplnetcost",
+                      "label": "global.net.cost"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 289,
+      "type": "VIEW_CNTR",
+      "viewName": "multiLineMoveChildView"
+    }
+  ]
+}

@@ -1,0 +1,276 @@
+{
+  "viewId": "wm-wmet-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.wmet",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 35,
+              "type": "EXP_AREA",
+              "label": "global.multiple.products",
+              "conditionShow": "base.showBinProducts",
+              "children": [
+                {
+                  "id": 36,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 37,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "GRID",
+                          "controlRef": "base.productsGrid",
+                          "model": "base.wmbinproducts",
+                          "options": {
+                            "selectable": "single",
+                            "showCheckboxes": true,
+                            "events": {
+                              "selected": "mst.onProductSelected()"
+                            }
+                          },
+                          "controls": {
+                            "toolbar": {
+                              "id": 34,
+                              "type": "TOOLBAR",
+                              "label": "global.products.stored.in.bin"
+                            }
+                          },
+                          "children": [
+                            {
+                              "id": 31,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "prod",
+                              "label": "global.product"
+                            },
+                            {
+                              "id": 32,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "qtyavail",
+                              "label": "global.quantity.available",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 33,
+                              "type": "GRID_COL",
+                              "subType": "CHECKBOX",
+                              "model": "msdsfl",
+                              "label": "global.hazardous",
+                              "dataFormat": "LOGICAL"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.wmtransaction.prod",
+                      "label": "global.product",
+                      "meta": "ProdAll",
+                      "required": false,
+                      "conditionRequired": "base.isreq()",
+                      "conditionReadonly": "!base.wmtransaction.prodenabled",
+                      "eventChange": "mst.onProductChanged()"
+                    },
+                    {
+                      "id": 9,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.wmtransaction.tobinloc",
+                      "label": "global.to.bin.location",
+                      "meta": "BinLocation",
+                      "conditionReadonly": "!base.wmtransaction.tobinlocenabled",
+                      "dataFormat": "BinLoc",
+                      "eventChange": "mst.onBinLocChanged()",
+                      "options": {
+                        "searchParams": {
+                          "whse": {
+                            "type": "REF",
+                            "value": "base.criteria.whse"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 8,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.wmtransaction.quantity",
+                      "label": "global.quantity",
+                      "dataFormat": "DECIMAL",
+                      "sign": "+",
+                      "digits": 7,
+                      "decimals": 2,
+                      "conditionReadonly": "!base.wmtransaction.quantityenabled",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 13,
+                      "type": "BTN",
+                      "subType": "PRI",
+                      "label": "global.update",
+                      "eventClick": "mst.update()",
+                      "conditionDisabled": "!base.wmtransaction.quantityenabled",
+                      "icon": "",
+                      "securityLevel": 3
+                    },
+                    {
+                      "id": 14,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.cancel",
+                      "icon": "",
+                      "eventClick": "mst.cancel()"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 15,
+              "type": "GRID",
+              "controlRef": "base.grid",
+              "model": "base.wmtransactionsprocessed",
+              "controls": {
+                "toolbar": {
+                  "id": 12,
+                  "type": "TOOLBAR",
+                  "label": "global.transactions",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whse",
+                  "label": "global.warehouse"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "binloc",
+                  "label": "global.bin.location",
+                  "dataFormat": "BinLoc"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "adjtype",
+                  "label": "global.adjustment.type"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prod",
+                  "label": "global.product"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "icspnotesfl",
+                  "label": "global.product.notes",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "icsplookupnm",
+                  "label": "global.product.description"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "tobinloc",
+                  "label": "global.to.bin.location",
+                  "dataFormat": "BinLoc"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "quantity",
+                  "label": "global.quantity",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "icspunitstock",
+                  "label": "global.unit"
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "msdsfl",
+                  "label": "global.hazardous",
+                  "dataFormat": "LOGICAL"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,336 @@
+{
+  "viewId": "gl-glsf-detailcomputation",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.financial.statement.details",
+              "subLabel": "{{base.getSubTitleForDetail(dtlu.glsfDesignSummary)}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtlu.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtlu.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtlu.back()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 13,
+                  "type": "EXP_AREA",
+                  "label": "global.computation.type",
+                  "children": [
+                    {
+                      "id": 14,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 15,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtlu.glsfSetupU.operand1",
+                              "label": "global.first.value",
+                              "blankOption": false,
+                              "type3": "SET",
+                              "metaGroup": "GL",
+                              "meta": "FinancialStatementTotalsOperand",
+                              "autoFocus": true
+                            },
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtlu.glsfSetupU.storageNo1",
+                              "label": "global.storage.number",
+                              "dataFormat": "INTEGER",
+                              "digits": 2,
+                              "size": "XS",
+                              "conditionShow": "dtlu.glsfSetupU.operand1 === 's'"
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtlu.glsfSetupU.totalLevel1",
+                              "label": "global.total.level",
+                              "type3": "SET",
+                              "metaGroup": "GL",
+                              "meta": "TotalAndColumnLevel",
+                              "blankOption": false,
+                              "conditionShow": "dtlu.glsfSetupU.operand1 === 't'",
+                              "size": "XS"
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtlu.glsfSetupU.columnNo1",
+                              "label": "global.column",
+                              "type3": "SET",
+                              "metaGroup": "GL",
+                              "meta": "TotalAndColumnLevel",
+                              "blankOption": false,
+                              "conditionShow": "dtlu.glsfSetupU.operand1 === 't'",
+                              "size": "XS"
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtlu.glsfSetupU.value1",
+                              "label": "global.value",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "size": "SM",
+                              "decimals": 2,
+                              "conditionShow": "dtlu.glsfSetupU.operand1 === 'v'"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 17,
+                          "type": "COL",
+                          "subType": "1/4",
+                          "children": [
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtlu.glsfSetupU.operator",
+                              "label": "global.operator",
+                              "type3": "SET",
+                              "metaGroup": "GL",
+                              "meta": "FinancialStatementTotalsOperator",
+                              "blankOption": false,
+                              "size": "SM"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtlu.glsfSetupU.operand2",
+                              "label": "global.second.value",
+                              "blankOption": false,
+                              "type3": "SET",
+                              "metaGroup": "GL",
+                              "meta": "FinancialStatementTotalsOperand",
+                              "conditionDisabled": "dtlu.glsfSetupU.operator === 'C'"
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtlu.glsfSetupU.storageNo2",
+                              "label": "global.storage.number",
+                              "dataFormat": "INTEGER",
+                              "digits": 2,
+                              "size": "XS",
+                              "conditionShow": "dtlu.glsfSetupU.operand2 === 's'",
+                              "conditionDisabled": "dtlu.glsfSetupU.operator === 'C'"
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtlu.glsfSetupU.totalLevel2",
+                              "label": "global.total.level",
+                              "type3": "SET",
+                              "metaGroup": "GL",
+                              "meta": "TotalAndColumnLevel",
+                              "blankOption": false,
+                              "conditionShow": "dtlu.glsfSetupU.operand2 === 't'",
+                              "conditionDisabled": "dtlu.glsfSetupU.operator === 'C'",
+                              "size": "XS"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtlu.glsfSetupU.columnNo2",
+                              "label": "global.column",
+                              "type3": "SET",
+                              "metaGroup": "GL",
+                              "meta": "TotalAndColumnLevel",
+                              "blankOption": false,
+                              "conditionShow": "dtlu.glsfSetupU.operand2 === 't'",
+                              "size": "XS"
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtlu.glsfSetupU.value2",
+                              "label": "global.value",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "size": "SM",
+                              "decimals": 2,
+                              "conditionShow": "dtlu.glsfSetupU.operand2 === 'v'",
+                              "conditionDisabled": "dtlu.glsfSetupU.operator === 'C'"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 29,
+                  "type": "EXP_AREA",
+                  "label": "global.result",
+                  "children": [
+                    {
+                      "id": 30,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtlu.glsfSetupU.result",
+                              "label": "global.result",
+                              "blankOption": false,
+                              "type3": "SET",
+                              "metaGroup": "GL",
+                              "meta": "FinancialStatementTotalsResult",
+                              "conditionDisabled": "dtlu.glsfSetupU.operator === 'C'"
+                            },
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtlu.glsfSetupU.storageNo3",
+                              "label": "global.storage.number",
+                              "dataFormat": "INTEGER",
+                              "digits": 2,
+                              "size": "XS",
+                              "conditionShow": "dtlu.glsfSetupU.result === 's'",
+                              "conditionDisabled": "dtlu.glsfSetupU.operator === 'C'"
+                            },
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtlu.glsfSetupU.totalLevel3",
+                              "label": "global.total.level",
+                              "type3": "SET",
+                              "metaGroup": "GL",
+                              "meta": "TotalAndColumnLevel",
+                              "blankOption": false,
+                              "conditionShow": "dtlu.glsfSetupU.result === 't'",
+                              "conditionDisabled": "dtlu.glsfSetupU.operator === 'C'",
+                              "size": "XS"
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtlu.glsfSetupU.accumTotalsFl",
+                              "label": "global.accumulate.totals",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "dtlu.glsfSetupU.operator === 'C'"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 37,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 38,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 39,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtlu.glsfSetupU.comment",
+                              "label": "global.comment",
+                              "maxLength": 60,
+                              "size": "LG"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "viewId": "twl-twlei-build",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "dtlbuild.isBuild()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.create.cycle.counts.from.discrepancies",
+              "subLabel": "{{base.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtlbuild.cancelBuildCycleCounts()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 27,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.create",
+                  "eventClick": "dtlbuild.buildCycleCounts()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 28,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 29,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "dtlbuild.invDiscBuildCountCriteria.tgDelete",
+                          "label": "global.delete.discrepancies.after.count.is.created",
+                          "dataFormat": "LOGICAL",
+                          "conditionShow": "!base.criteriaUsed.showZeroNegInventory"
+                        },
+                        {
+                          "id": 32,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "dtlbuild.invDiscBuildCountCriteria.rsCountItemorLoc",
+                          "label": "global.locations",
+                          "blankOption": false,
+                          "type3": "MANUAL",
+                          "optionsModel": "dtlbuild.locationOptions"
+                        },
+                        {
+                          "id": 38,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "dtlbuild.invDiscBuildCountCriteria.transType",
+                          "label": "global.problem.type",
+                          "optionsModel": "base.problemTypes",
+                          "type3": "MANUAL",
+                          "blankOption": false,
+                          "conditionShow": "dtlbuild.invDiscBuildCountCriteria.transTypeEnabled",
+                          "conditionDisabled": "!dtlbuild.invDiscBuildCountCriteria.transTypeEnabled"
+                        },
+                        {
+                          "id": 39,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtlbuild.invDiscBuildCountCriteria.selectedRowCount",
+                          "label": "global.number.of.selected.rows",
+                          "dataFormat": "INTEGER",
+                          "readonly": true,
+                          "digits": 5,
+                          "conditionShow": "{{dtlbuild.invDiscBuildCountCriteria.selectedRowCount > 0}}"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 37,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 36,
+                          "type": "FIELD_SET",
+                          "label": "global.date.range",
+                          "conditionShow": "{{dtlbuild.invDiscBuildCountCriteria.selectedRowCount == 0}}",
+                          "children": [
+                            {
+                              "id": 33,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 34,
+                                  "type": "FIELD",
+                                  "subType": "DATE",
+                                  "model": "dtlbuild.invDiscBuildCountCriteria.startDate",
+                                  "label": "global.start",
+                                  "dataFormat": "DATE"
+                                },
+                                {
+                                  "id": 35,
+                                  "type": "FIELD",
+                                  "subType": "DATE",
+                                  "model": "dtlbuild.invDiscBuildCountCriteria.endDate",
+                                  "label": "global.end",
+                                  "dataFormat": "DATE"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

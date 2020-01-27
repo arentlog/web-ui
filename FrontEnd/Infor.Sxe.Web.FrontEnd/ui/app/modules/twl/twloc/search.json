@@ -1,0 +1,169 @@
+{
+  "viewId": "twl-twloc-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.criteria.chCo",
+                  "label": "global.company.number",
+                  "autoFocus": false,
+                  "readonly": true,
+                  "extra": true
+                },
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.chWh",
+                  "label": "global.warehouse",
+                  "readonly": false,
+                  "meta": "TWLWarehouse",
+                  "conditionReadonly": "base.restrictTWLWarehouse",
+                  "required": true
+                },
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.chOrd",
+                  "label": "global.order.number",
+                  "meta": "TWLOrder",
+                  "readonly": false,
+                  "size": "SM",
+                  "options": {
+                    "searchParams": {
+                      "coNum": {
+                        "type": "REF",
+                        "value": "base.criteria.chCo"
+                      },
+                      "whNum": {
+                        "type": "REF",
+                        "value": "base.criteria.chWh"
+                      }
+                    },
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.chCarton",
+                  "label": "global.carton",
+                  "readonly": false,
+                  "maxLength": 10
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.carrier",
+                  "label": "global.carrier",
+                  "readonly": false,
+                  "maxLength": 10,
+                  "meta": "TWLCarrier",
+                  "options": {
+                    "searchParams": {
+                      "coNum": {
+                        "type": "REF",
+                        "value": "base.criteria.chCo"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.chPallet",
+                  "label": "global.shipping.pallet",
+                  "readonly": false,
+                  "maxLength": 10
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.chTracking",
+                  "label": "global.tracking.id",
+                  "readonly": false,
+                  "maxLength": 24
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.chStatus",
+                  "label": "global.status",
+                  "readonly": false,
+                  "maxLength": 24,
+                  "type3": "SET",
+                  "metaGroup": "TWL",
+                  "meta": "CartonStatus",
+                  "blankOption": true,
+                  "blankOptionLabel": "global.all"
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "MULTI_SELECT",
+                  "model": "base.criteria.carrierArray",
+                  "label": "global.carrier",
+                  "conditionShow": "base.inExceptionsMaster",
+                  "eventChange": "base.setCarrier()",
+                  "maxLength": 24,
+                  "type3": "MANUAL",
+                  "optionLabelField": "carrierId",
+                  "optionValueField": "carrierId",
+                  "optionsModel": "base.carrierOptions",
+                  "size": "SM"
+                },
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.recordcountlimit",
+                  "label": "global.record.limit",
+                  "dataFormat": "INTEGER",
+                  "digits": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

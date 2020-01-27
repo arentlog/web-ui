@@ -1,0 +1,143 @@
+{
+  "viewId": "twl-twlert-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.criteria.coNum",
+                  "label": "global.company.number",
+                  "readonly": true,
+                  "extra": true
+                },
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.whNum",
+                  "label": "global.warehouse",
+                  "readonly": false,
+                  "meta": "TWLWarehouse",
+                  "conditionReadonly": "base.restrictTWLWarehouse",
+                  "required": true
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.toZone",
+                  "label": "global.to.zone",
+                  "autoFocus": true,
+                  "meta": "TWLWhZone",
+                  "size": "XS",
+                  "options": {
+                    "searchParams": {
+                      "coNum": {
+                        "type": "REF",
+                        "value": "base.criteria.coNum"
+                      },
+                      "whNum": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      },
+                      "searchType": "all",
+                      "keyField": "all"
+                    }
+                  }
+                },
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.aisle",
+                  "label": "global.aisle",
+                  "digits": 5,
+                  "dataFormat": "INTEGER"
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.binNum",
+                  "label": "global.location",
+                  "autoFocus": true,
+                  "meta": "TWLBinLocation",
+                  "options": {
+                    "searchParams": {
+                      "coNum": {
+                        "type": "REF",
+                        "value": "base.criteria.coNum"
+                      },
+                      "whNum": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.absNum",
+                  "label": "global.item",
+                  "autoFocus": true,
+                  "meta": "TWLItem",
+                  "options": {
+                    "searchParams": {
+                      "whse": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.chStat",
+                  "label": "global.status",
+                  "type3": "MANUAL",
+                  "optionsModel": "srch.statusTypes",
+                  "blankOptionLabel": "global.all"
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

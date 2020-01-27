@@ -1,0 +1,161 @@
+{
+  "viewId": "wm-wmea-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "conditionShow": "",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isMaster()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.wmea",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 19,
+              "type": "GRID",
+              "model": "base.dataset",
+              "controlRef": "base.grid",
+              "options": {
+                "showCheckboxes": true
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 5,
+                  "type": "TOOLBAR",
+                  "label": "global.committed.replenishments",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.bin.allocation",
+                      "conditionDisabled": "!base.grid.isOneRowSelected()",
+                      "eventClick": "mst.launchBinAllocationFunction()"
+                    },
+                    {
+                      "id": 28,
+                      "type": "BTN",
+                      "subType": "MENU",
+                      "label": "global.actions",
+                      "conditionDisabled": "!base.grid.isAnyRowSelected()",
+                      "children": [
+                        {
+                          "id": 29,
+                          "type": "MENU_OPT",
+                          "label": "global.accept",
+                          "icon": "icon-check",
+                          "eventClick": "mst.acceptFunction()"
+                        },
+                        {
+                          "id": 30,
+                          "type": "MENU_OPT",
+                          "label": "global.cancel",
+                          "icon": "icon-cancel",
+                          "eventClick": "mst.cancelFunction()"
+                        },
+                        {
+                          "id": 31,
+                          "type": "MENU_OPT",
+                          "label": "global.restore",
+                          "icon": "icon-reset",
+                          "eventClick": "mst.restoreFunction()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "type": "BTN",
+                      "label": "global.submit",
+                      "conditionDisabled": "",
+                      "eventClick": "mst.finalUpdateFunction()",
+                      "icon": "icon-save"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "binloc",
+                  "label": "global.bin.location",
+                  "eventClick": "mst.binInquiryHyperlink()",
+                  "dataFormat": "BinLoc"
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "accepttype",
+                  "label": "global.accept",
+                  "dataFormat": "WmReplenishmentActionTypeToName"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prod",
+                  "label": "global.product"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "icsplookupnm",
+                  "label": "global.lookup.name"
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "qtyactual",
+                  "label": "global.quantity",
+                  "dataFormat": "DECIMAL"
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "icspunitstock",
+                  "label": "global.unit"
+                },
+                {
+                  "id": 26,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "msdsfl",
+                  "label": "global.hazardous",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "oper",
+                  "label": "global.operator",
+                  "width": null
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 32,
+      "type": "VIEW_CNTR",
+      "viewName": "binAllocation"
+    }
+  ]
+}

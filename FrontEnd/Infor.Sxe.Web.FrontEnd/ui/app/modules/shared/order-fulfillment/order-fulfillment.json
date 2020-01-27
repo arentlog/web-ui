@@ -1,0 +1,489 @@
+{
+  "viewId": "shared-order-fulfillment-orderfulfillment",
+  "id": 1,
+  "type": "VIEW",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.order.entry",
+              "subLabel": "{{oful.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 44,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 45,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "oful.back()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 46,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "eventClick": "oful.save()",
+                  "conditionDisabled": "!oful.chgqtyenabled"
+                },
+                {
+                  "id": 64,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.submit.fulfillment",
+                  "conditionDisabled": "!oful.submitenabled",
+                  "eventClick": "oful.submitList()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 71,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.action.range.add.to.warehouse.list",
+                  "icon": "icon-add",
+                  "eventClick": "oful.addWarehouse()",
+                  "conditionDisabled": "!oful.submitenabled || !oful.chgqtyenabled",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 80,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.override.rule",
+                  "icon": "icon-edit",
+                  "securityLevel": 3,
+                  "conditionDisabled": "!oful.submitenabled || !oful.chgqtyenabled",
+                  "eventClick": "oful.overrideRule()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 48,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 49,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 76,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 53,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "oful.ordernumber",
+                              "label": "global.order.number",
+                              "meta": "OEOrders",
+                              "conditionDisabled": "oful.functionname.toLowerCase() !== 'oeet-hdr'",
+                              "size": "SM"
+                            },
+                            {
+                              "id": 54,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "oful.lineno",
+                              "label": "global.line.number",
+                              "dataFormat": "INTEGER",
+                              "maxLength": 3,
+                              "sign": "+",
+                              "digits": 3,
+                              "size": "XS",
+                              "readonly": true
+                            },
+                            {
+                              "id": 61,
+                              "type": "BTN",
+                              "subType": "PRI",
+                              "label": "global.search",
+                              "eventClick": "oful.search()",
+                              "conditionShow": "oful.functionname.toLowerCase() === 'oeet-hdr'"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 63,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "oful.whse",
+                          "label": "global.order.warehouse",
+                          "meta": "Warehouse",
+                          "readonly": true
+                        }
+                      ]
+                    },
+                    {
+                      "id": 52,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 68,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "oful.fulfillmentstgcd",
+                          "label": "global.stage.code",
+                          "type3": "SET",
+                          "metaGroup": "OE",
+                          "meta": "FulfillmentStageCode",
+                          "blankOption": false,
+                          "readonly": true
+                        },
+                        {
+                          "id": 67,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "oful.fulfillmentbillcd",
+                          "label": "global.billing.code",
+                          "type3": "SET",
+                          "metaGroup": "OE",
+                          "meta": "FulfillmentBillingCode",
+                          "blankOption": false,
+                          "readonly": true,
+                          "conditionShow": "oful.isFulfillmentBillingOn"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 65,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 56,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "oful.totqtyord",
+                          "label": "{{oful.totalOrdLabel}}",
+                          "dataFormat": "DECIMAL",
+                          "digits": 9,
+                          "decimals": 2,
+                          "readonly": true,
+                          "size": "SM"
+                        },
+                        {
+                          "id": 79,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 62,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "oful.totqtyship",
+                              "label": "global.quantity.allocated",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "readonly": true,
+                              "size": "SM"
+                            },
+                            {
+                              "id": 72,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "oful.shortstockfl",
+                              "label": "global.quantity.short",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "'true' === 'true'"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 9,
+                  "type": "GRID",
+                  "controlRef": "oful.grid",
+                  "model": "oful.oelines",
+                  "conditionEditable": "oful.chgqtyenabled",
+                  "options": {
+                    "editable": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 10,
+                      "type": "TOOLBAR",
+                      "label": "global.warehouse.list",
+                      "children": []
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "selectedfl",
+                      "label": "global.selected",
+                      "editable": true,
+                      "dataFormat": "LOGICAL",
+                      "eventChange": "oful.selectedFlagChange()"
+                    },
+                    {
+                      "id": 11,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "lineno",
+                      "label": "global.line.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 16,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "srcwhse",
+                      "label": "global.warehouse"
+                    },
+                    {
+                      "id": 15,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "seqno",
+                      "label": "global.seq.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 18,
+                      "type": "GRID_COL",
+                      "subType": "HYPERLINK",
+                      "model": "shipprod",
+                      "label": "global.product",
+                      "eventClick": "oful.navigateToIcia()"
+                    },
+                    {
+                      "id": 19,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyord",
+                      "label": "global.quantity.ordered",
+                      "dataFormat": "DECIMAL_TEXT"
+                    },
+                    {
+                      "id": 20,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "unit",
+                      "label": "global.unit"
+                    },
+                    {
+                      "id": 21,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "sourcedqty",
+                      "label": "global.quantity.allocated",
+                      "dataFormat": "DECIMAL_TEXT",
+                      "editable": true,
+                      "digits": 9,
+                      "decimals": 2,
+                      "sign": "+",
+                      "cellEditable": "",
+                      "eventChange": "oful.sourcedQtyChange()"
+                    },
+                    {
+                      "id": 22,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "netavail",
+                      "label": "global.net.available",
+                      "dataFormat": "DECIMAL_TEXT"
+                    },
+                    {
+                      "id": 23,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "surplus",
+                      "label": "global.surplus",
+                      "dataFormat": "DECIMAL_TEXT"
+                    },
+                    {
+                      "id": 24,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "nonstockfl",
+                      "label": "global.non.stock",
+                      "dataFormat": "BooleanToYesNo"
+                    },
+                    {
+                      "id": 25,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "fullstockfl",
+                      "label": "global.full.stock",
+                      "dataFormat": "BooleanToYesNo"
+                    },
+                    {
+                      "id": 75,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "shortstockfl",
+                      "label": "global.quantity.short",
+                      "dataFormat": "BooleanToYesNo"
+                    },
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "orignetavail",
+                      "label": "global.original.net.available",
+                      "dataFormat": "DECIMAL_TEXT"
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "origsurplus",
+                      "label": "global.original.surplus",
+                      "dataFormat": "DECIMAL_TEXT"
+                    },
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "arpvendno",
+                      "label": "global.arp.vendor.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 29,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "arpwhse",
+                      "label": "global.arp.warehouse"
+                    },
+                    {
+                      "id": 30,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "reqshipdt",
+                      "label": "global.request.ship.date",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 31,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "region",
+                      "label": "global.region"
+                    },
+                    {
+                      "id": 33,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "tiedordernum",
+                      "label": "global.tied.order.number"
+                    },
+                    {
+                      "id": 34,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "tiedlineno",
+                      "label": "global.tied.line.number",
+                      "dataFormat": "INTEGER_TEXT",
+                      "contentVisible": ""
+                    },
+                    {
+                      "id": 35,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "tiedqtyord",
+                      "label": "global.tied.quantity.ordered",
+                      "dataFormat": "DECIMAL_TEXT",
+                      "contentVisible": ""
+                    },
+                    {
+                      "id": 36,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "tiedqtyship",
+                      "label": "global.tied.quantity.ship",
+                      "dataFormat": "DECIMAL_TEXT",
+                      "contentVisible": ""
+                    },
+                    {
+                      "id": 37,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "tiedstagecd",
+                      "label": "global.tied.order.stage",
+                      "contentVisible": "",
+                      "dataFormat": "OeStage"
+                    },
+                    {
+                      "id": 38,
+                      "type": "GRID_COL",
+                      "subType": "DROP_DOWN",
+                      "model": "tiedlinetype",
+                      "label": "global.sourced.type",
+                      "type3": "SET",
+                      "metaGroup": "OE",
+                      "meta": "FulfillmentSourcedTieType",
+                      "blankOption": true
+                    },
+                    {
+                      "id": 39,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "tiedvendno",
+                      "label": "global.sourced.vendor.number",
+                      "dataFormat": "INTEGER_TEXT",
+                      "contentVisible": ""
+                    },
+                    {
+                      "id": 40,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "tiedwhse",
+                      "label": "global.sourced.warehouse",
+                      "contentVisible": ""
+                    },
+                    {
+                      "id": 42,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "origruleused",
+                      "label": "global.original.rule",
+                      "dataFormat": "OeFulfillmentRules"
+                    },
+                    {
+                      "id": 43,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "overruleused",
+                      "label": "global.override.rule",
+                      "dataFormat": "OeFulfillmentRules"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

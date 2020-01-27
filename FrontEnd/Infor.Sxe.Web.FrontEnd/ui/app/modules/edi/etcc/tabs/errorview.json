@@ -1,0 +1,311 @@
+{
+  "viewId": "edi-etcc-master-errors",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "conditionShow": "base.includesMaster()",
+  "children": [
+    {
+      "id": 101,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 102,
+          "type": "COL",
+          "subType": "1/3",
+          "children": [
+            {
+              "id": 115,
+              "type": "FIELD",
+              "subType": "DROP_DOWN",
+              "model": "base.quickErrorCriteria.level",
+              "label": "global.section",
+              "type3": "SET",
+              "metaGroup": "EDI",
+              "meta": "SectionType",
+              "blankOption": false,
+              "eventChange": "qView.quickSectionChanged()",
+              "size": "SM"
+            },
+            {
+              "id": 139,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "base.quickErrorCriteria.alllines",
+              "label": "global.all.lines",
+              "dataFormat": "LOGICAL",
+              "conditionShow": "base.quickErrorCriteria.level === 'l'",
+              "eventChange": "qView.quickAllLinesChanged()"
+            },
+            {
+              "id": 116,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "base.quickErrorCriteria.lineno",
+              "label": "global.line.number",
+              "type3": "SET",
+              "metaGroup": "EDI",
+              "meta": "SectionType",
+              "blankOption": false,
+              "dataFormat": "INTEGER_TEXT",
+              "digits": 3,
+              "conditionShow": "base.quickErrorCriteria.level === 'l' && !base.quickErrorCriteria.alllines === true",
+              "size": "XS"
+            },
+            {
+              "id": 117,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "base.quickErrorCriteria.showall",
+              "label": "global.include.corrected",
+              "dataFormat": "LOGICAL"
+            },
+            {
+              "id": 118,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "base.quickErrorCriteria.showerrors",
+              "label": "global.include.errors",
+              "dataFormat": "LOGICAL"
+            },
+            {
+              "id": 119,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "base.quickErrorCriteria.showexceptions",
+              "label": "global.exceptions",
+              "dataFormat": "LOGICAL"
+            },
+            {
+              "id": 120,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "base.quickErrorCriteria.showinfor",
+              "label": "global.informational",
+              "dataFormat": "LOGICAL"
+            },
+            {
+              "id": 166,
+              "type": "BTN",
+              "subType": "PRI",
+              "label": "global.search",
+              "icon": "icon-search",
+              "eventClick": "qView.quickSummaryGridSearch()"
+            }
+          ]
+        },
+        {
+          "id": 106,
+          "type": "COL",
+          "subType": "1/6",
+          "children": [
+            {
+              "id": 111,
+              "type": "FIELD_SET",
+              "label": "global.errors.to.correct",
+              "conditionShow": "base.quickErrorCriteria.showerrors",
+              "children": [
+                {
+                  "id": 112,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.quickErrorsTotals.tothdrerr",
+                  "label": "global.header",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 113,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.quickErrorsTotals.totlnerr",
+                  "label": "global.line",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 114,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.quickErrorsTotals.toterr",
+                  "label": "global.total",
+                  "dataFormat": "INTEGER_TEXT"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 105,
+          "type": "COL",
+          "subType": "1/6",
+          "children": [
+            {
+              "id": 107,
+              "type": "FIELD_SET",
+              "label": "global.exceptions.to.correct",
+              "conditionShow": "base.quickErrorCriteria.showexceptions",
+              "children": [
+                {
+                  "id": 108,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.quickErrorsTotals.tothdrexc",
+                  "label": "global.header",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 109,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.quickErrorsTotals.totlnexc",
+                  "label": "global.line",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 110,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.quickErrorsTotals.totexc",
+                  "label": "global.total",
+                  "dataFormat": "INTEGER_TEXT"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 160,
+          "type": "COL",
+          "subType": "1/6",
+          "children": [
+            {
+              "id": 161,
+              "type": "FIELD_SET",
+              "label": "global.informational",
+              "conditionShow": "base.quickErrorCriteria.showinfor",
+              "children": [
+                {
+                  "id": 162,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.quickErrorsTotals.tothdrinf",
+                  "label": "global.header",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 163,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.quickErrorsTotals.totlninf",
+                  "label": "global.line",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 164,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.quickErrorsTotals.totinf",
+                  "label": "global.total",
+                  "dataFormat": "INTEGER_TEXT"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 93,
+      "type": "GRID",
+      "model": "base.quickSummaryResults",
+      "conditionShow": "",
+      "controlRef": "qView.quickSummary.grid",
+      "options": {
+        "showCheckboxes": true,
+        "showDrilldown": false,
+        "events": {
+          "drilldown": "",
+          "selected": ""
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 96,
+          "type": "TOOLBAR",
+          "label": "global.results.summary",
+          "children": [
+            {
+              "id": 137,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.error.detail",
+              "icon": "icon-drilldown",
+              "eventClick": "qView.quickSummaryGridFilterAllErrorsBy()"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 98,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "docTxnType",
+          "label": "global.process.type"
+        },
+        {
+          "id": 144,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "docNm",
+          "label": "global.order.transtype"
+        },
+        {
+          "id": 167,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "leveldisplay",
+          "label": "global.section"
+        },
+        {
+          "id": 143,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "errty",
+          "label": "global.error.type",
+          "dataFormat": "EdiETCCErrorType"
+        },
+        {
+          "id": 94,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "fieldty",
+          "label": "global.error"
+        },
+        {
+          "id": 95,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "errdesc",
+          "label": "global.error.description"
+        },
+        {
+          "id": 97,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "numoferrors",
+          "label": "global.errors.to.correct",
+          "dataFormat": "INTEGER_TEXT"
+        },
+        {
+          "id": 138,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "numcorrected",
+          "label": "global.errors.corrected",
+          "dataFormat": "INTEGER_TEXT",
+          "conditionInclude": "base.quickErrorCriteria.showall"
+        }
+      ]
+    }
+  ]
+}

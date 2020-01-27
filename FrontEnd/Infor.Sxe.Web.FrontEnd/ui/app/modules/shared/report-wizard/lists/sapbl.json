@@ -1,0 +1,205 @@
+{
+  "viewId": "shared-report-wizard-lists-sapbl",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.customer.list",
+              "children": [
+                {
+                  "id": 18,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "securityLevel": 3,
+                  "eventClick": "list.submit()"
+                },
+                {
+                  "id": 19,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "stateRef": "^"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 8,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 9,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "list.record.vendno",
+                          "label": "global.customer",
+                          "meta": "Customer",
+                          "required": true
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "list.record.apinvno",
+                          "label": "global.ship.to",
+                          "meta": "ShipTo",
+                          "options": {
+                            "searchParams": {
+                              "custno": {
+                                "type": "REF",
+                                "value": "list.record.vendno"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 12,
+                          "type": "BTN",
+                          "subType": "SEC",
+                          "label": "global.add.to.list",
+                          "eventClick": "",
+                          "submitForm": true,
+                          "eventValidated": "list.addRecord()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 20,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 22,
+                          "type": "FIELD",
+                          "subType": "RADIO_SET",
+                          "model": "list.record.selecttype",
+                          "label": "global.list.type",
+                          "type3": "INLINE",
+                          "labelHidden": true,
+                          "required": true,
+                          "children": [
+                            {
+                              "id": 23,
+                              "type": "OPT",
+                              "label": "global.tool.crib",
+                              "value": "T"
+                            },
+                            {
+                              "id": 24,
+                              "type": "OPT",
+                              "label": "global.consignment",
+                              "value": "C"
+                            },
+                            {
+                              "id": 25,
+                              "type": "OPT",
+                              "label": "global.none",
+                              "value": ""
+                            }
+                          ]
+                        },
+                        {
+                          "id": 26,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "list.record.name",
+                          "label": "global.list.name"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 14,
+                  "type": "GRID",
+                  "model": "list.dataset",
+                  "controlRef": "list.grid",
+                  "options": {
+                    "showCheckboxes": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 15,
+                      "type": "TOOLBAR",
+                      "label": "global.customer.list",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "BTN",
+                          "subType": "SEC",
+                          "label": "global.delete",
+                          "icon": "icon-delete",
+                          "conditionDisabled": "!list.grid.isAnyRowSelected()",
+                          "eventClick": "list.delete()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "vendno",
+                      "label": "global.customer"
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "apinvno",
+                      "label": "global.ship.to"
+                    },
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "selecttype",
+                      "label": "global.type"
+                    },
+                    {
+                      "id": 29,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "name",
+                      "label": "global.list.name"
+                    },
+                    {
+                      "id": 16,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "disponly1",
+                      "label": "global.name"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

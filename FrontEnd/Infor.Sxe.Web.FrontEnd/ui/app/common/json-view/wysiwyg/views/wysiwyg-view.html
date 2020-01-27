@@ -1,0 +1,243 @@
+﻿<div class="page-container two-column fixed" initialize>
+
+   <!-- WYSIWYG content -->
+   <section class="main scrollable-y" style="width: calc(100% - 274px);" role="main">
+      <div class="content" style="height: auto;">
+         <div id="wysiwyg-content" class="wysiwyg-style"></div>
+      </div>
+   </section>
+
+   <!-- Side bar -->
+   <section class="sidebar" style="width: 270px; height: 100%;" role="complementary">
+      <div class="content scrollable-y" style="height: 100%;">
+         <div class="accordion alternate" data-options="{allowOnePane: false}">
+
+            <!-- General Info -->
+            <div class="accordion-header is-expanded">
+               <svg class="icon icon-info-field" focusable="false" aria-hidden="true" role="presentation">
+                  <use xlink:href="#icon-info-field"></use>
+               </svg>
+               <a href="#"><span>{{::isDevMode ? 'global.view' : 'global.extension' | translate}}</span></a>
+            </div>
+            <div class="accordion-pane">
+               <div class="accordion-content" style="padding-left: 0;">
+                  <div class="row">
+                     <div class="full column">
+                        <!-- Save -->
+                        <button type="button" class="btn-primary" ng-click="saveView()" style="width: 100%;">
+                           <span translate>global.save</span>
+                        </button>
+
+                        <!-- More Actions -->
+                        <button type="button" class="btn-secondary btn-menu" style="width: 100%;">
+                           <svg class="icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon-menu"></use></svg>
+                           <span translate>wysiwyg.more.actions</span>
+                        </button>
+                        <ul class="popupmenu has-icons">
+                           <li ng-if="!isDevMode" ng-class="{'is-disabled': !webExtRecord.webextendRowID}"><a href="#" ng-click="deleteExtension()" ng-disabled="!webExtRecord.webextendRowID"><svg class="icon"><use xlink:href="#icon-delete"></use></svg><span translate>global.delete</span></a></li>
+                           <li ng-if="!isDevMode"><a ng-click="outputJson()"><svg class="icon"><use xlink:href="#icon-export"></use></svg><span translate>wysiwyg.output.json</span></a></li>
+                           <li ng-if="isDevMode"><a ng-click="outputHtml()"><svg class="icon"><use xlink:href="#icon-export"></use></svg><span translate>wysiwyg.output.html</span></a></li>
+                        </ul>
+                     </div>
+                  </div>
+
+                  <hr style="margin: 8px 13px 20px 13px;" />
+
+                  <div class="row">
+                     <div class="full column">
+                        <div class="field">
+                           <label for="wysiwyg-view-id" translate>{{isDevMode ? 'wysiwyg.view.id' : 'global.extension.id'}}</label>
+                           <input type="text" id="wysiwyg-view-id" value="{{::jsonView.viewId}}" readonly="readonly" />
+                        </div>
+
+                        <div class="field" ng-if="!isNewMode">
+                           <label for="wysiwyg-view-file" translate>wysiwyg.view.path</label>
+                           <input type="text" id="wysiwyg-view-file" value="{{::viewPath}}" readonly="readonly" />
+                        </div>
+                     </div>
+                  </div>
+
+                  <!-- Extension Fields -->
+                  <div class="row" ng-if="isExtendMode || isNewMode">
+                     <div class="full column">
+                        <!-- Level -->
+                        <div class="field">
+                           <label class="inline">
+                              <span class="label-text" translate>global.level</span>
+                              <input type="text" ng-model="extensionLevelText" readonly="readonly" />
+                           </label>
+                        </div>
+
+                        <!-- Company -->
+                        <div class="field" ng-show="extensionLevel === 'cono'">
+                           <label class="inline">
+                              <span class="label-text" translate>global.company</span>
+                              <input type="text" ng-model="extensionCono" readonly="readonly" />
+                           </label>
+                        </div>
+
+                        <!-- Revision -->
+                        <div class="field">
+                           <label class="inline">
+                              <span class="label-text" translate>global.revision.number</span>
+                              <input type="text" class="input-xs" ng-model="webExtRecord.revision" readonly="readonly" />
+                           </label>
+                        </div>
+
+                        <!-- Active -->
+                        <div class="field">
+                           <input type="checkbox" id="wysiwyg-view-active" class="checkbox" ng-model="webExtRecord.activefl" />
+                           <label class="checkbox-label" for="wysiwyg-view-active" translate>global.active</label>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Context Fields -->
+            <div class="accordion-header">
+               <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                  <use xlink:href="#icon-connections"></use>
+               </svg>
+               <a href="#"><span>Context Fields ({{hiddenContextFields.length}})</span></a>
+            </div>
+            <div class="accordion-pane" style="padding: 0;">
+               <div class="accordion-content" style="padding: 0;">
+                  <div class="toolbar standalone" style="margin-bottom: 0;">
+                     <div class="buttonset">
+                        <button class="btn-tertiary" type="button" ng-click="newControl('CONTEXT_FIELD', '', jsonView.id)" title="Add Hidden Context Field">
+                           <svg class="icon"><use xlink:href="#icon-new-document"></use></svg>
+                           <span>Add</span>
+                        </button>
+                     </div>
+                  </div>
+                  <div class="listview">
+                     <ul>
+                        <li ng-repeat="item in hiddenContextFields" ng-click="editControl(item.control.id)">
+                           <p>{{item.entity ? item.entity.displayName : 'Undefined'}}</p>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Common Controls -->
+            <div class="accordion-header">
+               <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                  <use xlink:href="#icon-tools-addons"></use>
+               </svg>
+               <a href="#"><span>Common Controls</span></a>
+            </div>
+            <div class="accordion-pane">
+               <div class="accordion-content" style="padding-left: 0;">
+                  <div class="row">
+                     <div class="full column">
+                        <control-templates></control-templates>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Hot Keys -->
+            <div class="accordion-header">
+               <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                  <use xlink:href="#icon-key"></use>
+               </svg>
+               <a href="#"><span>Hot Keys ({{jsonView.hotKeys ? jsonView.hotKeys.length : 0}})</span></a>
+            </div>
+            <div class="accordion-pane" style="padding: 0;">
+               <div class="accordion-content" style="padding: 0;">
+                  <div class="toolbar standalone" style="margin-bottom: 0;">
+                     <div class="buttonset">
+                        <button class="btn-tertiary" type="button" ng-click="editHotKeys(jsonView.id)">
+                           <svg class="icon"><use xlink:href="#icon-edit"></use></svg>
+                           <span>Edit</span>
+                        </button>
+                     </div>
+                  </div>
+                  <div class="listview">
+                     <ul>
+                        <li ng-repeat="hotKey in jsonView.hotKeys">
+                           <p class="listview-heading">{{getHotKeyDisplay(hotKey)}}</p>
+                           <p class="listview-subheading">{{hotKey.action ? hotKey.action : 'Undefined'}}</p>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Deleted Controls (extensions) -->
+            <div class="accordion-header" ng-if="isExtendMode">
+               <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                  <use xlink:href="#icon-delete"></use>
+               </svg>
+               <a href="#"><span translate>wysiwyg.deleted.controls</span></a>
+            </div>
+            <div class="accordion-pane" ng-if="isExtendMode">
+               <div class="accordion-content" style="padding: 0;">
+                  <deleted-controls-list></deleted-controls-list>
+               </div>
+            </div>
+
+         </div>
+      </div>
+   </section>
+
+   <!-- Import columns -->
+   <div id="import-grid-columns" style="display: none;">
+      <div class="row">
+         <div class="full column">
+            <fieldset class="radio-group" style="margin-bottom: 12px;">
+               <legend>Input Type</legend>
+               <input type="radio" id="import-columns-type-sample-json" class="radio" value="sample" ng-model="importColumnsOptions.type" />
+               <label for="import-columns-type-sample-json" class="radio-label">Sample JSON Object (recommended)</label>
+               <br>
+               <input type="radio" id="import-columns-type-js-code" checked class="radio" value="code" ng-model="importColumnsOptions.type" />
+               <label for="import-columns-type-js-code"  class="radio-label">JavaScript Column Array</label>
+            </fieldset>
+
+            <div class="field" ng-show="importColumnsOptions.type === 'sample'">
+               <label for="import-columns-json-text" class="required">Input</label>
+               <textarea id="import-columns-json-text" ng-model="importColumnsOptions.input" style="width: 770px; height: 300px; max-width: none;" placeholder='{ "custno": 2.0, "name": "sample string 3" }'></textarea>
+            </div>
+
+            <div class="field" ng-show="importColumnsOptions.type === 'code'">
+               <label for="import-columns-js-code" class="required">Input</label>
+               <textarea id="import-columns-js-code" ng-model="importColumnsOptions.input" style="width: 770px; height: 300px; max-width: none;" placeholder="[ { id: 'duedt', field: 'duedt', name: 'global.due.date', formatter: Formatters.Date }, ... ]"></textarea>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Import fields -->
+   <div id="importFieldsView" style="display: none;">
+      <div class="field">
+         <label for="importFieldsPath" class="required" translate>REST Path</label>
+         <input type="text" id="importFieldsPath" ng-model="importFieldsOptions.path" placeholder="api/ar/arsc/getbypk?custno=123" />
+      </div>
+
+      <div class="field">
+         <label for="importFieldsBindObject" class="required" translate>Data Binding Prefix</label>
+         <input type="text" id="importFieldsBindObject" ng-model="importFieldsOptions.dataBindObject" placeholder="dtl.arsc." title="Enter the data binding prefix that will be used to populate data bindings on each field." />
+      </div>
+
+      <!-- BROKEN -->
+      <!--<div class="field">-->
+         <!--<input type="checkbox" id="import-fields-type-info" ng-model="importFieldsOptions.infoFields" />-->
+         <!--<label for="import-fields-type-info" class="checkbox-label" translate>Info Fields</label>-->
+      <!--</div>-->
+
+      <div class="field">
+         <label for="import-fields-field-type" class="label required" translate>Field Type</label>
+         <select id="import-fields-field-type" class="dropdown" ng-model="importFieldsOptions.fieldType">
+            <option value=""></option>
+            <option value="EDITABLE">Editable (Default)</option>
+            <option value="INFO">Info</option>
+         </select>
+      </div>
+   </div>
+
+   <!-- Control Menu -->
+   <div ng-include="'ui/app/common/json-view/wysiwyg/views/control-menu.html'"></div>
+
+</div>

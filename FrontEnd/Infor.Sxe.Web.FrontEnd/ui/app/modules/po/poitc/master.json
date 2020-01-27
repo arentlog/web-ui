@@ -1,0 +1,429 @@
+{
+  "viewId": "po-poitc-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.poitc",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "controls": {},
+          "children": [
+            {
+              "id": 10,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 11,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "base.header.prod",
+                      "label": "global.product",
+                      "dataDesc": "base.header.proddesc"
+                    }
+                  ]
+                },
+                {
+                  "id": 14,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "base.header.whse",
+                      "label": "global.warehouse"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 58,
+              "type": "EXP_AREA",
+              "label": "global.details",
+              "children": [
+                {
+                  "id": 12,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 13,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.header.qtyreq",
+                          "label": "global.required.quantity",
+                          "dataFormat": "DECIMAL",
+                          "digits": 7,
+                          "decimals": 2,
+                          "conditionReadonly": "!base.header.qtyreqenabled",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.header.qtyact",
+                          "label": "global.actual.quantity",
+                          "dataFormat": "DECIMAL",
+                          "decimals": 2,
+                          "readonly": true,
+                          "sign": "+",
+                          "digits": 7,
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 28,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.header.adjfactor",
+                          "label": "global.adjustment.factor",
+                          "dataFormat": "DECIMAL",
+                          "sign": "+",
+                          "decimals": 5,
+                          "digits": 7,
+                          "conditionShow": "!base.header.adjfactorhidden",
+                          "readonly": true,
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.header.unit",
+                          "label": "global.unit",
+                          "meta": "StockingUnit",
+                          "conditionReadonly": "!base.header.qtyreqenabled",
+                          "eventChange": "mst.unitChange()",
+                          "options": {
+                            "allowEntry": true,
+                            "searchParams": {
+                              "Product": {
+                                "type": "REF",
+                                "value": "base.header.prod"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.header.price",
+                          "label": "global.price",
+                          "dataFormat": "DECIMAL",
+                          "digits": 7,
+                          "decimals": 5,
+                          "conditionReadonly": "!base.header.qtyreqenabled",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 17,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 35,
+                          "type": "FIELD_SET",
+                          "label": "global.linear.feet",
+                          "conditionShow": "!base.header.memomixhidden",
+                          "children": [
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.header.onhandlf",
+                              "label": "global.on.hand",
+                              "dataFormat": "DECIMAL"
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.header.availlf",
+                              "label": "global.available",
+                              "dataFormat": "DECIMAL"
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.header.onorderlf",
+                              "label": "global.on.order",
+                              "dataFormat": "DECIMAL"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 41,
+                          "type": "BTN",
+                          "subType": "SEC",
+                          "label": "global.filter",
+                          "eventClick": "mst.filter()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 57,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "FIELD_SET",
+                          "label": "global.board.feet",
+                          "conditionShow": "!base.header.memomixhidden",
+                          "children": [
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.header.onhandbf",
+                              "label": "global.on.hand",
+                              "dataFormat": "DECIMAL"
+                            },
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.header.availbf",
+                              "label": "global.available",
+                              "dataFormat": "DECIMAL"
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.header.onorderbf",
+                              "label": "global.on.order",
+                              "dataFormat": "DECIMAL"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 43,
+                          "type": "BTN",
+                          "subType": "SEC",
+                          "label": "global.calculate.new.mix",
+                          "eventClick": "mst.calculateNewMix()",
+                          "conditionDisabled": "!mst.newMixAllowed()"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 7,
+              "type": "GRID",
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showDrilldown": true,
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                },
+                "showExpander": false,
+                "rowDetailOptions": {
+                  "template": "po/poitc/row-detail.json",
+                  "controller": "PoitcRowDetailCtrl as row",
+                  "paramsReference": "mst.rowParams"
+                },
+                "showCheckboxes": true,
+                "editable": true
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 8,
+                  "type": "TOOLBAR",
+                  "label": "global.tally.calculator.components",
+                  "children": [
+                    {
+                      "id": 55,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-new-document",
+                      "label": "global.new",
+                      "stateRef": "^.create",
+                      "securityLevel": 4,
+                      "eventClick": "",
+                      "conditionDisabled": "!base.toolbarEnabled() || base.grid.isAnyRowSelected()"
+                    },
+                    {
+                      "id": 56,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-delete",
+                      "label": "global.delete",
+                      "eventClick": "mst.delete()",
+                      "securityLevel": 5,
+                      "conditionDisabled": "!base.toolbarEnabled() || !base.grid.isAnyRowSelected()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 9,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "qtyord",
+                  "label": "global.quantity.ordered",
+                  "editable": true,
+                  "eventChange": "mst.qtyChange()",
+                  "sign": "+",
+                  "digits": 7,
+                  "sortable": false,
+                  "dataFormat": "INTEGER"
+                },
+                {
+                  "id": 44,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "length",
+                  "label": "global.length",
+                  "sortable": false
+                },
+                {
+                  "id": 45,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "extend",
+                  "label": "global.total.order",
+                  "sortable": false
+                },
+                {
+                  "id": 46,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipprod",
+                  "label": "global.product.number",
+                  "sortable": false
+                },
+                {
+                  "id": 47,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "notesfl",
+                  "label": "global.notes.flag",
+                  "sortable": false,
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 48,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "descrip1",
+                  "label": "global.description",
+                  "sortable": false
+                },
+                {
+                  "id": 49,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "qtyavail",
+                  "label": "global.quantity.available",
+                  "sortable": false,
+                  "dataFormat": "DECIMAL"
+                },
+                {
+                  "id": 50,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "adjcost",
+                  "label": "global.adjust.cost",
+                  "sortable": false,
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5,
+                    "maximumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 51,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prodcost",
+                  "label": "global.price",
+                  "sortable": false,
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5,
+                    "maximumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 52,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "invcost",
+                  "label": "global.invoice.cost",
+                  "sortable": false,
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5,
+                    "maximumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 53,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "qtyonhand",
+                  "label": "global.on.hand",
+                  "sortable": false,
+                  "dataFormat": "DECIMAL"
+                },
+                {
+                  "id": 54,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "qtyonorder",
+                  "label": "global.on.order",
+                  "sortable": false,
+                  "dataFormat": "DECIMAL"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

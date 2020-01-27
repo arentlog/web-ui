@@ -1,0 +1,474 @@
+{
+  "viewId": "oe-oeet-initiate-print",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.order.entry",
+              "subLabel": "global.print",
+              "children": [
+                {
+                  "id": 24,
+                  "type": "BTN",
+                  "label": "global.submit",
+                  "icon": "icon-confirm",
+                  "eventClick": "",
+                  "submitForm": true,
+                  "eventValidated": "oePrint.submit()",
+                  "conditionDisabled": "!oePrint.fullOrderNumber || (!oePrint.isPrintAck && !oePrint.isPrintInvoice && !oePrint.isPrintPickTicket && !oePrint.isPrintReceipt && !oePrint.isPrintDelivery)"
+                },
+                {
+                  "id": 15,
+                  "type": "BTN",
+                  "label": "global.create",
+                  "icon": "icon-new-document",
+                  "eventClick": "oePrint.create()"
+                },
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "label": "global.maintain",
+                  "icon": "icon-edit",
+                  "eventClick": "oePrint.maintain()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 23,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-delete",
+                  "eventClick": "oePrint.delete()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 14,
+                  "type": "BTN",
+                  "label": "global.copy",
+                  "icon": "icon-copy",
+                  "eventClick": "oePrint.copy()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 37,
+                  "type": "BTN",
+                  "label": "global.order.entry.defaults",
+                  "icon": "icon-genealogy",
+                  "eventClick": "oePrint.orderEntryDefaultsClicked()"
+                },
+                {
+                  "id": 17,
+                  "type": "BTN",
+                  "label": "global.receive.on.account",
+                  "eventClick": "oePrint.receiveOnAccount()",
+                  "icon": "icon-payment-request"
+                },
+                {
+                  "id": 18,
+                  "type": "BTN",
+                  "label": "wl.counter.sales.shipping",
+                  "eventClick": "oePrint.wlCounterSalesShipping()",
+                  "icon": "icon-travel-plan",
+                  "conditionShow": "base.sasa.modwlfl !== 'no'"
+                },
+                {
+                  "id": 19,
+                  "type": "BTN",
+                  "label": "global.maintain.customer.po",
+                  "eventClick": "oePrint.maintainPo()",
+                  "icon": "icon-edit"
+                },
+                {
+                  "id": 20,
+                  "type": "BTN",
+                  "label": "wt.billing.orders",
+                  "eventClick": "oePrint.wtBillingOrders()",
+                  "icon": "icon-script"
+                },
+                {
+                  "id": 22,
+                  "type": "BTN",
+                  "label": "global.import.from.excel",
+                  "eventClick": "oePrint.importFromExcel()",
+                  "icon": "icon-tree-xls"
+                },
+                {
+                  "id": 91,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.sales.order.fulfillment",
+                  "icon": "icon-script",
+                  "securityLevel": 3,
+                  "eventClick": "oePrint.orderFulfillmentClicked()",
+                  "conditionDisabled": "!base.isSASOFulfillmentOn",
+                  "conditionShow": "base.isOrderFulfillmentOn"
+                },
+                {
+                  "id": 92,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reassign.customer.slash.ship.to",
+                  "icon": "icon-edit",
+                  "securityLevel": 3,
+                  "eventClick": "oePrint.maintCustShipTo()",
+                  "conditionShow": "base.pvUser.oereassignarfl"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 39,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 40,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 41,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "oePrint.fullOrderNumber",
+                          "label": "global.order.number",
+                          "meta": "OEOrders",
+                          "autoFocus": true,
+                          "eventChange": "oePrint.orderChanged()"
+                        },
+                        {
+                          "id": 46,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "oePrint.promoMessage",
+                          "label": "global.promo.message",
+                          "maxLength": 50
+                        },
+                        {
+                          "id": 47,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "oePrint.useWhereAppropriate",
+                          "label": "global.use.where.appropriate",
+                          "dataFormat": "LOGICAL",
+                          "eventChange": "oePrint.useWhereAppropriateChanged()"
+                        },
+                        {
+                          "id": 45,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.autoPrintData.autoPrint",
+                          "label": "global.automatic.print",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!oePrint.autoPrintEnabled",
+                          "eventChange": "oePrint.autoPrintChanged()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 43,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 82,
+                          "type": "FIELD_SET",
+                          "label": "global.print.options",
+                          "children": [
+                            {
+                              "id": 50,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "oePrint.isPrintAck",
+                              "label": "global.acknowledgement",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!oePrint.isPrintAckEnabled",
+                              "eventChange": "oePrint.onPrintOptionsCheckUncheck('isPrintAck')"
+                            },
+                            {
+                              "id": 62,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "oePrint.isPrintPickTicket",
+                              "label": "global.pick.ticket",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!oePrint.isPrintPickTicketEnabled",
+                              "eventChange": "oePrint.onPrintOptionsCheckUncheck('isPrintPickTicket')"
+                            },
+                            {
+                              "id": 64,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "oePrint.isPrintDelivery",
+                              "label": "global.delivery",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!oePrint.isPrintDeliveryEnabled",
+                              "eventChange": "oePrint.onPrintOptionsCheckUncheck('isPrintDelivery')"
+                            },
+                            {
+                              "id": 65,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "oePrint.isPrintInvoice",
+                              "label": "global.invoice",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!oePrint.isPrintInvoiceEnabled",
+                              "eventChange": "oePrint.onPrintOptionsCheckUncheck('isPrintInvoice')"
+                            },
+                            {
+                              "id": 66,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "oePrint.isPrintReceipt",
+                              "label": "global.receipt",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!oePrint.isPrintReceiptEnabled",
+                              "eventChange": "oePrint.onPrintOptionsCheckUncheck('isPrintReceipt')"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 87,
+                          "type": "BTN",
+                          "label": "po.print",
+                          "icon": "icon-print",
+                          "eventClick": "oePrint.poPrint()"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 79,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 81,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 51,
+                          "type": "EXP_AREA",
+                          "label": "global.print.acknowledgement",
+                          "conditionShow": "oePrint.isPrintAck",
+                          "children": [
+                            {
+                              "id": 52,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 53,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 38,
+                                      "type": "CUSTOM",
+                                      "subType": "Printer",
+                                      "options": {
+                                        "controlRef": "oePrint.ackControl",
+                                        "functionName": "oeet",
+                                        "subFunctionName": "Acknowledgement",
+                                        "defaultPrintType": "",
+                                        "eventReady": "oePrint.ackReady()",
+                                        "printerSettingsModel": "oePrint.ackSettings",
+                                        "printWarehouse": "oePrint.printOeWarehouse"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 67,
+                          "type": "EXP_AREA",
+                          "label": "global.print.pick.ticket",
+                          "conditionShow": "oePrint.isPrintPickTicket",
+                          "children": [
+                            {
+                              "id": 68,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 69,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 83,
+                                      "type": "CUSTOM",
+                                      "subType": "Printer",
+                                      "options": {
+                                        "controlRef": "oePrint.pickTicketControl",
+                                        "functionName": "oeet",
+                                        "subFunctionName": "Pick Ticket",
+                                        "defaultPrintType": "",
+                                        "eventReady": "oePrint.pickTicketReady()",
+                                        "printerSettingsModel": "oePrint.pickTicketSettings",
+                                        "printWarehouse": "oePrint.printOeWarehouse"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 70,
+                          "type": "EXP_AREA",
+                          "label": "global.print.delivery",
+                          "conditionShow": "oePrint.isPrintDelivery",
+                          "children": [
+                            {
+                              "id": 71,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 72,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 85,
+                                      "type": "CUSTOM",
+                                      "subType": "Printer",
+                                      "options": {
+                                        "controlRef": "oePrint.deliveryControl",
+                                        "functionName": "oeet",
+                                        "subFunctionName": "Delivery Document",
+                                        "defaultPrintType": "",
+                                        "eventReady": "oePrint.deliveryReady()",
+                                        "printerSettingsModel": "oePrint.deliverySettings",
+                                        "printWarehouse": "oePrint.printOeWarehouse"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 73,
+                          "type": "EXP_AREA",
+                          "label": "global.print.invoice",
+                          "conditionShow": "oePrint.isPrintInvoice",
+                          "children": [
+                            {
+                              "id": 74,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 75,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 84,
+                                      "type": "CUSTOM",
+                                      "subType": "Printer",
+                                      "options": {
+                                        "controlRef": "oePrint.invoiceControl",
+                                        "functionName": "oeet",
+                                        "subFunctionName": "invoice",
+                                        "defaultPrintType": "",
+                                        "eventReady": "oePrint.invoiceReady()",
+                                        "printerSettingsModel": "oePrint.invoiceSettings",
+                                        "printWarehouse": "oePrint.printOeWarehouse"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 76,
+                          "type": "EXP_AREA",
+                          "label": "global.print.receipt",
+                          "conditionShow": "oePrint.isPrintReceipt",
+                          "children": [
+                            {
+                              "id": 77,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 78,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 86,
+                                      "type": "CUSTOM",
+                                      "subType": "Printer",
+                                      "options": {
+                                        "controlRef": "oePrint.receiptControl",
+                                        "functionName": "oeet",
+                                        "subFunctionName": "receipt",
+                                        "defaultPrintType": "",
+                                        "eventReady": "oePrint.receiptReady()",
+                                        "printerSettingsModel": "oePrint.receiptSettings",
+                                        "printWarehouse": "oePrint.printOeWarehouse"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 88,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Oeeh",
+      "contextValues": {
+        "key1": "oePrint.printLoadCriteria.orderno",
+        "key2": "oePrint.printLoadCriteria.ordersuf"
+      }
+    },
+    {
+      "id": 89,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Arsc",
+      "contextValues": {
+        "key1": "oePrint.oeCustomerNumber"
+      }
+    },
+    {
+      "id": 90,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Arss",
+      "contextValues": {
+        "key1": "oePrint.oeCustomerNumber",
+        "key2": "oePrint.oeShipTo"
+      }
+    }
+  ]
+}

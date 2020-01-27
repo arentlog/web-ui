@@ -1,0 +1,34 @@
+<div style="height: 100%;" initialize>
+   <div class="builder-sidebar-header">
+      <h3>{{base.prodSidebarLabel}}</h3>
+   </div>
+   <div class="builder-sidebar-content scrollable" style="height: calc(100% - 205px);">
+      <div class="listview tableview">
+         <ul>
+            <li ng-repeat="item in base.itemsList | limitTo:cart.showing track by item.lineitemrecid" ng-click="cart.goToLine(item)">
+               <p class="listview-heading">{{item.shipprod}} - {{item.proddesc}}</p>
+               <p class="listview-subheading">
+                  <span translate>global.line.number</span>: {{item.actllineno}}<br>
+                  <span translate>global.quantity</span>: <span class="data" formatter="DECIMAL" data-model="item.qtyorddspl" data-format-options='{"minimumFractionDigits":2}'></span><br>
+                  <span translate>global.price</span>: <span class="data" formatter="CURRENCY" data-model="item.price" data-format-options='{"minimumFractionDigits":2}'></span><br>
+                  <span translate>global.unit</span>: {{item.unit}}
+               </p>
+               <p class="l-pull-right" style="top: -65px; right: 50px;" ng-show="item.image">
+                  <img class="img-cart" ng-src="{{item.image}}" />
+               </p>
+            </li>
+            <!--Need this onclick becaue it executes before the cart limit is increased. Otherwise the list is scrolled all the way to the bottom-->
+            <li ng-click="cart.showing = 1000;" onclick="$(this).hide()" ng-show="base.itemsList.length > cart.limit">
+               <p translate>global.show.more.ellipsis</p>
+            </li>
+         </ul>
+      </div>
+   </div>
+   <div class="builder-sidebar-footer">
+      <div class="cart-totals">
+         <p class="totals"><span class="bold" translate>global.net.amount</span> <span class="l-pull-right bold">{{cart.getNetAmount()}}</span></p>
+      </div>
+      <button type="button" class="btn-secondary" ng-click="cart.goToLinesGrid()" style="width: 100%; margin-bottom: 10px;" translate>global.edit.lines</button>
+      <button type="button" class="btn-primary" ng-click="cart.goToCollectPayment()" style="width: 100%;" translate>global.collect.payment</button>
+   </div>
+</div>

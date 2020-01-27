@@ -1,0 +1,202 @@
+{
+  "viewId": "shared-lookups-emailorfaxcontactslookupmodal",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "LOOKUP_MODAL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "lkupmdl.subjectType",
+                  "label": "global.subject.type",
+                  "type3": "SET",
+                  "metaGroup": "COMMON",
+                  "meta": "ContactSubjectType",
+                  "blankOption": false,
+                  "eventChange": "lkupmdl.subjectTypeChanged()"
+                },
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "lkupmdl.custno",
+                  "label": "global.customer.number",
+                  "meta": "Customer",
+                  "conditionShow": "lkupmdl.isCustomerVisible()"
+                },
+                {
+                  "id": 21,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "lkupmdl.shipto",
+                  "label": "global.ship.to",
+                  "meta": "ShipTo",
+                  "conditionShow": "lkupmdl.isShiptoVisible()",
+                  "options": {
+                    "searchParams": {
+                      "custno": {
+                        "type": "REF",
+                        "value": "lkupmdl.criteria.custno"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 22,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "lkupmdl.vendno",
+                  "label": "global.vendor.number",
+                  "meta": "Vendor",
+                  "conditionShow": "lkupmdl.isVendorVisible()"
+                },
+                {
+                  "id": 23,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "lkupmdl.shipfmno",
+                  "label": "global.ship.from",
+                  "meta": "ShipFrom",
+                  "conditionShow": "lkupmdl.isShipfromVisible()",
+                  "options": {
+                    "searchParams": {
+                      "vendno": {
+                        "type": "REF",
+                        "value": "lkupmdl.criteria.vendno"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": 18,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 33,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "lkupmdl.criteria.firstnm",
+                  "label": "global.first.name",
+                  "maxLength": 30
+                },
+                {
+                  "id": 34,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "lkupmdl.criteria.lastnm",
+                  "label": "global.last.name",
+                  "maxLength": 30
+                },
+                {
+                  "id": 35,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "lkupmdl.criteria.contacttype",
+                  "label": "global.contact.type",
+                  "type3": "CODES",
+                  "meta": "ContactType"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 9,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "lkupmdl.search()"
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "lkupmdl.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "type": "GRID",
+      "subType": "LOOKUP_GRID",
+      "model": "lkupmdl.dataset",
+      "controls": {
+        "toolbar": {
+          "id": 13,
+          "type": "TOOLBAR",
+          "label": "{{lkup.toolbarTitle}}"
+        }
+      },
+      "children": [
+        {
+          "id": 14,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "firstemailaddr",
+          "label": "global.email.address"
+        },
+        {
+          "id": 15,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "faxphoneno",
+          "label": "global.fax.phone",
+          "dataFormat": "PHONE"
+        },
+        {
+          "id": 16,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "firstnm",
+          "label": "global.first.name"
+        },
+        {
+          "id": 17,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "lastnm",
+          "label": "global.last.name"
+        },
+        {
+          "id": 36,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "contacttypedesc",
+          "label": "global.contact.type"
+        }
+      ]
+    }
+  ]
+}

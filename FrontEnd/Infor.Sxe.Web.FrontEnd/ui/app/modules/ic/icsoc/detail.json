@@ -1,0 +1,272 @@
+{
+  "viewId": "ic-icsoc-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.grace.period.information",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.icsoc.levelcd",
+                              "label": "global.record.type",
+                              "type3": "MANUAL",
+                              "blankOption": false,
+                              "optionsModel": "base.recordTypeList",
+                              "conditionReadonly": "!base.isCreate()",
+                              "required": true,
+                              "eventChange": "dtl.setResetRecordDefaults()"
+                            },
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsoc.custno",
+                              "label": "global.customer.number",
+                              "required": false,
+                              "meta": "Customer",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.icsoc.levelcd === 1 || dtl.icsoc.levelcd === 2 || dtl.icsoc.levelcd === 3 || dtl.icsoc.levelcd === 4 || dtl.icsoc.levelcd === 5",
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 28,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "conditionDisabled": "!dtl.icsoc.custno",
+                                  "stateRef": "aric.detail({pk: dtl.icsoc.custno})"
+                                }
+                              }
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsoc.shipto",
+                              "label": "global.ship.to",
+                              "meta": "ShipTo",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.icsoc.levelcd === 1 || dtl.icsoc.levelcd === 2 || dtl.icsoc.levelcd === 3 || dtl.icsoc.levelcd === 4 || dtl.icsoc.levelcd === 5",
+                              "options": {
+                                "searchParams": {
+                                  "custno": {
+                                    "type": "REF",
+                                    "value": "dtl.icsoc.custno"
+                                  }
+                                }
+                              },
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 29,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "conditionDisabled": "!dtl.icsoc.shipto",
+                                  "stateRef": "aric.detail({pk: dtl.icsoc.custno, pk2: dtl.icsoc.shipto})"
+                                }
+                              }
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsoc.custtype",
+                              "label": "global.customer.type",
+                              "meta": "CustType",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.icsoc.levelcd === 6 || dtl.icsoc.levelcd === 7 || dtl.icsoc.levelcd === 8 || dtl.icsoc.levelcd === 9"
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsoc.pricetype",
+                              "label": "global.product.price.type",
+                              "meta": "ProdPriceTy",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.icsoc.levelcd === 2 || dtl.icsoc.levelcd === 3 || dtl.icsoc.levelcd === 4 || dtl.icsoc.levelcd === 5 || dtl.icsoc.levelcd === 6 || dtl.icsoc.levelcd === 7 || dtl.icsoc.levelcd === 8 || dtl.icsoc.levelcd === 9"
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsoc.whse",
+                              "label": "global.warehouse",
+                              "meta": "Warehouse",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.icsoc.levelcd === 2 || dtl.icsoc.levelcd === 3 || dtl.icsoc.levelcd === 6 || dtl.icsoc.levelcd === 7"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.icsoc.daymofl",
+                              "label": "global.days.months",
+                              "type3": "SET",
+                              "metaGroup": "IC",
+                              "meta": "MonthDay",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsoc.daymo",
+                              "label": "global.quantity",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 3
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "icsoc",
+                        "objectRef": "dtl.icsoc",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

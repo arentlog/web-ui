@@ -1,0 +1,129 @@
+{
+  "viewId": "po-poerb-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "type3": "STANDARD",
+                  "meta": "POOrders",
+                  "model": "base.criteria.pono",
+                  "label": "global.blanket.purchase.order.number",
+                  "autoFocus": true,
+                  "size": "SM",
+                  "contextValues": {
+                    "key1": "base.criteria.pono.split('-')[0]",
+                    "key2": "base.criteria.pono.split('-')[1]"
+                  },
+                  "options": {
+                    "searchParams": {
+                      "transtype": "BL"
+                    }
+                  },
+                  "controls": {
+                    "actionBtn": {
+                      "id": 13,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "global.inquire",
+                      "icon": "icon-drilldown",
+                      "isLabelTooltip": true,
+                      "conditionDisabled": "!base.criteria.pono",
+                      "eventClick": "srch.navigateToPoip()"
+                    }
+                  }
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.poBlanketValidateSingle.transtype",
+                  "label": "global.type",
+                  "type3": "SET",
+                  "metaGroup": "PO",
+                  "meta": "TransactionType",
+                  "readonly": true
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.poBlanketValidateSingle.vendno",
+                  "label": "global.vendor.number",
+                  "meta": "Vendor",
+                  "readonly": true,
+                  "size": "SM",
+                  "hyperlinks": {
+                    "data": {
+                      "stateRef": "apiv.detail({pk:base.poBlanketValidateSingle.vendno})"
+                    }
+                  },
+                  "controls": {
+                    "actionBtn": {
+                      "id": 14,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "global.inquire",
+                      "icon": "icon-drilldown",
+                      "isLabelTooltip": true,
+                      "conditionDisabled": "!base.poBlanketValidateSingle.vendno",
+                      "stateRef": "apiv.detail ({pk: base.poBlanketValidateSingle.vendno})"
+                    }
+                  }
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.poBlanketValidateSingle.shiptowhse",
+                  "label": "global.ship.to",
+                  "meta": "ShipTo",
+                  "readonly": true,
+                  "options": {
+                    "searchParams": {
+                      "vendno": {
+                        "type": "REF",
+                        "value": "{{base.poBlanketValidateSingle.vendno}}"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

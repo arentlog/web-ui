@@ -1,0 +1,139 @@
+{
+  "viewId": "ic-icsr-costmatrix",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "cm.isCostMatrixMaster()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.usage.rate.cost.matrix",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "cm.back()"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 12,
+                  "type": "GRID",
+                  "model": "cm.dataset",
+                  "controlRef": "cm.grid",
+                  "options": {
+                    "showCheckboxes": true,
+                    "showDrilldown": true,
+                    "events": {
+                      "drilldown": "cm.drilldown()"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 13,
+                      "type": "TOOLBAR",
+                      "label": "global.usage.rate.table",
+                      "children": [
+                        {
+                          "id": 10,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-new-document",
+                          "label": "global.new",
+                          "stateRef": ".create",
+                          "securityLevel": 4,
+                          "conditionDisabled": "cm.grid.isAnyRowSelected()"
+                        },
+                        {
+                          "id": 11,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-edit",
+                          "label": "global.edit",
+                          "stateRef": "",
+                          "securityLevel": 3,
+                          "conditionDisabled": "!cm.grid.isOneRowSelected()",
+                          "eventClick": "cm.edit()"
+                        },
+                        {
+                          "id": 16,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "eventClick": "cm.delete()",
+                          "securityLevel": 5,
+                          "conditionDisabled": "cm.grid.isNoRowSelected()"
+                        },
+                        {
+                          "id": 9,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-cancel",
+                          "label": "global.cancel",
+                          "eventClick": "cm.back()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 14,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.level",
+                      "model": "usagelevel",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 15,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.usage",
+                      "model": "usagerate",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "type": "VIEW_CNTR",
+      "viewName": "cmDetail"
+    }
+  ]
+}

@@ -1,0 +1,342 @@
+{
+  "viewId": "gl-glsa-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.account",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3,
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()"
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 34,
+                      "type": "TOOLBAR",
+                      "label": "global.blank.label.string.for.space",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "BTN",
+                          "subType": "PRI",
+                          "label": "global.create.division.s",
+                          "icon": "icon-launch",
+                          "conditionDisabled": "base.isDetail()",
+                          "eventClick": "dtl.createDivisions()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.glsa.gltitle",
+                              "label": "global.title",
+                              "maxLength": 32,
+                              "required": true,
+                              "eventChange": "dtl.gltitleChange()",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.glsa.lookupnm",
+                              "label": "global.lookup.name",
+                              "maxLength": 15,
+                              "size": "SM"
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.glsa.keywords",
+                              "label": "global.keywords.",
+                              "maxLength": 60,
+                              "size": "LG"
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.glsa.accttype",
+                              "label": "global.account.type",
+                              "type3": "SET",
+                              "metaGroup": "GL",
+                              "meta": "AccountType",
+                              "blankOption": true,
+                              "size": "SM",
+                              "required": true
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.glsa.baltype",
+                              "label": "global.balance.type",
+                              "type3": "SET",
+                              "metaGroup": "GL",
+                              "meta": "BalanceType",
+                              "blankOption": false,
+                              "size": "SM"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.glsa.printtype",
+                              "label": "global.print.type",
+                              "type3": "SET",
+                              "metaGroup": "GL",
+                              "meta": "AccountPrintType",
+                              "blankOption": false,
+                              "size": "SM"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.glsa.glrptgroup",
+                              "label": "global.report.group",
+                              "type3": "CODES",
+                              "meta": "GLReportGroups"
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.glsa.manpostfl",
+                              "label": "global.manual.posting",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.glsa.fwdbal",
+                              "label": "global.forward.balance",
+                              "dataFormat": "DECIMAL",
+                              "digits": 11,
+                              "decimals": 2,
+                              "size": "SM",
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 39,
+                  "type": "EXP_AREA",
+                  "label": "global.period.balances",
+                  "children": [
+                    {
+                      "id": 40,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 41,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 46,
+                              "type": "GRID",
+                              "model": "dtl.periodBalances",
+                              "options": {
+                                "paging": false,
+                                "showRowCount": false
+                              },
+                              "controls": {
+                                "toolbar": {
+                                  "id": 47,
+                                  "type": "TOOLBAR",
+                                  "label": "global.blank.label.string.for.space"
+                                }
+                              },
+                              "children": [
+                                {
+                                  "id": 48,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.period",
+                                  "model": "month"
+                                },
+                                {
+                                  "id": 49,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "amtposted",
+                                  "label": "global.amount.posted",
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 44,
+                          "type": "COL",
+                          "subType": "1/2"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "glsa",
+                        "objectRef": "dtl.glsa",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Glsa",
+      "contextValues": {
+        "key1": "base.glno"
+      }
+    }
+  ]
+}

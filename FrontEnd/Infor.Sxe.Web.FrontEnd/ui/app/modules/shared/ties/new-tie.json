@@ -1,0 +1,176 @@
+{
+  "viewId": "shared-ties-newtie",
+  "id": 1,
+  "type": "MODAL",
+  "subType": "MODAL",
+  "label": "global.add.tie",
+  "controls": {
+    "body": {
+      "id": 2,
+      "type": "MODAL_BODY",
+      "children": [
+        {
+          "id": 8,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 9,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "tieN.ordertype",
+                  "label": "global.type",
+                  "type3": "SET",
+                  "metaGroup": "VA",
+                  "meta": "VAUpdateTypes",
+                  "blankOption": false
+                },
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "tieN.seqno",
+                  "label": "global.sequence.number",
+                  "readonly": true
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "tieN.cleartiefl",
+                  "label": "global.clear",
+                  "dataFormat": "LOGICAL"
+                }
+              ]
+            },
+            {
+              "id": 10,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "tieN.orderaltno",
+                  "label": "global.tied.order.number",
+                  "meta": "OEOrders",
+                  "conditionShow": "tieN.ordertype.toLowerCase() === 'o'",
+                  "eventChange": "tieN.orderSelected()",
+                  "options": {
+                    "allowEntry": true,
+                    "searchParams": {
+                      "whse": {
+                        "type": "REF",
+                        "value": "ties.warehouse"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "tieN.orderaltno",
+                  "label": "global.tied.order.number",
+                  "meta": "KPWorkOrder",
+                  "conditionShow": "tieN.ordertype.toLowerCase() === 'w'",
+                  "eventChange": "tieN.orderSelected()",
+                  "options": {
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "tieN.orderaltno",
+                  "label": "global.tied.order.number",
+                  "meta": "VAOrders",
+                  "conditionShow": "tieN.ordertype.toLowerCase() === 'f'",
+                  "eventChange": "tieN.vaOrderSelected()",
+                  "options": {
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "tieN.orderaltno",
+                  "label": "global.tied.order.number",
+                  "meta": "WTOrders",
+                  "conditionShow": "tieN.ordertype.toLowerCase() === 't'",
+                  "eventChange": "tieN.orderSelected()",
+                  "options": {
+                    "allowEntry": true,
+                    "searchParams": {
+                      "shipfmwhse": {
+                        "type": "REF",
+                        "value": "ties.warehouse"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "tieN.linealtno",
+                  "label": "global.tied.line.number",
+                  "dataFormat": "INTEGER",
+                  "digits": 3,
+                  "sign": "+",
+                  "validateOn": "blur",
+                  "modelOptions": {
+                    "updateOn": "blur"
+                  }
+                },
+                {
+                  "id": 17,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "tieN.seqaltno",
+                  "label": "global.kit.value.add.sequence.number",
+                  "dataFormat": "INTEGER",
+                  "sign": "+",
+                  "digits": 3,
+                  "validateOn": "blur",
+                  "modelOptions": {
+                    "updateOn": "blur"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "btnSet": {
+      "id": 3,
+      "type": "BTN_SET",
+      "subType": "MODAL",
+      "children": [
+        {
+          "id": 4,
+          "type": "BTN",
+          "subType": "MODAL_SEC",
+          "label": "global.cancel",
+          "eventClick": "tieN.cancel()"
+        },
+        {
+          "id": 5,
+          "type": "BTN",
+          "subType": "MODAL_PRI",
+          "label": "global.ok",
+          "submitForm": true,
+          "eventValidated": "tieN.submit()"
+        }
+      ]
+    }
+  }
+}

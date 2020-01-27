@@ -1,0 +1,169 @@
+{
+  "viewId": "ic-icsr-detail-tabs-ranking",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isDetail() || dtl.isRankingTabReadonly",
+  "children": [
+    {
+      "id": 5,
+      "type": "EXP_AREA",
+      "label": "global.new.products",
+      "children": [
+        {
+          "id": 6,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 7,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsr.newprodmonths",
+                  "label": "global.number.of.months",
+                  "dataFormat": "INTEGER",
+                  "digits": 2,
+                  "sign": "+",
+                  "size": "XS",
+                  "conditionReadonly": "base.isDetail() || !dtl.isUseRanks || dtl.isRankingTabReadonly"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "type": "EXP_AREA",
+      "label": "global.ranking",
+      "children": [
+        {
+          "id": 12,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 13,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsr.rankty",
+                  "label": "global.ranking.type",
+                  "type3": "MANUAL",
+                  "blankOption": true,
+                  "conditionReadonly": "base.isDetail() || !dtl.icsr.ranktySensitive || dtl.isRankingTabReadonly",
+                  "eventChange": "dtl.rankTyChanged()",
+                  "optionLabelField": "label",
+                  "optionValueField": "value",
+                  "blankOptionLabel": "global.ignore",
+                  "optionsModel": "dtl.detailRankingType"
+                },
+                {
+                  "id": 24,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.icsr.ranks",
+                      "label": "global.ranks",
+                      "dataFormat": "INTEGER",
+                      "digits": 2,
+                      "sign": "+",
+                      "size": "XS",
+                      "conditionReadonly": "base.isDetail() || !dtl.isUseRanks || !dtl.isCompanyRecord || dtl.isRankingTabReadonly",
+                      "eventChange": "dtl.ranksChanged()",
+                      "conditionRequired": "dtl.icsr.rankty === 'y'"
+                    },
+                    {
+                      "id": 18,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.icsr.monthshistory",
+                      "label": "global.months.history",
+                      "dataFormat": "INTEGER",
+                      "digits": 2,
+                      "sign": "+",
+                      "size": "XS",
+                      "conditionReadonly": "base.isDetail() || !dtl.isUseRanks || dtl.isRankingTabReadonly"
+                    }
+                  ]
+                },
+                {
+                  "id": 22,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsr.detailrankpct",
+                  "label": "global.total.detail.rank",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "ProductRank",
+                  "dataFormat": "PERCENT",
+                  "sign": "+",
+                  "digits": 3,
+                  "decimals": 2,
+                  "readonly": true,
+                  "size": "XS",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                }
+              ]
+            },
+            {
+              "id": 17,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsr.newprodrank",
+                  "label": "global.new.product.rank",
+                  "size": "XS",
+                  "type3": "MANUAL",
+                  "optionLabelField": "label",
+                  "optionValueField": "value",
+                  "blankOption": true,
+                  "optionsModel": "dtl.newProdRankType",
+                  "conditionReadonly": "base.isDetail() || !dtl.isUseRanks || dtl.isRankingTabReadonly"
+                },
+                {
+                  "id": 23,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsr.pcthitfl",
+                  "label": "global.rank.based.on",
+                  "type3": "SET",
+                  "conditionShow": "dtl.isCompanyOrWhseRecord && dtl.isUseRanks",
+                  "metaGroup": "IC",
+                  "meta": "RankBasedOn",
+                  "eventChange": "dtl.pctHitChanged()",
+                  "blankOption": false
+                },
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "label": "global.detail.ranks",
+                  "conditionDisabled": "base.isDetail() || !dtl.isUseRanks || dtl.isRankingTabReadonly",
+                  "eventClick": "dtl.detailRankClick()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

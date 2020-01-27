@@ -1,0 +1,541 @@
+{
+  "viewId": "oe-oeet-selectproducts-quicklineentry",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "controlRef": "qle.view",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "sp.isQuickLineEntry()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.order.entry",
+              "subLabel": "global.quick.line.entry",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 60,
+                  "type": "BTN",
+                  "label": "global.finish",
+                  "icon": "icon-invoice-released",
+                  "eventClick": "base.finishOrder()"
+                },
+                {
+                  "id": 46,
+                  "type": "BTN",
+                  "label": "global.products",
+                  "icon": "icon-cart",
+                  "sidebarPopdownButton": true,
+                  "controls": {
+                    "popdown": {
+                      "id": 43,
+                      "type": "POPDOWN",
+                      "children": [
+                        {
+                          "id": 44,
+                          "type": "CARD",
+                          "label": "{{base.prodSidebarLabel}}",
+                          "children": [
+                            {
+                              "id": 45,
+                              "type": "SUB_VIEW",
+                              "subType": "HTML",
+                              "viewPath": "oe/oeet/shared/cart.html",
+                              "controller": "OeetCartCtrl as cart"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": 52,
+                  "type": "BTN",
+                  "subType": "MENU",
+                  "label": "global.line.entry",
+                  "children": [
+                    {
+                      "id": 51,
+                      "type": "MENU_OPT",
+                      "label": "global.advanced",
+                      "stateRef": "^.advancedLineEntry"
+                    },
+                    {
+                      "id": 36,
+                      "type": "MENU_OPT",
+                      "label": "global.easy",
+                      "eventClick": "qle.easyLineEntry()",
+                      "conditionDisabled": "base.oehdr.oetype === 'cr' || base.oehdr.oetype === 'do' || base.oehdr.oetype === 'rm'",
+                      "conditionShow": "base.oehdr.oetype !== 'cr' && base.oehdr.oetype !== 'do' && base.oehdr.oetype !== 'rm'"
+                    },
+                    {
+                      "id": 37,
+                      "type": "MENU_OPT",
+                      "label": "global.shopping.list",
+                      "stateRef": "^.shoppingList",
+                      "conditionDisabled": "base.oehdr.oetype === 'cr' || base.oehdr.oetype === 'rm'",
+                      "conditionShow": "base.oehdr.oetype !== 'cr' && base.oehdr.oetype !== 'rm'"
+                    },
+                    {
+                      "id": 38,
+                      "type": "MENU_OPT",
+                      "label": "global.return.multiple",
+                      "stateRef": "^.returnMultipleLines",
+                      "conditionDisabled": "base.oehdr.oetype === 'do'",
+                      "conditionShow": "base.oehdr.oetype !== 'do'"
+                    }
+                  ]
+                },
+                {
+                  "id": 53,
+                  "type": "BTN",
+                  "label": "global.customer.order.settings",
+                  "stateRef": "^.customerOrderSettings"
+                },
+                {
+                  "id": 39,
+                  "type": "BTN",
+                  "label": "global.edit.lines",
+                  "stateRef": "^.linesGrid"
+                },
+                {
+                  "id": 61,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.suspend",
+                  "eventClick": "base.suspend()",
+                  "conditionDisabled": "base.oehdr.oetype.toLowerCase() !== 'cs' && base.oehdr.oetype.toLowerCase() !== 'so' && base.oehdr.oetype.toLowerCase() !== 'do'"
+                },
+                {
+                  "id": 69,
+                  "type": "BTN",
+                  "label": "global.addons",
+                  "eventClick": "qle.addons()",
+                  "extra": true
+                },
+                {
+                  "id": 70,
+                  "type": "BTN",
+                  "label": "global.discounts",
+                  "eventClick": "qle.discounts()",
+                  "extra": true
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "controls": {
+                "contentHeader": {
+                  "id": 49,
+                  "type": "MOD_CONTENT_HDR",
+                  "children": [
+                    {
+                      "id": 50,
+                      "type": "WIZARD",
+                      "children": [
+                        {
+                          "id": 56,
+                          "type": "WIZARD_TICK",
+                          "label": "global.initiate",
+                          "conditionDisabled": "base.getStage() > 1",
+                          "conditionSelected": "base.getStage() === 1"
+                        },
+                        {
+                          "id": 57,
+                          "type": "WIZARD_TICK",
+                          "label": "global.select.products",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "conditionSelected": "base.getStage() === 2",
+                          "eventClick": "base.stageWizardSelectProducts()"
+                        },
+                        {
+                          "id": 58,
+                          "type": "WIZARD_TICK",
+                          "label": "global.taxes.and.totals",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "conditionSelected": "base.getStage() === 3",
+                          "eventClick": "base.stageWizardTaxesAndTotals()"
+                        },
+                        {
+                          "id": 59,
+                          "type": "WIZARD_TICK",
+                          "label": "global.collect.payment",
+                          "conditionSelected": "base.getStage() === 4",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "eventClick": "base.stageWizardCollectPayment()"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 9,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "qle.lineToAdd.qtyord",
+                              "label": "global.quantity",
+                              "size": "SM",
+                              "dataFormat": "DECIMAL",
+                              "decimals": 5,
+                              "digits": 7
+                            },
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "qle.lineToAdd.prod",
+                              "label": "global.product",
+                              "meta": "ProdAll",
+                              "size": "LG",
+                              "autoFocus": true,
+                              "options": {
+                                "allowEntry": true,
+                                "searchParams": {
+                                  "shipto": {
+                                    "type": "REF",
+                                    "value": "base.oehdr.shipto"
+                                  },
+                                  "whse": {
+                                    "type": "REF",
+                                    "value": "base.oehdr.whse"
+                                  },
+                                  "custno": {
+                                    "type": "REF",
+                                    "value": "base.oehdr.custno"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "qle.lineToAdd.price",
+                              "label": "global.price",
+                              "size": "SM",
+                              "dataFormat": "CURRENCY",
+                              "digits": 9,
+                              "decimals": 5
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "qle.lineToAdd.unit",
+                              "label": "global.unit",
+                              "size": "SM",
+                              "meta": "Units",
+                              "options": {
+                                "searchParams": {
+                                  "prod": {
+                                    "type": "REF",
+                                    "value": "qle.lineToAdd.prod"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 21,
+                              "type": "BTN",
+                              "subType": "PRI",
+                              "label": "global.add",
+                              "submitForm": true,
+                              "eventValidated": "qle.addToGrid()",
+                              "conditionDisabled": "!qle.wlwhsechgfl"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 11,
+                  "type": "GRID",
+                  "model": "qle.linesToAddCollection",
+                  "controlRef": "qle.grid",
+                  "options": {
+                    "showCheckboxes": true,
+                    "selectable": "multiple",
+                    "showExpander": false,
+                    "editable": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 12,
+                      "type": "TOOLBAR",
+                      "label": "global.products.to.add",
+                      "children": [
+                        {
+                          "id": 19,
+                          "type": "BTN",
+                          "label": "global.add.lines",
+                          "icon": "icon-add",
+                          "eventClick": "qle.addLines()",
+                          "conditionDisabled": "qle.linesToAddCollection.length === 0 || (!qle.wlwhsechgfl)"
+                        },
+                        {
+                          "id": 20,
+                          "type": "BTN",
+                          "label": "global.delete.lines",
+                          "icon": "icon-delete",
+                          "eventClick": "qle.deleteLines()",
+                          "conditionDisabled": "!qle.grid.isAnyRowSelected()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "isvalid",
+                      "label": "global.blank.label.string.for.space",
+                      "dataFormat": "Icon"
+                    },
+                    {
+                      "id": 62,
+                      "type": "GRID_COL",
+                      "subType": "IMAGE",
+                      "model": "image",
+                      "label": "global.image"
+                    },
+                    {
+                      "id": 13,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.quantity",
+                      "editable": true,
+                      "decimals": 5,
+                      "digits": 7,
+                      "model": "qtyord",
+                      "eventChange": "qle.gridColumnChange()",
+                      "dataFormat": "DECIMAL"
+                    },
+                    {
+                      "id": 22,
+                      "type": "GRID_COL",
+                      "subType": "LOOKUP",
+                      "label": "global.product",
+                      "editable": true,
+                      "model": "prod",
+                      "eventChange": "qle.gridColumnChange()",
+                      "meta": "ProdAll"
+                    },
+                    {
+                      "id": 23,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.description",
+                      "model": "proddesc"
+                    },
+                    {
+                      "id": 24,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.price",
+                      "editable": true,
+                      "digits": 9,
+                      "decimals": 5,
+                      "model": "price",
+                      "eventChange": "qle.gridColumnChange()",
+                      "dataFormat": "CURRENCY"
+                    },
+                    {
+                      "id": 25,
+                      "type": "GRID_COL",
+                      "subType": "LOOKUP",
+                      "label": "global.unit",
+                      "editable": true,
+                      "model": "unit",
+                      "eventChange": "qle.gridColumnChange()",
+                      "meta": "Units",
+                      "options": {
+                        "searchParams": {
+                          "prod": {
+                            "type": "REF",
+                            "value": "prod"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.net.available",
+                      "model": "netavail",
+                      "dataFormat": "DECIMAL"
+                    },
+                    {
+                      "id": 63,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "marginamt",
+                      "label": "global.margin.amount",
+                      "dataFormat": "DECIMAL",
+                      "extra": true
+                    },
+                    {
+                      "id": 68,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "marginpct",
+                      "label": "global.margin.percent",
+                      "dataFormat": "PERCENT",
+                      "extra": true
+                    },
+                    {
+                      "id": 64,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "discamt",
+                      "label": "global.discount.amount",
+                      "editable": true,
+                      "dataFormat": "CURRENCY",
+                      "sign": "+",
+                      "digits": 5,
+                      "decimals": 2,
+                      "eventChange": "qle.gridColumnChange()",
+                      "extra": true,
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 65,
+                      "type": "GRID_COL",
+                      "subType": "DROP_DOWN",
+                      "model": "disctype",
+                      "label": "global.discount.type",
+                      "editable": true,
+                      "type3": "SET",
+                      "metaGroup": "COMMON",
+                      "meta": "AmountPercentType",
+                      "blankOption": false,
+                      "extra": true
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.messages",
+                      "model": "messages",
+                      "customFormatter": "qle.messageFormatter"
+                    }
+                  ]
+                },
+                {
+                  "id": 29,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 30,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 34,
+                          "type": "FIELD_SET",
+                          "label": "global.totals",
+                          "children": [
+                            {
+                              "id": 35,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 54,
+                                  "type": "COL",
+                                  "subType": "1/6",
+                                  "children": [
+                                    {
+                                      "id": 32,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "qle.totalQuantity",
+                                      "label": "global.quantity",
+                                      "dataFormat": "DECIMAL"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 55,
+                                  "type": "COL",
+                                  "subType": "5/6",
+                                  "children": [
+                                    {
+                                      "id": 33,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "qle.totalAmount",
+                                      "label": "global.amount",
+                                      "dataFormat": "CURRENCY",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "sidebar": {
+              "id": 42,
+              "type": "MOD_SIDEBAR",
+              "children": [
+                {
+                  "id": 41,
+                  "type": "SUB_VIEW",
+                  "subType": "HTML",
+                  "viewPath": "oe/oeet/shared/cart.html",
+                  "controller": "OeetCartCtrl as cart"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

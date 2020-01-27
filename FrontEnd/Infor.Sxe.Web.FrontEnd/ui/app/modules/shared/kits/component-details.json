@@ -1,0 +1,558 @@
+{
+  "viewId": "shared-kits-componentdetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "kit.isComponentDetails()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "{{kitCd.getTitle()}}",
+              "subLabel": "{{kitCd.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "kitCd.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.submit",
+                  "submitForm": true,
+                  "eventValidated": "kitCd.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 16,
+                  "type": "BTN",
+                  "label": "global.sourcing",
+                  "eventClick": "kitCd.sourcingClicked()",
+                  "conditionShow": "kitCd.sourcingEnabled",
+                  "conditionDisabled": "!kitCd.sourcingEnabled"
+                },
+                {
+                  "id": 15,
+                  "type": "BTN",
+                  "label": "global.non.stock",
+                  "eventClick": "kitCd.nonStockClicked()",
+                  "conditionShow": "kitCd.componentDetails.specnstype.toLowerCase() === 'n'",
+                  "conditionDisabled": "kitCd.componentDetails.specnstype.toLowerCase() !== 'n'"
+                },
+                {
+                  "id": 20,
+                  "type": "BTN",
+                  "label": "{{kitCd.componentDetails.btnsubslabel}}",
+                  "conditionDisabled": "!kitCd.componentDetails.btnsubsenabled",
+                  "conditionShow": "kitCd.componentDetails.btnsubslabel",
+                  "eventClick": "kitCd.subsClicked()"
+                },
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "label": "global.cross.reference",
+                  "conditionShow": "!kitCd.componentDetails.btncrossrefhidden",
+                  "conditionDisabled": "!kitCd.componentDetails.btncrossrefenabled"
+                },
+                {
+                  "id": 17,
+                  "type": "BTN",
+                  "label": "global.serials",
+                  "eventClick": "kitCd.serialsClicked()",
+                  "conditionShow": "kitCd.componentDetails.serlottype.toLowerCase() === 's'",
+                  "conditionDisabled": "kitCd.componentDetails.serlottype.toLowerCase() !== 's'"
+                },
+                {
+                  "id": 18,
+                  "type": "BTN",
+                  "label": "global.lots",
+                  "conditionDisabled": "kitCd.componentDetails.serlottype.toLowerCase() !== 'l'",
+                  "conditionShow": "kitCd.componentDetails.serlottype.toLowerCase() === 'l'",
+                  "eventClick": "kitCd.lotsClicked()"
+                },
+                {
+                  "id": 19,
+                  "type": "BTN",
+                  "label": "global.warehouse.manager",
+                  "conditionShow": "kitCd.componentDetails.wmfl",
+                  "conditionDisabled": "!kitCd.componentDetails.wmfl",
+                  "eventClick": "kitCd.warehouseManagerClicked()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 70,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 69,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "kitCd.componentDetails.seqbef",
+                              "label": "global.add.before.line",
+                              "dataFormat": "INTEGER",
+                              "maxLength": 3,
+                              "sign": "+",
+                              "digits": 3,
+                              "conditionShow": "kitCd.componentType.toLowerCase() === 'add'"
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "kitCd.createAnother",
+                              "label": "global.create.another",
+                              "dataFormat": "LOGICAL",
+                              "conditionShow": "kitCd.componentType.toLowerCase() === 'add'"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 63,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 64,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "EXP_AREA",
+                          "label": "global.product.information",
+                          "children": [
+                            {
+                              "id": 12,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 13,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 25,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "kitCd.componentDetails.specnstype",
+                                      "label": "global.line.type",
+                                      "conditionReadonly": "!kitCd.componentDetails.specnstypeenabled",
+                                      "type3": "SET",
+                                      "metaGroup": "OE",
+                                      "meta": "OrderLineType",
+                                      "blankOption": false,
+                                      "eventChange": "kitCd.lineTypeChanged()"
+                                    },
+                                    {
+                                      "id": 24,
+                                      "type": "FIELD",
+                                      "subType": "LOOKUP",
+                                      "model": "kitCd.componentDetails.shipprod",
+                                      "label": "global.product",
+                                      "autoFocus": true,
+                                      "meta": "ProdAll",
+                                      "conditionReadonly": "!kitCd.componentDetails.shipprodenabled || kitCd.componentDetails.specnstype.toLowerCase() === 'n'",
+                                      "eventChange": "kitCd.componentDetailFieldChanged('shipprod')",
+                                      "contextOptions": {
+                                        "deactivated": "kitCd.componentDetails.specnstype === 'n'"
+                                      }
+                                    },
+                                    {
+                                      "id": 67,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "kitCd.componentDetails.proddesc",
+                                      "label": "global.description",
+                                      "readonly": true
+                                    },
+                                    {
+                                      "id": 32,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_AREA",
+                                      "model": "kitCd.componentDetails.instructions",
+                                      "label": "global.instructions",
+                                      "conditionReadonly": "!kitCd.componentDetails.instructionsenabled"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 23,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 31,
+                                      "type": "FIELD",
+                                      "subType": "LOOKUP",
+                                      "model": "kitCd.componentDetails.refer",
+                                      "label": "global.reference",
+                                      "meta": "Reference",
+                                      "conditionReadonly": "!kitCd.componentDetails.referenabled",
+                                      "eventChange": "kitCd.componentDetailFieldChanged('refer')"
+                                    },
+                                    {
+                                      "id": 29,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "kitCd.componentDetails.comptype",
+                                      "label": "global.component.type",
+                                      "readonly": true
+                                    },
+                                    {
+                                      "id": 36,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "kitCd.componentDetails.groupoptname",
+                                      "label": "global.group.option.key",
+                                      "readonly": true
+                                    },
+                                    {
+                                      "id": 55,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "kitCd.componentDetails.wlpicktype",
+                                      "label": "wl.pick.type",
+                                      "readonly": true,
+                                      "conditionShow": "!kitCd.componentDetails.wlpicktypehidden"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 38,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 41,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "kitCd.componentDetails.reqfl",
+                                      "label": "global.required",
+                                      "dataFormat": "LOGICAL",
+                                      "disabled": true
+                                    },
+                                    {
+                                      "id": 42,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "kitCd.componentDetails.variablefl",
+                                      "label": "global.variable.quantity",
+                                      "dataFormat": "LOGICAL",
+                                      "conditionDisabled": "!kitCd.componentDetails.variableflenabled"
+                                    },
+                                    {
+                                      "id": 43,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "kitCd.componentDetails.subfl",
+                                      "label": "global.substitute",
+                                      "dataFormat": "LOGICAL",
+                                      "conditionDisabled": "!kitCd.componentDetails.subflenabled"
+                                    },
+                                    {
+                                      "id": 44,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "kitCd.componentDetails.pricefl",
+                                      "label": "global.price",
+                                      "dataFormat": "LOGICAL",
+                                      "conditionDisabled": "!kitCd.componentDetails.priceflenabled"
+                                    },
+                                    {
+                                      "id": 45,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "kitCd.componentDetails.printfl",
+                                      "label": "global.print",
+                                      "dataFormat": "LOGICAL",
+                                      "conditionDisabled": "!kitCd.componentDetails.printflenabled"
+                                    },
+                                    {
+                                      "id": 46,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "kitCd.componentDetails.bofl",
+                                      "label": "global.back.order",
+                                      "dataFormat": "LOGICAL",
+                                      "conditionDisabled": "!kitCd.componentDetails.boflenabled"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": 47,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 48,
+                                  "type": "COL",
+                                  "subType": "2/3",
+                                  "children": [
+                                    {
+                                      "id": 50,
+                                      "type": "FIELD_SET",
+                                      "label": "global.quantities",
+                                      "children": [
+                                        {
+                                          "id": 52,
+                                          "type": "ROW",
+                                          "children": [
+                                            {
+                                              "id": 53,
+                                              "type": "COL",
+                                              "subType": "1/2",
+                                              "children": [
+                                                {
+                                                  "id": 26,
+                                                  "type": "FIELD",
+                                                  "subType": "TEXT_BOX",
+                                                  "model": "kitCd.componentDetails.qtyneeded",
+                                                  "label": "global.quantity.needed",
+                                                  "dataFormat": "DECIMAL",
+                                                  "digits": 7,
+                                                  "decimals": 2,
+                                                  "conditionReadonly": "!kitCd.componentDetails.qtyneededenabled",
+                                                  "eventChange": "kitCd.componentDetailFieldChanged('qtyneeded')",
+                                                  "size": "SM",
+                                                  "formatOptions": {
+                                                    "minimumFractionDigits": 2,
+                                                    "maximumFractionDigits": 2
+                                                  }
+                                                },
+                                                {
+                                                  "id": 30,
+                                                  "type": "FIELD",
+                                                  "subType": "LOOKUP",
+                                                  "model": "kitCd.componentDetails.unit",
+                                                  "label": "global.unit",
+                                                  "meta": "Units",
+                                                  "conditionReadonly": "!kitCd.componentDetails.unitenabled",
+                                                  "options": {
+                                                    "searchParams": {
+                                                      "prod": {
+                                                        "type": "REF",
+                                                        "value": "kitCd.componentDetails.shipprod"
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                {
+                                                  "id": 28,
+                                                  "type": "FIELD",
+                                                  "subType": "TEXT_BOX",
+                                                  "model": "kitCd.componentDetails.totship",
+                                                  "label": "global.quantity.shipped",
+                                                  "dataFormat": "DECIMAL",
+                                                  "digits": 7,
+                                                  "decimals": 2,
+                                                  "conditionReadonly": "!kitCd.componentDetails.totshipenabled",
+                                                  "size": "SM",
+                                                  "formatOptions": {
+                                                    "minimumFractionDigits": 2,
+                                                    "maximumFractionDigits": 2
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "id": 54,
+                                              "type": "COL",
+                                              "subType": "1/2",
+                                              "children": [
+                                                {
+                                                  "id": 35,
+                                                  "type": "FIELD",
+                                                  "subType": "TEXT_BOX",
+                                                  "model": "kitCd.componentDetails.qtyreserved",
+                                                  "label": "global.quantity.reserved",
+                                                  "dataFormat": "DECIMAL",
+                                                  "digits": 7,
+                                                  "decimals": 2,
+                                                  "conditionReadonly": "!kitCd.componentDetails.qtyreservedenabled",
+                                                  "conditionShow": "!kitCd.componentDetails.qtyreservedhidden",
+                                                  "size": "SM",
+                                                  "formatOptions": {
+                                                    "minimumFractionDigits": 2,
+                                                    "maximumFractionDigits": 2
+                                                  }
+                                                },
+                                                {
+                                                  "id": 27,
+                                                  "type": "FIELD",
+                                                  "subType": "TEXT_BOX",
+                                                  "model": "kitCd.componentDetails.totalneeded",
+                                                  "label": "global.quantity.ordered",
+                                                  "readonly": true,
+                                                  "dataDesc": "kitCd.componentDetails.unitstock",
+                                                  "size": "SM",
+                                                  "dataFormat": "DECIMAL",
+                                                  "digits": 7,
+                                                  "decimals": 2,
+                                                  "formatOptions": {
+                                                    "minimumFractionDigits": 2,
+                                                    "maximumFractionDigits": 2
+                                                  }
+                                                },
+                                                {
+                                                  "id": 40,
+                                                  "type": "FIELD",
+                                                  "subType": "CHECKBOX",
+                                                  "model": "kitCd.componentDetails.ovship",
+                                                  "label": "global.back.ordered",
+                                                  "dataFormat": "LOGICAL",
+                                                  "conditionDisabled": "!kitCd.componentDetails.ovshipenabled",
+                                                  "eventChange": "kitCd.componentDetailFieldChanged('ovship')"
+                                                },
+                                                {
+                                                  "id": 39,
+                                                  "type": "FIELD",
+                                                  "subType": "CHECKBOX",
+                                                  "model": "kitCd.componentDetails.delayresrvfl",
+                                                  "label": "global.delayed",
+                                                  "dataFormat": "LOGICAL",
+                                                  "disabled": true,
+                                                  "conditionShow": "!kitCd.componentDetails.delayresrvflhidden"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 49,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 51,
+                                      "type": "FIELD_SET",
+                                      "label": "global.pricing",
+                                      "children": [
+                                        {
+                                          "id": 33,
+                                          "type": "FIELD",
+                                          "subType": "DROP_DOWN",
+                                          "model": "kitCd.componentDetails.countryoforigin",
+                                          "label": "global.country.of.origin",
+                                          "conditionReadonly": "!kitCd.componentDetails.countryoforiginenabled",
+                                          "type3": "CODES",
+                                          "meta": "Country",
+                                          "eventChange": "kitCd.componentDetailFieldChanged('countryoforigin')"
+                                        },
+                                        {
+                                          "id": 34,
+                                          "type": "FIELD",
+                                          "subType": "LOOKUP",
+                                          "model": "kitCd.componentDetails.tariffcd",
+                                          "label": "global.tariff.code",
+                                          "meta": "Tariff",
+                                          "conditionReadonly": "!kitCd.componentDetails.tariffcdenabled",
+                                          "eventChange": "kitCd.componentDetailFieldChanged('tariffcd')"
+                                        },
+                                        {
+                                          "id": 56,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "kitCd.prodCost()",
+                                          "label": "{{kitCd.prodCostLabel()}}",
+                                          "readonly": true
+                                        },
+                                        {
+                                          "id": 57,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "kitCd.price()",
+                                          "label": "{{kitCd.priceLabel()}}",
+                                          "readonly": true
+                                        },
+                                        {
+                                          "id": 58,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "kitCd.componentDetails.pdrecno",
+                                          "label": "{{kitCd.componentDetails.pdtitle}}",
+                                          "readonly": true,
+                                          "conditionShow": "!kitCd.componentDetails.pdtitlehidden || !kitCd.componentDetails.pdrecnohidden"
+                                        },
+                                        {
+                                          "id": 59,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "kitCd.componentDetails.tiedata",
+                                          "label": "{{kitCd.componentDetails.tietitle}}",
+                                          "readonly": true
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "type": "VIEW_CNTR",
+      "viewName": "kitsComponentDetailChildView"
+    },
+    {
+      "id": 68,
+      "type": "VIEW_CNTR",
+      "viewName": "binAllocation"
+    }
+  ]
+}

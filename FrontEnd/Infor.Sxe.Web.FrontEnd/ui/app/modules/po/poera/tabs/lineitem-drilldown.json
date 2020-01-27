@@ -1,0 +1,138 @@
+{
+  "viewId": "po-poera-lineitemdrilldown",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isLineItemDrillDown()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.line.item.information",
+              "subLabel": "{{drldwnli.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "submitForm": true,
+                  "eventValidated": "drldwnli.submit()",
+                  "conditionDisabled": "!drldwnli.isSaveButtonEnabled() || base.isLineItemsTabReadonly"
+                },
+                {
+                  "id": 14,
+                  "type": "BTN",
+                  "label": "global.recalculate.ordering.controls",
+                  "conditionDisabled": "!drldwnli.isRecalcOrderControlsButtonEnabled() || base.isLineItemsTabReadonly",
+                  "eventClick": "drldwnli.recalculateOrderingControls()",
+                  "icon": "icon-check"
+                },
+                {
+                  "id": 18,
+                  "type": "BTN",
+                  "label": "global.usage",
+                  "icon": "icon-check",
+                  "eventClick": "drldwnli.launchUsageView()",
+                  "conditionDisabled": "!drldwnli.isUsageButtonEnabled() || base.isLineItemsTabReadonly"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "TAB",
+                      "label": "global.extended.information",
+                      "eventActivated": "drldwnli.activate('extend')",
+                      "conditionShow": "drldwnli.tabVisible('extend')",
+                      "tabId": "extended-info",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "po/poera/tabs/lineitem-drilldown-extend.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "type": "TAB",
+                      "label": "global.alternate.vendors",
+                      "eventActivated": "drldwnli.activate('altvendor')",
+                      "conditionShow": "drldwnli.tabVisible('altvendor')",
+                      "tabId": "alternate-vendors",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "po/poera/tabs/lineitem-drilldown-altvendor.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 15,
+                      "type": "TAB",
+                      "label": "global.usage.analysis",
+                      "eventActivated": "drldwnli.activate('usageanalysis')",
+                      "conditionShow": "drldwnli.tabVisible('usageanalysis')",
+                      "tabId": "usage-analysis",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "shared/usage-analysis/usage-analysis.json",
+                          "controller": "UsageAnalysisCtrl as ctrl"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "type": "VIEW_CNTR",
+      "viewName": "usage"
+    }
+  ]
+}

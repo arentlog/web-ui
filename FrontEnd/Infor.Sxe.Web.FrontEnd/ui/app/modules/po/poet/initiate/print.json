@@ -1,0 +1,236 @@
+{
+  "viewId": "po-poet-initiate-print",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.purchase.order",
+              "subLabel": "global.print",
+              "children": [
+                {
+                  "id": 24,
+                  "type": "BTN",
+                  "label": "global.submit",
+                  "icon": "icon-confirm",
+                  "eventClick": "",
+                  "submitForm": true,
+                  "eventValidated": "poPrint.submit()",
+                  "conditionDisabled": "!poPrint.fullPurchaseOrderNumber || !poPrint.printPurchaseOrder"
+                },
+                {
+                  "id": 15,
+                  "type": "BTN",
+                  "label": "global.create",
+                  "icon": "icon-new-document",
+                  "eventClick": "poPrint.create()"
+                },
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "label": "global.maintain",
+                  "icon": "icon-edit",
+                  "eventClick": "poPrint.maintain()",
+                  "securityLevel": 3,
+                  "conditionDisabled": "base.subFunctionSecurityForLines < 2"
+                },
+                {
+                  "id": 23,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-delete",
+                  "eventClick": "poPrint.delete()",
+                  "securityLevel": 5,
+                  "conditionDisabled": "base.subFunctionSecurityForLines < 2"
+                },
+                {
+                  "id": 14,
+                  "type": "BTN",
+                  "label": "global.copy",
+                  "icon": "icon-copy",
+                  "eventClick": "poPrint.copy()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 87,
+                  "type": "BTN",
+                  "label": "global.entry.defaults",
+                  "icon": "icon-genealogy",
+                  "eventClick": "poPrint.entryDefaultsClicked()"
+                },
+                {
+                  "id": 85,
+                  "type": "BTN",
+                  "label": "global.import.from.excel",
+                  "icon": "icon-import",
+                  "eventClick": "poPrint.importFromExcel()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 86,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.manual.acknowledgement",
+                  "eventClick": "poPrint.launchManualAcknowledgement()",
+                  "icon": "icon-drilldown"
+                },
+                {
+                  "id": 16,
+                  "type": "BTN",
+                  "subType": "MENU",
+                  "label": "global.more.ellipsis",
+                  "children": []
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 39,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 40,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 41,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "poPrint.fullPurchaseOrderNumber",
+                          "label": "global.purchase.order.number",
+                          "meta": "POOrders",
+                          "autoFocus": true,
+                          "eventChange": "poPrint.purchaseOrderChanged()"
+                        },
+                        {
+                          "id": 50,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "poPrint.useWhereAppropriate",
+                          "label": "global.use.where.appropriate",
+                          "dataFormat": "LOGICAL",
+                          "eventChange": "poPrint.useWhereAppropriateChanged()"
+                        },
+                        {
+                          "id": 45,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.autoPrintData.autoPrint",
+                          "label": "global.automatic.print",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!poPrint.autoPrintEnabled",
+                          "eventChange": "poPrint.autoPrintChanged()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 43,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 82,
+                          "type": "FIELD_SET",
+                          "label": "global.print.options",
+                          "children": [
+                            {
+                              "id": 84,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "poPrint.printPurchaseOrder",
+                              "label": "global.print.purchase.order",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!poPrint.isPrintPurchaseOrderEnabled"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 79,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 81,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 67,
+                          "type": "EXP_AREA",
+                          "label": "global.print.purchase.order",
+                          "conditionShow": "poPrint.printPurchaseOrder",
+                          "children": [
+                            {
+                              "id": 68,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 69,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 83,
+                                      "type": "CUSTOM",
+                                      "subType": "Printer",
+                                      "options": {
+                                        "controlRef": "poPrint.purchaseOrderControl",
+                                        "functionName": "poet",
+                                        "subFunctionName": "",
+                                        "defaultPrintType": "",
+                                        "printerSettingsModel": "poPrint.purchaseOrderSettings",
+                                        "printWarehouse": "poPrint.printPoWarehouse"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 88,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Poeh",
+      "contextValues": {
+        "key1": "poPrint.poetPrintLoadCriteria.pono",
+        "key2": "poPrint.poetPrintLoadCriteria.posuf"
+      }
+    },
+    {
+      "id": 89,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Apsv",
+      "contextValues": {
+        "key1": "poPrint.poVendorNumber"
+      }
+    }
+  ]
+}

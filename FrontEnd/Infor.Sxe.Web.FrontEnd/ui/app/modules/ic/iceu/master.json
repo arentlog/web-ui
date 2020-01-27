@@ -1,0 +1,178 @@
+{
+  "viewId": "ic-iceu-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "conditionShow": "",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isMaster()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.iceu",
+          "subLabel": "",
+          "children": [
+            {
+              "id": 11,
+              "type": "BTN",
+              "subType": "MENU",
+              "label": "global.actions",
+              "securityLevel": 3,
+              "children": [
+                {
+                  "id": 14,
+                  "type": "MENU_OPT",
+                  "label": "global.move.unavail.to.onhand",
+                  "conditionDisabled": "!base.grid.isAnyRowSelected()",
+                  "eventClick": "mst.doAction('subtract')"
+                },
+                {
+                  "id": 12,
+                  "type": "MENU_OPT",
+                  "label": "global.move.onhand.to.unavail",
+                  "stateRef": "",
+                  "eventClick": "mst.doAction('add')",
+                  "conditionDisabled": "!base.grid.isOneRowSelected()"
+                },
+                {
+                  "id": 13,
+                  "type": "MENU_OPT",
+                  "label": "global.modify.unavail.reason",
+                  "conditionDisabled": "!base.grid.isOneRowSelected()",
+                  "eventClick": "mst.doAction('modify')"
+                },
+                {
+                  "id": 15,
+                  "type": "MENU_OPT",
+                  "label": "global.remove.unavailable",
+                  "conditionDisabled": "!base.grid.isAnyRowSelected()",
+                  "eventClick": "mst.doAction('remove')"
+                }
+              ]
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 6,
+              "type": "GRID",
+              "htmlId": "iceu-master-grid",
+              "controlRef": "base.grid",
+              "options": {
+                "showCheckboxes": true,
+                "events": {
+                  "selected": "mst.onRecordSelection()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 5,
+                  "type": "TOOLBAR",
+                  "label": "global.unavailable.inventories",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whse",
+                  "label": "global.warehouse"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "prod",
+                  "label": "global.product",
+                  "eventClick": "mst.navigateToIcip()"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "reasunavtydesc",
+                  "label": "global.reason.unavailable"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "qtyunavail",
+                  "label": "global.qty.unavail",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "stkunit",
+                  "label": "global.unit"
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "enterdt",
+                  "label": "global.enter.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "refer",
+                  "label": "global.reference"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "cDesc",
+                  "label": "global.description"
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "iCETNotesFl",
+                  "label": "global.notes",
+                  "dataFormat": "NotesFlag"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 24,
+      "type": "VIEW_CNTR",
+      "viewName": "binAllocation"
+    },
+    {
+      "id": 26,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icet",
+      "contextValues": {
+        "key1": "mst.icetForNotes.whse",
+        "key2": "mst.icetForNotes.prod",
+        "key3": "mst.icetForNotes.postdt",
+        "key4": "mst.icetForNotes.transtype",
+        "key5": "mst.icetForNotes.notesid"
+      }
+    }
+  ]
+}

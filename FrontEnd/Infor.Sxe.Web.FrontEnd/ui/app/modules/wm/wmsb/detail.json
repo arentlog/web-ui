@@ -1,0 +1,155 @@
+{
+  "viewId": "wm-wmsb-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "conditionShow": "base.isDetail() || base.isEdit() || base.isCreate()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.bin.locations",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 28,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 29,
+                      "type": "TAB",
+                      "label": "global.general",
+                      "subFunction": "",
+                      "tabId": "general",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "wm/wmsb/tabs/general.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 31,
+                      "type": "TAB",
+                      "label": "global.products",
+                      "subFunction": "",
+                      "conditionShow": "!base.isCreate()",
+                      "tabId": "products",
+                      "children": [
+                        {
+                          "id": 34,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "wm/wmsb/tabs/products.json",
+                          "controller": "WmsbDetailProductTabCtrl as prods"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "type": "VIEW_CNTR",
+      "viewName": "productDetail"
+    }
+  ]
+}

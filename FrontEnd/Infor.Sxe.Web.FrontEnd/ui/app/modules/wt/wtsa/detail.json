@@ -1,0 +1,284 @@
+{
+  "viewId": "wt-wtsa-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.markup.addons",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.wtsa.recordtype",
+                              "label": "global.markup.type",
+                              "type3": "MANUAL",
+                              "optionsModel": "base.markupAddonTypeList",
+                              "eventChange": "dtl.markupTypeChanged()",
+                              "blankOptionLabel": "global.default",
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.wtsa.shipfmwhse",
+                              "label": "global.ship.from.warehouse",
+                              "meta": "Warehouse",
+                              "required": true,
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.wtsa.shiptowhse",
+                              "label": "global.ship.to.warehouse",
+                              "meta": "Warehouse",
+                              "required": true,
+                              "conditionReadonly": "!base.isCreate()",
+                              "options": {
+                                "searchParams": {
+                                  "cono": {
+                                    "type": "REF",
+                                    "value": "base.criteria.cono2"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.wtsa.product",
+                              "label": "global.product",
+                              "meta": "ProdAll",
+                              "conditionShow": "base.wtsaInitialObject.useproductfl",
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.wtsa.prodcat",
+                              "label": "global.product.category",
+                              "meta": "ProdCat",
+                              "conditionShow": "base.wtsaInitialObject.useprodcatfl",
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.wtsa.prodprctype",
+                              "label": "global.product.price.type",
+                              "meta": "ProdPriceTy",
+                              "conditionShow": "base.wtsaInitialObject.useprodprctyfl",
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.wtsa.altprodgrp",
+                              "label": "global.alternate.product.group",
+                              "meta": "AltProdGroup",
+                              "conditionShow": "base.wtsaInitialObject.usealtprodgrpfl",
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.wtsa.vendno",
+                              "label": "global.vendor.number",
+                              "meta": "Vendor",
+                              "conditionShow": "base.wtsaInitialObject.usevendnofl",
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.wtsa.prodline",
+                              "label": "global.product.line",
+                              "meta": "ProdLine",
+                              "conditionShow": "base.wtsaInitialObject.useprodlinefl",
+                              "conditionReadonly": "!base.isCreate()",
+                              "options": {
+                                "searchParams": {
+                                  "vendno": {
+                                    "type": "REF",
+                                    "value": "dtl.wtsa.vendno"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.wtsa.addontype",
+                              "label": "global.addon.type",
+                              "type3": "SET",
+                              "metaGroup": "SA",
+                              "meta": "AmountPercentType",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.wtsa.addonamt",
+                              "label": "global.addon.amount",
+                              "dataFormat": "DECIMAL_TEXT",
+                              "digits": 5,
+                              "decimals": 2,
+                              "required": true
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "wtsa",
+                        "objectRef": "dtl.wtsa",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+<!-- 
+   =============================================
+   Infor Distribution SX.e Logging Configuration                                                           
+   =============================================
+   Implemented using NLOG
+   =============================================
+   The following variables are implemented for all loggers (allthough not all will be populated in all cases)
+   
+   All messages 
+      
+      ${level}                                  - Log levels (1 see below)
+      $(message)                                - Log message
+      ${exception:format=ToString,StackTrace}   - ErrorException and FatalException only
+   
+   
+   Through the MappedDiagnosticsContext   
+      ${mdc:oper}                               - Sxe Username
+      ${mdc:cono}                               - Sxe Cono
+      ${mdc:sessionid}                          - Sxe sessionid
+      ${mdc:function}                           - function
+      ${mdc:remotehost}                         - remotehost
+      
+      ${mdc:where}                              - where clause for fetchwhere calls
+      ${mdc:elapsed}                            - Elapsed time for calls that report time to carry out an operation
+      ${mdc:batchsize}                          - Record count
+      ${mdc:fldlist}                            - List of fields to include/exclude
+      ${mdc:exclude}                            - Yes, fields are excluded, No, Fields and included
+      
+(1) Valid Log Levels.  Off, Fatal, FatalException, Error, ErrorException, Warn, Info, Debug, Trace
+
+
+To download the Sentinel viewer visit, https://sentinel.codeplex.com/
+
+The below target NLogViewer will display directly to this viewer.
+-->
+ 
+
+<nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" throwExceptions="true">
+   <variable name="logDirectory" value="${basedir}/Logs/${shortdate}" />
+   <variable name="stackTrace" value="${longdate} ${exception:format=ToString,StackTrace}${newline}" />
+   <targets async="true">  
+      <target name="f1" xsi:type="File" fileName="${logDirectory}/${shortdate}.txt" layout="${longdate} ${level} ${mdc:function} ${mdc:oper} ${mdc:remotehost} ${message} ${mdc:elapsed} ${mdc:where} ${mdc:batchsize}"/>
+      <target xsi:type="NLogViewer"
+           name="viewer"
+           address="udp://127.0.0.1:9999"/>
+      <!--<target name="database" type="Database" connectionString="Data Source=*.*.*.*;Initial Catalog=xxxx;user id=xxxx;password=xxxx;MultipleActiveResultSets=True; ">
+         <commandText>
+            insert into LogApi ([TimeStamp],[Level],Logger, [Message], UserId, Exception, StackTrace) values (@TimeStamp, @Level, @Logger, @Message,
+            case when len(@UserID) = 0 then null
+            else @UserId
+            end,
+            @Exception, @StackTrace);
+         </commandText>
+         <parameter name="@TimeStamp" layout="${date}"/>
+         <parameter name="@Level" layout="${level}"/>
+         <parameter name="@Logger" layout="${logger}"/>
+         <parameter name="@Message" layout="${message}"/>
+         <parameter name="@UserId" layout="${mdc:user_id}"/>
+         <parameter name="@Exception" layout="${exception}"/>
+         <parameter name="@StackTrace" layout="${stacktrace}"/>
+         <dbProvider>System.Data.SqlClient</dbProvider>
+      </target>-->
+   </targets>
+   <rules>
+      <!--<logger name="*" minLevel="Info" appendTo="database" />-->
+      <logger name="*" minLevel="off" writeTo="f1" />
+      <logger name="*" minlevel="off" writeTo="viewer" />
+   </rules>
+</nlog>

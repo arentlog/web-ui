@@ -1,0 +1,128 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.00">
+
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+
+  <!-- Location of the output. $(MSBuildProjectDirectory is the directory this .proj file is located in.-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Major Condition=" '$(Major)' == '' ">11</Major>
+    <Minor Condition=" '$(Minor)' == '' ">19</Minor>
+    <Build Condition=" '$(Build)' == '' ">6</Build>
+    <Revision Condition=" '$(Revision)' == '' ">0</Revision>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!--MSBuild 4.0 property--> 
+    <ProgramFiles32>$(MSBuildProgramFiles32)</ProgramFiles32>  
+    <!--Use OS env vars as a fallback--> 
+    <ProgramFiles32 Condition=" '' == '$(ProgramFiles32)'">$(ProgramFiles%28x86%29)</ProgramFiles32> 
+    <ProgramFiles32 Condition=" '' == '$(ProgramFiles32)' ">$(ProgramFiles)</ProgramFiles32> 
+  </PropertyGroup>
+
+  <Target Name="Version">
+    <Message Text="MSBuildProgramFiles32=$(MSBuildProgramFiles32)"/>
+    <Message Text="MSBuildProgramFiles64=$(MSBuildProgramFiles64)"/>
+
+     <!-- <SvnVersion LocalPath="$(MSBuildProjectDirectory)" ToolPath="$(ProgramFiles)\Subversion\bin">
+      <Output TaskParameter="Revision" PropertyName="Revision" />
+    </SvnVersion> -->
+
+    <Message Text="Version: $(Major).$(Minor).$(Build).$(Revision)"/>
+
+    <AssemblyInfo CodeLanguage="CS"  
+      OutputFile="FrontEnd\Infor.Sxe.Web.HealthCheck\Properties\AssemblyInfo.cs" 
+      AssemblyTitle="SXWebCEH5"
+      AssemblyDescription="Infor10 Distribution Business"
+      AssemblyVersion="$(Major).$(Minor).$(Build).$(Revision)" 
+      AssemblyFileVersion="$(Major).$(Minor).$(Build).$(Revision)" 
+      Condition="$(Revision) != '0' "/>
+  </Target>
+
+  <!-- Additional reference paths.  These paths will also be considered when resolving references. To include, uncomment the item and provide a folder path.-->
+  <ItemGroup>
+    <!--AdditionalReferencePath Include="(Folder path)"/
+    <AdditionalReferencePath Include=""/>-->
+  </ItemGroup>
+
+  <Target Name="Build" DependsOnTargets="Version">
+    <MSBuild Projects="Infor.Sxe.Web.HealthCheckBuild.sln" Properties="Configuration=$(Configuration);" />
+  </Target>
+
+  <Target Name="Deploy" DependsOnTargets="Build">
+    <MSBuild Projects="FrontEnd\Infor.Sxe.Web.HealthCheck\Infor.Sxe.Web.HealthCheck.csproj" Properties="Configuration=$(Configuration);DeployOnBuild=True; AllowUntrustedCertificate=True; DeployTarget=MsDeployPublish; MSDeployPublishMethod=WMSVC;MSDeployServiceUrl=https://uscswdev01:8172/msdeploy.axd; DeployIISAppPath=Default Web Site/CE_HealthCheck; UserName=webdeploy; Password=webdeploy" />
+  </Target>
+
+  <Target Name="Package" DependsOnTargets="Build">
+    <MSBuild Projects="FrontEnd\Infor.Sxe.Web.HealthCheck\Infor.Sxe.Web.HealthCheck.csproj" Targets="Package"  Properties="Configuration=$(Configuration);"/>
+  </Target>
+  
+  
+  <Target Name="PackageNoCopy" DependsOnTargets="Build">
+    <MSBuild Projects="FrontEnd\Infor.Sxe.Web.HealthCheck\Infor.Sxe.Web.HealthCheck.csproj" Targets="PackageNoCopy"  Properties="Configuration=$(Configuration);"/>
+  </Target>
+  
+  <Target Name="BuildInfo" DependsOnTargets="Package">
+	<ItemGroup>
+		<Line Include="line01"><Text>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</Text></Line>
+		<Line Include="line02"><Text>&lt;ProjectBuildInfo&gt;</Text></Line>
+		<Line Include="line03"><Text>&lt;BuildEntryList&gt;</Text></Line>
+		<Line Include="line04"><Text>&lt;BuildEntry name=&quot;SXWeb&quot;&gt;</Text></Line>
+		<Line Include="line05"><Text>&lt;Version&gt;$(Major).$(Minor).$(Build)&lt;/Version&gt;</Text></Line>
+		<Line Include="line06"><Text>&lt;BuildNr&gt;$(Revision)&lt;/BuildNr&gt;</Text></Line>
+		<Line Include="line07"><Text>&lt;/BuildEntry&gt;</Text></Line>
+		<Line Include="line08"><Text>&lt;/BuildEntryList&gt;</Text></Line>
+		<Line Include="line09"><Text>&lt;/ProjectBuildInfo&gt;</Text></Line>
+		<LineText Include="%(Line.Text)" />
+	</ItemGroup>
+	<WriteLinesToFile
+		 File="FrontEnd\Infor.Sxe.Web.HealthCheck\obj\$(Configuration)\ProjectBuildInfo.xml"
+		 Lines="@(LineText)"
+		 Overwrite="true" />  
+ </Target>
+ 
+ <Target Name="DeployBuildInfo" DependsOnTargets="BuildInfo">
+	<Exec Command="net use z: /delete"
+              WorkingDirectory="c:\"
+              ContinueOnError="true"
+              />
+	<Exec Command="net use z: %22\\uscswdev01\BuildInfos%22 /user:infor\deploy nimda"
+              WorkingDirectory="c:\"
+              ContinueOnError="false"
+              />
+	<Copy SourceFiles="FrontEnd\Infor.Sxe.Web.HealthCheck\obj\$(Configuration)\ProjectBuildInfo.xml" DestinationFolder="z:\" />
+   <Exec Command="net use z: /delete"
+              WorkingDirectory="c:\"
+              ContinueOnError="true"
+              />
+ </Target>
+
+  <Target Name="PackageBuild" DependsOnTargets="DeployBuildInfo">
+   <ItemGroup>
+      <ZipFiles Include="FrontEnd\Infor.Sxe.Web.HealthCheck\obj\$(Configuration)\Package\*.*" Exclude="PackageTmp" />
+    </ItemGroup>
+    <RemoveDir Directories="Builds" Condition="Exists('Builds')" />
+    <MakeDir Directories="Builds" Condition="!Exists('Builds')" />
+
+    <Zip Files="@(ZipFiles)"
+       WorkingDirectory="FrontEnd\Infor.Sxe.Web.HealthCheck\obj\$(Configuration)\Package\"
+       ZipFileName="Builds\SXWebCEH5$(Major).$(Minor).$(Build).$(Revision).zip"
+       ZipLevel="9" /> 
+  </Target>
+  
+ <Target Name="PackageNoCopyBuild" DependsOnTargets="BuildInfo">
+    <ItemGroup>
+      <ZipFiles Include="FrontEnd\Infor.Sxe.Web.HealthCheck\obj\$(Configuration)\Package\*.*" Exclude="PackageTmp" />
+    </ItemGroup>
+    <RemoveDir Directories="Builds" Condition="Exists('Builds')" />
+    <MakeDir Directories="Builds" Condition="!Exists('Builds')" />
+
+    <Zip Files="@(ZipFiles)"
+       WorkingDirectory="FrontEnd\Infor.Sxe.Web.HealthCheck\obj\$(Configuration)\Package\"
+       ZipFileName="Builds\SXWebCEH5$(Major).$(Minor).$(Build).$(Revision).zip"
+       ZipLevel="9" /> 
+  </Target>
+</Project>

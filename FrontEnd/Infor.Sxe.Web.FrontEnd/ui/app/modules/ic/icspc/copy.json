@@ -1,0 +1,229 @@
+{
+  "viewId": "ic-icspc-copy",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "menu.icspc",
+              "subLabel": "{{getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 23,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 24,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "cpy.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "submitForm": true,
+                  "eventValidated": "cpy.submit()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 22,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "cpy.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 8,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "cpy.request.setuptype",
+                          "label": "global.setup.type",
+                          "type3": "SET",
+                          "metaGroup": "IC",
+                          "meta": "RecordTypeICSPC",
+                          "blankOption": false,
+                          "required": true,
+                          "readonly": true
+                        },
+                        {
+                          "id": 10,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "cpy.request.custno",
+                          "label": "global.customer.number",
+                          "meta": "Customer",
+                          "required": true,
+                          "controls": {
+                            "actionBtn": {
+                              "id": 25,
+                              "type": "BTN",
+                              "subType": "ICON",
+                              "label": "global.inquire",
+                              "icon": "icon-drilldown",
+                              "isLabelTooltip": true,
+                              "conditionDisabled": "!cpy.request.custno",
+                              "stateRef": "aric.detail({pk: cpy.request.custno})"
+                            }
+                          }
+                        },
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "cpy.request.shipto",
+                          "label": "global.ship.to",
+                          "meta": "ShipTo",
+                          "options": {
+                            "searchParams": {
+                              "custno": {
+                                "type": "REF",
+                                "value": "cpy.request.custno"
+                              }
+                            }
+                          },
+                          "controls": {
+                            "actionBtn": {
+                              "id": 26,
+                              "type": "BTN",
+                              "subType": "ICON",
+                              "label": "global.inquire",
+                              "icon": "icon-drilldown",
+                              "isLabelTooltip": true,
+                              "conditionDisabled": "!cpy.request.shipto",
+                              "stateRef": "aric.detail({pk: cpy.request.custno, pk2: cpy.request.shipto})"
+                            }
+                          }
+                        },
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "cpy.request.shiptogrp",
+                          "label": "global.ship.to.group",
+                          "meta": "ShipToGroup",
+                          "conditionShow": "cpy.request.setuptype === 'F'",
+                          "options": {
+                            "searchParams": {
+                              "custno": {
+                                "type": "REF",
+                                "value": "cpy.request.custno"
+                              },
+                              "shiptogrp": {
+                                "type": "REF",
+                                "value": "cpy.request.shiptogrp"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 15,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 9,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "cpy.request.whse",
+                          "label": "global.warehouse",
+                          "meta": "Warehouse",
+                          "required": true
+                        },
+                        {
+                          "id": 16,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "cpy.request.startdt",
+                              "label": "global.start.date",
+                              "dataFormat": "DATE",
+                              "readonly": false,
+                              "required": true
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "cpy.request.expiredt",
+                              "label": "global.expire.date",
+                              "dataFormat": "DATE",
+                              "required": true
+                            }
+                          ]
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "cpy.request.copydetailfl",
+                          "label": "global.copy.product.detail.records",
+                          "type3": "SET",
+                          "metaGroup": "COMMON",
+                          "meta": null,
+                          "dataFormat": "LOGICAL"
+                        },
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "cpy.request.copyusage",
+                          "label": "global.copy.usage",
+                          "type3": "SET",
+                          "metaGroup": "IC",
+                          "meta": "CopyUsageICSPC",
+                          "blankOption": false,
+                          "conditionShow": "cpy.request.setuptype === 'F'"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

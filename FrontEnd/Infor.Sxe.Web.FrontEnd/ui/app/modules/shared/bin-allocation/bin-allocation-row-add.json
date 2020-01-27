@@ -1,0 +1,184 @@
+{
+  "viewId": "shared-bin-allocation-binallocationrowadd",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.allocate.to.another.bin",
+              "subLabel": "{{bac.assignment.prod}}",
+              "controls": {
+                "navBtns": {
+                  "id": 20,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 23,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "eventClick": "baccrt.ok()"
+                },
+                {
+                  "id": 22,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "baccrt.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 9,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "baccrt.binallocationRow.binloc",
+                          "label": "global.bin.location",
+                          "eventChange": "baccrt.binLocationSelected()",
+                          "required": true,
+                          "meta": "BinLocation",
+                          "dataFormat": "BinLoc",
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          },
+                          "options": {
+                            "searchParams": {
+                              "whse": {
+                                "type": "REF",
+                                "value": "baccrt.binallocationRow.whse"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 28,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 12,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "baccrt.binallocationRow.stockqty",
+                              "label": "global.stock.quantity",
+                              "size": "SM",
+                              "conditionDisabled": "!baccrt.binallocationRow.binloc",
+                              "dataFormat": "DECIMAL",
+                              "decimals": 2,
+                              "eventChange": "baccrt.stockQtyLeave()",
+                              "digits": 8,
+                              "sign": "+",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 14,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "baccrt.binallocationRow.stockunit",
+                              "label": "global.stock.unit",
+                              "size": "XS"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 13,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 29,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "baccrt.binallocationRow.buysellqty",
+                              "label": "{{baccrt.buyselllabel}}",
+                              "dataFormat": "DECIMAL",
+                              "readonly": false,
+                              "size": "SM",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "baccrt.binallocationRow.buysellqtyenabled",
+                              "conditionDisabled": "!baccrt.binallocationRow.binloc",
+                              "eventChange": "baccrt.buysellQtyLeave()",
+                              "sign": "+"
+                            },
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "baccrt.binallocationRow.buysellunit",
+                              "label": "global.ship.unit",
+                              "size": "XS",
+                              "conditionShow": "baccrt.binallocationRow.buysellqtyenabled"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

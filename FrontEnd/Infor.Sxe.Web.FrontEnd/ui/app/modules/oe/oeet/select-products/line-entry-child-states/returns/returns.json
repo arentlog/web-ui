@@ -1,0 +1,363 @@
+{
+  "viewId": "oe-oeet-selectproducts-lineentrychildstates-returns-returns",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ale.isReturn()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.returns",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "aleRet.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 58,
+                  "type": "BTN",
+                  "label": "global.serials",
+                  "conditionDisabled": "ale.oeline.serlottype.toLowerCase() !== 's'",
+                  "conditionShow": "ale.oeline.serlottype.toLowerCase() === 's'",
+                  "eventClick": "aleRet.serialsClicked()"
+                },
+                {
+                  "id": 59,
+                  "type": "BTN",
+                  "label": "global.lots",
+                  "conditionDisabled": "ale.oeline.serlottype.toLowerCase() !== 'l'",
+                  "conditionShow": "ale.oeline.serlottype.toLowerCase() === 'l'",
+                  "eventClick": "aleRet.lotsClicked()"
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.submit",
+                  "icon": "icon-save",
+                  "submitForm": true,
+                  "eventValidated": "aleRet.submit()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 52,
+                  "type": "EXP_AREA",
+                  "label": "global.return.details",
+                  "children": [
+                    {
+                      "id": 53,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 54,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 61,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "aleRet.oereturn.crreasonty",
+                              "label": "global.return.reason",
+                              "type3": "CODES",
+                              "meta": "ReturnAdjustReason",
+                              "eventChange": "aleRet.returnReasonChanged()",
+                              "conditionReadonly": "!aleRet.oereturn.crreasontyenabled",
+                              "required": true,
+                              "autoFocus": true
+                            },
+                            {
+                              "id": 28,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 29,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleRet.oereturn.restockamt",
+                                  "label": "global.restock.charge",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 7,
+                                  "decimals": 2
+                                },
+                                {
+                                  "id": 62,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "aleRet.oereturn.restockfl",
+                                  "label": "global.blank",
+                                  "size": "SM",
+                                  "labelHidden": true,
+                                  "blankOption": false,
+                                  "type3": "SET",
+                                  "metaGroup": "OE",
+                                  "meta": "AmountPercentType"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "aleRet.oereturn.warrtag",
+                              "label": "global.warranty.tag.number",
+                              "maxLength": 15
+                            }
+                          ]
+                        },
+                        {
+                          "id": 55,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "aleRet.oereturn.returntype",
+                              "label": "global.return.to"
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "aleRet.oereturn.restktaxgrp",
+                              "label": "global.tax.group",
+                              "conditionDisabled": "!aleRet.oereturn.restktaxgrpenabled",
+                              "type3": "CODES",
+                              "meta": "TaxGroup"
+                            },
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "aleRet.oereturn.usagefl",
+                              "label": "global.usage",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 60,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "aleRet.oereturn.vendretauth",
+                              "label": "global.vendor.return.authorization.no",
+                              "maxLength": 30
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 20,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 23,
+                          "type": "FIELD_SET",
+                          "label": "global.invoice.information",
+                          "conditionShow": "aleRet.isInvoiceInfoVisible()",
+                          "children": [
+                            {
+                              "id": 45,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 41,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleRet.oereturn.retorderno",
+                                  "label": "global.invoice.number",
+                                  "conditionDisabled": "!aleRet.oereturn.retordernoenabled",
+                                  "eventChange": "aleRet.returnOrderNoChanged()",
+                                  "dataFormat": "INTEGER_TEXT",
+                                  "sign": "+",
+                                  "digits": 9,
+                                  "modelOptions": {
+                                    "updateOn": "blur"
+                                  }
+                                },
+                                {
+                                  "id": 42,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleRet.oereturn.retordersuf",
+                                  "label": "global.blank",
+                                  "labelHidden": true,
+                                  "size": "XS",
+                                  "conditionDisabled": "!aleRet.oereturn.retordersufenabled",
+                                  "eventChange": "aleRet.returnOrderNoChanged()",
+                                  "dataFormat": "INTEGER",
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "maxLength": 2
+                                }
+                              ]
+                            },
+                            {
+                              "id": 43,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "aleRet.oereturn.retlineno",
+                              "label": "global.line",
+                              "size": "SM",
+                              "conditionDisabled": "!aleRet.oereturn.retlinenoenabled",
+                              "eventChange": "aleRet.returnOrderNoChanged()",
+                              "dataFormat": "INTEGER_TEXT",
+                              "sign": "+",
+                              "digits": 3,
+                              "maxLength": 3
+                            },
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "aleRet.oereturn.ehfamt",
+                              "label": "global.ehf.amount",
+                              "dataFormat": "DECIMAL",
+                              "digits": 7,
+                              "decimals": 5,
+                              "conditionDisabled": "aleRet.oereturn.retlineno === 0",
+                              "conditionShow": "aleRet.oereturn.retlineno !== 0"
+                            },
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "aleRet.oereturn.ehfaddonno",
+                              "label": "global.ehf.addon.number",
+                              "conditionShow": "aleRet.oereturn.retlineno !== 0",
+                              "conditionDisabled": "aleRet.oereturn.retlineno === 0",
+                              "type3": "CODES",
+                              "meta": "Addon"
+                            },
+                            {
+                              "id": 47,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "aleRet.oereturn.warrantymsg",
+                              "label": "global.blank",
+                              "labelHidden": true,
+                              "readonly": true,
+                              "conditionShow": "aleRet.oereturn.warrantymsg"
+                            },
+                            {
+                              "id": 44,
+                              "type": "BTN",
+                              "subType": "SEC",
+                              "label": "global.find.invoice",
+                              "conditionDisabled": "!aleRet.oereturn.retordernoenabled",
+                              "eventClick": "aleRet.findInvoiceClicked()"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 56,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 27,
+                          "type": "FIELD_SET",
+                          "label": "global.purchase.order.information",
+                          "conditionShow": "aleRet.isPurchaseOrderInfoVisible()",
+                          "children": [
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "aleRet.oereturn.createpofl",
+                              "label": "global.tie.to.po",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!aleRet.oereturn.createpoflenabled"
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "aleRet.orderAltNo",
+                              "label": "global.purchase.order.number",
+                              "meta": "POOrders",
+                              "conditionDisabled": "!aleRet.oereturn.orderaltnoenabled"
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "aleRet.oereturn.qtyunavail",
+                              "label": "global.quantity.unavailable",
+                              "dataFormat": "DECIMAL",
+                              "digits": 7,
+                              "decimals": 5,
+                              "conditionDisabled": "!aleRet.oereturn.qtyunavailenabled"
+                            },
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "aleRet.oereturn.reasunavty",
+                              "label": "global.reason",
+                              "meta": "ReasonUnavailable",
+                              "conditionDisabled": "!aleRet.oereturn.reasunavtyenabled"
+                            },
+                            {
+                              "id": 40,
+                              "type": "BTN",
+                              "subType": "SEC",
+                              "label": "global.sourcing",
+                              "eventClick": "aleRet.sourcingClicked()",
+                              "conditionDisabled": "!aleRet.oereturn.btnsourcingenabled"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "type": "VIEW_CNTR",
+      "viewName": "aleReturnsChildView"
+    }
+  ]
+}

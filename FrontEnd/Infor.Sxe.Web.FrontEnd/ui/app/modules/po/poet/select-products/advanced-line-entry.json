@@ -1,0 +1,899 @@
+{
+  "viewId": "po-poet-advancedlineentry",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "controlRef": "ale.view",
+  "allowCrossContainer": true,
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ale.isLineEntry()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.purchase.order.entry",
+              "subLabel": "global.advanced.line.entry",
+              "children": [
+                {
+                  "id": 175,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-invoice-released",
+                  "label": "global.finish",
+                  "eventClick": "ale.finish()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "{{ale.addUpdateButtonText()}}",
+                  "icon": "icon-save",
+                  "submitForm": true,
+                  "eventValidated": "ale.addUpdate()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 157,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "ale.deleteClicked()",
+                  "securityLevel": 4,
+                  "conditionShow": "!ale.isAddLineMode"
+                },
+                {
+                  "id": 74,
+                  "type": "BTN",
+                  "label": "{{ale.clearCancelButtonText()}}",
+                  "icon": "icon-cancel",
+                  "eventClick": "ale.clearCancel()"
+                },
+                {
+                  "id": 132,
+                  "type": "BTN",
+                  "label": "global.products",
+                  "icon": "icon-cart",
+                  "sidebarPopdownButton": true,
+                  "controls": {
+                    "popdown": {
+                      "id": 133,
+                      "type": "POPDOWN",
+                      "children": [
+                        {
+                          "id": 134,
+                          "type": "CARD",
+                          "label": "{{'global.products' | translate}} ({{base.lineItems.length}})",
+                          "children": [
+                            {
+                              "id": 135,
+                              "type": "SUB_VIEW",
+                              "subType": "HTML",
+                              "viewPath": "po/poet/shared/cart.html",
+                              "controller": "PoetCartCtrl as cart"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": 130,
+                  "type": "BTN",
+                  "label": "global.easy.line.entry",
+                  "eventClick": "ale.easyLineEntry()"
+                },
+                {
+                  "id": 158,
+                  "type": "BTN",
+                  "label": "global.purchase.order.settings",
+                  "eventClick": "ale.purchaseOrderSettings()"
+                },
+                {
+                  "id": 131,
+                  "type": "BTN",
+                  "label": "global.edit.lines",
+                  "eventClick": "ale.detailedGrid()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "controls": {
+                "contentHeader": {
+                  "id": 138,
+                  "type": "MOD_CONTENT_HDR",
+                  "children": [
+                    {
+                      "id": 169,
+                      "type": "WIZARD",
+                      "children": [
+                        {
+                          "id": 170,
+                          "type": "WIZARD_TICK",
+                          "label": "global.initiate",
+                          "conditionDisabled": "base.getStage() > 1",
+                          "conditionSelected": "base.getStage() === 1"
+                        },
+                        {
+                          "id": 171,
+                          "type": "WIZARD_TICK",
+                          "label": "global.select.products",
+                          "conditionSelected": "base.getStage() === 2",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "eventClick": "ale.stageWizardSelectProducts()"
+                        },
+                        {
+                          "id": 172,
+                          "type": "WIZARD_TICK",
+                          "label": "global.review.and.totals",
+                          "conditionDisabled": "base.getStage() === 1 || base.subFunctionSecurityForReview < 2",
+                          "conditionSelected": "base.getStage() === 3",
+                          "eventClick": "ale.stageWizardReviewAndTotals()"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 27,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 29,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 161,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "ale.poline.lineno",
+                          "label": "global.line.number",
+                          "size": "XS",
+                          "digits": 3,
+                          "readonly": true,
+                          "dataFormat": "INTEGER"
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "ale.poline.prod",
+                          "label": "global.product",
+                          "meta": "ProdAllNoDNR",
+                          "type3": "STANDARD",
+                          "size": "LG",
+                          "autoFocus": true,
+                          "eventChange": "ale.productSelected()",
+                          "contextOptions": {
+                            "deactivated": "ale.poline.nonstockty === 'n'"
+                          },
+                          "options": {
+                            "searchParams": {
+                              "whse": {
+                                "type": "REF",
+                                "value": "base.pohdr.whse"
+                              },
+                              "keyno": {
+                                "type": "REF",
+                                "value": "base.pohdr.vendno"
+                              }
+                            }
+                          },
+                          "controls": {
+                            "actionBtn": {
+                              "id": 174,
+                              "type": "BTN",
+                              "subType": "ICON",
+                              "label": "global.inquire",
+                              "icon": "icon-drilldown",
+                              "isLabelTooltip": true,
+                              "eventClick": "ale.navToProduct()",
+                              "conditionDisabled": "!ale.poline.prod"
+                            }
+                          }
+                        },
+                        {
+                          "id": 162,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "ale.getFullProductDescription()",
+                          "label": "global.description",
+                          "conditionShow": "ale.isDescriptionVisible",
+                          "readonly": true
+                        },
+                        {
+                          "id": 81,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "label": "global.configure",
+                          "conditionShow": "ale.poline.cfgkitfl",
+                          "eventClick": "ale.configureProductClicked()"
+                        },
+                        {
+                          "id": 17,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.poline.qtyord",
+                              "label": "global.quantity",
+                              "size": "SM",
+                              "dataFormat": "DECIMAL",
+                              "eventChange": "ale.qtyOrdLostFocus()",
+                              "digits": 7,
+                              "decimals": 2,
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              },
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              },
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 173,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "eventClick": "ale.navToQuantityOrdered()",
+                                  "conditionDisabled": "!ale.poline.qtyord"
+                                }
+                              },
+                              "sign": "+"
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "base.isReturn",
+                              "label": "global.return",
+                              "conditionShow": "base.pohdr.potype.toLowerCase() === 'rm'",
+                              "disabled": true,
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 140,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "ale.poline.reasunavty",
+                              "label": "global.unavailable.reason",
+                              "meta": "ReasonUnavailable",
+                              "conditionReadonly": "!ale.poline.reasunavtyenabled",
+                              "eventChange": "ale.validationFieldLostFocus()"
+                            },
+                            {
+                              "id": 77,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "ale.poline.returnfl",
+                              "label": "global.blank.label.string.for.space",
+                              "type3": "INLINE",
+                              "conditionShow": "base.oehdr.oetype === 'cr'",
+                              "blankOption": false,
+                              "size": "SM",
+                              "children": [
+                                {
+                                  "id": 78,
+                                  "type": "OPT",
+                                  "label": "global.credit",
+                                  "value": "true"
+                                },
+                                {
+                                  "id": 79,
+                                  "type": "OPT",
+                                  "label": "global.debit",
+                                  "value": "false"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 75,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "",
+                              "label": "global.quantity.ordered",
+                              "extra": true,
+                              "dataFormat": "DECIMAL",
+                              "readonly": true,
+                              "sign": "+",
+                              "digits": 9,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              },
+                              "hyperlinks": {
+                                "label": {
+                                  "eventClick": "ale.navToQuantityOrdered()"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 28,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "ale.poline.nonstockty",
+                          "label": "global.line.type",
+                          "type3": "SET",
+                          "metaGroup": "PO",
+                          "meta": "LineType",
+                          "eventChange": "ale.lineTypeChanged()",
+                          "blankOption": false
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "ale.poline.unit",
+                          "label": "global.unit",
+                          "meta": "Units",
+                          "type3": "STANDARD",
+                          "conditionReadonly": "!ale.poline.unitenabled",
+                          "eventChange": "ale.validationFieldLostFocus()",
+                          "options": {
+                            "searchParams": {
+                              "prod": {
+                                "type": "REF",
+                                "value": "ale.poline.prod"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 20,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.poline.scrnprice",
+                              "label": "global.price",
+                              "size": "SM",
+                              "dataFormat": "CURRENCY",
+                              "conditionReadonly": "!ale.poline.priceenabled",
+                              "eventChange": "ale.validationFieldLostFocus()",
+                              "digits": 7,
+                              "decimals": 5,
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.poline.netamt",
+                              "label": "global.net.amount",
+                              "conditionShow": "base.sasoo.oepricefl !== 'n'",
+                              "readonly": true,
+                              "dataFormat": "CURRENCY",
+                              "digits": 7,
+                              "decimals": 5
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 105,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 106,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 107,
+                          "type": "TOOLBAR",
+                          "label": "global.blank.label.string.for.space",
+                          "conditionShow": "",
+                          "children": [
+                            {
+                              "id": 111,
+                              "type": "BTN",
+                              "label": "global.non.stock",
+                              "conditionDisabled": "ale.poline.nonstockty.toLowerCase() !== 'n'",
+                              "conditionShow": "ale.poline.nonstockty.toLowerCase() === 'n'",
+                              "eventClick": "ale.nonStockClicked()"
+                            },
+                            {
+                              "id": 160,
+                              "type": "BTN",
+                              "label": "global.not.for.resale",
+                              "conditionDisabled": "ale.poline.nonstockty.toLowerCase() !== 'r'",
+                              "conditionShow": "ale.poline.nonstockty.toLowerCase() === 'r'",
+                              "eventClick": "ale.resaleClicked()"
+                            },
+                            {
+                              "id": 168,
+                              "type": "BTN",
+                              "label": "global.ties",
+                              "conditionShow": "ale.poline.prod",
+                              "eventClick": "ale.tiesClicked()"
+                            },
+                            {
+                              "id": 121,
+                              "type": "BTN",
+                              "label": "global.pricing",
+                              "eventClick": "ale.pricingClicked()",
+                              "conditionShow": "ale.poline.prod"
+                            },
+                            {
+                              "id": 108,
+                              "type": "BTN",
+                              "label": "global.serials",
+                              "eventClick": "ale.serialsClicked()",
+                              "conditionShow": "base.pohdr.potype.toLowerCase() === 'rm' && ale.poline.serlottype.toLowerCase() === 's'",
+                              "conditionDisabled": "ale.poline.serlottype.toLowerCase() !== 's'"
+                            },
+                            {
+                              "id": 112,
+                              "type": "BTN",
+                              "label": "global.lots",
+                              "conditionDisabled": "ale.poline.serlottype.toLowerCase() !== 'l'",
+                              "conditionShow": "base.pohdr.potype.toLowerCase() === 'rm' &&  ale.poline.serlottype.toLowerCase() === 'l'",
+                              "eventClick": "ale.lotsClicked()"
+                            },
+                            {
+                              "id": 124,
+                              "type": "BTN",
+                              "label": "global.tallies",
+                              "eventClick": "ale.talliesClicked()",
+                              "conditionShow": "!ale.poline.reqbundleidfl && (ale.poline.tallyfl || ale.poline.memomixfl)",
+                              "conditionDisabled": "ale.poline.reqbundleidfl && (!ale.poline.tallyfl || !ale.poline.memomixfl)"
+                            },
+                            {
+                              "id": 125,
+                              "type": "BTN",
+                              "label": "global.bundles",
+                              "eventClick": "ale.bundlesClicked()",
+                              "conditionShow": "ale.poline.reqbundleidfl && (ale.poline.tallyfl || ale.poline.memomixfl)",
+                              "conditionDisabled": "!ale.poline.reqbundleidfl && (!ale.poline.tallyfl || !ale.poline.memomixfl)"
+                            },
+                            {
+                              "id": 117,
+                              "type": "BTN",
+                              "label": "global.return.allocation",
+                              "eventClick": "ale.coreReturnAllocationClicked()",
+                              "conditionShow": "ale.poline.lCoreReturnFl"
+                            },
+                            {
+                              "id": 120,
+                              "type": "BTN",
+                              "label": "global.comments",
+                              "conditionShow": "ale.poline.prod",
+                              "eventClick": "ale.commentsClicked()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 30,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 31,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "EXP_AREA",
+                          "label": "global.extended.fields",
+                          "collapsed": true,
+                          "children": [
+                            {
+                              "id": 123,
+                              "type": "TOOLBAR",
+                              "label": "global.blank.label.string.for.space",
+                              "extra": true,
+                              "children": []
+                            },
+                            {
+                              "id": 33,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 141,
+                                  "type": "COL",
+                                  "subType": "2/3",
+                                  "children": [
+                                    {
+                                      "id": 58,
+                                      "type": "FIELD",
+                                      "subType": "DATE",
+                                      "model": "ale.poline.duedt",
+                                      "label": "global.due.date",
+                                      "dataFormat": "DATE",
+                                      "size": "SM",
+                                      "conditionReadonly": "!ale.poline.duedtenabled"
+                                    },
+                                    {
+                                      "id": 142,
+                                      "type": "FIELD",
+                                      "subType": "DATE",
+                                      "model": "ale.poline.expshipdt",
+                                      "label": "global.expected.ship.date",
+                                      "dataFormat": "DATE",
+                                      "size": "SM",
+                                      "conditionReadonly": "!ale.poline.expshipdtenabled"
+                                    },
+                                    {
+                                      "id": 57,
+                                      "type": "FIELD",
+                                      "subType": "DATE",
+                                      "model": "ale.poline.reqshipdt",
+                                      "label": "global.requested.date",
+                                      "dataFormat": "DATE",
+                                      "size": "SM",
+                                      "conditionReadonly": "!ale.poline.reqshipdtenabled"
+                                    },
+                                    {
+                                      "id": 98,
+                                      "type": "FIELD",
+                                      "subType": "DATE",
+                                      "model": "ale.poline.ackdt",
+                                      "label": "global.acknowledge.date",
+                                      "dataFormat": "DATE",
+                                      "size": "SM",
+                                      "conditionReadonly": "!ale.poline.ackdtenabled"
+                                    },
+                                    {
+                                      "id": 94,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "ale.poline.ackrsn",
+                                      "label": "global.acknowledge.reason",
+                                      "size": "SM",
+                                      "conditionReadonly": "!ale.poline.ackrsnenabled",
+                                      "maxLength": 8
+                                    },
+                                    {
+                                      "id": 183,
+                                      "type": "FIELD",
+                                      "subType": "LOOKUP",
+                                      "model": "ale.poline.countryoforigin",
+                                      "label": "global.country.of.origin",
+                                      "meta": "Country",
+                                      "eventChange": "ale.validationFieldLostFocus()"
+                                    },
+                                    {
+                                      "id": 185,
+                                      "type": "FIELD",
+                                      "subType": "LOOKUP",
+                                      "model": "ale.poline.tariffcd",
+                                      "label": "global.hs.code",
+                                      "meta": "Tariff",
+                                      "eventChange": "ale.validationFieldLostFocus()"
+                                    },
+                                    {
+                                      "id": 144,
+                                      "type": "FIELD",
+                                      "subType": "LOOKUP",
+                                      "model": "ale.poline.contractno",
+                                      "label": "global.contract",
+                                      "meta": "VendorContract",
+                                      "conditionReadonly": "!ale.poline.contractnoenabled",
+                                      "options": {
+                                        "searchParams": {
+                                          "vendno": {
+                                            "type": "REF",
+                                            "value": "ale.poline.vendno"
+                                          },
+                                          "whse": {
+                                            "type": "REF",
+                                            "value": "ale.poline.whse"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "id": 145,
+                                      "type": "FIELD",
+                                      "subType": "LOOKUP",
+                                      "model": "ale.poline.reasunavty",
+                                      "label": "global.unavailable.reason",
+                                      "meta": "ReasonUnavailable",
+                                      "conditionReadonly": "!ale.poline.reasunavtyenabled"
+                                    },
+                                    {
+                                      "id": 192,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "ale.poline.vendretauth",
+                                      "label": "global.vendor.return.authorization.no",
+                                      "maxLength": 30
+                                    },
+                                    {
+                                      "id": 69,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "ale.poline.ncnr",
+                                      "label": "global.ncnr",
+                                      "conditionDisabled": "!ale.poline.ncnrenabled",
+                                      "dataFormat": "LOGICAL",
+                                      "subFormat": "YBlank"
+                                    },
+                                    {
+                                      "id": 64,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "ale.poline.ignoreltfl",
+                                      "label": "global.ignore.lead.time",
+                                      "conditionDisabled": "!ale.poline.ignoreltflenabled"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 36,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 151,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "ale.poline.stkunit",
+                                      "label": "global.stocking.unit"
+                                    },
+                                    {
+                                      "id": 153,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "ale.poline.netavail",
+                                      "label": "global.net.available",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 154,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "ale.poline.stkqtyord",
+                                      "label": "global.stock.quantity.ordered",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 155,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "ale.poline.onorder",
+                                      "label": "global.qty.on.order",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 156,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "ale.poline.backorder",
+                                      "label": "global.qty.bo.demand",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 51,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "ale.poline.cubes",
+                                      "label": "global.cubes",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 5,
+                                        "maximumFractionDigits": 5
+                                      }
+                                    },
+                                    {
+                                      "id": 148,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "ale.poline.totCubes",
+                                      "label": "global.total.cubes",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 5,
+                                        "maximumFractionDigits": 5
+                                      }
+                                    },
+                                    {
+                                      "id": 149,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "ale.poline.weight",
+                                      "label": "global.weight",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 5,
+                                        "maximumFractionDigits": 5
+                                      }
+                                    },
+                                    {
+                                      "id": 150,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "ale.poline.totWeight",
+                                      "label": "global.total.weight",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 5,
+                                        "maximumFractionDigits": 5
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 177,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 178,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 179,
+                          "type": "EXP_AREA",
+                          "label": "global.available.fields",
+                          "extra": true,
+                          "children": [
+                            {
+                              "id": 180,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 181,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 184,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "ale.poline.dutyrate",
+                                      "label": "global.duty.rate",
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 7,
+                                      "decimals": 5
+                                    },
+                                    {
+                                      "id": 186,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "ale.poline.prccostper",
+                                      "label": "global.spec.price.cost",
+                                      "size": "SM",
+                                      "readonly": true
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 182,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "id": 190,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 191,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 189,
+                                      "type": "CUSTOM",
+                                      "subType": "UserFields",
+                                      "options": {
+                                        "tableName": "poel",
+                                        "objectRef": "ale.poline"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "sidebar": {
+              "id": 136,
+              "type": "MOD_SIDEBAR",
+              "children": [
+                {
+                  "id": 137,
+                  "type": "SUB_VIEW",
+                  "subType": "HTML",
+                  "viewPath": "po/poet/shared/cart.html",
+                  "controller": "PoetCartCtrl as cart"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 109,
+      "type": "VIEW_CNTR",
+      "viewName": "aleChildView"
+    },
+    {
+      "id": 118,
+      "type": "VIEW_CNTR",
+      "viewName": "binAllocation"
+    },
+    {
+      "id": 176,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Poel",
+      "contextValues": {
+        "key1": "ale.poline.pono",
+        "key2": "ale.poline.posuf",
+        "key3": "ale.poline.lineno"
+      }
+    }
+  ]
+}

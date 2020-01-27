@@ -1,0 +1,173 @@
+{
+  "viewId": "ic-icsprc-copy",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.copy.certificate.license",
+              "subLabel": "{{cpy.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 8,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "cpy.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "submitForm": true,
+                  "eventValidated": "cpy.submit()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "cpy.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "cpy.request.custno",
+                          "label": "global.customer.number",
+                          "meta": "Customer",
+                          "required": true,
+                          "controls": {
+                            "actionBtn": {
+                              "id": 15,
+                              "type": "BTN",
+                              "subType": "ICON",
+                              "label": "global.inquire",
+                              "icon": "icon-drilldown",
+                              "isLabelTooltip": true,
+                              "conditionDisabled": "!cpy.request.custno",
+                              "stateRef": "aric.detail ({pk: cpy.request.custno})"
+                            }
+                          }
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "cpy.request.shipto",
+                          "label": "global.ship.to",
+                          "meta": "ShipTo",
+                          "options": {
+                            "searchParams": {
+                              "custno": {
+                                "type": "REF",
+                                "value": "cpy.request.custno"
+                              }
+                            }
+                          },
+                          "controls": {
+                            "actionBtn": {
+                              "id": 16,
+                              "type": "BTN",
+                              "subType": "ICON",
+                              "label": "global.inquire",
+                              "icon": "icon-drilldown",
+                              "isLabelTooltip": true,
+                              "conditionDisabled": "!cpy.request.shipto",
+                              "stateRef": "aric.detail ({pk: cpy.request.custno, pk2: cpy.request.shipto})"
+                            }
+                          }
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "cpy.request.restrictcd",
+                          "label": "global.restriction.code",
+                          "meta": "ProdRestrictions",
+                          "required": true
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "cpy.request.certcode",
+                          "label": "global.certificate.code",
+                          "meta": "CertificateLicense",
+                          "required": true
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "cpy.request.startdt",
+                          "label": "global.start.date",
+                          "dataFormat": "DATE",
+                          "required": true
+                        },
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "cpy.request.expiredt",
+                          "label": "global.expire.date",
+                          "dataFormat": "DATE"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

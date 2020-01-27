@@ -1,0 +1,228 @@
+{
+  "viewId": "oe-oeet-taxesandtotals-discounts",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.oeet",
+              "subLabel": "global.discounts",
+              "controls": {
+                "navBtns": {
+                  "id": 38,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 49,
+                  "type": "BTN",
+                  "label": "global.submit",
+                  "icon": "icon-save",
+                  "eventClick": "disc.submit()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 55,
+                  "type": "EXP_AREA",
+                  "label": "global.order.discount",
+                  "children": [
+                    {
+                      "id": 56,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 57,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 34,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 31,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.orderTotals.wodiscamtdspl",
+                                  "label": "global.blank",
+                                  "dataFormat": "CURRENCY",
+                                  "size": "SM",
+                                  "conditionDisabled": "!base.orderTotals.wodiscamtenabled",
+                                  "eventChange": "disc.amountChanged()",
+                                  "dataDesc": "disc.asText",
+                                  "labelHidden": true,
+                                  "digits": 7,
+                                  "decimals": 2,
+                                  "modelOptions": {
+                                    "updateOn": "blur"
+                                  },
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 35,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "base.orderTotals.wodisctype",
+                                  "label": "global.blank.label.string.for.space",
+                                  "size": "SM",
+                                  "meta": "AmountPercentType",
+                                  "type3": "SET",
+                                  "metaGroup": "OE",
+                                  "conditionDisabled": "!base.orderTotals.wodiscamtenabled",
+                                  "eventChange": "disc.amountChanged()",
+                                  "blankOption": false
+                                }
+                              ]
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.oehdr.stagearea",
+                              "label": "global.staging.area",
+                              "dataFormat": "BinLoc"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 58,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.oehdr.specdiscamt",
+                              "label": "global.other.discount",
+                              "dataFormat": "CURRENCY"
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.oehdr.wodiscamt",
+                              "label": "global.discount.total",
+                              "dataFormat": "CURRENCY"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 52,
+                  "type": "EXP_AREA",
+                  "label": "global.discount.calculator",
+                  "children": [
+                    {
+                      "id": 53,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 54,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 25,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 16,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "disc.selectedCalculatorType",
+                                  "label": "global.type",
+                                  "type3": "MANUAL",
+                                  "optionsModel": "disc.calculatorTypes",
+                                  "blankOption": false,
+                                  "dataDesc": "disc.ofText"
+                                },
+                                {
+                                  "id": 17,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "disc.calculatorAmount",
+                                  "label": "global.blank.label.string.for.space",
+                                  "dataFormat": "DECIMAL",
+                                  "size": "SM",
+                                  "digits": 8,
+                                  "decimals": 2,
+                                  "sign": "+",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 29,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 19,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "disc.isCalculatorAmount",
+                                  "label": "global.expressed.as",
+                                  "meta": "AmountPercentType",
+                                  "size": "SM",
+                                  "type3": "SET",
+                                  "metaGroup": "OE",
+                                  "blankOption": false
+                                },
+                                {
+                                  "id": 30,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "base.orderTotals.lotpricefl",
+                                  "label": "global.lot.price.order"
+                                },
+                                {
+                                  "id": 20,
+                                  "type": "BTN",
+                                  "subType": "SEC",
+                                  "label": "global.calculate",
+                                  "eventClick": "disc.calculate()",
+                                  "conditionDisabled": "!base.orderTotals.wodiscamtenabled"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

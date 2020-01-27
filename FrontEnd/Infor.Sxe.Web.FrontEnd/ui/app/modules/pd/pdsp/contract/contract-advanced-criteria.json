@@ -1,0 +1,191 @@
+{
+  "viewId": "pd-pdsp-contractadvancedcriteria",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 14,
+      "type": "COMP_FLD",
+      "children": [
+        {
+          "id": 7,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "vcmst.advCriteria.clevelcd",
+          "label": "global.vendor.contract.records",
+          "type3": "MANUAL",
+          "optionsModel": "base.levelCodePDSVC",
+          "blankOption": false,
+          "eventChange": "base.searchFieldsVisible(vcmst.advCriteria.clevelcd, '', '','', 'adv')"
+        },
+        {
+          "id": 24,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "vcmst.advCriteria.pdrecno",
+          "label": "global.record.number",
+          "dataFormat": "INTEGER",
+          "sign": "+",
+          "digits": 8,
+          "conditionShow": "vcmst.advCriteria.clevelcd === 'v0'",
+          "size": "SM"
+        },
+        {
+          "id": 19,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "vcmst.advCriteria.prod",
+          "label": "global.product",
+          "meta": "ProdAll",
+          "conditionShow": "base.ProdFl",
+          "controls": {
+            "actionBtn": {
+              "id": 32,
+              "type": "BTN",
+              "subType": "ICON",
+              "label": "global.inquire",
+              "icon": "icon-drilldown",
+              "isLabelTooltip": true,
+              "conditionShow": "base.ProdFl",
+              "conditionDisabled": "!vcmst.advCriteria.prod",
+              "stateRef": "icip.detail ({pk: vcmst.advCriteria.prod, pk2: vcmst.advCriteria.whse})"
+            }
+          }
+        },
+        {
+          "id": 20,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "vcmst.advCriteria.rebtype",
+          "label": "global.rebate.type",
+          "type3": "SET",
+          "metaGroup": "PD",
+          "meta": "ProductRebateType",
+          "conditionShow": "base.RebTypeFl"
+        },
+        {
+          "id": 23,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "vcmst.advCriteria.rebsubty",
+          "label": "global.rebate.sub.type",
+          "meta": "ProductRebateSubType",
+          "conditionShow": "base.SubRebTypeFl"
+        },
+        {
+          "id": 21,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "vcmst.advCriteria.prodpricety",
+          "label": "global.product.price.type",
+          "meta": "ProdPriceTy",
+          "conditionShow": "base.ProdPriceTypeFl"
+        },
+        {
+          "id": 22,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "vcmst.advCriteria.vendno",
+          "label": "global.vendor.number",
+          "meta": "Vendor",
+          "conditionShow": "base.VendNoFl",
+          "controls": {
+            "actionBtn": {
+              "id": 27,
+              "type": "BTN",
+              "subType": "ICON",
+              "label": "global.inquire",
+              "icon": "icon-drilldown",
+              "isLabelTooltip": true,
+              "conditionDisabled": "!vcmst.advCriteria.vendno",
+              "conditionShow": "base.VendNoFl",
+              "stateRef": "apiv.detail ({pk: vcmst.advCriteria.vendno})"
+            }
+          }
+        },
+        {
+          "id": 31,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "vcmst.advCriteria.unit",
+          "label": "global.unit",
+          "type3": "SET",
+          "metaGroup": "SA",
+          "meta": "Units",
+          "conditionShow": "base.UnitFl",
+          "options": {
+            "searchParams": {
+              "prod": {
+                "type": "REF",
+                "value": "vcmst.advCriteria.prod"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "COMP_FLD",
+      "children": [
+        {
+          "id": 25,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "vcmst.advCriteria.contractno",
+          "label": "global.contract.number",
+          "meta": "ProdLine",
+          "conditionShow": "advsrch.isSelected('contractno') && base.ContractNoFl",
+          "options": {
+            "searchParams": {
+              "vendno": {
+                "type": "REF",
+                "value": "mst.advCriteria.vendno"
+              }
+            }
+          }
+        },
+        {
+          "id": 28,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "vcmst.advCriteria.whse",
+          "label": "global.warehouse",
+          "meta": "Warehouse",
+          "conditionShow": "advsrch.isSelected('whse') && base.WhseFl"
+        },
+        {
+          "id": 30,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "vcmst.advCriteria.startdt",
+          "label": "global.start.date",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('startdt') && base.StartDtFl"
+        },
+        {
+          "id": 8,
+          "type": "FIELD",
+          "subType": "CHECKBOX",
+          "model": "vcmst.advCriteria.inactivefl",
+          "label": "global.inactive",
+          "dataFormat": "LOGICAL",
+          "conditionShow": "advsrch.isSelected('inactivefl') && vcmst.advCriteria.clevelcd !== 'v0'"
+        },
+        {
+          "id": 11,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "vcmst.advCriteria.iRecordlimit",
+          "label": "global.record.limit",
+          "conditionShow": "advsrch.isSelected('iRecordlimit') && vcmst.advCriteria.clevelcd !== 'v0'",
+          "dataFormat": "INTEGER",
+          "sign": "+",
+          "digits": 4,
+          "size": "SM"
+        }
+      ]
+    }
+  ]
+}

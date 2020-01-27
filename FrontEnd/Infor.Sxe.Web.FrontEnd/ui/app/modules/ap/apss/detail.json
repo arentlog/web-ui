@@ -1,0 +1,207 @@
+{
+  "viewId": "ap-apss-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isDetail() || base.isEdit()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.vendor.ship.from.setup",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3,
+                  "conditionShow": "dtl.editButtonVisibility()"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.customDelete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 24,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 25,
+                      "type": "TAB",
+                      "label": "global.general",
+                      "tabId": "general",
+                      "subFunction": "General",
+                      "children": [
+                        {
+                          "id": 29,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ap/apss/tabs/general.json",
+                          "controller": ""
+                        }
+                      ]
+                    },
+                    {
+                      "id": 26,
+                      "type": "TAB",
+                      "label": "global.ecommerce",
+                      "tabId": "edi-code",
+                      "subFunction": "EDI",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ap/apss/tabs/edi.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 27,
+                      "type": "TAB",
+                      "label": "global.route",
+                      "tabId": "route",
+                      "subFunction": "Route",
+                      "children": [
+                        {
+                          "id": 33,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ap/apss/tabs/route.json",
+                          "controller": "ApssDetailRouteCtrl as rte"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 28,
+                      "type": "TAB",
+                      "label": "global.custom",
+                      "tabId": "custom",
+                      "subFunction": "Custom",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "CUSTOM",
+                          "subType": "UserFields",
+                          "options": {
+                            "tableName": "apss",
+                            "objectRef": "dtl.apss",
+                            "conditionReadonly": "base.isDetail()"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "type": "VIEW_CNTR",
+      "viewName": "emailSelectSubView",
+      "conditionShow": "dtlemail.isEmailSelect()"
+    },
+    {
+      "id": 35,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Apsv",
+      "contextValues": {
+        "key1": "dtl.apss.vendno"
+      }
+    },
+    {
+      "id": 36,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Apss",
+      "contextValues": {
+        "key1": "dtl.apss.vendno",
+        "key2": "dtl.apss.shipfmno"
+      }
+    }
+  ]
+}

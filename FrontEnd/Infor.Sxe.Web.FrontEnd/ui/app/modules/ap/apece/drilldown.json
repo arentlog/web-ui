@@ -1,0 +1,316 @@
+{
+  "viewId": "ap-apece-drilldown",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isDrillDown()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.invoice.detail",
+              "subLabel": "{{drldwn.detailSubTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "drldwn.exitDetail()"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "EXP_AREA",
+                  "label": "global.detail",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 10,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.bannerRecord.groupnm",
+                              "label": "global.group.name",
+                              "dataDesc": "drldwn.bannerRecord.groupdesc",
+                              "contextEntity": "Apei",
+                              "contextValues": {
+                                "key1": "drldwn.bannerRecord.groupnm",
+                                "key2": "drldwn.bannerRecord.createddt",
+                                "key3": "drldwn.bannerRecord.groupseqno",
+                                "key4": "drldwn.bannerRecord.invseqno"
+                              }
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.bannerRecord.vendno",
+                              "label": "global.vendor.number",
+                              "dataDesc": "drldwn.bannerRecord.vendorname"
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.bannerRecord.apinvno",
+                              "label": "global.invoice.number"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 21,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.bannerRecord.transcdword",
+                              "label": "global.transaction.type"
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.bannerRecord.proctypeword",
+                              "label": "global.process.type"
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.bannerRecord.invdt",
+                              "label": "global.invoice.date",
+                              "dataFormat": "DATE"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 20,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.bannerRecord.amountstring",
+                              "label": "global.amount"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.invoiceTotals.glproofstring",
+                              "label": "{{base.invoiceproofTitle}}"
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.invoiceTotals.poproofstring",
+                              "label": "po.costing"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 11,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 12,
+                      "type": "TAB",
+                      "label": "gl.distribution",
+                      "conditionShow": "drldwn.bannerRecord.gldisttabenabledfl",
+                      "conditionSelected": "drldwn.glDistributionTabSelected",
+                      "tabId": "gl-distribution",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ap/apece/tabs/gl-distribution.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 13,
+                      "type": "TAB",
+                      "label": "po.header.entry",
+                      "conditionShow": "drldwn.bannerRecord.poheadertabenabledfl",
+                      "conditionSelected": "drldwn.poHeaderTabSelected",
+                      "tabId": "po-header-entry",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ap/apece/tabs/po-header.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 14,
+                      "type": "TAB",
+                      "label": "global.addons",
+                      "conditionShow": "drldwn.bannerRecord.addontabenabledfl",
+                      "conditionSelected": "drldwn.AddonTabSelected",
+                      "tabId": "addons",
+                      "children": [
+                        {
+                          "id": 33,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ap/apece/tabs/addons.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 15,
+                      "type": "TAB",
+                      "label": "global.terms",
+                      "conditionShow": "drldwn.bannerRecord.termstabenabledfl",
+                      "conditionSelected": "drldwn.termsTabSelected",
+                      "tabId": "terms",
+                      "children": [
+                        {
+                          "id": 34,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ap/apece/tabs/terms.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 16,
+                      "type": "TAB",
+                      "label": "global.additional.information",
+                      "conditionShow": "drldwn.bannerRecord.additionalinfotabenabledfl",
+                      "conditionSelected": "drldwn.additionalInfoTabSelected",
+                      "tabId": "additional-info",
+                      "children": [
+                        {
+                          "id": 35,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ap/apece/tabs/additional-info.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 17,
+                      "type": "TAB",
+                      "label": "global.manual.payments",
+                      "conditionShow": "drldwn.bannerRecord.manualpaymentstabenabledfl",
+                      "conditionSelected": "drldwn.manualPaymentsTabSelected",
+                      "tabId": "manual-payments",
+                      "children": [
+                        {
+                          "id": 36,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ap/apece/tabs/manual-payments.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 18,
+                      "type": "TAB",
+                      "label": "global.apply.credits",
+                      "conditionShow": "drldwn.bannerRecord.misccreditstabenabledfl",
+                      "conditionSelected": "drldwn.applyCreditsTabSelected",
+                      "tabId": "apply-credits",
+                      "children": [
+                        {
+                          "id": 37,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ap/apece/tabs/apply-credits.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 19,
+                      "type": "TAB",
+                      "label": "global.tax.distribution",
+                      "conditionShow": "drldwn.bannerRecord.taxdetailenabledfl",
+                      "conditionSelected": "drldwn.taxTabSelected",
+                      "tabId": "tax-distribution",
+                      "children": [
+                        {
+                          "id": 38,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ap/apece/tabs/tax-distribution.json"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "type": "VIEW_CNTR",
+      "viewName": "linedetail"
+    },
+    {
+      "id": 40,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Apsv",
+      "contextValues": {
+        "key1": "drldwn.bannerRecord.vendno"
+      }
+    },
+    {
+      "id": 41,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Apei",
+      "contextValues": {
+        "key1": "drldwn.bannerRecord.groupnm",
+        "key2": "drldwn.bannerRecord.createddt",
+        "key3": "drldwn.bannerRecord.groupseqno",
+        "key4": "drldwn.bannerRecord.invseqno"
+      }
+    }
+  ]
+}

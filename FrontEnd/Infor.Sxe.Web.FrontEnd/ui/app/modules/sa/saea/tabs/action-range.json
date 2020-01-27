@@ -1,0 +1,691 @@
+{
+  "viewId": "sa-saea-actiondetail-actionrange",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionShow": "actdtl.isActionDetail()",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.warehouse.range",
+      "collapsed": false,
+      "conditionCollapsed": "actdtl.isWarehouseCollapsed",
+      "conditionShow": "actdtl.saeaAction.whseenabled",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "RADIO_SET",
+                  "model": "actdtl.saeaAction.whserangety",
+                  "label": "global.selection",
+                  "meta": "RangeListAllTypes",
+                  "type3": "SET",
+                  "metaGroup": "COMMON",
+                  "required": true,
+                  "size": "",
+                  "autoFocus": true
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "type": "COL",
+              "subType": "2/3",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "actdtl.saeaAction.whsebeg",
+                  "label": "global.from.warehouse",
+                  "meta": "Warehouse",
+                  "conditionShow": "actdtl.isWarehouseRangeVisible()"
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "actdtl.saeaAction.whseend",
+                  "label": "global.to.warehouse",
+                  "conditionShow": "actdtl.isWarehouseRangeVisible()",
+                  "meta": "Warehouse"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID",
+                  "model": "actdtl.saeaListWhse",
+                  "controlRef": "actdtl.whseGrid",
+                  "conditionShow": "actdtl.isWarehouseListVisible()",
+                  "options": {
+                    "showCheckboxes": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 18,
+                      "type": "TOOLBAR",
+                      "label": "global.warehouses",
+                      "conditionShow": "actdtl.isWarehouseListVisible()",
+                      "children": [
+                        {
+                          "id": 19,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-new-document",
+                          "label": "global.new",
+                          "stateRef": "",
+                          "securityLevel": 4,
+                          "eventClick": "actdtl.addWarehouseToList()"
+                        },
+                        {
+                          "id": 20,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "eventClick": "actdtl.deleteWarehouseFromList()",
+                          "securityLevel": 5
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "listvalue",
+                      "label": "global.warehouse"
+                    },
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "namedesc",
+                      "label": "global.description"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "type": "EXP_AREA",
+      "label": "global.customer.number.range",
+      "conditionCollapsed": "actdtl.isCustomerCollapsed",
+      "conditionShow": "actdtl.saeaAction.custenabled",
+      "children": [
+        {
+          "id": 22,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 23,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 25,
+                  "type": "FIELD",
+                  "subType": "RADIO_SET",
+                  "model": "actdtl.saeaAction.custnorangety",
+                  "label": "global.selection",
+                  "meta": "RangeListAllTypes",
+                  "type3": "SET",
+                  "metaGroup": "COMMON",
+                  "autoFocus": true
+                }
+              ]
+            },
+            {
+              "id": 24,
+              "type": "COL",
+              "subType": "2/3",
+              "children": [
+                {
+                  "id": 26,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "actdtl.saeaAction.custnobeg",
+                  "label": "global.from.customer.number",
+                  "meta": "Customer",
+                  "conditionShow": "actdtl.isCustomerRangeVisible()"
+                },
+                {
+                  "id": 27,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "actdtl.saeaAction.custnoend",
+                  "label": "global.to.customer.number",
+                  "meta": "Customer",
+                  "conditionDisabled": "",
+                  "conditionShow": "actdtl.isCustomerRangeVisible()"
+                },
+                {
+                  "id": 31,
+                  "type": "GRID",
+                  "controlRef": "actdtl.custGrid",
+                  "model": "actdtl.saeaListCust",
+                  "conditionShow": "actdtl.isCustomerListVisible()",
+                  "options": {
+                    "showCheckboxes": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 30,
+                      "type": "TOOLBAR",
+                      "label": "global.customers",
+                      "conditionShow": "actdtl.isCustomerListVisible()",
+                      "children": [
+                        {
+                          "id": 35,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-new-document",
+                          "label": "global.new",
+                          "stateRef": "",
+                          "securityLevel": 4,
+                          "eventClick": "actdtl.addCustomerToList()"
+                        },
+                        {
+                          "id": 34,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "eventClick": "actdtl.deleteCustomerFromList()",
+                          "securityLevel": 5
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 32,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.customer.number",
+                      "model": "listvalue"
+                    },
+                    {
+                      "id": 36,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.ship.to",
+                      "model": "listvalue2"
+                    },
+                    {
+                      "id": 37,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.name",
+                      "model": "namedesc"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "type": "EXP_AREA",
+      "label": "global.region.range",
+      "conditionCollapsed": "actdtl.isRegionCollapsed",
+      "conditionShow": "actdtl.saeaAction.regenabled",
+      "children": [
+        {
+          "id": 41,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 42,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 56,
+                  "type": "FIELD",
+                  "subType": "RADIO_SET",
+                  "model": "actdtl.saeaAction.regionrangety",
+                  "label": "global.selection",
+                  "meta": "RangeListAllTypes",
+                  "type3": "SET",
+                  "metaGroup": "COMMON",
+                  "autoFocus": true
+                }
+              ]
+            },
+            {
+              "id": 67,
+              "type": "COL",
+              "subType": "2/3",
+              "children": [
+                {
+                  "id": 71,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "actdtl.saeaAction.regionbeg",
+                  "label": "global.from.region",
+                  "conditionShow": "actdtl.isRegionRangeVisible()"
+                },
+                {
+                  "id": 72,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "actdtl.saeaAction.regionend",
+                  "label": "global.to.region",
+                  "conditionShow": "actdtl.isRegionRangeVisible()"
+                },
+                {
+                  "id": 74,
+                  "type": "GRID",
+                  "conditionShow": "actdtl.isRegionListVisible()",
+                  "controlRef": "actdtl.regionGrid",
+                  "model": "actdtl.saeaListReg",
+                  "options": {
+                    "showCheckboxes": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 73,
+                      "type": "TOOLBAR",
+                      "label": "global.regions",
+                      "conditionShow": "actdtl.isRegionListVisible()",
+                      "children": [
+                        {
+                          "id": 76,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-new-document",
+                          "label": "global.new",
+                          "stateRef": "",
+                          "securityLevel": 4,
+                          "eventClick": "actdtl.addRegionToList()"
+                        },
+                        {
+                          "id": 77,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "eventClick": "actdtl.deleteRegionFromList()",
+                          "securityLevel": 5
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 75,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.region",
+                      "model": "listvalue"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "type": "EXP_AREA",
+      "label": "global.vendor.number.range",
+      "conditionCollapsed": "actdtl.isVendorCollapsed",
+      "conditionShow": "actdtl.saeaAction.vendenabled",
+      "children": [
+        {
+          "id": 44,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 45,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 57,
+                  "type": "FIELD",
+                  "subType": "RADIO_SET",
+                  "model": "actdtl.saeaAction.vendnorangety",
+                  "label": "global.selection",
+                  "meta": "RangeListAllTypes",
+                  "type3": "SET",
+                  "metaGroup": "COMMON",
+                  "autoFocus": true
+                }
+              ]
+            },
+            {
+              "id": 53,
+              "type": "COL",
+              "subType": "2/3",
+              "children": [
+                {
+                  "id": 81,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "actdtl.saeaAction.vendnobeg",
+                  "label": "global.from.vendor.number",
+                  "meta": "Vendor",
+                  "conditionShow": "actdtl.isVendorRangeVisible()"
+                },
+                {
+                  "id": 82,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "actdtl.saeaAction.vendnoend",
+                  "label": "global.to.vendor.number",
+                  "meta": "Vendor",
+                  "conditionShow": "actdtl.isVendorRangeVisible()"
+                },
+                {
+                  "id": 84,
+                  "type": "GRID",
+                  "model": "actdtl.saeaListVend",
+                  "conditionShow": "actdtl.isVendorListVisible()",
+                  "controlRef": "actdtl.vendGrid",
+                  "options": {
+                    "showCheckboxes": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 83,
+                      "type": "TOOLBAR",
+                      "label": "global.vendors",
+                      "conditionShow": "actdtl.isVendorListVisible()",
+                      "children": [
+                        {
+                          "id": 87,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-new-document",
+                          "label": "global.new",
+                          "stateRef": "",
+                          "securityLevel": 4,
+                          "eventClick": "actdtl.addVendorToList()"
+                        },
+                        {
+                          "id": 86,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "eventClick": "actdtl.deleteVendorFromList()",
+                          "securityLevel": 5
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 85,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "listvalue",
+                      "label": "global.vendor.number"
+                    },
+                    {
+                      "id": 88,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "namedesc",
+                      "label": "global.name"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "type": "EXP_AREA",
+      "label": "global.product.range",
+      "conditionCollapsed": "actdtl.isProductCollapsed",
+      "conditionShow": "actdtl.saeaAction.prodenabled",
+      "children": [
+        {
+          "id": 47,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 48,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 58,
+                  "type": "FIELD",
+                  "subType": "RADIO_SET",
+                  "model": "actdtl.saeaAction.prodrangety",
+                  "label": "global.selection",
+                  "meta": "RangeListAllTypes",
+                  "type3": "SET",
+                  "metaGroup": "COMMON",
+                  "autoFocus": true
+                }
+              ]
+            },
+            {
+              "id": 54,
+              "type": "COL",
+              "subType": "2/3",
+              "children": [
+                {
+                  "id": 91,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "actdtl.saeaAction.prodbeg",
+                  "label": "global.from.product",
+                  "meta": "ProdAll",
+                  "conditionShow": "actdtl.isProductRangeVisible()"
+                },
+                {
+                  "id": 92,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "actdtl.saeaAction.prodend",
+                  "label": "global.to.product",
+                  "meta": "ProdAll",
+                  "conditionShow": "actdtl.isProductRangeVisible()"
+                },
+                {
+                  "id": 94,
+                  "type": "GRID",
+                  "model": "actdtl.saeaListProd",
+                  "controlRef": "actdtl.prodGrid",
+                  "conditionShow": "actdtl.isProductListVisible()",
+                  "options": {
+                    "showCheckboxes": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 93,
+                      "type": "TOOLBAR",
+                      "label": "global.products",
+                      "conditionShow": "actdtl.isProductListVisible()",
+                      "children": [
+                        {
+                          "id": 96,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-new-document",
+                          "label": "global.new",
+                          "stateRef": "",
+                          "securityLevel": 4,
+                          "eventClick": "actdtl.addProductToList()"
+                        },
+                        {
+                          "id": 97,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "eventClick": "actdtl.deleteProductFromList()",
+                          "securityLevel": 5,
+                          "conditionDisabled": "",
+                          "conditionShow": ""
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 95,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "listvalue",
+                      "label": "global.product"
+                    },
+                    {
+                      "id": 98,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "namedesc",
+                      "label": "global.description"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "type": "EXP_AREA",
+      "label": "global.product.category.range",
+      "conditionCollapsed": "actdtl.isProdCatCollapsed",
+      "conditionShow": "actdtl.saeaAction.pcatenabled",
+      "children": [
+        {
+          "id": 50,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 51,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 59,
+                  "type": "FIELD",
+                  "subType": "RADIO_SET",
+                  "model": "actdtl.saeaAction.prodcatrangety",
+                  "label": "global.selection",
+                  "meta": "RangeListAllTypes",
+                  "type3": "SET",
+                  "metaGroup": "COMMON",
+                  "autoFocus": true
+                }
+              ]
+            },
+            {
+              "id": 55,
+              "type": "COL",
+              "subType": "2/3",
+              "children": [
+                {
+                  "id": 99,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "actdtl.saeaAction.prodcatbeg",
+                  "label": "global.from.prod.category",
+                  "meta": "ProdCat",
+                  "conditionShow": "actdtl.isProdCatRangeVisible()"
+                },
+                {
+                  "id": 100,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "actdtl.saeaAction.prodcatend",
+                  "label": "global.to.prod.category",
+                  "meta": "ProdCat",
+                  "conditionShow": "actdtl.isProdCatRangeVisible()"
+                },
+                {
+                  "id": 102,
+                  "type": "GRID",
+                  "model": "actdtl.saeaListPcat",
+                  "controlRef": "actdtl.prodcatGrid",
+                  "conditionShow": "actdtl.isProdCatListVisible()",
+                  "options": {
+                    "showCheckboxes": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 101,
+                      "type": "TOOLBAR",
+                      "label": "global.product.categories",
+                      "conditionShow": "actdtl.isProdCatListVisible()",
+                      "children": [
+                        {
+                          "id": 105,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-new-document",
+                          "label": "global.new",
+                          "stateRef": "",
+                          "securityLevel": 4,
+                          "eventClick": "actdtl.addProdCatToList()"
+                        },
+                        {
+                          "id": 106,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "eventClick": "actdtl.deleteProdCatFromList()",
+                          "securityLevel": 5
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 103,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "listvalue",
+                      "label": "global.product.category"
+                    },
+                    {
+                      "id": 104,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "namedesc",
+                      "label": "global.description"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

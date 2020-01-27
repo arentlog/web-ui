@@ -1,0 +1,146 @@
+{
+  "viewId": "ap-apece-drilldown-additionalinfo",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 15,
+      "type": "TOOLBAR",
+      "label": "global.blank.label.string.for.space",
+      "children": [
+        {
+          "id": 8,
+          "type": "BTN",
+          "label": "global.edit",
+          "icon": "icon-edit",
+          "securityLevel": 3,
+          "eventClick": "drldwn.populateAdditionalInfo(true)"
+        },
+        {
+          "id": 9,
+          "type": "BTN",
+          "label": "global.save",
+          "icon": "icon-save",
+          "securityLevel": 3,
+          "eventValidated": "drldwn.additionalInforSubmit()",
+          "conditionDisabled": "!drldwn.additionalInforSaveEnabled()",
+          "eventClick": "drldwn.additionalInforSubmit()"
+        },
+        {
+          "id": 11,
+          "type": "BTN",
+          "label": "global.reset",
+          "eventClick": "drldwn.populateAdditionalInfo(false)"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "type": "EXP_AREA",
+      "label": "global.manual.check",
+      "children": [
+        {
+          "id": 17,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 18,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "drldwn.additionalInfoData.bankno",
+                  "label": "global.bank.number",
+                  "conditionReadonly": "!drldwn.additionalInfoData.manualcheckenabledfl",
+                  "type3": "MANUAL",
+                  "optionsModel": "drldwn.additionalInfoBanknoDropDownOptions"
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "drldwn.additionalInfoData.origdisc",
+                  "label": "global.discount.amount",
+                  "dataFormat": "CURRENCY",
+                  "sign": "+",
+                  "digits": 7,
+                  "decimals": 2,
+                  "conditionShow": "drldwn.additionalInfoData.newinvfl",
+                  "conditionReadonly": "!drldwn.additionalInfoData.manualcheckenabledfl"
+                }
+              ]
+            },
+            {
+              "id": 22,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "drldwn.additionalInfoData.checkno",
+                  "label": "global.check.number",
+                  "dataFormat": "INTEGER_TEXT",
+                  "digits": 8,
+                  "conditionReadonly": "!drldwn.additionalInfoData.manualcheckenabledfl"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "type": "EXP_AREA",
+      "label": "global.manual.address",
+      "children": [
+        {
+          "id": 20,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 21,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "drldwn.additionalInfoData.name",
+                  "label": "global.name",
+                  "maxLength": 30,
+                  "conditionReadonly": "!drldwn.additionalInfoData.addlinfoenabledfl"
+                },
+                {
+                  "id": 10,
+                  "type": "CUSTOM",
+                  "subType": "AddressForm",
+                  "options": {
+                    "countryCdVisible": false,
+                    "addr2Visible": true,
+                    "addr3Visible": true,
+                    "addr1Model": "drldwn.additionalInfoData.addr1",
+                    "addr2Model": "drldwn.additionalInfoData.addr2",
+                    "addr3Model": "drldwn.additionalInfoData.addr3",
+                    "cityModel": "drldwn.additionalInfoData.city",
+                    "stateModel": "drldwn.additionalInfoData.state",
+                    "zipCodeModel": "drldwn.additionalInfoData.zipcd",
+                    "conditionReadonly": "!drldwn.additionalInfoData.addlinfoenabledfl",
+                    "addressLabel": "global.address"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

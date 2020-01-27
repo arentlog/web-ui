@@ -1,0 +1,166 @@
+{
+  "viewId": "twl-twlei-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.criteria.coNum",
+                  "label": "global.company.number",
+                  "readonly": true,
+                  "extra": true
+                },
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.whNum",
+                  "label": "global.warehouse",
+                  "readonly": false,
+                  "meta": "TWLWarehouse",
+                  "conditionReadonly": "base.restrictTWLWarehouse",
+                  "required": true
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.binNum",
+                  "label": "global.location",
+                  "meta": "TWLBinLocation",
+                  "options": {
+                    "searchParams": {
+                      "coNum": {
+                        "type": "REF",
+                        "value": "base.criteria.coNum"
+                      },
+                      "whNum": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      },
+                      "binNum": {
+                        "type": "REF",
+                        "value": "base.criteria.binNum"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.absNum",
+                  "label": "global.item",
+                  "meta": "TWLItem",
+                  "options": {
+                    "searchParams": {
+                      "whse": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "base.criteria.showZeroNegInventory",
+                  "label": "global.negative.and.zero.inventory",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.empNum",
+                  "label": "global.employee",
+                  "meta": "TWLEmployee",
+                  "conditionShow": "!base.criteria.showZeroNegInventory",
+                  "options": {
+                    "searchParams": {
+                      "coNum": {
+                        "type": "REF",
+                        "value": "base.criteria.coNum"
+                      },
+                      "whNum": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.transType",
+                  "label": "global.transaction.type",
+                  "maxLength": 10,
+                  "conditionShow": "!base.criteria.showZeroNegInventory",
+                  "type3": "CODES",
+                  "meta": "TWLTransTypes"
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.problemType",
+                  "label": "global.problem.type",
+                  "maxLength": 10,
+                  "conditionShow": "!base.criteria.showZeroNegInventory",
+                  "type3": "MANUAL",
+                  "blankOption": false,
+                  "optionsModel": "base.problemTypes"
+                },
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.recordType",
+                  "label": "global.record.type",
+                  "maxLength": 10,
+                  "conditionShow": "!base.criteria.showZeroNegInventory",
+                  "type3": "MANUAL",
+                  "blankOption": false,
+                  "optionsModel": "base.recordTypes"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

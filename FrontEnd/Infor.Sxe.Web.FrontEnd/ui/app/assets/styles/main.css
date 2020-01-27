@@ -1,0 +1,543 @@
+/* Master CSS file */
+
+/* These need full height in order for scrollable sections to work */
+form, .view, .sub-view {
+   height: 100%;
+}
+/* But not when form is in modal (otherwise messes up modals) */
+.modal form {
+   height: auto;
+}
+/* View containers (ui-view) need display inline in order for scrollable sections to work */
+.view-container {
+   height: 100%;
+   display: inline;
+}
+
+/* Template section adjustments (made sidebar wider so two buttons can be side-by-side even with the scroll bar) */
+.two-column.fixed .sidebar {
+   width: 270px;
+}
+.two-column.fixed .main {
+   width: calc(100% - 270px);
+}
+
+/* Template sections expand/collapse */
+.two-column.fixed section.main.full-width {
+   width: 100%;
+}
+.two-column.fixed section.main.expanded-width {
+   width: calc(100% - 36px);
+}
+
+/*
+ * Small screen adjustments to get sections to still display on phones.
+ * Soho default was to dynamically show one or the other, which doesn't work for us.
+ */
+@media (max-width: 766px) {
+   .two-column.fixed .sidebar {
+      display: inline-block;
+      width: 40% !important;
+   }
+   .two-column.fixed .main {
+      display: inline-block;
+      width: 60% !important;
+   }
+   .two-column.fixed .sidebar.collapsed-bar {
+      width: 36px !important;
+   }
+   .two-column.fixed section.main.expanded-width {
+      width: calc(100% - 36px) !important;
+   }
+}
+
+/* Template sections widgets */
+.full-height {
+   height: 100%;
+}
+.partial-height {
+   height: 47%;
+}
+
+/* Styles for the collapsible sections and the expand/collapse button */
+collapsible-section-button {
+   height: 36px;
+   position: absolute;
+   bottom: 0;
+}
+.expanded-width {
+   width: calc(100% - 36px);
+}
+.collapsed-width {
+   width: 36px;
+}
+.builder-sidebar {
+   padding-bottom: 21px; /* creates space for the collapse button */
+}
+.builder-sidebar.collapsed-width .builder-sidebar-header, .builder-sidebar.collapsed-width .builder-sidebar-content, .builder-sidebar.collapsed-width .builder-sidebar-footer {
+   display: none; /* current way to not show edges of the content when section is collapsed */
+}
+
+/* We added a full width class for text areas for special cases */
+.textarea-full {
+   width: 100%;
+}
+
+/* We added height classes for text areas for special cases (lg matches height of 4 fields; xl matches 8 fields) */
+.textarea-height-lg {
+   min-height: 222px;
+}
+.textarea-height-xl {
+   min-height: 516px;
+}
+
+/* Align classes (used by field format metadata) */
+.align-left {
+   text-align: left;
+}
+.align-right {
+   text-align: right;
+}
+.align-center {
+   text-align: center;
+}
+
+/*
+* Grid max-height in order to add contained scrolling and a fixed header (most grids use this, but not all).
+* We specify a different max-height based on the user's window size in order to make use of the available screen space.
+*/
+@media (max-height: 599px) {
+   .datagrid-contained .datagrid-body {
+      max-height: 220px;
+   }
+}
+@media (min-height: 600px) and (max-height: 699px) {
+   .datagrid-contained .datagrid-body {
+      max-height: 320px;
+   }
+}
+@media (min-height: 700px) and (max-height: 799px) {
+   .datagrid-contained .datagrid-body {
+      max-height: 420px;
+   }
+}
+@media (min-height: 800px) and (max-height: 899px) {
+   .datagrid-contained .datagrid-body {
+      max-height: 520px;
+   }
+}
+@media (min-height: 900px) and (max-height: 999px) {
+   .datagrid-contained .datagrid-body {
+      max-height: 620px;
+   }
+}
+@media (min-height: 1000px) and (max-height: 1099px) {
+   .datagrid-contained .datagrid-body {
+      max-height: 720px;
+   }
+}
+@media (min-height: 1100px) and (max-height: 1199px) {
+   .datagrid-contained .datagrid-body {
+      max-height: 820px;
+   }
+}
+@media (min-height: 1200px) and (max-height: 1299px) {
+   .datagrid-contained .datagrid-body {
+      max-height: 920px;
+   }
+}
+@media (min-height: 1300px) and (max-height: 1399px) {
+   .datagrid-contained .datagrid-body {
+      max-height: 1020px;
+   }
+}
+@media (min-height: 1400px) and (max-height: 1499px) {
+   .datagrid-contained .datagrid-body {
+      max-height: 1120px;
+   }
+}
+@media (min-height: 1500px) {
+   .datagrid-contained .datagrid-body {
+      max-height: 1220px;
+   }
+}
+
+/* Grids adjacent to each other need some vertical margin between them */
+.grid-container + .grid-container {
+   margin-top: 20px;
+}
+
+/* Using the Soho "Activated" grid row (mixed selection) feature for drilldown but adjusting the color to not clash with selected row color */
+.light-theme .datagrid tbody tr.is-rowactivated td:not(.is-editing), .light-theme .datagrid tbody tr.is-rowactivated td:not(.is-editing) .datagrid-cell-wrapper {
+   background-color: #d8d8d8;
+}
+.dark-theme .datagrid tbody tr.is-rowactivated td:not(.is-editing), .dark-theme .datagrid tbody tr.is-rowactivated td:not(.is-editing) .datagrid-cell-wrapper {
+   background-color: #50535a;
+}
+.high-contrast-theme .datagrid tbody tr.is-rowactivated td:not(.is-editing), .high-contrast-theme .datagrid tbody tr.is-rowactivated td:not(.is-editing) .datagrid-cell-wrapper {
+   background-color: #999999;
+}
+
+/* Adjustment for unnecessary padding above and below main content of views.
+*  When have a tabset, exp area, grid, or other control first then don't need top padding.
+*  When have a plain row with fields then do need top padding. */
+.builder-actions-content {
+   margin-top: 0;
+   margin-bottom: 0;
+}
+.builder-actions-content > .row:first-child {
+   margin-top: 10px;
+}
+.tab-container.horizontal {
+   margin-bottom: 0;
+}
+
+/* Adjustment for first .columns in field sets to have no margin */
+fieldset .columns:first-child {
+   margin-left: 0;
+   padding-left: 0;
+}
+/* Adjustment for all columns in field sets to have no padding on small screens (when columns collapse) */
+@media (max-width: 766px) {
+   fieldset .columns {
+      padding: 0;
+   }
+}
+/* Adjustment for SoHo's odd no left margin on columns in expandable areas */
+@media (min-width: 767px) {
+   .expandable-area .expandable-pane .columns:not(:first-child) {
+      margin-left: 20px;
+   }
+}
+
+/* Adjustment for spacing below radio sets */
+.radio-group {
+   margin-bottom: 20px;
+   padding-bottom: 0;
+}
+.radio-group + .field {
+   padding-top: 0;
+}
+
+/* First expandable areas in a series don't need the huge 30px padding above them */
+.expandable-area:first-child .expandable-header {
+   padding-top: 7px;
+}
+
+/* Adjustment for Expandable areas that are inline with other fields (i.e. Additional Criteria in Search sections) */
+div.field + .expandable-area > .expandable-header {
+   padding-top: 5px;
+   border-top-color: transparent;
+}
+
+/* Adjustment for excessive margin after last row */
+.row:last-child {
+   margin-bottom: 0;
+}
+
+/* Adjustment for SoHo Summary Form "Info" fields */
+.summary-form .field:last-child {
+   margin-bottom: auto; /* Adjustment last field margin css that was causing problems with our Address Info markup */
+}
+.summary-form {
+   min-height: 39px; /* Adjustment for min-height for better alignment with empty data */
+   width: 100%; /* From soho css for .summary-form .field (we put summary-form and field on same div) */
+}
+.summary-form .hyperlink {
+   white-space: normal; /* Adjustment for hyperlinks on info fields (no-wrap was causing problems for long text in OEET widgets) */
+}
+.summary-form .data .hyperlink {
+   font-size: 14px; /* Adjustment for font size of hyperlink data */
+   font-size: 1.4rem;
+}
+
+/* Buttons in normal layouts (targeting ones inside row columns here) need some bottom margin to separate from wrapped buttons or fields */
+.column > button, .columns > button {
+   margin-bottom: 15px;
+}
+
+/* Adjustments for controls inside of compound fields */
+.compound-field > button {
+   margin-top: 19px;
+}
+.compound-field label.checkbox-label {
+   margin-top: 25px;
+}
+
+/* Adjustments for adding the builder content header (i.e. wizard in OEET) */
+.builder-actions.has-content-header {
+   padding-top: 0;
+}
+.module-content-header {
+   height: 83px;
+   background-color: #f0f0f0;
+   border-bottom: 1px solid #bdbdbd;
+   border-right: 1px solid #bdbdbd;
+}
+.dark-theme .module-content-header {
+   background-color: #313236;
+   border-bottom: 1px solid #656871;
+   border-right: 1px solid #656871;
+}
+.high-contrast-theme .module-content-header {
+   background-color: #bdbdbd;
+   border-bottom: 1px solid #5c5c5c;
+   border-right: 1px solid #5c5c5c;
+}
+.module-content-body {
+   height: calc(100% - 83px);
+   padding-top: 10px;
+}
+
+/* Brought in cart totals css from Soho's edit profile example to use for oeet sidebar cart totals */
+.builder-sidebar-footer .cart-totals {
+   border-top: 1px solid #bdbdbd;
+   padding: 5px 10px 15px 10px;
+}
+.builder-sidebar-footer .cart-totals .totals {
+   font-weight: bold;
+   margin-top: 10px;
+}
+.builder-sidebar-footer .bold {
+   font-weight: bold;
+}
+
+/* Workaround to get oeet popdown cart to display decently. In future can give it it's own json view instead of sharing sidebar cart view. */
+.card .builder-sidebar-header {
+   display: none;
+}
+.card .builder-sidebar-content {
+   height: calc(100% - 150px) !important;
+}
+
+/* Adjustment for the Soho image placeholder to look better across the three themes */
+.image-lg.placeholder, .image-md.placeholder, .image-sm.placeholder {
+   background-color: transparent;
+}
+
+/* Adjust dark theme tab bottom color since was same as background color */
+.dark-theme .tab-container.horizontal > .tab-list {
+   border-color: #656871;
+}
+
+/* Add missing top border to sidebar widgets */
+.sidebar .accordion-header {
+   border-top-color: #d8d8d8;
+}
+.dark-theme .sidebar .accordion-header {
+   border-top-color: #212224;
+}
+.high-contrast-theme .sidebar .accordion-header {
+   border-top-color: #5c5c5c;
+}
+
+/* Adjust padding of the Wizard control because the SoHo defaults look strange on our screens */
+.wizard-header {
+   padding: 30px 70px 50px 45px;
+}
+
+/* Adjustment for actions buttons next to lookup fields so doesn't wrap to next line */
+.has-actions-wrapper {
+   margin-right: -41px; /* for some reason SoHo's -40px worked, but our app needed -41px */
+}
+
+/* Adjust lookup modals */
+/* Our lookup modals have a modal title and toolbar title (Soho's are only toolbar title, so we need to adjust things) */
+.lookup-modal .modal-body-wrapper {
+   padding-top: 5px; /* Need more padding under title because the SoHo defaults look strange on ours */
+   overflow: auto; /* Need to allow modal scrolling since can be a lot of content above the grid */
+}
+.lookup-modal .toolbar.has-more-button .buttonset {
+   width: calc(55% - 44px); /* Soho was giving 100% - 44px which caused bad display */
+}
+.lookup-modal .toolbar {
+   margin-bottom: 5px;
+}
+.lookup-modal .toolbar .title, .lookup-modal .expandable-header .title {
+   font-size: 16px;
+   font-size: 1.6rem;
+}
+
+/* Adjustments to get modal actions button to display in corner of modals */
+.modal-title {
+   display: inline-block;
+   width: calc(100% - 36px); /* icon buttons are 36px wide */
+}
+/* Our actions button element directive at top of modals */
+view-actions-button {
+   display: inline-block;
+   width: 36px; /* set width to width of the icon button, otherwise overflows */
+}
+
+/* Adjustments for header toolbars */
+.header .toolbar.has-title-button {
+   margin-left: 2px; /* Adjustment for excessive left/right margin */
+   margin-right: 5px;
+}
+/* Container for toolbar navigation buttons (left-side, i.e. back button) */
+.header .toolbar .title > .nav-buttonset {
+   vertical-align: top;
+   margin-top: 0;
+   margin-right: 7px;
+}
+/* This is needed to make header toolbar titles work well with the toolbar nav back button */
+.header .toolbar .title > h2 {
+   vertical-align: top;
+   margin-top: 5px;
+   width: 100%; /* Full width needed for overflow ellipsis feature */
+}
+.header .toolbar.has-title-button .title > h2 {
+   width: calc(100% - 46px); /* Full width minus back button */
+}
+/* Apply overflow ellipsis feature to each piece of the title */
+.header .toolbar .title > h2 span {
+   display: inline-block;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   width: 100%;
+}
+.header .toolbar .title > h2 span.panel-subhead {
+   display: block;
+   margin-top: 0;
+   line-height: normal; /* The line-height: 1 was chopping off bottom of 'g', 'j', and 'y' characters */
+}
+/* Non-header toolbars - need to make span be inline in order for ellipsis feature to work */
+.toolbar .title span {
+   display: inline;
+}
+
+/* The menu function search autocomplete wasn't working when many results so cap the height */
+.popupmenu.autocomplete {
+   max-height: 405px;
+}
+
+/* Adjustment for Swap Lists inside of expandable areas */
+.expandable-area .expandable-pane > .content .swaplist p {
+   margin-bottom: 0;
+}
+.swaplist .handle {
+   font-size: 25px;
+}
+
+/* Message control via wysiwyg */
+div.message {
+   font-size: 1.5rem;
+   line-height: 20px;
+   padding: 15px 0 25px;
+   text-align: left;
+}
+
+/* Message control icons */
+div.message .icon {
+   margin-left: 5px;
+   margin-right: 4px;
+   top: auto;
+   left: -6px;
+}
+
+/* Notes indicator on lookup fields (keep in sync with SoHo's .error-message div for fields) */
+.notes-indicator {
+   font-size: 12px;
+   font-size: 1.2rem;
+   /* color: #e84f4f; Note: not using the red text of error messages */
+   display: block;
+   line-height: 1.2rem;
+   margin-top: -15px;
+   max-width: 300px;
+   position: relative;
+}
+.notes-indicator .icon {
+   height: 14px;
+   left: 0;
+   margin-left: 0;
+   margin-top: 0;
+   position: absolute;
+   top: 0;
+   width: 14px;
+}
+.notes-indicator .message-text {
+   font-size: inherit;
+   line-height: 15px;
+   margin-bottom: 15px;
+   margin-top: 1px;
+   max-width: 280px;
+   padding-left: 19px;
+}
+
+/* Server error */
+.serverError {
+   font-size: 12px;
+   max-width: 500px;
+   height: 125px;
+   margin-top: 5px;
+   overflow: scroll;
+}
+
+/* Widget content styles */
+.accordion-content.no-padding {
+   padding: 0;
+}
+.accordion-content.top-padding {
+   padding-top: 25px;
+}
+.accordion-content.wide-content {
+   overflow-x: scroll;
+   white-space: nowrap;
+}
+.img-cart {
+    height: 38px;
+    width: 38px;
+}
+
+/* Chart size styling */
+.chart-container {
+   height: 300px;
+   width: 100%;
+}
+.chart-container.chart-pie > svg {
+   overflow: visible; /* Had to put this in because pie labels were sometimes chopped off on smaller screens */
+}
+.chart-container.completion-chart {
+   height: auto;
+   width: 100%;
+   padding: 15px 70px 25px 35px;
+   overflow: visible; /* Had to put this in because long numbers were sometimes chopped off on left side */
+}
+.chart-container.completion-chart[data-type='completion'] {
+   padding: 0;
+}
+.chart-completion-target span:not(.audible), .chart-completion span:not(.audible) {
+   background-color: transparent;
+}
+
+/* Styling for image controls */
+.image-container {
+   margin-bottom: 20px; /* Standard margin below so looks good with surrounding content */
+   text-align: center;
+}
+
+/* Part of the rollback for SOHO-7087. This can be removed after upgrade to Soho 4.3.3+ */
+@media (max-width: 766px) {
+  body::after {
+    content: "phone";
+    display: none; } }
+
+@media (min-width: 0) and (max-width: 479px) {
+  body::after {
+    content: "phonedown";
+    display: none; } }
+
+@media (min-width: 767px) and (max-width: 1279px) {
+  body::after {
+    content: "tablet";
+    display: none; } }
+
+@media (min-width: 1280px) and (max-width: 1599px) {
+  body::after {
+    content: "desktop";
+    display: none; } }
+
+@media (min-width: 1600px) {
+  body::after {
+    content: "extralarge";
+    display: none; } }

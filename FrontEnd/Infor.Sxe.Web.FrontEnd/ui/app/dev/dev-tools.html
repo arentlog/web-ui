@@ -1,0 +1,82 @@
+﻿<div style="display: inline-block;">
+
+   <!-- Dev Tools Menu -->
+   <ul id="dev-tools-menu" class="popupmenu has-icons">
+      <li dev-only class="submenu"><a><svg class="icon"><use xlink:href="#icon-edit"></use></svg><span translate>global.edit</span></a>
+         <ul class="popupmenu">
+            <li><a ng-click="editMainView()"><svg class="icon"><use xlink:href="#icon-misc"></use></svg><span translate>special.developer.this.view</span></a></li>
+            <li><a ng-click="showActiveViews()"><svg class="icon"><use xlink:href="#icon-more"></use></svg><span translate>global.more.ellipsis</span></a></li>
+         </ul>
+      </li>
+
+      <li dev-only class="submenu"><a><svg class="icon"><use xlink:href="#icon-new-document"></use></svg><span translate>global.new</span></a>
+         <ul class="popupmenu">
+            <li><a ng-click="newFunction()"><svg class="icon"><use xlink:href="#icon-tools-addons"></use></svg><span translate>special.developer.function</span></a></li>
+            <li><a ng-click="newView()"><svg class="icon"><use xlink:href="#icon-document"></use></svg><span translate>special.developer.view</span></a></li>
+         </ul>
+      </li>
+
+      <!-- Test different locales (the real test is by browser options, but we can enhance and bring back in the future if needed) -->
+      <li class="submenu" ng-if="false"><a><svg class="icon"><use xlink:href="#icon-url"></use></svg><span>Locale</span></a>
+         <ul class="popupmenu is-selectable">
+            <li ng-class="locale === 'en-US' ? 'is-checked' : ''"><a ng-click="setLocale('en-US')"><span>en-US</span></a></li>
+            <li ng-class="locale === 'en-GB' ? 'is-checked' : ''"><a ng-click="setLocale('en-GB')"><span>en-GB</span></a></li>
+            <li ng-class="locale === 'en-IN' ? 'is-checked' : ''"><a ng-click="setLocale('en-IN')"><span>en-IN</span></a></li>
+            <li ng-class="locale === 'es-ES' ? 'is-checked' : ''"><a ng-click="setLocale('es-ES')"><span>es-ES</span></a></li>
+            <li ng-class="locale === 'fr-CA' ? 'is-checked' : ''"><a ng-click="setLocale('fr-CA')"><span>fr-CA</span></a></li>
+            <li ng-class="locale === 'fr-FR' ? 'is-checked' : ''"><a ng-click="setLocale('fr-FR')"><span>fr-FR</span></a></li>
+         </ul>
+      </li>
+
+      <!-- Settings -->
+      <li class="submenu"><a><svg class="icon"><use xlink:href="#icon-settings"></use></svg><span translate>global.settings</span></a>
+         <ul class="popupmenu">
+            <li class="submenu">
+               <a><svg class="icon"><use xlink:href="#icon-workflow"></use></svg><span translate>global.extensions</span></a>
+               <ul class="popupmenu is-selectable">
+                  <li ng-class="enableExtensions ? 'is-checked' : ''"><a ng-click="toggleExtensions(true)"><span translate>global.on</span></a></li>
+                  <li ng-class="!enableExtensions ? 'is-checked' : ''"><a ng-click="toggleExtensions(false)"><span translate>global.off</span></a></li>
+               </ul>
+            </li>
+            <li class="submenu">
+               <a><svg class="icon"><use xlink:href="#icon-settings"></use></svg><span translate>global.personalization</span></a>
+               <ul class="popupmenu is-selectable">
+                  <li ng-class="enablePersonalization ? 'is-checked' : ''"><a ng-click="togglePersonalization(true)"><span translate>global.on</span></a></li>
+                  <li ng-class="!enablePersonalization ? 'is-checked' : ''"><a ng-click="togglePersonalization(false)"><span translate>global.off</span></a></li>
+               </ul>
+            </li>
+         </ul>
+      </li>
+
+      <!-- Tools -->
+      <li class="submenu"><a><svg class="icon"><use xlink:href="#icon-tools"></use></svg><span>Tools</span></a>
+         <ul class="popupmenu has-icons">
+            <li><a ng-click="clearLocalStorageData()"><svg class="icon"><use xlink:href="#icon-clear-screen"></use></svg><span>Clear Local Storage Data</span></a></li>
+            <li><a ui-sref="devReports"><svg class="icon"><use xlink:href="#icon-report"></use></svg><span>Dev Reports</span></a></li>
+            <li><a href="ui/app/dev/mock-mingle.html"><svg class="icon"><use xlink:href="#icon-grid"></use></svg><span>Mock Ming.le</span></a></li>
+         </ul>
+      </li>
+
+      <!-- Help -->
+      <li class="submenu"><a><svg class="icon"><use xlink:href="#icon-help"></use></svg><span>Help</span></a>
+         <ul class="popupmenu has-icons">
+            <li><a href="help" target="_blank"><svg class="icon"><use xlink:href="#icon-copy-url"></use></svg><span>REST Services Help</span></a></li>
+         </ul>
+      </li>
+   </ul>
+
+   <!-- New Function/View Generation -->
+   <div id="dev-tools-modal-container"></div>
+
+   <!-- Generate Setups -->
+   <div id="dev-tools-generate-setups" style="display: none;">
+      <div clas="row">
+         <div class="full column">
+            <div class="field">
+               <label for="setup-json-text" class="required">JSON Input</label>
+               <textarea id="setup-json-text" ng-model="setupJsonInput" data-validate="required" rows="20" cols="80" style="width: 770px; max-width: none;"></textarea>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,349 @@
+{
+  "viewId": "oe-oeio-detail-taxes",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "TAB",
+  "children": [
+    {
+      "id": 10,
+      "type": "EXP_AREA",
+      "label": "global.tax.settings",
+      "children": [
+        {
+          "id": 11,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 12,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 17,
+                  "type": "MESSAGE",
+                  "text": "{{tax.detail.spectaxcd}}",
+                  "conditionShow": "!tax.detail.spectaxcdhidden"
+                },
+                {
+                  "id": 6,
+                  "type": "MESSAGE",
+                  "text": "{{tax.detail.nontaxtext}}"
+                },
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "tax.detail.statecd",
+                  "label": "{{tax.detail.statecdlabel}}",
+                  "conditionShow": "!tax.detail.statecdhidden"
+                }
+              ]
+            },
+            {
+              "id": 13,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "MESSAGE",
+                  "text": "{{tax.detail.taxovertext}}"
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "tax.detail.taxauth",
+                  "label": "global.tax.authority",
+                  "conditionShow": "!tax.detail.taxauthhidden"
+                }
+              ]
+            },
+            {
+              "id": 58,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 15,
+                  "type": "MESSAGE",
+                  "text": "{{tax.detail.taxdefaulttext}}"
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "tax.detail.pstlicenseno",
+                  "label": "global.pst.license.number",
+                  "conditionShow": "!tax.detail.pstlicensenohidden"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "type": "EXP_AREA",
+      "label": "{{tax.detail.txtlabel}}",
+      "conditionShow": "tax.isGSTorVAT()",
+      "children": [
+        {
+          "id": 29,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 30,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 32,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "tax.detail.psttaxamount",
+                  "label": "{{tax.detail.psttaxamountlabel}}",
+                  "dataFormat": "DECIMAL",
+                  "conditionShow": "!tax.detail.psttaxamounthidden",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                }
+              ]
+            },
+            {
+              "id": 31,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 33,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "tax.detail.gsttaxamount",
+                  "label": "{{tax.detail.gsttaxamountlabel}}",
+                  "dataFormat": "DECIMAL",
+                  "conditionShow": "!tax.detail.gsttaxamounthidden",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                }
+              ]
+            },
+            {
+              "id": 59,
+              "type": "COL",
+              "subType": "1/3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "type": "GRID",
+      "model": "tax.dataset",
+      "controlRef": "tax.grid",
+      "conditionShow": "!tax.isGSTorVAT()",
+      "controls": {
+        "toolbar": {
+          "id": 19,
+          "type": "TOOLBAR",
+          "label": "global.taxes"
+        }
+      },
+      "children": [
+        {
+          "id": 39,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "clocallabel",
+          "label": "global.locality"
+        },
+        {
+          "id": 40,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "clocalcode",
+          "label": "global.tax.entity"
+        },
+        {
+          "id": 41,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "clocaldescrip",
+          "label": "global.description"
+        },
+        {
+          "id": 42,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "ctaxamtdspl",
+          "label": "global.tax.amount"
+        },
+        {
+          "id": 43,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "ctaxgroupnm",
+          "label": "global.group"
+        },
+        {
+          "id": 44,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "ctaxsaleamtdspl",
+          "label": "global.tax.sale.amount"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "type": "GRID",
+      "model": "tax.dataset",
+      "controlRef": "tax.grid2",
+      "conditionShow": "tax.isGSTorVAT()",
+      "controls": {
+        "toolbar": {
+          "id": 23,
+          "type": "TOOLBAR",
+          "label": "global.taxes"
+        }
+      },
+      "children": [
+        {
+          "id": 45,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "ctaxgroupnm",
+          "label": "global.group"
+        },
+        {
+          "id": 46,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "ctaxsaleamtdspl",
+          "label": "global.tax.sale.amount"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "type": "GRID",
+      "model": "tax.dataset3",
+      "controlRef": "tax.grid3",
+      "conditionShow": "!tax.isGSTorVAT()",
+      "controls": {
+        "toolbar": {
+          "id": 26,
+          "type": "TOOLBAR",
+          "label": "global.tax.details",
+          "conditionShow": ""
+        }
+      },
+      "children": [
+        {
+          "id": 47,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "recty",
+          "label": "global.type",
+          "dataFormat": "INTEGER_TEXT"
+        },
+        {
+          "id": 48,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cLocalCode",
+          "label": "global.tax.entity"
+        },
+        {
+          "id": 49,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cTaxSaleBase",
+          "label": "global.tax.base"
+        },
+        {
+          "id": 50,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cTaxSaleAmt",
+          "label": "global.tax.sale.amount"
+        },
+        {
+          "id": 51,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "taxsalert",
+          "label": "global.sale.rate",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 52,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cTaxUseAmt",
+          "label": "global.tax.use.amount"
+        },
+        {
+          "id": 53,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "taxusert",
+          "label": "global.use.rate",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 54,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cTaxTransAmt",
+          "label": "global.transit.amount"
+        },
+        {
+          "id": 55,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "taxtransrt",
+          "label": "global.transit.rate",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 56,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cTaxExcAmt",
+          "label": "global.excise.amount"
+        },
+        {
+          "id": 57,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "taxexcrt",
+          "label": "global.excise.rate",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        }
+      ]
+    }
+  ]
+}

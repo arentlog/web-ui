@@ -1,0 +1,221 @@
+{
+  "viewId": "ic-icspc-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.icspc",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 49,
+              "type": "EXP_AREA",
+              "label": "global.advanced.search",
+              "collapsed": true,
+              "children": [
+                {
+                  "id": 52,
+                  "type": "CUSTOM",
+                  "subType": "AdvancedSearch",
+                  "options": {
+                    "criteria": "mst.advCriteria",
+                    "criteriaList": "mst.criteriaList",
+                    "criteriaView": "ic/icspc/advanced-criteria.json",
+                    "defaultSelectedCriteria": "mst.defaultSelectedCriteria",
+                    "searchFunction": "mst.search"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "GRID",
+              "id": 5,
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "selectable": "multiple",
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "menu.icspc",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-new-document",
+                      "label": "global.new",
+                      "eventClick": "mst.create()",
+                      "conditionDisabled": "base.grid.isAnyRowSelected()",
+                      "securityLevel": 4
+                    },
+                    {
+                      "id": 8,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-edit",
+                      "label": "global.edit",
+                      "eventClick": "mst.edit()",
+                      "conditionDisabled": "!base.grid.isOneRowSelected()",
+                      "securityLevel": 3
+                    },
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-delete",
+                      "label": "global.delete",
+                      "eventClick": "mst.delete()",
+                      "conditionDisabled": "base.grid.isNoRowSelected()",
+                      "securityLevel": 5
+                    },
+                    {
+                      "id": 56,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-copy",
+                      "label": "global.copy",
+                      "eventClick": "mst.copy()",
+                      "securityLevel": 4,
+                      "conditionDisabled": "!base.grid.isOneRowSelected()"
+                    },
+                    {
+                      "id": 53,
+                      "type": "BTN",
+                      "subType": "MENU",
+                      "label": "global.action",
+                      "conditionDisabled": "base.grid.isNoRowSelected()",
+                      "securityLevel": 3,
+                      "children": [
+                        {
+                          "id": 54,
+                          "type": "MENU_OPT",
+                          "label": "global.activate",
+                          "eventClick": "mst.doAction('activate')"
+                        },
+                        {
+                          "id": 55,
+                          "type": "MENU_OPT",
+                          "label": "global.inactivate",
+                          "eventClick": "mst.doAction('inactivate')"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 48,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "recordtype",
+                  "label": "{{base.recordTypeLabel}}",
+                  "type3": "INLINE",
+                  "blankOption": false,
+                  "dataFormat": "IcRecordTypeICSPC"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "custno",
+                  "label": "global.customer.number",
+                  "eventClick": "mst.customerInquiryHyperlink()",
+                  "dataFormat": "DECIMAL_TEXT"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "shipto",
+                  "label": "global.ship.to",
+                  "eventClick": "mst.shiptoInquiryHyperlink()"
+                },
+                {
+                  "id": 47,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shiptogrp",
+                  "label": "global.ship.to.group"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whse",
+                  "label": "global.warehouse"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "startdt",
+                  "label": "global.start.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "expiredt",
+                  "label": "global.expire.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "activefl",
+                  "label": "global.active",
+                  "type3": "",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "contractno",
+                  "label": "global.contract"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "refer",
+                  "label": "global.reference"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "createdt",
+                  "label": "global.created.date",
+                  "dataFormat": "DATE"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,413 @@
+{
+  "viewId": "pd-pder-vatanalysis",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.value.added.tax.vat",
+              "subLabel": "{{prvc.subtitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 8,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "prvc.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "prvc.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "prvc.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 14,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "prvc.vat.vat1groupno",
+                              "label": "global.tax.group",
+                              "size": "SM",
+                              "type3": "CODES",
+                              "meta": "TaxGroup",
+                              "readonly": true,
+                              "conditionShow": "!prvc.vat.vat1hidden"
+                            },
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "prvc.vat.vat1goodsamt",
+                              "label": "global.tax.basis",
+                              "size": "SM",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "!prvc.vat.vat1hidden",
+                              "conditionDisabled": "!prvc.vat.vat1enabled || prvc.mode === 'view'",
+                              "eventChange": "prvc.recalculateProof()",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "prvc.vat.vat1taxamt",
+                              "label": "vat.amount",
+                              "size": "SM",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionDisabled": "!prvc.vat.vat1enabled || prvc.mode === 'view'",
+                              "conditionShow": "!prvc.vat.vat1hidden",
+                              "eventChange": "prvc.recalculateProof()",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 17,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "prvc.vat.vat2groupno",
+                              "label": "global.tax.group",
+                              "size": "SM",
+                              "type3": "CODES",
+                              "meta": "TaxGroup",
+                              "readonly": true,
+                              "conditionShow": "!prvc.vat.vat2hidden"
+                            },
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "prvc.vat.vat2goodsamt",
+                              "label": "global.tax.basis",
+                              "size": "SM",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "!prvc.vat.vat2hidden",
+                              "conditionDisabled": "!prvc.vat.vat2enabled || prvc.mode === 'view'",
+                              "eventChange": "prvc.recalculateProof()",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "prvc.vat.vat2taxamt",
+                              "label": "vat.amount",
+                              "size": "SM",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionDisabled": "!prvc.vat.vat2enabled || prvc.mode === 'view'",
+                              "conditionShow": "!prvc.vat.vat2hidden",
+                              "eventChange": "prvc.recalculateProof()",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 21,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "prvc.vat.vat3groupno",
+                              "label": "global.tax.group",
+                              "size": "SM",
+                              "type3": "CODES",
+                              "meta": "TaxGroup",
+                              "readonly": true,
+                              "conditionShow": "!prvc.vat.vat3hidden"
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "prvc.vat.vat3goodsamt",
+                              "label": "global.tax.basis",
+                              "size": "SM",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "!prvc.vat.vat3hidden",
+                              "conditionDisabled": "!prvc.vat.vat3enabled || prvc.mode === 'view'",
+                              "eventChange": "prvc.recalculateProof()",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "prvc.vat.vat3taxamt",
+                              "label": "vat.amount",
+                              "size": "SM",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionDisabled": "!prvc.vat.vat3enabled || prvc.mode === 'view'",
+                              "conditionShow": "!prvc.vat.vat3hidden",
+                              "eventChange": "prvc.recalculateProof()",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 25,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "prvc.vat.vat4groupno",
+                              "label": "global.tax.group",
+                              "size": "SM",
+                              "type3": "CODES",
+                              "meta": "TaxGroup",
+                              "readonly": true,
+                              "conditionShow": "!prvc.vat.vat4hidden"
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "prvc.vat.vat4goodsamt",
+                              "label": "global.tax.basis",
+                              "size": "SM",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "!prvc.vat.vat4hidden",
+                              "conditionDisabled": "!prvc.vat.vat4enabled || prvc.mode === 'view'",
+                              "eventChange": "prvc.recalculateProof()",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "prvc.vat.vat4taxamt",
+                              "label": "vat.amount",
+                              "size": "SM",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionDisabled": "!prvc.vat.vat4enabled || prvc.mode === 'view'",
+                              "conditionShow": "!prvc.vat.vat4hidden",
+                              "eventChange": "prvc.recalculateProof()",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 29,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "prvc.vat.vat5groupno",
+                              "label": "global.tax.group",
+                              "size": "SM",
+                              "type3": "CODES",
+                              "meta": "TaxGroup",
+                              "readonly": true,
+                              "conditionShow": "!prvc.vat.vat5hidden"
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "prvc.vat.vat5goodsamt",
+                              "label": "global.tax.basis",
+                              "size": "SM",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "!prvc.vat.vat5hidden",
+                              "conditionDisabled": "!prvc.vat.vat5enabled || prvc.mode === 'view'",
+                              "eventChange": "prvc.recalculateProof()",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "prvc.vat.vat5taxamt",
+                              "label": "vat.amount",
+                              "size": "SM",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionDisabled": "!prvc.vat.vat5enabled || prvc.mode === 'view'",
+                              "conditionShow": "!prvc.vat.vat5hidden",
+                              "eventChange": "prvc.recalculateProof()",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 33,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "prvc.vat.vatdomain",
+                          "label": "global.taxing.state",
+                          "readonly": true
+                        },
+                        {
+                          "id": 36,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "prvc.vat.receiptamt",
+                          "label": "global.receipt.amount",
+                          "dataFormat": "DECIMAL",
+                          "digits": 9,
+                          "decimals": 2,
+                          "readonly": true,
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 34,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "prvc.vat.settamt",
+                          "label": "global.settlement.amount",
+                          "dataFormat": "DECIMAL",
+                          "digits": 9,
+                          "decimals": 2,
+                          "conditionDisabled": "!prvc.vat.vat1enabled || prvc.mode === 'view'",
+                          "eventChange": "prvc.recalculateProof()",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 35,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "prvc.vat.vatproof",
+                          "label": "global.proof",
+                          "dataFormat": "DECIMAL",
+                          "digits": 9,
+                          "decimals": 2,
+                          "readonly": true,
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

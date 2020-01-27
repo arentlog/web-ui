@@ -1,0 +1,203 @@
+{
+  "viewId": "wt-wtit-linedetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.line.details",
+              "subLabel": "{{wldc.subTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "TAB",
+                      "label": "global.extended",
+                      "tabId": "extended",
+                      "children": [
+                        {
+                          "id": 23,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "wt/wtit/line-detail/tabs/extended.json",
+                          "controller": "WtitLineDetailExtendedCtrl as wldec"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "type": "TAB",
+                      "label": "global.non.stock",
+                      "conditionShow": "wldc.isNonStockVisible",
+                      "tabId": "non-stock",
+                      "children": [
+                        {
+                          "id": 24,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "controller": "WtitLineDetailNonstockCtrl as wldnc",
+                          "viewPath": "wt/wtit/line-detail/tabs/non-stock.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 11,
+                      "type": "TAB",
+                      "label": "global.ties",
+                      "conditionShow": "wldc.isTiesVisible",
+                      "tabId": "ties",
+                      "children": [
+                        {
+                          "id": 17,
+                          "type": "CUSTOM",
+                          "subType": "Ties",
+                          "options": {
+                            "modeModel": "Inquiry Only",
+                            "tieTypeModel": "Warehouse Transfer",
+                            "orderNumberModel": "wldc.wtno",
+                            "orderSuffixModel": "wldc.wtsuf",
+                            "lineNumberModel": "wldc.selectedLine.lineno"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "type": "TAB",
+                      "label": "global.serial",
+                      "conditionShow": "wldc.isSerialVisible",
+                      "tabId": "serial",
+                      "children": [
+                        {
+                          "id": 18,
+                          "type": "CUSTOM",
+                          "subType": "SerialsInquiry",
+                          "options": {
+                            "ordertypeModel": "t",
+                            "ordernoModel": "wldc.wtno",
+                            "ordersufModel": "wldc.wtsuf",
+                            "linenoModel": "wldc.selectedLine.lineno"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 13,
+                      "type": "TAB",
+                      "label": "global.lot",
+                      "conditionShow": "wldc.isLotVisible",
+                      "tabId": "lot",
+                      "children": [
+                        {
+                          "id": 19,
+                          "type": "CUSTOM",
+                          "subType": "LotsInquiry",
+                          "options": {
+                            "ordertypeModel": "t",
+                            "ordernoModel": "wldc.wtno",
+                            "ordersufModel": "wldc.wtsuf",
+                            "linenoModel": "wldc.selectedLine.lineno"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 15,
+                      "type": "TAB",
+                      "label": "global.line.history",
+                      "tabId": "line-history",
+                      "children": [
+                        {
+                          "id": 22,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "controller": "WtitLineDetailHistoryCtrl as wldhc",
+                          "viewPath": "wt/wtit/line-detail/tabs/line-history.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 14,
+                      "type": "TAB",
+                      "label": "global.custom",
+                      "tabId": "custom",
+                      "children": [
+                        {
+                          "id": 20,
+                          "type": "CUSTOM",
+                          "subType": "UserFields",
+                          "options": {
+                            "tableName": "wtel",
+                            "objectRef": "wldc.wtel",
+                            "conditionReadonly": "true"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 16,
+                      "type": "TAB",
+                      "label": "global.comments",
+                      "tabId": "comments",
+                      "children": [
+                        {
+                          "id": 21,
+                          "type": "CUSTOM",
+                          "subType": "LineComments",
+                          "options": {
+                            "commentTypeModel": "wt",
+                            "tableNameModel": "wtel",
+                            "orderNumberModel": "wldc.wtno",
+                            "orderSuffixModel": "wldc.wtsuf",
+                            "lineNumberModel": "wldc.selectedLine.lineno",
+                            "isAutoFocus": true,
+                            "conditionReadonly": "base.isLineDetailTabReadonly"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

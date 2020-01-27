@@ -1,0 +1,1066 @@
+{
+  "viewId": "po-poera-drilldown-header",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isHeaderTabReadonly",
+  "children": [
+    {
+      "id": 151,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 153,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 154,
+              "type": "FIELD_SET",
+              "label": "global.bill.to",
+              "children": [
+                {
+                  "id": 147,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "drldwn.headerData.billtoname",
+                  "label": "global.name",
+                  "conditionReadonly": "true"
+                },
+                {
+                  "id": 148,
+                  "type": "CUSTOM",
+                  "subType": "AddressForm",
+                  "options": {
+                    "addr1Model": "drldwn.headerData.billtoaddr1",
+                    "addr2Model": "drldwn.headerData.billtoaddr2",
+                    "addr3Model": "drldwn.headerData.billtoaddr3",
+                    "cityModel": "drldwn.headerData.billtocity",
+                    "stateModel": "drldwn.headerData.billtostate",
+                    "zipCodeModel": "drldwn.headerData.billtozip",
+                    "countryCodeModel": "drldwn.headerData.billtocountrycd",
+                    "countryCdVisible": true,
+                    "addressLabel": "global.address",
+                    "conditionReadonly": "true",
+                    "addr2Visible": true,
+                    "addr3Visible": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 152,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 156,
+              "type": "FIELD_SET",
+              "label": "global.ship.to",
+              "children": [
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "drldwn.headerData.shiptoname",
+                  "label": "global.name",
+                  "conditionDisabled": "!drldwn.isShipToAddressEnabled() || base.isHeaderTabReadonly",
+                  "maxLength": 30
+                },
+                {
+                  "id": 16,
+                  "type": "CUSTOM",
+                  "subType": "AddressForm",
+                  "options": {
+                    "addr1Model": "drldwn.headerData.shiptoaddr1",
+                    "addr2Model": "drldwn.headerData.shiptoaddr2",
+                    "addr3Model": "drldwn.headerData.shiptoaddr3",
+                    "cityModel": "drldwn.headerData.shiptocity",
+                    "stateModel": "drldwn.headerData.shiptostate",
+                    "zipCodeModel": "drldwn.headerData.shiptozip",
+                    "conditionReadonly": "!drldwn.isShipToAddressEnabled() || base.isHeaderTabReadonly",
+                    "countryCodeModel": "drldwn.headerData.shiptocountrycd",
+                    "countryCdVisible": true,
+                    "geoCodeModel": "drldwn.headerData.geocd",
+                    "geoCodeVisible": true,
+                    "outOfCityFlagModel": "drldwn.headerData.outofcityfl",
+                    "outOfCityVisible": true,
+                    "addressLabel": "global.address",
+                    "geoCodeLookupCriteriaFunction": "drldwn.getGeoCodeLookupCriteria",
+                    "addr2Visible": true,
+                    "addr3Visible": true
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 157,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 158,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 160,
+              "type": "FIELD_SET",
+              "label": "global.shipping.information",
+              "children": [
+                {
+                  "id": 44,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "drldwn.headerData.duedt",
+                  "label": "global.due.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 45,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "drldwn.headerData.reqshipdt",
+                  "label": "global.requested.ship.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 46,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "drldwn.headerData.shipviaty",
+                  "label": "global.ship.via",
+                  "meta": "ShipVia",
+                  "conditionShow": "!hdr.limitShipVia"
+                },
+                {
+                  "id": 149,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "drldwn.headerData.shipviaty",
+                  "label": "global.ship.via",
+                  "meta": "ShipViaApsdLimited",
+                  "conditionShow": "hdr.limitShipVia",
+                  "options": {
+                    "searchParams": {
+                      "vendno": {
+                        "type": "REF",
+                        "value": "drldwn.headerData.vendno"
+                      },
+                      "shipfmno": {
+                        "type": "REF",
+                        "value": "drldwn.headerData.shipfmno"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 47,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "drldwn.headerData.frttermscd",
+                  "label": "global.freight.terms",
+                  "meta": "FreightTerms"
+                },
+                {
+                  "id": 48,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "drldwn.headerData.transferloc",
+                  "label": "global.transfer.location",
+                  "maxLength": 24
+                },
+                {
+                  "id": 49,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "drldwn.headerData.frtbillacct",
+                  "label": "global.freight.bill.account",
+                  "maxLength": 24
+                },
+                {
+                  "id": 50,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "drldwn.headerData.orderdisp",
+                  "label": "global.order.disposition",
+                  "type3": "SET",
+                  "metaGroup": "PO",
+                  "meta": "Disposition",
+                  "blankOption": false
+                },
+                {
+                  "id": 51,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "drldwn.headerData.instructions",
+                  "label": "global.instructions",
+                  "maxLength": 30
+                },
+                {
+                  "id": 52,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "drldwn.headerData.refer",
+                  "label": "global.reference",
+                  "maxLength": 24
+                },
+                {
+                  "id": 83,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "drldwn.headerData.frtconsolidation",
+                  "label": "global.freight.consolidation",
+                  "meta": "FreightConsol"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 159,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 161,
+              "type": "FIELD_SET",
+              "label": "global.billing.information",
+              "children": [
+                {
+                  "id": 53,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "drldwn.headerData.termstype",
+                  "label": "global.terms",
+                  "meta": "Terms",
+                  "conditionDisabled": "!drldwn.isTermsEnabled() || base.isHeaderTabReadonly"
+                },
+                {
+                  "id": 55,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 56,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "drldwn.headerData.resalefl",
+                      "label": "global.resale",
+                      "dataFormat": "LOGICAL",
+                      "size": "XS",
+                      "conditionDisabled": "!drldwn.isResaleEnabled() || base.isHeaderTabReadonly"
+                    },
+                    {
+                      "id": 57,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "drldwn.headerData.resaleno",
+                      "label": "global.resale.number",
+                      "maxLength": 18,
+                      "size": "SM",
+                      "conditionDisabled": "!drldwn.isResaleEnabled() || base.isHeaderTabReadonly"
+                    }
+                  ]
+                },
+                {
+                  "id": 62,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 54,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "drldwn.headerData.wodiscamt",
+                      "label": "global.order.discount",
+                      "dataFormat": "DECIMAL",
+                      "digits": 9,
+                      "decimals": 2,
+                      "size": "SM",
+                      "eventChange": "drldwn.wholeOrderDiscountChange()"
+                    },
+                    {
+                      "id": 61,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "drldwn.headerData.wodisctype",
+                      "label": "global.discount.type",
+                      "type3": "SET",
+                      "optionsModel": "",
+                      "blankOption": false,
+                      "size": "SM",
+                      "eventChange": "drldwn.wholeOrderDiscountChange()",
+                      "labelHidden": true,
+                      "metaGroup": "COMMON",
+                      "meta": "AmountPercentageType"
+                    },
+                    {
+                      "id": 63,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "drldwn.headerData.wodiscnet",
+                      "label": "global.net.amount",
+                      "dataFormat": "CURRENCY"
+                    }
+                  ]
+                },
+                {
+                  "id": 64,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.headerData.discpct",
+                  "label": "global.current.discount",
+                  "dataFormat": "CURRENCY"
+                },
+                {
+                  "id": 65,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.headerData.addon",
+                  "label": "global.addons",
+                  "dataFormat": "CURRENCY"
+                },
+                {
+                  "id": 66,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.headerData.currencydesc",
+                  "label": "global.currency"
+                },
+                {
+                  "id": 67,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "drldwn.headerData.contractno",
+                  "label": "global.contract.number",
+                  "maxLength": 24,
+                  "meta": "VendorContract",
+                  "options": {
+                    "searchParams": {
+                      "vendno": {
+                        "type": "REF",
+                        "value": "drldwn.headerData.vendno"
+                      },
+                      "whse": {
+                        "type": "REF",
+                        "value": "drldwn.headerData.whse"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 162,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 165,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 166,
+              "type": "FIELD_SET",
+              "label": "global.controls",
+              "children": [
+                {
+                  "id": 76,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "drldwn.headerData.subfl",
+                  "label": "global.substitutes",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 77,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "drldwn.headerData.leadtimefl",
+                  "label": "global.lead.time",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 78,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "drldwn.headerData.bofl",
+                  "label": "global.backorder",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 79,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "drldwn.headerData.fobfl",
+                  "label": "global.fob",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 80,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "",
+                  "label": "global.consolidate"
+                },
+                {
+                  "id": 81,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "drldwn.headerData.conslinesfl",
+                  "label": "global.product.lines",
+                  "dataFormat": "LOGICAL",
+                  "conditionDisabled": "!drldwn.isConsolidateLineEnabled() || base.isHeaderTabReadonly"
+                },
+                {
+                  "id": 82,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "drldwn.headerData.conswhsefl",
+                  "label": "global.warehouses",
+                  "dataFormat": "LOGICAL",
+                  "conditionDisabled": "!drldwn.isConsolidateWhseEnabled() || base.isHeaderTabReadonly"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 164,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 167,
+              "type": "FIELD_SET",
+              "label": "global.target",
+              "children": [
+                {
+                  "id": 85,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.headerData.targetamt",
+                  "label": "{{drldwn.headerData.targettext}}",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "conditionShow": "drldwn.headerData.targettext"
+                },
+                {
+                  "id": 86,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.headerData.shortamt",
+                  "label": "{{drldwn.headerData.shorttext}}",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "conditionShow": "drldwn.headerData.shorttext"
+                },
+                {
+                  "id": 88,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.headerData.adjustamt",
+                  "label": "{{drldwn.headerData.adjusttext}}",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "conditionShow": "drldwn.headerData.adjustvisible",
+                  "dataDesc": "drldwn.PERCENT_SYMBOL"
+                },
+                {
+                  "id": 89,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.headerData.minbuyamt",
+                  "label": "{{drldwn.headerData.minbuytext}}",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "conditionShow": "drldwn.headerData.minbuyvisible"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 173,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 174,
+          "type": "COL",
+          "subType": "1",
+          "children": [
+            {
+              "id": 172,
+              "type": "FIELD_SET",
+              "label": "global.addons",
+              "children": [
+                {
+                  "id": 175,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 176,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 102,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 94,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "drldwn.headerData.addonno1",
+                              "label": "global.addon.1",
+                              "type3": "CODES",
+                              "meta": "POAddon",
+                              "size": "SM"
+                            },
+                            {
+                              "id": 103,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "drldwn.headerData.addonamt1",
+                              "label": "global.amount",
+                              "size": "SM",
+                              "labelHidden": true,
+                              "dataFormat": "CURRENCY",
+                              "sign": "+",
+                              "digits": 9,
+                              "decimals": 2,
+                              "eventChange": "drldwn.addon1Change()"
+                            },
+                            {
+                              "id": 104,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "drldwn.headerData.addontype1",
+                              "label": "global.type",
+                              "labelHidden": true,
+                              "type3": "SET",
+                              "optionsModel": "",
+                              "size": "SM",
+                              "blankOption": false,
+                              "eventChange": "drldwn.addon1Change()",
+                              "metaGroup": "COMMON",
+                              "meta": "AmountPercentageType"
+                            },
+                            {
+                              "id": 105,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "drldwn.headerData.addoncaplabel1",
+                              "label": "global.expense",
+                              "labelHidden": true,
+                              "size": "SM",
+                              "type3": "SET",
+                              "metaGroup": "PO",
+                              "meta": "PORRARHeaderCapType",
+                              "blankOption": false,
+                              "conditionReadonly": "!drldwn.headerData.addoncaplabelenabled || base.isHeaderTabReadonly"
+                            },
+                            {
+                              "id": 106,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.headerData.addonnet1",
+                              "label": "global.net.amount"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 109,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 114,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "drldwn.headerData.addonno3",
+                              "label": "global.addon.3",
+                              "type3": "CODES",
+                              "meta": "POAddon",
+                              "size": "SM",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 115,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "drldwn.headerData.addonamt3",
+                              "label": "global.amount",
+                              "labelHidden": true,
+                              "size": "SM",
+                              "eventChange": "drldwn.addon3Change()",
+                              "dataFormat": "CURRENCY",
+                              "sign": "+",
+                              "digits": 9,
+                              "decimals": 2
+                            },
+                            {
+                              "id": 116,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "drldwn.headerData.addontype3",
+                              "label": "global.type",
+                              "labelHidden": true,
+                              "size": "SM",
+                              "type3": "SET",
+                              "optionsModel": "",
+                              "blankOption": false,
+                              "eventChange": "drldwn.addon3Change()",
+                              "metaGroup": "COMMON",
+                              "meta": "AmountPercentageType"
+                            },
+                            {
+                              "id": 117,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "drldwn.headerData.addoncaplabel3",
+                              "label": "global.expense",
+                              "size": "SM",
+                              "labelHidden": true,
+                              "blankOption": false,
+                              "type3": "SET",
+                              "metaGroup": "PO",
+                              "meta": "PORRARHeaderCapType",
+                              "conditionReadonly": "!drldwn.headerData.addoncaplabelenabled || base.isHeaderTabReadonly"
+                            },
+                            {
+                              "id": 118,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.headerData.addonnet3",
+                              "label": "global.net.amount"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 177,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 95,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 96,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "drldwn.headerData.addonno2",
+                              "label": "global.addon.2",
+                              "type3": "CODES",
+                              "meta": "POAddon",
+                              "size": "SM"
+                            },
+                            {
+                              "id": 97,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "drldwn.headerData.addonamt2",
+                              "label": "global.amount",
+                              "dataFormat": "CURRENCY",
+                              "sign": "+",
+                              "digits": 9,
+                              "decimals": 2,
+                              "labelHidden": true,
+                              "size": "SM",
+                              "eventChange": "drldwn.addon2Change()"
+                            },
+                            {
+                              "id": 98,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "drldwn.headerData.addontype2",
+                              "label": "global.type",
+                              "labelHidden": true,
+                              "type3": "SET",
+                              "optionsModel": "",
+                              "size": "SM",
+                              "blankOption": false,
+                              "eventChange": "drldwn.addon2Change()",
+                              "metaGroup": "COMMON",
+                              "meta": "AmountPercentageType"
+                            },
+                            {
+                              "id": 108,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "drldwn.headerData.addoncaplabel2",
+                              "label": "global.expense",
+                              "labelHidden": true,
+                              "size": "SM",
+                              "type3": "SET",
+                              "metaGroup": "PO",
+                              "meta": "PORRARHeaderCapType",
+                              "blankOption": false,
+                              "conditionReadonly": "!drldwn.headerData.addoncaplabelenabled || base.isHeaderTabReadonly"
+                            },
+                            {
+                              "id": 107,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.headerData.addonnet2",
+                              "label": "global.net.amount"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 113,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 119,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "drldwn.headerData.addonno4",
+                              "label": "global.addon.4",
+                              "blankOption": false,
+                              "size": "SM",
+                              "type3": "CODES",
+                              "meta": "POAddon"
+                            },
+                            {
+                              "id": 120,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "drldwn.headerData.addonamt4",
+                              "label": "global.amount",
+                              "labelHidden": true,
+                              "size": "SM",
+                              "eventChange": "drldwn.addon4Change()",
+                              "dataFormat": "CURRENCY",
+                              "sign": "+",
+                              "digits": 9,
+                              "decimals": 2
+                            },
+                            {
+                              "id": 121,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "drldwn.headerData.addontype4",
+                              "label": "global.type",
+                              "labelHidden": true,
+                              "size": "SM",
+                              "type3": "SET",
+                              "optionsModel": "",
+                              "eventChange": "drldwn.addon4Change()",
+                              "blankOption": false,
+                              "metaGroup": "COMMON",
+                              "meta": "AmountPercentageType"
+                            },
+                            {
+                              "id": 122,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "drldwn.headerData.addoncaplabel4",
+                              "label": "global.expense",
+                              "labelHidden": true,
+                              "size": "SM",
+                              "blankOption": false,
+                              "type3": "SET",
+                              "metaGroup": "PO",
+                              "meta": "PORRARHeaderCapType",
+                              "conditionReadonly": "!drldwn.headerData.addoncaplabelenabled || base.isHeaderTabReadonly"
+                            },
+                            {
+                              "id": 123,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.headerData.addonnet4",
+                              "label": "global.net.amount"
+                            },
+                            {
+                              "id": 124,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "drldwn.headerData.freightexpectedfl",
+                              "label": "global.freight.expected",
+                              "dataFormat": "LOGICAL",
+                              "size": "SM"
+                            },
+                            {
+                              "id": 125,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.headerData.freightexpectedmsg",
+                              "label": "global.blank.label.string.for.space"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 168,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 170,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 171,
+              "type": "FIELD_SET",
+              "label": "global.totals",
+              "children": [
+                {
+                  "id": 90,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.headerData.totqtyordered",
+                  "label": "global.qty.ordered",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 91,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.headerData.totlineamount",
+                  "label": "global.ordered",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 92,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.headerData.totweight",
+                  "label": "global.weight",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5,
+                    "maximumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 93,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.headerData.totcubes",
+                  "label": "global.cubes",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5,
+                    "maximumFractionDigits": 5
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 169,
+          "type": "COL",
+          "subType": "1/2",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 68,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 69,
+          "type": "COL",
+          "subType": "1",
+          "children": [
+            {
+              "id": 70,
+              "type": "EXP_AREA",
+              "label": "global.combine.inquiry",
+              "eventReady": "",
+              "collapsed": true,
+              "conditionCollapsed": "",
+              "children": [
+                {
+                  "id": 132,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 133,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 136,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "drldwn.combineInquiryTotals.dTotalLineAmount",
+                          "label": "global.total.line.amt",
+                          "dataFormat": "DECIMAL_TEXT"
+                        },
+                        {
+                          "id": 144,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "drldwn.combineInquiryTotals.dTotalQtyOrdered",
+                          "label": "global.qty.ordered",
+                          "dataFormat": "DECIMAL_TEXT"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 135,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 142,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "drldwn.combineInquiryTotals.dTotalWeight",
+                          "label": "global.weight",
+                          "dataFormat": "DECIMAL_TEXT"
+                        },
+                        {
+                          "id": 145,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "drldwn.combineInquiryTotals.dTotalCubes",
+                          "label": "global.cubes",
+                          "dataFormat": "DECIMAL_TEXT"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 134,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 143,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "drldwn.combineInquiryTotals.dTargetBuyString",
+                          "label": "{{drldwn.combineInquiryTotals.targetheading}}",
+                          "dataFormat": "DECIMAL_TEXT"
+                        },
+                        {
+                          "id": 146,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "drldwn.combineInquiryTotals.dTargetBuyPct",
+                          "label": "{{drldwn.combineInquiryTotals.targetpctheading}}",
+                          "dataFormat": "DECIMAL_TEXT"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 126,
+                  "type": "GRID",
+                  "model": "drldwn.combineInquiryList",
+                  "controlRef": "drldwn.combineInquiryGrid",
+                  "controls": {
+                    "toolbar": {
+                      "id": 127,
+                      "type": "TOOLBAR",
+                      "label": "global.reports"
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 128,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.report.number",
+                      "model": "reportno",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 129,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.product.line",
+                      "model": "prodline"
+                    },
+                    {
+                      "id": 130,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.warehouse",
+                      "model": "whse"
+                    },
+                    {
+                      "id": 131,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "symbol.pound.of.lines",
+                      "model": "sLineno",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 137,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "sTotal",
+                      "label": "global.actual",
+                      "dataFormat": "DECIMAL_TEXT"
+                    },
+                    {
+                      "id": 138,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.target.type",
+                      "model": "sTotalFl"
+                    },
+                    {
+                      "id": 139,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.target",
+                      "model": "sTarget",
+                      "dataFormat": "DECIMAL_TEXT"
+                    },
+                    {
+                      "id": 140,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "question.combine",
+                      "model": "sCombineFl"
+                    },
+                    {
+                      "id": 141,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "sReason",
+                      "label": "global.reason"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

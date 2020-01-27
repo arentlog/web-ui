@@ -1,0 +1,273 @@
+{
+  "viewId": "ic-icsec-customerdetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.icsec",
+              "subLabel": "{{cdtl.subtitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 25,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 26,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "conditionDisabled": "!base.isDetail()",
+                      "stateRef": "^.customerMaster"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 27,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "stateRef": "^.customerCreate",
+                  "securityLevel": 4,
+                  "conditionDisabled": "!base.isDetail()",
+                  "conditionShow": "base.security.customer >= 4"
+                },
+                {
+                  "id": 28,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "securityLevel": 3,
+                  "conditionDisabled": "!base.isDetail()",
+                  "conditionShow": "base.security.customer >= 3"
+                },
+                {
+                  "id": 31,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "cdtl.delete()",
+                  "securityLevel": 5,
+                  "conditionDisabled": "!base.isDetail()",
+                  "conditionShow": "base.security.customer >= 5"
+                },
+                {
+                  "id": 30,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "cdtl.submit()",
+                  "securityLevel": 3,
+                  "conditionDisabled": "base.isDetail()",
+                  "conditionShow": "base.security.customer >= 3"
+                },
+                {
+                  "id": 29,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "conditionDisabled": "base.isDetail()",
+                  "eventClick": "cdtl.cancel()",
+                  "conditionShow": "base.security.customer >= 3"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 12,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 13,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "cdtl.icsec.custno",
+                              "label": "global.customer",
+                              "meta": "Customer",
+                              "required": true,
+                              "conditionReadonly": "!base.isCreate()",
+                              "autoFocus": true
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "cdtl.icsec.prod",
+                              "label": "global.customer.product",
+                              "meta": "ProdIcsecHAndC",
+                              "conditionReadonly": "!base.isCreate()",
+                              "required": true,
+                              "maxLength": 50,
+                              "contextOptions": {
+                                "deactivated": true
+                              },
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "cdtl.icsec.orderqty",
+                              "label": "global.quantity",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 6,
+                              "decimals": 2,
+                              "required": true
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "cdtl.icsec.addprtinfo",
+                              "label": "global.customer.product.information",
+                              "maxLength": 45
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "cdtl.icsec.price",
+                              "label": "global.last.price.paid",
+                              "readonly": true
+                            }
+                          ]
+                        },
+                        {
+                          "id": 15,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "cdtl.icsec.shipto",
+                              "label": "global.ship.to",
+                              "meta": "ShipTo",
+                              "conditionReadonly": "!base.isCreate()",
+                              "options": {
+                                "searchParams": {
+                                  "custno": {
+                                    "type": "REF",
+                                    "value": "cdtl.icsec.custno"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "cdtl.icsec.altprod",
+                              "label": "global.our.product",
+                              "meta": "ProdIcspAndXref",
+                              "required": true,
+                              "maxLength": 50
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "cdtl.icsec.unitsell",
+                              "label": "global.unit",
+                              "meta": "Units",
+                              "required": true,
+                              "options": {
+                                "searchParams": {
+                                  "prod": {
+                                    "value": "cdtl.icsec.altprod",
+                                    "type": "REF"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "cdtl.icesc.custglacctno",
+                              "label": "gl.account.number",
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 9,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 8,
+                              "type": "CUSTOM",
+                              "subType": "UserFields",
+                              "options": {
+                                "tableName": "icsec",
+                                "objectRef": "cdtl.icsec",
+                                "conditionReadonly": "base.isDetail()"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

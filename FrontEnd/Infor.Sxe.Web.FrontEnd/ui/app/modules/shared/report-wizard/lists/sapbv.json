@@ -1,0 +1,176 @@
+{
+  "viewId": "shared-report-wizard-lists-sapbv",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "!list.inInvoiceSelection",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.vendor.invoice.list",
+              "children": [
+                {
+                  "id": 18,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "securityLevel": 3,
+                  "eventClick": "list.submit()"
+                },
+                {
+                  "id": 19,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "stateRef": "^"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 8,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 9,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "list.record.vendno",
+                          "label": "global.vendor",
+                          "meta": "Vendor",
+                          "required": true
+                        },
+                        {
+                          "id": 12,
+                          "type": "BTN",
+                          "subType": "SEC",
+                          "label": "global.add.to.list",
+                          "eventClick": "",
+                          "submitForm": true,
+                          "eventValidated": "list.addRecord()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 20,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "list.record.disponly5",
+                          "label": "global.all.invoices",
+                          "dataFormat": "LOGICAL",
+                          "subFormat": "YesNo",
+                          "formatOptions": {
+                            "trueValue": "",
+                            "falseValue": ""
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 14,
+                  "type": "GRID",
+                  "model": "list.dataset",
+                  "controlRef": "list.grid",
+                  "options": {
+                    "showCheckboxes": true,
+                    "showDrilldown": true,
+                    "events": {
+                      "drilldown": "list.drilldown()"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 15,
+                      "type": "TOOLBAR",
+                      "label": "global.vendor.invoice.list",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "BTN",
+                          "subType": "SEC",
+                          "label": "global.delete",
+                          "icon": "icon-delete",
+                          "conditionDisabled": "!list.grid.isAnyRowSelected()",
+                          "eventClick": "list.delete()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "disponly1",
+                      "label": "global.vendor"
+                    },
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "disponly2",
+                      "label": "global.notes.flag",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 22,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "disponly3",
+                      "label": "global.name"
+                    },
+                    {
+                      "id": 23,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "disponly4",
+                      "label": "global.balance"
+                    },
+                    {
+                      "id": 24,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "disponly5",
+                      "label": "global.all"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "type": "VIEW_CNTR",
+      "viewName": "invoices"
+    }
+  ]
+}

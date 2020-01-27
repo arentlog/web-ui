@@ -1,0 +1,219 @@
+{
+  "viewId": "pd-pder-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "conditionShow": "!base.isJournalState()",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "pd.entry.rebate.reconciliation",
+              "subLabel": "{{dtl.subtitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "label": "special.button.back",
+                      "eventClick": "dtl.back()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 70,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.submit",
+                  "submitForm": true,
+                  "eventValidated": "dtl.finalUpdate()",
+                  "securityLevel": 3
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 73,
+                  "type": "EXP_AREA",
+                  "label": "",
+                  "children": [
+                    {
+                      "id": 74,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 75,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 11,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 12,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 14,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "dtl.pderGetClaimResults.receiptamt",
+                                      "label": "global.original.amount",
+                                      "dataFormat": "CURRENCY"
+                                    },
+                                    {
+                                      "id": 16,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "dtl.pderGetClaimResults.receiptdt",
+                                      "label": "global.claim.date",
+                                      "dataFormat": "DATE"
+                                    },
+                                    {
+                                      "id": 18,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "dtl.pderClaimTotalResults.totVendRecon",
+                                      "label": "global.vendor.receipts",
+                                      "dataFormat": "CURRENCY",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 20,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "dtl.rebateCode",
+                                      "label": "global.rebate.code"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 13,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 15,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "dtl.pderGetClaimResults.reconamt",
+                                      "label": "global.reconcile.amt",
+                                      "dataFormat": "CURRENCY"
+                                    },
+                                    {
+                                      "id": 17,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "dtl.pderClaimTotalResults.proofAmt",
+                                      "label": "global.proof",
+                                      "dataFormat": "CURRENCY"
+                                    },
+                                    {
+                                      "id": 19,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "dtl.pderClaimTotalResults.totLineRecon",
+                                      "label": "global.total.line.amt",
+                                      "dataFormat": "CURRENCY"
+                                    },
+                                    {
+                                      "id": 72,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "dtl.pderGetClaimResults.currencytydesc",
+                                      "label": "global.currency",
+                                      "conditionShow": "dtl.pderGetClaimResults.currencytydesc && base.allowForeignRebates"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 8,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "TAB",
+                      "label": "global.vendor.receipts",
+                      "conditionSelected": "base.defaultTab === 0",
+                      "eventActivated": "dtl.vendorReceiptsActivated()",
+                      "tabId": "vendor-receipts",
+                      "subFunction": "Vendor Rcpts",
+                      "children": [
+                        {
+                          "id": 21,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "pd/pder/tabs/vendor-receipts.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "type": "TAB",
+                      "label": "global.line.reconciliation",
+                      "conditionSelected": "base.defaultTab === 1",
+                      "eventActivated": "dtl.lineReconcileActivated()",
+                      "tabId": "line-reconciliation",
+                      "subFunction": "Line Recon",
+                      "children": [
+                        {
+                          "id": 22,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "pd/pder/tabs/line-reconcile.json"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "type": "VIEW_CNTR",
+      "viewName": "finalUpdate"
+    },
+    {
+      "id": 69,
+      "type": "VIEW_CNTR",
+      "viewName": "glDistributionView"
+    }
+  ]
+}

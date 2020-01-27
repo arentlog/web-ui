@@ -1,0 +1,63 @@
+<!--
+   =============================================
+   Infor Distribution SX.e Logging Configuration
+   =============================================
+   Implemented using NLOG
+   =============================================
+   The following variables are implemented for all loggers (allthough not all will be populated in all cases)
+
+   All messages
+
+      ${level}                                  - Log levels (1 see below)
+      $(message)                                - Log message
+      ${exception:format=ToString,StackTrace}   - ErrorException and FatalException only
+
+
+   Through the MappedDiagnosticsContext
+      ${mdc:tenant}                             - Tenant
+      ${mdc:oper}                               - Sxe Username
+      ${mdc:cono}                               - Sxe Cono
+      ${mdc:sessionid}                          - Sxe sessionid
+      ${mdc:function}                           - function
+      ${mdc:remotehost}                         - remotehost
+      ${mdc:callguid}                           - A unique value that consists of the tenant cono oper and a guid from the client (this is shown on the client as a reference and stored in the log
+
+   Peformance Only
+
+      ${mdc:where}                              - where clause for fetchwhere calls
+      ${mdc:elapsed}                            - Elapsed time for calls that report time to carry out an operation
+      ${mdc:batchsize}                          - Record count
+      ${mdc:fldlist}                            - List of fields to include/exclude
+      ${mdc:exclude}                            - Yes, fields are excluded, No, Fields and included
+
+   API Logging only
+
+      ${mdc:method}                             - HTTP Method
+      ${mdc:url}                                - URL of WebApi call
+      ${mdc:query}                              - Query String
+      ${mdc:request}                            - Request Body
+
+
+1) API Logging, minimim level to be set is Info, this will log, method, url and query.  To harvest request bodies on calls, log level needs to be set to trace.
+2) Performance Logging.  Must be set to info to get performance figures.  Setting to trace will provide more logging.
+3) Valid Log Levels.  Off, Fatal, FatalException, Error, ErrorException, Warn, Info, Debug, Trace
+
+-->
+
+
+<nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" throwConfigExceptions="true" throwExceptions="false" autoReload="true">
+   <variable name="logDirectory" value="${basedir}/Logs/${shortdate}" />
+   <variable name="stackTrace" value="${exception:format=ToString,StackTrace}${newline}" />
+   <targets async="true">
+      <target name="Std"     xsi:type="File" fileName="${logDirectory}/${mdc:tenant}-${mdc:cono}.txt"         layout="${longdate} ${level} ${mdc:callguid} ${mdc:function} ${mdc:oper} ${mdc:remotehost} ${message} ${stackTrace}"/>
+      <target name="Perf"    xsi:type="File" fileName="${logDirectory}/${mdc:tenant}-${mdc:cono}-Perf.txt"    layout="${longdate} ${level} ${mdc:oper} ${message} ${mdc:elapsed} ${mdc:where} ${mdc:batchsize}"/>
+      <target name="ApiFull" xsi:type="File" fileName="${logDirectory}/${mdc:tenant}-${mdc:cono}-ApiLogF.txt" layout="${longdate} METHOD=[${mdc:method}] URL=[${mdc:url}] QUERY=[${mdc:query}] REQUEST=[${mdc:request}]"/>
+      <target name="ApiPart" xsi:type="File" fileName="${logDirectory}/${mdc:tenant}-${mdc:cono}-ApiLogP.txt" layout="${longdate} METHOD=[${mdc:method}] URL=[${mdc:url}] QUERY=[${mdc:query}] "/>
+   </targets>
+   <rules>
+      <logger name="SxeLogger"   minlevel="Error"  writeTo="Std"     />
+      <logger name="Performance" minlevel="Off"    writeTo="Perf"    />
+      <logger name="ApiLog"      minlevel="Off"    writeTo="ApiFull" />
+      <logger name="ApiLog"      minlevel="Off"    writeTo="ApiPart" />
+   </rules>
+</nlog>

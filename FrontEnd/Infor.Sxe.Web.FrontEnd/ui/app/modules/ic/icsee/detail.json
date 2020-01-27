@@ -1,0 +1,164 @@
+{
+  "viewId": "ic-icsee-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.icsee",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 15,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 17,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.new",
+                  "icon": "icon-new-document",
+                  "securityLevel": 4,
+                  "conditionDisabled": "!base.isDetail()",
+                  "eventClick": "dtl.create()"
+                },
+                {
+                  "id": 18,
+                  "type": "BTN",
+                  "subType": "",
+                  "label": "global.delete",
+                  "icon": "icon-delete",
+                  "securityLevel": 5,
+                  "conditionDisabled": "!base.isDetail()",
+                  "eventClick": "dtl.delete()"
+                },
+                {
+                  "id": 13,
+                  "type": "BTN",
+                  "subType": "",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 19,
+                  "type": "BTN",
+                  "subType": "",
+                  "label": "global.reset",
+                  "icon": "icon-reset",
+                  "conditionDisabled": "base.isDetail()",
+                  "eventClick": "dtl.reset()"
+                },
+                {
+                  "id": 14,
+                  "type": "BTN",
+                  "subType": "",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "conditionDisabled": "base.isDetail()",
+                  "eventClick": "dtl.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "EXP_AREA",
+                  "label": "global.product.exceptions",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 8,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 10,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsee.custno",
+                              "label": "global.customer.number",
+                              "meta": "Customer",
+                              "required": true,
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 11,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsee.shipto",
+                              "label": "global.ship.to",
+                              "meta": "ShipTo",
+                              "conditionReadonly": "!base.isCreate()",
+                              "options": {
+                                "searchParams": {
+                                  "custno": {
+                                    "type": "REF",
+                                    "value": "dtl.icsee.custno"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 9,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 12,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsee.prod",
+                              "label": "global.product",
+                              "meta": "ProdAll",
+                              "required": true,
+                              "conditionReadonly": "!base.isCreate()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

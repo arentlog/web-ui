@@ -1,0 +1,352 @@
+{
+  "viewId": "sa-sasto-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "conditionShow": "base.isDetail() || base.isEdit() || base.isCreate()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.order.entry.addon",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sasto.codeval",
+                              "label": "global.addon.number",
+                              "required": true,
+                              "dataFormat": "INTEGER",
+                              "digits": 2,
+                              "sign": "+",
+                              "conditionReadonly": "!base.isCreate()",
+                              "size": "XS"
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sasto.descrip",
+                              "label": "global.description",
+                              "required": true,
+                              "maxLength": 24
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.sasto.cglno",
+                              "label": "gl.number",
+                              "required": false,
+                              "meta": "GlAccount",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 24,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 26,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.sasto.addonamt",
+                                  "label": "global.amount",
+                                  "required": false,
+                                  "dataFormat": "DECIMAL",
+                                  "decimals": 2,
+                                  "digits": 5,
+                                  "size": "SM",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 27,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.sasto.addontype",
+                                  "label": "global.addon.type",
+                                  "required": false,
+                                  "size": "SM",
+                                  "type3": "SET",
+                                  "metaGroup": "OE",
+                                  "meta": "AmountPercentType",
+                                  "blankOption": false
+                                }
+                              ]
+                            },
+                            {
+                              "id": 38,
+                              "type": "BTN",
+                              "label": "global.enter.description.in.multiple.language",
+                              "conditionDisabled": "base.isCreate()",
+                              "conditionShow": "dtl.sasc.langcd !== ''",
+                              "eventClick": "dtl.multiLangClick()"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 28,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 29,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.sasto.addonmin",
+                                  "label": "global.minimum.charge",
+                                  "required": false,
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "decimals": 2,
+                                  "digits": 5,
+                                  "size": "SM",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 30,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.sasto.addonmax",
+                                  "label": "global.maximum.charge",
+                                  "required": false,
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "decimals": 2,
+                                  "size": "SM",
+                                  "digits": 5,
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 31,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 32,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.sasto.addonzero",
+                                  "label": "global.zero.level",
+                                  "required": false,
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "decimals": 2,
+                                  "digits": 5,
+                                  "size": "SM",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 33,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.sasto.frghtcalcty",
+                                  "label": "global.type",
+                                  "required": false,
+                                  "size": "SM",
+                                  "type3": "SET",
+                                  "metaGroup": "SA",
+                                  "meta": "OrderAddonFreightCalcType",
+                                  "blankOption": true
+                                }
+                              ]
+                            },
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sasto.zipcd",
+                              "label": "edi.codes",
+                              "required": false,
+                              "dataFormat": "EdiCodes"
+                            },
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.sasto.ehffl",
+                              "label": "menu.icspe",
+                              "required": false,
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.sasto.state",
+                              "label": "global.state",
+                              "required": false,
+                              "type3": "CODES",
+                              "meta": "State",
+                              "conditionShow": "dtl.sasto.ehffl === true",
+                              "conditionReadonly": ""
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "sastn",
+                        "objectRef": "dtl.sasto",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "type": "VIEW_CNTR",
+      "viewName": "multiLanguage"
+    },
+    {
+      "id": 41,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Sasc",
+      "contextValues": {
+        "key1": "dtl.sasc.cono"
+      }
+    }
+  ]
+}

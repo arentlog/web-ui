@@ -1,0 +1,139 @@
+{
+  "viewId": "twl-twlcin-invprintrcvglabels",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "dtllbl.isDetailReceivingLabels()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.print.receiving.labels",
+              "subLabel": "{{dtllbl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtllbl.returnToDetail()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 26,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.print",
+                  "icon": "icon-print",
+                  "submitForm": true,
+                  "eventValidated": "dtllbl.printLabels()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.twlcin.absNum",
+                          "label": "global.item"
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.twlcin.itemDesc",
+                          "label": "global.item.description"
+                        },
+                        {
+                          "id": 24,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.twlcin.binNum",
+                          "label": "global.location"
+                        },
+                        {
+                          "id": 25,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.twlcin.lot",
+                          "label": "global.lot"
+                        },
+                        {
+                          "id": 28,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtllbl.printerId",
+                          "label": "global.printer.label",
+                          "meta": "TWLLabelPrinters",
+                          "required": true,
+                          "options": {
+                            "searchParams": {
+                              "coNum": {
+                                "type": "REF",
+                                "value": "dtl.twlcin.coNum"
+                              },
+                              "whNum": {
+                                "type": "REF",
+                                "value": "dtl.twlcin.whNum"
+                              },
+                              "printerId": {
+                                "type": "REF",
+                                "value": "dtllbl.printerId"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 27,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtllbl.numberOfLabels",
+                          "label": "global.number.of.labels",
+                          "dataFormat": "INTEGER",
+                          "sign": "+",
+                          "digits": 9,
+                          "required": true,
+                          "eventChange": "dtllbl.changeLabelCount()"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

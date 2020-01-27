@@ -1,0 +1,352 @@
+{
+  "viewId": "ic-icip-detail-tabs-transactions",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 5,
+      "type": "EXP_AREA",
+      "label": "global.additional.search",
+      "children": [
+        {
+          "id": 6,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 7,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "idtc.criteria.datethrough",
+                  "label": "global.posted.through",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "idtc.criteria.unit",
+                  "label": "global.unit",
+                  "meta": "Units",
+                  "options": {
+                    "searchParams": {
+                      "prod": {
+                        "type": "REF",
+                        "value": "dtl.prod"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 43,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "idtc.criteria.recordcountlimit",
+                  "label": "global.record.limit",
+                  "size": "SM",
+                  "dataFormat": "INTEGER",
+                  "digits": 4,
+                  "sign": "+"
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "RADIO_SET",
+                  "model": "idtc.criteria.invty",
+                  "label": "global.customer.owned",
+                  "type3": "INLINE",
+                  "optionLabelField": "Customer",
+                  "labelHidden": true,
+                  "conditionShow": "idtc.isManagedFlag",
+                  "children": [
+                    {
+                      "id": 13,
+                      "type": "OPT",
+                      "label": "global.customer.owned",
+                      "value": "c"
+                    },
+                    {
+                      "id": 14,
+                      "type": "OPT",
+                      "label": "global.distributor.owned",
+                      "value": "d"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 9,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "MULTI_SELECT",
+                  "model": "idtc.selectedModules",
+                  "label": "global.modules",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "ProductTransactionModule",
+                  "blankOption": false
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "MULTI_SELECT",
+                  "model": "idtc.selectedTransactions",
+                  "label": "global.transaction.types",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "TransactionType"
+                },
+                {
+                  "id": 17,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idtc.ictransSingle.qtyonhand",
+                  "label": "global.total.on.hand",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idtc.ictransSingle.custqtyonhand",
+                  "label": "global.cust.on.hand",
+                  "dataFormat": "DECIMAL",
+                  "conditionShow": "idtc.isManagedFlag",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idtc.ictransSingle.distqtyonhand",
+                  "label": "global.dist.on.hand",
+                  "dataFormat": "DECIMAL",
+                  "conditionShow": "idtc.isManagedFlag",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "eventClick": "idtc.getTransactions()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "GRID",
+      "model": "idtc.ictransResults",
+      "options": {
+        "showDrilldown": true,
+        "events": {
+          "drilldown": "idtc.drilldown()"
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "global.transactions"
+        }
+      },
+      "children": [
+        {
+          "id": 4,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.country.of.origin",
+          "model": "countryoforigin"
+        },
+        {
+          "id": 22,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "tariffcd",
+          "label": "global.harmonized.system.tariff.code"
+        },
+        {
+          "id": 23,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dtPosted",
+          "label": "global.posted.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 24,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dtReqShipDt",
+          "label": "global.req.ship.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 25,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "ilineno",
+          "label": "global.line.number"
+        },
+        {
+          "id": 26,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "archive",
+          "label": "global.archived"
+        },
+        {
+          "id": 27,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cModule",
+          "label": "global.module",
+          "dataFormat": "ModuleName"
+        },
+        {
+          "id": 28,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "iOrderNo",
+          "label": "global.order.number",
+          "eventClick": "idtc.navigateToInquiry()"
+        },
+        {
+          "id": 29,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "iOrderSuf",
+          "label": "global.order.suffix",
+          "dataFormat": "Suffix"
+        },
+        {
+          "id": 30,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cOrderNotes",
+          "label": "global.order.notes",
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 31,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cSign",
+          "label": "global.increase.decrease"
+        },
+        {
+          "id": 32,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cTransDesc",
+          "label": "global.transaction.type"
+        },
+        {
+          "id": 33,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "cName",
+          "label": "global.name",
+          "eventClick": "idtc.navigateAricOrApiv()"
+        },
+        {
+          "id": 34,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dStkQtyShip",
+          "label": "global.quantity.shipped",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2
+          }
+        },
+        {
+          "id": 35,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dQtyOnHand",
+          "label": "global.quantity.on.hand",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2
+          }
+        },
+        {
+          "id": 36,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cCustVendNotes",
+          "label": "global.vendor.notes",
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 37,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "iJrnlNo",
+          "label": "global.journal.number",
+          "eventClick": "idtc.navigatetoglij()"
+        },
+        {
+          "id": 38,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cProd",
+          "label": "global.product"
+        },
+        {
+          "id": 39,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cWhse",
+          "label": "global.warehouse"
+        },
+        {
+          "id": 40,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cTransNotes",
+          "label": "global.transaction.notes",
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 41,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cProdNotes",
+          "label": "global.product.notes",
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 42,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cICETNotes",
+          "label": "global.inventory.transaction.notes",
+          "dataFormat": "NotesFlag"
+        }
+      ]
+    }
+  ]
+}

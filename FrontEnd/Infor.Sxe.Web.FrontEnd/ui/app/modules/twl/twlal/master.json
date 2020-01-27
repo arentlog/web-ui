@@ -1,0 +1,260 @@
+{
+  "viewId": "twl-twlal-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.twlal",
+          "subLabel": "{{base.getSubTitle()}}",
+          "children": [
+            {
+              "id": 25,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-edit",
+              "label": "global.setup.unibar",
+              "securityLevel": 3,
+              "eventClick": "mst.setupUnibar()",
+              "conditionShow": "base.criteria.usageType === base.USAGETYPE_UNIBAR",
+              "conditionDisabled": "!base.criteriaUsed.whNum"
+            },
+            {
+              "id": 26,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-copy",
+              "label": "global.copy.all.records",
+              "eventClick": "mst.copyAll()",
+              "securityLevel": 4,
+              "conditionShow": "base.criteria.recordType !== base.RECORDTYPE_SPECIFIC"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 5,
+              "type": "GRID",
+              "controlRef": "base.legacyGrid",
+              "model": "base.legacyDataset",
+              "conditionShow": "base.criteria.usageType === base.USAGETYPE_LEGACY_ZEBRA",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": false,
+                "events": {
+                  "drilldown": "mst.drilldownLegacy()"
+                },
+                "showExpander": true,
+                "rowDetailOptions": {
+                  "template": "twl/twlal/show-description.json",
+                  "controller": "TwlalLegacyShowDescriptionCtrl as legacyRow",
+                  "paramsReference": "mst.legacyRowParams"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.parameter.types",
+                  "children": [
+                    {
+                      "id": 27,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-new-document",
+                      "label": "global.create.override.record",
+                      "securityLevel": 4,
+                      "conditionDisabled": "!base.legacyGrid.isAnyRowSelected()",
+                      "eventClick": "mst.createLegacyOverideRecord()",
+                      "conditionShow": "base.criteria.recordType === base.RECORDTYPE_DEFAULT"
+                    },
+                    {
+                      "id": 29,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-edit",
+                      "label": "global.edit",
+                      "securityLevel": 3,
+                      "conditionDisabled": "!base.legacyGrid.isOneRowSelected() || base.criteria.recordType === base.RECORDTYPE_DEFAULT",
+                      "eventClick": "mst.editLegacy()",
+                      "conditionShow": "base.criteria.recordType !== base.RECORDTYPE_DEFAULT"
+                    },
+                    {
+                      "id": 23,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-delete",
+                      "label": "global.delete",
+                      "eventClick": "mst.deleteLegacy()",
+                      "securityLevel": 5,
+                      "conditionDisabled": "!base.legacyGrid.isAnyRowSelected() || base.criteria.recordType === base.RECORDTYPE_DEFAULT",
+                      "conditionShow": "base.criteria.recordType !== base.RECORDTYPE_DEFAULT"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "udcType",
+                  "label": "global.type"
+                },
+                {
+                  "id": 8,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "paramType",
+                  "label": "global.parameter.type"
+                },
+                {
+                  "id": 9,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "udcValue",
+                  "label": "global.setting"
+                },
+                {
+                  "id": 31,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "isOverridden",
+                  "label": "global.overridden",
+                  "dataFormat": "LOGICAL",
+                  "conditionInclude": "base.criteria.recordType === base.RECORDTYPE_DEFAULT"
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "transProc",
+                  "label": "global.modified.by"
+                }
+              ]
+            },
+            {
+              "id": 12,
+              "type": "GRID",
+              "conditionShow": "base.criteria.usageType === base.USAGETYPE_UNIBAR",
+              "controlRef": "base.unibarGrid",
+              "model": "base.unibarDataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": false,
+                "events": {
+                  "drilldown": "mst.drilldownUnibar()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 13,
+                  "type": "TOOLBAR",
+                  "label": "global.label.types",
+                  "children": [
+                    {
+                      "id": 28,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-new-document",
+                      "label": "global.create.override.record",
+                      "securityLevel": 4,
+                      "conditionDisabled": "!base.unibarGrid.isAnyRowSelected()",
+                      "eventClick": "mst.createUnibarOverideRecord()",
+                      "conditionShow": "base.criteria.recordType === base.RECORDTYPE_DEFAULT"
+                    },
+                    {
+                      "id": 30,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-edit",
+                      "label": "global.edit",
+                      "securityLevel": 3,
+                      "conditionDisabled": "!base.unibarGrid.isOneRowSelected() || base.criteria.recordType === base.RECORDTYPE_DEFAULT",
+                      "eventClick": "mst.editUnibar()",
+                      "conditionShow": "base.criteria.recordType !== base.RECORDTYPE_DEFAULT"
+                    },
+                    {
+                      "id": 24,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-delete",
+                      "label": "global.delete",
+                      "eventClick": "mst.deleteUnibar()",
+                      "securityLevel": 5,
+                      "conditionDisabled": "!base.unibarGrid.isAnyRowSelected() || base.criteria.recordType === base.RECORDTYPE_DEFAULT",
+                      "conditionShow": "base.criteria.recordType !== base.RECORDTYPE_DEFAULT"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "udcType",
+                  "label": "global.type"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "udcId",
+                  "label": "global.label.type"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "empNum",
+                  "label": "global.printer.id"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "udcValue",
+                  "label": "global.label.file"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "legacyLabelfl",
+                  "label": "global.legacy.instead",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 32,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "isOverridden",
+                  "label": "global.overridden",
+                  "dataFormat": "LOGICAL",
+                  "conditionInclude": "base.criteria.recordType === base.RECORDTYPE_DEFAULT"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "transProc",
+                  "label": "global.modified.by"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

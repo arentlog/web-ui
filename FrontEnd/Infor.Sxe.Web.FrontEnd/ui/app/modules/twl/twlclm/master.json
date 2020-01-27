@@ -1,0 +1,749 @@
+{
+  "viewId": "twl-twlclm-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.twlclm",
+          "subLabel": "{{base.getSubTitle()}}",
+          "children": [
+            {
+              "id": 17,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-new-document",
+              "label": "global.create.working.list",
+              "securityLevel": 4,
+              "eventClick": "mst.createList()",
+              "conditionShow": "!base.isWorkingListFound",
+              "conditionDisabled": "base.controlData.statusCode !== base.STATUS_NONE && base.controlData.statusCode !== base.STATUS_CREATED"
+            },
+            {
+              "id": 19,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-new-document",
+              "label": "global.create.bin.locations",
+              "securityLevel": 4,
+              "eventClick": "mst.submitCreate()",
+              "conditionShow": "base.isWorkingListFound",
+              "conditionDisabled": "base.controlData.statusCode !== base.STATUS_BUILT"
+            },
+            {
+              "id": 18,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-edit",
+              "label": "global.details",
+              "securityLevel": 3,
+              "eventClick": "mst.viewDetails()",
+              "conditionShow": "base.isWorkingListFound",
+              "conditionDisabled": "base.controlData.statusCode !== base.STATUS_BUILT"
+            },
+            {
+              "id": 16,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-delete",
+              "label": "global.delete.working.list",
+              "eventClick": "mst.deleteList()",
+              "securityLevel": 5,
+              "conditionShow": "base.isWorkingListFound",
+              "conditionDisabled": "base.controlData.statusCode !== base.STATUS_BUILT && base.controlData.statusCode !== base.STATUS_CREATED && base.controlData.recordCount > 0"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 105,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 106,
+                  "type": "COL",
+                  "subType": "1",
+                  "children": [
+                    {
+                      "id": 107,
+                      "type": "FIELD_SET",
+                      "label": "global.working.list.status",
+                      "conditionShow": "base.isWorkingListFound",
+                      "children": [
+                        {
+                          "id": 108,
+                          "type": "ROW",
+                          "children": [
+                            {
+                              "id": 109,
+                              "type": "COL",
+                              "subType": "1",
+                              "children": [
+                                {
+                                  "id": 13,
+                                  "type": "MESSAGE",
+                                  "text": "{{mst.getStatusMessage()}}",
+                                  "icon": "icon-alert"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 114,
+                          "type": "ROW",
+                          "children": [
+                            {
+                              "id": 124,
+                              "type": "COL",
+                              "subType": "1/3",
+                              "children": [
+                                {
+                                  "id": 122,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.controlData.binLocationMask",
+                                  "label": "global.bin.location.sample"
+                                },
+                                {
+                                  "id": 123,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.controlData.expRecordCount",
+                                  "label": "global.expected.record.count"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 115,
+                              "type": "COL",
+                              "subType": "1/3",
+                              "children": [
+                                {
+                                  "id": 104,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.controlData.startDate",
+                                  "label": "global.start.date",
+                                  "dataFormat": "DATE"
+                                },
+                                {
+                                  "id": 113,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.controlData.startTime",
+                                  "label": "global.start.time",
+                                  "dataFormat": "TIME",
+                                  "subFormat": "hhmm"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 116,
+                              "type": "COL",
+                              "subType": "1/3",
+                              "children": [
+                                {
+                                  "id": 112,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.controlData.endDate",
+                                  "label": "global.end.date",
+                                  "dataFormat": "DATE"
+                                },
+                                {
+                                  "id": 102,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.controlData.endTime",
+                                  "label": "global.end.time",
+                                  "dataFormat": "TIME",
+                                  "subFormat": "hhmm"
+                                },
+                                {
+                                  "id": 14,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.controlData.recordCount",
+                                  "label": "global.record.count"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 37,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 38,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": []
+                },
+                {
+                  "id": 101,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": 35,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 36,
+                  "type": "COL",
+                  "subType": "1",
+                  "children": [
+                    {
+                      "id": 26,
+                      "type": "EXP_AREA",
+                      "label": "global.bin.location.numbers",
+                      "children": [
+                        {
+                          "id": 27,
+                          "type": "ROW",
+                          "children": [
+                            {
+                              "id": 28,
+                              "type": "COL",
+                              "subType": "1",
+                              "children": [
+                                {
+                                  "id": 45,
+                                  "type": "FIELD",
+                                  "subType": "LOOKUP",
+                                  "model": "base.controlData.whZone",
+                                  "label": "global.warehouse.zone",
+                                  "required": true,
+                                  "meta": "TWLWhZone",
+                                  "conditionReadonly": "base.isCriteriaDisabled()",
+                                  "options": {
+                                    "searchParams": {
+                                      "coNum": {
+                                        "type": "REF",
+                                        "value": "base.criteria.coNum"
+                                      },
+                                      "whNum": {
+                                        "type": "REF",
+                                        "value": "base.criteria.whNum"
+                                      }
+                                    }
+                                  }
+                                },
+                                {
+                                  "id": 47,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.controlData.prefix",
+                                  "label": "global.prefix",
+                                  "maxLength": 8,
+                                  "size": "SM",
+                                  "conditionReadonly": "base.isCriteriaDisabled()"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 55,
+                          "type": "ROW",
+                          "children": [
+                            {
+                              "id": 56,
+                              "type": "COL",
+                              "subType": "1",
+                              "children": [
+                                {
+                                  "id": 57,
+                                  "type": "FIELD_SET",
+                                  "label": "global.position"
+                                },
+                                {
+                                  "id": 58,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 59,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "base.controlData.positionType",
+                                      "label": "global.digits.or.letters",
+                                      "size": "SM",
+                                      "blankOption": false,
+                                      "type3": "SET",
+                                      "metaGroup": "TWL",
+                                      "meta": "MultipleLocationCreatePositionType",
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    },
+                                    {
+                                      "id": 71,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.positionFromAlpha",
+                                      "label": "global.from",
+                                      "size": "XS",
+                                      "maxLength": 6,
+                                      "conditionShow": "base.controlData.positionType !== 1",
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    },
+                                    {
+                                      "id": 117,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.positionFromNumeric",
+                                      "label": "global.from",
+                                      "size": "XS",
+                                      "maxLength": 6,
+                                      "dataFormat": "INTEGER",
+                                      "digits": 6,
+                                      "conditionShow": "base.controlData.positionType === 1",
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    },
+                                    {
+                                      "id": 60,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.positionToAlpha",
+                                      "label": "global.to",
+                                      "size": "XS",
+                                      "maxLength": 6,
+                                      "conditionShow": "base.controlData.positionType !== 1",
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    },
+                                    {
+                                      "id": 118,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.positionToNumeric",
+                                      "label": "global.to",
+                                      "size": "XS",
+                                      "maxLength": 6,
+                                      "dataFormat": "INTEGER",
+                                      "digits": 6,
+                                      "conditionShow": "base.controlData.positionType === 1",
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    },
+                                    {
+                                      "id": 62,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.controlData.positionLength",
+                                      "label": "global.length",
+                                      "dataFormat": "INTEGER",
+                                      "digits": 2,
+                                      "size": "XS",
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    },
+                                    {
+                                      "id": 63,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "base.controlData.positionRangeType",
+                                      "label": "global.range.type",
+                                      "size": "SM",
+                                      "blankOption": false,
+                                      "type3": "SET",
+                                      "metaGroup": "TWL",
+                                      "meta": "MultipleLocationCreateRangeType",
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 66,
+                          "type": "ROW",
+                          "children": [
+                            {
+                              "id": 67,
+                              "type": "COL",
+                              "subType": "1",
+                              "children": [
+                                {
+                                  "id": 68,
+                                  "type": "FIELD_SET",
+                                  "label": "global.level",
+                                  "children": []
+                                },
+                                {
+                                  "id": 70,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 69,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "base.controlData.levelType",
+                                      "label": "global.digits.or.letters",
+                                      "size": "SM",
+                                      "blankOption": false,
+                                      "type3": "SET",
+                                      "metaGroup": "TWL",
+                                      "meta": "MultipleLocationCreatePositionType",
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    },
+                                    {
+                                      "id": 72,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.levelFromAlpha",
+                                      "label": "global.from",
+                                      "size": "XS",
+                                      "maxLength": 6,
+                                      "conditionShow": "base.controlData.levelType !== 1",
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    },
+                                    {
+                                      "id": 119,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.levelFromNumeric",
+                                      "label": "global.from",
+                                      "size": "XS",
+                                      "maxLength": 6,
+                                      "conditionShow": "base.controlData.levelType === 1",
+                                      "dataFormat": "INTEGER",
+                                      "digits": 6,
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    },
+                                    {
+                                      "id": 73,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.levelToAlpha",
+                                      "label": "global.to",
+                                      "size": "XS",
+                                      "maxLength": 6,
+                                      "conditionShow": "base.controlData.levelType !== 1",
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    },
+                                    {
+                                      "id": 120,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.levelToNumeric",
+                                      "label": "global.to",
+                                      "size": "XS",
+                                      "maxLength": 6,
+                                      "dataFormat": "INTEGER",
+                                      "digits": 6,
+                                      "conditionShow": "base.controlData.levelType === 1",
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    },
+                                    {
+                                      "id": 75,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.controlData.levelLength",
+                                      "label": "global.length",
+                                      "dataFormat": "INTEGER",
+                                      "digits": 2,
+                                      "size": "XS",
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 42,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 43,
+                  "type": "COL",
+                  "subType": "1",
+                  "children": [
+                    {
+                      "id": 30,
+                      "type": "EXP_AREA",
+                      "label": "global.bin.location.attributes",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "ROW",
+                          "children": [
+                            {
+                              "id": 32,
+                              "type": "COL",
+                              "subType": "1",
+                              "children": [
+                                {
+                                  "id": 121,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 77,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "base.controlData.locType",
+                                      "label": "global.bin.type",
+                                      "blankOption": false,
+                                      "size": "SM",
+                                      "type3": "SET",
+                                      "metaGroup": "TWL",
+                                      "meta": "LocationType",
+                                      "eventChange": "base.changeBinType()",
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    },
+                                    {
+                                      "id": 79,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "base.controlData.abc",
+                                      "label": "global.class",
+                                      "blankOption": false,
+                                      "size": "XS",
+                                      "type3": "SET",
+                                      "metaGroup": "TWL",
+                                      "meta": "AbcType",
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    },
+                                    {
+                                      "id": 46,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.controlData.aisle",
+                                      "label": "global.aisle",
+                                      "maxLength": 4,
+                                      "size": "XS",
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 80,
+                          "type": "ROW",
+                          "children": [
+                            {
+                              "id": 81,
+                              "type": "COL",
+                              "subType": "1",
+                              "children": [
+                                {
+                                  "id": 82,
+                                  "type": "FIELD_SET",
+                                  "label": "global.cube.dimensions"
+                                },
+                                {
+                                  "id": 84,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 97,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.controlData.height",
+                                      "label": "global.height",
+                                      "dataFormat": "INTEGER",
+                                      "digits": 4,
+                                      "size": "XS",
+                                      "eventChange": "base.assignCubeDimension()",
+                                      "conditionReadonly": "base.isCriteriaDisabled()",
+                                      "modelOptions": {
+                                        "updateOn": "blur"
+                                      }
+                                    },
+                                    {
+                                      "id": 98,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.controlData.width",
+                                      "label": "global.width",
+                                      "dataFormat": "INTEGER",
+                                      "digits": 4,
+                                      "size": "XS",
+                                      "eventChange": "base.assignCubeDimension()",
+                                      "conditionReadonly": "base.isCriteriaDisabled()",
+                                      "modelOptions": {
+                                        "updateOn": "blur"
+                                      }
+                                    },
+                                    {
+                                      "id": 99,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.controlData.depth",
+                                      "label": "global.depth",
+                                      "dataFormat": "INTEGER",
+                                      "digits": 4,
+                                      "size": "XS",
+                                      "eventChange": "base.assignCubeDimension()",
+                                      "conditionReadonly": "base.isCriteriaDisabled()",
+                                      "modelOptions": {
+                                        "updateOn": "blur"
+                                      }
+                                    },
+                                    {
+                                      "id": 100,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.controlData.cube",
+                                      "label": "global.cube",
+                                      "dataFormat": "INTEGER",
+                                      "size": "SM",
+                                      "digits": 6,
+                                      "readonly": true
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 83,
+                                  "type": "FIELD_SET",
+                                  "label": "global.other.dimensions",
+                                  "children": [
+                                    {
+                                      "id": 96,
+                                      "type": "COMP_FLD",
+                                      "children": [
+                                        {
+                                          "id": 85,
+                                          "type": "FIELD",
+                                          "subType": "TEXT_BOX",
+                                          "model": "base.controlData.maxWeight",
+                                          "label": "global.maximum.weight",
+                                          "dataFormat": "INTEGER",
+                                          "digits": 8,
+                                          "size": "SM",
+                                          "conditionReadonly": "base.isCriteriaDisabled()"
+                                        },
+                                        {
+                                          "id": 86,
+                                          "type": "FIELD",
+                                          "subType": "TEXT_BOX",
+                                          "model": "base.controlData.palletFootprint",
+                                          "label": "global.pallet.foot.print",
+                                          "dataFormat": "INTEGER",
+                                          "digits": 8,
+                                          "size": "SM",
+                                          "eventChange": "base.assignMaximumPallets()",
+                                          "conditionReadonly": "base.isPalletFootprintDisabled || base.isCriteriaDisabled()",
+                                          "modelOptions": {
+                                            "updateOn": "blur"
+                                          }
+                                        },
+                                        {
+                                          "id": 87,
+                                          "type": "FIELD",
+                                          "subType": "TEXT_BOX",
+                                          "model": "base.controlData.stackHeight",
+                                          "label": "global.stacking.height",
+                                          "dataFormat": "INTEGER",
+                                          "digits": 8,
+                                          "size": "SM",
+                                          "eventChange": "base.assignMaximumPallets()",
+                                          "conditionReadonly": "base.isStackHeightDisabled || base.isCriteriaDisabled()",
+                                          "modelOptions": {
+                                            "updateOn": "blur"
+                                          }
+                                        },
+                                        {
+                                          "id": 89,
+                                          "type": "FIELD",
+                                          "subType": "TEXT_BOX",
+                                          "model": "base.maximumPallet",
+                                          "label": "global.maximum.pallets",
+                                          "dataFormat": "INTEGER",
+                                          "digits": 3,
+                                          "size": "SM",
+                                          "readonly": true
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 90,
+                          "type": "ROW",
+                          "children": [
+                            {
+                              "id": 91,
+                              "type": "COL",
+                              "subType": "1",
+                              "children": [
+                                {
+                                  "id": 92,
+                                  "type": "FIELD_SET",
+                                  "label": "global.options"
+                                },
+                                {
+                                  "id": 93,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 94,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.controlData.pickSequence",
+                                      "label": "global.pick.sequence",
+                                      "dataFormat": "INTEGER",
+                                      "digits": 3,
+                                      "size": "XS",
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    },
+                                    {
+                                      "id": 95,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.controlData.putawayGroup",
+                                      "label": "global.put.away.group",
+                                      "size": "SM",
+                                      "maxLength": 12,
+                                      "conditionReadonly": "base.isCriteriaDisabled()"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

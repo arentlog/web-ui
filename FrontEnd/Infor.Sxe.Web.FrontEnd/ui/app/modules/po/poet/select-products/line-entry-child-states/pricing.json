@@ -1,0 +1,289 @@
+{
+  "viewId": "po-poet-selectproducts-lineentrychildstates-pricing",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ale.isPricing()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.pricing",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "aleP.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 124,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.restore.pricing",
+                  "conditionDisabled": "!ale.poline.btnrestorepricingsensitive",
+                  "eventClick": "aleP.restoreSystemPricing()",
+                  "icon": "icon-refresh"
+                },
+                {
+                  "id": 123,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.system.pricing",
+                  "conditionDisabled": "!ale.poline.btnsystempricingsensitive",
+                  "eventClick": "aleP.calculateSystemPricing()"
+                },
+                {
+                  "id": 126,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.apply",
+                  "conditionDisabled": "!aleP.isApplyPricingEnabled",
+                  "eventClick": "aleP.applyPricing()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 130,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 131,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 145,
+                          "type": "EXP_AREA",
+                          "label": "global.pricing.worksheet",
+                          "children": [
+                            {
+                              "id": 146,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 147,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 117,
+                                      "type": "COMP_FLD",
+                                      "children": [
+                                        {
+                                          "id": 127,
+                                          "type": "FIELD",
+                                          "subType": "DROP_DOWN",
+                                          "model": "ale.poline.basisType",
+                                          "label": "global.basis",
+                                          "type3": "SET",
+                                          "metaGroup": "PO",
+                                          "meta": "PriceBasis",
+                                          "blankOption": false,
+                                          "eventChange": "aleP.pricingBasisChange()",
+                                          "conditionReadonly": "!ale.poline.cbbasistypesensitive"
+                                        },
+                                        {
+                                          "id": 118,
+                                          "type": "FIELD",
+                                          "subType": "TEXT_BOX",
+                                          "model": "ale.poline.basis",
+                                          "label": "global.amount",
+                                          "dataFormat": "CURRENCY",
+                                          "digits": 7,
+                                          "decimals": 0,
+                                          "eventChange": "aleP.setApplyPricing()",
+                                          "size": "SM",
+                                          "conditionReadonly": "!aleP.isPriceBasisEnabled"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": 119,
+                                      "type": "COMP_FLD",
+                                      "children": [
+                                        {
+                                          "id": 128,
+                                          "type": "FIELD",
+                                          "subType": "DROP_DOWN",
+                                          "model": "ale.poline.operator",
+                                          "label": "global.operator",
+                                          "type3": "SET",
+                                          "metaGroup": "PO",
+                                          "meta": "PriceOperator",
+                                          "blankOption": false,
+                                          "eventChange": "ale.setApplyPricing()",
+                                          "conditionReadonly": "!ale.poline.cboperatorsensitive"
+                                        },
+                                        {
+                                          "id": 121,
+                                          "type": "FIELD",
+                                          "subType": "TEXT_BOX",
+                                          "model": "ale.poline.operand",
+                                          "label": "global.amount",
+                                          "dataFormat": "CURRENCY",
+                                          "digits": 7,
+                                          "decimals": 2,
+                                          "eventChange": "aleP.setApplyPricing()",
+                                          "size": "SM"
+                                        },
+                                        {
+                                          "id": 129,
+                                          "type": "FIELD",
+                                          "subType": "TEXT_BOX",
+                                          "model": "ale.poline.price",
+                                          "label": "global.new.calculated.price",
+                                          "dataFormat": "CURRENCY",
+                                          "digits": 7,
+                                          "decimals": 0,
+                                          "eventChange": "aleP.setApplyPricing()",
+                                          "readonly": true,
+                                          "size": "SM"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 132,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 133,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 134,
+                          "type": "GRID",
+                          "controlRef": "aleP.whseAvailGrid",
+                          "model": "aleP.warehouseAvailability",
+                          "controls": {
+                            "toolbar": {
+                              "id": 135,
+                              "type": "TOOLBAR",
+                              "label": "global.warehouse.availability"
+                            }
+                          },
+                          "children": [
+                            {
+                              "id": 136,
+                              "type": "GRID_COL",
+                              "subType": "CHECKBOX",
+                              "model": "lValidWhse",
+                              "label": "global.valid",
+                              "subFormat": "YesNo",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 137,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "cWhse",
+                              "label": "global.warehouse"
+                            },
+                            {
+                              "id": 138,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "dNetAvail",
+                              "label": "global.net.available",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 139,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "dCost",
+                              "label": "global.cost",
+                              "dataFormat": "CURRENCY"
+                            },
+                            {
+                              "id": 140,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "iQtyOnOrder",
+                              "label": "global.on.order",
+                              "dataFormat": "INTEGER"
+                            },
+                            {
+                              "id": 141,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "iSurplus",
+                              "label": "global.surplus",
+                              "dataFormat": "INTEGER"
+                            },
+                            {
+                              "id": 142,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "dUsageRate",
+                              "label": "global.usage.rate",
+                              "dataFormat": "DECIMAL"
+                            },
+                            {
+                              "id": 143,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "iLeadTmAvg",
+                              "label": "global.lead.days",
+                              "dataFormat": "INTEGER"
+                            },
+                            {
+                              "id": 144,
+                              "type": "GRID_COL",
+                              "subType": "DATE",
+                              "model": "dtNextRcv",
+                              "label": "global.next.receive.date",
+                              "dataFormat": "DATE"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

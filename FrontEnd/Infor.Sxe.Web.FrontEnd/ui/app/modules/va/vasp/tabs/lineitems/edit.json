@@ -1,0 +1,210 @@
+{
+  "viewId": "va-vasp-tabs-lineitems-lineedit",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SUB-DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.includesLineItemsEdit()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.update.line",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "lineedit.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "lineedit.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 24,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 13,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "lineedit.vaspLineChange.nonstockty",
+                              "label": "global.line.type",
+                              "type3": "SET",
+                              "metaGroup": "VA",
+                              "meta": "NonStockType",
+                              "blankOption": false,
+                              "conditionReadonly": "lineedit.vaspLineChange.sctntype.toLowerCase() !== 'in'",
+                              "eventChange": "lineedit.changeLineType()",
+                              "controls": {}
+                            },
+                            {
+                              "id": 23,
+                              "type": "BTN",
+                              "subType": "SEC",
+                              "label": "global.edit",
+                              "eventClick": "lineedit.changeLineType()",
+                              "conditionShow": "lineedit.vaspLineChange.nonstockty.toLowerCase() === 'n'"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "lineedit.vaspLineChange.shipprod",
+                          "label": "global.product",
+                          "meta": "ProdAll",
+                          "eventChange": "lineedit.changeProduct()",
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "lineedit.vaspLineChange.lgthcompfl",
+                          "label": "global.var.length",
+                          "dataFormat": "LOGICAL",
+                          "conditionShow": "lineedit.vaspLineChange.sctntype.toLowerCase() === 'in'",
+                          "eventChange": "lineedit.changeFab()",
+                          "conditionDisabled": "!base.selectedLineitemsRecord.vafabfl"
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "lineedit.vaspLineChange.scrapfctr",
+                          "label": "global.scrap.factor.percent",
+                          "dataFormat": "DECIMAL",
+                          "digits": 2,
+                          "decimals": 2,
+                          "conditionShow": "lineedit.vaspLineChange.sctntype.toLowerCase() === 'in'",
+                          "conditionReadonly": "!base.selectedLineitemsRecord.vafabfl",
+                          "sign": "+",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "lineedit.vaspLineChange.qtyneeded",
+                          "label": "global.quantity.needed",
+                          "dataFormat": "DECIMAL",
+                          "sign": "+",
+                          "digits": 7,
+                          "decimals": 2,
+                          "conditionReadonly": "lineedit.vaspLineChange.sctntype.toLowerCase() !== 'in' && lineedit.vaspLineChange.sctntype.toLowerCase() !== 'it'",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "lineedit.vaspLineChange.unit",
+                          "label": "global.unit",
+                          "meta": "StockingUnit",
+                          "conditionReadonly": "lineedit.vaspLineChange.sctntype.toLowerCase() !== 'in' && lineedit.vaspLineChange.sctntype.toLowerCase() !== 'it'",
+                          "eventChange": "lineedit.changeUnit()"
+                        },
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "lineedit.vaspLineChange.qtybasetotfl",
+                          "label": "global.quantity.based.on.total",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "lineedit.vaspLineChange.sctntype.toLowerCase() !== 'in' && lineedit.vaspLineChange.sctntype.toLowerCase() !== 'it'"
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "lineedit.vaspLineChange.cutoffty",
+                          "label": "global.cut.off.ty",
+                          "type3": "SET",
+                          "metaGroup": "VA",
+                          "meta": "CutOffType",
+                          "blankOption": false,
+                          "conditionShow": "lineedit.vaspLineChange.sctntype.toLowerCase() === 'in'",
+                          "conditionReadonly": "!base.selectedLineitemsRecord.vafabfl"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "type": "VIEW_CNTR",
+      "viewName": "editNonstock"
+    }
+  ]
+}

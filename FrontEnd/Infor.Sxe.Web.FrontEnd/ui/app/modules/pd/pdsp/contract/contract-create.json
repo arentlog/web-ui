@@ -1,0 +1,222 @@
+{
+  "viewId": "pd-pdsp-contractcreate",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.vendor.contract.records",
+              "subLabel": "{{vcdtl.subtitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 8,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "",
+                      "eventClick": "vcdtl.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "vcdtl.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "SEC",
+                  "label": "global.cancel",
+                  "eventClick": "vcdtl.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "vcdtl.pdsvc.levelcd",
+                          "label": "global.level",
+                          "required": true,
+                          "type3": "MANUAL",
+                          "optionsModel": "base.levelCodeDetailPDSVC",
+                          "blankOption": false,
+                          "conditionReadonly": "base.callType === 'copy'",
+                          "eventChange": "vcdtl.changeLevelCode()"
+                        },
+                        {
+                          "id": 48,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "vcdtl.pdsvc.contractno",
+                          "label": "global.contract.number",
+                          "type3": "CODES",
+                          "conditionShow": "base.srchContractNoFl",
+                          "meta": "PriceRebateRegion",
+                          "maxLength": 24
+                        },
+                        {
+                          "id": 39,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "vcdtl.pdsvc.vendno",
+                          "label": "global.vendor.number",
+                          "meta": "Vendor",
+                          "conditionShow": "base.srchVendNoFl",
+                          "controls": {
+                            "actionBtn": {
+                              "id": 41,
+                              "type": "BTN",
+                              "subType": "ICON",
+                              "label": "global.inquire",
+                              "icon": "icon-drilldown",
+                              "isLabelTooltip": true,
+                              "conditionDisabled": "!vcdtl.pdsvc.vendno",
+                              "stateRef": "apiv.detail ({pk: vcdtl.pdsvc.vendno})",
+                              "conditionShow": "base.srchVendNoFl"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 18,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 37,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "vcdtl.pdsvc.prod",
+                          "label": "global.product",
+                          "meta": "ProdAll",
+                          "conditionShow": "base.srchProdFl",
+                          "options": {
+                            "allowEntry": true
+                          },
+                          "controls": {
+                            "actionBtn": {
+                              "id": 42,
+                              "type": "BTN",
+                              "subType": "ICON",
+                              "label": "global.inquire",
+                              "icon": "icon-drilldown",
+                              "isLabelTooltip": true,
+                              "conditionDisabled": "!vcdtl.pdsvc.prod",
+                              "conditionShow": "base.srchProdFl",
+                              "stateRef": "icip.detail ({pk: vcdtl.pdsvc.prod, pk2: vcdtl.pdsvc.whse})"
+                            }
+                          }
+                        },
+                        {
+                          "id": 44,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "vcdtl.pdsvc.prodpricety",
+                          "label": "global.product.price.type",
+                          "meta": "ProdPriceTy",
+                          "conditionShow": "base.srchProdPriceTypeFl"
+                        },
+                        {
+                          "id": 45,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "vcdtl.pdsvc.rebtype",
+                          "label": "global.rebate.type",
+                          "meta": "ProductRebateType",
+                          "conditionShow": "base.srchRebTypeFl"
+                        },
+                        {
+                          "id": 40,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "vcdtl.pdsvc.rebsubty",
+                          "label": "global.rebate.sub.type",
+                          "meta": "ProductRebateSubType",
+                          "conditionShow": "base.srchSubRebTypeFl"
+                        },
+                        {
+                          "id": 25,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "vcdtl.pdsvc.startdt",
+                          "label": "global.start.date",
+                          "dataFormat": "DATE",
+                          "required": true
+                        },
+                        {
+                          "id": 49,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "vcdtl.pdsvc.whse",
+                          "label": "global.warehouse",
+                          "meta": "Warehouse",
+                          "conditionShow": "base.srchWhseFl"
+                        },
+                        {
+                          "id": 50,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "vcdtl.pdsvc.unit",
+                          "label": "global.unit",
+                          "conditionShow": "base.srchUnitFl",
+                          "meta": "Units",
+                          "options": {
+                            "searchParams": {
+                              "prod": {
+                                "type": "REF",
+                                "value": "vcdtl.pdsvc.prod"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

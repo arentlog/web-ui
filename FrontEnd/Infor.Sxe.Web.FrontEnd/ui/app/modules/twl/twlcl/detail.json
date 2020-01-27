@@ -1,0 +1,638 @@
+{
+  "viewId": "twl-twlcl-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "conditionShow": "base.isDetailOrEdit()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.twlcl",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtl.customCancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail() || ((!base.criteria.whNum) && (!base.criteriaUsed.whNum))",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.customDelete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 66,
+                  "type": "BTN",
+                  "subType": "MENU",
+                  "label": "global.inquiries",
+                  "children": [
+                    {
+                      "id": 67,
+                      "type": "MENU_OPT",
+                      "label": "global.inventory",
+                      "eventClick": "dtl.showInventory()",
+                      "conditionDisabled": "!dtl.twlcl.enableinventory"
+                    },
+                    {
+                      "id": 68,
+                      "type": "MENU_OPT",
+                      "label": "global.pending.movement",
+                      "eventClick": "dtl.showMovement()",
+                      "conditionDisabled": "!dtl.twlcl.enablemovement"
+                    },
+                    {
+                      "id": 70,
+                      "type": "MENU_OPT",
+                      "label": "global.pending.picks",
+                      "eventClick": "dtl.showPicks()",
+                      "conditionDisabled": "!dtl.twlcl.enablepicks"
+                    },
+                    {
+                      "id": 69,
+                      "type": "MENU_OPT",
+                      "label": "global.pending.replenishment",
+                      "eventClick": "dtl.showReplenishment()",
+                      "conditionDisabled": "!dtl.twlcl.enablereplenishment"
+                    }
+                  ]
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 35,
+                  "type": "FIELD_SET",
+                  "label": "global.general.information",
+                  "children": [
+                    {
+                      "id": 36,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 37,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.twlcl.whZone",
+                              "label": "global.warehouse.zone",
+                              "meta": "TWLWhZone",
+                              "size": "SM",
+                              "conditionReadonly": "!dtl.allowZoneChange",
+                              "conditionDisabled": "base.isDetail()",
+                              "options": {
+                                "searchParams": {
+                                  "coNum": {
+                                    "type": "REF",
+                                    "value": "dtl.twlcl.coNum"
+                                  },
+                                  "whNum": {
+                                    "type": "REF",
+                                    "value": "dtl.twlcl.whNum"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.aisle",
+                              "label": "global.aisle",
+                              "size": "SM",
+                              "dataFormat": "INTEGER_TEXT",
+                              "sign": "+",
+                              "digits": 4
+                            },
+                            {
+                              "id": 43,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.pickSequence",
+                              "label": "global.pick.sequence",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 3,
+                              "size": "SM"
+                            },
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.putawayGroup",
+                              "label": "global.put.away.group",
+                              "maxLength": 12
+                            }
+                          ]
+                        },
+                        {
+                          "id": 38,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.binHits",
+                              "label": "global.bin.hits",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 7,
+                              "size": "SM"
+                            },
+                            {
+                              "id": 62,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlcl.rowStatus",
+                              "label": "global.active",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 63,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlcl.physical",
+                              "label": "global.physical",
+                              "dataFormat": "LOGICAL",
+                              "disabled": true
+                            },
+                            {
+                              "id": 64,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlcl.inboundstgfl",
+                              "label": "global.inbound",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "base.isDetail() || dtl.twlcl.locType.toLowerCase() !== 't'"
+                            },
+                            {
+                              "id": 45,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.lastCount",
+                              "label": "global.last.count",
+                              "dataFormat": "TwlCharDateConversion",
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 46,
+                  "type": "FIELD_SET",
+                  "label": "global.location.attributes",
+                  "children": [
+                    {
+                      "id": 47,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 48,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.binNum",
+                              "label": "global.location",
+                              "required": true,
+                              "conditionShow": "base.isCreate()"
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlcl.locType",
+                              "label": "global.location.type",
+                              "type3": "SET",
+                              "metaGroup": "TWL",
+                              "meta": "LocationType",
+                              "blankOption": false,
+                              "size": "SM",
+                              "eventChange": "dtl.locationTypeChanged()",
+                              "controls": {}
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.height",
+                              "label": "global.height",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 4,
+                              "size": "SM",
+                              "eventChange": "dtl.changeVolume()",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.width",
+                              "label": "global.width",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 4,
+                              "size": "SM",
+                              "eventChange": "dtl.changeVolume()",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.depth",
+                              "label": "global.depth",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 4,
+                              "size": "SM",
+                              "eventChange": "dtl.changeVolume()",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.cube",
+                              "label": "global.cubes",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 9,
+                              "size": "SM",
+                              "readonly": true
+                            },
+                            {
+                              "id": 65,
+                              "type": "MESSAGE",
+                              "text": "{{dtl.qtyMessage}}"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 49,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlcl.abc",
+                              "label": "global.class",
+                              "type3": "SET",
+                              "blankOption": false,
+                              "size": "XS",
+                              "metaGroup": "TWL",
+                              "meta": "AbcType"
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.maxWeight",
+                              "label": "global.maximum.weight",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 7,
+                              "size": "SM"
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.palletFootprint",
+                              "label": "global.pallet.foot.print",
+                              "size": "SM",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 7,
+                              "eventChange": "dtl.changePallet()",
+                              "conditionReadonly": "base.isDetail() || (!base.newRecord && (dtl.twlcl.locType.toLowerCase() === 'c' || dtl.twlcl.locType.toLowerCase() === 'f' || dtl.twlcl.locType.toLowerCase() === 's'))",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.stackHeight",
+                              "label": "global.stacking.height",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 7,
+                              "size": "SM",
+                              "eventChange": "dtl.changePallet()",
+                              "conditionReadonly": "base.isDetail() || (!base.newRecord && (dtl.twlcl.locType.toLowerCase() === 'c' || dtl.twlcl.locType.toLowerCase() === 'f' || dtl.twlcl.locType.toLowerCase() === 's'))",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.maxPal",
+                              "label": "global.maximum.pallets",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 7,
+                              "readonly": true,
+                              "size": "SM"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 50,
+                  "type": "FIELD_SET",
+                  "label": "global.primary.pick",
+                  "children": [
+                    {
+                      "id": 51,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 52,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 44,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlcl.primPick",
+                              "label": "global.primary.pick",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "base.isDetail() || base.newRecord",
+                              "eventChange": "dtl.primPickChanged()"
+                            },
+                            {
+                              "id": 54,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.twlcl.absNum",
+                              "label": "global.product",
+                              "meta": "TWLItem",
+                              "conditionShow": "dtl.twlcl.primPick",
+                              "options": {
+                                "searchParams": {
+                                  "whse": {
+                                    "type": "REF",
+                                    "value": "base.criteria.whNum"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 55,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlcl.primPickType",
+                              "label": "global.pick.type",
+                              "type3": "SET",
+                              "metaGroup": "TWL",
+                              "meta": "PrimaryPickType",
+                              "blankOption": false,
+                              "conditionShow": "dtl.twlcl.primPick"
+                            },
+                            {
+                              "id": 60,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.repQty",
+                              "label": "global.replenishment.quantity",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 5,
+                              "decimals": 2,
+                              "conditionShow": "dtl.twlcl.primPick",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 61,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlcl.repUnit",
+                              "label": "global.replenish.by",
+                              "type3": "SET",
+                              "optionsModel": "dtl.replenishType",
+                              "optionLabelField": "label",
+                              "optionValueField": "value",
+                              "blankOption": false,
+                              "conditionShow": "dtl.twlcl.primPick && dtl.twlcl.primPickType.toLowerCase() === 'f'",
+                              "metaGroup": "TWL",
+                              "meta": "PickTypeFull"
+                            },
+                            {
+                              "id": 73,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlcl.repUnit",
+                              "label": "global.replenish.by",
+                              "type3": "SET",
+                              "optionsModel": "dtl.replenishType",
+                              "optionLabelField": "label",
+                              "optionValueField": "value",
+                              "blankOption": false,
+                              "conditionShow": "dtl.twlcl.primPick && dtl.twlcl.primPickType.toLowerCase() !== 'f'",
+                              "metaGroup": "TWL",
+                              "meta": "PickTypeSplit"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 53,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 56,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.caseSize",
+                              "label": "global.item.case.size",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "decimals": 2,
+                              "digits": 7,
+                              "conditionShow": "dtl.twlcl.primPick",
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 57,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.palletSize",
+                              "label": "global.item.pallet.size",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 7,
+                              "decimals": 2,
+                              "conditionShow": "dtl.twlcl.primPick",
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 58,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.maxLvl",
+                              "label": "global.maximum.level",
+                              "dataFormat": "DECIMAL",
+                              "digits": 5,
+                              "decimals": 2,
+                              "sign": "+",
+                              "conditionShow": "dtl.twlcl.primPick",
+                              "eventChange": "dtl.changeLevel()",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 59,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcl.minLvl",
+                              "label": "global.minimum.level",
+                              "dataFormat": "DECIMAL",
+                              "digits": 5,
+                              "decimals": 2,
+                              "sign": "+",
+                              "conditionShow": "dtl.twlcl.primPick",
+                              "eventChange": "dtl.changeLevel()",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 72,
+      "type": "VIEW_CNTR",
+      "viewName": "subDetail"
+    }
+  ]
+}

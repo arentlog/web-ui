@@ -1,0 +1,254 @@
+{
+  "viewId": "sa-sasbr-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.sasbr",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "type": "GRID",
+              "id": 5,
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "selectable": "multiple",
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.business.rules",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-new-document",
+                      "label": "global.new",
+                      "eventClick": "mst.create()",
+                      "conditionDisabled": "base.grid.isAnyRowSelected()",
+                      "securityLevel": 4
+                    },
+                    {
+                      "id": 8,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-edit",
+                      "label": "global.edit",
+                      "eventClick": "mst.edit()",
+                      "conditionDisabled": "!base.grid.isOneRowSelected()",
+                      "securityLevel": 3
+                    },
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-delete",
+                      "label": "global.delete",
+                      "eventClick": "mst.delete()",
+                      "conditionDisabled": "base.grid.isNoRowSelected()",
+                      "securityLevel": 5
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "ruledescrip",
+                  "label": "global.rule"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "ruletype",
+                  "label": "global.rule.type"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "rulevalue",
+                  "label": "global.rule.value"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "level",
+                  "label": "global.level",
+                  "customFormatter": "base.levelFormatter"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "edipartner",
+                  "label": "global.partner.name",
+                  "conditionInclude": "base.criteria.rulelevel === 'Customer' || base.criteria.rulelevel === 'ShipTo' || base.criteria.rulelevel === 'Vendor' || base.criteria.rulelevel === 'Shipfmno'"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "custno",
+                  "label": "global.customer.number",
+                  "conditionInclude": "base.criteria.rulelevel === 'Customer' || base.criteria.rulelevel === 'ShipTo'",
+                  "eventClick": "mst.customerInquiryHyperlink()",
+                  "dataFormat": "DECIMAL_TEXT"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "custnotesfl",
+                  "label": "global.customer.notes",
+                  "conditionInclude": "base.criteria.rulelevel === 'Customer' || base.criteria.rulelevel === 'ShipTo'",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "custname",
+                  "label": "global.customer.name",
+                  "conditionInclude": "base.criteria.rulelevel === 'Customer' || base.criteria.rulelevel === 'ShipTo'"
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "shipto",
+                  "label": "global.ship.to",
+                  "conditionInclude": "base.criteria.rulelevel === 'Customer' || base.criteria.rulelevel === 'ShipTo'",
+                  "eventClick": "mst.customerInquiryHyperlink()"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shiptonotesfl",
+                  "label": "global.ship.to.notes",
+                  "conditionInclude": "base.criteria.rulelevel === 'Customer' || base.criteria.rulelevel === 'ShipTo'",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shiptoname",
+                  "label": "global.ship.to.name",
+                  "conditionInclude": "base.criteria.rulelevel === 'Customer' || base.criteria.rulelevel === 'ShipTo'"
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "vendno",
+                  "label": "global.vendor.number",
+                  "conditionInclude": "base.criteria.rulelevel === 'Vendor' || base.criteria.rulelevel === 'Shipfmno'",
+                  "eventClick": "mst.vendorInquiryHyperlink",
+                  "dataFormat": "DECIMAL_TEXT"
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "vendnotesfl",
+                  "label": "global.vendor.notes",
+                  "conditionInclude": "base.criteria.rulelevel === 'Vendor' || base.criteria.rulelevel === 'Shipfmno'",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 26,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "shipfmno",
+                  "label": "global.ship.from",
+                  "conditionInclude": "base.criteria.rulelevel === 'Vendor' || base.criteria.rulelevel === 'Shipfmno'",
+                  "eventClick": "mst.vendorInquiryHyperlink()",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "vendname",
+                  "label": "global.vendor.name",
+                  "conditionInclude": "base.criteria.rulelevel === 'Vendor' || base.criteria.rulelevel === 'Shipfmno'"
+                },
+                {
+                  "id": 28,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "cono",
+                  "label": "global.company",
+                  "conditionInclude": "base.criteria.rulelevel === 'Company'",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 29,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "conm",
+                  "label": "global.company.name",
+                  "conditionInclude": "base.criteria.rulelevel === 'Company'"
+                },
+                {
+                  "id": 30,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "docHandler",
+                  "label": "global.document.handler.program"
+                },
+                {
+                  "id": 31,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "direction",
+                  "label": "global.direction",
+                  "customFormatter": "mst.directionFormatter"
+                },
+                {
+                  "id": 32,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "nodeNm",
+                  "label": "global.node.name"
+                },
+                {
+                  "id": 33,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "attrNm",
+                  "label": "global.attribute.name"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

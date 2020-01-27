@@ -1,0 +1,348 @@
+{
+  "viewId": "va-vaif-master-advancedcriteria",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 2,
+      "type": "COMP_FLD",
+      "children": [
+        {
+          "id": 8,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.detailtype",
+          "label": "global.display",
+          "type3": "MANUAL",
+          "blankOption": false,
+          "optionsModel": "base.displayOnlyInSearch",
+          "conditionShow": "advsrch.isSelected('detailtype')"
+        },
+        {
+          "id": 12,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.vanox",
+          "label": "global.value.add.order.number",
+          "meta": "VAOrders",
+          "eventChange": "mst.changeOfVAOrder()",
+          "options": {
+            "allowEntry": true,
+            "searchParams": {
+              "vano": {
+                "type": "REF",
+                "value": "mst.advCriteria.vano"
+              },
+              "vasuf": {
+                "type": "REF",
+                "value": "mst.advCriteria.vasuf"
+              },
+              "whse": {
+                "type": "REF",
+                "value": "mst.advCriteria.whse"
+              }
+            },
+            "searchCriteriaFunction": "mst.updateAutocompleteCriteria()"
+          },
+          "controls": {
+            "actionBtn": {
+              "id": 135,
+              "type": "BTN",
+              "subType": "ACT",
+              "label": "global.inquire",
+              "eventClick": "mst.auditHyperlink()",
+              "conditionDisabled": "!mst.advCriteria.vanox || mst.advCriteria.vanox === '0-00'"
+            }
+          }
+        },
+        {
+          "id": 72,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.custno",
+          "label": "global.customer.number",
+          "meta": "Customer",
+          "conditionShow": "advsrch.isSelected('custno')",
+          "controls": {
+            "actionBtn": {
+              "id": 138,
+              "type": "BTN",
+              "subType": "ACT",
+              "label": "global.inquire",
+              "conditionShow": "mst.advCriteria.custno",
+              "eventClick": "mst.custnoHyperlink()"
+            }
+          }
+        },
+        {
+          "id": 139,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.vendno",
+          "label": "global.vendor.number",
+          "meta": "Vendor",
+          "conditionShow": "advsrch.isSelected('vendno')",
+          "controls": {
+            "actionBtn": {
+              "id": 140,
+              "type": "BTN",
+              "subType": "ACT",
+              "label": "global.inquire",
+              "conditionShow": "mst.advCriteria.vendno",
+              "eventClick": "mst.vendnoHyperlink()"
+            }
+          }
+        },
+        {
+          "id": 74,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.whse",
+          "label": "global.warehouse",
+          "meta": "Warehouse",
+          "conditionShow": "advsrch.isSelected('whse')"
+        },
+        {
+          "id": 9,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.verno",
+          "label": "global.version.number",
+          "meta": "ValueAddVersion",
+          "conditionShow": "advsrch.isSelected('verno')",
+          "options": {
+            "searchParams": {
+              "prod": {
+                "type": "REF",
+                "value": "mst.advCriteria.prod"
+              },
+              "whse": {
+                "type": "REF",
+                "value": "mst.advCriteria.whse"
+              }
+            }
+          }
+        },
+        {
+          "id": 106,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.prod",
+          "label": "global.finished.product",
+          "meta": "ProdAll",
+          "conditionShow": "advsrch.isSelected('prod')",
+          "controls": {
+            "actionBtn": {
+              "id": 137,
+              "type": "BTN",
+              "subType": "ACT",
+              "label": "global.inquire",
+              "eventClick": "mst.prodHyperlink()",
+              "conditionShow": "mst.advCriteria.prod"
+            }
+          }
+        },
+        {
+          "id": 75,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.compprod",
+          "label": "global.component.product",
+          "meta": "ProdAll",
+          "conditionShow": "advsrch.isSelected('compprod')",
+          "controls": {
+            "actionBtn": {
+              "id": 136,
+              "type": "BTN",
+              "subType": "ACT",
+              "label": "global.inquire",
+              "conditionShow": "mst.advCriteria.compprod",
+              "eventClick": "mst.compprodHyperlink()"
+            }
+          }
+        },
+        {
+          "id": 107,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.takenby",
+          "label": "global.taken.by",
+          "conditionShow": "advsrch.isSelected('takenby')",
+          "maxLength": 4,
+          "size": "XS"
+        },
+        {
+          "id": 101,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.fromentereddate",
+          "label": "global.entered.from",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('entereddate')",
+          "eventChange": "mst.fromenteredChanged()"
+        },
+        {
+          "id": 102,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.toentereddate",
+          "label": "global.entered.to",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('entereddate')",
+          "conditionRequired": "mst.advCriteria.fromentereddate"
+        },
+        {
+          "id": 109,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.frompromiseddate",
+          "label": "global.promised.from",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('promiseddate')",
+          "eventChange": "mst.frompromisedChanged()"
+        },
+        {
+          "id": 110,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.topromiseddate",
+          "label": "global.promised.to",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('promiseddate')",
+          "conditionRequired": "mst.advCriteria.frompromiseddate"
+        },
+        {
+          "id": 111,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.fromreqshipdate",
+          "label": "global.requested.ship.from",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('reqshipdate')",
+          "eventChange": "mst.fromreqshipChanged()"
+        },
+        {
+          "id": 112,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.toreqshipdate",
+          "label": "global.requested.ship.to",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('reqshipdate')",
+          "conditionRequired": "mst.advCriteria.fromreqshipdate"
+        },
+        {
+          "id": 113,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.fromestcompdt",
+          "label": "global.estimated.completion.from",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('estcompdt')",
+          "eventChange": "mst.fromestcompChanged()"
+        },
+        {
+          "id": 114,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.toestcompdt",
+          "label": "global.estimated.completion.to",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('estcompdt')",
+          "conditionRequired": "mst.advCriteria.fromestcompdt"
+        },
+        {
+          "id": 115,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.fromreceiptdt",
+          "label": "global.receipt.from",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('receiptdt')",
+          "eventChange": "mst.fromreceiptChanged()"
+        },
+        {
+          "id": 116,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.toreceiptdt",
+          "label": "global.receipt.to",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('receiptdt')",
+          "conditionRequired": "mst.advCriteria.fromreceiptdt"
+        },
+        {
+          "id": 120,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.slbotype",
+          "label": "global.backorder.filter",
+          "type3": "SET",
+          "metaGroup": "VA",
+          "meta": "BackOrderFilterType",
+          "conditionShow": "advsrch.isSelected('slbotype')",
+          "size": "SM",
+          "blankOption": true
+        },
+        {
+          "id": 121,
+          "type": "FIELD",
+          "subType": "MULTI_SELECT",
+          "model": "mst.advCriteria.stageList",
+          "label": "global.stage",
+          "type3": "SET",
+          "metaGroup": "VA",
+          "meta": "StageType",
+          "conditionShow": "advsrch.isSelected('slstage')",
+          "blankOption": false
+        },
+        {
+          "id": 122,
+          "type": "FIELD",
+          "subType": "MULTI_SELECT",
+          "model": "mst.advCriteria.transTypeList",
+          "label": "global.transaction.types",
+          "type3": "SET",
+          "metaGroup": "VA",
+          "meta": "TransferTransactionType",
+          "conditionShow": "advsrch.isSelected('sltranstype')",
+          "blankOption": false
+        },
+        {
+          "id": 124,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.slprodstat",
+          "label": "global.line.type",
+          "type3": "SET",
+          "metaGroup": "OE",
+          "meta": "LineType",
+          "conditionShow": "advsrch.isSelected('slprodstat')",
+          "blankOption": false,
+          "size": "SM"
+        },
+        {
+          "id": 132,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.custreservecontractno",
+          "label": "global.customer.reservations.contract",
+          "conditionShow": "advsrch.isSelected('custreservecontractno')"
+        },
+        {
+          "id": 134,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.irecordcountlimit",
+          "label": "global.record.limit",
+          "conditionShow": "advsrch.isSelected('irecordcountlimit')",
+          "size": "SM",
+          "dataFormat": "INTEGER",
+          "sign": "+",
+          "digits": 4
+        }
+      ]
+    }
+  ]
+}

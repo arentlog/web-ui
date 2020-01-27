@@ -1,0 +1,718 @@
+{
+  "viewId": "pd-pdec-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER",
+  "conditionShow": "base.isMaster()",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "!base.isInContinueMode",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.pdec",
+              "children": [
+                {
+                  "id": 130,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.previous",
+                  "icon": "icon-left-arrow",
+                  "conditionDisabled": "base.isInContinueMode",
+                  "eventClick": "base.previous()"
+                },
+                {
+                  "id": 131,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.next",
+                  "icon": "icon-right-arrow",
+                  "conditionDisabled": "base.isInContinueMode",
+                  "eventClick": "base.next()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 92,
+                  "type": "EXP_AREA",
+                  "label": "global.blank.label.string.for.space",
+                  "children": [
+                    {
+                      "id": 93,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 94,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 81,
+                              "type": "FIELD_SET",
+                              "label": "global.price.cost",
+                              "children": [
+                                {
+                                  "id": 89,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "base.updatePricecostCriteria.basetype",
+                                  "label": "global.base.price",
+                                  "meta": "PriceCostBaseType",
+                                  "type3": "SET",
+                                  "metaGroup": "PD",
+                                  "eventChange": "base.priceTypeChange('b')",
+                                  "blankOption": false,
+                                  "autoFocus": true
+                                },
+                                {
+                                  "id": 97,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "base.updatePricecostCriteria.listtype",
+                                  "label": "global.list.price",
+                                  "meta": "PriceCostListType",
+                                  "type3": "SET",
+                                  "metaGroup": "PD",
+                                  "eventChange": "base.priceTypeChange('l')",
+                                  "blankOption": false
+                                },
+                                {
+                                  "id": 108,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "base.updatePricecostCriteria.repltype",
+                                  "label": "global.replacement.cost",
+                                  "meta": "PriceCostReplacementType",
+                                  "type3": "SET",
+                                  "metaGroup": "PD",
+                                  "eventChange": "base.priceTypeChange('r')",
+                                  "blankOption": false
+                                },
+                                {
+                                  "id": 112,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "base.updatePricecostCriteria.stndtype",
+                                  "label": "global.standard.cost",
+                                  "meta": "PriceCostStandardType",
+                                  "type3": "SET",
+                                  "metaGroup": "PD",
+                                  "eventChange": "base.priceTypeChange('s')",
+                                  "blankOption": false
+                                },
+                                {
+                                  "id": 116,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "base.updatePricecostCriteria.icscupdt",
+                                  "label": "global.update.catalog"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 96,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 82,
+                              "type": "FIELD_SET",
+                              "label": "global.new.value",
+                              "children": [
+                                {
+                                  "id": 129,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 90,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.updatePricecostCriteria.baseprice",
+                                      "dataFormat": "CURRENCY",
+                                      "sign": "+",
+                                      "digits": 7,
+                                      "decimals": 5,
+                                      "conditionReadonly": "base.isBaseTypeEnabled",
+                                      "label": "global.new.base.price",
+                                      "labelHidden": true,
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 5,
+                                        "maximumFractionDigits": 5
+                                      }
+                                    },
+                                    {
+                                      "id": 98,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.updatePricecostCriteria.listprice",
+                                      "dataFormat": "CURRENCY",
+                                      "sign": "+",
+                                      "digits": 7,
+                                      "decimals": 5,
+                                      "conditionReadonly": "base.isListTypeEnabled",
+                                      "label": "global.new.list.price",
+                                      "labelHidden": true,
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 5,
+                                        "maximumFractionDigits": 5
+                                      }
+                                    },
+                                    {
+                                      "id": 109,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.updatePricecostCriteria.replcost",
+                                      "dataFormat": "CURRENCY",
+                                      "sign": "+",
+                                      "digits": 7,
+                                      "decimals": 5,
+                                      "conditionReadonly": "base.isReplTypeEnabled",
+                                      "label": "global.new.replacement.cost",
+                                      "labelHidden": true,
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 5,
+                                        "maximumFractionDigits": 5
+                                      }
+                                    },
+                                    {
+                                      "id": 113,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.updatePricecostCriteria.stndcost",
+                                      "dataFormat": "CURRENCY",
+                                      "sign": "+",
+                                      "digits": 7,
+                                      "decimals": 5,
+                                      "conditionReadonly": "base.isStndTypeEnabled",
+                                      "label": "global.new.standard.cost",
+                                      "labelHidden": true,
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 5,
+                                        "maximumFractionDigits": 5
+                                      }
+                                    },
+                                    {
+                                      "id": 117,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.updatePricecostCriteria.lastcost",
+                                      "label": "global.last.cost",
+                                      "dataFormat": "CURRENCY",
+                                      "digits": 9,
+                                      "decimals": 5,
+                                      "readonly": true,
+                                      "sign": "+"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 95,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 83,
+                              "type": "FIELD_SET",
+                              "label": "global.current.value.and.date",
+                              "children": [
+                                {
+                                  "id": 101,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 104,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.updatePricecostCriteria.basepriceorig",
+                                      "size": "SM",
+                                      "dataFormat": "CURRENCY",
+                                      "sign": "+",
+                                      "digits": 7,
+                                      "decimals": 5,
+                                      "readonly": true,
+                                      "label": "global.old.base.price",
+                                      "labelHidden": true,
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 5,
+                                        "maximumFractionDigits": 5
+                                      }
+                                    },
+                                    {
+                                      "id": 105,
+                                      "type": "FIELD",
+                                      "subType": "DATE",
+                                      "model": "base.updatePricecostCriteria.basedt",
+                                      "dataFormat": "DATE",
+                                      "size": "SM",
+                                      "readonly": true,
+                                      "label": "global.base.price",
+                                      "labelHidden": true
+                                    },
+                                    {
+                                      "id": 106,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.updatePricecostCriteria.listpriceorig",
+                                      "size": "SM",
+                                      "dataFormat": "CURRENCY",
+                                      "sign": "+",
+                                      "digits": 7,
+                                      "decimals": 5,
+                                      "readonly": true,
+                                      "label": "global.old.list.price",
+                                      "labelHidden": true,
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 5,
+                                        "maximumFractionDigits": 5
+                                      }
+                                    },
+                                    {
+                                      "id": 107,
+                                      "type": "FIELD",
+                                      "subType": "DATE",
+                                      "model": "base.updatePricecostCriteria.listdt",
+                                      "dataFormat": "DATE",
+                                      "size": "SM",
+                                      "readonly": true,
+                                      "label": "global.list.price",
+                                      "labelHidden": true
+                                    },
+                                    {
+                                      "id": 110,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.updatePricecostCriteria.replcostorig",
+                                      "readonly": true,
+                                      "size": "SM",
+                                      "dataFormat": "CURRENCY",
+                                      "sign": "+",
+                                      "digits": 7,
+                                      "decimals": 5,
+                                      "label": "global.old.replacement.cost",
+                                      "labelHidden": true,
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 5,
+                                        "maximumFractionDigits": 5
+                                      }
+                                    },
+                                    {
+                                      "id": 111,
+                                      "type": "FIELD",
+                                      "subType": "DATE",
+                                      "model": "base.updatePricecostCriteria.repldt",
+                                      "dataFormat": "DATE",
+                                      "size": "SM",
+                                      "readonly": true,
+                                      "label": "global.replacement.cost.date",
+                                      "labelHidden": true
+                                    },
+                                    {
+                                      "id": 114,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "base.updatePricecostCriteria.stndcostorig",
+                                      "size": "SM",
+                                      "dataFormat": "CURRENCY",
+                                      "sign": "+",
+                                      "digits": 7,
+                                      "decimals": 5,
+                                      "readonly": true,
+                                      "label": "global.old.standard.cost",
+                                      "labelHidden": true,
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 5,
+                                        "maximumFractionDigits": 5
+                                      }
+                                    },
+                                    {
+                                      "id": 115,
+                                      "type": "FIELD",
+                                      "subType": "DATE",
+                                      "model": "base.updatePricecostCriteria.stnddt",
+                                      "readonly": true,
+                                      "dataFormat": "DATE",
+                                      "label": "global.standard.cost",
+                                      "labelHidden": true
+                                    },
+                                    {
+                                      "id": 126,
+                                      "type": "BTN",
+                                      "subType": "PRI",
+                                      "label": "global.update",
+                                      "submitForm": true,
+                                      "securityLevel": 3,
+                                      "conditionDisabled": "!base.isInContinueMode",
+                                      "eventValidated": "mst.update()"
+                                    },
+                                    {
+                                      "id": 127,
+                                      "type": "BTN",
+                                      "subType": "TER",
+                                      "label": "global.reset",
+                                      "eventClick": "mst.reset()",
+                                      "conditionDisabled": "!base.isInContinueMode"
+                                    },
+                                    {
+                                      "id": 128,
+                                      "type": "BTN",
+                                      "subType": "TER",
+                                      "label": "global.cancel",
+                                      "conditionDisabled": "!base.isInContinueMode",
+                                      "eventClick": "mst.cancel()"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 118,
+                  "type": "EXP_AREA",
+                  "label": "global.pricing.parameters",
+                  "children": [
+                    {
+                      "id": 119,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 120,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 122,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "base.updatePricecostCriteria.pround",
+                              "label": "global.round",
+                              "meta": "PriceRoundingType",
+                              "type3": "SET",
+                              "metaGroup": "COMMON",
+                              "blankOption": true
+                            },
+                            {
+                              "id": 124,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.updatePricecostCriteria.pexactrnd",
+                              "label": "global.user.target",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 3,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 121,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 123,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "base.updatePricecostCriteria.ptarget",
+                              "label": "global.target",
+                              "meta": "PriceTargetType",
+                              "type3": "SET",
+                              "metaGroup": "COMMON",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 125,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.updatePricecostCriteria.pricetype",
+                              "label": "global.product.price.type",
+                              "meta": "ProdPriceTy"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 16,
+                  "type": "GRID",
+                  "controlRef": "base.grid",
+                  "model": "mst.pdecUpdatePriceCostResults",
+                  "controls": {
+                    "toolbar": {
+                      "id": 15,
+                      "type": "TOOLBAR",
+                      "label": "global.change.prices.and.costs",
+                      "children": []
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prod",
+                      "label": "global.product"
+                    },
+                    {
+                      "id": 23,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "notesfl",
+                      "label": "global.notes",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "whse",
+                      "label": "global.warehouse"
+                    },
+                    {
+                      "id": 31,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "basetype",
+                      "label": "global.base.type",
+                      "customFormatter": "mst.typeFormatter()"
+                    },
+                    {
+                      "id": 33,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "baseprice",
+                      "label": "global.base.value.chg",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 35,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "basepriceorig",
+                      "label": "global.base.orig",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 34,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "basepricenew",
+                      "label": "global.base.new",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 37,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "listtype",
+                      "label": "global.list.type",
+                      "customFormatter": "mst.typeFormatter()"
+                    },
+                    {
+                      "id": 39,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "listprice",
+                      "label": "global.list.value.chg",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 41,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "listpriceorig",
+                      "label": "global.list.orig",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 40,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "listpricenew",
+                      "label": "global.list.new",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 43,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "repltype",
+                      "label": "global.replacement.type",
+                      "customFormatter": "mst.typeFormatter()"
+                    },
+                    {
+                      "id": 45,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "replcost",
+                      "label": "global.replacement.value.chg",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 47,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "replcostorig",
+                      "label": "global.replacement.orig",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 46,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "replcostnew",
+                      "label": "global.replacement.new",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 49,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "stndtype",
+                      "label": "global.standard.type",
+                      "customFormatter": "mst.typeFormatter()"
+                    },
+                    {
+                      "id": 51,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "stndcost",
+                      "label": "global.standard.value.chg",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 53,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "stndcostorig",
+                      "label": "global.standard.orig",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 52,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "stndcostnew",
+                      "label": "global.standard.new",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 59,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "pround",
+                      "label": "global.round",
+                      "customFormatter": "mst.roundTypeFormatter()"
+                    },
+                    {
+                      "id": 61,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "ptarget",
+                      "label": "global.target",
+                      "customFormatter": "mst.targetTypeFormatter()"
+                    },
+                    {
+                      "id": 63,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "pexactrnd",
+                      "label": "global.pricing.round",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 64,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "pricetype",
+                      "label": "global.price.type"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

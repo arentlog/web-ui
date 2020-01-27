@@ -1,0 +1,95 @@
+<div ng-show="sp.searchResults.length > 0" initialize>
+   <div class="toolbar" role="toolbar">
+      <div class="title">
+         <span translate>global.products</span>
+         <span>({{sp.searchResults.length}})</span>
+      </div>
+      <div class="buttonset">
+         <button class="btn-secondary" type="button" ng-click="sp.addAllWithQuantity()" ng-disabled="!sp.wlwhsechgfl" translate>global.add.all.lines.with.quantity</button>
+      </div>
+   </div>
+   <div list-view data-model="sp.searchResults" data-on-paging="sp.getPricingData()">
+      <div class="listview tableview paginated" data-init="false" style="overflow-y: hidden;">
+         <table role="grid" class="listview-table show-headers">
+            <thead>
+               <tr>
+                  <th scope="col" role="columnheader" translate>global.image</th>
+                  <th scope="col" role="columnheader" style="max-width: 250px" translate>global.description</th>
+                  <th scope="col" role="columnheader" translate>global.price</th>
+                  <th scope="col" role="columnheader" translate>global.unit</th>
+                  <th scope="col" role="columnheader" translate>global.quantity</th>
+                  <th scope="col" role="columnheader" translate>global.action</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr ng-repeat="item in sp.searchResults | limitTo:list.pageSize:list.startIndex track by $index">
+                  <td>
+                     <div class="image-sm" ng-if="item.image">
+                        <img ng-src="{{item.image}}" />
+                     </div>
+                     <div class="image-sm placeholder" ng-if="!item.image">
+                        <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                           <use xlink:href="#icon-insert-image"></use>
+                        </svg>
+                        <span class="audible">Placeholder Image</span>
+                     </div>
+                  </td>
+                  <td style="max-width: 250px">
+                     <p>
+                        <a ng-click="sp.navigateToProduct(item.value)" class="hyperlink">{{item.Description || item.value}}</a>
+                     </p>
+                     <ul class="info">
+                        <li ng-show="item.value"><span translate>global.product.number</span>: <strong>{{item.value}}</strong></li>
+                        <li ng-show="item.ExtendedDescription"><span translate>global.description</span>: <strong style="text-overflow: ellipsis; max-width: 200px; overflow: hidden">{{item.ExtendedDescription}}</strong></li>
+                        <li><span translate>global.in.stock</span>: <strong>{{item.calc_qtyavail}}</strong></li>
+                     </ul>
+                  </td>
+                  <td>
+                     <div class="field" style="margin-top: 20px" initialize>
+                        <span class="data" formatter="CURRENCY" data-model="item.Price" data-format-options='{"minimumFractionDigits":2}'></span>
+                     </div>
+                  </td>
+                  <td>
+                     <div class="field" style="margin-top: 40px">
+                        <input type="text"
+                               class="lookup input-sm"
+                               data-model="item.calc_uom"
+                               data-on-change="sp.repriceLine(item)"
+                               lookup="Units"
+                               style="text-align: left"
+                               ng-show="item.calc_uom"
+                               ng-readonly="item.rectype !== 'icsw' || !sp.wlwhsechgfl || item.Error"
+                               data-lookup-options='{"autoFetchMetadata":false,"searchParams":{"prod":{"type":"REF","value":"item.value"}}}'
+                               autocomplete="off" />
+                     </div>
+                  </td>
+                  <td>
+                     <div class="field" style="margin-top: 20px" initialize>
+                        <input type="text"
+                               class="input-xs"
+                               placeholder="{{base.easyDefaultQuantity}}"
+                               field-format="DECIMAL"
+                               style="text-align: right"
+                               data-digits="7"
+                               data-decimals="2"
+                               data-format-options='{"minimumFractionDigits":2}'
+                               autocomplete="off"
+                               ng-readonly="item.rectype !== 'icsw' || !sp.wlwhsechgfl || item.Error"
+                               ng-hide="!item.QuantityOrdered && item.rectype !== 'icsw'"
+                               ng-model="item.QuantityOrdered"/>
+                     </div>
+                  </td>
+                  <td class="l-right-text">
+                     <svg class="icon icon-alert" style="margin-top: 5px" focusable="false" aria-hidden="true" role="presentation" tooltip="item.Tooltip" ng-show="(item.Warning && item.rectype === 'icsw') || item.Error">
+                        <use xlink:href="#icon-alert"></use>
+                     </svg>
+                     <span class="audible">Alert</span>
+                     <button class="btn-primary" type="button" ng-show="item.rectype === 'icsw'" style="margin-top: 5px" ng-click="sp.addProduct(item)" ng-disabled="!sp.wlwhsechgfl || item.Error" translate>global.add.item</button>
+                     <button class="btn-secondary" type="button" ng-click="sp.details(item)" style="margin-top: 5px" translate>global.details</button>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+</div>

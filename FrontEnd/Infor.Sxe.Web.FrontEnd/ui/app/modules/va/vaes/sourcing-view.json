@@ -1,0 +1,370 @@
+{
+  "viewId": "va-vaes-sourcingview",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "conditionReadonly": "base.isLineItemsTabReadonly",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "{{base.sourcingTitle}}",
+              "subLabel": "{{base.subtitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.detail()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 301,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "submitForm": true,
+                  "eventValidated": "vsc.submit()",
+                  "conditionDisabled": "base.isLineItemsTabReadonly"
+                },
+                {
+                  "id": 310,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "stateRef": "^.detail"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "EXP_AREA",
+                  "label": "global.document.informaton",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 10,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 11,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "vsc.valinelinetie.ordertype",
+                              "label": "global.type",
+                              "type3": "SET",
+                              "metaGroup": "VA",
+                              "meta": "VASourceOrderTypes",
+                              "conditionDisabled": "!vsc.valinelinetie.ordertypeenabled || base.isLineItemsTabReadonly",
+                              "eventChange": "vsc.vasourceOrderChange()"
+                            },
+                            {
+                              "id": 311,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "vsc.pono",
+                              "label": "global.purchase.order.number",
+                              "meta": "POOrders",
+                              "conditionDisabled": "!vsc.valinelinetie.orderaltnoenabled || base.isLineItemsTabReadonly",
+                              "eventChange": "vsc.ponochanged()",
+                              "conditionShow": "vsc.isPOVisible"
+                            },
+                            {
+                              "id": 312,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "vsc.pono",
+                              "label": "global.warehouse.transfer.number",
+                              "meta": "WTOrders",
+                              "conditionDisabled": "!vsc.valinelinetie.orderaltnoenabled || base.isLineItemsTabReadonly",
+                              "eventChange": "vsc.ponochanged()",
+                              "conditionShow": "vsc.isWTVisible"
+                            },
+                            {
+                              "id": 313,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "vsc.pono",
+                              "label": "global.value.add.number",
+                              "meta": "VAOrders",
+                              "conditionDisabled": "!vsc.valinelinetie.orderaltnoenabled || base.isLineItemsTabReadonly",
+                              "eventChange": "vsc.ponochanged()",
+                              "conditionShow": "vsc.isVAVisible"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 13,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 14,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "vsc.valinelinetie.vaverno",
+                              "label": "global.version.number",
+                              "meta": "ValueAddVersion",
+                              "conditionShow": "!vsc.valinelinetie.vavernohidden",
+                              "conditionDisabled": "!vsc.isVernoEnable || base.isLineItemsTabReadonly",
+                              "options": {
+                                "searchParams": {
+                                  "Prod": "vsc.firstselectedline.shipprod",
+                                  "Whse": "vsc.firstselectedline.whse"
+                                }
+                              }
+                            },
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "vsc.valinelinetie.backordertype",
+                              "label": "global.disposition",
+                              "type3": "SET",
+                              "metaGroup": "VA",
+                              "meta": "VABackOrderTypes",
+                              "conditionDisabled": "!vsc.valinelinetie.backordertypeenabled || base.isLineItemsTabReadonly",
+                              "eventChange": "vsc.vadispositionChange()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 16,
+                  "type": "EXP_AREA",
+                  "label": "global.purchase.order",
+                  "conditionShow": "vsc.valinelinetie.ordertype.toLowerCase() === 'p'",
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "vsc.valinelinetie.vendno",
+                              "label": "global.vendor.number",
+                              "meta": "Vendor",
+                              "conditionDisabled": "!vsc.valinelinetie.vendnoenabled || base.isLineItemsTabReadonly",
+                              "options": {
+                                "searchParams": {
+                                  "LookupParameter": "apsv"
+                                }
+                              }
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "vsc.valinelinetie.poshipvia",
+                              "label": "global.ship.via",
+                              "meta": "ShipVia",
+                              "conditionDisabled": "!vsc.valinelinetie.poshipviaenabled || base.isLineItemsTabReadonly"
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "vsc.valinelinetie.shipfmno",
+                              "label": "global.ship.from",
+                              "meta": "ShipFrom",
+                              "conditionDisabled": "!vsc.valinelinetie.shipfmnoenabled || base.isLineItemsTabReadonly",
+                              "options": {
+                                "searchParams": {
+                                  "LookupParameter": "apss"
+                                }
+                              }
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "vsc.valinelinetie.phoneno",
+                              "label": "global.phone",
+                              "dataFormat": "PHONE"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 20,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "vsc.valinelinetie.faxphoneno",
+                              "label": "global.fax"
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "vsc.valinelinetie.poduedate",
+                              "label": "global.due.date",
+                              "dataFormat": "DATE",
+                              "conditionDisabled": "!vsc.valinelinetie.poduedateenabled || base.isLineItemsTabReadonly"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "vsc.valinelinetie.orderdate",
+                              "label": "global.order.date",
+                              "dataFormat": "DATE",
+                              "conditionShow": "vsc.valinelinetie.orderdatehidden"
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "vsc.valinelinetie.fob",
+                              "label": "global.fob",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!vsc.valinelinetie.fobenabled || base.isLineItemsTabReadonly"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "vsc.valinelinetie.confirm",
+                              "label": "global.confirm",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!vsc.valinelinetie.confirmenabled || base.isLineItemsTabReadonly"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 30,
+                  "type": "EXP_AREA",
+                  "label": "global.warehouse.transfer",
+                  "conditionShow": "vsc.valinelinetie.ordertype.toLowerCase() === 't'",
+                  "children": [
+                    {
+                      "id": 31,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "vsc.valinelinetie.wtwhse",
+                              "label": "global.warehouse",
+                              "meta": "Warehouse",
+                              "conditionDisabled": "!vsc.valinelinetie.wtwhseenabled || base.isLineItemsTabReadonly"
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "vsc.valinelinetie.backtietype",
+                              "label": "global.back.tie",
+                              "type3": "SET",
+                              "metaGroup": "VA",
+                              "meta": "VASourceBackTieTypes",
+                              "conditionDisabled": "!vsc.valinelinetie.backtietypeenabled || base.isLineItemsTabReadonly",
+                              "conditionShow": "vsc.valinelinetie.backtietypehidden"
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "vsc.valinelinetie.wtduedate",
+                              "label": "global.due.date",
+                              "dataFormat": "DATE",
+                              "conditionDisabled": "!vsc.valinelinetie.wtduedateenabled || base.isLineItemsTabReadonly"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 34,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "vsc.valinelinetie.powtaltno",
+                              "label": "po.wt.number",
+                              "conditionDisabled": "!vsc.valinelinetie.powtaltnoenabled || base.isLineItemsTabReadonly",
+                              "conditionShow": "vsc.valinelinetie.powtaltnohidden"
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "vsc.valinelinetie.wtshipvia",
+                              "label": "global.ship.via",
+                              "meta": "ShipVia",
+                              "conditionDisabled": "!vsc.valinelinetie.wtshipviaenabled || base.isLineItemsTabReadonly"
+                            },
+                            {
+                              "id": 41,
+                              "type": "BTN",
+                              "subType": "PRI",
+                              "label": "global.sourcing",
+                              "conditionDisabled": "!vsc.valinelinetie.backtiesrcenabled || base.isLineItemsTabReadonly",
+                              "conditionShow": "vsc.valinelinetie.backtiesrchidden"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

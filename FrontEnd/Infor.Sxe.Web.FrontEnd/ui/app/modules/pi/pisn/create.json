@@ -1,0 +1,179 @@
+{
+  "viewId": "pi-pisn-create",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.new.product.defaults",
+              "subLabel": "{{getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "stateRef": "^.master"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.pisn.imptype",
+                          "label": "global.import.type",
+                          "meta": "ImportType",
+                          "required": true,
+                          "autoFocus": true
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.pisn.vendcd",
+                          "label": "global.vendor.code",
+                          "meta": "SLVendorCode",
+                          "options": {
+                            "searchParams": {
+                              "imptype": {
+                                "type": "REF",
+                                "value": "dtl.pisn.imptype"
+                              }
+                            },
+                            "allowEntry": true,
+                            "autoSelect": false
+                          }
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.pisn.linecd",
+                          "label": "global.line.code",
+                          "meta": "SLLineCode",
+                          "options": {
+                            "searchParams": {
+                              "imptype": {
+                                "type": "REF",
+                                "value": "dtl.pisn.imptype"
+                              },
+                              "vendcd": {
+                                "type": "REF",
+                                "value": "dtl.pisn.vendcd"
+                              }
+                            },
+                            "allowEntry": true,
+                            "autoSelect": false
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 15,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.pisn.vendno",
+                          "label": "global.vendor",
+                          "meta": "Vendor",
+                          "dataFormat": "DECIMAL_TEXT",
+                          "digits": 12,
+                          "decimals": 0,
+                          "sign": "+",
+                          "required": true
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.pisn.prodline",
+                          "label": "global.product.line",
+                          "meta": "ProdLine",
+                          "readonly": false,
+                          "required": true,
+                          "options": {
+                            "searchParams": {
+                              "vendno": {
+                                "type": "REF",
+                                "value": "dtl.pisn.vendno"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.pisn.prodcat",
+                          "label": "global.product.category",
+                          "meta": "ProdCat",
+                          "required": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

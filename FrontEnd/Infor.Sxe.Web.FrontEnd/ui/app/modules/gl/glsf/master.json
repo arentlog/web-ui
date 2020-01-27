@@ -1,0 +1,179 @@
+{
+  "viewId": "gl-glsf-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "conditionShow": "",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isMaster()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.glsf",
+          "subLabel": "{{base.getSubTitle()}}",
+          "children": [
+            {
+              "id": 11,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-new-document",
+              "label": "global.new",
+              "stateRef": "",
+              "securityLevel": 4,
+              "eventClick": "mst.createStatement()"
+            },
+            {
+              "id": 23,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-edit",
+              "label": "global.edit",
+              "stateRef": "",
+              "securityLevel": 3,
+              "eventClick": "mst.editStatement()"
+            },
+            {
+              "id": 12,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-delete",
+              "label": "global.delete",
+              "eventClick": "mst.deleteStatement()",
+              "securityLevel": 5
+            },
+            {
+              "id": 18,
+              "type": "BTN",
+              "subType": "MENU",
+              "label": "global.actions",
+              "children": [
+                {
+                  "id": 19,
+                  "type": "MENU_OPT",
+                  "label": "global.duplicate.lines",
+                  "icon": "icon-copy",
+                  "securityLevel": 4,
+                  "eventClick": "mst.duplicateLines()"
+                },
+                {
+                  "id": 20,
+                  "type": "MENU_OPT",
+                  "label": "global.move.lines",
+                  "icon": "icon-down-arrow",
+                  "eventClick": "mst.moveLines()"
+                },
+                {
+                  "id": 21,
+                  "type": "MENU_OPT",
+                  "label": "global.renumber",
+                  "icon": "icon-number-list",
+                  "securityLevel": 5,
+                  "eventClick": "mst.renumberLines()"
+                }
+              ]
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 25,
+              "type": "GRID",
+              "model": "base.dataset",
+              "controlRef": "base.grid",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 26,
+                  "type": "TOOLBAR",
+                  "label": "global.sequences",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-new-document",
+                      "label": "global.new",
+                      "stateRef": "",
+                      "securityLevel": 4,
+                      "eventClick": "mst.createSequence()",
+                      "conditionDisabled": "!(base.grid.isNoRowSelected() || base.grid.isOneRowSelected())"
+                    },
+                    {
+                      "id": 22,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-edit",
+                      "label": "global.edit",
+                      "stateRef": "",
+                      "securityLevel": 3,
+                      "eventClick": "mst.editSequence()",
+                      "conditionDisabled": "!base.grid.isOneRowSelected()"
+                    },
+                    {
+                      "id": 17,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-delete",
+                      "label": "global.delete",
+                      "eventClick": "mst.deleteSequence()",
+                      "securityLevel": 5,
+                      "conditionDisabled": "!base.grid.isAnyRowSelected()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "seqno",
+                  "label": "global.sequence.number"
+                },
+                {
+                  "id": 28,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "recDesc",
+                  "label": "global.type"
+                },
+                {
+                  "id": 30,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "comment",
+                  "label": "global.comment"
+                },
+                {
+                  "id": 29,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "recInfo",
+                  "label": "global.values"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 24,
+      "type": "VIEW_CNTR",
+      "viewName": "masterEdit"
+    }
+  ]
+}

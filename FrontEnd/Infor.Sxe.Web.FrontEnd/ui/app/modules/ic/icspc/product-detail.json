@@ -1,0 +1,358 @@
+{
+  "viewId": "ic-icspc-productdetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "conditionReadonly": "dtl.isProductTabReadonly",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.product.detail",
+              "subLabel": "",
+              "controls": {
+                "navBtns": {
+                  "id": 8,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "securityLevel": 3,
+                  "eventClick": "sub.submit()"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "",
+                  "stateRef": "^"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 29,
+                  "type": "EXP_AREA",
+                  "label": "global.product.detail",
+                  "children": [
+                    {
+                      "id": 30,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 10,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 11,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 12,
+                                      "type": "FIELD",
+                                      "subType": "LOOKUP",
+                                      "model": "sub.icspcdaddchg.product",
+                                      "label": "global.product",
+                                      "meta": "ProdAll",
+                                      "conditionReadonly": "sub.isChangeMode() || dtl.isProductTabReadonly",
+                                      "required": true,
+                                      "eventChange": "sub.loadICSWValues()",
+                                      "controls": {
+                                        "actionBtn": {
+                                          "id": 46,
+                                          "type": "BTN",
+                                          "subType": "ICON",
+                                          "label": "global.inquire",
+                                          "icon": "icon-drilldown",
+                                          "isLabelTooltip": true,
+                                          "conditionDisabled": "!sub.icspcdaddchg.product",
+                                          "eventClick": "sub.productInquiryHyperlink()"
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "id": 13,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "sub.icspcdaddchg.qtyrequired",
+                                      "label": "global.required.quantity",
+                                      "dataFormat": "DECIMAL",
+                                      "sign": "+",
+                                      "digits": 9,
+                                      "decimals": 2,
+                                      "conditionShow": "!sub.isForecast()",
+                                      "required": true
+                                    },
+                                    {
+                                      "id": 14,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "sub.icspcdaddchg.qtyexpected",
+                                      "label": "global.total.expected.quantity",
+                                      "dataFormat": "DECIMAL",
+                                      "sign": "+",
+                                      "digits": 9,
+                                      "decimals": 2,
+                                      "conditionReadonly": "sub.isForecast() || dtl.isProductTabReadonly"
+                                    },
+                                    {
+                                      "id": 16,
+                                      "type": "COMP_FLD",
+                                      "children": [
+                                        {
+                                          "id": 17,
+                                          "type": "FIELD",
+                                          "subType": "CHECKBOX",
+                                          "model": "sub.icspcdaddchg.allowpullqtyfl",
+                                          "label": "global.allowed.to.pull.quantity",
+                                          "dataFormat": "LOGICAL",
+                                          "conditionShow": "!sub.isForecast()"
+                                        },
+                                        {
+                                          "id": 18,
+                                          "type": "FIELD",
+                                          "subType": "CHECKBOX",
+                                          "model": "sub.icspcdaddchg.replenishfl",
+                                          "label": "global.replenish.stock",
+                                          "dataFormat": "LOGICAL",
+                                          "conditionShow": "!sub.isForecast()"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": 15,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "sub.icspcdaddchg.qtyreserved",
+                                      "label": "global.reserved.quantity",
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 9,
+                                      "decimals": 2,
+                                      "conditionShow": "!sub.isForecast()",
+                                      "conditionReadonly": "!sub.isOperatorChgBal() || dtl.isProductTabReadonly"
+                                    },
+                                    {
+                                      "id": 32,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "sub.icspcdaddchg.expectedratepct",
+                                      "label": "global.expected.run.rate.percent",
+                                      "dataFormat": "INTEGER",
+                                      "sign": "+",
+                                      "digits": 4,
+                                      "maxLength": 4,
+                                      "conditionShow": "sub.isForecast()"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 19,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 20,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "sub.icspcdaddchg.qtysold",
+                                      "label": "global.total.quantity.sold",
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 9,
+                                      "decimals": 2,
+                                      "readonly": true
+                                    },
+                                    {
+                                      "id": 21,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "sub.icspcdaddchg.lastinvdt",
+                                      "label": "global.last.invoice.date",
+                                      "dataFormat": "DATE",
+                                      "readonly": true
+                                    },
+                                    {
+                                      "id": 22,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "sub.icspcdaddchg.createdt",
+                                      "label": "global.created.date",
+                                      "dataFormat": "DATE",
+                                      "readonly": true
+                                    },
+                                    {
+                                      "id": 23,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "sub.icspcdaddchg.qtyavail",
+                                      "label": "icsw.net.available",
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 9,
+                                      "decimals": 2,
+                                      "readonly": true,
+                                      "conditionShow": "!sub.isForecast()"
+                                    },
+                                    {
+                                      "id": 24,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "sub.icspcdaddchg.qtybo",
+                                      "label": "icsw.demand.quantity",
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 9,
+                                      "decimals": 2,
+                                      "readonly": true,
+                                      "conditionShow": "!sub.isForecast()"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 38,
+                  "type": "EXP_AREA",
+                  "label": "global.forecast.data",
+                  "conditionShow": "sub.isForecast()",
+                  "children": [
+                    {
+                      "id": 39,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 40,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 41,
+                              "type": "GRID",
+                              "model": "sub.forecastGrid",
+                              "conditionShow": "sub.isForecast()",
+                              "options": {
+                                "editable": true
+                              },
+                              "controls": {
+                                "toolbar": {
+                                  "id": 42,
+                                  "type": "TOOLBAR",
+                                  "label": "global.forecast",
+                                  "conditionShow": "sub.isForecast()"
+                                }
+                              },
+                              "children": [
+                                {
+                                  "id": 43,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "monthLabel",
+                                  "label": "global.month"
+                                },
+                                {
+                                  "id": 44,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "forecastData",
+                                  "label": "global.forecast",
+                                  "editable": true,
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "dataFormat": "DECIMAL"
+                                },
+                                {
+                                  "id": 45,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "actualData",
+                                  "label": "global.actual",
+                                  "editable": true,
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "cellEditable": "sub.allowActualQtyChg()",
+                                  "dataFormat": "DECIMAL"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 26,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 27,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 28,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 25,
+                              "type": "CUSTOM",
+                              "subType": "UserFields",
+                              "options": {
+                                "tableName": "icspcd",
+                                "objectRef": "sub.icspcdaddchg"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1330 @@
+{
+  "viewId": "twl-twlom-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isMaster()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.twlom",
+          "subLabel": "{{base.getSubTitle()}}",
+          "children": [
+            {
+              "id": 168,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.emergency",
+              "conditionShow": "base.ominfo.isEmergencyAnywhere",
+              "eventClick": "base.searchForEmergencies()",
+              "icon": "icon-alert"
+            },
+            {
+              "id": 169,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.exceptions",
+              "eventValidated": "alias.submit()",
+              "conditionShow": "base.ominfo.isExceptionsAnywhere",
+              "eventClick": "base.goToExceptions()"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 134,
+              "type": "EXP_AREA",
+              "label": "global.advanced.search",
+              "collapsed": true,
+              "children": [
+                {
+                  "id": 135,
+                  "type": "CUSTOM",
+                  "subType": "AdvancedSearch",
+                  "options": {
+                    "criteria": "mst.advCriteria",
+                    "criteriaList": "mst.criteriaList",
+                    "criteriaView": "twl/twlom/advanced-criteria.json",
+                    "defaultSelectedCriteria": "mst.defaultSelectedCriteria",
+                    "searchFunction": "mst.search",
+                    "eventReady": "mst.advCriteriaReady()"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 148,
+              "type": "EXP_AREA",
+              "label": "global.search.results.summary",
+              "conditionShow": "base.datasummary",
+              "collapsed": true,
+              "children": [
+                {
+                  "id": 189,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 190,
+                      "type": "COL",
+                      "subType": "1/4",
+                      "children": [
+                        {
+                          "id": 182,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "mst.showSelectedTotals",
+                          "label": "global.show.selected.totals",
+                          "dataFormat": "LOGICAL",
+                          "eventChange": "mst.orderSelectionChange()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 193,
+                      "type": "COL",
+                      "subType": "1/4",
+                      "children": [
+                        {
+                          "id": 187,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "mst.ttblomselectedordertotals.total_weight",
+                          "label": "global.total.selected.weight",
+                          "dataFormat": "DECIMAL",
+                          "conditionShow": "mst.showSelectedTotals",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 192,
+                      "type": "COL",
+                      "subType": "1/4",
+                      "children": [
+                        {
+                          "id": 188,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "mst.ttblomselectedordertotals.total_cube",
+                          "label": "global.total.selected.cube",
+                          "dataFormat": "DECIMAL",
+                          "conditionShow": "mst.showSelectedTotals",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 191,
+                      "type": "COL",
+                      "subType": "1/4",
+                      "children": [
+                        {
+                          "id": 184,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "mst.ttblomselectedordertotals.total_line_cnt",
+                          "label": "global.total.selected.lines",
+                          "conditionShow": "mst.showSelectedTotals"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 149,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 194,
+                      "type": "COL",
+                      "subType": "1/4",
+                      "children": [
+                        {
+                          "id": 159,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.datasummary.totalOrders",
+                          "label": "global.total"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 150,
+                      "type": "COL",
+                      "subType": "1/4",
+                      "children": [
+                        {
+                          "id": 153,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.datasummary.openOrders",
+                          "label": "global.open",
+                          "dataFormat": "INTEGER"
+                        },
+                        {
+                          "id": 154,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.datasummary.inPickOrders",
+                          "label": "global.in.pick",
+                          "dataFormat": "INTEGER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 152,
+                      "type": "COL",
+                      "subType": "1/4",
+                      "children": [
+                        {
+                          "id": 155,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.datasummary.pickedOrders",
+                          "label": "global.picked",
+                          "dataFormat": "INTEGER"
+                        },
+                        {
+                          "id": 156,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.datasummary.packedOrders",
+                          "label": "global.packed",
+                          "dataFormat": "INTEGER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 151,
+                      "type": "COL",
+                      "subType": "1/4",
+                      "children": [
+                        {
+                          "id": 157,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.datasummary.shippedOrders",
+                          "label": "global.shipped",
+                          "dataFormat": "INTEGER"
+                        },
+                        {
+                          "id": 158,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.datasummary.exceptionOrders",
+                          "label": "global.exceptions",
+                          "dataFormat": "INTEGER"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "type": "GRID",
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showCheckboxes": true,
+                "events": {
+                  "selected": "mst.orderSelectionChange()"
+                },
+                "showExpander": true,
+                "rowDetailOptions": {
+                  "template": "twl/twlom/line-detail.json",
+                  "controller": "TwlomRowDetailCtrl as rwd",
+                  "paramsReference": "mst.rowParams"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "{{base.getMainGridLabel()}}",
+                  "children": [
+                    {
+                      "id": 137,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.drop",
+                      "conditionDisabled": "!mst.dropButtonEnabled",
+                      "eventClick": "base.dropPrinterSelection()"
+                    },
+                    {
+                      "id": 138,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.zero.ship",
+                      "conditionDisabled": "!mst.dropButtonEnabled",
+                      "eventClick": "base.zeroShip()"
+                    },
+                    {
+                      "id": 139,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.undrop",
+                      "conditionDisabled": "!mst.unDropButtonEnabled",
+                      "eventClick": "base.unDrop()"
+                    },
+                    {
+                      "id": 141,
+                      "type": "BTN",
+                      "subType": "MENU",
+                      "label": "global.update",
+                      "children": [
+                        {
+                          "id": 142,
+                          "type": "MENU_OPT",
+                          "label": "global.in.use.change.to.open",
+                          "conditionDisabled": "!mst.inUseCount",
+                          "eventClick": "mst.updateInUseToOpen()"
+                        },
+                        {
+                          "id": 143,
+                          "type": "MENU_OPT",
+                          "label": "global.carrier",
+                          "eventClick": "mst.updateCarrier()",
+                          "conditionDisabled": "!mst.openCount"
+                        },
+                        {
+                          "id": 144,
+                          "type": "MENU_OPT",
+                          "label": "global.rush",
+                          "eventClick": "mst.setToRush()",
+                          "conditionDisabled": "!mst.openCount"
+                        },
+                        {
+                          "id": 174,
+                          "type": "MENU_OPT",
+                          "label": "global.assign.employees",
+                          "conditionDisabled": "!(base.grid.isOneRowSelected() && mst.openAssignedCount && (!mst.shipCount))",
+                          "eventClick": "mst.setEmployees()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 170,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-comment",
+                      "label": "global.comments",
+                      "securityLevel": 3,
+                      "eventClick": "mst.viewComments()",
+                      "conditionDisabled": "!base.grid.isOneRowSelected() || !mst.commentsExist"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "order",
+                  "label": "global.order.number",
+                  "eventClick": "mst.orderInquiryHyperlink()"
+                },
+                {
+                  "id": 9,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "orderSuffix",
+                  "label": "global.order.suffix"
+                },
+                {
+                  "id": 175,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "isComments",
+                  "label": "global.comments",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 10,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "priority",
+                  "label": "global.priority",
+                  "dataFormat": "Sequence"
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "class",
+                  "label": "global.class"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "type",
+                  "label": "global.order.type",
+                  "dataFormat": "TwlOrderTypeToName"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "calcStatus",
+                  "label": "global.order.status",
+                  "dataFormat": "TwlOrderStatusNameToName"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "carrier",
+                  "label": "global.carrier"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "lineCount",
+                  "label": "global.line.count",
+                  "dataFormat": "INTEGER",
+                  "eventClick": "mst.orderLineInquiryHyperlink()"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "origOrderDate",
+                  "label": "global.original.order.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "expShipDate",
+                  "label": "global.expected.ship.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "shipDate",
+                  "label": "global.ship.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "batchid",
+                  "label": "global.wave",
+                  "dataFormat": "INTEGER",
+                  "eventClick": "mst.waveHyperLink()"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "actualFreight",
+                  "label": "global.actual.freight",
+                  "dataFormat": "DECIMAL",
+                  "extra": true,
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "assigned",
+                  "label": "global.assigned.for.pick",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "billAddr1",
+                  "label": "global.bill.to.addr",
+                  "extra": true
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "billAddr2",
+                  "label": "global.bill.to.addr.2",
+                  "extra": true
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "billAddrExt1",
+                  "label": "global.bill.to.addr.ext",
+                  "extra": true
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "billAddrExt2",
+                  "label": "global.bill.to.addr.ext2",
+                  "extra": true
+                },
+                {
+                  "id": 26,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "billAddrExt3",
+                  "label": "global.bill.to.addr.ext3",
+                  "extra": true
+                },
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "billCity",
+                  "label": "global.bill.to.city",
+                  "extra": true
+                },
+                {
+                  "id": 28,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "billCountry",
+                  "label": "global.bill.to.country",
+                  "extra": true
+                },
+                {
+                  "id": 29,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "billName",
+                  "label": "global.bill.to.name",
+                  "extra": true
+                },
+                {
+                  "id": 30,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "billState",
+                  "label": "global.bill.to.state",
+                  "extra": true
+                },
+                {
+                  "id": 31,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "billZip",
+                  "label": "global.bill.to.zip",
+                  "extra": true
+                },
+                {
+                  "id": 32,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "branchId",
+                  "label": "global.branch.id",
+                  "extra": true
+                },
+                {
+                  "id": 33,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "cancelFlag",
+                  "label": "global.cancel",
+                  "dataFormat": "LOGICAL",
+                  "extra": true
+                },
+                {
+                  "id": 34,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "charges",
+                  "label": "global.total.charges",
+                  "dataFormat": "DECIMAL",
+                  "extra": true,
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 35,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "clearanceCode",
+                  "label": "global.clearance.code",
+                  "extra": true
+                },
+                {
+                  "id": 36,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "clearanceRequired",
+                  "label": "global.clearance.required",
+                  "dataFormat": "LOGICAL",
+                  "extra": true
+                },
+                {
+                  "id": 37,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "codAddr1",
+                  "label": "global.cod.addr",
+                  "extra": true
+                },
+                {
+                  "id": 38,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "codAddr2",
+                  "label": "global.cod.addr2",
+                  "extra": true
+                },
+                {
+                  "id": 39,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "codAddr3",
+                  "label": "global.cod.addr3",
+                  "extra": true
+                },
+                {
+                  "id": 40,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "codAddr4",
+                  "label": "global.cod.addr4",
+                  "extra": true
+                },
+                {
+                  "id": 41,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "codAddr5",
+                  "label": "global.cod.addr5",
+                  "extra": true
+                },
+                {
+                  "id": 42,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "codAmount",
+                  "label": "global.cod.amount",
+                  "dataFormat": "DECIMAL",
+                  "extra": true,
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 43,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "codCharge",
+                  "label": "global.charge.cod.to",
+                  "extra": true
+                },
+                {
+                  "id": 44,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "codCity",
+                  "label": "global.cod.city",
+                  "extra": true
+                },
+                {
+                  "id": 45,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "codCountry",
+                  "label": "global.cod.country",
+                  "extra": true
+                },
+                {
+                  "id": 46,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "codFlag",
+                  "label": "global.cod",
+                  "dataFormat": "LOGICAL",
+                  "extra": true
+                },
+                {
+                  "id": 47,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "codName",
+                  "label": "global.cod.name",
+                  "extra": true
+                },
+                {
+                  "id": 48,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "codState",
+                  "label": "global.cod.state",
+                  "extra": true
+                },
+                {
+                  "id": 49,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "codZip",
+                  "label": "global.cod.zip",
+                  "extra": true
+                },
+                {
+                  "id": 50,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "comment",
+                  "label": "global.comment",
+                  "extra": true
+                },
+                {
+                  "id": 51,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "coNum",
+                  "label": "global.company",
+                  "extra": true
+                },
+                {
+                  "id": 52,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "customerFreight",
+                  "label": "global.customer.freight",
+                  "dataFormat": "DECIMAL",
+                  "extra": true,
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 53,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "customerPo",
+                  "label": "global.customer.purchase.order.number",
+                  "extra": true
+                },
+                {
+                  "id": 54,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "customData1",
+                  "label": "global.custom.data.1",
+                  "extra": true
+                },
+                {
+                  "id": 55,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "customData2",
+                  "label": "global.custom.data.2",
+                  "extra": true
+                },
+                {
+                  "id": 56,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "customData3",
+                  "label": "global.custom.data.3",
+                  "extra": true
+                },
+                {
+                  "id": 57,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "customData4",
+                  "label": "global.custom.data.4",
+                  "extra": true
+                },
+                {
+                  "id": 58,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "customData5",
+                  "label": "global.custom.data.5",
+                  "extra": true
+                },
+                {
+                  "id": 59,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "customSelector",
+                  "label": "global.custom.selector",
+                  "extra": true
+                },
+                {
+                  "id": 60,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "custCode",
+                  "label": "global.customer.code",
+                  "extra": true
+                },
+                {
+                  "id": 61,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "delRoute",
+                  "label": "global.route.id",
+                  "extra": true
+                },
+                {
+                  "id": 62,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "discount",
+                  "label": "global.discount",
+                  "dataFormat": "DECIMAL",
+                  "extra": true,
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 63,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "dropCube",
+                  "label": "global.drop.cube",
+                  "dataFormat": "DECIMAL",
+                  "extra": true,
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 64,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "dropType",
+                  "label": "global.drop.type",
+                  "extra": true
+                },
+                {
+                  "id": 65,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "dropWeight",
+                  "label": "global.drop.weight",
+                  "dataFormat": "DECIMAL",
+                  "extra": true,
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 66,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "freightTerms",
+                  "label": "global.freight.terms",
+                  "extra": true
+                },
+                {
+                  "id": 69,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "guaranteedDelTime",
+                  "label": "global.guaranteed.delivery.time",
+                  "extra": true
+                },
+                {
+                  "id": 70,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "holdReason",
+                  "label": "global.hold.reason",
+                  "extra": true
+                },
+                {
+                  "id": 71,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "hostBatch",
+                  "label": "global.host.wave",
+                  "extra": true
+                },
+                {
+                  "id": 72,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "hostSelector",
+                  "label": "global.host.selector",
+                  "extra": true
+                },
+                {
+                  "id": 73,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "hostSequence",
+                  "label": "global.host.sequence",
+                  "dataFormat": "INTEGER",
+                  "extra": true
+                },
+                {
+                  "id": 74,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "international",
+                  "label": "global.international",
+                  "dataFormat": "LOGICAL",
+                  "extra": true
+                },
+                {
+                  "id": 75,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "kitBuildType",
+                  "label": "global.kit.build.type",
+                  "extra": true
+                },
+                {
+                  "id": 76,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "lot",
+                  "label": "global.line.count",
+                  "extra": true
+                },
+                {
+                  "id": 77,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "maxDays",
+                  "label": "global.lot",
+                  "dataFormat": "INTEGER",
+                  "extra": true
+                },
+                {
+                  "id": 78,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "memo",
+                  "label": "global.maximum.days",
+                  "extra": true
+                },
+                {
+                  "id": 79,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "orderDate",
+                  "label": "global.order.date",
+                  "dataFormat": "DATE",
+                  "extra": true
+                },
+                {
+                  "id": 80,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "orderStatus",
+                  "label": "global.status",
+                  "extra": true
+                },
+                {
+                  "id": 81,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "origCube",
+                  "label": "global.original.cube",
+                  "dataFormat": "DECIMAL",
+                  "extra": true,
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 82,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "origWeight",
+                  "label": "global.original.weight",
+                  "dataFormat": "DECIMAL",
+                  "extra": true,
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 83,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "palletDropFl",
+                  "label": "global.pallet.drop",
+                  "dataFormat": "LOGICAL",
+                  "extra": true
+                },
+                {
+                  "id": 84,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "partial",
+                  "label": "global.partial.shipment",
+                  "dataFormat": "LOGICAL",
+                  "extra": true
+                },
+                {
+                  "id": 85,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "payMethod",
+                  "label": "global.payment.method",
+                  "extra": true
+                },
+                {
+                  "id": 86,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "printed",
+                  "label": "global.printed",
+                  "dataFormat": "LOGICAL",
+                  "extra": true
+                },
+                {
+                  "id": 87,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "product",
+                  "label": "global.finished.product",
+                  "extra": true
+                },
+                {
+                  "id": 88,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "productQty",
+                  "label": "global.production.quantity",
+                  "dataFormat": "DECIMAL",
+                  "extra": true,
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 89,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "proNumber",
+                  "label": "global.pro.number",
+                  "extra": true
+                },
+                {
+                  "id": 90,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "rateType",
+                  "label": "global.rate.type",
+                  "extra": true
+                },
+                {
+                  "id": 91,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "route",
+                  "label": "global.route",
+                  "extra": true
+                },
+                {
+                  "id": 92,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "rowStatus",
+                  "label": "global.active",
+                  "dataFormat": "LOGICAL",
+                  "extra": true
+                },
+                {
+                  "id": 93,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "service",
+                  "label": "global.service",
+                  "extra": true
+                },
+                {
+                  "id": 94,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipAddr1",
+                  "label": "global.ship.to.address",
+                  "extra": true
+                },
+                {
+                  "id": 95,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipAddr2",
+                  "label": "global.ship.to.address.2",
+                  "extra": true
+                },
+                {
+                  "id": 96,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipAddrExt1",
+                  "label": "global.ship.to.address.ext",
+                  "extra": true
+                },
+                {
+                  "id": 97,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipAddrExt2",
+                  "label": "global.ship.to.address.ext2",
+                  "extra": true
+                },
+                {
+                  "id": 98,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipAddrExt3",
+                  "label": "global.ship.to.address.ext3",
+                  "extra": true
+                },
+                {
+                  "id": 99,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipCity",
+                  "label": "global.ship.to.city",
+                  "extra": true
+                },
+                {
+                  "id": 100,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipCountry",
+                  "label": "global.ship.to.country",
+                  "extra": true
+                },
+                {
+                  "id": 101,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipCube",
+                  "label": "global.shipping.cube",
+                  "dataFormat": "DECIMAL",
+                  "extra": true,
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 102,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipCustCode",
+                  "label": "global.shipping.customer.code",
+                  "extra": true
+                },
+                {
+                  "id": 103,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipName",
+                  "label": "global.ship.to.name",
+                  "extra": true
+                },
+                {
+                  "id": 104,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipState",
+                  "label": "global.ship.to.state",
+                  "extra": true
+                },
+                {
+                  "id": 105,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipToCode",
+                  "label": "global.ship.to.code",
+                  "extra": true
+                },
+                {
+                  "id": 106,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipWeight",
+                  "label": "global.shipping.weight",
+                  "dataFormat": "DECIMAL",
+                  "extra": true,
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 107,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipZip",
+                  "label": "global.ship.to.zip",
+                  "extra": true
+                },
+                {
+                  "id": 108,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "shpByIrms",
+                  "label": "global.shipped.by.twl",
+                  "dataFormat": "LOGICAL",
+                  "extra": true
+                },
+                {
+                  "id": 109,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "slsrepin",
+                  "label": "global.inside.sales.rep",
+                  "extra": true
+                },
+                {
+                  "id": 110,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "slsrepout",
+                  "label": "global.outside.salesrep",
+                  "extra": true
+                },
+                {
+                  "id": 111,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "takenby",
+                  "label": "global.taken.by",
+                  "extra": true
+                },
+                {
+                  "id": 112,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "tax",
+                  "label": "global.tax",
+                  "dataFormat": "DECIMAL",
+                  "extra": true,
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 113,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totalLineCnt",
+                  "label": "global.total.line.count",
+                  "dataFormat": "INTEGER",
+                  "extra": true
+                },
+                {
+                  "id": 114,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totalLineQty",
+                  "label": "global.total.line.quantity",
+                  "dataFormat": "DECIMAL",
+                  "extra": true,
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 115,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "transDate",
+                  "label": "global.transaction.date",
+                  "extra": true
+                },
+                {
+                  "id": 116,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "transProc",
+                  "label": "global.transaction.procedure",
+                  "extra": true
+                },
+                {
+                  "id": 117,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "transUser",
+                  "label": "global.transaction.user",
+                  "extra": true
+                },
+                {
+                  "id": 118,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whNum",
+                  "label": "global.warehouse",
+                  "extra": true
+                },
+                {
+                  "id": 120,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "notes",
+                  "label": "global.notes",
+                  "extra": true
+                },
+                {
+                  "id": 121,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "empNum",
+                  "label": "global.employee",
+                  "extra": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 140,
+      "type": "VIEW_CNTR",
+      "viewName": "viewContainer"
+    },
+    {
+      "id": 173,
+      "type": "VIEW_CNTR",
+      "viewName": "notesComments"
+    }
+  ]
+}

@@ -1,0 +1,361 @@
+{
+  "viewId": "ar-shared-writeoff-writeoff",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SUB_DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "wo.isWriteOff()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.write.off.distribution",
+              "controls": {
+                "navBtns": {
+                  "id": 20,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 5,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "eventClick": "wo.done()"
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "wo.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 7,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "type": "ROW",
+                  "id": 8,
+                  "children": [
+                    {
+                      "type": "COL",
+                      "subType": "1/2",
+                      "id": 9,
+                      "children": [
+                        {
+                          "id": 10,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "wo.woDisplay.account",
+                          "label": "global.account",
+                          "meta": "GlAccount",
+                          "type3": "STANDARD",
+                          "conditionShow": "wo.woDisplay.accountvisible",
+                          "conditionReadonly": "!wo.woDisplay.accountenabled",
+                          "eventChange": "wo.onNewWriteoffFieldChanged('account')",
+                          "autoFocus": true,
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "wo.woDisplay.amount",
+                          "label": "global.amount",
+                          "dataFormat": "CURRENCY",
+                          "digits": 7,
+                          "decimals": 2,
+                          "eventChange": "wo.onNewWriteoffFieldChanged('amount')",
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          },
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 33,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "wo.woDisplay.invno",
+                              "label": "global.invoice.number",
+                              "size": "SM",
+                              "conditionShow": "wo.woDisplay.invnovisible",
+                              "conditionReadonly": "!wo.woDisplay.invnoenabled",
+                              "dataFormat": "INTEGER_TEXT",
+                              "sign": "+",
+                              "digits": 8,
+                              "eventChange": "wo.onNewWriteoffFieldChanged('invno')",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "wo.woDisplay.invsuf",
+                              "label": "global.suffix",
+                              "size": "XS",
+                              "conditionShow": "wo.woDisplay.invnovisible",
+                              "conditionReadonly": "!wo.woDisplay.invsufenabled",
+                              "dataFormat": "SuffixInput",
+                              "maxLength": 2
+                            },
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "wo.woDisplay.seqno",
+                              "label": "global.sequence.number.poundsign",
+                              "size": "XS",
+                              "conditionShow": "wo.woDisplay.invnovisible",
+                              "conditionReadonly": "!wo.woDisplay.seqnoenabled",
+                              "dataFormat": "INTEGER",
+                              "maxLength": 3,
+                              "sign": "+",
+                              "digits": 3
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "COL",
+                      "subType": "1/2",
+                      "id": 14,
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "wo.woDisplay.adjbaseamt",
+                          "dataFormat": "CURRENCY",
+                          "label": "global.adjusted.base.amount",
+                          "digits": 7,
+                          "decimals": 2,
+                          "conditionShow": "wo.woDisplay.adjbaseamtvisible",
+                          "conditionReadonly": "!wo.woDisplay.adjbaseamtenabled",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "wo.woDisplay.taxexemptamt",
+                          "dataFormat": "CURRENCY",
+                          "label": "global.tax.exempt.amount",
+                          "digits": 7,
+                          "decimals": 2,
+                          "conditionShow": "wo.woDisplay.taxexemptamtvisible",
+                          "conditionReadonly": "!wo.woDisplay.taxexemptamtenabled",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 36,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 37,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "wo.woDisplay.proof",
+                          "label": "global.proof",
+                          "readonly": true,
+                          "dataFormat": "CURRENCY"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "GRID",
+                  "htmlId": "arele-writeoff-grid",
+                  "controlRef": "wo.grid",
+                  "model": "wo.writeOffsList",
+                  "options": {
+                    "showCheckboxes": true,
+                    "selectable": "multiple",
+                    "editable": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 16,
+                      "type": "TOOLBAR",
+                      "label": "global.write.offs",
+                      "children": [
+                        {
+                          "id": 17,
+                          "type": "BTN",
+                          "subType": "",
+                          "icon": "icon-add",
+                          "label": "global.add",
+                          "eventClick": "wo.addWriteOff()",
+                          "conditionDisabled": "wo.woDisplay.amount === 0"
+                        },
+                        {
+                          "id": 35,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "eventClick": "wo.deleteWriteOff()",
+                          "conditionDisabled": "!wo.grid.isAnyRowSelected()"
+                        },
+                        {
+                          "id": 18,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "label": "global.writeoff.tax",
+                          "eventClick": "wo.writeOffTax()",
+                          "conditionShow": "!wo.isCreditMode",
+                          "conditionDisabled": "!wo.grid.isAnyRowSelected()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "invnosuffix",
+                      "label": "global.invoice.number"
+                    },
+                    {
+                      "id": 23,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "seqno",
+                      "label": "global.seq.number",
+                      "dataFormat": "Sequence"
+                    },
+                    {
+                      "id": 24,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "account",
+                      "label": "global.account"
+                    },
+                    {
+                      "id": 25,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "amount",
+                      "label": "global.amount",
+                      "dataFormat": "CURRENCY",
+                      "editable": true,
+                      "cellEditable": "wo.isEditable()",
+                      "eventChange": "wo.writeoffGridCellAmountChanged()",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "acctname",
+                      "label": "global.description"
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "origtaxamt",
+                      "label": "global.original.tax.amount",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "taxexemptamt",
+                      "label": "global.tax.exempt.amount",
+                      "dataFormat": "CURRENCY",
+                      "editable": true,
+                      "cellEditable": "wo.isEditable()",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 29,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "origbaseamt",
+                      "label": "global.original.base.amount",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 30,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "adjbaseamt",
+                      "label": "global.adjusted.base.amount",
+                      "dataFormat": "CURRENCY",
+                      "editable": true,
+                      "cellEditable": "wo.isEditable()",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

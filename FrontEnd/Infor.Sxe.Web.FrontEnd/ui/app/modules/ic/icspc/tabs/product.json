@@ -1,0 +1,422 @@
+{
+  "viewId": "ic-icspc-detail-tabs-product",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionShow": "",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.product.search",
+      "conditionShow": "",
+      "conditionCollapsed": "",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.criteriaProduct",
+                  "label": "global.product",
+                  "meta": "ProdAll",
+                  "conditionShow": "",
+                  "conditionReadonly": "false",
+                  "controls": {
+                    "actionBtn": {
+                      "id": 97,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "global.inquire",
+                      "icon": "icon-drilldown",
+                      "isLabelTooltip": true,
+                      "conditionDisabled": "!dtl.criteriaProduct",
+                      "stateRef": "icip.detail({pk: dtl.criteriaProduct, pk2: dtl.icspcaddchg.whse})"
+                    }
+                  }
+                },
+                {
+                  "id": 24,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 14,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "dtl.criteriaAllowPullQtyFl",
+                      "label": "global.allowed.pull.quantity",
+                      "dataFormat": "LOGICAL",
+                      "conditionShow": "dtl.icspcaddchg.setuptype === 'R'",
+                      "conditionDisabled": "false"
+                    },
+                    {
+                      "id": 15,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "dtl.criteriaDemandQtyFl",
+                      "label": "global.demand.quantity",
+                      "dataFormat": "LOGICAL",
+                      "conditionShow": "dtl.icspcaddchg.setuptype === 'R'",
+                      "conditionDisabled": "false"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 19,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 20,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "conditionShow": "",
+                  "eventClick": "prd.search()"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "type": "GRID",
+          "model": "prd.productList",
+          "conditionShow": "dtl.icspcaddchg.setuptype === 'R'",
+          "controlRef": "prd.grid",
+          "options": {
+            "showDrilldown": true,
+            "selectable": "multiple",
+            "showCheckboxes": true,
+            "events": {
+              "drilldown": "prd.drilldown()"
+            }
+          },
+          "controls": {
+            "toolbar": {
+              "id": 12,
+              "type": "TOOLBAR",
+              "label": "global.product.detail",
+              "conditionShow": "dtl.icspcaddchg.setuptype === 'R'",
+              "children": [
+                {
+                  "id": 87,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "stateRef": "",
+                  "securityLevel": 4,
+                  "eventClick": "prd.create()",
+                  "conditionDisabled": "prd.grid.isAnyRowSelected()"
+                },
+                {
+                  "id": 79,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "prd.delete()",
+                  "securityLevel": 5,
+                  "conditionDisabled": "!prd.grid.isOneRowSelected()"
+                }
+              ]
+            }
+          },
+          "children": [
+            {
+              "id": 13,
+              "type": "GRID_COL",
+              "subType": "HYPERLINK",
+              "label": "global.product",
+              "model": "product",
+              "eventClick": "prd.productInquiryHyperlink()"
+            },
+            {
+              "id": 21,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyrequired",
+              "label": "global.required.quantity",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 23,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyexpected",
+              "label": "global.total.expected",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 25,
+              "type": "GRID_COL",
+              "subType": "CHECKBOX",
+              "model": "allowpullqtyfl",
+              "label": "global.pull.quantity",
+              "dataFormat": "LOGICAL"
+            },
+            {
+              "id": 26,
+              "type": "GRID_COL",
+              "subType": "CHECKBOX",
+              "model": "replenishfl",
+              "label": "global.replenish",
+              "dataFormat": "LOGICAL"
+            },
+            {
+              "id": 22,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyreserved",
+              "label": "global.reserved.quantity",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 27,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtysold",
+              "label": "global.total.sold",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 28,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyavail",
+              "label": "icsw.net.available",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 29,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtybo",
+              "label": "icsw.demand.quantity",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 30,
+              "type": "GRID_COL",
+              "subType": "DATE",
+              "model": "lastinvdt",
+              "label": "global.last.invoice.date",
+              "dataFormat": "DATE"
+            },
+            {
+              "id": 31,
+              "type": "GRID_COL",
+              "subType": "DATE",
+              "model": "createdt",
+              "label": "global.created.date",
+              "dataFormat": "DATE"
+            }
+          ]
+        },
+        {
+          "id": 65,
+          "type": "GRID",
+          "conditionShow": "dtl.icspcaddchg.setuptype === 'F'",
+          "model": "prd.productList",
+          "controlRef": "prd.grid2",
+          "options": {
+            "showDrilldown": true,
+            "selectable": "multiple",
+            "showCheckboxes": true,
+            "events": {
+              "drilldown": "prd.drilldown()"
+            }
+          },
+          "controls": {
+            "toolbar": {
+              "id": 66,
+              "type": "TOOLBAR",
+              "label": "global.product.detail",
+              "conditionShow": "dtl.icspcaddchg.setuptype === 'F'",
+              "children": [
+                {
+                  "id": 81,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "stateRef": "",
+                  "securityLevel": 4,
+                  "conditionDisabled": "prd.grid2.isAnyRowSelected()",
+                  "eventClick": "prd.create()"
+                },
+                {
+                  "id": 83,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "prd.delete()",
+                  "securityLevel": 5,
+                  "conditionDisabled": "!prd.grid2.isOneRowSelected()"
+                }
+              ]
+            }
+          },
+          "children": [
+            {
+              "id": 69,
+              "type": "GRID_COL",
+              "subType": "HYPERLINK",
+              "model": "product",
+              "label": "global.product",
+              "eventClick": "prd.productInquiryHyperlink()"
+            },
+            {
+              "id": 70,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyexpected",
+              "label": "global.total.expected",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 71,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtysold",
+              "label": "global.total.sold",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 72,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "expectedratepct",
+              "label": "global.expected.run.rate.percent",
+              "dataFormat": "INTEGER"
+            },
+            {
+              "id": 75,
+              "type": "GRID_COL",
+              "subType": "DATE",
+              "model": "lastinvdt",
+              "label": "global.last.invoice.date",
+              "dataFormat": "DATE"
+            },
+            {
+              "id": 76,
+              "type": "GRID_COL",
+              "subType": "DATE",
+              "model": "createdt",
+              "label": "global.created.date",
+              "dataFormat": "DATE"
+            },
+            {
+              "id": 73,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyforecast1",
+              "label": "{{prd.forecastLabel1}}",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 74,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyforecast2",
+              "label": "{{prd.forecastLabel2}}",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 67,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "label": "{{prd.forecastLabel3}}",
+              "model": "qtyforecast3",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 88,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyforecast4",
+              "label": "{{prd.forecastLabel4}}",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 89,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyforecast5",
+              "label": "{{prd.forecastLabel5}}",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 90,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyforecast6",
+              "label": "{{prd.forecastLabel6}}",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 91,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyforecast7",
+              "label": "{{prd.forecastLabel7}}",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 92,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyforecast8",
+              "label": "{{prd.forecastLabel8}}",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 93,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyforecast9",
+              "label": "{{prd.forecastLabel9}}",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 94,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyforecast10",
+              "label": "{{prd.forecastLabel10}}",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 95,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyforecast11",
+              "label": "{{prd.forecastLabel11}}",
+              "dataFormat": "DECIMAL"
+            },
+            {
+              "id": 96,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyforecast12",
+              "label": "{{prd.forecastLabel12}}",
+              "dataFormat": "DECIMAL"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

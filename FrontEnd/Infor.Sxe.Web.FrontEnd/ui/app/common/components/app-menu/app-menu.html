@@ -1,0 +1,56 @@
+<div class="accordion panel inverse" data-options="{'allowOnePane': true}">
+
+   <!-- User Account -->
+   <div class="accordion-header is-selected">
+      <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+         <use xlink:href="#icon-user"></use>
+      </svg>
+      <a href="#"><span translate>special.menu.account</span></a>
+   </div>
+
+   <div class="accordion-pane">
+      <div class="accordion-content panel logout">
+         <svg class="icon avatar" viewBox="0 0 48 48" focusable="false" aria-hidden="true" role="presentation">
+            <use xlink:href="#icon-user-avatar"></use>
+         </svg>
+         <span class="content">
+            <span class="name">{{::userName}} ({{::company}})</span>
+            <span><a class="hyperlink" soho-click="signOut()"><span translate>global.sign.out</span></a></span>
+         </span>
+      </div>
+   </div>
+
+   <!-- Top Level Menu Items -->
+   <div class="accordion-header" ng-repeat-start="topLevel in ::topLevelList">
+      <svg class="icon" ng-if="::topLevel.functionname === 'search'">
+         <use xlink:href="#icon-search"></use>
+      </svg>
+      <svg class="icon" ng-if="::topLevel.functionname !== 'search'">
+         <use xlink:href="#icon-bookmark-filled"></use>
+      </svg>
+      <a href="#" soho-click="menuItemClick(topLevel, topLevel.SecondLevelMenus)"><span>{{::getLabel(topLevel)}}</span></a>
+   </div>
+
+   <!-- 2nd Level -->
+   <div class="accordion-pane" ng-if="::topLevel.SecondLevelMenus.length > 0" ng-repeat-end>
+      <div class="accordion-header" ng-repeat-start="secondLevel in ::topLevel.SecondLevelMenus">
+         <a href="#" soho-click="menuItemClick(secondLevel, secondLevel.MenuFunctions)"><span>{{::getLabel(secondLevel)}}</span></a>
+      </div>
+
+      <!-- 3rd Level (menu functions) -->
+      <div class="accordion-pane" ng-if="::secondLevel.MenuFunctions.length > 0" ng-repeat-end>
+         <div class="accordion-header" ng-repeat="menuFunction in ::secondLevel.MenuFunctions">
+            <a href="#" soho-click="menuItemClick(menuFunction, null)">
+               <span class="title">{{::getLabel(menuFunction)}}</span>
+            </a>
+         </div>
+      </div>
+   </div>
+
+</div>
+
+<div class="branding">
+   <svg class="icon" viewBox="0 0 34 34">
+      <use xlink:href="#icon-logo"></use>
+   </svg>
+</div>

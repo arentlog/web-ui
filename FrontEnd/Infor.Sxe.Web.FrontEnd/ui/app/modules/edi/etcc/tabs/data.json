@@ -1,0 +1,766 @@
+{
+  "viewId": "edi-etcc-data",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 2,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 3,
+          "type": "COL",
+          "subType": "1/3",
+          "children": [
+            {
+              "id": 12,
+              "type": "FIELD",
+              "subType": "DROP_DOWN",
+              "model": "drldwn.dataCriteria.section",
+              "label": "global.section",
+              "blankOption": false,
+              "type3": "SET",
+              "metaGroup": "EDI",
+              "meta": "DataGridType",
+              "eventChange": "drldwn.dataSectionChanged()",
+              "size": "SM"
+            },
+            {
+              "id": 94,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "drldwn.dataCriteria.alllines",
+              "label": "global.all.lines",
+              "dataFormat": "LOGICAL",
+              "conditionShow": "!drldwn.dataCriteria.alllineshidden",
+              "eventChange": "drldwn.dataAllLinesChanged()"
+            },
+            {
+              "id": 95,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "drldwn.dataCriteria.lineno",
+              "label": "global.line.number",
+              "dataFormat": "INTEGER_TEXT",
+              "sign": "+",
+              "digits": 3,
+              "size": "XS",
+              "conditionShow": "drldwn.dataCriteria.section === 'line' && !drldwn.dataCriteria.alllines"
+            },
+            {
+              "id": 96,
+              "type": "BTN",
+              "subType": "PRI",
+              "label": "global.search",
+              "icon": "icon-search",
+              "eventClick": "drldwn.buildDataResults()"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "type": "COL",
+          "subType": "1/3",
+          "children": [
+            {
+              "id": 70,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "drldwn.dataCriteria.rcvdfl",
+              "label": "global.transaction.data",
+              "dataFormat": "LOGICAL"
+            },
+            {
+              "id": 71,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "drldwn.dataCriteria.processedfl",
+              "label": "global.include.processed",
+              "dataFormat": "LOGICAL"
+            }
+          ]
+        },
+        {
+          "id": 74,
+          "type": "COL",
+          "subType": "1/3",
+          "children": [
+            {
+              "id": 73,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "drldwn.dataCriteria.histfl",
+              "label": "global.historical.data",
+              "dataFormat": "LOGICAL"
+            },
+            {
+              "id": 72,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "drldwn.dataCriteria.origfl",
+              "label": "sxe.data",
+              "dataFormat": "LOGICAL"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "GRID",
+      "conditionShow": "drldwn.IsDataHeaderGridVisible()",
+      "model": "drldwn.dataHeaderResults",
+      "controlRef": "drldwn.dataHeaderResultsGrid",
+      "options": {
+        "showCheckboxes": true
+      },
+      "controls": {
+        "toolbar": {
+          "id": 6,
+          "type": "TOOLBAR",
+          "label": "global.header",
+          "conditionShow": "drldwn.IsDataHeaderGridVisible()",
+          "children": [
+            {
+              "id": 75,
+              "type": "BTN",
+              "label": "global.edit",
+              "icon": "icon-edit",
+              "securityLevel": 3,
+              "eventClick": "drldwn.dataGridHeaderEdit()",
+              "conditionDisabled": "!drldwn.dataGridHeaderEditEnabled()"
+            },
+            {
+              "id": 77,
+              "type": "BTN",
+              "subType": "MENU",
+              "label": "global.action",
+              "children": [
+                {
+                  "id": 78,
+                  "type": "MENU_OPT",
+                  "label": "global.override.transaction",
+                  "conditionDisabled": "!drldwn.dataGridHeaderOverrideEnabled()",
+                  "eventClick": "drldwn.dataGridHeaderOverride()",
+                  "icon": "icon-copy",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 79,
+                  "type": "MENU_OPT",
+                  "label": "global.cancel.override",
+                  "icon": "icon-cancel",
+                  "conditionDisabled": "!drldwn.dataGridHeaderCancelOverrideEnabled()",
+                  "eventClick": "drldwn.dataGridHeaderCancelOverride()"
+                },
+                {
+                  "id": 80,
+                  "type": "MENU_OPT",
+                  "label": "global.approve",
+                  "icon": "icon-confirm",
+                  "conditionDisabled": "!drldwn.dataGridHeaderMiscEnabled()",
+                  "eventClick": "drldwn.dataGridHeaderMisc('y')"
+                },
+                {
+                  "id": 81,
+                  "type": "MENU_OPT",
+                  "label": "global.not.approved",
+                  "icon": "icon-close-cancel",
+                  "conditionDisabled": "!drldwn.dataGridHeaderMiscEnabled()",
+                  "eventClick": "drldwn.dataGridHeaderMisc('n')"
+                },
+                {
+                  "id": 82,
+                  "type": "MENU_OPT",
+                  "label": "global.cancel.update",
+                  "icon": "icon-cancel",
+                  "conditionDisabled": "!drldwn.dataGridHeaderMiscEnabled()",
+                  "eventClick": "drldwn.dataGridHeaderMisc('c')"
+                },
+                {
+                  "id": 83,
+                  "type": "MENU_OPT",
+                  "label": "global.update.transactions",
+                  "icon": "icon-process",
+                  "conditionDisabled": "!base.changeModeSecurityEnabled()",
+                  "eventClick": "drldwn.updateTransactions()"
+                },
+                {
+                  "id": 84,
+                  "type": "MENU_OPT",
+                  "label": "global.transaction.notes",
+                  "icon": "icon-notes",
+                  "conditionDisabled": "!drldwn.dataGridHeaderTransNotesEnabled()",
+                  "eventClick": "drldwn.dataGridHeaderTransNotes()"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 7,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.approval",
+          "model": "approvty",
+          "dataFormat": "EdiETCCApproveType"
+        },
+        {
+          "id": 13,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.data.source",
+          "model": "datasource",
+          "dataFormat": "EdiETCCDataSource"
+        },
+        {
+          "id": 14,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.section",
+          "model": "sectionD"
+        },
+        {
+          "id": 16,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "symbol.pound.errors",
+          "model": "errcnt",
+          "dataFormat": "INTEGER_TEXT",
+          "contentVisible": "drldwn.sectionErrorStatsDisplay()"
+        },
+        {
+          "id": 17,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "exccnt",
+          "label": "symbol.pound.exceptions",
+          "dataFormat": "INTEGER_TEXT",
+          "contentVisible": "drldwn.sectionErrorStatsDisplay()"
+        },
+        {
+          "id": 18,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "infocnt",
+          "label": "symbol.pound.informational",
+          "dataFormat": "INTEGER_TEXT",
+          "contentVisible": "drldwn.sectionErrorStatsDisplay()"
+        },
+        {
+          "id": 97,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.transaction.set.purpose.code",
+          "dataFormat": "EdiTransSetPurposeCd",
+          "model": "transetcd"
+        },
+        {
+          "id": 19,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "stageword",
+          "label": "global.stage",
+          "dataFormat": "EdiETCCSTage"
+        },
+        {
+          "id": 20,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "ackdt",
+          "label": "po.ack.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 21,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "ackty",
+          "label": "po.ack.reason",
+          "dataFormat": "PoAcknowledgementType"
+        },
+        {
+          "id": 22,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "notesfl",
+          "label": "global.notes",
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 23,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "poty",
+          "label": "po.type",
+          "dataFormat": "EdiPoType"
+        },
+        {
+          "id": 24,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "vendno",
+          "label": "global.vendor.number",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 25,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "partnerid",
+          "label": "global.trading.partner"
+        },
+        {
+          "id": 26,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "whse",
+          "label": "global.warehouse"
+        },
+        {
+          "id": 27,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "pono",
+          "label": "po.number",
+          "dataFormat": "INTEGER_TEXT"
+        },
+        {
+          "id": 28,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "posuf",
+          "label": "global.suffix",
+          "dataFormat": "Suffix"
+        },
+        {
+          "id": 29,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "enterdt",
+          "label": "po.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 30,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "expshipdt",
+          "label": "global.expected.ship.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 31,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "expduedt",
+          "label": "global.exp.due.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 32,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "createdt",
+          "label": "global.create.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 33,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "createtm",
+          "label": "global.create.time"
+        },
+        {
+          "id": 34,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "transdt",
+          "label": "global.trans.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 35,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "transtm",
+          "label": "global.trans.time"
+        },
+        {
+          "id": 36,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "transproc",
+          "label": "global.trans.proc"
+        },
+        {
+          "id": 37,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "operinit",
+          "label": "global.operator"
+        },
+        {
+          "id": 38,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "docidD",
+          "label": "global.trans.id",
+          "dataFormat": "INTEGER_TEXT"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "GRID",
+      "conditionShow": "drldwn.IsDataLineGridVisible()",
+      "model": "drldwn.dataLineResults",
+      "controlRef": "drldwn.dataLineResultsGrid",
+      "options": {
+        "showCheckboxes": true
+      },
+      "controls": {
+        "toolbar": {
+          "id": 9,
+          "type": "TOOLBAR",
+          "label": "global.lines",
+          "conditionShow": "drldwn.IsDataLineGridVisible()",
+          "children": [
+            {
+              "id": 85,
+              "type": "BTN",
+              "label": "global.edit",
+              "conditionDisabled": "!drldwn.dataGridLineEditEnabled()",
+              "eventClick": "drldwn.dataGridLineEdit()",
+              "icon": "icon-edit",
+              "securityLevel": 3
+            },
+            {
+              "id": 86,
+              "type": "BTN",
+              "subType": "MENU",
+              "label": "global.action",
+              "children": [
+                {
+                  "id": 87,
+                  "type": "MENU_OPT",
+                  "label": "global.override.transaction",
+                  "icon": "icon-copy",
+                  "eventClick": "drldwn.dataGridLineOverride()",
+                  "conditionDisabled": "!drldwn.dataGridLineOverrideEnabled()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 88,
+                  "type": "MENU_OPT",
+                  "label": "global.cancel.override",
+                  "conditionDisabled": "!drldwn.dataGridLineCancelOverrideEnabled()",
+                  "eventClick": "drldwn.dataGridLineCancelOverride()",
+                  "icon": "icon-cancel"
+                },
+                {
+                  "id": 89,
+                  "type": "MENU_OPT",
+                  "label": "global.approve",
+                  "icon": "icon-confirm",
+                  "conditionDisabled": "!drldwn.dataGridLineMiscEnabled()",
+                  "eventClick": "drldwn.dataGridLineMisc('y')"
+                },
+                {
+                  "id": 90,
+                  "type": "MENU_OPT",
+                  "label": "global.not.approved",
+                  "icon": "icon-close-cancel",
+                  "conditionDisabled": "!drldwn.dataGridLineMiscEnabled()",
+                  "eventClick": "drldwn.dataGridLineMisc('n')"
+                },
+                {
+                  "id": 91,
+                  "type": "MENU_OPT",
+                  "label": "global.cancel.update",
+                  "icon": "icon-cancel",
+                  "conditionDisabled": "!drldwn.dataGridLineMiscEnabled()",
+                  "eventClick": "drldwn.dataGridLineMisc('c')"
+                },
+                {
+                  "id": 92,
+                  "type": "MENU_OPT",
+                  "label": "global.update.transactions",
+                  "conditionDisabled": "!base.changeModeSecurityEnabled()",
+                  "eventClick": "drldwn.updateTransactions()",
+                  "icon": "icon-process"
+                },
+                {
+                  "id": 93,
+                  "type": "MENU_OPT",
+                  "label": "global.transaction.notes",
+                  "icon": "icon-notes",
+                  "conditionDisabled": "!drldwn.dataGridLineTransNotesEnabled()",
+                  "eventClick": "drldwn.dataGridLineTransNotes()"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 10,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.approval",
+          "model": "approvty",
+          "dataFormat": "EdiETCCApproveType"
+        },
+        {
+          "id": 41,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "datasource",
+          "label": "global.data.source",
+          "dataFormat": "EdiETCCDataSource"
+        },
+        {
+          "id": 42,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "sectionD",
+          "label": "global.section"
+        },
+        {
+          "id": 44,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "errcnt",
+          "label": "symbol.pound.errors",
+          "dataFormat": "INTEGER_TEXT",
+          "contentVisible": "drldwn.sectionErrorStatsDisplay()"
+        },
+        {
+          "id": 45,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "exccnt",
+          "label": "symbol.pound.exceptions",
+          "dataFormat": "INTEGER_TEXT",
+          "contentVisible": "drldwn.sectionErrorStatsDisplay()"
+        },
+        {
+          "id": 46,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "infocnt",
+          "label": "symbol.pound.informational",
+          "dataFormat": "INTEGER_TEXT",
+          "contentVisible": "drldwn.sectionErrorStatsDisplay()"
+        },
+        {
+          "id": 98,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.transaction.set.purpose.code",
+          "dataFormat": "EdiTransSetPurposeCd",
+          "model": "transetcd",
+          "contentVisible": ""
+        },
+        {
+          "id": 47,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "stageword",
+          "label": "global.stage",
+          "dataFormat": "EdiETCCSTage"
+        },
+        {
+          "id": 48,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "ackdt",
+          "label": "po.ack.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 49,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "statuscd",
+          "label": "po.ack.reason",
+          "dataFormat": "PoAcknowledgementItemStatusCode"
+        },
+        {
+          "id": 50,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "commtype",
+          "label": "global.comm.type"
+        },
+        {
+          "id": 51,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "duedt",
+          "label": "global.exp.due.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 100,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "expshipdt",
+          "label": "global.expected.ship.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 99,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dlvrydatecd",
+          "label": "global.delivery.date.code",
+          "customFormatter": "",
+          "dataFormat": "PoDeliveryDateCode"
+        },
+        {
+          "id": 52,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "vendlineno",
+          "label": "global.vendor.line.number",
+          "dataFormat": "INTEGER_TEXT"
+        },
+        {
+          "id": 53,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "lineno",
+          "label": "sxe.line.number",
+          "dataFormat": "INTEGER_TEXT"
+        },
+        {
+          "id": 54,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "vendprod",
+          "label": "global.vendor.product"
+        },
+        {
+          "id": 55,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "shipprod",
+          "label": "sxe.product"
+        },
+        {
+          "id": 56,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "barcode",
+          "label": "global.bar.code"
+        },
+        {
+          "id": 57,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "subfl",
+          "label": "global.substitute",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 58,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "superfl",
+          "label": "global.supersede",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 59,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty",
+          "label": "global.quantity",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 60,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "unit",
+          "label": "global.qty.uom"
+        },
+        {
+          "id": 61,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "price",
+          "label": "global.unit.price",
+          "dataFormat": "DECIMAL_TEXT",
+          "contentVisible": "base.canSeeCost()"
+        },
+        {
+          "id": 62,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "priceunit",
+          "label": "global.price.uom",
+          "contentVisible": "base.canSeeCost()"
+        },
+        {
+          "id": 63,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "createdt",
+          "label": "global.create.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 64,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "createtm",
+          "label": "global.create.time"
+        },
+        {
+          "id": 65,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "transdt",
+          "label": "global.trans.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 66,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "transtm",
+          "label": "global.trans.time"
+        },
+        {
+          "id": 67,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "transproc",
+          "label": "global.trans.proc"
+        },
+        {
+          "id": 68,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "operinit",
+          "label": "global.operator"
+        },
+        {
+          "id": 69,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "docidD",
+          "label": "global.trans.id",
+          "dataFormat": "INTEGER_TEXT"
+        }
+      ]
+    }
+  ]
+}

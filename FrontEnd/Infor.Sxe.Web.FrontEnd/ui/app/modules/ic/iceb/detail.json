@@ -1,0 +1,188 @@
+{
+  "viewId": "ic-iceb-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.entry.bin.details",
+              "subLabel": "{{dtl.icsw.prod + ' | ' + dtl.icsw.icspes.descrip1}}",
+              "controls": {
+                "navBtns": {
+                  "id": 24,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 25,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtl.onNavigationBack()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 35,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "dtl.cancelBinLoc()",
+                  "stateRef": ""
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 17,
+                  "type": "EXP_AREA",
+                  "label": "global.bin.locations",
+                  "children": [
+                    {
+                      "id": 18,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 19,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsw.binloc1",
+                              "label": "global.bin.location.number1",
+                              "autoFocus": true,
+                              "dataFormat": "BinLoc"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 20,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsw.binloc2",
+                              "label": "global.bin.location.number2",
+                              "dataFormat": "BinLoc"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 10,
+                  "type": "GRID",
+                  "model": "dtl.binLocs",
+                  "controlRef": "dtl.binLocsgrid",
+                  "options": {
+                    "editable": true,
+                    "showCheckboxes": true,
+                    "selectable": "multiple"
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 9,
+                      "type": "TOOLBAR",
+                      "label": "global.additional.bin.locations",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "BTN",
+                          "label": "global.new",
+                          "icon": "icon-new-document",
+                          "eventClick": "dtl.newRow()",
+                          "conditionDisabled": "!dtl.binLocsgrid.isNoRowSelected()"
+                        },
+                        {
+                          "id": 21,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "conditionDisabled": "dtl.binLocsgrid.isNoRowSelected()",
+                          "eventClick": "dtl.onDeleteBin()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 23,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "binloc",
+                      "label": "global.bin.location",
+                      "editable": true,
+                      "dataFormat": "BinLoc",
+                      "eventChange": "dtl.onBinLocChanged()"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsw",
+      "contextValues": {
+        "key1": "dtl.icsw.prod",
+        "key2": "dtl.icsw.whse"
+      }
+    },
+    {
+      "id": 37,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsp",
+      "contextValues": {
+        "key1": "dtl.icsw.prod"
+      }
+    },
+    {
+      "id": 38,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsd",
+      "contextValues": {
+        "key1": "dtl.icsw.whse"
+      }
+    }
+  ]
+}

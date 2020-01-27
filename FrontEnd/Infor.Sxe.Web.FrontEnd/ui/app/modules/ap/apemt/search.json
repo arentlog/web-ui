@@ -1,0 +1,104 @@
+{
+  "viewId": "ap-apemt-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "type3": "STANDARD",
+                  "meta": "Vendor",
+                  "model": "base.criteria.vendno",
+                  "label": "global.vendor.number",
+                  "autoFocus": true,
+                  "required": true
+                },
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.apinvno",
+                  "label": "global.beg.invoice.number",
+                  "meta": "ApInvoices",
+                  "type3": "STANDARD",
+                  "conditionDisabled": "!base.criteria.vendno",
+                  "options": {
+                    "searchParams": {
+                      "vendno": {
+                        "type": "REF",
+                        "value": "base.criteria.vendno"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.type",
+                  "label": "global.type",
+                  "meta": "SearchType",
+                  "type3": "SET",
+                  "metaGroup": "AP",
+                  "blankOption": false
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.seqno",
+                  "label": "global.seq.number",
+                  "dataFormat": "INTEGER",
+                  "digits": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 10,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

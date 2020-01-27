@@ -1,0 +1,189 @@
+{
+  "viewId": "shared-address-form-addressform",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 2,
+      "type": "FIELD",
+      "subType": "TEXT_BOX",
+      "model": "addr.addr1",
+      "label": "{{addr.addressLabel}}",
+      "maxLength": "{{addr.addrMaxLength}}",
+      "conditionReadonly": "addr.isReadOnly || !addr.isAddress1Enabled",
+      "eventChange": "addr.trackedFieldChanged('e')",
+      "conditionShow": "!addr.isAddress1Hidden",
+      "modelOptions": {
+        "getterSetter": true
+      }
+    },
+    {
+      "id": 5,
+      "type": "FIELD",
+      "subType": "TEXT_BOX",
+      "model": "addr.addr2",
+      "label": "global.address.2",
+      "maxLength": "{{addr.addrMaxLength}}",
+      "labelHidden": true,
+      "attachUp": true,
+      "conditionShow": "addr.options.addr2Visible",
+      "conditionReadonly": "addr.isReadOnly",
+      "modelOptions": {
+        "getterSetter": true
+      }
+    },
+    {
+      "id": 4,
+      "type": "FIELD",
+      "subType": "TEXT_BOX",
+      "model": "addr.addr3",
+      "label": "global.address.3",
+      "maxLength": "{{addr.addrMaxLength}}",
+      "labelHidden": true,
+      "attachUp": true,
+      "conditionShow": "addr.options.addr3Visible",
+      "conditionReadonly": "addr.isReadOnly",
+      "modelOptions": {
+        "getterSetter": true
+      }
+    },
+    {
+      "id": 12,
+      "type": "FIELD",
+      "subType": "TEXT_BOX",
+      "model": "addr.city",
+      "label": "global.address.4",
+      "maxLength": 30,
+      "conditionRequired": "addr.options.cityRequired && addr.isInternationalFormat",
+      "conditionShow": "addr.isInternationalFormat",
+      "labelHidden": true,
+      "attachUp": true,
+      "conditionDisabled": "",
+      "conditionReadonly": "addr.isReadOnly",
+      "modelOptions": {
+        "getterSetter": true
+      }
+    },
+    {
+      "id": 3,
+      "type": "FIELD",
+      "subType": "TEXT_BOX",
+      "model": "addr.city",
+      "label": "global.city",
+      "maxLength": 20,
+      "conditionRequired": "addr.options.cityRequired  && !addr.isInternationalFormat",
+      "conditionShow": "!addr.isInternationalFormat",
+      "conditionReadonly": "addr.isReadOnly",
+      "eventChange": "addr.trackedFieldChanged('b')",
+      "modelOptions": {
+        "getterSetter": true
+      }
+    },
+    {
+      "id": 7,
+      "type": "COMP_FLD",
+      "children": [
+        {
+          "id": 6,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "addr.state",
+          "label": "global.state",
+          "maxLength": 2,
+          "size": "XS",
+          "conditionShow": "!addr.isInternationalFormat",
+          "conditionReadonly": "addr.isReadOnly",
+          "eventChange": "addr.trackedFieldChanged('b')",
+          "modelOptions": {
+            "getterSetter": true
+          }
+        },
+        {
+          "id": 8,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "addr.zipCode",
+          "label": "global.zip.code",
+          "size": "SM",
+          "maxLength": 10,
+          "conditionReadonly": "addr.isReadOnly",
+          "conditionRequired": "addr.options.zipcdRequired",
+          "eventChange": "addr.zipCodeChanged('b')",
+          "modelOptions": {
+            "getterSetter": true,
+            "updateOn": "blur"
+          }
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "type": "FIELD",
+      "subType": "DROP_DOWN",
+      "model": "addr.countryCd",
+      "label": "global.country",
+      "type3": "CODES",
+      "meta": "Country",
+      "conditionShow": "addr.options.countryCdVisible",
+      "conditionReadonly": "addr.isReadOnly || !addr.isCountryEnabled",
+      "eventChange": "addr.trackedFieldChanged('b')",
+      "modelOptions": {
+        "getterSetter": true
+      }
+    },
+    {
+      "id": 10,
+      "type": "FIELD",
+      "subType": "LOOKUP",
+      "model": "addr.geoCode",
+      "label": "global.geo.code",
+      "conditionShow": "(!addr.taxMethodType || addr.taxMethodType.toLowerCase() === 'e') && addr.options.geoCodeVisible",
+      "conditionDisabled": "!addr.isGeoCodeEnabled",
+      "size": "SM",
+      "meta": "GeoCodeEnterprise",
+      "conditionReadonly": "addr.isReadOnly",
+      "eventChange": "addr.geoCodeChanged()",
+      "modelOptions": {
+        "getterSetter": true
+      },
+      "options": {
+        "searchParams": {},
+        "searchCriteriaFunction": "addr.getGeoCodeLookupCriteria()"
+      }
+    },
+    {
+      "id": 13,
+      "type": "FIELD",
+      "subType": "LOOKUP",
+      "model": "addr.geoCode",
+      "label": "global.geo.code",
+      "conditionShow": "addr.taxMethodType.toLowerCase() === 't' && addr.options.geoCodeVisible",
+      "conditionDisabled": "!addr.isGeoCodeEnabled",
+      "size": "SM",
+      "meta": "GeoCodeSalesUseTax",
+      "conditionReadonly": "addr.isReadOnly",
+      "eventChange": "addr.geoCodeChanged()",
+      "modelOptions": {
+        "getterSetter": true
+      },
+      "options": {
+        "searchParams": {},
+        "searchCriteriaFunction": "addr.getGeoCodeLookupCriteria()"
+      }
+    },
+    {
+      "id": 11,
+      "type": "FIELD",
+      "subType": "CHECKBOX",
+      "model": "addr.isOutOfCity",
+      "label": "global.out.of.city",
+      "dataFormat": "LOGICAL",
+      "conditionShow": "addr.taxMethodType === 'e' && addr.options.outOfCityVisible",
+      "conditionDisabled": "addr.isReadOnly || !addr.isOutOfCityEnabled",
+      "modelOptions": {
+        "getterSetter": true
+      }
+    }
+  ]
+}

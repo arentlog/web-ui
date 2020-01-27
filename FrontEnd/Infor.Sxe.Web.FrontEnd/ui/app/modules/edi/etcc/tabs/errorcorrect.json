@@ -1,0 +1,293 @@
+{
+  "viewId": "edi-etcc-errorcorrect",
+  "id": 1,
+  "type": "VIEW",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.electronic.transaction.control.center",
+              "subLabel": "global.error.detail",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "eventClick": "qCorrect.quickCorrectGridExit()"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "GRID",
+                  "model": "base.quickCorrectResults",
+                  "controlRef": "base.quickCorrect.grid",
+                  "options": {
+                    "showCheckboxes": true,
+                    "showDrilldown": true,
+                    "showExpander": true,
+                    "editable": true,
+                    "rowDetailOptions": {
+                      "template": "edi/etcc/quickerrorcorrect-detail.json",
+                      "controller": "EtccExpandErrorCorrectRowCtrl as qExp",
+                      "paramsReference": "base.quickErrorCorrectRowParams"
+                    },
+                    "events": {
+                      "drilldown": "qCorrect.quickErrorDrilldown()",
+                      "ready": ""
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 9,
+                      "type": "TOOLBAR",
+                      "label": "global.errors.to.correct",
+                      "children": [
+                        {
+                          "id": 20,
+                          "type": "BTN",
+                          "subType": "MENU",
+                          "label": "global.actions",
+                          "conditionDisabled": "!qCorrect.quickCorrectGridActionEnabled()",
+                          "children": [
+                            {
+                              "id": 21,
+                              "type": "MENU_OPT",
+                              "label": "global.last.update",
+                              "icon": "icon-clock",
+                              "eventClick": "qCorrect.quickCorrectGridLastUpdate()"
+                            },
+                            {
+                              "id": 23,
+                              "type": "MENU_OPT",
+                              "label": "global.correct.multiple.values",
+                              "icon": "icon-edit",
+                              "securityLevel": 3,
+                              "conditionDisabled": "!qCorrect.quickCorrectGridCorrectAllSelectedRowsEnabled()",
+                              "eventClick": "qCorrect.quickCorrectGridCorrectAllSelectedRows()"
+                            },
+                            {
+                              "id": 24,
+                              "type": "MENU_OPT",
+                              "subType": "SUB_MENU",
+                              "label": "global.transaction.processing",
+                              "icon": "icon-expand-app-tray",
+                              "children": [
+                                {
+                                  "id": 25,
+                                  "type": "MENU_OPT",
+                                  "label": "global.transaction.detail",
+                                  "icon": "icon-drilldown",
+                                  "eventClick": "qCorrect.quickCorrectGridTransDocumentDrilldown()",
+                                  "conditionDisabled": "!qCorrect.quickCorrectGridTransDocumentDrilldownEnabled()"
+                                },
+                                {
+                                  "id": 26,
+                                  "type": "MENU_OPT",
+                                  "label": "global.approve.transaction",
+                                  "conditionDisabled": "!qCorrect.quickCorrectGridTransApproveTransactionEnabled()",
+                                  "eventClick": "qCorrect.quickCorrectGridTransApproveTransaction()",
+                                  "icon": "icon-confirm"
+                                },
+                                {
+                                  "id": 27,
+                                  "type": "MENU_OPT",
+                                  "label": "global.place.on.e.hold",
+                                  "conditionDisabled": "!qCorrect.quickCorrectGridTransPlaceOnEHoldEnabled()",
+                                  "eventClick": "qCorrect.quickCorrectGridTransPlaceOnEHold()",
+                                  "icon": "icon-flag"
+                                },
+                                {
+                                  "id": 28,
+                                  "type": "MENU_OPT",
+                                  "label": "sxe.document",
+                                  "conditionDisabled": "!qCorrect.quickCorrectGridTransLaunchSXeDocumentEnabled()",
+                                  "eventClick": "qCorrect.quickCorrectGridTransLaunchSXeDocument()",
+                                  "icon": "icon-quick-access"
+                                },
+                                {
+                                  "id": 29,
+                                  "type": "MENU_OPT",
+                                  "label": "global.cancel.transaction",
+                                  "icon": "icon-cancel",
+                                  "conditionDisabled": "!qCorrect.quickCorrectGridTransCancelEnabled()",
+                                  "eventClick": "qCorrect.quickCorrectGridTransCancel()"
+                                },
+                                {
+                                  "id": 30,
+                                  "type": "MENU_OPT",
+                                  "label": "global.update.transaction",
+                                  "conditionDisabled": "!qCorrect.quickCorrectGridTransUpdateEnabled()",
+                                  "eventClick": "qCorrect.quickCorrectGridTransUpdate()",
+                                  "icon": "icon-process"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "corrected",
+                      "label": "global.corrected",
+                      "dataFormat": "LOGICAL",
+                      "contentVisible": "",
+                      "eventChange": "base.quickCorrectGridCorrectionToggle()",
+                      "editable": true,
+                      "cellEditable": "base.changeModeSecurityEnabled()"
+                    },
+                    {
+                      "id": 11,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "edivalue",
+                      "label": "global.transaction.value"
+                    },
+                    {
+                      "id": 12,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "usetransvalue",
+                      "label": "global.use.transaction.value",
+                      "dataFormat": "LOGICAL",
+                      "editable": true,
+                      "cellEditable": "qCorrect.quickCorrectGridUseTransValueToggleEnabled()",
+                      "contentVisible": "qCorrect.quickCorrectGridUseTransValueToggleVisible()",
+                      "conditionInclude": "qCorrect.quickCorrectGridUseTransValueToggleIncluded()",
+                      "eventChange": "qCorrect.quickCorrectGridUseTransValueToggle()"
+                    },
+                    {
+                      "id": 13,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "sxevalue",
+                      "label": "sxe.value"
+                    },
+                    {
+                      "id": 31,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "usesxevalue",
+                      "label": "global.use.sx.e.value",
+                      "dataFormat": "LOGICAL",
+                      "editable": true,
+                      "cellEditable": "qCorrect.quickCorrectGridUseSXValueToggleEnabled()",
+                      "contentVisible": "qCorrect.quickCorrectGridUseSXValueToggleVisible()",
+                      "conditionInclude": "qCorrect.quickCorrectGridUseSXValueToggleIncluded()",
+                      "eventChange": "qCorrect.quickCorrectGridUseSXValueToggle()"
+                    },
+                    {
+                      "id": 14,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "correctvalue",
+                      "label": "global.corrected.value",
+                      "contentVisible": "",
+                      "editable": true,
+                      "cellEditable": "qCorrect.quickCorrectGridCorrectValueEnabled()",
+                      "conditionInclude": "qCorrect.quickCorrectGridCorrectValueIncluded()",
+                      "eventChange": "qCorrect.quickCorrectGridCorrectValueChanged()"
+                    },
+                    {
+                      "id": 15,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "errdesc",
+                      "label": "global.error.description"
+                    },
+                    {
+                      "id": 16,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "docId",
+                      "label": "global.document.id",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "leveldisplay",
+                      "label": "global.section"
+                    },
+                    {
+                      "id": 18,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "oEEHcustno",
+                      "label": "{{base.partnerTitle}}"
+                    },
+                    {
+                      "id": 19,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "oEEHshipto",
+                      "label": "{{base.shipToTitle}}"
+                    },
+                    {
+                      "id": 32,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "oEEHcustname",
+                      "label": "global.name"
+                    },
+                    {
+                      "id": 33,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "oEEHwhse",
+                      "label": "global.warehouse"
+                    },
+                    {
+                      "id": 34,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "fieldty",
+                      "label": "global.error"
+                    },
+                    {
+                      "id": 35,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "errty",
+                      "label": "global.type",
+                      "dataFormat": "EdiETCCErrorType"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

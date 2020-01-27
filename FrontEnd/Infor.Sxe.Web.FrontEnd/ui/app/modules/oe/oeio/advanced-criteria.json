@@ -1,0 +1,520 @@
+{
+  "viewId": "oe-oeio-master-advancedcriteria",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 2,
+      "type": "COMP_FLD",
+      "children": [
+        {
+          "id": 72,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.custno",
+          "label": "global.customer.number",
+          "meta": "Customer",
+          "conditionShow": "advsrch.isSelected('custno')"
+        },
+        {
+          "id": 90,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.shipto",
+          "label": "global.ship.to",
+          "meta": "ShipTo",
+          "conditionShow": "advsrch.isSelected('shipto')",
+          "options": {
+            "searchParams": {
+              "custno": {
+                "type": "REF",
+                "value": "mst.advCriteria.custno"
+              }
+            }
+          }
+        },
+        {
+          "id": 74,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.whse",
+          "label": "global.warehouse",
+          "meta": "Warehouse",
+          "conditionShow": "advsrch.isSelected('whse')"
+        },
+        {
+          "id": 140,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.saleswhse",
+          "label": "global.sales.warehouse",
+          "meta": "Warehouse",
+          "conditionShow": "advsrch.isSelected('saleswhse') && base.isAOSalesWhseOn"
+        },
+        {
+          "id": 91,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.custpo",
+          "label": "global.customer.purchase.order.number",
+          "conditionShow": "advsrch.isSelected('custpo')",
+          "maxLength": 22
+        },
+        {
+          "id": 99,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.refer",
+          "label": "global.reference",
+          "conditionShow": "advsrch.isSelected('refer')",
+          "maxLength": 24
+        },
+        {
+          "id": 100,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.orderdisp",
+          "label": "global.disposition",
+          "type3": "SET",
+          "metaGroup": "OE",
+          "meta": "Disposition",
+          "conditionShow": "advsrch.isSelected('orderdisp')",
+          "size": "SM"
+        },
+        {
+          "id": 103,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.approvty",
+          "label": "global.approval",
+          "conditionShow": "advsrch.isSelected('approvty')",
+          "maxLength": 1,
+          "size": "XS"
+        },
+        {
+          "id": 104,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.slsrepin",
+          "label": "global.sales.rep.internal",
+          "meta": "SalesRep",
+          "conditionShow": "advsrch.isSelected('slsrepin')"
+        },
+        {
+          "id": 105,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.slsrepout",
+          "label": "global.sales.rep.external",
+          "meta": "SalesRep",
+          "conditionShow": "advsrch.isSelected('slsrepout')"
+        },
+        {
+          "id": 106,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.prod",
+          "label": "global.product",
+          "meta": "ProdAll",
+          "conditionShow": "advsrch.isSelected('prod')",
+          "conditionDisabled": "mst.advCriteria.trackerno",
+          "eventChange": "mst.setDisplayType()",
+          "options": {
+            "allowEntry": true
+          }
+        },
+        {
+          "id": 125,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.prodtype",
+          "label": "global.product.type",
+          "type3": "SET",
+          "metaGroup": "OE",
+          "meta": "ProductType",
+          "conditionShow": "advsrch.isSelected('prodtype')",
+          "blankOption": false,
+          "eventChange": "mst.prodtypeChanged()"
+        },
+        {
+          "id": 135,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.coresselect",
+          "label": "global.core.status",
+          "type3": "SET",
+          "metaGroup": "OE",
+          "meta": "CoreStatusType",
+          "conditionShow": "advsrch.isSelected('prodtype') && mst.advCriteria.prodtype.toUpperCase() === 'C'",
+          "blankOption": false,
+          "size": "SM"
+        },
+        {
+          "id": 136,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.coresmonths",
+          "label": "global.months",
+          "type3": "",
+          "conditionShow": "advsrch.isSelected('prodtype') && mst.advCriteria.prodtype.toUpperCase() === 'C'",
+          "size": "XS",
+          "dataFormat": "INTEGER",
+          "sign": "+",
+          "maxLength": 2,
+          "digits": 2
+        },
+        {
+          "id": 137,
+          "type": "FIELD",
+          "subType": "CHECKBOX",
+          "model": "mst.advCriteria.coreszerolines",
+          "label": "global.include.zero.qty.ship.lines",
+          "type3": "",
+          "conditionShow": "advsrch.isSelected('prodtype') && mst.advCriteria.prodtype.toUpperCase() === 'C' && mst.advCriteria.coresselect.toUpperCase() !== 'L'",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 107,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.takenby",
+          "label": "global.taken.by",
+          "conditionShow": "advsrch.isSelected('takenby')",
+          "maxLength": 4,
+          "meta": "Operator",
+          "size": "SM"
+        },
+        {
+          "id": 108,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.trackerno",
+          "label": "global.tracker.number",
+          "conditionShow": "advsrch.isSelected('trackerno')",
+          "maxLength": 30,
+          "eventChange": "mst.setDisplayType()"
+        },
+        {
+          "id": 101,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.fromentered",
+          "label": "global.entered.from",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('fromentered')",
+          "eventChange": "mst.fromenteredChanged()"
+        },
+        {
+          "id": 102,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.toentered",
+          "label": "global.entered.to",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('toentered')",
+          "conditionRequired": "mst.advCriteria.fromentered"
+        },
+        {
+          "id": 109,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.frompromised",
+          "label": "global.promised.from",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('frompromised')",
+          "eventChange": "mst.frompromisedChanged()"
+        },
+        {
+          "id": 110,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.topromised",
+          "label": "global.promised.to",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('topromised')",
+          "conditionRequired": "mst.advCriteria.frompromised"
+        },
+        {
+          "id": 111,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.fromreqship",
+          "label": "global.requested.ship.from",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('fromreqship')",
+          "eventChange": "mst.fromreqshipChanged()"
+        },
+        {
+          "id": 112,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.toreqship",
+          "label": "global.requested.ship.to",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('toreqship')",
+          "conditionRequired": "mst.advCriteria.fromreqship"
+        },
+        {
+          "id": 113,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.fromshipped",
+          "label": "global.shipped.from",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('fromshipped')",
+          "eventChange": "mst.fromshippedChanged()"
+        },
+        {
+          "id": 114,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.toshipped",
+          "label": "global.shipped.to",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('toshipped')",
+          "conditionRequired": "mst.advCriteria.fromshipped"
+        },
+        {
+          "id": 115,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.frominvoiced",
+          "label": "global.invoiced.from",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('frominvoiced')",
+          "eventChange": "mst.frominvoicedChanged()"
+        },
+        {
+          "id": 116,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.toinvoiced",
+          "label": "global.invoiced.to",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('toinvoiced')"
+        },
+        {
+          "id": 138,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.fromccsubmitd",
+          "label": "global.from.submit.date",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('fromccsubmitd')",
+          "eventChange": "mst.fromccsubmitdChanged()"
+        },
+        {
+          "id": 139,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.toccsubmitd",
+          "label": "global.to.submit.date",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('toccsubmitd')",
+          "conditionRequired": "mst.advCriteria.fromccsubmitd"
+        },
+        {
+          "id": 120,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.botype",
+          "label": "global.backorder.filter",
+          "type3": "SET",
+          "metaGroup": "OE",
+          "meta": "BackOrderFilter",
+          "conditionShow": "advsrch.isSelected('botype')",
+          "size": "SM",
+          "blankOption": false
+        },
+        {
+          "id": 121,
+          "type": "FIELD",
+          "subType": "MULTI_SELECT",
+          "model": "mst.advCriteria.stage",
+          "label": "global.stage",
+          "type3": "SET",
+          "metaGroup": "OE",
+          "meta": "OrderStageFilter",
+          "conditionShow": "advsrch.isSelected('stage')",
+          "blankOption": false
+        },
+        {
+          "id": 122,
+          "type": "FIELD",
+          "subType": "MULTI_SELECT",
+          "model": "mst.advCriteria.transtype",
+          "label": "global.transaction.types",
+          "type3": "SET",
+          "metaGroup": "OE",
+          "meta": "OrderTransactionTypeFilter",
+          "conditionShow": "advsrch.isSelected('transtype')",
+          "blankOption": false,
+          "eventChange": "mst.transtypeChanged()"
+        },
+        {
+          "id": 124,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.prodstat",
+          "label": "global.line.type",
+          "type3": "SET",
+          "metaGroup": "OE",
+          "meta": "LineType",
+          "conditionShow": "advsrch.isSelected('prodstat')",
+          "blankOption": false,
+          "size": "SM",
+          "conditionDisabled": "mst.advCriteria.prodtype.toUpperCase() === 'T' || mst.advCriteria.prodtype.toUpperCase() === 'C'",
+          "eventChange": "mst.setDisplayType()"
+        },
+        {
+          "id": 123,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.wtbilled",
+          "label": "wt.billed.orders",
+          "type3": "SET",
+          "metaGroup": "OE",
+          "meta": "WTBilledOrderFilter",
+          "conditionShow": "advsrch.isSelected('wtbilled')",
+          "blankOption": false,
+          "size": "SM"
+        },
+        {
+          "id": 126,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.restrictcd",
+          "label": "global.restriction.code",
+          "meta": "ProdRestrictions",
+          "conditionShow": "advsrch.isSelected('restrictcd')"
+        },
+        {
+          "id": 130,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.certcode",
+          "label": "global.certificate.license.id",
+          "meta": "CertificateLicense",
+          "conditionShow": "advsrch.isSelected('certcode')"
+        },
+        {
+          "id": 132,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.custreservecontractno",
+          "label": "global.customer.reservations.contract",
+          "conditionShow": "advsrch.isSelected('custreservecontractno')",
+          "maxLength": 24
+        },
+        {
+          "id": 141,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.fulfillmentordty",
+          "label": "global.fulfillment.order",
+          "conditionShow": "advsrch.isSelected('fulfillmentordty') && base.isOrderFulfillmentOn",
+          "type3": "SET",
+          "metaGroup": "OE",
+          "meta": "FulfillmentOrderFilter",
+          "blankOption": false
+        },
+        {
+          "id": 142,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.fulfillmenttiedty",
+          "label": "global.fulfillment.tied.order",
+          "conditionShow": "advsrch.isSelected('fulfillmenttiedty') && base.isOrderFulfillmentOn",
+          "type3": "SET",
+          "metaGroup": "OE",
+          "meta": "FulfillmentOrderTiedFilter",
+          "blankOption": false
+        },
+        {
+          "id": 133,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.display",
+          "label": "global.display",
+          "conditionShow": "advsrch.isSelected('display')",
+          "conditionDisabled": "mst.advCriteria.displayDisabled",
+          "blankOption": false,
+          "type3": "SET",
+          "metaGroup": "OE",
+          "meta": "DetailType",
+          "size": "SM"
+        },
+        {
+          "id": 134,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.recordlimit",
+          "label": "global.record.limit",
+          "conditionShow": "advsrch.isSelected('recordlimit')",
+          "size": "SM",
+          "dataFormat": "INTEGER",
+          "sign": "+",
+          "digits": 4
+        },
+        {
+          "id": 117,
+          "type": "FIELD",
+          "subType": "CHECKBOX",
+          "model": "mst.advCriteria.frtoutreqonlyfl",
+          "label": "global.freight.out.required.only",
+          "dataFormat": "LOGICAL",
+          "conditionShow": "advsrch.isSelected('frtoutreqonlyfl')",
+          "subFormat": "YesNo"
+        },
+        {
+          "id": 118,
+          "type": "FIELD",
+          "subType": "CHECKBOX",
+          "model": "mst.advCriteria.susponlyfl",
+          "label": "global.suspended.only",
+          "dataFormat": "LOGICAL",
+          "conditionShow": "advsrch.isSelected('susponlyfl')"
+        },
+        {
+          "id": 119,
+          "type": "FIELD",
+          "subType": "CHECKBOX",
+          "model": "mst.advCriteria.doonlyflag",
+          "label": "global.show.only.direct.order.lines",
+          "dataFormat": "LOGICAL",
+          "conditionShow": "advsrch.isSelected('doonlyflag')",
+          "subFormat": "YesNo"
+        },
+        {
+          "id": 129,
+          "type": "FIELD",
+          "subType": "CHECKBOX",
+          "model": "mst.advCriteria.restrictovrfl",
+          "label": "global.restriction.override.only",
+          "dataFormat": "LOGICAL",
+          "conditionShow": "advsrch.isSelected('restrictovrfl')"
+        },
+        {
+          "id": 131,
+          "type": "FIELD",
+          "subType": "CHECKBOX",
+          "model": "mst.advCriteria.custreserveovrfl",
+          "label": "global.customer.reservations.override.only",
+          "dataFormat": "LOGICAL",
+          "conditionShow": "advsrch.isSelected('custreserveovrfl')"
+        },
+        {
+          "id": 143,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.divno",
+          "label": "global.division",
+          "conditionShow": "advsrch.isSelected('divno')",
+          "type3": "MANUAL",
+          "optionsModel": "mst.divnoDropDownOptions"
+        }
+      ]
+    }
+  ]
+}

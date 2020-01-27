@@ -1,0 +1,142 @@
+{
+  "viewId": "sa-saapa-copy",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.personalization",
+              "subLabel": "global.copy",
+              "controls": {
+                "navBtns": {
+                  "id": 7,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 8,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "cpy.cancel()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "submitForm": true,
+                  "eventValidated": "cpy.customSubmit()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "cpy.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "cpy.request.screenname",
+                          "label": "global.view.id",
+                          "maxLength": 78,
+                          "autoFocus": true,
+                          "customMask": "[a-z0-9-]",
+                          "readonly": true
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "cpy.request.functionname",
+                          "label": "global.function.name",
+                          "maxLength": 78,
+                          "readonly": true
+                        }
+                      ]
+                    },
+                    {
+                      "id": 13,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "cpy.level",
+                          "label": "global.level",
+                          "type3": "MANUAL",
+                          "optionsModel": "base.personalizationLevelOptions",
+                          "optionLabelField": "label",
+                          "optionValueField": "value",
+                          "blankOption": false,
+                          "eventChange": "cpy.levelChanged()",
+                          "required": true
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "cpy.request.profile",
+                          "label": "global.profile",
+                          "meta": "ProfileName",
+                          "conditionRequired": "cpy.level === base.LEVEL_PROFILE",
+                          "conditionShow": "cpy.level === base.LEVEL_PROFILE"
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "cpy.request.operator",
+                          "label": "global.user",
+                          "conditionRequired": "cpy.level === base.LEVEL_USER",
+                          "conditionShow": "cpy.level === base.LEVEL_USER",
+                          "meta": "Operator"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

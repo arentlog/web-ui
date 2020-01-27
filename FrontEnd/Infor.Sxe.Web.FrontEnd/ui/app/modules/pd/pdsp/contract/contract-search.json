@@ -1,0 +1,119 @@
+{
+  "viewId": "pd-pdsp-search-contractsearch",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.clevelcd",
+                  "label": "global.vendor.contract.records",
+                  "type3": "MANUAL",
+                  "blankOption": false,
+                  "optionsModel": "base.levelCodePDSVC",
+                  "eventChange": "base.changeSearchLevelCd()"
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.pdrecno",
+                  "label": "global.record.number",
+                  "dataFormat": "INTEGER_TEXT",
+                  "conditionShow": "base.criteria.clevelcd === 'v0'",
+                  "maxLength": 8,
+                  "digits": 8,
+                  "sign": "+"
+                },
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.vendno",
+                  "label": "global.vendor.number",
+                  "meta": "Vendor",
+                  "conditionShow": "base.criteria.clevelcd !== 'v0'"
+                },
+                {
+                  "id": 23,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.contractno",
+                  "label": "global.contract.number",
+                  "maxLength": 24,
+                  "conditionShow": "base.criteria.clevelcd !== 'v0'"
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.prod",
+                  "label": "global.product",
+                  "meta": "ProdAll",
+                  "conditionShow": "base.criteria.clevelcd === 'v2'"
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.prodpricety",
+                  "label": "global.product.price.type",
+                  "meta": "ProdPriceTy",
+                  "conditionShow": "base.criteria.clevelcd === 'v2p'"
+                },
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.rebtype",
+                  "label": "global.rebate.type",
+                  "meta": "ProductRebateType",
+                  "conditionShow": "base.criteria.clevelcd === 'v3'"
+                },
+                {
+                  "id": 24,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.iRecordlimit",
+                  "label": "global.record.limit",
+                  "dataFormat": "INTEGER_TEXT",
+                  "digits": 4
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "vcsrch.submit(base.criteria.clevelcd)"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "vcsrch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

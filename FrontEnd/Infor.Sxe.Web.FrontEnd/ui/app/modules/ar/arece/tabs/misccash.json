@@ -1,0 +1,224 @@
+{
+  "viewId": "ar-arece-detail-misccash",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "TAB",
+  "children": [
+    {
+      "id": 202,
+      "type": "TOOLBAR",
+      "label": "global.blank.label.string.for.space",
+      "children": [
+        {
+          "id": 200,
+          "type": "BTN",
+          "subType": "SEC",
+          "label": "global.convert.percent.to.amount",
+          "eventClick": "dtl.onMiscCashGletaFieldChange('Convert')",
+          "icon": "icon-calculator"
+        },
+        {
+          "id": 201,
+          "type": "BTN",
+          "subType": "SEC",
+          "label": "global.set.amount.equal.to.proof",
+          "eventClick": "dtl.onMiscCashGletaFieldChange('Set')",
+          "icon": "icon-filter-equals"
+        }
+      ]
+    },
+    {
+      "id": 175,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 176,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 196,
+              "type": "FIELD",
+              "subType": "LOOKUP",
+              "model": "base.newMiscCashGletaData.caccount",
+              "label": "global.account",
+              "meta": "GlAccount",
+              "autoFocus": true,
+              "eventChange": "dtl.onMiscCashGletaFieldChange('cAccount')",
+              "required": true,
+              "options": {
+                "allowEntry": true
+              }
+            },
+            {
+              "id": 181,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "base.newMiscCashGletaData.damount",
+              "label": "global.amount",
+              "dataFormat": "DECIMAL",
+              "digits": 9,
+              "decimals": 2,
+              "size": "SM",
+              "eventChange": "dtl.onMiscCashGletaFieldChange('Amount')",
+              "modelOptions": {
+                "updateOn": "blur"
+              },
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            },
+            {
+              "id": 199,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "base.miscCashData.proof",
+              "label": "global.proof",
+              "dataFormat": "DECIMAL",
+              "digits": 9,
+              "decimals": 2,
+              "size": "SM",
+              "sign": "+",
+              "readonly": true,
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            }
+          ]
+        },
+        {
+          "id": 177,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 197,
+              "type": "FIELD",
+              "subType": "LOOKUP",
+              "model": "base.miscCashData.acctcd",
+              "label": "global.cash.general.ledger.account",
+              "meta": "GlAccount",
+              "eventChange": "dtl.onMiscCashHeaderFieldChange('account')",
+              "required": true,
+              "options": {
+                "allowEntry": true
+              }
+            },
+            {
+              "id": 198,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "base.miscCashData.refer",
+              "label": "global.reference",
+              "eventChange": "dtl.onMiscCashHeaderFieldChange('refer')",
+              "maxLength": 24,
+              "modelOptions": {
+                "updateOn": "blur"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 145,
+      "type": "GRID",
+      "model": "base.miscCashGletaList",
+      "controlRef": "base.grid5",
+      "conditionEditable": "base.isSelectionViewVisible",
+      "options": {
+        "showCheckboxes": true,
+        "showDrilldown": false,
+        "selectable": "multiple",
+        "editable": true,
+        "events": {
+          "cellchange": "dtl.onMiscCashCellChange()"
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 146,
+          "type": "TOOLBAR",
+          "label": "global.detail.gl.distribution",
+          "children": [
+            {
+              "id": 173,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.add",
+              "icon": "icon-add",
+              "eventClick": "dtl.onMiscCashNewGletaAdd()"
+            },
+            {
+              "id": 174,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.delete",
+              "icon": "icon-delete",
+              "conditionDisabled": "!base.grid5.isAnyRowSelected()",
+              "eventClick": "dtl.onMiscCashGletaGridDelete()"
+            },
+            {
+              "id": 205,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.convert.percent.to.amount",
+              "icon": "icon-calculator",
+              "conditionDisabled": "!base.grid5.isOneRowSelected()",
+              "eventClick": "dtl.onMiscCashGletaGridConvertPercent()"
+            },
+            {
+              "id": 206,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.set.amount.equal.to.proof",
+              "icon": "icon-filter-equals",
+              "conditionDisabled": "!base.grid5.isOneRowSelected()",
+              "eventClick": "dtl.onMiscCashGletaGridSetAmount()"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 148,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "ctype",
+          "label": "global.account.type"
+        },
+        {
+          "id": 203,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "caccount",
+          "label": "global.account"
+        },
+        {
+          "id": 195,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "damount",
+          "label": "global.amount",
+          "editable": true,
+          "digits": 9,
+          "decimals": 2,
+          "dataFormat": "CURRENCY",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 204,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cname",
+          "label": "global.account.name"
+        }
+      ]
+    }
+  ]
+}

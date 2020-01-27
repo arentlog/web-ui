@@ -1,0 +1,238 @@
+{
+  "viewId": "twl-twleci-cctransactions",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "dtlt.isDetailTransactions()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.transactions",
+              "subLabel": "{{dtlt.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtlt.returnToMaster()"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 8,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlt.summary.requestedDate",
+                          "label": "global.requested",
+                          "dataFormat": "TwlCharDateConversion"
+                        },
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlt.summary.startedDate",
+                          "label": "global.started",
+                          "dataFormat": "TwlCharDateConversion"
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlt.summary.completedDate",
+                          "label": "global.completed",
+                          "dataFormat": "TwlCharDateConversion"
+                        },
+                        {
+                          "id": 50,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "dtlt.gridDisplay",
+                          "label": "global.counts",
+                          "type3": "MANUAL",
+                          "optionsModel": "dtlt.displayTypes",
+                          "optionLabelField": "label",
+                          "optionValueField": "value",
+                          "eventChange": "dtlt.changeGridDisplay()",
+                          "blankOptionLabel": "global.all"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 14,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlt.summary.goodQty",
+                          "label": "global.matching"
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlt.summary.discQty",
+                          "label": "global.discrepancies"
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlt.summary.totalQty",
+                          "label": "global.total"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "GRID",
+                  "id": 19,
+                  "controlRef": "dtlt.grid",
+                  "model": "dtlt.dataset",
+                  "children": [
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "isDisc",
+                      "label": "global.discrepancy",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 47,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "dateTime",
+                      "label": "global.date.time"
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "empNum",
+                      "label": "global.employee"
+                    },
+                    {
+                      "id": 33,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "binNum",
+                      "label": "global.location"
+                    },
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "absNum",
+                      "label": "global.item"
+                    },
+                    {
+                      "id": 36,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "palletId",
+                      "label": "global.pallet"
+                    },
+                    {
+                      "id": 30,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "itemQty",
+                      "label": "global.expected.quantity",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 31,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "suggQty",
+                      "label": "global.counted.quantity",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 43,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "stockStat",
+                      "label": "global.stock.status",
+                      "dataFormat": "TwlStockStatusToName"
+                    },
+                    {
+                      "id": 48,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "diffQty",
+                      "label": "global.net",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 41,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "lotBefore",
+                      "label": "global.lot.before"
+                    },
+                    {
+                      "id": 49,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "lot",
+                      "label": "global.lot"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

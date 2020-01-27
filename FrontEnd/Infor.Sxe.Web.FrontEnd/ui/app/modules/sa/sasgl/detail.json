@@ -1,0 +1,275 @@
+{
+  "viewId": "sa-sasgl-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.local.taxes",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 24,
+                          "type": "FIELD_SET",
+                          "label": "global.tax.description",
+                          "children": [
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sasgl.descrip",
+                              "label": "global.description",
+                              "maxLength": 12
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 23,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 27,
+                          "type": "FIELD_SET",
+                          "label": "global.tax.accounts",
+                          "children": [
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.localResults.gstglno",
+                              "label": "gst.account",
+                              "meta": "GlAccount",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.localResults.provinceglno",
+                              "label": "pst.account",
+                              "meta": "GlAccount",
+                              "readonly": true,
+                              "options": {
+                                "allowEntry": true
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 36,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 37,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "GRID",
+                          "model": "dtl.taxRates",
+                          "controlRef": "dtl.grid",
+                          "options": {
+                            "editable": true,
+                            "showRowCount": false,
+                            "paging": false
+                          },
+                          "controls": {
+                            "toolbar": {
+                              "id": 31,
+                              "type": "TOOLBAR",
+                              "label": "global.tax.rates"
+                            }
+                          },
+                          "children": [
+                            {
+                              "id": 32,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "taxgroup",
+                              "label": "global.tax.group"
+                            },
+                            {
+                              "id": 33,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "pst",
+                              "label": "pst.rate",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 3,
+                                "maximumFractionDigits": 3
+                              }
+                            },
+                            {
+                              "id": 34,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "gst",
+                              "label": "gst.rate",
+                              "editable": true,
+                              "sign": "+",
+                              "digits": 2,
+                              "decimals": 3,
+                              "eventChange": "dtl.gstValueChange()",
+                              "cellEditable": "dtl.isGstCellEditable()",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 3,
+                                "maximumFractionDigits": 3
+                              }
+                            },
+                            {
+                              "id": 35,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "total",
+                              "label": "global.total.tax.rate",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 3,
+                                "maximumFractionDigits": 3
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "sasgl",
+                        "objectRef": "dtl.sasgl",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

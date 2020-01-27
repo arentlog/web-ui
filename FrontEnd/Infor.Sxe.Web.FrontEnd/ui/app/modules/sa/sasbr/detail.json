@@ -1,0 +1,526 @@
+{
+  "viewId": "sa-sasbr-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.sasbr",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.customReset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.template",
+                  "conditionShow": "base.isCreate()",
+                  "children": [
+                    {
+                      "id": 73,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 74,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 78,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 75,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.sasbrmaint.category",
+                                  "label": "global.category",
+                                  "type3": "MANUAL",
+                                  "optionsModel": "dtl.sasbrCategories",
+                                  "optionLabelField": "category",
+                                  "optionValueField": "category",
+                                  "blankOptionLabel": "global.show.all",
+                                  "eventChange": "dtl.loadDetailRules(dtl.sasbrmaint.category)",
+                                  "conditionShow": "base.isCreate()",
+                                  "size": "LG",
+                                  "autoFocus": true
+                                },
+                                {
+                                  "id": 76,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.sasbrmaint.cbRule",
+                                  "label": "global.rule",
+                                  "type3": "MANUAL",
+                                  "optionsModel": "dtl.sasbrDetailRules",
+                                  "optionLabelField": "descrip",
+                                  "optionValueField": "ruletype",
+                                  "blankOption": true,
+                                  "eventChange": "dtl.changeRuleType()",
+                                  "size": "LG",
+                                  "conditionReadonly": "!base.isCreate() && !dtl.sasbrmaint.cbRuleSensitive",
+                                  "blankOptionLabel": "global.show.all",
+                                  "conditionRequired": "base.isCreate() || dtl.sasbrmaint.cbRuleSensitive"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 29,
+                  "type": "EXP_AREA",
+                  "label": "global.global.company",
+                  "conditionShow": "(dtl.sasbrmaint.cbRule)",
+                  "children": [
+                    {
+                      "id": 30,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.sasbrmaint.tgGlobal",
+                              "label": "global.global",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!dtl.sasbrmaint.tgGlobalSensitive",
+                              "eventChange": "dtl.fieldChanged('tgGlobal')",
+                              "conditionShow": "(base.isCreate() && !dtl.sasbrmaint.tgCompany) || (base.isDetail() && dtl.sasbrmaint.tgGlobal)"
+                            },
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.sasbrmaint.tgCompany",
+                              "label": "global.company.wide",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!dtl.sasbrmaint.tgCompanySensitive",
+                              "eventChange": "dtl.fieldChanged('tgCompany')",
+                              "conditionShow": "(base.isCreate() && !dtl.sasbrmaint.tgGlobal) || (base.isDetail() && dtl.sasbrmaint.tgCompany)"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 72,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.sasbr.cono",
+                              "label": "global.company",
+                              "meta": "Company",
+                              "required": false,
+                              "conditionReadonly": "!dtl.sasbrmaint.conoSensitive",
+                              "conditionShow": "(!dtl.sasbrmaint.tgGlobal)",
+                              "eventChange": "dtl.fieldChanged('fiCono')"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 41,
+                  "type": "EXP_AREA",
+                  "label": "global.trading.partner",
+                  "conditionShow": "(dtl.sasbrmaint.cbRule) && (!dtl.sasbrmaint.tgGlobal) && (!dtl.sasbrmaint.tgCompany)",
+                  "children": [
+                    {
+                      "id": 42,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 43,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 50,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.sasbr.tradingpartner",
+                              "label": "global.type",
+                              "type3": "MANUAL",
+                              "blankOption": false,
+                              "conditionReadonly": "!dtl.sasbrmaint.tradingPartnerSensitive",
+                              "optionsModel": "dtl.tradingPartnerDataSet",
+                              "optionLabelField": "label",
+                              "optionValueField": "value",
+                              "eventChange": "dtl.fieldChanged('rsTradingPartner')",
+                              "conditionShow": "base.isCreate()"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 69,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 45,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.sasbr.custno",
+                              "label": "global.customer.number",
+                              "meta": "Customer",
+                              "conditionReadonly": "!dtl.sasbrmaint.custVendSensitive",
+                              "conditionShow": "dtl.sasbr.tradingpartner === 'c' && !dtl.sasbrmaint.custVendHidden",
+                              "required": true,
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 65,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "eventClick": "base.customerHyperlink(dtl.sasbr.custno)",
+                                  "conditionDisabled": "!dtl.sasbr.custno"
+                                }
+                              }
+                            },
+                            {
+                              "id": 47,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.sasbr.shipto",
+                              "label": "global.ship.to",
+                              "meta": "ShipTo",
+                              "conditionReadonly": "!dtl.sasbrmaint.shipFromToSensitive",
+                              "conditionShow": "dtl.sasbr.tradingpartner === 'c' && !dtl.sasbrmaint.shipFromToHidden",
+                              "options": {
+                                "searchParams": {
+                                  "custno": {
+                                    "type": "REF",
+                                    "value": "dtl.sasbrmaint.custno"
+                                  }
+                                }
+                              },
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 66,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "eventClick": "base.shipToHyperlink(dtl.sasbr.custno, dtl.sasbr.shipto)",
+                                  "conditionDisabled": "!dtl.sasbr.shipto"
+                                }
+                              }
+                            },
+                            {
+                              "id": 48,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.sasbr.vendno",
+                              "label": "global.vendor.number",
+                              "meta": "Vendor",
+                              "conditionShow": "dtl.sasbr.tradingpartner === 'v' && !dtl.sasbrmaint.custVendHidden",
+                              "conditionReadonly": "!dtl.sasbrmaint.custVendSensitive",
+                              "required": true,
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 67,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "eventClick": "base.vendorHyperlink(dtl.sasbr.vendno)",
+                                  "conditionDisabled": "!dtl.sasbr.vendno"
+                                }
+                              }
+                            },
+                            {
+                              "id": 49,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.sasbr.shipfmno",
+                              "label": "global.ship.from",
+                              "meta": "ShipFrom",
+                              "conditionReadonly": "!dtl.sasbrmaint.shipFromToSensitive",
+                              "conditionShow": "dtl.sasbr.tradingpartner === 'v' && !dtl.sasbrmaint.shipFromToHidden",
+                              "options": {
+                                "searchParams": {
+                                  "vendno": {
+                                    "type": "REF",
+                                    "value": "dtl.sasbrmaint.vendno"
+                                  }
+                                }
+                              },
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 68,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "eventClick": "base.shipFromHyperlink(dtl.sasbr.vendno, dtl.sasbr.shipfmno)",
+                                  "conditionDisabled": "!dtl.sasbr.shipfmno"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 51,
+                  "type": "EXP_AREA",
+                  "label": "global.rule",
+                  "conditionShow": "(dtl.sasbrmaint.cbRule)",
+                  "children": [
+                    {
+                      "id": 52,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 53,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 54,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sasbr.docHandler",
+                              "label": "global.document.handler",
+                              "conditionReadonly": "!dtl.sasbrmaint.docHandlerSensitive"
+                            },
+                            {
+                              "id": 62,
+                              "type": "FIELD",
+                              "subType": "RADIO_SET",
+                              "model": "dtl.sasbr.direction",
+                              "label": "global.direction",
+                              "type3": "SET",
+                              "metaGroup": "SA",
+                              "meta": "Direction",
+                              "conditionDisabled": "!dtl.sasbrmaint.directionSensitive"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 63,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 55,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sasbr.nodeNm",
+                              "label": "global.node.name",
+                              "conditionReadonly": "!dtl.sasbrmaint.nodeNameSensitive"
+                            },
+                            {
+                              "id": 59,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sasbr.attrNm",
+                              "label": "global.attribute.name",
+                              "conditionReadonly": "!dtl.sasbrmaint.attrNameSensitive"
+                            },
+                            {
+                              "id": 60,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sasbr.ruletype",
+                              "label": "global.rule.type",
+                              "conditionReadonly": "!dtl.sasbrmaint.ruleTypeSensitive"
+                            },
+                            {
+                              "id": 61,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sasbr.rulevalue",
+                              "label": "global.rule.value"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 86,
+                  "type": "EXP_AREA",
+                  "label": "global.extended.description",
+                  "children": [
+                    {
+                      "id": 87,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 88,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 90,
+                              "type": "MESSAGE",
+                              "text": "{{dtl.getExtendedDescrip(dtl.sasbr.extdescrip)}}",
+                              "conditionShow": "base.isDetail()"
+                            },
+                            {
+                              "id": 89,
+                              "type": "FIELD",
+                              "subType": "TEXT_AREA",
+                              "model": "dtl.sasbr.extdescrip",
+                              "label": "global.extended.description",
+                              "size": "LG",
+                              "labelHidden": true,
+                              "conditionShow": "!base.isDetail()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 23,
+                  "type": "EXP_AREA",
+                  "label": "global.categories",
+                  "conditionShow": "(dtl.sasbrmaint.cbRule)",
+                  "children": [
+                    {
+                      "id": 91,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 92,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "TEXT_AREA",
+                              "model": "dtl.sasbr.categorylist",
+                              "label": "global.categories",
+                              "readonly": true,
+                              "size": "LG"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+﻿<div class="contextual-action-panel" ng-controller="WysiwygInlineOptionsCtrl as wio" initialize>
+   <div class="modal-content">
+      <div class="modal-header">
+         <div class="toolbar">
+            <div class="title" translate>Inline Options</div>
+            <div class="buttonset">
+               <button class="btn" type="button" ng-click="wio.submit()">
+                  <svg class="icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon-confirm"></use></svg>
+                  <span translate>global.ok</span>
+               </button>
+               <button class="btn" type="button" ng-click="wio.cancel()">
+                  <svg class="icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon-cancel"></use></svg>
+                  <span translate>global.cancel</span>
+               </button>
+            </div>
+         </div>
+      </div>
+
+      <div class="modal-body-wrapper">
+         <div class="modal-body">
+            <div class="row">
+               <div class="twelve columns">
+
+                  <!-- Grid -->
+                  <div class="grid-container">
+                     <div class="toolbar" data-options="{maxVisibleButtons: 50, favorButtonset: false}">
+                        <div class="title"><span translate>global.options</span> <span class="datagrid-result-count"></span></div>
+                        <div class="buttonset">
+                           <button type="button" class="btn" ng-click="wio.addOption()" ng-disabled="wio.grid.isAnyRowSelected()">
+                              <svg class="icon"><use xlink:href="#icon-new-document"></use></svg>
+                              <span translate>global.add</span>
+                           </button>
+                           <button type="button" class="btn" ng-click="wio.moveOption(true)" ng-disabled="!wio.grid.isOneRowSelected()">
+                              <svg class="icon"><use xlink:href="#icon-up-arrow"></use></svg>
+                              <span translate>global.move.up</span>
+                           </button>
+                           <button type="button" class="btn" ng-click="wio.moveOption(false)" ng-disabled="!wio.grid.isOneRowSelected()">
+                              <svg class="icon"><use xlink:href="#icon-down-arrow"></use></svg>
+                              <span translate>global.move.down</span>
+                           </button>
+                           <button type="button" class="btn" ng-click="wio.deleteOption()" ng-disabled="wio.grid.isNoRowSelected()">
+                              <svg class="icon"><use xlink:href="#icon-delete"></use></svg>
+                              <span translate>global.delete</span>
+                           </button>
+                        </div>
+                     </div>
+                     <div data-grid class="grid-body datagrid-contained" data-init="false"
+                          data-control-ref="wio.grid" data-model="wio.dataset"
+                          data-options='{"editable":true,"showCheckboxes":true,"selectable":"single","paging":false,"showSearchField":false,"columns":[{"id":"label","field":"label","name":"global.label","type":"TEXT","editable":true,"width":340},{"id":"value","field":"value","name":"Value (string only)","type":"TEXT","editable":true,"width":340,"headerTooltip":"Only string values may be used for inline options. Numeric and boolean values are not supported."}]}'>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,123 @@
+{
+  "viewId": "twl-twlocs-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.twlocs",
+          "subLabel": "{{base.getSubTitle()}}",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "type": "GRID",
+              "id": 5,
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "selectable": "multiple",
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.carton.sizes",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-new-document",
+                      "label": "global.new",
+                      "eventClick": "mst.create()",
+                      "conditionDisabled": "base.grid.isAnyRowSelected() || ((!base.criteria.whNum) && (!base.criteriaUsed.whNum))",
+                      "securityLevel": 4
+                    },
+                    {
+                      "id": 8,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-edit",
+                      "label": "global.edit",
+                      "eventClick": "mst.edit()",
+                      "conditionDisabled": "!base.grid.isOneRowSelected()",
+                      "securityLevel": 3
+                    },
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-delete",
+                      "label": "global.delete",
+                      "eventClick": "mst.delete()",
+                      "conditionDisabled": "base.grid.isNoRowSelected()",
+                      "securityLevel": 5
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 10,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "rowStatus",
+                  "label": "global.active",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "boxId",
+                  "label": "global.carton.id"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "description",
+                  "label": "global.description"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "cube",
+                  "label": "global.cube",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "carrierId",
+                  "label": "global.carrier"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

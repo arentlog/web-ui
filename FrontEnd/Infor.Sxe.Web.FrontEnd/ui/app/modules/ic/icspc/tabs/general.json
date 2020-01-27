@@ -1,0 +1,216 @@
+{
+  "viewId": "ic-icspc-detail-tabs-general",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isDetail() || dtl.isGeneralTabReadonly",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.general",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icspcaddchg.whse",
+                  "label": "global.warehouse",
+                  "meta": "Warehouse",
+                  "required": true,
+                  "conditionReadonly": "!base.isCreate()"
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icspcaddchg.custno",
+                  "label": "global.customer.number",
+                  "meta": "Customer",
+                  "conditionReadonly": "!base.isCreate()",
+                  "eventChange": "dtl.loadDefaultWhse()",
+                  "required": true,
+                  "controls": {
+                    "actionBtn": {
+                      "id": 19,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "global.inquire",
+                      "icon": "icon-drilldown",
+                      "isLabelTooltip": true,
+                      "conditionDisabled": "!dtl.icspcaddchg.custno",
+                      "stateRef": "aric.detail({pk: dtl.icspcaddchg.custno})"
+                    }
+                  }
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icspcaddchg.shipto",
+                  "label": "global.ship.to",
+                  "meta": "ShipTo",
+                  "conditionReadonly": "!base.isCreate()",
+                  "eventChange": "dtl.loadDefaultWhse()",
+                  "options": {
+                    "searchParams": {
+                      "custno": {
+                        "type": "REF",
+                        "value": "dtl.icspcaddchg.custno"
+                      }
+                    }
+                  },
+                  "controls": {
+                    "actionBtn": {
+                      "id": 20,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "global.inquire",
+                      "icon": "icon-drilldown",
+                      "isLabelTooltip": true,
+                      "conditionDisabled": "!dtl.icspcaddchg.shipto",
+                      "stateRef": "aric.detail({pk: dtl.icspcaddchg.custno, pk2: dtl.icspcaddchg.shipto})"
+                    }
+                  }
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icspcaddchg.shiptogrp",
+                  "label": "global.ship.to.group",
+                  "meta": "ShipToGroup",
+                  "conditionReadonly": "!base.isCreate()",
+                  "conditionShow": "dtl.icspcaddchg.shiptogrpfl",
+                  "options": {
+                    "searchParams": {
+                      "custno": {
+                        "type": "REF",
+                        "value": "dtl.icspcaddchg.custno"
+                      },
+                      "shiptogrp": {
+                        "type": "REF",
+                        "value": "dtl.icspcaddchg.shiptogrp"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 15,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 14,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "dtl.icspcaddchg.startdt",
+                      "label": "global.start.date",
+                      "dataFormat": "DATE",
+                      "required": true,
+                      "conditionReadonly": "!base.isCreate()"
+                    },
+                    {
+                      "id": 16,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "dtl.icspcaddchg.expiredt",
+                      "label": "global.expire.date",
+                      "dataFormat": "DATE",
+                      "required": true,
+                      "conditionReadonly": "!base.isCreate()"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 6,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icspcaddchg.activefl",
+                  "label": "global.active",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "ActiveStatus",
+                  "blankOption": false,
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icspcaddchg.contractno",
+                  "label": "global.contract",
+                  "maxLength": 24
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icspcaddchg.refer",
+                  "label": "global.reference",
+                  "maxLength": 48,
+                  "size": "LG",
+                  "meta": "Reference",
+                  "eventChange": "dtl.referenceLookupChanged()",
+                  "options": {
+                    "allowEntry": true,
+                    "autoSelect": false
+                  }
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icspcaddchg.fillpriority",
+                  "label": "global.fill.priority",
+                  "dataFormat": "INTEGER",
+                  "sign": "+",
+                  "digits": 2,
+                  "conditionShow": "dtl.icspcaddchg.fillpriorityfl"
+                },
+                {
+                  "id": 17,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icspcaddchg.expectedratepct",
+                  "label": "global.estimated.usage.rate.pct",
+                  "dataFormat": "INTEGER",
+                  "digits": 4,
+                  "sign": "+",
+                  "conditionShow": "dtl.icspcaddchg.expectedratepctfl"
+                },
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icspcaddchg.expiredusagetype",
+                  "label": "global.expired.forecast.usage",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "ExpiredForecastUsage",
+                  "blankOption": false,
+                  "conditionShow": "dtl.icspcaddchg.expiredusagetypefl"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

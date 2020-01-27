@@ -1,0 +1,197 @@
+{
+  "viewId": "ic-icspr-detail-customer",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isDetail()",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.customer.detail",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.criteriaType",
+                  "label": "global.type",
+                  "optionsModel": "base.customerFullList",
+                  "conditionReadonly": "false",
+                  "blankOption": false,
+                  "type3": "MANUAL"
+                }
+              ]
+            },
+            {
+              "id": 7,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "eventClick": "cst.search()"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "type": "GRID",
+          "model": "cst.icsprtList",
+          "controlRef": "cst.grid",
+          "options": {
+            "showCheckboxes": true,
+            "showDrilldown": true,
+            "events": {
+              "drilldown": "cst.drilldown()"
+            }
+          },
+          "controls": {
+            "toolbar": {
+              "id": 9,
+              "type": "TOOLBAR",
+              "label": "global.customer.restrictions",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "stateRef": "",
+                  "securityLevel": 4,
+                  "conditionDisabled": "cst.grid.isAnyRowSelected()",
+                  "eventClick": "cst.create()"
+                },
+                {
+                  "id": 22,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "cst.delete()",
+                  "securityLevel": 5,
+                  "conditionDisabled": "!cst.grid.isOneRowSelected()"
+                }
+              ]
+            }
+          },
+          "children": [
+            {
+              "id": 23,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "territorydesc",
+              "label": "global.type"
+            },
+            {
+              "id": 10,
+              "type": "GRID_COL",
+              "subType": "HYPERLINK",
+              "label": "global.customer.number",
+              "model": "custno",
+              "eventClick": "cst.customerInquiryHyperlink()",
+              "conditionInclude": "cst.allowCustomerField()",
+              "dataFormat": "DECIMAL_TEXT"
+            },
+            {
+              "id": 11,
+              "type": "GRID_COL",
+              "subType": "HYPERLINK",
+              "model": "shipto",
+              "label": "global.ship.to",
+              "eventClick": "cst.shiptoInquiryHyperlink()",
+              "conditionInclude": "cst.allowShipToField()"
+            },
+            {
+              "id": 12,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "city",
+              "label": "global.city",
+              "conditionInclude": "cst.allowCityField()"
+            },
+            {
+              "id": 13,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "state",
+              "label": "global.state",
+              "conditionInclude": "cst.allowStateField()"
+            },
+            {
+              "id": 14,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "zipcd",
+              "label": "global.postal.code",
+              "conditionInclude": "cst.allowZipCdField()"
+            },
+            {
+              "id": 15,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "countrycd",
+              "label": "global.country",
+              "conditionInclude": "cst.allowCountryField()"
+            },
+            {
+              "id": 20,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "custtype",
+              "label": "global.customer.type",
+              "conditionInclude": "cst.allowCustTypeField()"
+            },
+            {
+              "id": 16,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "pricetype",
+              "label": "global.customer.price.type",
+              "conditionInclude": "cst.allowPriceTypeField()"
+            },
+            {
+              "id": 17,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "salesterr",
+              "label": "global.sales.territory",
+              "conditionInclude": "cst.allowSalesTerrField()"
+            },
+            {
+              "id": 18,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "certcode",
+              "label": "global.certificate.license",
+              "conditionInclude": "cst.allowCertCodeField()"
+            },
+            {
+              "id": 19,
+              "type": "GRID_COL",
+              "subType": "DATE",
+              "model": "createdt",
+              "label": "global.create.date",
+              "dataFormat": "DATE"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

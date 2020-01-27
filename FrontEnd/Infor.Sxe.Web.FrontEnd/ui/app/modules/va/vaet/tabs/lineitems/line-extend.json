@@ -1,0 +1,301 @@
+{
+  "viewId": "va-vaet-tabs-lineitems-lineextend",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.line.extended.information",
+              "subLabel": "{{lineext.detailSubTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "lineext.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "stateRef": "^"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.lineUpdateRecord.nonstockty",
+                          "label": "global.line.type",
+                          "type3": "SET",
+                          "metaGroup": "VA",
+                          "meta": "FinishedProductLineType",
+                          "blankOption": false,
+                          "readonly": true
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.lineUpdateRecord.prodcost",
+                          "label": "global.cost",
+                          "dataFormat": "DECIMAL",
+                          "sign": "+",
+                          "digits": 7,
+                          "decimals": 5,
+                          "conditionReadonly": "!base.lineUpdateRecord.prodcostSensitive",
+                          "conditionShow": "base.sasoo.seecostfl",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.lineUpdateRecord.qtyneeded",
+                          "label": "global.quantity.needed",
+                          "dataFormat": "DECIMAL",
+                          "sign": "+",
+                          "digits": 7,
+                          "decimals": 2,
+                          "readonly": true,
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.lineUpdateRecord.qtyord",
+                          "label": "global.quantity.ordered",
+                          "dataFormat": "DECIMAL",
+                          "sign": "+",
+                          "digits": 7,
+                          "decimals": 2,
+                          "readonly": true,
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.lineUpdateRecord.qtyship",
+                          "label": "global.quantity.shipped",
+                          "dataFormat": "DECIMAL",
+                          "sign": "+",
+                          "digits": 7,
+                          "decimals": 2,
+                          "conditionReadonly": "!base.lineUpdateRecord.qtyshipSensitive",
+                          "eventChange": "lineext.fieldChange('qtyship')",
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          },
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.lineUpdateRecord.usagefl",
+                          "label": "global.usage",
+                          "dataFormat": "LOGICAL"
+                        },
+                        {
+                          "id": 26,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.lineUpdateRecord.rushfl",
+                          "label": "global.rush",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!base.lineUpdateRecord.rushflSensitive"
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.lineUpdateRecord.directfl",
+                          "label": "global.direct.order",
+                          "dataFormat": "LOGICAL",
+                          "disabled": true
+                        },
+                        {
+                          "id": 27,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "lineext.cancelfl",
+                          "label": "global.cancel",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!base.lineUpdateRecord.cancelsimpleSensitive",
+                          "conditionShow": "!base.lineUpdateRecord.cancelsimpleHidden",
+                          "eventChange": "lineext.simpleCancelChange()"
+                        },
+                        {
+                          "id": 28,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.lineUpdateRecord.cancelty",
+                          "label": "global.cancel",
+                          "type3": "SET",
+                          "metaGroup": "VA",
+                          "meta": "VaLineCancelType",
+                          "blankOption": false,
+                          "conditionDisabled": "!base.lineUpdateRecord.cancelchoicesSensitive",
+                          "conditionShow": "!base.lineUpdateRecord.cancelchoicesHidden",
+                          "eventChange": "lineext.choicesCancelChange()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.lineUpdateRecord.shipprod",
+                          "label": "global.product",
+                          "meta": "ProdAll",
+                          "readonly": true
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.lineUpdateRecord.netavail",
+                          "label": "global.net.available",
+                          "dataFormat": "DECIMAL",
+                          "decimals": 2,
+                          "digits": 9,
+                          "readonly": true,
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 23,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.lineUpdateRecord.stkqtyneeded",
+                          "label": "global.stock.quantity.needed",
+                          "dataFormat": "DECIMAL",
+                          "sign": "+",
+                          "digits": 7,
+                          "decimals": 2,
+                          "readonly": true,
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 24,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.lineUpdateRecord.stkqtyord",
+                          "label": "global.stock.quantity.ordered",
+                          "dataFormat": "DECIMAL",
+                          "sign": "+",
+                          "digits": 7,
+                          "decimals": 2,
+                          "readonly": true,
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 25,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.lineUpdateRecord.stkqtyship",
+                          "label": "global.stock.quantity.shipped",
+                          "dataFormat": "DECIMAL",
+                          "sign": "+",
+                          "digits": 7,
+                          "decimals": 2,
+                          "readonly": true,
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 22,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.lineUpdateRecord.unit",
+                          "label": "global.units",
+                          "readonly": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

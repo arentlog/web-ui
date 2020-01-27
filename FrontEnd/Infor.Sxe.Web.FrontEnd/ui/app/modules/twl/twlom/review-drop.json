@@ -1,0 +1,277 @@
+{
+  "viewId": "twl-twlom-review-drop",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "dtlr.isReviewDrop()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "{{base.dropSummaryTitle}}",
+              "subLabel": "{{base.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 40,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "eventValidated": "alias.submit()",
+                  "eventClick": "dtlr.returnToMaster()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 67,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 68,
+                      "type": "TAB",
+                      "label": "global.waves",
+                      "conditionSelected": "base.omorderdropwaves.length",
+                      "tabId": "waves",
+                      "children": [
+                        {
+                          "id": 41,
+                          "type": "GRID",
+                          "model": "base.omorderdropwaves",
+                          "controlRef": "base.gridOrderDropWaves",
+                          "options": {
+                            "showCheckboxes": true,
+                            "selectable": "single",
+                            "events": {
+                              "selected": "dtlr.selectRow()"
+                            }
+                          },
+                          "controls": {
+                            "toolbar": {
+                              "id": 42,
+                              "type": "TOOLBAR",
+                              "label": "global.waves",
+                              "children": [
+                                {
+                                  "id": 83,
+                                  "type": "BTN",
+                                  "subType": "SEC",
+                                  "label": "global.assign.employees",
+                                  "eventClick": "dtlr.setEmployees()",
+                                  "conditionDisabled": "(!base.gridOrderDropWaves.isOneRowSelected()) || (base.dropSummaryType !== 'drop') || (dtlr.selectedRow.goodOrderCount === 0)"
+                                }
+                              ]
+                            }
+                          },
+                          "children": [
+                            {
+                              "id": 44,
+                              "type": "GRID_COL",
+                              "subType": "HYPERLINK",
+                              "model": "batch",
+                              "label": "global.wave",
+                              "dataFormat": "INTEGER",
+                              "eventClick": "dtlr.waveHyperLink()"
+                            },
+                            {
+                              "id": 46,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "goodOrderCount",
+                              "label": "global.successful.orders",
+                              "dataFormat": "INTEGER_TEXT"
+                            },
+                            {
+                              "id": 47,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "notOrderCount",
+                              "label": "global.not.successful",
+                              "dataFormat": "INTEGER_TEXT"
+                            },
+                            {
+                              "id": 45,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "orderCount",
+                              "label": "global.orders.attempted",
+                              "dataFormat": "INTEGER_TEXT"
+                            },
+                            {
+                              "id": 49,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "goodLineCount",
+                              "label": "global.successful.lines",
+                              "dataFormat": "INTEGER_TEXT"
+                            },
+                            {
+                              "id": 51,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "chWork",
+                              "label": "global.message"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 69,
+                      "type": "TAB",
+                      "label": "global.orders.attempted",
+                      "conditionShow": "base.omorderdropsummary.length",
+                      "conditionSelected": "base.omorderdropsummary.length && !base.omorderdropwaves.length",
+                      "tabId": "orders-attempted",
+                      "children": [
+                        {
+                          "id": 82,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.dropStatus",
+                          "label": "global.status",
+                          "type3": "MANUAL",
+                          "optionsModel": "base.dropStatusTypes",
+                          "blankOption": false,
+                          "eventChange": "mst.changeStatusType()"
+                        },
+                        {
+                          "id": 61,
+                          "type": "GRID",
+                          "model": "base.omorderdropsummaryDisplay",
+                          "controlRef": "base.gridOrderDropOrders",
+                          "controls": {
+                            "toolbar": {
+                              "id": 62,
+                              "type": "TOOLBAR",
+                              "label": "global.orders"
+                            }
+                          },
+                          "children": [
+                            {
+                              "id": 75,
+                              "type": "GRID_COL",
+                              "subType": "CHECKBOX",
+                              "model": "isSuccessful",
+                              "label": "global.successful",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 71,
+                              "type": "GRID_COL",
+                              "subType": "HYPERLINK",
+                              "model": "wave",
+                              "label": "global.wave",
+                              "dataFormat": "INTEGER",
+                              "eventClick": "dtlr.ordersAttemptedWaveHyperLink()"
+                            },
+                            {
+                              "id": 72,
+                              "type": "GRID_COL",
+                              "subType": "HYPERLINK",
+                              "model": "order",
+                              "label": "global.order.number",
+                              "eventClick": "base.orderInquiryHyperlink()"
+                            },
+                            {
+                              "id": 73,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "orderSuffix",
+                              "label": "global.order.suffix"
+                            },
+                            {
+                              "id": 74,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "lineCount",
+                              "label": "global.lines",
+                              "dataFormat": "INTEGER_TEXT"
+                            },
+                            {
+                              "id": 76,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "chWork",
+                              "label": "global.message"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 70,
+                      "type": "TAB",
+                      "label": "global.orders.not.attempted",
+                      "conditionShow": "base.omorderdropnotattempted.length",
+                      "conditionSelected": "base.omorderdropnotattempted.length && (!base.omorderdropsummary.length) && (!base.omorderdropwaves.length)",
+                      "tabId": "orders-not-attempted",
+                      "children": [
+                        {
+                          "id": 64,
+                          "type": "GRID",
+                          "model": "base.omorderdropnotattempted",
+                          "controlRef": "base.gridNotAttempted",
+                          "controls": {
+                            "toolbar": {
+                              "id": 65,
+                              "type": "TOOLBAR",
+                              "label": "global.orders"
+                            }
+                          },
+                          "children": [
+                            {
+                              "id": 77,
+                              "type": "GRID_COL",
+                              "subType": "HYPERLINK",
+                              "model": "order",
+                              "label": "global.order.number",
+                              "eventClick": "base.orderInquiryHyperlink()"
+                            },
+                            {
+                              "id": 78,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "orderSuffix",
+                              "label": "global.order.suffix"
+                            },
+                            {
+                              "id": 81,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "errorMessage",
+                              "label": "global.message"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

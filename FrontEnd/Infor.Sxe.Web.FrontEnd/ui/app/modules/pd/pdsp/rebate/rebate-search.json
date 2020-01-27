@@ -1,0 +1,164 @@
+{
+  "viewId": "pd-pdsp-search-rebatesearch",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.clevelcd",
+                  "label": "global.rebate.records",
+                  "type3": "MANUAL",
+                  "blankOption": false,
+                  "optionsModel": "base.levelCodePDSR",
+                  "eventChange": "base.changeSearchLevelCd()"
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.pdrecno",
+                  "label": "global.record.number",
+                  "dataFormat": "INTEGER_TEXT",
+                  "conditionShow": "base.criteria.clevelcd === 'r0'",
+                  "maxLength": 8,
+                  "digits": 8,
+                  "sign": "+"
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.prod",
+                  "label": "global.product",
+                  "meta": "ProdAll",
+                  "conditionShow": "base.criteria.clevelcd === 'r1'"
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.prodpricety",
+                  "label": "global.product.price.type",
+                  "meta": "ProdPriceTy",
+                  "conditionShow": "base.criteria.clevelcd === 'r3' && base.criteria.rebatecd !== 'p'"
+                },
+                {
+                  "id": 17,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.prodline",
+                  "label": "global.product.line",
+                  "meta": "ProdLine",
+                  "conditionShow": "base.criteria.clevelcd === 'r4'",
+                  "options": {
+                    "searchParams": {
+                      "vendno": {
+                        "type": "REF",
+                        "value": "base.criteria.vendno"
+                      },
+                      "prodline": {
+                        "type": "REF",
+                        "value": "base.criteria.prodline"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.vendno",
+                  "label": "global.vendor.number",
+                  "meta": "Vendor",
+                  "conditionShow": "base.criteria.clevelcd === 'r4'"
+                },
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.prodcat",
+                  "label": "global.product.category",
+                  "meta": "ProdCat",
+                  "conditionShow": "base.criteria.clevelcd === 'r5'"
+                },
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.rebtype",
+                  "label": "global.rebate.type",
+                  "meta": "ProductRebateType",
+                  "conditionShow": "base.criteria.clevelcd === 'r2'"
+                },
+                {
+                  "id": 21,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.rebatecd",
+                  "label": "global.rebate.code",
+                  "type3": "SET",
+                  "metaGroup": "PD",
+                  "meta": "RebateCodeTypes",
+                  "blankOption": false,
+                  "conditionShow": "base.criteria.clevelcd === 'r1' || base.criteria.clevelcd === 'r2' || base.criteria.clevelcd === 'r3' || base.criteria.clevelcd === 'r4' || base.criteria.clevelcd === 'r5'"
+                },
+                {
+                  "id": 22,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.shiptype",
+                  "label": "global.drop.ship.type",
+                  "type3": "SET",
+                  "metaGroup": "PD",
+                  "meta": "RebatesDropShipTypes",
+                  "blankOption": false,
+                  "conditionShow": "base.criteria.clevelcd === 'r1' || base.criteria.clevelcd === 'r2' || base.criteria.clevelcd === 'r3' || base.criteria.clevelcd === 'r4' || base.criteria.clevelcd === 'r5'"
+                },
+                {
+                  "id": 23,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.iRecordlimit",
+                  "label": "global.record.limit",
+                  "dataFormat": "INTEGER_TEXT",
+                  "digits": 4
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "rsrch.submit(base.criteria.clevelcd)"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "rsrch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+<div id="source-viewer" class="page-container two-column fixed">
+
+   <!-- Sidebar -->
+   <section initialize class="sidebar scrollable">
+
+      <div class="accordion alternate" data-options="{allowOnePane: false}">
+         <div class="accordion-header is-expanded">
+            <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+               <use xlink:href="#icon-document2"></use>
+            </svg>
+            <a href="#"><span translate>global.source.code</span></a>
+         </div>
+         <div class="accordion-pane" style="padding-top: 0;">
+            <div class="accordion-content no-padding" style="padding-left: 0;">
+
+               <!-- Source Tree -->
+               <ul source-viewer-tree class="tree" role="tree" data-init="false" style="margin: 15px;">
+                  <li>
+                     <a href="#">{{tree.sourceTree.name}}</a>
+                     <ul class="is-open">
+                        <li ng-repeat="branch in tree.sourceTree.children">
+                           <a href="#">{{branch.name}}</a>
+                           <!-- Recursive Nodes -->
+                           <ul source-code-node="branch" ng-class="{'is-open': branch.name === 'app'}"></ul>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+
+            </div>
+         </div>
+      </div>
+
+      <!-- Splitter -->
+      <div class="splitter splitter-right" id="source-code-splitter"></div>
+   </section>
+
+   <!-- Content (min-width 0 needed since flex box area messes up scrolling on the pre code) -->
+   <section initialize class="main" role="main" style="min-width: 0;">
+      <div source-viewer-toolbar class="toolbar editor-toolbar formatter-toolbar" style="margin-bottom: 0;" role="toolbar">
+         <div class="buttonset">
+            <button type="button" class="btn" ng-click="base.toggleLineNumbers()" data-multiple-clicks="true" title="{{'global.line.numbers' | translate}}">
+               <svg class="icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon-number-list"></use></svg>
+            </button>
+
+            <div class="separator"></div>
+
+            <button type="button" class="btn btn-menu" title="{{'global.font.size' | translate}}">
+               <svg class="icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon-change-font"></use></svg>
+            </button>
+            <ul class="popupmenu is-selectable">
+               <li ng-class="{'is-checked': base.isFontSize('8px')}"><a href="#" ng-click="base.setStyle('font-size', '8px')"><span>8</span></a></li>
+               <li ng-class="{'is-checked': base.isFontSize('10px')}"><a href="#" ng-click="base.setStyle('font-size', '10px')"><span>10</span></a></li>
+               <li ng-class="{'is-checked': base.isFontSize('12px')}"><a href="#" ng-click="base.setStyle('font-size', '12px')"><span>12</span></a></li>
+               <li ng-class="{'is-checked': base.isFontSize('14px')}"><a href="#" ng-click="base.setStyle('font-size', '14px')"><span>14</span></a></li>
+               <li ng-class="{'is-checked': base.isFontSize('16px')}"><a href="#" ng-click="base.setStyle('font-size', '16px')"><span>16</span></a></li>
+               <li ng-class="{'is-checked': base.isFontSize('18px')}"><a href="#" ng-click="base.setStyle('font-size', '18px')"><span>18</span></a></li>
+               <li ng-class="{'is-checked': base.isFontSize('20px')}"><a href="#" ng-click="base.setStyle('font-size', '20px')"><span>20</span></a></li>
+            </ul>
+
+            <div class="separator"></div>
+
+            <button type="button" class="btn" ng-click="base.copyToClipboard()" title="{{'global.copy' | translate}}">
+               <svg class="icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon-copy"></use></svg>
+            </button>
+
+            <div class="separator"></div>
+
+            <button type="button" class="btn" ng-click="base.downloadFile()" title="{{'global.download' | translate}}">
+               <svg class="icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon-download"></use></svg>
+            </button>
+         </div>
+      </div>
+
+      <!-- Source Code -->
+      <div class="scrollable" style="height: calc(100% - 34px);">
+         <pre id="source-code" ng-bind-html="base.sourceCode" ng-class="{'line-numbers': base.options.lineNumbers}" ng-style="base.options.viewerStyle"></pre>
+      </div>
+   </section>
+</div>

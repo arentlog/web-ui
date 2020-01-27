@@ -1,0 +1,271 @@
+{
+  "viewId": "po-poei-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "dtl.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.purchase.order.details",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 38,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtl.navBack()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.submit",
+                  "eventClick": "dtl.receivingWork()"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel.receiving.work",
+                  "eventClick": "dtl.cancelReceivingWork()"
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.receiver.number",
+                  "eventClick": "dtl.launchReceiver()",
+                  "conditionDisabled": "!dtl.isReceiverEnabled"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 12,
+                  "type": "EXP_AREA",
+                  "label": "global.purchase.order",
+                  "children": [
+                    {
+                      "id": 13,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailHeader.transtype",
+                              "label": "global.type"
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailHeader.prodline",
+                              "label": "global.product.line"
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailHeader.whse",
+                              "label": "global.warehouse",
+                              "contextEntity": "Icsd"
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailHeader.buyer",
+                              "label": "global.buyer"
+                            },
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.poeiDetailHeader.netbillty",
+                              "label": "global.net.billed",
+                              "type3": "SET",
+                              "metaGroup": "COMMON",
+                              "meta": "NetBillType",
+                              "readonly": true,
+                              "conditionShow": "dtl.poeiDetailHeader.netbilltyvis"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 25,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailHeader.vendno",
+                              "label": "global.vendor.number",
+                              "dataFormat": "DECIMAL_TEXT",
+                              "dataDesc": "dtl.poeiDetailHeader.vendname",
+                              "contextEntity": "Apsv"
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailHeader.shipfmno",
+                              "label": "global.ship.from",
+                              "dataFormat": "INTEGER_TEXT",
+                              "contextEntity": "Apss",
+                              "contextValues": {
+                                "key1": "dtl.poeiDetailHeader.vendno",
+                                "key2": "dtl.poeiDetailHeader.shipfmno"
+                              }
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailHeader.billtowhse",
+                              "label": "global.bill.to.warehouse"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailTotal.totrcvamt",
+                              "label": "global.total.received.amount",
+                              "dataFormat": "CURRENCY"
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailHeader.stagecdx",
+                              "label": "global.stage"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 15,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "TAB",
+                      "label": "global.header",
+                      "conditionSelected": "dtl.isDetailSelectedDefaultTabHeader",
+                      "conditionShow": "dtl.isDetailHeaderTabVisible",
+                      "tabId": "header",
+                      "subFunction": "Header",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "po/poei/tabs/detail-header.json",
+                          "controller": ""
+                        }
+                      ]
+                    },
+                    {
+                      "id": 17,
+                      "type": "TAB",
+                      "label": "global.addons",
+                      "conditionSelected": "dtl.isDetailSelectedDefaultTabAddon",
+                      "conditionShow": "dtl.isDetailAddonsTabVisible",
+                      "tabId": "addons",
+                      "subFunction": "Add Ons",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "po/poei/tabs/detail-addons.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 18,
+                      "type": "TAB",
+                      "label": "global.line.items",
+                      "conditionSelected": "dtl.isDetailSelectedDefaultTabLines",
+                      "conditionShow": "dtl.isDetailLinesTabVisible",
+                      "tabId": "line-items",
+                      "subFunction": "Line Items",
+                      "children": [
+                        {
+                          "id": 33,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "po/poei/tabs/detail-lines.json"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "type": "VIEW_CNTR",
+      "viewName": "subSupersede"
+    },
+    {
+      "id": 35,
+      "type": "VIEW_CNTR",
+      "viewName": "detailLineQuickView"
+    },
+    {
+      "id": 36,
+      "type": "VIEW_CNTR",
+      "viewName": "valueAddSurplus"
+    },
+    {
+      "id": 37,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Poeh",
+      "contextValues": {
+        "key1": "dtl.poeiDetailHeader.pono",
+        "key2": "dtl.poeiDetailHeader.posuf"
+      }
+    }
+  ]
+}

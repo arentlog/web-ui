@@ -1,0 +1,323 @@
+{
+  "viewId": "oe-oeet-delete",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "del.isDeleteOrder()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.oeet",
+              "subLabel": "global.lost.business",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "del.back()",
+                      "conditionDisabled": "del.isLostBusinessReasonVisible",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 35,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.next",
+                  "icon": "icon-right-arrow",
+                  "submitForm": true,
+                  "eventValidated": "del.continue()",
+                  "conditionShow": "!del.isLostBusinessReasonVisible"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "label": "global.lost.business",
+                  "icon": "icon-delete",
+                  "submitForm": false,
+                  "eventValidated": "",
+                  "securityLevel": 3,
+                  "conditionShow": "del.isLostBusinessReasonVisible",
+                  "eventClick": "del.delete()"
+                },
+                {
+                  "id": 36,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "conditionShow": "del.isLostBusinessReasonVisible",
+                  "eventClick": "del.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 8,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "del.orderNumber",
+                          "label": "global.order.number",
+                          "meta": "OEOrders",
+                          "type3": "STANDARD",
+                          "required": true,
+                          "autoFocus": true,
+                          "conditionReadonly": "del.isLostBusinessReasonVisible",
+                          "eventChange": "del.orderSelected()",
+                          "contextValues": {
+                            "key1": "del.oehdr.orderno",
+                            "key2": "del.oehdr.ordersuf"
+                          },
+                          "options": {
+                            "searchParams": {}
+                          }
+                        },
+                        {
+                          "id": 34,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "del.selectedLostBusinessReason",
+                          "label": "global.lost.business.reason",
+                          "meta": "LostBusinessReason",
+                          "type3": "CODES",
+                          "conditionShow": "del.isLostBusinessReasonVisible"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "FIELD_SET",
+                          "label": "global.order.information",
+                          "children": [
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.oetypeDisplay()",
+                              "label": "global.order.type"
+                            },
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.oehdr.stagecd",
+                              "label": "global.order.stage",
+                              "dataFormat": "OeStage"
+                            },
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.oehdr.whse",
+                              "label": "global.warehouse",
+                              "contextEntity": "Icsd"
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.oehdr.custno",
+                              "label": "global.customer",
+                              "dataDesc": "del.oehdr.name",
+                              "contextEntity": "Arsc"
+                            },
+                            {
+                              "id": 38,
+                              "type": "CUSTOM",
+                              "subType": "AddressInfo",
+                              "options": {
+                                "countryCdVisible": true,
+                                "addr1Model": "del.oehdr.addr1",
+                                "addressLabel": "global.sold.to.address",
+                                "addr2Model": "del.oehdr.addr2",
+                                "addr3Model": "del.oehdr.addr3",
+                                "cityModel": "del.oehdr.coty",
+                                "stateModel": "del.oehdr.state",
+                                "zipCodeModel": "del.oehdr.zipcd",
+                                "countryCodeModel": "del.oehdr.billtocountrycd"
+                              }
+                            },
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.oehdr.custpo",
+                              "label": "global.customer.po"
+                            },
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.oehdr.shiptonm",
+                              "label": "global.ship.to",
+                              "contextEntity": "Arss",
+                              "contextValues": {
+                                "key1": "del.oehdr.custno",
+                                "key2": "del.oehdr.shipto"
+                              }
+                            },
+                            {
+                              "id": 39,
+                              "type": "CUSTOM",
+                              "subType": "AddressInfo",
+                              "options": {
+                                "countryCdVisible": true,
+                                "addressLabel": "global.ship.to.address",
+                                "addr1Model": "del.oehdr.shiptoaddr1",
+                                "addr2Model": "del.oehdr.shiptoaddr2",
+                                "addr3Model": "del.oehdr.shiptoaddr3",
+                                "cityModel": "del.oehdr.shiptocity",
+                                "stateModel": "del.oehdr.shiptost",
+                                "zipCodeModel": "del.oehdr.shiptozipcd",
+                                "countryCodeModel": "del.oehdr.shiptocountrycd"
+                              }
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.oehdr.approvty",
+                              "label": "global.approval"
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.oehdr.approvintlty",
+                              "label": "global.international.approval",
+                              "conditionShow": "del.defaultSettings.intlApproval"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 24,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 25,
+                          "type": "FIELD_SET",
+                          "label": "global.order.totals",
+                          "children": [
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.orderTotals.ordtotalamt",
+                              "label": "global.order.amount",
+                              "dataFormat": "CURRENCY"
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.orderTotals.ordlineamt",
+                              "label": "global.lines",
+                              "dataFormat": "CURRENCY"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.orderTotals.ordtaxamt",
+                              "label": "global.taxes",
+                              "dataFormat": "CURRENCY"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.orderTotals.ordaddonamt - del.orderTotals.orddiscamt",
+                              "label": "global.other",
+                              "dataFormat": "CURRENCY"
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.oehdr.totqtyord",
+                              "label": "global.total.quantity.ordered",
+                              "dataFormat": "CURRENCY"
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.oedhr.totqtyshp",
+                              "label": "global.total.quantity.shipped",
+                              "dataFormat": "CURRENCY"
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.oehdr.margin",
+                              "label": "global.margin.amount",
+                              "dataFormat": "CURRENCY",
+                              "conditionShow": "base.sasoo.seecostfl && !base.defaultSettings.isHideMargin"
+                            },
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.oehdr.marginpct",
+                              "label": "global.margin.percent",
+                              "dataFormat": "PERCENT",
+                              "conditionShow": "base.sasoo.seecostfl && !base.defaultSettings.isHideMargin"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "type": "VIEW_CNTR",
+      "viewName": "orderStatus"
+    }
+  ]
+}

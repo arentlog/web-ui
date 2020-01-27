@@ -1,0 +1,179 @@
+{
+  "viewId": "shared-printer-printerview",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 35,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 42,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 43,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "pc.printerSettings.printtype",
+                  "label": "global.print.type",
+                  "type3": "MANUAL",
+                  "eventChange": "pc.printerTypeChange(pc.printerSettings.printtype)",
+                  "optionsModel": "pc.printTypeOptions",
+                  "blankOption": false
+                },
+                {
+                  "id": 48,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "pc.printerSettings.printernm",
+                  "label": "{{pc.ackPrinterlabel}}",
+                  "meta": "Printer",
+                  "conditionShow": "pc.printerSettings.printtype.toLowerCase() === 'p' || pc.printerSettings.printtype.toLowerCase() === 'r'  || pc.printerSettings.printtype.toLowerCase() === 'd'  || pc.printerSettings.printtype === 'f'",
+                  "options": {
+                    "searchParams": {
+                      "ptype": {
+                        "type": "REF",
+                        "value": "pc.printerSettings.printtype"
+                      },
+                      "recordcountlimit": 500
+                    }
+                  }
+                },
+                {
+                  "id": 32,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "pc.printerSettings.queue",
+                  "label": "global.queue",
+                  "meta": "Queues",
+                  "type3": "STANDARD",
+                  "conditionDisabled": "!pc.printerSettings.queueenabled"
+                },
+                {
+                  "id": 49,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "pc.printerSettings.flatfilenm",
+                  "label": "{{pc.ackPrinterlabel}}",
+                  "conditionShow": "pc.printerSettings.printtype.toLowerCase() === 'o'"
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "pc.printerSettings.printoptfl",
+                  "label": "global.print.options.page",
+                  "conditionShow": "pc.isPrinterOptionsFlagVisible"
+                },
+                {
+                  "id": 50,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "pc.printerSettings.outputover",
+                  "label": "global.print.text.override"
+                },
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "pc.printerSettings.faxphoneno",
+                  "label": "global.fax.number",
+                  "conditionShow": "pc.printerSettings.printtype.toLowerCase() === 'f'",
+                  "required": false,
+                  "conditionRequired": "pc.printerSettings.printtype.toLowerCase() === 'f'",
+                  "meta": "FaxNumberContacts",
+                  "dataFormat": "PHONE",
+                  "options": {
+                    "searchParams": {
+                      "recordlimit": 500
+                    },
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 23,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "pc.printerSettings.faxto1",
+                  "label": "global.fax.to.1",
+                  "conditionShow": "pc.printerSettings.printtype.toLowerCase() === 'f'",
+                  "conditionRequired": "pc.printerSettings.printtype.toLowerCase() === 'f'"
+                },
+                {
+                  "id": 24,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "pc.printerSettings.faxto2",
+                  "label": "global.fax.to.2",
+                  "conditionShow": "pc.printerSettings.printtype.toLowerCase() === 'f'",
+                  "conditionRequired": "pc.printerSettings.printtype.toLowerCase() === 'f'"
+                },
+                {
+                  "id": 29,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "pc.printerSettings.emailaddr",
+                  "label": "global.email.address",
+                  "conditionShow": "pc.printerSettings.printtype.toLowerCase() === 'e'",
+                  "conditionRequired": "pc.printerSettings.printtype.toLowerCase() === 'e'",
+                  "meta": "EmailContacts",
+                  "dataFormat": "EMAIL",
+                  "options": {
+                    "searchParams": {
+                      "recordlimit": 500
+                    },
+                    "allowEntry": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": 41,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 22,
+                  "type": "FIELD",
+                  "subType": "RADIO_SET",
+                  "model": "pc.printerSettings.faxpriority",
+                  "label": "global.priority",
+                  "type3": "SET",
+                  "metaGroup": "COMMON",
+                  "meta": "PrintPriorityType",
+                  "conditionShow": "pc.printerSettings.printtype.toLowerCase() === 'f'"
+                },
+                {
+                  "id": 25,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "pc.printerSettings.faxfrom",
+                  "label": "global.from",
+                  "conditionShow": "pc.printerSettings.printtype.toLowerCase() === 'f'",
+                  "conditionRequired": "pc.printerSettings.printtype.toLowerCase() === 'f'"
+                },
+                {
+                  "id": 26,
+                  "type": "FIELD",
+                  "subType": "TEXT_AREA",
+                  "model": "pc.printerSettings.faxcom",
+                  "label": "global.comments",
+                  "conditionShow": "pc.printerSettings.printtype.toLowerCase() === 'f' || pc.printerSettings.printtype.toLowerCase() === 'e'",
+                  "customValidation": "pc.validateCommentValue()",
+                  "validateOn": "blue"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

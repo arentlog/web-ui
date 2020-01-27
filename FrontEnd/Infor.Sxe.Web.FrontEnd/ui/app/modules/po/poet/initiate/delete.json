@@ -1,0 +1,218 @@
+{
+  "viewId": "po-poet-delete",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "del.isDelete()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.poet",
+              "subLabel": "global.delete",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "del.back()",
+                      "conditionDisabled": "del.isLostBusinessReasonVisible",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 35,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.next",
+                  "icon": "icon-right-arrow",
+                  "submitForm": true,
+                  "eventValidated": "del.continue()",
+                  "conditionShow": "!del.isLostBusinessReasonVisible"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "label": "global.delete",
+                  "icon": "icon-delete",
+                  "submitForm": false,
+                  "eventValidated": "",
+                  "securityLevel": 5,
+                  "conditionShow": "del.isLostBusinessReasonVisible",
+                  "eventClick": "del.delete()"
+                },
+                {
+                  "id": 36,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "conditionShow": "del.isLostBusinessReasonVisible",
+                  "eventClick": "del.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 8,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "del.purchaseOrderNumber",
+                          "label": "global.purchase.order.number",
+                          "meta": "POOrders",
+                          "type3": "STANDARD",
+                          "required": true,
+                          "autoFocus": true,
+                          "eventChange": "del.purchaseOrderSelected()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "FIELD_SET",
+                          "label": "global.purchase.order.information",
+                          "children": [
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.pohdr.potype",
+                              "label": "global.purchase.order.type",
+                              "dataFormat": "PoOrderType"
+                            },
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.pohdr.stagecd",
+                              "label": "global.stage",
+                              "dataFormat": "PoStage"
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.pohdr.vendno + ' - ' + del.pohdr.vendname",
+                              "label": "global.vendor"
+                            },
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.shipfmno",
+                              "label": "global.ship.from"
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.pohdr.whse",
+                              "label": "global.ship.to.warehouse"
+                            },
+                            {
+                              "id": 40,
+                              "type": "CUSTOM",
+                              "subType": "AddressInfo",
+                              "options": {
+                                "countryCdVisible": false,
+                                "addr1Model": "del.pohdr.shiptoaddr1",
+                                "addr2Model": "del.pohdr.shiptoaddr2",
+                                "addr3Model": "del.pohdr.shiptoaddr3",
+                                "cityModel": "del.pohdr.shiptocity",
+                                "stateModel": "del.pohdr.shiptost",
+                                "zipCodeModel": "del.pohdr.shiptozip",
+                                "addressLabel": "global.ship.to.address",
+                                "geoCodeVisible": false
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 24,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 25,
+                          "type": "FIELD_SET",
+                          "label": "global.purchase.order.totals",
+                          "children": [
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.purchaseOorderTotals.xxx",
+                              "label": "global.order.amount",
+                              "dataFormat": "CURRENCY"
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "del.pohdr.totqtyord",
+                              "label": "global.quantity.ordered",
+                              "dataFormat": "CURRENCY"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.podhr.totaladdons",
+                              "label": "global.total.addons",
+                              "dataFormat": "CURRENCY"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "type": "VIEW_CNTR",
+      "viewName": "orderStatus"
+    }
+  ]
+}

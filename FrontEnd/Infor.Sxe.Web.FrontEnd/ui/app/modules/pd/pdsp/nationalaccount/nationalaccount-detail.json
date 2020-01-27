@@ -1,0 +1,478 @@
+{
+  "viewId": "pd-pdsp-nationalaccount-nationalaccountdetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "conditionShow": "base.isDetail() || base.isEdit()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.national.program",
+              "subLabel": "{{nadtl.subtitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "nadtl.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "nadtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4,
+                  "conditionShow": "base.securityLevelPDSN >= 4"
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3,
+                  "conditionShow": "base.securityLevelPDSN >= 3"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "nadtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5,
+                  "conditionShow": "base.securityLevelPDSN >= 5"
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "nadtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "nadtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "nadtl.cancel()",
+                  "conditionDisabled": "base.isDetail()",
+                  "stateRef": ""
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.record.info",
+                  "collapsed": true,
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "nadtl.pdsn.pdsnrecno",
+                              "label": "global.record.number",
+                              "required": true,
+                              "type3": "MANUAL",
+                              "optionsModel": "base.levelCodeDetailPDSN",
+                              "blankOption": false,
+                              "eventChange": "nadtl.changeLevelCode()"
+                            },
+                            {
+                              "id": 123,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "nadtl.pdsn.clevelcd",
+                              "label": "global.level",
+                              "required": true,
+                              "type3": "MANUAL",
+                              "optionsModel": "base.levelCodeDetailPDSN",
+                              "blankOption": false,
+                              "eventChange": "nadtl.changeLevelCode()",
+                              "dataFormat": "PdPricingRecordTypeForPDSNToName"
+                            },
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "nadtl.pdsn.vendno",
+                              "label": "global.vendor.number",
+                              "meta": "Vendor",
+                              "contextEntity": "Apsv",
+                              "dataDesc": "nadtl.pdsn.vendorName",
+                              "controls": {}
+                            },
+                            {
+                              "id": 126,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "nadtl.pdsn.custno",
+                              "label": "global.customer.number",
+                              "meta": "Vendor",
+                              "contextEntity": "Apsv",
+                              "dataDesc": "nadtl.pdsn.customerName",
+                              "conditionShow": "base.srchCustNoFl"
+                            },
+                            {
+                              "id": 127,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "nadtl.pdsn.shipto",
+                              "label": "global.ship.to.job",
+                              "meta": "Vendor",
+                              "contextEntity": "Apsv",
+                              "dataDesc": "nadtl.pdsn.shiptoName",
+                              "conditionShow": "base.srchShipToFl"
+                            },
+                            {
+                              "id": 133,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "nadtl.pdsn.custgroup",
+                              "label": "global.customer.group",
+                              "meta": "Vendor",
+                              "contextEntity": "Apsv",
+                              "conditionShow": "base.srchCustGroupFl"
+                            },
+                            {
+                              "id": 134,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "nadtl.pdsn.custpricety",
+                              "label": "global.customer.price.type",
+                              "meta": "Vendor",
+                              "contextEntity": "Apsv",
+                              "conditionShow": "base.srchCustPriceTypeFl"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 108,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "nadtl.pdsn.startdt",
+                              "label": "global.start.date",
+                              "required": true,
+                              "dataFormat": "DATE"
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "nadtl.pdsn.prod",
+                              "label": "global.product",
+                              "meta": "ProdAll",
+                              "contextEntity": "Icsp",
+                              "dataDesc": "nadtl.pdsn.prodDesc",
+                              "conditionShow": "base.srchProdFl",
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 42,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "conditionDisabled": "!nadtl.pdsn.prod",
+                                  "conditionShow": "base.srchProdFl",
+                                  "stateRef": "icip.detail ({pk: nadtl.pdsn.prod})"
+                                }
+                              }
+                            },
+                            {
+                              "id": 124,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "nadtl.pdsn.modelcode",
+                              "label": "global.model",
+                              "meta": "ProdAll",
+                              "contextEntity": "Icsp",
+                              "conditionShow": "base.srchModelFl"
+                            },
+                            {
+                              "id": 125,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "nadtl.pdsn.brandcode",
+                              "label": "global.brand",
+                              "meta": "ProdAll",
+                              "contextEntity": "Icsp",
+                              "conditionShow": "base.srchBrandFl"
+                            },
+                            {
+                              "id": 128,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "nadtl.pdsn.prodcat",
+                              "label": "global.product.category",
+                              "meta": "ProdAll",
+                              "contextEntity": "Icsp",
+                              "conditionShow": "base.srchProdCatFl"
+                            },
+                            {
+                              "id": 129,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "nadtl.pdsn.prodline",
+                              "label": "global.product.line",
+                              "meta": "ProdAll",
+                              "contextEntity": "Icsp",
+                              "conditionShow": "base.srchProdLineFl"
+                            },
+                            {
+                              "id": 130,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "nadtl.pdsn.prodpricety",
+                              "label": "global.product.price.type",
+                              "meta": "ProdAll",
+                              "contextEntity": "Icsp",
+                              "conditionShow": "base.srchProdPriceTypeFl"
+                            },
+                            {
+                              "id": 131,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "nadtl.pdsn.rebtype",
+                              "label": "global.rebate.type",
+                              "meta": "ProdAll",
+                              "contextEntity": "Icsp",
+                              "conditionShow": "base.srchRebTypeFl"
+                            },
+                            {
+                              "id": 132,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "nadtl.pdsn.rebsubty",
+                              "label": "global.rebate.sub.type",
+                              "meta": "ProdAll",
+                              "contextEntity": "Icsp",
+                              "conditionShow": "base.srchSubRebTypeFl"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 21,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 23,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "nadtl.pdsn.enddt",
+                              "label": "global.end.date",
+                              "dataFormat": "DATE"
+                            },
+                            {
+                              "id": 50,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "nadtl.pdsn.statustype",
+                              "label": "global.active",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 116,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "nadtl.pdsn.allowretfl",
+                              "label": "global.allow.returns",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 117,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "nadtl.pdsn.programonlyfl",
+                              "label": "global.program.only",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 114,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "nadtl.pdsn.npcd",
+                              "label": "global.national.program.code",
+                              "maxLength": 15,
+                              "required": true
+                            },
+                            {
+                              "id": 115,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "nadtl.pdsn.descrip",
+                              "label": "global.description",
+                              "maxLength": 40
+                            }
+                          ]
+                        },
+                        {
+                          "id": 26,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 118,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "nadtl.pdsn.npcomcalctype",
+                              "label": "global.commission.type",
+                              "type3": "SET",
+                              "metaGroup": "PD",
+                              "meta": "NationalAccountCommissionType",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 119,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "nadtl.pdsn.npcombasedon",
+                              "label": "global.based.on",
+                              "conditionShow": "nadtl.pdsn.npcomcalctype.toUpperCase() === 'P'",
+                              "type3": "SET",
+                              "metaGroup": "PD",
+                              "meta": "NationalAccountBasedOn",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 120,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "nadtl.pdsn.npcomamt",
+                              "label": "global.commission",
+                              "dataFormat": "DECIMAL_TEXT",
+                              "sign": "+",
+                              "digits": 5,
+                              "decimals": 2
+                            },
+                            {
+                              "id": 121,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "nadtl.pdsn.npcomprod",
+                              "label": "global.claim.product",
+                              "meta": "ProdIcspOnly"
+                            },
+                            {
+                              "id": 122,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "nadtl.pdsn.npcommtype",
+                              "label": "global.commission.type",
+                              "meta": "Commission"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "pdsn",
+                        "objectRef": "nadtl.pdsn",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 113,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Pdsn",
+      "contextValues": {
+        "key1": "nadtl.pdsn.vendno",
+        "key2": "nadtl.pdsn.prod",
+        "key3": "nadtl.pdsn.startdt"
+      }
+    }
+  ]
+}

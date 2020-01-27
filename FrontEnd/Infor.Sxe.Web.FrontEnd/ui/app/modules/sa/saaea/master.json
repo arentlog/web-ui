@@ -1,0 +1,253 @@
+{
+  "viewId": "sa-saaea-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.saaea",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "type": "GRID",
+              "id": 5,
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "selectable": "multiple",
+                "events": {
+                  "drilldown": "mst.drilldown()",
+                  "cellchange": "mst.gridCellChange()"
+                },
+                "editable": true
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.extensions",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "MENU",
+                      "icon": "icon-new-document",
+                      "label": "global.new",
+                      "conditionDisabled": "base.grid.isAnyRowSelected()",
+                      "securityLevel": 4,
+                      "children": [
+                        {
+                          "id": 18,
+                          "type": "MENU_OPT",
+                          "label": "global.extended.view",
+                          "eventClick": "mst.create(base.TYPE_EXTENDED_VIEW)",
+                          "icon": "icon-workflow"
+                        },
+                        {
+                          "id": 19,
+                          "type": "MENU_OPT",
+                          "label": "global.new.view",
+                          "eventClick": "mst.create(base.TYPE_NEW_VIEW)",
+                          "icon": "icon-document"
+                        },
+                        {
+                          "id": 20,
+                          "type": "MENU_OPT",
+                          "label": "global.javascript",
+                          "eventClick": "mst.create(base.TYPE_JAVASCRIPT)",
+                          "icon": "icon-script"
+                        },
+                        {
+                          "id": 34,
+                          "type": "MENU_OPT",
+                          "label": "global.css",
+                          "icon": "icon-select-all",
+                          "eventClick": "mst.create(base.TYPE_CSS)"
+                        },
+                        {
+                          "id": 33,
+                          "type": "MENU_OPT",
+                          "label": "global.function",
+                          "icon": "icon-tools-addons",
+                          "eventClick": "mst.createFunction()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 8,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-edit",
+                      "label": "global.edit",
+                      "eventClick": "mst.edit()",
+                      "conditionDisabled": "!base.grid.isOneRowSelected()",
+                      "securityLevel": 3
+                    },
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-delete",
+                      "label": "global.delete",
+                      "eventClick": "mst.delete()",
+                      "conditionDisabled": "base.grid.isNoRowSelected()",
+                      "securityLevel": 5
+                    },
+                    {
+                      "id": 22,
+                      "type": "BTN",
+                      "subType": "",
+                      "label": "global.export",
+                      "icon": "icon-download",
+                      "conditionDisabled": "base.grid.isNoRowSelected()",
+                      "eventClick": "mst.download()",
+                      "securityLevel": 3
+                    },
+                    {
+                      "id": 23,
+                      "type": "BTN",
+                      "subType": "",
+                      "label": "global.import",
+                      "icon": "icon-upload",
+                      "conditionDisabled": "",
+                      "securityLevel": 4,
+                      "stateRef": "^.import"
+                    },
+                    {
+                      "id": 29,
+                      "type": "BTN",
+                      "subType": "MENU",
+                      "label": "global.change.active.status",
+                      "conditionDisabled": "base.grid.isNoRowSelected()",
+                      "icon": "icon-check",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "MENU_OPT",
+                          "label": "global.active",
+                          "icon": "icon-filter-selected",
+                          "eventClick": "mst.changeStatus(true)"
+                        },
+                        {
+                          "id": 31,
+                          "type": "MENU_OPT",
+                          "label": "global.inactive",
+                          "icon": "icon-filter-not-selected",
+                          "eventClick": "mst.changeStatus(false)"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "screenname",
+                  "label": "global.extension.id"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "cono",
+                  "label": "global.level",
+                  "customFormatter": "mst.levelFormatter"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "extensiontype",
+                  "label": "global.type",
+                  "type3": "MANUAL",
+                  "optionsModel": "base.extensionTypeOptions",
+                  "optionLabelField": "label",
+                  "optionValueField": "value"
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.revision.number",
+                  "dataFormat": "INTEGER_TEXT",
+                  "model": "revision"
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "tag",
+                  "label": "global.tags"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "activefl",
+                  "label": "global.active",
+                  "dataFormat": "LOGICAL",
+                  "editable": true
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "functionname",
+                  "label": "global.function.name"
+                },
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "operinit",
+                  "label": "global.update.operator"
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "transdt",
+                  "label": "global.update.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 26,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "transtm",
+                  "label": "global.update.time",
+                  "dataFormat": "TIME",
+                  "subFormat": "hhmm"
+                },
+                {
+                  "id": 32,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "descrip",
+                  "label": "global.description",
+                  "width": 400,
+                  "dataFormat": "ELLIPSIS"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

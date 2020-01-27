@@ -1,0 +1,207 @@
+{
+  "viewId": "ic-icamr-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isDetail() || base.isEdit()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.administrator.usage.rate.update.details",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "",
+                      "eventClick": "dtl.back()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 13,
+                  "type": "BTN",
+                  "label": "global.usage.history",
+                  "eventClick": "dtl.usageHistoryClicked()",
+                  "conditionDisabled": "!base.isUsageHistoryAllowed"
+                },
+                {
+                  "id": 14,
+                  "type": "BTN",
+                  "label": "global.trend",
+                  "eventClick": "dtl.trendClicked()",
+                  "conditionDisabled": "!base.isTrendAllowed"
+                },
+                {
+                  "id": 15,
+                  "type": "BTN",
+                  "label": "global.adjuster.inquiry",
+                  "eventClick": "dtl.adjusterInquiryClicked()",
+                  "conditionDisabled": "!base.isAdjustersAllowed"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.blank.label.string.for.space",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 21,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.icamapdetail.prod",
+                              "label": "global.product"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.icamapdetail.proddesc",
+                              "label": "global.description"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 27,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.icamapdetail.whse",
+                              "label": "global.warehouse"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 22,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.icamapdetail.statustype",
+                              "label": "global.status",
+                              "dataFormat": "IcICSWStatus"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 8,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "TAB",
+                      "label": "global.methods",
+                      "tabId": "methods",
+                      "subFunction": "Methods",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "shared/usage-analysis/usage-analysis.json",
+                          "controller": "UsageAnalysisCtrl as ctrl"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 29,
+                      "type": "TAB",
+                      "label": "global.required",
+                      "conditionShow": "base.isRequiredAllowed",
+                      "tabId": "required",
+                      "subFunction": "Required",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ic/icamr/tabs/required.json",
+                          "controller": ""
+                        }
+                      ]
+                    },
+                    {
+                      "id": 31,
+                      "type": "TAB",
+                      "label": "global.ordering",
+                      "conditionShow": "base.isOrderingAllowed",
+                      "tabId": "ordering",
+                      "subFunction": "Ordering",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ic/icamr/tabs/ordering.json"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "type": "VIEW_CNTR",
+      "viewName": "usage"
+    },
+    {
+      "id": 17,
+      "type": "VIEW_CNTR",
+      "viewName": "trendInfo"
+    },
+    {
+      "id": 18,
+      "type": "VIEW_CNTR",
+      "viewName": "adjusters"
+    }
+  ]
+}

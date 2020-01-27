@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{284DE04D-EE1D-4E72-A68E-5E796D128EEB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>General.Business</RootNamespace>
+    <AssemblyName>General.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LazyCache, Version=0.7.1.44, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LazyCache.0.7.1.44\lib\net45\LazyCache.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MoreLinq, Version=2.6.20831.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\morelinq.2.6.0\lib\net40\MoreLinq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Services" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.3.1\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enums\Shared\PreLoginModes.cs" />
+    <Compile Include="Interfaces\AP\IApsfService.cs" />
+    <Compile Include="Interfaces\AR\IArbcbService.cs" />
+    <Compile Include="Interfaces\AR\IAretService.cs" />
+    <Compile Include="Interfaces\CM\ICmstService.cs" />
+    <Compile Include="Interfaces\GL\IGlsaBusinessContextService.cs" />
+    <Compile Include="Interfaces\GL\IGlsaService.cs" />
+    <Compile Include="Interfaces\GL\IGlsfService.cs" />
+    <Compile Include="Interfaces\IC\IAsicsetupService.cs" />
+    <Compile Include="Interfaces\IC\IIcamueService.cs" />
+    <Compile Include="Interfaces\IC\IIcsecService.cs" />
+    <Compile Include="Interfaces\IC\IIcsehService.cs" />
+    <Compile Include="Interfaces\IC\IIcsepsService.cs" />
+    <Compile Include="Interfaces\IC\IIcsessService.cs" />
+    <Compile Include="Interfaces\IC\IIcslService.cs" />
+    <Compile Include="Interfaces\IC\IIcsrService.cs" />
+    <Compile Include="Interfaces\KP\IKpsgService.cs" />
+    <Compile Include="Interfaces\KP\IKpsoService.cs" />
+    <Compile Include="Interfaces\KP\IKpssService.cs" />
+    <Compile Include="Interfaces\OE\iOedcService.cs" />
+    <Compile Include="Interfaces\OE\IOedsService.cs" />
+    <Compile Include="Interfaces\OE\IOeehService.cs" />
+    <Compile Include="Interfaces\PD\IAspdentryService.cs" />
+    <Compile Include="Interfaces\PD\IPdscBusinessContextService.cs" />
+    <Compile Include="Interfaces\PD\IPdscInterface.cs" />
+    <Compile Include="Interfaces\PD\IPdsraService.cs" />
+    <Compile Include="Interfaces\PD\IPdssService.cs" />
+    <Compile Include="Interfaces\PO\IAspoentryService.cs" />
+    <Compile Include="Interfaces\PO\IPoerahService.cs" />
+    <Compile Include="Interfaces\PO\IPoeralService.cs" />
+    <Compile Include="Interfaces\PV\IPvAdminLogService.cs" />
+    <Compile Include="Interfaces\PV\IPvRecoveryService.cs" />
+    <Compile Include="Interfaces\PV\IPvSapbqService.cs" />
+    <Compile Include="Interfaces\PV\IPvSassmService.cs" />
+    <Compile Include="Interfaces\PV\IPvSassmTypesService.cs" />
+    <Compile Include="Interfaces\PV\IPvShoplistService.cs" />
+    <Compile Include="Interfaces\PV\IPvUserService.cs" />
+    <Compile Include="Interfaces\SA\IBusinessRules.cs" />
+    <Compile Include="Interfaces\SA\ICenpos.cs" />
+    <Compile Include="Interfaces\SA\ISabsService.cs" />
+    <Compile Include="Interfaces\SA\ISaeaService.cs" />
+    <Compile Include="Interfaces\SA\ISaegService.cs" />
+    <Compile Include="Interfaces\SA\ISapbService.cs" />
+    <Compile Include="Interfaces\SA\ISascService.cs" />
+    <Compile Include="Interfaces\SA\ISasglService.cs" />
+    <Compile Include="Interfaces\SA\ISaspgService.cs" />
+    <Compile Include="Interfaces\SA\ISasrService.cs" />
+    <Compile Include="Interfaces\SA\ISasseService.cs" />
+    <Compile Include="Interfaces\SA\ISasspService.cs" />
+    <Compile Include="Interfaces\SA\ISassrService.cs" />
+    <Compile Include="Interfaces\SA\ISasstService.cs" />
+    <Compile Include="Interfaces\SA\ISastazService.cs" />
+    <Compile Include="Interfaces\SA\ISastnService.cs" />
+    <Compile Include="Interfaces\SA\ISastpService.cs" />
+    <Compile Include="Interfaces\SA\ISaszService.cs" />
+    <Compile Include="Interfaces\Shared\IAoSharedService.cs" />
+    <Compile Include="Interfaces\Shared\IAuthpointsService.cs" />
+    <Compile Include="Interfaces\Shared\IIntegrationService.cs" />
+    <Compile Include="Interfaces\Shared\IJsonViewService.cs" />
+    <Compile Include="Interfaces\Shared\ILoginService.cs" />
+    <Compile Include="Interfaces\Shared\IMegaMenuService.cs" />
+    <Compile Include="Interfaces\Shared\INotesService.cs" />
+    <Compile Include="Interfaces\Shared\ITriggerSetupService.cs" />
+    <Compile Include="Interfaces\SL\ISlsiService.cs" />
+    <Compile Include="Interfaces\SL\ISlsnService.cs" />
+    <Compile Include="Interfaces\SL\ISlspService.cs" />
+    <Compile Include="Interfaces\SL\ISlstService.cs" />
+    <Compile Include="Interfaces\SM\ISmsmService.cs" />
+    <Compile Include="Interfaces\SM\ISmsnService.cs" />
+    <Compile Include="Interfaces\SW\ISwsjService.cs" />
+    <Compile Include="Interfaces\SW\ISwswService.cs" />
+    <Compile Include="Interfaces\TWL\IAutodrpcfgService.cs" />
+    <Compile Include="Interfaces\TWL\IBinmstService.cs" />
+    <Compile Include="Interfaces\TWL\ICarrierService.cs" />
+    <Compile Include="Interfaces\TWL\ICarrierServiceService.cs" />
+    <Compile Include="Interfaces\TWL\ICartonSizeService.cs" />
+    <Compile Include="Interfaces\TWL\ICmpmstService.cs" />
+    <Compile Include="Interfaces\TWL\IComdetService.cs" />
+    <Compile Include="Interfaces\TWL\ICommstService.cs" />
+    <Compile Include="Interfaces\TWL\IDepmstService.cs" />
+    <Compile Include="Interfaces\TWL\IDockmstrService.cs" />
+    <Compile Include="Interfaces\TWL\IDrpLogService.cs" />
+    <Compile Include="Interfaces\TWL\IShpMstService.cs" />
+    <Compile Include="Interfaces\TWL\IDrpOrdService.cs" />
+    <Compile Include="Interfaces\TWL\IDrpRulesService.cs" />
+    <Compile Include="Interfaces\TWL\IEmpmstService.cs" />
+    <Compile Include="Interfaces\TWL\IEndOfDayService.cs" />
+    <Compile Include="Interfaces\TWL\IEodSetupService.cs" />
+    <Compile Include="Interfaces\TWL\IFileRetentService.cs" />
+    <Compile Include="Interfaces\TWL\IInvAdjService.cs" />
+    <Compile Include="Interfaces\TWL\IItemService.cs" />
+    <Compile Include="Interfaces\TWL\IOrderClassService.cs" />
+    <Compile Include="Interfaces\TWL\IOrdhdrService.cs" />
+    <Compile Include="Interfaces\TWL\IParametersService.cs" />
+    <Compile Include="Interfaces\TWL\IPickService.cs" />
+    <Compile Include="Interfaces\TWL\IPrintmstService.cs" />
+    <Compile Include="Interfaces\TWL\IProdcatService.cs" />
+    <Compile Include="Interfaces\TWL\IReturnCategoryService.cs" />
+    <Compile Include="Interfaces\TWL\IReturnReasonService.cs" />
+    <Compile Include="Interfaces\TWL\IShfmstService.cs" />
+    <Compile Include="Interfaces\TWL\ITransTypeService.cs" />
+    <Compile Include="Interfaces\TWL\IUomService.cs" />
+    <Compile Include="Interfaces\TWL\IWaveService.cs" />
+    <Compile Include="Interfaces\TWL\IWhmstService.cs" />
+    <Compile Include="Interfaces\TWL\IWhZoneService.cs" />
+    <Compile Include="Interfaces\TWL\IWlpasswdService.cs" />
+    <Compile Include="Interfaces\VA\IVaeuService.cs" />
+    <Compile Include="Interfaces\WL\IWlalService.cs" />
+    <Compile Include="Interfaces\WT\IWterahService.cs" />
+    <Compile Include="Models\AP\GetApsfListByTaxDetailsRequestApi.cs" />
+    <Compile Include="Models\AR\GetArbcbListApi.cs" />
+    <Compile Include="Models\CM\GetCmstListByIDCodeValDesc.cs" />
+    <Compile Include="Models\GL\GetGlifListByGroupNameDescRequestApi.cs" />
+    <Compile Include="Models\IC\GetIcamueListRequestApi.cs" />
+    <Compile Include="Models\IC\GetIcsecsByTypeKeyNoProdCustShipToRequestApi.cs" />
+    <Compile Include="Models\IC\GetIcsecsByTypeProdAltProdRequestApi.cs" />
+    <Compile Include="Models\IC\GetIcsecsByTypeProdRequestApi.cs" />
+    <Compile Include="Models\IC\GetIcsehListAllByMSDSSheetNoAndLangcdRequestApi.cs" />
+    <Compile Include="Models\IC\GetIcsessListRequestApi.cs" />
+    <Compile Include="Models\IC\GetIcslListByWhseVendNoProdLineRequestApi.cs" />
+    <Compile Include="Models\IC\GetIcsrZeroVendorBlankWhseLineResponseModel.cs" />
+    <Compile Include="Models\IC\IcsdpSavePwRequestApi.cs" />
+    <Compile Include="Models\IC\IcsepsGetListByPkRequestAPI.cs" />
+    <Compile Include="Models\KP\GetGroupsByGroupNameAndSequenceNumber.cs" />
+    <Compile Include="Models\KP\GetKpssList.cs" />
+    <Compile Include="Models\KP\GetOptionsByOptionName.cs" />
+    <Compile Include="Models\OE\GetOedcListAllByConoAndKeyRequestApi.cs" />
+    <Compile Include="Models\OE\GetOedsListAllByConoAndWhseRequestApi.cs" />
+    <Compile Include="Models\PD\GetPdscListByWhseRequestAPI.cs" />
+    <Compile Include="Models\PD\GetPdsraListByRebateRequestApi.cs" />
+    <Compile Include="Models\PD\GetPdssListBySearchTermsRequestApi.cs" />
+    <Compile Include="Models\PD\PDEMLookupReturnModel.cs" />
+    <Compile Include="Models\PO\GetPoerahListByVendWhseProdLineRequestApiRequestApi.cs" />
+    <Compile Include="Models\PO\GetPoeralByReportNoLineNoSeqNoRequestApi.cs" />
+    <Compile Include="Models\PV\GetAllPvSassmTypesListRequestApi.cs" />
+    <Compile Include="Models\PV\GetPvSapbqListByQueueAndDemandRequestApi.cs" />
+    <Compile Include="Models\PV\GetPvSapbqListByQueueRequestApi.cs" />
+    <Compile Include="Models\PV\GetPvSassmForAoSystemListRequestApi.cs" />
+    <Compile Include="Models\PV\GetPvShoplistByOperRequestApi.cs" />
+    <Compile Include="Models\PV\GetPvUserListByKeysRequestApi.cs" />
+    <Compile Include="Models\PV\ListBySubjectRequestApi.cs" />
+    <Compile Include="Models\SA\CenPosModel.cs" />
+    <Compile Include="Models\SA\DeleteSaegGroupsByOperRequestApi.cs" />
+    <Compile Include="Models\SA\GetCompanyLookup.cs" />
+    <Compile Include="Models\SA\GetSabssWithBlankGroupNameRequestAPI.cs" />
+    <Compile Include="Models\SA\GetSapbByConoReportFunctionAltReportRequestApi.cs" />
+    <Compile Include="Models\SA\GetSapbByReportFunctionRequestApi.cs" />
+    <Compile Include="Models\SA\GetSasglListAllByState.cs" />
+    <Compile Include="Models\SA\GetSaspgPrinterGroupRequestApi.cs" />
+    <Compile Include="Models\SA\GetSasrDetails.cs" />
+    <Compile Include="Models\SA\GetSasseListAllByErrorAndLangRequestApi.cs" />
+    <Compile Include="Models\SA\GetSasspListByAreaCodeApi.cs" />
+    <Compile Include="Models\SA\GetSassrByKeysRequestApi.cs" />
+    <Compile Include="Models\SA\GetSasstListByZipCodeQueryRequestApi.cs" />
+    <Compile Include="Models\SA\GetSastnList.cs" />
+    <Compile Include="Models\SA\GetSastpListRequestApi.cs" />
+    <Compile Include="Models\SA\GetSaszListAllByConoWhseShipVia.cs" />
+    <Compile Include="Models\SA\ListSassrsByKeysRequestApi.cs" />
+    <Compile Include="Models\SA\SaeaGetListNameDescRequestApi.cs" />
+    <Compile Include="Models\SA\SastnLookupRequest.cs" />
+    <Compile Include="Models\SA\SastnLookupResponse.cs" />
+    <Compile Include="Models\Shared\Acl.cs" />
+    <Compile Include="Models\Shared\Attr.cs" />
+    <Compile Include="Models\Shared\Attrs.cs" />
+    <Compile Include="Models\Shared\ChangePasswordRequestModel.cs" />
+    <Compile Include="Models\Shared\ErrorList.cs" />
+    <Compile Include="Models\Shared\GetAuthorizationPointsApi.cs" />
+    <Compile Include="Models\Shared\GetImageUrlRequest.cs" />
+    <Compile Include="Models\Shared\GetImageUrlRequestWrapper.cs" />
+    <Compile Include="Models\Shared\GetImageUrlResponse.cs" />
+    <Compile Include="Models\Shared\GetImageUrlResponseWrapper.cs" />
+    <Compile Include="Models\Shared\GetSasuNotesApi.cs" />
+    <Compile Include="Models\Shared\GetTriggerSetupListByNameApi.cs" />
+    <Compile Include="Models\Shared\IdmResponse.cs" />
+    <Compile Include="Models\Shared\Item.cs" />
+    <Compile Include="Models\Shared\Items.cs" />
+    <Compile Include="Models\Shared\JsonViewResponseApi.cs" />
+    <Compile Include="Models\Shared\LoginRequestModel.cs" />
+    <Compile Include="Models\Shared\LoginResponseModel.cs" />
+    <Compile Include="Models\Shared\LoginZoneTimeRequest.cs" />
+    <Compile Include="Models\Shared\MegaMenuModel.cs" />
+    <Compile Include="Models\Shared\MenuDetailsModel.cs" />
+    <Compile Include="Models\Shared\MenuSecurityFunction.cs" />
+    <Compile Include="Models\Shared\MingleUserDetailResponse.cs" />
+    <Compile Include="Models\Shared\MingleWorkflowRequest.cs" />
+    <Compile Include="Models\Shared\MingleWorkflowResponse.cs" />
+    <Compile Include="Models\Shared\PreLoginResults.cs" />
+    <Compile Include="Models\Shared\Re.cs" />
+    <Compile Include="Models\Shared\Resrs.cs" />
+    <Compile Include="Models\Shared\SaGetEnvResponse.cs" />
+    <Compile Include="Models\Shared\SecondLevelMenu.cs" />
+    <Compile Include="Models\Shared\Startparameter.cs" />
+    <Compile Include="Models\Shared\SupportedRespository.cs" />
+    <Compile Include="Models\Shared\TopLevelList.cs" />
+    <Compile Include="Models\Shared\Ttbllogintimezone.cs" />
+    <Compile Include="Models\Shared\Ttblsaenv.cs" />
+    <Compile Include="Models\Shared\Userdetaillist.cs" />
+    <Compile Include="Models\SL\GetSlsiListByImportTypeDescRequestApi.cs" />
+    <Compile Include="Models\SL\GetSlsiListByImpTypeBeginsRequestApi.cs" />
+    <Compile Include="Models\SL\GetSlsnListByKeys.cs" />
+    <Compile Include="Models\SL\GetSlspListByKeys.cs" />
+    <Compile Include="Models\SL\GetSupplierLinkSetupForLookupRequestApi.cs" />
+    <Compile Include="Models\SM\GetSmsmes.cs" />
+    <Compile Include="Models\SM\GetSmsnListBySalesRepAndName.cs" />
+    <Compile Include="Models\SW\ListSwsjByTypePCatChargeOETypeRequestApi.cs" />
+    <Compile Include="Models\SW\ListSwswByClaimTypeRequestApi.cs" />
+    <Compile Include="Models\TWL\GetTWLAutoDropConfigsApi.cs" />
+    <Compile Include="Models\TWL\GetTWLAutoDropLogsApi.cs" />
+    <Compile Include="Models\TWL\GetTWLAutoDropOrdersApi.cs" />
+    <Compile Include="Models\TWL\GetTWLAutoDropRulesApi.cs" />
+    <Compile Include="Models\TWL\GetTWLBinLocationsApi.cs" />
+    <Compile Include="Models\TWL\GetTWLBinsNotActiveApi.cs" />
+    <Compile Include="Models\TWL\GetTWLCarriersApi.cs" />
+    <Compile Include="Models\TWL\GetTWLCarrierServicesApi.cs" />
+    <Compile Include="Models\TWL\GetTWLCartonSizesApi.cs" />
+    <Compile Include="Models\TWL\GetTWLComdetInterfacesApi.cs" />
+    <Compile Include="Models\TWL\GetTWLCommstInterfacesApi.cs" />
+    <Compile Include="Models\TWL\GetTWLCompaniesApi.cs" />
+    <Compile Include="Models\TWL\GetTWLDepartmentsApi.cs" />
+    <Compile Include="Models\TWL\GetTWLDocksApi.cs" />
+    <Compile Include="Models\TWL\GetTWLEmployeesApi.cs" />
+    <Compile Include="Models\TWL\GetTWLEndOfDaysApi.cs" />
+    <Compile Include="Models\TWL\GetTWLEodSetupsApi.cs" />
+    <Compile Include="Models\TWL\GetTWLFileRetentionsApi.cs" />
+    <Compile Include="Models\TWL\GetTWLInvAdjustmentsApi.cs" />
+    <Compile Include="Models\TWL\GetTWLItemsApi.cs" />
+    <Compile Include="Models\TWL\GetTWLOrderClassesApi.cs" />
+    <Compile Include="Models\TWL\GetTWLOrdersApi.cs" />
+    <Compile Include="Models\TWL\GetTWLPicksApi.cs" />
+    <Compile Include="Models\TWL\GetTWLPrintersApi.cs" />
+    <Compile Include="Models\TWL\GetTWLProdCatListApi.cs" />
+    <Compile Include="Models\TWL\GetTWLProdcatsApi.cs" />
+    <Compile Include="Models\TWL\GetTWLReturnCategoriesApi.cs" />
+    <Compile Include="Models\TWL\GetTWLReturnReasonsApi.cs" />
+    <Compile Include="Models\TWL\GetTWLShpmst.cs" />
+    <Compile Include="Models\TWL\GetTWLShiftsApi.cs" />
+    <Compile Include="Models\TWL\GetTWLTransTypesApi.cs" />
+    <Compile Include="Models\TWL\GetTWLUnitOfMeasuresApi.cs" />
+    <Compile Include="Models\TWL\GetTWLWarehousesApi.cs" />
+    <Compile Include="Models\TWL\GetTWLWarehouseZonesApi.cs" />
+    <Compile Include="Models\TWL\GetTWLWavesApi.cs" />
+    <Compile Include="Models\VA\ValueAddUpgradeVersionByListRequestApi.cs" />
+    <Compile Include="Models\WL\GetWlalByLocationDescriptionApi.cs" />
+    <Compile Include="Models\WT\GetWterahListByShipFmWhseShipToWhseRequestApi.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AP\ApsfService.cs" />
+    <Compile Include="Services\AR\ArbcbService.cs" />
+    <Compile Include="Services\AR\AretService.cs" />
+    <Compile Include="Services\CM\CmstService.cs" />
+    <Compile Include="Services\GL\GlsaBusinessContextService.cs" />
+    <Compile Include="Services\GL\GlsaService.cs" />
+    <Compile Include="Services\GL\GlsfService.cs" />
+    <Compile Include="Services\IC\AsicsetupService.cs" />
+    <Compile Include="Services\IC\IcamueService.cs" />
+    <Compile Include="Services\IC\IcsecService.cs" />
+    <Compile Include="Services\IC\IcsehService.cs" />
+    <Compile Include="Services\IC\IcsepsService.cs" />
+    <Compile Include="Services\IC\IcsessService.cs" />
+    <Compile Include="Services\IC\IcslService.cs" />
+    <Compile Include="Services\IC\IcsrService.cs" />
+    <Compile Include="Services\KP\KpsgService.cs" />
+    <Compile Include="Services\KP\KpsoService.cs" />
+    <Compile Include="Services\KP\KpssService.cs" />
+    <Compile Include="Services\OE\OedcService.cs" />
+    <Compile Include="Services\OE\OedsService.cs" />
+    <Compile Include="Services\OE\OeehService.cs" />
+    <Compile Include="Services\PD\AspdentryService.cs" />
+    <Compile Include="Services\PD\PdscBusinessContextService.cs" />
+    <Compile Include="Services\PD\PdscService.cs" />
+    <Compile Include="Services\PD\PdsraService.cs" />
+    <Compile Include="Services\PD\PdssService.cs" />
+    <Compile Include="Services\PO\AspoentryService.cs" />
+    <Compile Include="Services\PO\PoerahService.cs" />
+    <Compile Include="Services\PO\PoeralService.cs" />
+    <Compile Include="Services\PV\PvAdminLogService.cs" />
+    <Compile Include="Services\PV\PvRecoveryService.cs" />
+    <Compile Include="Services\PV\PvSapbqService.cs" />
+    <Compile Include="Services\PV\PvSassmService.cs" />
+    <Compile Include="Services\PV\PvSassmTypesService.cs" />
+    <Compile Include="Services\PV\PvShoplistService.cs" />
+    <Compile Include="Services\PV\PvUserService.cs" />
+    <Compile Include="Services\SA\BusinessRules.cs" />
+    <Compile Include="Services\SA\Cenpos.cs" />
+    <Compile Include="Services\SA\SabsService.cs" />
+    <Compile Include="Services\SA\SaeaService.cs" />
+    <Compile Include="Services\SA\SaegService.cs" />
+    <Compile Include="Services\SA\SapbService.cs" />
+    <Compile Include="Services\SA\SascService.cs" />
+    <Compile Include="Services\SA\SasglService.cs" />
+    <Compile Include="Services\SA\SaspgService.cs" />
+    <Compile Include="Services\SA\SasrService.cs" />
+    <Compile Include="Services\SA\SasseService.cs" />
+    <Compile Include="Services\SA\SasspService.cs" />
+    <Compile Include="Services\SA\SassrService.cs" />
+    <Compile Include="Services\SA\SasstService.cs" />
+    <Compile Include="Services\SA\SastazService.cs" />
+    <Compile Include="Services\SA\SastnService.cs" />
+    <Compile Include="Services\SA\SastpService.cs" />
+    <Compile Include="Services\SA\SaszService.cs" />
+    <Compile Include="Services\Shared\AoSharedService.cs" />
+    <Compile Include="Services\Shared\AuthpointsService.cs" />
+    <Compile Include="Services\Shared\IntegrationService.cs" />
+    <Compile Include="Services\Shared\JsonViewService.cs" />
+    <Compile Include="Services\Shared\LoginService.cs" />
+    <Compile Include="Services\Shared\MegaMenuService.cs" />
+    <Compile Include="Services\Shared\NotesService.cs" />
+    <Compile Include="Services\Shared\TriggerSetupService.cs" />
+    <Compile Include="Services\SL\SlsiService.cs" />
+    <Compile Include="Services\SL\SlsnService.cs" />
+    <Compile Include="Services\SL\SlspService.cs" />
+    <Compile Include="Services\SL\SlstService.cs" />
+    <Compile Include="Services\SM\SmsmService.cs" />
+    <Compile Include="Services\SM\SmsnService.cs" />
+    <Compile Include="Services\SW\SwsjService.cs" />
+    <Compile Include="Services\SW\SwswService.cs" />
+    <Compile Include="Services\TWL\AutodrpcfgService.cs" />
+    <Compile Include="Services\TWL\BinmstService.cs" />
+    <Compile Include="Services\TWL\CarrierService.cs" />
+    <Compile Include="Services\TWL\CarrierServiceService.cs" />
+    <Compile Include="Services\TWL\CartonSizeService.cs" />
+    <Compile Include="Services\TWL\CmpmstService.cs" />
+    <Compile Include="Services\TWL\ComdetService.cs" />
+    <Compile Include="Services\TWL\CommstService.cs" />
+    <Compile Include="Services\TWL\DepmstService.cs" />
+    <Compile Include="Services\TWL\DockmstrService.cs" />
+    <Compile Include="Services\TWL\DrpLogService.cs" />
+    <Compile Include="Services\TWL\DrpOrdService.cs" />
+    <Compile Include="Services\TWL\DrpRulesService.cs" />
+    <Compile Include="Services\TWL\EmpmstService.cs" />
+    <Compile Include="Services\TWL\EndOfDayService.cs" />
+    <Compile Include="Services\TWL\EodSetupService.cs" />
+    <Compile Include="Services\TWL\FileRetentService.cs" />
+    <Compile Include="Services\TWL\InvAdjustmentService.cs" />
+    <Compile Include="Services\TWL\ItemService.cs" />
+    <Compile Include="Services\TWL\OrderClassService.cs" />
+    <Compile Include="Services\TWL\OrdhdrService.cs" />
+    <Compile Include="Services\TWL\ParametersService.cs" />
+    <Compile Include="Services\TWL\PickService.cs" />
+    <Compile Include="Services\TWL\PrintmstService.cs" />
+    <Compile Include="Services\TWL\ProdcatService.cs" />
+    <Compile Include="Services\TWL\ReturnCategoryService.cs" />
+    <Compile Include="Services\TWL\ReturnReasonService.cs" />
+    <Compile Include="Services\TWL\ShpmstService.cs" />
+    <Compile Include="Services\TWL\ShfmstService.cs" />
+    <Compile Include="Services\TWL\TransTypeService.cs" />
+    <Compile Include="Services\TWL\UomService.cs" />
+    <Compile Include="Services\TWL\WaveService.cs" />
+    <Compile Include="Services\TWL\WhmstService.cs" />
+    <Compile Include="Services\TWL\WhZoneService.cs" />
+    <Compile Include="Services\TWL\WlpasswdService.cs" />
+    <Compile Include="Services\VA\VaeuService.cs" />
+    <Compile Include="Services\WL\WlalService.cs" />
+    <Compile Include="Services\WT\WterahService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Constants\" />
+    <Folder Include="Enums\AP\" />
+    <Folder Include="Enums\AR\" />
+    <Folder Include="Enums\BI\" />
+    <Folder Include="Enums\BP\" />
+    <Folder Include="Enums\CM\" />
+    <Folder Include="Enums\Custom\" />
+    <Folder Include="Enums\EDI\" />
+    <Folder Include="Enums\GL\" />
+    <Folder Include="Enums\IC\" />
+    <Folder Include="Enums\JM\" />
+    <Folder Include="Enums\KP\" />
+    <Folder Include="Enums\OE\" />
+    <Folder Include="Enums\OT\" />
+    <Folder Include="Enums\PD\" />
+    <Folder Include="Enums\PO\" />
+    <Folder Include="Enums\PTX\" />
+    <Folder Include="Enums\PV\" />
+    <Folder Include="Enums\RS\" />
+    <Folder Include="Enums\SA\" />
+    <Folder Include="Enums\SL\" />
+    <Folder Include="Enums\SM\" />
+    <Folder Include="Enums\SW\" />
+    <Folder Include="Enums\TWL\" />
+    <Folder Include="Enums\VA\" />
+    <Folder Include="Enums\WL\" />
+    <Folder Include="Enums\WM\" />
+    <Folder Include="Enums\WT\" />
+    <Folder Include="Interfaces\BI\" />
+    <Folder Include="Interfaces\BP\" />
+    <Folder Include="Interfaces\Custom\" />
+    <Folder Include="Interfaces\EDI\" />
+    <Folder Include="Interfaces\JM\" />
+    <Folder Include="Interfaces\OT\" />
+    <Folder Include="Interfaces\PTX\" />
+    <Folder Include="Interfaces\RS\" />
+    <Folder Include="Interfaces\WM\" />
+    <Folder Include="Models\BI\" />
+    <Folder Include="Models\BP\" />
+    <Folder Include="Models\Custom\" />
+    <Folder Include="Models\EDI\" />
+    <Folder Include="Models\JM\" />
+    <Folder Include="Models\OT\" />
+    <Folder Include="Models\PTX\" />
+    <Folder Include="Models\RS\" />
+    <Folder Include="Models\WM\" />
+    <Folder Include="Services\BI\" />
+    <Folder Include="Services\BP\" />
+    <Folder Include="Services\Custom\" />
+    <Folder Include="Services\EDI\" />
+    <Folder Include="Services\JM\" />
+    <Folder Include="Services\OT\" />
+    <Folder Include="Services\PTX\" />
+    <Folder Include="Services\RS\" />
+    <Folder Include="Services\WM\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\AP.Data\AP.Data.csproj">
+      <Project>{ec33ffb8-4cb4-42e7-bf21-9167871b349d}</Project>
+      <Name>AP.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\AR.Data\AR.Data.csproj">
+      <Project>{efea9fc1-f3fc-4f36-97a7-2e74c2c673ea}</Project>
+      <Name>AR.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\BI.Data\BI.Data.csproj">
+      <Project>{f593c4bd-1b58-4f13-bee3-953c87e0f398}</Project>
+      <Name>BI.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\BP.Data\BP.Data.csproj">
+      <Project>{16a74a00-6bbd-4b4a-92a1-f09311a65d45}</Project>
+      <Name>BP.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\CM.Data\CM.Data.csproj">
+      <Project>{5d882385-e8b2-4579-af38-419ad77f21fa}</Project>
+      <Name>CM.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Common.Data\Common.Data.csproj">
+      <Project>{ca603a87-bc17-4e02-8e55-68ab943efbef}</Project>
+      <Name>Common.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Custom.Data\Custom.Data.csproj">
+      <Project>{a14b856d-ed00-4e06-8936-bf6a3297cbff}</Project>
+      <Name>Custom.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\EDI.Data\EDI.Data.csproj">
+      <Project>{d13ad7c2-1323-426a-8952-bc249a6f0293}</Project>
+      <Name>EDI.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\GL.Data\GL.Data.csproj">
+      <Project>{562eda36-1939-4087-855e-23bdfc7fe646}</Project>
+      <Name>GL.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\IC.Data\IC.Data.csproj">
+      <Project>{3af0ed7a-6290-4850-8902-79ed2d44c46d}</Project>
+      <Name>IC.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\JM.Data\JM.Data.csproj">
+      <Project>{36f66fb0-e90a-4cad-8bb9-1e76be4b96de}</Project>
+      <Name>JM.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\KP.Data\KP.Data.csproj">
+      <Project>{c070a1b5-213d-42ac-8789-47f8076f1658}</Project>
+      <Name>KP.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\OE.Data\OE.Data.csproj">
+      <Project>{589a977c-db18-4a74-91ff-12792510669f}</Project>
+      <Name>OE.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\OT.Data\OT.Data.csproj">
+      <Project>{15fe0395-3226-4e7a-88b2-c8f2b65c9bda}</Project>
+      <Name>OT.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\PD.Data\PD.Data.csproj">
+      <Project>{f41309a4-8609-4427-b0ad-ee1c43eb79b0}</Project>
+      <Name>PD.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\PO.Data\PO.Data.csproj">
+      <Project>{ca66f6e3-2d15-454d-a75e-945f10dadcc0}</Project>
+      <Name>PO.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\PTX.Data\PTX.Data.csproj">
+      <Project>{e309b06c-d970-4c09-82d8-0698fc086a88}</Project>
+      <Name>PTX.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\PV.Data\PV.Data.csproj">
+      <Project>{2fada402-39e6-4b5f-9d01-aaaaf4edde6b}</Project>
+      <Name>PV.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\RS.Data\RS.Data.csproj">
+      <Project>{c1cb5717-add6-4d8c-94e6-0326769ccfc6}</Project>
+      <Name>RS.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\SA.Data\SA.Data.csproj">
+      <Project>{56d3ac8d-2748-4066-946b-f398427a9945}</Project>
+      <Name>SA.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Shared.Data\Shared.Data.csproj">
+      <Project>{6e6cb5f3-ac3f-4b28-b50e-82828a2c0370}</Project>
+      <Name>Shared.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\SL.Data\SL.Data.csproj">
+      <Project>{6d5129a4-0d5a-4550-9c5b-d65344163358}</Project>
+      <Name>SL.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\SM.Data\SM.Data.csproj">
+      <Project>{96d2e707-bd45-47dc-9b43-d302cc885932}</Project>
+      <Name>SM.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\SW.Data\SW.Data.csproj">
+      <Project>{2a57ea84-949a-4a9e-a910-c86574fc6c68}</Project>
+      <Name>SW.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\TWL.Data\TWL.Data.csproj">
+      <Project>{47ee6d22-b5a5-4adb-8407-78700b716cc8}</Project>
+      <Name>TWL.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\VA.Data\VA.Data.csproj">
+      <Project>{23da80cb-57da-4f1f-9d09-761f06b6ed06}</Project>
+      <Name>VA.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\WL.Data\WL.Data.csproj">
+      <Project>{6e3045d6-c076-409e-b633-d6a6a0e36159}</Project>
+      <Name>WL.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\WM.Data\WM.Data.csproj">
+      <Project>{b1637eeb-2ce9-4ae2-87cf-b914300e270f}</Project>
+      <Name>WM.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\WT.Data\WT.Data.csproj">
+      <Project>{eb4de1c5-3282-494c-9c6d-6cfd7e6561b5}</Project>
+      <Name>WT.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\ClientLogging\ClientLogging.csproj">
+      <Project>{b46df9d0-5d5b-4214-b8f8-f9f5e58c117c}</Project>
+      <Name>ClientLogging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Logging\Logging.csproj">
+      <Project>{84155caf-6555-44a2-a101-6942d5355f1f}</Project>
+      <Name>Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Security\Security.csproj">
+      <Project>{f3aeab6f-34dc-4d7c-b845-47f3d6e14525}</Project>
+      <Name>Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\ServiceInterfaceClient\ServiceInterfaceClient.csproj">
+      <Project>{269e9951-4f01-4743-8f53-f6f703790460}</Project>
+      <Name>ServiceInterfaceClient</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

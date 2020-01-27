@@ -1,0 +1,140 @@
+{
+  "viewId": "oe-oeif-master-advancedcriteria",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 2,
+      "type": "COMP_FLD",
+      "children": [
+        {
+          "id": 3,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.ordernum",
+          "label": "global.order.number",
+          "conditionShow": "advsrch.isSelected('ordernum')",
+          "meta": "OEOrders",
+          "size": "SM"
+        },
+        {
+          "id": 4,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.whse",
+          "label": "global.order.warehouse",
+          "meta": "Warehouse",
+          "conditionShow": "advsrch.isSelected('whse')"
+        },
+        {
+          "id": 5,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.custno",
+          "label": "global.customer.number",
+          "meta": "Customer",
+          "conditionShow": "advsrch.isSelected('custno')",
+          "controls": {
+            "actionBtn": {
+              "id": 6,
+              "type": "BTN",
+              "subType": "ICON",
+              "label": "global.inquire",
+              "icon": "icon-drilldown",
+              "isLabelTooltip": true,
+              "stateRef": "aric.detail ({pk: mst.advCriteria.custno})",
+              "conditionDisabled": "!mst.advCriteria.custno"
+            }
+          }
+        },
+        {
+          "id": 7,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.shipto",
+          "label": "global.ship.to",
+          "meta": "ShipTo",
+          "conditionShow": "advsrch.isSelected('shipto')",
+          "options": {
+            "searchParams": {
+              "custno": {
+                "type": "REF",
+                "value": "mst.advCriteria.custno"
+              }
+            }
+          },
+          "controls": {
+            "actionBtn": {
+              "id": 8,
+              "type": "BTN",
+              "subType": "ICON",
+              "label": "global.inquire",
+              "icon": "icon-drilldown",
+              "isLabelTooltip": true,
+              "stateRef": "aric.detail ({pk: mst.advCriteria.custno, pk2: mst.advCriteria.shipto})",
+              "conditionDisabled": "!mst.advCriteria.shipto"
+            }
+          }
+        },
+        {
+          "id": 9,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.billcd",
+          "label": "global.billing.code",
+          "type3": "SET",
+          "metaGroup": "OE",
+          "meta": "FulfillmentBillingCodeOEIF",
+          "blankOption": false,
+          "conditionShow": "advsrch.isSelected('billcd') && base.isAOConsolFulfillmentOn",
+          "size": "SM"
+        },
+        {
+          "id": 10,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.stgcd",
+          "label": "global.stage.code",
+          "type3": "SET",
+          "metaGroup": "OE",
+          "meta": "FulfillmentStageCodeOEIF",
+          "blankOption": false,
+          "conditionShow": "advsrch.isSelected('stgcd')",
+          "size": "SM"
+        },
+        {
+          "id": 11,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.tiedordnum",
+          "label": "global.tied.order.number",
+          "meta": "OEOrders",
+          "conditionShow": "advsrch.isSelected('tiedordnum')",
+          "size": "SM"
+        },
+        {
+          "id": 12,
+          "type": "FIELD",
+          "subType": "CHECKBOX",
+          "model": "mst.advCriteria.releasefl",
+          "label": "global.ready.to.release",
+          "dataFormat": "LOGICAL",
+          "conditionShow": "advsrch.isSelected('releasefl') && base.isAOConsolFulfillmentOn"
+        },
+        {
+          "id": 13,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.recordlimit",
+          "label": "global.record.limit",
+          "dataFormat": "INTEGER",
+          "sign": "+",
+          "size": "SM",
+          "digits": 4,
+          "conditionShow": "advsrch.isSelected('recordlimit')"
+        }
+      ]
+    }
+  ]
+}

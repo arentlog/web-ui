@@ -1,0 +1,155 @@
+{
+  "viewId": "va-vasp-detail-tabs-lineitems-rowdetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 8,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 9,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 11,
+              "type": "FIELD",
+              "subType": "DROP_DOWN",
+              "model": "linerow.vaspLineChange.nonstockty",
+              "label": "global.line.type",
+              "type3": "SET",
+              "metaGroup": "VA",
+              "meta": "NonStockType",
+              "blankOption": false,
+              "conditionReadonly": "linerow.vaspLineChange.sctntype.toLowerCase() !== 'in'",
+              "eventChange": "linerow.changeLineType()",
+              "controls": {
+                "actionBtn": {
+                  "id": 18,
+                  "type": "BTN",
+                  "subType": "ICON",
+                  "label": "global.inquire",
+                  "icon": "icon-drilldown",
+                  "isLabelTooltip": true,
+                  "conditionShow": "linerow.vaspLineChange.nonstockty.toLowerCase() === 'n'",
+                  "eventClick": "linerow.changeLineType()"
+                }
+              }
+            },
+            {
+              "id": 2,
+              "type": "FIELD",
+              "subType": "LOOKUP",
+              "model": "linerow.vaspLineChange.shipprod",
+              "label": "global.product",
+              "meta": "ProdAll",
+              "required": true,
+              "eventChange": "linerow.changeProduct()"
+            },
+            {
+              "id": 15,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "linerow.vaspLineChange.lgthcompfl",
+              "label": "global.var.length",
+              "dataFormat": "LOGICAL",
+              "conditionShow": "linerow.vaspLineChange.sctntype.toLowerCase() === 'in'",
+              "conditionDisabled": "!item.vafabfl",
+              "eventChange": "linerow.changeFab()"
+            },
+            {
+              "id": 16,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "linerow.vaspLineChange.scrapfctr",
+              "label": "global.scrap.factor.percent",
+              "dataFormat": "DECIMAL",
+              "sign": "+",
+              "decimals": 2,
+              "digits": 2,
+              "conditionShow": "linerow.vaspLineChange.sctntype.toLowerCase() === 'in'",
+              "conditionReadonly": "!item.vafabfl",
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            },
+            {
+              "id": 3,
+              "type": "BTN",
+              "subType": "PRI",
+              "label": "global.ok",
+              "icon": "icon-confirm",
+              "eventClick": "linerow.submit()"
+            },
+            {
+              "id": 4,
+              "type": "BTN",
+              "subType": "SEC",
+              "label": "global.cancel",
+              "icon": "icon-cancel",
+              "eventClick": "linerow.cancel()"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 12,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "linerow.vaspLineChange.qtyneeded",
+              "label": "global.quantity.needed",
+              "dataFormat": "DECIMAL",
+              "sign": "+",
+              "decimals": 2,
+              "digits": 7,
+              "conditionReadonly": "linerow.vaspLineChange.sctntype.toLowerCase() !== 'in' && linerow.vaspLineChange.sctntype.toLowerCase() !== 'it'",
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            },
+            {
+              "id": 13,
+              "type": "FIELD",
+              "subType": "LOOKUP",
+              "model": "linerow.vaspLineChange.unit",
+              "label": "global.unit",
+              "meta": "StockingUnit",
+              "conditionReadonly": "linerow.vaspLineChange.sctntype.toLowerCase() !== 'in' && linerow.vaspLineChange.sctntype.toLowerCase() !== 'it'",
+              "eventChange": "linerow.changeUnit()"
+            },
+            {
+              "id": 14,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "linerow.vaspLineChange.qtybasetotfl",
+              "label": "global.quantity.based.on.total",
+              "dataFormat": "LOGICAL",
+              "conditionDisabled": "linerow.vaspLineChange.sctntype.toLowerCase() !== 'in' && linerow.vaspLineChange.sctntype.toLowerCase() !== 'it'"
+            },
+            {
+              "id": 17,
+              "type": "FIELD",
+              "subType": "DROP_DOWN",
+              "model": "linerow.vaspLineChange.cutoffty",
+              "label": "global.cutoff.type",
+              "type3": "SET",
+              "metaGroup": "VA",
+              "meta": "CutOffType",
+              "blankOption": false,
+              "conditionShow": "linerow.vaspLineChange.sctntype.toLowerCase() === 'in'",
+              "conditionReadonly": "!item.vafabfl"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

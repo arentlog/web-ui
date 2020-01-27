@@ -1,0 +1,464 @@
+{
+  "viewId": "oe-oeet-selectproducts-lineentrychildstates-nonstock",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ale.isNonStock()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.non.stock",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "aleNs.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.submit",
+                  "icon": "icon-save",
+                  "submitForm": true,
+                  "eventValidated": "aleNs.submit()"
+                },
+                {
+                  "id": 15,
+                  "type": "BTN",
+                  "label": "global.default.fields",
+                  "conditionDisabled": "!aleNs.oelineNonStock.defaultbuttonenabled",
+                  "conditionShow": "!aleNs.oelineNonStock.defaultbuttonhidden",
+                  "eventClick": "aleNs.defaultFields()"
+                },
+                {
+                  "id": 16,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "aleNs.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.oelineNonStock.prod",
+                          "label": "global.product",
+                          "meta": "ProdAllNonStock",
+                          "maxLength": "{{aleNs.prodMaxLength}}",
+                          "size": "LG",
+                          "autoFocus": true,
+                          "eventChange": "aleNs.productChanged()",
+                          "contextOptions": {
+                            "deactivated": true
+                          },
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleNs.oelineNonStock.proddesc",
+                          "label": "global.description",
+                          "maxLength": 24
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleNs.oelineNonStock.proddesc2",
+                          "label": "global.description",
+                          "maxLength": 24,
+                          "labelHidden": true,
+                          "attachUp": true
+                        },
+                        {
+                          "id": 55,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.oelineNonStock.altprodgrp",
+                          "label": "global.alternate.product.group",
+                          "attachUp": true,
+                          "meta": "AltProdGroup",
+                          "eventChange": "aleNs.altProdGrpChanged()"
+                        },
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleNs.oelineNonStock.price",
+                          "label": "global.price",
+                          "dataFormat": "CURRENCY",
+                          "digits": 7,
+                          "decimals": 5,
+                          "conditionDisabled": "!aleNs.oelineNonStock.priceenabled",
+                          "conditionShow": "!aleNs.oelineNonStock.pricehidden"
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.oelineNonStock.prodcat",
+                          "label": "global.category",
+                          "meta": "ProdCat",
+                          "eventChange": "aleNs.nonStockFieldChanged('prodcat')"
+                        },
+                        {
+                          "id": 22,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.oelineNonStock.vendno",
+                          "label": "global.vendor",
+                          "meta": "Vendor",
+                          "eventChange": "aleNs.nonStockFieldChanged('vendno')"
+                        },
+                        {
+                          "id": 57,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleNs.oelineNonStock.upcid",
+                          "label": "global.upc.number",
+                          "maxLength": 24
+                        },
+                        {
+                          "id": 24,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.oelineNonStock.arpwhse",
+                          "label": "global.warehouse",
+                          "meta": "Warehouse",
+                          "conditionDisabled": "!aleNs.oelineNonStock.arpwhseenabled"
+                        },
+                        {
+                          "id": 23,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.oelineNonStock.prodline",
+                          "label": "global.line",
+                          "meta": "ProdLine",
+                          "conditionDisabled": "!aleNs.oelineNonStock.prodlineenabled",
+                          "eventChange": "aleNs.nonStockFieldChanged('prodline')",
+                          "options": {
+                            "searchParams": {
+                              "vendno": {
+                                "type": "REF",
+                                "value": "aleNs.oelineNonStock.vendno"
+                              },
+                              "whse": {
+                                "type": "REF",
+                                "value": "base.oehdr.whse"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 37,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "aleNs.oelineNonStock.bofl",
+                          "label": "global.back.order",
+                          "dataFormat": "LOGICAL",
+                          "eventChange": "aleNs.backOrderChanged()"
+                        },
+                        {
+                          "id": 38,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "aleNs.oelineNonStock.createpofl",
+                          "label": "global.create.purchase.order",
+                          "dataFormat": "LOGICAL",
+                          "eventChange": "aleNs.createPoChanged()"
+                        },
+                        {
+                          "id": 39,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "ale.oelineNonStock.rushfl",
+                          "label": "global.rush",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!aleNs.oelineNonStock.rushflenabled"
+                        },
+                        {
+                          "id": 40,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "aleNs.oelineNonStock.copycommentfl",
+                          "label": "global.copy.comments",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!aleNs.oelineNonStock.copycommentflenabled"
+                        },
+                        {
+                          "id": 41,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "aleNs.oelineNonStock.ncnr",
+                          "label": "global.ncnr",
+                          "dataFormat": "LOGICAL",
+                          "subFormat": "YBlank"
+                        },
+                        {
+                          "id": 48,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleNs.oelineNonStock.nsqtyavail",
+                          "label": "global.non.stock.quantity.available",
+                          "conditionShow": "!aleNs.oelineNonStock.nsqtyavailhidden"
+                        },
+                        {
+                          "id": 51,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleNs.oelineNonStock.stkqtyavail",
+                          "label": "global.stock.quantity.available",
+                          "conditionShow": "!aleNs.oelineNonStock.stkqtyavailhidden"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 26,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "aleNs.oelineNonStock.discamt",
+                              "label": "global.discount",
+                              "dataFormat": "DECIMAL",
+                              "digits": 7,
+                              "decimals": 5,
+                              "size": "SM",
+                              "conditionDisabled": "!aleNs.oelineNonStock.discamtenabled",
+                              "conditionShow": "!aleNs.oelineNonStock.discamthidden"
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "aleNs.oelineNonStock.disctype",
+                              "label": "global.discount.type",
+                              "size": "SM",
+                              "blankOption": false,
+                              "labelHidden": true,
+                              "conditionDisabled": "!aleNs.oelineNonStock.disctypeenabled",
+                              "conditionShow": "!aleNs.oelineNonStock.disctypehidden",
+                              "type3": "SET",
+                              "metaGroup": "OE",
+                              "meta": "AmountPercentType"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 28,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleNs.oelineNonStock.prodcost",
+                          "label": "global.cost",
+                          "conditionDisabled": "!aleNs.oelineNonStock.prodcostenabled",
+                          "conditionShow": "!aleNs.oelineNonStock.prodcosthidden",
+                          "eventChange": "aleNs.nonStockFieldChanged('prodcost')",
+                          "dataFormat": "CURRENCY",
+                          "digits": 7,
+                          "decimals": 5,
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          }
+                        },
+                        {
+                          "id": 30,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.oelineNonStock.pricetype",
+                          "label": "global.price.type",
+                          "meta": "ProdPriceTy",
+                          "conditionDisabled": "!aleNs.oelineNonStock.pricetypeenabled"
+                        },
+                        {
+                          "id": 29,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "aleNs.oelineNonStock.itemtype",
+                          "label": "global.item.type",
+                          "type3": "MANUAL",
+                          "optionsModel": "aleNs.itemTypeCollection",
+                          "eventChange": "aleNs.nonStockFieldChanged('itemtype')",
+                          "optionLabelField": "label",
+                          "optionValueField": "value",
+                          "blankOption": false,
+                          "conditionReadonly": "!aleNs.oelineNonStock.itemtypeenabled"
+                        },
+                        {
+                          "id": 32,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.oelineNonStock.commtype",
+                          "label": "global.commission.type",
+                          "conditionDisabled": "!aleNs.oelineNonStock.commtypeenabled",
+                          "meta": "Commission"
+                        },
+                        {
+                          "id": 31,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.oelineNonStock.eccnclasscd",
+                          "label": "global.eccn",
+                          "meta": "ECCNClass"
+                        },
+                        {
+                          "id": 33,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "aleNs.oelineNonStock.countryoforigin",
+                          "label": "global.country.of.origin",
+                          "type3": "CODES",
+                          "meta": "Country",
+                          "eventChange": "aleNs.nonStockFieldChanged('countryoforigin')"
+                        },
+                        {
+                          "id": 34,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.oelineNonStock.tariffcd",
+                          "label": "global.hs.code",
+                          "meta": "Tariff",
+                          "eventChange": "aleNs.nonStockFieldChanged('tariffcd')"
+                        },
+                        {
+                          "id": 42,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "aleNs.oelineNonStock.kitfl",
+                          "label": "global.kit",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!aleNs.oelineNonStock.kitflenabled",
+                          "eventChange": "aleNs.kitChanged()"
+                        },
+                        {
+                          "id": 46,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "aleNs.oelineNonStock.kitrollty",
+                          "label": "global.kit.rollup",
+                          "type3": "SET",
+                          "conditionDisabled": "!aleNs.oelineNonStock.kitrolltyenabled",
+                          "metaGroup": "OE",
+                          "blankOption": false,
+                          "meta": "KitRollupType"
+                        },
+                        {
+                          "id": 56,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleNs.oelineNonStock.custprod",
+                          "label": "global.customer.product",
+                          "maxLength": 24
+                        },
+                        {
+                          "id": 47,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleNs.oelineNonStock.foreigncost",
+                          "label": "global.vendor.foreign.cost",
+                          "dataFormat": "CURRENCY",
+                          "conditionShow": "!aleNs.oelineNonStock.foreigncosthidden"
+                        },
+                        {
+                          "id": 50,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleNs.oelineNonStock.exchangerate",
+                          "label": "global.exchange.rate",
+                          "conditionShow": "!aleNs.oelineNonStock.exchangeratehidden"
+                        },
+                        {
+                          "id": 49,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleNs.oelineNonStock.currencyty",
+                          "label": "global.currency.code",
+                          "conditionShow": "!aleNs.oelineNonStock.currencytyhidden",
+                          "dataDesc": "{{aleNs.oelineNonStock.currencytyshort}}"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 12,
+                  "type": "EXP_AREA",
+                  "label": "global.cost.calculator",
+                  "collapsed": true,
+                  "conditionShow": "!aleNs.oelineNonStock.calculatebuttonhidden",
+                  "children": [
+                    {
+                      "id": 52,
+                      "type": "CUSTOM",
+                      "subType": "NonStockCostCalculator",
+                      "options": {
+                        "calcCostCallback": "aleNs.costCalculatorCostChangedCallback()",
+                        "calcCostModel": "aleNs.oelineNonStock.foreigncost",
+                        "vendorNumberModel": "aleNs.oelineNonStock.vendno",
+                        "vendorNameModel": "aleNs.oelineNonStock.vendname",
+                        "productCostModel": "aleNs.oelineNonStock.prodcost",
+                        "exchangeRateModel": "aleNs.oelineNonStock.exchangerate",
+                        "currencyCodeModel": "aleNs.oelineNonStock.currencyty",
+                        "calcModeModel": "global.order.entry"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "type": "VIEW_CNTR",
+      "viewName": "nonStockChildView"
+    }
+  ]
+}

@@ -1,0 +1,679 @@
+{
+  "viewId": "po-poera-linedetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isSurplusItemDrillDown()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "{{drldwndetl.detailTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 777,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 15,
+                  "type": "BTN",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "submitForm": true,
+                  "eventValidated": "drldwndetl.submit()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 773,
+                  "type": "EXP_AREA",
+                  "label": "global.details",
+                  "children": [
+                    {
+                      "id": 774,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 775,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 8,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 9,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 10,
+                                      "type": "FIELD",
+                                      "subType": "LOOKUP",
+                                      "model": "drldwn.updateLineItemRecord.shipprod",
+                                      "label": "global.product",
+                                      "meta": "ProdAll",
+                                      "conditionDisabled": "!drldwndetl.isProductEnabled()",
+                                      "eventChange": "drldwndetl.productChanged()"
+                                    },
+                                    {
+                                      "id": 12,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "drldwn.updateLineItemRecord.qtyord",
+                                      "label": "global.quantity",
+                                      "dataFormat": "DECIMAL_TEXT",
+                                      "sign": "+",
+                                      "digits": 7,
+                                      "decimals": 2,
+                                      "conditionDisabled": "!drldwndetl.isUnitEnabled()",
+                                      "eventChange": "drldwndetl.unitChanged()"
+                                    },
+                                    {
+                                      "id": 13,
+                                      "type": "FIELD",
+                                      "subType": "LOOKUP",
+                                      "model": "drldwn.updateLineItemRecord.unit",
+                                      "label": "global.unit",
+                                      "meta": "Units",
+                                      "conditionDisabled": "!drldwndetl.isUnitEnabled()",
+                                      "eventChange": "drldwndetl.unitChanged()",
+                                      "options": {
+                                        "searchParams": {
+                                          "prod": {
+                                            "type": "REF",
+                                            "value": "drldwn.updateLineItemRecord.shipprod"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "id": 17,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "drldwn.updateLineItemRecord.rushfl",
+                                      "label": "global.rush",
+                                      "dataFormat": "LOGICAL"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 772,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 14,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "drldwn.updateLineItemRecord.price",
+                                      "label": "global.price",
+                                      "dataFormat": "DECIMAL_TEXT",
+                                      "sign": "+",
+                                      "digits": 7,
+                                      "decimals": 5,
+                                      "conditionDisabled": "!drldwndetl.isPriceEnabled()",
+                                      "eventChange": "drldwndetl.priceChanged()"
+                                    },
+                                    {
+                                      "id": 18,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "drldwn.updateLineItemRecord.accepttype",
+                                      "label": "global.accept.type",
+                                      "type3": "SET",
+                                      "metaGroup": "WT",
+                                      "meta": "WTRRARAcceptType",
+                                      "conditionDisabled": "drldwndetl.isProductEnabled()"
+                                    },
+                                    {
+                                      "id": 19,
+                                      "type": "FIELD",
+                                      "subType": "LOOKUP",
+                                      "model": "drldwn.updateLineItemRecord.contractno",
+                                      "label": "global.contract.number",
+                                      "meta": "VendorContract",
+                                      "eventChange": "drldwndetl.contractChanged()",
+                                      "options": {
+                                        "searchParams": {
+                                          "vendno": {
+                                            "type": "REF",
+                                            "value": "base.drillDownRecord.vendno"
+                                          },
+                                          "whse": {
+                                            "type": "REF",
+                                            "value": "base.drillDownRecord.whse"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 25,
+                  "type": "EXP_AREA",
+                  "label": "global.surplus",
+                  "conditionShow": "drldwn.updateLineItemRecord.porrarlinedspllinesur && drldwn.updateLineItemRecord.porrarlinedspllinesur.length > 0",
+                  "children": [
+                    {
+                      "id": 26,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 27,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 28,
+                              "type": "GRID",
+                              "model": "drldwn.updateLineItemRecord.porrarlinedspllinesur",
+                              "controlRef": "drldwndetl.grid",
+                              "options": {
+                                "editable": true
+                              },
+                              "controls": {
+                                "toolbar": {
+                                  "id": 29,
+                                  "type": "TOOLBAR",
+                                  "label": "global.surplus"
+                                }
+                              },
+                              "children": [
+                                {
+                                  "id": 30,
+                                  "type": "GRID_COL",
+                                  "subType": "CHECKBOX",
+                                  "model": "accepttype",
+                                  "label": "global.accept.type",
+                                  "editable": true,
+                                  "eventChange": "drldwndetl.onCellChange()",
+                                  "dataFormat": "LOGICAL",
+                                  "subFormat": "YN"
+                                },
+                                {
+                                  "id": 37,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.quantity",
+                                  "model": "qtyord",
+                                  "editable": true,
+                                  "sign": "+",
+                                  "digits": 7,
+                                  "decimals": 2,
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 31,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.warehouse",
+                                  "model": "linewhse"
+                                },
+                                {
+                                  "id": 32,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.tie.hold",
+                                  "model": "tiehold"
+                                },
+                                {
+                                  "id": 33,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.non.stock",
+                                  "model": "specnstype"
+                                },
+                                {
+                                  "id": 34,
+                                  "type": "GRID_COL",
+                                  "subType": "CHECKBOX",
+                                  "label": "global.comment",
+                                  "model": "commentfl",
+                                  "dataFormat": "LOGICAL"
+                                },
+                                {
+                                  "id": 35,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.product",
+                                  "model": "shipprod"
+                                },
+                                {
+                                  "id": 36,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "descrip",
+                                  "label": "global.description"
+                                },
+                                {
+                                  "id": 38,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "notesfl",
+                                  "label": "global.notes",
+                                  "dataFormat": "NotesFlag"
+                                },
+                                {
+                                  "id": 39,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "unit",
+                                  "label": "global.unit"
+                                },
+                                {
+                                  "id": 40,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "price",
+                                  "label": "global.price",
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 5,
+                                    "maximumFractionDigits": 5
+                                  }
+                                },
+                                {
+                                  "id": 41,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "lock",
+                                  "label": "global.lock"
+                                },
+                                {
+                                  "id": 42,
+                                  "type": "GRID_COL",
+                                  "subType": "CHECKBOX",
+                                  "model": "rushfl",
+                                  "label": "global.rush",
+                                  "dataFormat": "LOGICAL"
+                                },
+                                {
+                                  "id": 43,
+                                  "type": "GRID_COL",
+                                  "subType": "CHECKBOX",
+                                  "model": "belowopfl",
+                                  "label": "global.below.order.point",
+                                  "dataFormat": "LOGICAL"
+                                },
+                                {
+                                  "id": 44,
+                                  "type": "GRID_COL",
+                                  "subType": "CHECKBOX",
+                                  "model": "criticalfl",
+                                  "label": "global.critical",
+                                  "dataFormat": "LOGICAL"
+                                },
+                                {
+                                  "id": 45,
+                                  "type": "GRID_COL",
+                                  "subType": "CHECKBOX",
+                                  "model": "npnafl",
+                                  "label": "global.npna",
+                                  "dataFormat": "LOGICAL"
+                                },
+                                {
+                                  "id": 46,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "ordertype",
+                                  "label": "global.order.type"
+                                },
+                                {
+                                  "id": 47,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "lineno",
+                                  "label": "global.line.number",
+                                  "dataFormat": "INTEGER_TEXT"
+                                },
+                                {
+                                  "id": 48,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "seqno",
+                                  "label": "global.sequence.number",
+                                  "dataFormat": "INTEGER_TEXT"
+                                },
+                                {
+                                  "id": 49,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "addlcarrycost",
+                                  "label": "global.additional.carrying.cost",
+                                  "dataFormat": "DECIMAL_TEXT"
+                                },
+                                {
+                                  "id": 50,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "blno",
+                                  "label": "global.blanket.purchase.order.number",
+                                  "dataFormat": "INTEGER_TEXT"
+                                },
+                                {
+                                  "id": 51,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.suffix",
+                                  "model": "blsuf",
+                                  "dataFormat": "Suffix"
+                                },
+                                {
+                                  "id": 52,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "qtybreak",
+                                  "label": "global.qty.break"
+                                },
+                                {
+                                  "id": 53,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "orderaltno",
+                                  "label": "global.tied.order.number",
+                                  "dataFormat": "INTEGER_TEXT"
+                                },
+                                {
+                                  "id": 54,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "orderaltsuf",
+                                  "label": "global.tied.order.suffix",
+                                  "dataFormat": "Suffix"
+                                },
+                                {
+                                  "id": 55,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "linealtno",
+                                  "label": "global.tied.line.number",
+                                  "dataFormat": "INTEGER_TEXT"
+                                },
+                                {
+                                  "id": 56,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "seqaltno",
+                                  "label": "global.tied.seq.number",
+                                  "dataFormat": "INTEGER_TEXT"
+                                },
+                                {
+                                  "id": 57,
+                                  "type": "GRID_COL",
+                                  "subType": "DATE",
+                                  "model": "promisedt",
+                                  "label": "global.tied.promise.date",
+                                  "dataFormat": "DATE"
+                                },
+                                {
+                                  "id": 58,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "companyrank",
+                                  "label": "global.company.rank"
+                                },
+                                {
+                                  "id": 59,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "whserank",
+                                  "label": "global.warehouse.rank"
+                                },
+                                {
+                                  "id": 60,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "contractno",
+                                  "label": "global.contract.number"
+                                },
+                                {
+                                  "id": 61,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "pdsvcrecno",
+                                  "label": "pdsvc.record.number",
+                                  "dataFormat": "INTEGER_TEXT"
+                                },
+                                {
+                                  "id": 62,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "vendquote",
+                                  "label": "global.vendor.quote"
+                                },
+                                {
+                                  "id": 63,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "abcrankty",
+                                  "label": "abc.rank"
+                                },
+                                {
+                                  "id": 64,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "srcriticalfl",
+                                  "label": "global.critical.product"
+                                },
+                                {
+                                  "id": 65,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "custonhand",
+                                  "label": "global.cust.on.hand",
+                                  "dataFormat": "DECIMAL_TEXT"
+                                },
+                                {
+                                  "id": 66,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "superty",
+                                  "label": "global.supersede"
+                                },
+                                {
+                                  "id": 67,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "unitbuy",
+                                  "label": "global.buying.unit"
+                                },
+                                {
+                                  "id": 68,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "unitstnd",
+                                  "label": "global.standard.pack"
+                                },
+                                {
+                                  "id": 69,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "custname",
+                                  "label": "global.customer.name"
+                                },
+                                {
+                                  "id": 70,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "custnumber",
+                                  "label": "global.customer.number",
+                                  "dataFormat": "DECIMAL_TEXT"
+                                },
+                                {
+                                  "id": 71,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "takenby",
+                                  "label": "global.taken.by"
+                                },
+                                {
+                                  "id": 72,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "updtype",
+                                  "label": "global.suspended"
+                                },
+                                {
+                                  "id": 73,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "netavail",
+                                  "label": "global.net.available",
+                                  "dataFormat": "DECIMAL_TEXT"
+                                },
+                                {
+                                  "id": 74,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "ncnr",
+                                  "label": "global.ncnr"
+                                },
+                                {
+                                  "id": 75,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "countryoforigin",
+                                  "label": "global.country.of.origin"
+                                },
+                                {
+                                  "id": 76,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "tariffcd",
+                                  "label": "global.tariff.code"
+                                },
+                                {
+                                  "id": 771,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "dutyrate",
+                                  "label": "global.duty.rate",
+                                  "dataFormat": "DECIMAL_TEXT"
+                                },
+                                {
+                                  "id": 78,
+                                  "type": "GRID_COL",
+                                  "subType": "CHECKBOX",
+                                  "model": "msdsfl",
+                                  "label": "global.hazardous",
+                                  "dataFormat": "LOGICAL"
+                                },
+                                {
+                                  "id": 79,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "vendprod",
+                                  "label": "global.vendor.product",
+                                  "extra": true
+                                },
+                                {
+                                  "id": 80,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "userfield",
+                                  "label": "global.user.field",
+                                  "extra": true
+                                },
+                                {
+                                  "id": 81,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "reportno",
+                                  "label": "global.report.number",
+                                  "extra": true,
+                                  "dataFormat": "INTEGER_TEXT"
+                                },
+                                {
+                                  "id": 82,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "mfgprod",
+                                  "label": "global.manufacturer.product",
+                                  "extra": true
+                                },
+                                {
+                                  "id": 83,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "brandcode",
+                                  "label": "global.brand.code",
+                                  "extra": true
+                                },
+                                {
+                                  "id": 778,
+                                  "type": "GRID_COL",
+                                  "subType": "HYPERLINK",
+                                  "model": "usagerate",
+                                  "label": "global.usage.rate",
+                                  "dataFormat": "DECIMAL_TEXT",
+                                  "eventClick": "drldwndetl.lineSurplusUsagelinkClicked()"
+                                },
+                                {
+                                  "id": 781,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "avgcost",
+                                  "label": "global.average.cost",
+                                  "dataFormat": "DECIMAL_TEXT"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 780,
+      "type": "VIEW_CNTR",
+      "viewName": "usage"
+    }
+  ]
+}

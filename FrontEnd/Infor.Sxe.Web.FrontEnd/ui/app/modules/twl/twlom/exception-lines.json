@@ -1,0 +1,267 @@
+{
+  "viewId": "twl-twlom-exception-lines",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isExceptionLines()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.twlomel",
+          "subLabel": "{{base.getSubTitle()}}",
+          "controls": {
+            "navBtns": {
+              "id": 145,
+              "type": "BTN_SET",
+              "subType": "TBAR_NAV",
+              "children": [
+                {
+                  "id": 146,
+                  "type": "BTN",
+                  "subType": "ICON",
+                  "label": "special.button.back",
+                  "icon": "icon-left-arrow",
+                  "eventClick": "dtle.returnFromHere()"
+                }
+              ]
+            }
+          },
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "controls": {},
+          "children": [
+            {
+              "id": 167,
+              "type": "COMP_FLD",
+              "children": [
+                {
+                  "id": 178,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 179,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 153,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtle.record.order + '-' + dtle.record.orderSuffix",
+                          "label": "global.order.number"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 186,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 183,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtle.record.shipName",
+                          "label": "global.name"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 180,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 181,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtle.record.carrier",
+                          "label": "Carrier"
+                        },
+                        {
+                          "id": 182,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtle.record.service",
+                          "label": "global.service",
+                          "conditionShow": "dtle.record.service"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 168,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtle.showAll",
+                  "label": "global.show.all",
+                  "dataFormat": "LOGICAL",
+                  "eventChange": "dtle.changeShowAll()"
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "type": "GRID",
+              "controlRef": "dtle.grid",
+              "model": "dtle.dataset",
+              "options": {
+                "showCheckboxes": true,
+                "events": {
+                  "selected": "dtle.lineSelectionChange()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.lines",
+                  "children": [
+                    {
+                      "id": 150,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.hold",
+                      "eventClick": "dtle.hold()",
+                      "conditionDisabled": "!dtle.holdButtonEnabled"
+                    },
+                    {
+                      "id": 151,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.remove.hold",
+                      "eventClick": "dtle.removeHold()",
+                      "conditionDisabled": "!dtle.removeHoldButtonEnabled"
+                    },
+                    {
+                      "id": 187,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.inventory",
+                      "eventClick": "dtle.inventoryHyperlinkSearch()",
+                      "icon": "icon-search",
+                      "conditionDisabled": "!dtle.grid.isOneRowSelected()"
+                    },
+                    {
+                      "id": 184,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "",
+                      "label": "New Field"
+                    },
+                    {
+                      "id": 185,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "",
+                      "label": "New Field",
+                      "dataFormat": "LOGICAL"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 169,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "lineStatus",
+                  "label": "global.status",
+                  "dataFormat": "TwlOrderStatusToName"
+                },
+                {
+                  "id": 170,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "absNum",
+                  "label": "global.item"
+                },
+                {
+                  "id": 171,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "itemDesc",
+                  "label": "global.product.description"
+                },
+                {
+                  "id": 172,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "reqQty",
+                  "label": "global.requested"
+                },
+                {
+                  "id": 173,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "actQty",
+                  "label": "global.actual",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 174,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "itemUom",
+                  "label": "global.unit.of.measure"
+                },
+                {
+                  "id": 188,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "shipcompfl",
+                  "label": "global.ship.complete",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 175,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "lastEmpNum",
+                  "label": "global.employee"
+                },
+                {
+                  "id": 176,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "origCube",
+                  "label": "global.line.cube",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 177,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "origWeight",
+                  "label": "global.line.weight",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,287 @@
+{
+  "viewId": "oe-oeec-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.maintenance",
+              "subLabel": "{{dtl.subTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 33,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 34,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 31,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.update()"
+                },
+                {
+                  "id": 32,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "dtl.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.ordernox",
+                          "label": "global.order.no"
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.oeecdetail.lineno",
+                          "label": "global.line.number",
+                          "dataFormat": "INTEGER"
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.oeecdetail.shipprod + '  ' + dtl.oeecdetail.proddesc",
+                          "label": "global.product.number"
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.oeecdetail.commcost",
+                          "label": "global.commission.cost",
+                          "dataFormat": "DECIMAL",
+                          "decimals": 5,
+                          "digits": 9,
+                          "eventChange": "dtl.updateRebate()",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.oeecdetail.slsrepout",
+                          "label": "global.outside.salesrep",
+                          "required": true,
+                          "meta": "SalesRep"
+                        },
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.oeecdetail.slsrepin",
+                          "label": "global.inside.sales.rep",
+                          "required": true,
+                          "meta": "SalesRep"
+                        },
+                        {
+                          "id": 22,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.oeecdetail.commtype",
+                          "label": "global.commission.type",
+                          "required": true,
+                          "meta": "Commission",
+                          "options": {
+                            "searchParams": {
+                              "slsrep": {
+                                "type": "REF",
+                                "value": "dtl.oeecdetail.slsrepout"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 8,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.oeecdetail.vendrebamt",
+                          "label": "global.rebate",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "maximumFractionDigits": 5,
+                            "minimumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 38,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.oeecdetail.transtype",
+                          "label": "global.order.type",
+                          "type3": "CODES",
+                          "meta": "OrderEntryTransaction",
+                          "dataFormat": "OeOrderType"
+                        },
+                        {
+                          "id": 37,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.oeecdetail.custno",
+                          "label": "global.customer.number",
+                          "dataDesc": "dtl.oeecdetail.custname"
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.oeecdetail.postrebcst",
+                          "label": "global.post.rebate.cost",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 25,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "dtl.oeecdetail.commmanfl",
+                          "label": "global.manual.override",
+                          "type3": "SET",
+                          "size": "SM",
+                          "eventChange": "",
+                          "meta": "ManualOverride",
+                          "metaGroup": "OE",
+                          "blankOption": false,
+                          "children": [
+                            {
+                              "id": 26,
+                              "type": "OPT",
+                              "label": "global.yes",
+                              "value": "y"
+                            },
+                            {
+                              "id": 27,
+                              "type": "OPT",
+                              "label": "global.no",
+                              "value": "n"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 39,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.oeecdetail.commamtout",
+                              "label": "global.outside",
+                              "conditionReadonly": "!dtl.oeecdetail.commmanfl",
+                              "dataFormat": "DECIMAL",
+                              "decimals": 2,
+                              "digits": 8,
+                              "formatOptions": {
+                                "maximumFractionDigits": 2,
+                                "minimumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.oeecdetail.commpaidfl",
+                              "label": "global.paid.out",
+                              "dataFormat": "LOGICAL"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 41,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.oeecdetail.commamtin",
+                              "label": "global.inside",
+                              "conditionReadonly": "!dtl.oeecdetail.commmanfl",
+                              "dataFormat": "DECIMAL",
+                              "decimals": 2,
+                              "digits": 8,
+                              "formatOptions": {
+                                "maximumFractionDigits": 2,
+                                "minimumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.oeecdetail.commpaidinfl",
+                              "label": "global.paid.in",
+                              "dataFormat": "LOGICAL"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

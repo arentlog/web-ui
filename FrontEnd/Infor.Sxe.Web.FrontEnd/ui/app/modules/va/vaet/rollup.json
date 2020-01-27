@@ -1,0 +1,512 @@
+{
+  "viewId": "va-vaet-rollup",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "va.rollup",
+              "subLabel": "{{rollup.subTitle}}",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "label": "global.update",
+                  "icon": "icon-in-progress",
+                  "submitForm": true,
+                  "eventValidated": "rollup.update()"
+                },
+                {
+                  "id": 17,
+                  "type": "BTN",
+                  "label": "global.recalculate",
+                  "eventClick": "rollup.recalculate()"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "rollup.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "rollup.criteria.vacalcdfltty",
+                          "label": "global.calc.type",
+                          "conditionReadonly": "base.sasoo.oepricefl !== 'e'",
+                          "type3": "INLINE",
+                          "blankOption": false,
+                          "children": [
+                            {
+                              "id": 63,
+                              "type": "OPT",
+                              "label": "global.margin",
+                              "value": "margin"
+                            },
+                            {
+                              "id": 64,
+                              "type": "OPT",
+                              "label": "global.markup",
+                              "value": "markup"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 22,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "rollup.results.overprc",
+                          "label": "global.price.override",
+                          "autoFocus": true,
+                          "conditionReadonly": "base.sasoo.oepricefl !== 'e'",
+                          "dataFormat": "DECIMAL",
+                          "decimals": 5,
+                          "digits": 7,
+                          "sign": "+",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "rollup.results.prcupdatefl",
+                          "label": "global.update.sales.order.price",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "base.sasoo.oepricefl !== 'e'",
+                          "conditionShow": "rollup.criteria.ourproc !== 'oeip'"
+                        },
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "rollup.results.varollfl",
+                          "label": "global.view.rollup.costs.prices",
+                          "dataFormat": "LOGICAL",
+                          "disabled": true
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "rollup.criteria.vamarkupfl",
+                          "label": "{{rollup.laborBasedLabel()}}",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "base.sasoo.oepricefl !== 'e'"
+                        },
+                        {
+                          "id": 24,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "rollup.criteria.vainvmarkupfl",
+                          "label": "{{rollup.inventoryBasedLabel()}}",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "base.sasoo.oepricefl !== 'e'"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 65,
+                          "type": "FIELD_SET",
+                          "label": "{{rollup.marginsOrMarkups()}}",
+                          "children": [
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "rollup.criteria.vaextmarkup",
+                              "label": "global.external.process",
+                              "dataFormat": "PERCENT",
+                              "digits": 3,
+                              "decimals": 2,
+                              "conditionReadonly": "base.sasoo.oepricefl !== 'e'",
+                              "sign": "+",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "rollup.criteria.vaintmarkup",
+                              "label": "global.internal.labor.",
+                              "conditionReadonly": "base.sasoo.oepricefl !== 'e'",
+                              "dataFormat": "PERCENT",
+                              "digits": 3,
+                              "decimals": 2,
+                              "sign": "+",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "rollup.criteria.vanonstkmarkup",
+                              "label": "global.non.stock",
+                              "dataFormat": "PERCENT",
+                              "digits": 3,
+                              "decimals": 2,
+                              "conditionReadonly": "base.sasoo.oepricefl !== 'e'",
+                              "sign": "+",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "rollup.criteria.vainvmarkup",
+                              "label": "global.inventory",
+                              "dataFormat": "PERCENT",
+                              "digits": 3,
+                              "decimals": 2,
+                              "conditionReadonly": "base.sasoo.oepricefl !== 'e'",
+                              "sign": "+",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 11,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 12,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 43,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vainvcst",
+                          "label": "global.inventory.cost",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 44,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vanstkcst",
+                          "label": "global.non.stock.cost",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 45,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vaextcst",
+                          "label": "global.external.process.cost",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 46,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vaintlbrcst",
+                          "label": "global.internal.labor.cost",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 47,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vaintprtcst",
+                          "label": "global.internal.parts.cost",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 48,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vainvincst",
+                          "label": "global.inventory.in.cost",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 49,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vatotcst",
+                          "label": "{{rollup.results.vacstunit}}",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 50,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vavendrebs",
+                          "label": "global.vendor.rebates",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 51,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vamarginamt",
+                          "label": "global.margin",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 121,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vamarginpct",
+                          "label": "global.margin.pct",
+                          "dataFormat": "PERCENT",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 66,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 67,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vainvprc",
+                          "label": "global.inventory.price",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 68,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vanstkprc",
+                          "label": "global.non.stock.price",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 69,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vaextprc",
+                          "label": "global.external.process.price",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 70,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vaintlbrprc",
+                          "label": "global.internal.labor.price",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 72,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vaintprtprc",
+                          "label": "global.internal.parts.price",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 71,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vainvinprc",
+                          "label": "global.inventory.in.price",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 73,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vatotprc",
+                          "label": "{{rollup.results.vaprcunit}}",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 74,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vacustrebs",
+                          "label": "global.customer.rebates",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 75,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.vaaddons",
+                          "label": "global.addons",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 14,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 61,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.oeorigprice",
+                          "label": "global.current.oe.line.price.each",
+                          "dataFormat": "CURRENCY",
+                          "conditionShow": "rollup.criteria.ourproc != 'oeip'"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 16,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 62,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "rollup.results.oemarginamt",
+                          "label": "global.current.oe.line.cost.margin",
+                          "dataDesc": "rollup.results.oemarginpct + '%'",
+                          "dataFormat": "CURRENCY",
+                          "conditionShow": "rollup.criteria.ourproc != 'oeip'"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

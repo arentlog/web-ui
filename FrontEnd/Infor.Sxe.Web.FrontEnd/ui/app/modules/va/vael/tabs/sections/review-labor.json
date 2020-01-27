@@ -1,0 +1,325 @@
+{
+  "viewId": "va-vael-tabs-sections-reviewlabor",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isReviewLabor()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.review.labor.lines",
+              "subLabel": "{{sctnrev.revSubTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 37,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 38,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "sctnrev.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 22,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "submitForm": true,
+                  "eventValidated": "sctnrev.submit()"
+                },
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "sctnrev.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "FIELD_SET",
+                          "label": "global.actual",
+                          "children": [
+                            {
+                              "id": 14,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "sctnrev.noData",
+                              "label": "message.star.pro.rate"
+                            },
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "sctnrev.laborReviewTotals.unitactualcost",
+                              "label": "message.star.cost.per.unit",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "sctnrev.laborReviewTotals.controlledactualcost",
+                              "label": "global.controlled.cost",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 17,
+                              "type": "MESSAGE",
+                              "text": "message.star.based.on.full.receipt.amount"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "FIELD_SET",
+                          "label": "global.estimated",
+                          "children": [
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "sctnrev.laborReviewTotals.completeestimatedcost",
+                              "label": "message.star.pro.rate",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "sctnrev.laborReviewTotals.unitestimatedcost",
+                              "label": "message.star.cost.per.unit",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "sctnrev.noData",
+                              "label": "global.controlled.cost"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 8,
+                  "type": "GRID",
+                  "model": "sctnrev.laborReview",
+                  "controlRef": "sctnrev.grid",
+                  "options": {
+                    "showCheckboxes": true,
+                    "selectable": "single",
+                    "events": {
+                      "selected": "sctnrev.setCurrentLaborLine"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 9,
+                      "type": "TOOLBAR",
+                      "label": "global.labor.detail",
+                      "children": [
+                        {
+                          "id": 23,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "label": "global.labor.product.info",
+                          "conditionDisabled": "!sctnrev.grid.isOneRowSelected()",
+                          "eventClick": "sctnrev.laborInfo()"
+                        },
+                        {
+                          "id": 24,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "label": "global.extend",
+                          "conditionDisabled": "!sctnrev.grid.isOneRowSelected()",
+                          "eventClick": "sctnrev.laborExtend()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "infotext",
+                      "label": "global.line.information"
+                    },
+                    {
+                      "id": 25,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "seqno",
+                      "label": "global.sequence",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "lineno",
+                      "label": "global.line.number",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "sctntype",
+                      "label": "global.section.type",
+                      "customFormatter": "sctnrev.sectionFormatter"
+                    },
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "shipprod",
+                      "label": "global.product"
+                    },
+                    {
+                      "id": 29,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "qtybasetotfl",
+                      "label": "global.quantity.based.on.total",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 30,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "netamt",
+                      "label": "global.net.amount",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 31,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "timeactty",
+                      "label": "global.time.type",
+                      "customFormatter": "sctnrev.timeTypeFormatter"
+                    },
+                    {
+                      "id": 32,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "esttimetext",
+                      "label": "global.estimated.time"
+                    },
+                    {
+                      "id": 33,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prodcost",
+                      "label": "global.cost",
+                      "dataFormat": "DECIMAL",
+                      "contentVisible": "sctnrev.canSeeCost()",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 34,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "stkqtyship",
+                      "label": "global.quantity.shipped",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 35,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "stkqtyord",
+                      "label": "global.quantity.ordered",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "type": "VIEW_CNTR",
+      "viewName": "subReviewLabor"
+    }
+  ]
+}

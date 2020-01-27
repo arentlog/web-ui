@@ -1,0 +1,228 @@
+{
+  "viewId": "twl-twlir-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.searchType",
+                  "label": "global.search.type",
+                  "type3": "SET",
+                  "metaGroup": "TWL",
+                  "meta": "ReceiptMasterSearchType",
+                  "blankOption": false,
+                  "eventChange": "srch.changeSearchType()"
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.criteria.coNum",
+                  "label": "global.company.number",
+                  "extra": true
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.whNum",
+                  "label": "global.warehouse",
+                  "meta": "TWLWarehouse",
+                  "required": true,
+                  "conditionReadonly": "base.restrictTWLWarehouse"
+                },
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.poNumber",
+                  "label": "global.purchase.order.number",
+                  "autoFocus": true,
+                  "meta": "TWLPurchaseOrder",
+                  "conditionShow": "base.isSearch_PO",
+                  "options": {
+                    "searchParams": {
+                      "coNum": {
+                        "type": "REF",
+                        "value": "base.criteria.coNum"
+                      },
+                      "whNum": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      }
+                    },
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.vendorId",
+                  "label": "global.vendor.number",
+                  "autoFocus": true,
+                  "conditionShow": "base.isSearch_PO"
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.absNum",
+                  "label": "global.item",
+                  "autoFocus": true,
+                  "meta": "TWLItem",
+                  "conditionShow": "base.isSearch_PO",
+                  "options": {
+                    "searchParams": {
+                      "whse": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.rtNum",
+                  "label": "global.receipt.transaction.number",
+                  "autoFocus": true,
+                  "conditionShow": "base.isSearch_RT"
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.carrier",
+                  "label": "global.carrier",
+                  "autoFocus": true,
+                  "meta": "TWLCarrier",
+                  "conditionShow": "base.isSearch_RT",
+                  "options": {
+                    "searchParams": {
+                      "coNum": {
+                        "type": "REF",
+                        "value": "base.criteria.coNum"
+                      },
+                      "whNum": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 22,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.printerId",
+                  "label": "global.printer",
+                  "autoFocus": true,
+                  "meta": "Printer",
+                  "conditionShow": "base.isSearch_RI",
+                  "conditionRequired": "base.isSearch_RI"
+                },
+                {
+                  "id": 21,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "base.criteria.deliveryFrom",
+                  "label": "{{base.dateFromLabel}}",
+                  "autoFocus": true,
+                  "conditionShow": "base.isSearch_MI || base.isSearch_RI",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "base.criteria.deliveryTo",
+                  "label": "{{base.dateToLabel}}",
+                  "autoFocus": true,
+                  "conditionShow": "base.isSearch_MI || base.isSearch_RI",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.type",
+                  "label": "global.type",
+                  "type3": "SET",
+                  "metaGroup": "TWL",
+                  "meta": "ReceiptMasterType",
+                  "blankOption": true,
+                  "conditionShow": "base.isSearch_RT || base.isSearch_MI",
+                  "blankOptionLabel": "global.all"
+                },
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.rowStatus",
+                  "label": "global.status",
+                  "type3": "SET",
+                  "metaGroup": "TWL",
+                  "meta": "ReceiptMasterStatus",
+                  "blankOption": true,
+                  "conditionShow": "base.isSearch_PO || base.isSearch_RT || base.isSearch_RI || base.isSearch_MI",
+                  "blankOptionLabel": "global.all"
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.vendItem",
+                  "label": "global.vendor.product",
+                  "autoFocus": true,
+                  "conditionShow": "base.isSearch_PO"
+                },
+                {
+                  "id": 17,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.cargoControl",
+                  "label": "global.cargo.control",
+                  "autoFocus": true,
+                  "conditionShow": "base.isSearch_RT"
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

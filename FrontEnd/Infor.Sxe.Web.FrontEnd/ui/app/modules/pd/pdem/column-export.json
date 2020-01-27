@@ -1,0 +1,2522 @@
+{
+  "viewId": "pd-pdem-columnexport",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.pdem",
+              "subLabel": "global.export.to.excel",
+              "controls": {
+                "navBtns": {
+                  "id": 12,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 13,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 18,
+                  "type": "BTN",
+                  "subType": "SEC",
+                  "label": "global.export.to.excel",
+                  "icon": "icon-export-spreadsheet",
+                  "eventClick": "colexp.LaunchExportToExcel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "EXP_AREA",
+                  "label": "global.options",
+                  "children": [
+                    {
+                      "id": 14,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 15,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "colexp.exportFileName",
+                              "label": "global.file.name",
+                              "size": "LG"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 7,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 8,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 9,
+                              "type": "SWAP_LIST",
+                              "eventChange": "colexp.exportGridChanged()",
+                              "children": [
+                                {
+                                  "id": 10,
+                                  "type": "SWAP_LIST_LIST",
+                                  "model": "colexp.availableFieldList",
+                                  "label": "global.possible.fields",
+                                  "labelField": "label",
+                                  "valueField": "value"
+                                },
+                                {
+                                  "id": 11,
+                                  "type": "SWAP_LIST_LIST",
+                                  "label": "global.chosen.fields",
+                                  "model": "colexp.selectedFieldList",
+                                  "labelField": "label",
+                                  "valueField": "value"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 109,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 110,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 76,
+                                      "type": "GRID",
+                                      "model": "colexp.dataset",
+                                      "controlRef": "colexp.exportGridpdsc1",
+                                      "conditionShow": "base.exportGridName === 'pdsc1'",
+                                      "controls": {
+                                        "toolbar": {
+                                          "id": 113,
+                                          "type": "TOOLBAR",
+                                          "label": "global.rows.to.export"
+                                        }
+                                      },
+                                      "children": [
+                                        {
+                                          "id": 77,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "excelrowid",
+                                          "label": "global.row.id"
+                                        },
+                                        {
+                                          "id": 78,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "updttype",
+                                          "label": "global.update",
+                                          "dataFormat": "BooleanToYesNo",
+                                          "conditionInclude": "colexp.isColumnIncluded('updttype')"
+                                        },
+                                        {
+                                          "id": 59,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "custno",
+                                          "label": "global.customer.number",
+                                          "dataFormat": "DECIMAL_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('custno')"
+                                        },
+                                        {
+                                          "id": 134,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "custnotesfl",
+                                          "label": "global.customer.notes",
+                                          "conditionInclude": "colexp.isColumnIncluded('custnotesfl')"
+                                        },
+                                        {
+                                          "id": 133,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "custtype",
+                                          "label": "global.ship.to",
+                                          "conditionInclude": "colexp.isColumnIncluded('custtype')"
+                                        },
+                                        {
+                                          "id": 132,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "shiptonotesfl",
+                                          "label": "global.ship.to.notes",
+                                          "conditionInclude": "colexp.isColumnIncluded('shiptonotesfl')"
+                                        },
+                                        {
+                                          "id": 131,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prod",
+                                          "label": "global.product",
+                                          "conditionInclude": "colexp.isColumnIncluded('prod')"
+                                        },
+                                        {
+                                          "id": 129,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prodnotesfl",
+                                          "label": "global.product.notes",
+                                          "conditionInclude": "colexp.isColumnIncluded('prodnotesfl')"
+                                        },
+                                        {
+                                          "id": 128,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "proddesc",
+                                          "label": "global.description",
+                                          "conditionInclude": "colexp.isColumnIncluded('proddesc')"
+                                        },
+                                        {
+                                          "id": 127,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "proddesc2",
+                                          "label": "global.description.2",
+                                          "conditionInclude": "colexp.isColumnIncluded('proddesc2')"
+                                        },
+                                        {
+                                          "id": 126,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "whse",
+                                          "label": "global.warehouse",
+                                          "conditionInclude": "colexp.isColumnIncluded('whse')"
+                                        },
+                                        {
+                                          "id": 263,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "region",
+                                          "label": "global.region",
+                                          "conditionInclude": "colexp.isColumnIncluded('region')"
+                                        },
+                                        {
+                                          "id": 125,
+                                          "type": "GRID_COL",
+                                          "subType": "DATE",
+                                          "model": "startdt",
+                                          "label": "global.start.date",
+                                          "dataFormat": "DATE",
+                                          "conditionInclude": "colexp.isColumnIncluded('startdt')"
+                                        },
+                                        {
+                                          "id": 123,
+                                          "type": "GRID_COL",
+                                          "subType": "DATE",
+                                          "model": "enddt",
+                                          "label": "global.end.date",
+                                          "dataFormat": "DATE",
+                                          "conditionInclude": "colexp.isColumnIncluded('enddt')"
+                                        },
+                                        {
+                                          "id": 122,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "units",
+                                          "label": "global.units",
+                                          "conditionInclude": "colexp.isColumnIncluded('units')"
+                                        },
+                                        {
+                                          "id": 124,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "xrefprod",
+                                          "label": "global.cross.reference",
+                                          "conditionInclude": "colexp.isColumnIncluded('xrefprod')"
+                                        },
+                                        {
+                                          "id": 121,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "contractNo",
+                                          "label": "global.contract.number",
+                                          "conditionInclude": "colexp.isColumnIncluded('contractNo')"
+                                        },
+                                        {
+                                          "id": 65,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prctype",
+                                          "label": "global.price.type",
+                                          "dataFormat": "BooleanToAmtPct",
+                                          "conditionInclude": "colexp.isColumnIncluded('prctype')"
+                                        },
+                                        {
+                                          "id": 119,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "priceSheet",
+                                          "label": "global.price.sheet.name",
+                                          "conditionInclude": "colexp.isColumnIncluded('priceSheet')"
+                                        },
+                                        {
+                                          "id": 118,
+                                          "type": "GRID_COL",
+                                          "subType": "DATE",
+                                          "model": "priceEffectiveDate",
+                                          "label": "global.price.sheet.dt",
+                                          "dataFormat": "DATE",
+                                          "conditionInclude": "colexp.isColumnIncluded('priceEffectiveDate')"
+                                        },
+                                        {
+                                          "id": 70,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "refer",
+                                          "label": "global.reference",
+                                          "conditionInclude": "colexp.isColumnIncluded('refer')"
+                                        },
+                                        {
+                                          "id": 74,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "statustype",
+                                          "label": "global.status",
+                                          "conditionInclude": "colexp.isColumnIncluded('statustype')"
+                                        },
+                                        {
+                                          "id": 115,
+                                          "type": "GRID_COL",
+                                          "subType": "DROP_DOWN",
+                                          "model": "qtybreakty",
+                                          "label": "global.quantity.break.type",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybreakty')",
+                                          "type3": "MANUAL",
+                                          "optionsModel": "base.qtyBreakTyList",
+                                          "optionLabelField": "value",
+                                          "optionValueField": "key",
+                                          "blankOption": false
+                                        },
+                                        {
+                                          "id": 114,
+                                          "type": "GRID_COL",
+                                          "subType": "DROP_DOWN",
+                                          "model": "priceonty",
+                                          "label": "global.basis",
+                                          "conditionInclude": "colexp.isColumnIncluded('priceonty')",
+                                          "type3": "MANUAL",
+                                          "optionsModel": "base.priceOnTyList",
+                                          "optionLabelField": "value",
+                                          "optionValueField": "key",
+                                          "blankOption": false
+                                        },
+                                        {
+                                          "id": 83,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult1",
+                                          "label": "global.price.1",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult1')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 32,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk1",
+                                          "label": "global.quantity.break.1",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk1')"
+                                        },
+                                        {
+                                          "id": 85,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc1",
+                                          "label": "global.discount.1",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc1')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 172,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult2",
+                                          "label": "global.price.2",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult2')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 94,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk2",
+                                          "label": "global.quantity.break.2",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk2')"
+                                        },
+                                        {
+                                          "id": 101,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc2",
+                                          "label": "global.discount.2",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc2')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 169,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult3",
+                                          "label": "global.price.3",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult3')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 168,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk3",
+                                          "label": "global.quantity.break.3",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk3')"
+                                        },
+                                        {
+                                          "id": 167,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc3",
+                                          "label": "global.discount.3",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc3')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 91,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult4",
+                                          "label": "global.price.4",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult4')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 96,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk4",
+                                          "label": "global.quantity.break.4",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk4')"
+                                        },
+                                        {
+                                          "id": 105,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc4",
+                                          "label": "global.discount.4",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc4')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 90,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult5",
+                                          "label": "global.price.5",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult5')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 98,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk5",
+                                          "label": "global.quantity.break.5",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk5')"
+                                        },
+                                        {
+                                          "id": 106,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc5",
+                                          "label": "global.discount.5",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc5')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 89,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult6",
+                                          "label": "global.price.6",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult6')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 159,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk6",
+                                          "label": "global.quantity.break.6",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk6')"
+                                        },
+                                        {
+                                          "id": 103,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc6",
+                                          "label": "global.discount.6",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc6')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 88,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult7",
+                                          "label": "global.price.7",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult7')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 100,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk7",
+                                          "label": "global.quantity.break.7",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk7')"
+                                        },
+                                        {
+                                          "id": 155,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc7",
+                                          "label": "global.discount.7",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc7')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 87,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult8",
+                                          "label": "global.price.8",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult8')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 153,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk8",
+                                          "label": "global.quantity.break.8",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk8')"
+                                        },
+                                        {
+                                          "id": 107,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc8",
+                                          "label": "global.discount.8",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc8')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 86,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult9",
+                                          "label": "global.price.9",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult9')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 108,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc9",
+                                          "label": "global.discount.9",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc9')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 82,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "pdrecno",
+                                          "label": "global.price.discounting.record.number",
+                                          "dataFormat": "INTEGER",
+                                          "conditionInclude": "colexp.isColumnIncluded('pdrecno')"
+                                        },
+                                        {
+                                          "id": 81,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "modifiernm",
+                                          "label": "global.modifier.name",
+                                          "conditionInclude": "colexp.isColumnIncluded('modifiernm')"
+                                        },
+                                        {
+                                          "id": 80,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "modifierrebfl",
+                                          "label": "global.allow.with.rebate",
+                                          "dataFormat": "BooleanToYesNo",
+                                          "conditionInclude": "colexp.isColumnIncluded('modifierrebfl')"
+                                        },
+                                        {
+                                          "id": 79,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "cUpdErrMsg",
+                                          "label": "global.error",
+                                          "conditionInclude": "colexp.isColumnIncluded('cUpdErrMsg')"
+                                        },
+                                        {
+                                          "id": 236,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "hardpricefl",
+                                          "label": "global.hard.system.price",
+                                          "conditionInclude": "colexp.isColumnIncluded('hardpricefl')",
+                                          "dataFormat": "BooleanToYesNo"
+                                        },
+                                        {
+                                          "id": 237,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "hardmaxqtyfl",
+                                          "label": "global.hard.maximum",
+                                          "conditionInclude": "colexp.isColumnIncluded('hardmaxqtyfl')",
+                                          "dataFormat": "BooleanToYesNo"
+                                        },
+                                        {
+                                          "id": 238,
+                                          "type": "GRID_COL",
+                                          "subType": "DROP_DOWN",
+                                          "model": "maxqtytype",
+                                          "label": "global.based.on",
+                                          "conditionInclude": "colexp.isColumnIncluded('maxqtytype')",
+                                          "type3": "MANUAL",
+                                          "optionsModel": "base.maxQtyTypeList",
+                                          "optionLabelField": "value",
+                                          "optionValueField": "key",
+                                          "blankOption": false
+                                        },
+                                        {
+                                          "id": 239,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "ovrridepctup",
+                                          "label": "global.override.tolerance.up",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('ovrridepctup')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 2
+                                          }
+                                        },
+                                        {
+                                          "id": 240,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "ovrridepctdown",
+                                          "label": "global.override.tolerance.down",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('ovrridepctdown')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 2
+                                          }
+                                        },
+                                        {
+                                          "id": 241,
+                                          "type": "GRID_COL",
+                                          "subType": "DATE",
+                                          "model": "lastuseddt",
+                                          "label": "global.last.used.date",
+                                          "dataFormat": "DATE",
+                                          "conditionInclude": "colexp.isColumnIncluded('lastuseddt')"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": 135,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 136,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 137,
+                                      "type": "GRID",
+                                      "model": "colexp.dataset",
+                                      "controlRef": "colexp.exportGridpdsc2",
+                                      "conditionShow": "base.exportGridName === 'pdsc2'",
+                                      "controls": {
+                                        "toolbar": {
+                                          "id": 138,
+                                          "type": "TOOLBAR",
+                                          "label": "global.rows.to.export"
+                                        }
+                                      },
+                                      "children": [
+                                        {
+                                          "id": 140,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "excelrowid",
+                                          "label": "global.row.id"
+                                        },
+                                        {
+                                          "id": 141,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "updttype",
+                                          "label": "global.update",
+                                          "dataFormat": "BooleanToYesNo",
+                                          "conditionInclude": "colexp.isColumnIncluded('updttype')"
+                                        },
+                                        {
+                                          "id": 142,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "custno",
+                                          "label": "global.customer.number",
+                                          "dataFormat": "DECIMAL_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('custno')"
+                                        },
+                                        {
+                                          "id": 143,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "custnotesfl",
+                                          "label": "global.customer.notes",
+                                          "conditionInclude": "colexp.isColumnIncluded('custnotesfl')"
+                                        },
+                                        {
+                                          "id": 144,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "custtype",
+                                          "label": "global.ship.to",
+                                          "conditionInclude": "colexp.isColumnIncluded('custtype')"
+                                        },
+                                        {
+                                          "id": 145,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "shiptonotesfl",
+                                          "label": "global.ship.to.notes",
+                                          "conditionInclude": "colexp.isColumnIncluded('shiptonotesfl')"
+                                        },
+                                        {
+                                          "id": 187,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prodprcty",
+                                          "label": "global.product.price.type",
+                                          "conditionInclude": "colexp.isColumnIncluded('prodprcty')"
+                                        },
+                                        {
+                                          "id": 188,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prodcat",
+                                          "label": "global.product.category",
+                                          "conditionInclude": "colexp.isColumnIncluded('prodcat')"
+                                        },
+                                        {
+                                          "id": 189,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "rebatety",
+                                          "label": "global.rebate.type",
+                                          "conditionInclude": "colexp.isColumnIncluded('rebatety')"
+                                        },
+                                        {
+                                          "id": 268,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "rebsubty",
+                                          "label": "global.rebate.sub.type",
+                                          "conditionInclude": "colexp.isColumnIncluded('rebatety') && base.pdscRebSubTyAOData"
+                                        },
+                                        {
+                                          "id": 190,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prodline",
+                                          "label": "global.product.line",
+                                          "conditionInclude": "colexp.isColumnIncluded('prodline')"
+                                        },
+                                        {
+                                          "id": 191,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "vendno",
+                                          "label": "global.vendor",
+                                          "conditionInclude": "colexp.isColumnIncluded('vendno')"
+                                        },
+                                        {
+                                          "id": 192,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "vendnotesfl",
+                                          "label": "global.vendor.notes",
+                                          "conditionInclude": "colexp.isColumnIncluded('vendnotesfl')"
+                                        },
+                                        {
+                                          "id": 186,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "whse",
+                                          "label": "global.warehouse",
+                                          "conditionInclude": "colexp.isColumnIncluded('whse')"
+                                        },
+                                        {
+                                          "id": 265,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "region",
+                                          "label": "global.region",
+                                          "conditionInclude": "colexp.isColumnIncluded('region')"
+                                        },
+                                        {
+                                          "id": 185,
+                                          "type": "GRID_COL",
+                                          "subType": "DATE",
+                                          "model": "startdt",
+                                          "label": "global.start.date",
+                                          "dataFormat": "DATE",
+                                          "conditionInclude": "colexp.isColumnIncluded('startdt')"
+                                        },
+                                        {
+                                          "id": 184,
+                                          "type": "GRID_COL",
+                                          "subType": "DATE",
+                                          "model": "enddt",
+                                          "label": "global.end.date",
+                                          "dataFormat": "DATE",
+                                          "conditionInclude": "colexp.isColumnIncluded('enddt')"
+                                        },
+                                        {
+                                          "id": 183,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "contractNo",
+                                          "label": "global.contract.number",
+                                          "conditionInclude": "colexp.isColumnIncluded('contractNo')"
+                                        },
+                                        {
+                                          "id": 182,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prctype",
+                                          "label": "global.price.type",
+                                          "dataFormat": "BooleanToAmtPct",
+                                          "conditionInclude": "colexp.isColumnIncluded('prctype')"
+                                        },
+                                        {
+                                          "id": 181,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "priceSheet",
+                                          "label": "global.price.sheet.name",
+                                          "conditionInclude": "colexp.isColumnIncluded('priceSheet')"
+                                        },
+                                        {
+                                          "id": 180,
+                                          "type": "GRID_COL",
+                                          "subType": "DATE",
+                                          "model": "priceEffectiveDate",
+                                          "label": "global.price.sheet.dt",
+                                          "dataFormat": "DATE",
+                                          "conditionInclude": "colexp.isColumnIncluded('priceEffectiveDate')"
+                                        },
+                                        {
+                                          "id": 179,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "refer",
+                                          "label": "global.reference",
+                                          "conditionInclude": "colexp.isColumnIncluded('refer')"
+                                        },
+                                        {
+                                          "id": 178,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "statustype",
+                                          "label": "global.status",
+                                          "conditionInclude": "colexp.isColumnIncluded('statustype')"
+                                        },
+                                        {
+                                          "id": 177,
+                                          "type": "GRID_COL",
+                                          "subType": "DROP_DOWN",
+                                          "model": "qtybreakty",
+                                          "label": "global.quantity.break.type",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybreakty')",
+                                          "type3": "MANUAL",
+                                          "optionsModel": "base.qtyBreakTyList",
+                                          "optionLabelField": "value",
+                                          "optionValueField": "key",
+                                          "blankOption": false
+                                        },
+                                        {
+                                          "id": 176,
+                                          "type": "GRID_COL",
+                                          "subType": "DROP_DOWN",
+                                          "model": "priceonty",
+                                          "label": "global.basis",
+                                          "conditionInclude": "colexp.isColumnIncluded('priceonty')",
+                                          "type3": "MANUAL",
+                                          "optionsModel": "base.priceOnTyList",
+                                          "optionLabelField": "value",
+                                          "optionValueField": "key",
+                                          "blankOption": false
+                                        },
+                                        {
+                                          "id": 173,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult1",
+                                          "label": "global.price.1",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult1')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 175,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk1",
+                                          "label": "global.quantity.break.1",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk1')"
+                                        },
+                                        {
+                                          "id": 174,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc1",
+                                          "label": "global.discount.1",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc1')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 93,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult2",
+                                          "label": "global.price.2",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult2')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 171,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk2",
+                                          "label": "global.quantity.break.2",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk2')"
+                                        },
+                                        {
+                                          "id": 170,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc2",
+                                          "label": "global.discount.2",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc2')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 92,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult3",
+                                          "label": "global.price.3",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult3')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 95,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk3",
+                                          "label": "global.quantity.break.3",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk3')"
+                                        },
+                                        {
+                                          "id": 102,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc3",
+                                          "label": "global.discount.3",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc3')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 166,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult4",
+                                          "label": "global.price.4",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult4')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 165,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk4",
+                                          "label": "global.quantity.break.4",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk4')"
+                                        },
+                                        {
+                                          "id": 164,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc4",
+                                          "label": "global.discount.4",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc4')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 163,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult5",
+                                          "label": "global.price.5",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult5')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 162,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk5",
+                                          "label": "global.quantity.break.5",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk5')"
+                                        },
+                                        {
+                                          "id": 161,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc5",
+                                          "label": "global.discount.5",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc5')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 160,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult6",
+                                          "label": "global.price.6",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult6')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 97,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk6",
+                                          "label": "global.quantity.break.6",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk6')"
+                                        },
+                                        {
+                                          "id": 158,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc6",
+                                          "label": "global.discount.6",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc6')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 157,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult7",
+                                          "label": "global.price.7",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult7')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 156,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk7",
+                                          "label": "global.quantity.break.7",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk7')"
+                                        },
+                                        {
+                                          "id": 104,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc7",
+                                          "label": "global.discount.7",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc7')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 154,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult8",
+                                          "label": "global.price.8",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult8')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 99,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk8",
+                                          "label": "global.quantity.break.8",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk8')"
+                                        },
+                                        {
+                                          "id": 152,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc8",
+                                          "label": "global.discount.8",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc8')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 151,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult9",
+                                          "label": "global.price.9",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult9')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 150,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc9",
+                                          "label": "global.discount.9",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc9')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 149,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "pdrecno",
+                                          "label": "global.price.discounting.record.number",
+                                          "dataFormat": "INTEGER",
+                                          "conditionInclude": "colexp.isColumnIncluded('pdrecno')"
+                                        },
+                                        {
+                                          "id": 148,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "modifiernm",
+                                          "label": "global.modifier.name",
+                                          "conditionInclude": "colexp.isColumnIncluded('modifiernm')"
+                                        },
+                                        {
+                                          "id": 147,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "modifierrebfl",
+                                          "label": "global.allow.with.rebate",
+                                          "dataFormat": "BooleanToYesNo",
+                                          "conditionInclude": "colexp.isColumnIncluded('modifierrebfl')"
+                                        },
+                                        {
+                                          "id": 146,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "cUpdErrMsg",
+                                          "label": "global.error",
+                                          "conditionInclude": "colexp.isColumnIncluded('cUpdErrMsg')"
+                                        },
+                                        {
+                                          "id": 242,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "hardpricefl",
+                                          "label": "global.hard.system.price",
+                                          "conditionInclude": "colexp.isColumnIncluded('hardpricefl')",
+                                          "dataFormat": "BooleanToYesNo"
+                                        },
+                                        {
+                                          "id": 243,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "hardmaxqtyfl",
+                                          "label": "global.hard.maximum",
+                                          "conditionInclude": "colexp.isColumnIncluded('hardmaxqtyfl')",
+                                          "dataFormat": "BooleanToYesNo"
+                                        },
+                                        {
+                                          "id": 244,
+                                          "type": "GRID_COL",
+                                          "subType": "DROP_DOWN",
+                                          "model": "maxqtytype",
+                                          "label": "global.based.on",
+                                          "conditionInclude": "colexp.isColumnIncluded('maxqtytype')",
+                                          "type3": "MANUAL",
+                                          "optionsModel": "base.maxQtyTypeList",
+                                          "optionLabelField": "value",
+                                          "optionValueField": "key",
+                                          "blankOption": false
+                                        },
+                                        {
+                                          "id": 245,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "ovrridepctup",
+                                          "label": "global.override.tolerance.up",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('ovrridepctup')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 2
+                                          }
+                                        },
+                                        {
+                                          "id": 246,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "ovrridepctdown",
+                                          "label": "global.override.tolerance.down",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('ovrridepctdown')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 2
+                                          }
+                                        },
+                                        {
+                                          "id": 247,
+                                          "type": "GRID_COL",
+                                          "subType": "DATE",
+                                          "model": "lastuseddt",
+                                          "label": "global.last.used.date",
+                                          "dataFormat": "DATE",
+                                          "conditionInclude": "colexp.isColumnIncluded('lastuseddt')"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": 111,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 112,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 20,
+                                      "type": "GRID",
+                                      "model": "colexp.dataset",
+                                      "controlRef": "colexp.exportGridpdsc3",
+                                      "conditionShow": "base.exportGridName === 'pdsc3'",
+                                      "controls": {
+                                        "toolbar": {
+                                          "id": 21,
+                                          "type": "TOOLBAR",
+                                          "label": "global.rows.to.export"
+                                        }
+                                      },
+                                      "children": [
+                                        {
+                                          "id": 22,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "excelrowid",
+                                          "label": "global.row.id"
+                                        },
+                                        {
+                                          "id": 23,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "updttype",
+                                          "label": "global.update",
+                                          "dataFormat": "BooleanToYesNo",
+                                          "conditionInclude": "colexp.isColumnIncluded('updttype')"
+                                        },
+                                        {
+                                          "id": 57,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "custtype",
+                                          "label": "global.customer.price.type",
+                                          "conditionInclude": "colexp.isColumnIncluded('custtype')"
+                                        },
+                                        {
+                                          "id": 67,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prodprcty",
+                                          "label": "global.product.price.type",
+                                          "conditionInclude": "colexp.isColumnIncluded('prodprcty')"
+                                        },
+                                        {
+                                          "id": 58,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "rebatety",
+                                          "label": "global.rebate.type",
+                                          "conditionInclude": "colexp.isColumnIncluded('rebatety')"
+                                        },
+                                        {
+                                          "id": 267,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "rebsubty",
+                                          "label": "global.rebate.sub.type",
+                                          "conditionInclude": "colexp.isColumnIncluded('rebatety') && base.pdscRebSubTyAOData"
+                                        },
+                                        {
+                                          "id": 130,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prod",
+                                          "label": "global.product",
+                                          "conditionInclude": "colexp.isColumnIncluded('prod')"
+                                        },
+                                        {
+                                          "id": 60,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prodnotesfl",
+                                          "label": "global.product.notes",
+                                          "conditionInclude": "colexp.isColumnIncluded('prodnotesfl')"
+                                        },
+                                        {
+                                          "id": 61,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "whse",
+                                          "label": "global.warehouse",
+                                          "conditionInclude": "colexp.isColumnIncluded('whse')"
+                                        },
+                                        {
+                                          "id": 266,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "region",
+                                          "label": "global.region",
+                                          "conditionInclude": "colexp.isColumnIncluded('region')"
+                                        },
+                                        {
+                                          "id": 62,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "units",
+                                          "label": "global.units",
+                                          "conditionInclude": "colexp.isColumnIncluded('units')"
+                                        },
+                                        {
+                                          "id": 63,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "contractNo",
+                                          "label": "global.contract.number",
+                                          "conditionInclude": "colexp.isColumnIncluded('contractNo')"
+                                        },
+                                        {
+                                          "id": 120,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prctype",
+                                          "label": "global.price.type",
+                                          "dataFormat": "BooleanToAmtPct",
+                                          "conditionInclude": "colexp.isColumnIncluded('prctype')"
+                                        },
+                                        {
+                                          "id": 64,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "priceSheet",
+                                          "label": "global.price.sheet.name",
+                                          "conditionInclude": "colexp.isColumnIncluded('priceSheet')"
+                                        },
+                                        {
+                                          "id": 66,
+                                          "type": "GRID_COL",
+                                          "subType": "DATE",
+                                          "model": "priceEffectiveDate",
+                                          "label": "global.price.sheet.dt",
+                                          "dataFormat": "DATE",
+                                          "conditionInclude": "colexp.isColumnIncluded('priceEffectiveDate')"
+                                        },
+                                        {
+                                          "id": 68,
+                                          "type": "GRID_COL",
+                                          "subType": "DATE",
+                                          "model": "startdt",
+                                          "label": "global.start.date",
+                                          "dataFormat": "DATE",
+                                          "conditionInclude": "colexp.isColumnIncluded('startdt')"
+                                        },
+                                        {
+                                          "id": 69,
+                                          "type": "GRID_COL",
+                                          "subType": "DATE",
+                                          "model": "enddt",
+                                          "label": "global.end.date",
+                                          "dataFormat": "DATE",
+                                          "conditionInclude": "colexp.isColumnIncluded('enddt')"
+                                        },
+                                        {
+                                          "id": 117,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "refer",
+                                          "label": "global.reference",
+                                          "conditionInclude": "colexp.isColumnIncluded('refer')"
+                                        },
+                                        {
+                                          "id": 116,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "statustype",
+                                          "label": "global.status",
+                                          "conditionInclude": "colexp.isColumnIncluded('statustype')"
+                                        },
+                                        {
+                                          "id": 71,
+                                          "type": "GRID_COL",
+                                          "subType": "DROP_DOWN",
+                                          "model": "qtybreakty",
+                                          "label": "global.quantity.break.type",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybreakty')",
+                                          "type3": "MANUAL",
+                                          "optionsModel": "base.qtyBreakTyList",
+                                          "optionLabelField": "value",
+                                          "optionValueField": "key",
+                                          "blankOption": false
+                                        },
+                                        {
+                                          "id": 73,
+                                          "type": "GRID_COL",
+                                          "subType": "DROP_DOWN",
+                                          "model": "priceonty",
+                                          "label": "global.basis",
+                                          "conditionInclude": "colexp.isColumnIncluded('priceonty')",
+                                          "type3": "MANUAL",
+                                          "optionsModel": "base.priceOnTyList",
+                                          "optionLabelField": "value",
+                                          "optionValueField": "key",
+                                          "blankOption": false
+                                        },
+                                        {
+                                          "id": 56,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult1",
+                                          "label": "global.price.1",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult1')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 84,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk1",
+                                          "label": "global.quantity.break.1",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk1')"
+                                        },
+                                        {
+                                          "id": 40,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc1",
+                                          "label": "global.discount.1",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc1')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 24,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult2",
+                                          "label": "global.price.2",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult2')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 33,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk2",
+                                          "label": "global.quantity.break.2",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk2')"
+                                        },
+                                        {
+                                          "id": 41,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc2",
+                                          "label": "global.discount.2",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc2')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 25,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult3",
+                                          "label": "global.price.3",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult3')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 38,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk3",
+                                          "label": "global.quantity.break.3",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk3')"
+                                        },
+                                        {
+                                          "id": 42,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc3",
+                                          "label": "global.discount.3",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc3')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 26,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult4",
+                                          "label": "global.price.4",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult4')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 35,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk4",
+                                          "label": "global.quantity.break.4",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk4')"
+                                        },
+                                        {
+                                          "id": 43,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc4",
+                                          "label": "global.discount.4",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc4')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 27,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult5",
+                                          "label": "global.price.5",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult5')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 34,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk5",
+                                          "label": "global.quantity.break.5",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk5')"
+                                        },
+                                        {
+                                          "id": 44,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc5",
+                                          "label": "global.discount.5",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc5')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 28,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult6",
+                                          "label": "global.price.6",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult6')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 36,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk6",
+                                          "label": "global.quantity.break.6",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk6')"
+                                        },
+                                        {
+                                          "id": 45,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc6",
+                                          "label": "global.discount.6",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc6')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 29,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult7",
+                                          "label": "global.price.7",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult7')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 39,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk7",
+                                          "label": "global.quantity.break.7",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk7')"
+                                        },
+                                        {
+                                          "id": 46,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc7",
+                                          "label": "global.discount.7",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc7')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 30,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult8",
+                                          "label": "global.price.8",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult8')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 47,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc8",
+                                          "label": "global.discount.8",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc8')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 37,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "qtybrk8",
+                                          "label": "global.quantity.break.8",
+                                          "dataFormat": "INTEGER_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('qtybrk8')"
+                                        },
+                                        {
+                                          "id": 31,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcmult9",
+                                          "label": "global.price.9",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcmult9')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 48,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prcdisc9",
+                                          "label": "global.discount.9",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('prcdisc9')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 3
+                                          }
+                                        },
+                                        {
+                                          "id": 49,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "pdrecno",
+                                          "label": "global.price.discounting.record.number",
+                                          "dataFormat": "INTEGER",
+                                          "conditionInclude": "colexp.isColumnIncluded('pdrecno')"
+                                        },
+                                        {
+                                          "id": 50,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "proddesc",
+                                          "label": "global.product.description",
+                                          "conditionInclude": "colexp.isColumnIncluded('proddesc')"
+                                        },
+                                        {
+                                          "id": 51,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "proddesc2",
+                                          "label": "global.product.description.2",
+                                          "conditionInclude": "colexp.isColumnIncluded('proddesc2')"
+                                        },
+                                        {
+                                          "id": 52,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "modifiernm",
+                                          "label": "global.modifier.name",
+                                          "conditionInclude": "colexp.isColumnIncluded('modifiernm')"
+                                        },
+                                        {
+                                          "id": 53,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "modifierrebfl",
+                                          "label": "global.allow.with.rebate",
+                                          "dataFormat": "BooleanToYesNo",
+                                          "conditionInclude": "colexp.isColumnIncluded('modifierrebfl')"
+                                        },
+                                        {
+                                          "id": 54,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "cUpdErrMsg",
+                                          "label": "global.error",
+                                          "conditionInclude": "colexp.isColumnIncluded('cUpdErrMsg')"
+                                        },
+                                        {
+                                          "id": 248,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "hardpricefl",
+                                          "label": "global.hard.system.price",
+                                          "conditionInclude": "colexp.isColumnIncluded('hardpricefl')",
+                                          "dataFormat": "BooleanToYesNo"
+                                        },
+                                        {
+                                          "id": 249,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "hardmaxqtyfl",
+                                          "label": "global.hard.maximum",
+                                          "conditionInclude": "colexp.isColumnIncluded('hardmaxqtyfl')",
+                                          "dataFormat": "BooleanToYesNo"
+                                        },
+                                        {
+                                          "id": 250,
+                                          "type": "GRID_COL",
+                                          "subType": "DROP_DOWN",
+                                          "model": "maxqtytype",
+                                          "label": "global.based.on",
+                                          "conditionInclude": "colexp.isColumnIncluded('maxqtytype')",
+                                          "type3": "MANUAL",
+                                          "optionsModel": "base.maxQtyTypeList",
+                                          "optionLabelField": "value",
+                                          "optionValueField": "key",
+                                          "blankOption": false
+                                        },
+                                        {
+                                          "id": 251,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "ovrridepctup",
+                                          "label": "global.override.tolerance.up",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('ovrridepctup')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 2
+                                          }
+                                        },
+                                        {
+                                          "id": 252,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "ovrridepctdown",
+                                          "label": "global.override.tolerance.down",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('ovrridepctdown')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 3,
+                                            "maximumFractionDigits": 2
+                                          }
+                                        },
+                                        {
+                                          "id": 253,
+                                          "type": "GRID_COL",
+                                          "subType": "DATE",
+                                          "model": "lastuseddt",
+                                          "label": "global.last.used.date",
+                                          "dataFormat": "DATE",
+                                          "conditionInclude": "colexp.isColumnIncluded('lastuseddt')"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": 193,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 194,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 195,
+                                      "type": "GRID",
+                                      "model": "colexp.dataset",
+                                      "controlRef": "colexp.exportGridpdsr",
+                                      "conditionShow": "base.exportGridName === 'pdsr'",
+                                      "controls": {
+                                        "toolbar": {
+                                          "id": 196,
+                                          "type": "TOOLBAR",
+                                          "label": "global.rows.to.export"
+                                        }
+                                      },
+                                      "children": [
+                                        {
+                                          "id": 198,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "excelrowid",
+                                          "label": "global.row.id"
+                                        },
+                                        {
+                                          "id": 199,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "updttype",
+                                          "label": "global.update",
+                                          "dataFormat": "BooleanToYesNo",
+                                          "conditionInclude": "colexp.isColumnIncluded('updttype')"
+                                        },
+                                        {
+                                          "id": 200,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prod",
+                                          "label": "global.product",
+                                          "conditionInclude": "colexp.isColumnIncluded('prod')"
+                                        },
+                                        {
+                                          "id": 235,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prodnotesfl",
+                                          "label": "global.product.notes",
+                                          "conditionInclude": "colexp.isColumnIncluded('prodnotesfl')"
+                                        },
+                                        {
+                                          "id": 234,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "proddesc",
+                                          "label": "global.product.description",
+                                          "conditionInclude": "colexp.isColumnIncluded('proddesc')"
+                                        },
+                                        {
+                                          "id": 233,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "proddesc2",
+                                          "label": "global.product.description.2",
+                                          "conditionInclude": "colexp.isColumnIncluded('proddesc2')"
+                                        },
+                                        {
+                                          "id": 227,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "whse",
+                                          "label": "global.warehouse",
+                                          "conditionInclude": "colexp.isColumnIncluded('whse')"
+                                        },
+                                        {
+                                          "id": 262,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "region",
+                                          "label": "global.region",
+                                          "conditionInclude": "colexp.isColumnIncluded('region')"
+                                        },
+                                        {
+                                          "id": 232,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "rebatety",
+                                          "label": "global.rebate.type",
+                                          "conditionInclude": "colexp.isColumnIncluded('rebatety')"
+                                        },
+                                        {
+                                          "id": 231,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "rebsubty",
+                                          "label": "global.rebate.sub.type",
+                                          "conditionInclude": "colexp.isColumnIncluded('rebsubty')"
+                                        },
+                                        {
+                                          "id": 230,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prodprcty",
+                                          "label": "global.product.price.type",
+                                          "conditionInclude": "colexp.isColumnIncluded('prodprcty')"
+                                        },
+                                        {
+                                          "id": 229,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prodline",
+                                          "label": "global.product.line",
+                                          "conditionInclude": "colexp.isColumnIncluded('prodline')"
+                                        },
+                                        {
+                                          "id": 228,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prodcat",
+                                          "label": "global.product.category",
+                                          "conditionInclude": "colexp.isColumnIncluded('prodcat')"
+                                        },
+                                        {
+                                          "id": 226,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "vendno",
+                                          "label": "global.vendor.number",
+                                          "conditionInclude": "colexp.isColumnIncluded('vendno')"
+                                        },
+                                        {
+                                          "id": 225,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "vendnotesfl",
+                                          "label": "global.vendor.notes",
+                                          "conditionInclude": "colexp.isColumnIncluded('vendnotesfl')"
+                                        },
+                                        {
+                                          "id": 224,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "custno",
+                                          "label": "global.customer.number",
+                                          "dataFormat": "DECIMAL_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('custno')"
+                                        },
+                                        {
+                                          "id": 223,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "custnotesfl",
+                                          "label": "global.customer.notes",
+                                          "conditionInclude": "colexp.isColumnIncluded('custnotesfl')"
+                                        },
+                                        {
+                                          "id": 222,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "custtype",
+                                          "label": "global.ship.to",
+                                          "conditionInclude": "colexp.isColumnIncluded('custtype')"
+                                        },
+                                        {
+                                          "id": 221,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "shiptonotesfl",
+                                          "label": "global.ship.to.notes",
+                                          "conditionInclude": "colexp.isColumnIncluded('shiptonotesfl')"
+                                        },
+                                        {
+                                          "id": 220,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "custrebty",
+                                          "label": "global.customer.rebate.type",
+                                          "conditionInclude": "colexp.isColumnIncluded('custrebty')"
+                                        },
+                                        {
+                                          "id": 219,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "contractNo",
+                                          "label": "global.contract.number",
+                                          "conditionInclude": "colexp.isColumnIncluded('contractNo')"
+                                        },
+                                        {
+                                          "id": 218,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "xrefprod",
+                                          "label": "global.cross.reference",
+                                          "conditionInclude": "colexp.isColumnIncluded('xrefprod')"
+                                        },
+                                        {
+                                          "id": 207,
+                                          "type": "GRID_COL",
+                                          "subType": "DATE",
+                                          "model": "startdt",
+                                          "label": "global.start.date",
+                                          "conditionInclude": "colexp.isColumnIncluded('startdt')",
+                                          "dataFormat": "DATE"
+                                        },
+                                        {
+                                          "id": 217,
+                                          "type": "GRID_COL",
+                                          "subType": "DATE",
+                                          "model": "enddt",
+                                          "label": "global.end.date",
+                                          "conditionInclude": "colexp.isColumnIncluded('enddt')",
+                                          "dataFormat": "DATE"
+                                        },
+                                        {
+                                          "id": 216,
+                                          "type": "GRID_COL",
+                                          "subType": "DROP_DOWN",
+                                          "model": "dropshipty",
+                                          "label": "global.drop.ship.type",
+                                          "conditionInclude": "colexp.isColumnIncluded('dropshipty')",
+                                          "type3": "SET",
+                                          "metaGroup": "PD",
+                                          "meta": "RebatesDropShipTypes",
+                                          "blankOption": false
+                                        },
+                                        {
+                                          "id": 215,
+                                          "type": "GRID_COL",
+                                          "subType": "DROP_DOWN",
+                                          "model": "rebatecd",
+                                          "label": "global.rebate.code",
+                                          "conditionInclude": "colexp.isColumnIncluded('rebatecd')",
+                                          "type3": "SET",
+                                          "metaGroup": "PD",
+                                          "meta": "RebateCodeTypes",
+                                          "blankOption": false
+                                        },
+                                        {
+                                          "id": 214,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "rebcalcty",
+                                          "label": "global.rebate.calculation.type",
+                                          "conditionInclude": "colexp.isColumnIncluded('rebcalcty')",
+                                          "dataFormat": "PdRebateCalcTypeToName"
+                                        },
+                                        {
+                                          "id": 213,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "margincostty",
+                                          "label": "global.margin.basis",
+                                          "conditionInclude": "colexp.isColumnIncluded('margincostty')",
+                                          "dataFormat": "PdMarginCostTypeToName"
+                                        },
+                                        {
+                                          "id": 212,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "rebatecostty",
+                                          "label": "global.rebate.from.basis",
+                                          "conditionInclude": "colexp.isColumnIncluded('rebatecostty')",
+                                          "dataFormat": "PdRebateCostTypeToName"
+                                        },
+                                        {
+                                          "id": 211,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "rebdowntoty",
+                                          "label": "global.rebate.down.to.basis",
+                                          "conditionInclude": "colexp.isColumnIncluded('rebdowntoty')",
+                                          "dataFormat": "PdRebateDownToName"
+                                        },
+                                        {
+                                          "id": 210,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "rebateamt",
+                                          "label": "global.rebate.amount",
+                                          "conditionInclude": "colexp.isColumnIncluded('rebateamt')",
+                                          "dataFormat": "DECIMAL",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 209,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "rebatepct",
+                                          "label": "global.rebate.percent",
+                                          "conditionInclude": "colexp.isColumnIncluded('rebatepct')",
+                                          "dataFormat": "DECIMAL",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 208,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "priceSheet",
+                                          "label": "global.price.sheet.name",
+                                          "conditionInclude": "colexp.isColumnIncluded('priceSheet')"
+                                        },
+                                        {
+                                          "id": 206,
+                                          "type": "GRID_COL",
+                                          "subType": "DATE",
+                                          "model": "priceEffectiveDate",
+                                          "label": "global.price.sheet.dt",
+                                          "dataFormat": "DATE",
+                                          "conditionInclude": "colexp.isColumnIncluded('priceEffectiveDate')"
+                                        },
+                                        {
+                                          "id": 204,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "priceSheetTo",
+                                          "label": "global.price.sheet.name.to",
+                                          "conditionInclude": "colexp.isColumnIncluded('priceSheetTo')"
+                                        },
+                                        {
+                                          "id": 205,
+                                          "type": "GRID_COL",
+                                          "subType": "DATE",
+                                          "model": "priceEffectiveDateTo",
+                                          "label": "global.price.sheet.dt.to",
+                                          "dataFormat": "DATE",
+                                          "conditionInclude": "colexp.isColumnIncluded('priceEffectiveDateTo')"
+                                        },
+                                        {
+                                          "id": 203,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "refer",
+                                          "label": "global.reference",
+                                          "conditionInclude": "colexp.isColumnIncluded('refer')"
+                                        },
+                                        {
+                                          "id": 201,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "rebrecno",
+                                          "label": "global.rebate.record.number",
+                                          "conditionInclude": "colexp.isColumnIncluded('rebrecno')",
+                                          "dataFormat": "INTEGER_TEXT"
+                                        },
+                                        {
+                                          "id": 254,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "sharefl",
+                                          "label": "global.share.rebate",
+                                          "conditionInclude": "colexp.isColumnIncluded('sharefl')",
+                                          "dataFormat": "BooleanToYesNo"
+                                        },
+                                        {
+                                          "id": 255,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "sharepct",
+                                          "label": "global.share.rebate.percent",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('sharepct')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 2,
+                                            "maximumFractionDigits": 2
+                                          }
+                                        },
+                                        {
+                                          "id": 256,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "capsellamount",
+                                          "label": "global.cap.sell.amount",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('capsellamount')",
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 5,
+                                            "maximumFractionDigits": 5
+                                          }
+                                        },
+                                        {
+                                          "id": 260,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "capselltypefl",
+                                          "label": "global.cap.sell.type",
+                                          "dataFormat": "BooleanToAmtPct"
+                                        },
+                                        {
+                                          "id": 257,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "manualfl",
+                                          "label": "global.manual.rebate",
+                                          "conditionInclude": "colexp.isColumnIncluded('manualfl')",
+                                          "dataFormat": "BooleanToYesNo"
+                                        },
+                                        {
+                                          "id": 258,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "contractcostfl",
+                                          "label": "global.contract.cost",
+                                          "conditionInclude": "colexp.isColumnIncluded('contractcostfl')",
+                                          "dataFormat": "BooleanToYesNo"
+                                        },
+                                        {
+                                          "id": 259,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "contractlineno",
+                                          "label": "global.contract.line.number",
+                                          "dataFormat": "INTEGER",
+                                          "conditionInclude": "colexp.isColumnIncluded('contractlineno')"
+                                        },
+                                        {
+                                          "id": 261,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "usecontractlineno",
+                                          "label": "global.use.contract.line.number",
+                                          "conditionInclude": "colexp.isColumnIncluded('usecontractlineno')",
+                                          "dataFormat": "BooleanToYesNo"
+                                        },
+                                        {
+                                          "id": 202,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "cUpdErrMsg",
+                                          "label": "global.error",
+                                          "conditionInclude": "colexp.isColumnIncluded('cUpdErrMsg')"
+                                        },
+                                        {
+                                          "id": 269,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "price",
+                                          "label": "global.rebate.price",
+                                          "dataFormat": "DECIMAL_TEXT",
+                                          "conditionInclude": "colexp.isColumnIncluded('price')"
+                                        },
+                                        {
+                                          "id": 270,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "prccurrencyty",
+                                          "label": "global.rebate.price.currency",
+                                          "conditionInclude": "colexp.isColumnIncluded('prccurrencyty')"
+                                        },
+                                        {
+                                          "id": 271,
+                                          "type": "GRID_COL",
+                                          "subType": "CHECKBOX",
+                                          "model": "usepricerebfl",
+                                          "label": "global.use.rebate.price",
+                                          "dataFormat": "LOGICAL",
+                                          "conditionInclude": "colexp.isColumnIncluded('usepricerebfl')"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

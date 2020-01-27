@@ -1,0 +1,309 @@
+{
+  "viewId": "ic-iceaa-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.adjust.core.allocation",
+              "subLabel": "{{dtl.getSubTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 45,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 46,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 34,
+                  "type": "BTN",
+                  "label": "global.edit",
+                  "icon": "icon-edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()"
+                },
+                {
+                  "id": 39,
+                  "type": "BTN",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "eventClick": "",
+                  "conditionDisabled": "",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()"
+                },
+                {
+                  "id": 36,
+                  "type": "BTN",
+                  "label": "global.reset",
+                  "icon": "icon-reset",
+                  "eventClick": "dtl.reset()"
+                },
+                {
+                  "id": 37,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "dtl.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "dtl.iceaa.transty",
+                          "label": "global.transaction.type",
+                          "type3": "SET",
+                          "meta": "TransactionsType",
+                          "metaGroup": "IC",
+                          "optionsModel": "",
+                          "required": true,
+                          "size": "SM",
+                          "blankOption": false,
+                          "conditionReadonly": "!base.isCreate()",
+                          "eventChange": "dtl.clear()"
+                        },
+                        {
+                          "id": 47,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 43,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.orderno",
+                              "label": "global.order.number",
+                              "type3": "STANDARD",
+                              "meta": "OEOrders",
+                              "conditionShow": "dtl.iceaa.transty === 'o'",
+                              "conditionReadonly": "!base.isCreate()",
+                              "eventChange": "dtl.fieldChange('order')",
+                              "conditionRequired": "dtl.iceaa.transty === 'o'",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              },
+                              "contextValues": {
+                                "key1": "dtl.orderno.split('-')[0]",
+                                "key2": "dtl.orderno.split('-')[1]"
+                              }
+                            },
+                            {
+                              "id": 54,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.pono",
+                              "label": "global.purchase.order.number",
+                              "type3": "STANDARD",
+                              "meta": "POOrders",
+                              "conditionShow": "dtl.iceaa.transty === 'p'",
+                              "conditionReadonly": "!base.isCreate()",
+                              "eventChange": "dtl.fieldChange('order')",
+                              "conditionRequired": "dtl.iceaa.transty === 'p'",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              },
+                              "contextValues": {
+                                "key1": "dtl.pono.split('-')[0]",
+                                "key2": "dtl.pono.split('-')[1]"
+                              }
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.iceaa.lineno",
+                              "label": "global.line.number",
+                              "required": false,
+                              "maxLength": 4,
+                              "size": "XS",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "eventChange": "dtl.fieldChange('order')",
+                              "conditionReadonly": "!base.isCreate()",
+                              "digits": 4,
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 50,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 44,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.retorderno",
+                              "label": "global.return.order.number",
+                              "type3": "STANDARD",
+                              "meta": "OEOrders",
+                              "conditionShow": "dtl.iceaa.transty === 'o'",
+                              "eventChange": "dtl.fieldChange('return')",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionRequired": "dtl.iceaa.transty === 'o'",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              },
+                              "contextValues": {
+                                "key1": "dtl.retorderno.split('-')[0]",
+                                "key2": "dtl.retorderno.split('-')[1]"
+                              }
+                            },
+                            {
+                              "id": 56,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.retpono",
+                              "label": "global.return.purchase.order.number",
+                              "type3": "STANDARD",
+                              "meta": "POOrders",
+                              "conditionShow": "dtl.iceaa.transty === 'p'",
+                              "conditionReadonly": "!base.isCreate()",
+                              "eventChange": "dtl.fieldChange('return')",
+                              "conditionRequired": "dtl.iceaa.transty === 'p'",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              },
+                              "contextValues": {
+                                "key1": "dtl.retpono.split('-')[0]",
+                                "key2": "dtl.retpono.split('-')[1]"
+                              }
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.iceaa.retlineno",
+                              "label": "global.return.line.number",
+                              "maxLength": 4,
+                              "size": "XS",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "conditionReadonly": "!base.isCreate()",
+                              "eventChange": "dtl.fieldChange('return')",
+                              "digits": 4,
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 51,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.iceaa.whse",
+                          "label": "global.warehouse",
+                          "type3": "STANDARD",
+                          "meta": "Warehouse",
+                          "required": true,
+                          "conditionReadonly": "!base.isCreate()"
+                        },
+                        {
+                          "id": 26,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.iceaa.prod",
+                          "label": "global.product",
+                          "type3": "STANDARD",
+                          "meta": "ProdAll",
+                          "required": true,
+                          "conditionReadonly": "!base.isCreate()",
+                          "eventChange": "dtl.fieldChange('prod')",
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          }
+                        },
+                        {
+                          "id": 52,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.iceaa.coreprod",
+                              "label": "global.core.product",
+                              "type3": "STANDARD",
+                              "meta": "ProdAll",
+                              "readonly": false,
+                              "conditionDisabled": "true"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.iceaa.subfl",
+                              "label": "global.substitute",
+                              "conditionDisabled": "true"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 32,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.iceaa.qty",
+                          "label": "global.allocated.quantity",
+                          "required": true,
+                          "size": "SM",
+                          "dataFormat": "INTEGER",
+                          "digits": 7
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

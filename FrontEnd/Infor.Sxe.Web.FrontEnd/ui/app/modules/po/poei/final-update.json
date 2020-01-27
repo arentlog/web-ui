@@ -1,0 +1,190 @@
+{
+  "viewId": "po-poei-finalupdate",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.final.update",
+              "subLabel": "{{fu.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "fu.back()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "eventClick": "fu.validateAndSubmit()"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "fu.back()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "fu.poeiFinalUpdate.receipttype",
+                          "label": "global.printer.for.allocation.and.receipt.report",
+                          "type3": "SET",
+                          "metaGroup": "PO",
+                          "meta": "ReceiptsType",
+                          "blankOption": false,
+                          "conditionDisabled": "!fu.poeiFinalInit.receiptsensitive",
+                          "conditionReadonly": "",
+                          "conditionRequired": "fu.poeiFinalInit.receiptsensitive",
+                          "size": "SM",
+                          "eventChange": "fu.changeReceiptsType()"
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "fu.poeiFinalUpdate.receiptprinter",
+                          "label": "global.file.for.receipt.printer",
+                          "labelHidden": true,
+                          "attachUp": true,
+                          "conditionDisabled": "!fu.poeiFinalInit.receiptsensitive",
+                          "conditionRequired": "",
+                          "conditionShow": "fu.poeiFinalUpdate.receipttype === 'F'"
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "fu.poeiFinalUpdate.receiptprinter",
+                          "label": "global.receipt.printer",
+                          "meta": "Printer",
+                          "labelHidden": true,
+                          "attachUp": true,
+                          "conditionShow": "fu.poeiFinalUpdate.receipttype === 'P' || fu.poeiFinalUpdate.receipttype === 'D'",
+                          "conditionDisabled": "!fu.poeiFinalInit.receiptsensitive",
+                          "conditionRequired": ""
+                        }
+                      ]
+                    },
+                    {
+                      "id": 19,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "fu.poeiFinalUpdate.picktype",
+                          "label": "global.printer.for.pick.tickets",
+                          "type3": "SET",
+                          "metaGroup": "PO",
+                          "meta": "ReceiptsType",
+                          "blankOption": false,
+                          "conditionReadonly": "",
+                          "conditionDisabled": "!fu.poeiFinalInit.picksensitive",
+                          "conditionRequired": "",
+                          "size": "SM",
+                          "eventChange": "fu.changePickType()"
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "fu.poeiFinalUpdate.pickprinter",
+                          "label": "global.receipt.printer",
+                          "labelHidden": true,
+                          "attachUp": true,
+                          "conditionDisabled": "!fu.poeiFinalInit.picksensitive",
+                          "conditionRequired": "",
+                          "conditionShow": "fu.poeiFinalUpdate.picktype === 'F'"
+                        },
+                        {
+                          "id": 22,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "fu.poeiFinalUpdate.pickprinter",
+                          "label": "global.file.for.pick.printer",
+                          "meta": "Printer",
+                          "labelHidden": true,
+                          "attachUp": true,
+                          "conditionShow": "fu.poeiFinalUpdate.picktype === 'P' || fu.poeiFinalUpdate.picktype === 'D'",
+                          "conditionDisabled": "!fu.poeiFinalInit.picksensitive",
+                          "conditionRequired": ""
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "fu.poeiFinalUpdate.printorder",
+                          "label": "global.pick.ticket.print.order",
+                          "type3": "SET",
+                          "metaGroup": "PO",
+                          "meta": "PrintOrder",
+                          "blankOption": false,
+                          "size": "SM"
+                        },
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "fu.poeiFinalUpdate.adjbofl",
+                          "label": "global.for.any.corrections.adjust.back.orders",
+                          "dataFormat": "LOGICAL",
+                          "conditionShow": "fu.poeiFinalInit.crctexistsfl"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

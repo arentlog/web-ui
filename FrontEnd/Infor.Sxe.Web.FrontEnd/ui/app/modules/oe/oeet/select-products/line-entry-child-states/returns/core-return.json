@@ -1,0 +1,160 @@
+{
+  "viewId": "oe-oeet-selectproducts-lineentrychildstates-returns-corereturn",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "aleRet.isReturnCore()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.core.return",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "aleRc.back()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.submit",
+                  "icon": "icon-save",
+                  "submitForm": true,
+                  "eventValidated": "aleRc.submit()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 22,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 23,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "FIELD",
+                          "subType": "RADIO_SET",
+                          "model": "aleRc.coreReturnType.cCoreRtnTy",
+                          "label": "global.core.return.type",
+                          "type3": "INLINE",
+                          "eventChange": "aleRc.returnTypeChanged()",
+                          "children": [
+                            {
+                              "id": 32,
+                              "type": "OPT",
+                              "label": "{{aleRc.rsLabel}}",
+                              "value": "C"
+                            },
+                            {
+                              "id": 33,
+                              "type": "OPT",
+                              "label": "global.substitute",
+                              "value": "S",
+                              "conditionShow": "aleRc.isSubstituteVisible"
+                            },
+                            {
+                              "id": 34,
+                              "type": "OPT",
+                              "label": "global.core.buy",
+                              "value": "U"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 26,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleRc.coreReturnType.cSubProd",
+                          "label": "global.product",
+                          "meta": "ProdAll",
+                          "conditionDisabled": "!aleRc.coreReturnType.prodenabled",
+                          "conditionShow": "!aleRc.coreReturnType.prodhidden"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 24,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 27,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "aleRc.coreReturnType.lWarrantyCore",
+                          "label": "global.warranty.core",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!aleRc.coreReturnType.warrantycoreenabled",
+                          "conditionShow": "!aleRc.coreReturnType.warrantycorehidden",
+                          "eventChange": "aleRc.warrantyCoreChanged()"
+                        },
+                        {
+                          "id": 28,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleRc.coreReturnType.cVendClaimNo",
+                          "label": "global.claim.number",
+                          "conditionDisabled": "!aleRc.coreReturnType.vendclaimnoenabled",
+                          "conditionShow": "!aleRc.coreReturnType.vendclaimnohidden"
+                        },
+                        {
+                          "id": 29,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "aleRc.coreReturnType.lUnavailable",
+                          "label": "global.return.to.unavailable",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!aleRc.coreReturnType.unavailableenabled",
+                          "conditionShow": "!aleRc.coreReturnType.unavailablehidden",
+                          "eventChange": "aleRc.returnToUnavailableChanged()"
+                        },
+                        {
+                          "id": 30,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleRc.coreReturnType.cReasUnAvTy",
+                          "label": "global.reason.unavailable",
+                          "meta": "ReasonUnavailable",
+                          "conditionDisabled": "!aleRc.coreReturnType.reasunavtyenabled",
+                          "conditionShow": "!aleRc.coreReturnType.reasunavtyhidden"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

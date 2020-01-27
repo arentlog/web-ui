@@ -1,0 +1,270 @@
+{
+  "viewId": "ic-icspr-customerdetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "conditionReadonly": "dtl.isCustomerTabReadonly",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.customer.detail",
+              "controls": {
+                "navBtns": {
+                  "id": 20,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 22,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "securityLevel": 3,
+                  "eventClick": "sub.submit()"
+                },
+                {
+                  "id": 23,
+                  "type": "BTN",
+                  "subType": "SEC",
+                  "label": "global.cancel",
+                  "stateRef": "^"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 16,
+                  "type": "EXP_AREA",
+                  "label": "global.customer.detail",
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 9,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "sub.icsprtaddchg.territorycd",
+                              "label": "global.type",
+                              "optionsModel": "sub.customerFullList",
+                              "type3": "MANUAL",
+                              "blankOption": false,
+                              "conditionReadonly": "sub.isChangeMode() || dtl.isCustomerTabReadonly",
+                              "required": true
+                            },
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "sub.icsprtaddchg.createdt",
+                              "label": "global.create.date",
+                              "dataFormat": "DATE",
+                              "readonly": true
+                            }
+                          ]
+                        },
+                        {
+                          "id": 19,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 10,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "sub.icsprtaddchg.custno",
+                              "label": "global.customer.number",
+                              "meta": "Customer",
+                              "conditionShow": "sub.isVisible('custno')",
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 24,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "stateRef": "aric.detail ({pk: sub.icsprtaddchg.custno})",
+                                  "conditionDisabled": "!sub.icsprtaddchg.custno",
+                                  "conditionShow": "sub.isVisible('custno')",
+                                  "eventClick": ""
+                                }
+                              }
+                            },
+                            {
+                              "id": 11,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "sub.icsprtaddchg.shipto",
+                              "label": "global.ship.to",
+                              "meta": "ShipTo",
+                              "conditionShow": "sub.isVisible('shipto')",
+                              "options": {
+                                "searchParams": {
+                                  "custno": {
+                                    "type": "REF",
+                                    "value": "sub.icsprtaddchg.custno"
+                                  }
+                                }
+                              },
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 25,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "conditionDisabled": "!sub.icsprtaddchg.shipto",
+                                  "stateRef": "aric.detail ({pk: sub.icsprtaddchg.custno, pk2: sub.icsprtaddchg.shipto})",
+                                  "conditionShow": "sub.isVisible('shipto')"
+                                }
+                              }
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "sub.icsprtaddchg.city",
+                              "label": "global.city",
+                              "conditionShow": "sub.isVisible('city')"
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "sub.icsprtaddchg.state",
+                              "label": "global.state",
+                              "conditionShow": "sub.isVisible('state')",
+                              "size": "XS",
+                              "maxLength": 2
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "sub.icsprtaddchg.zipcd",
+                              "label": "global.postal.code",
+                              "conditionShow": "sub.isVisible('zipcd')",
+                              "maxLength": 10,
+                              "size": "SM"
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "sub.icsprtaddchg.pricetype",
+                              "label": "global.customer.price.type",
+                              "meta": "CustomerPriceType",
+                              "conditionShow": "sub.isVisible('pricetype')"
+                            },
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "sub.icsprtaddchg.salesterr",
+                              "label": "global.customer.territory",
+                              "meta": "Territories",
+                              "conditionShow": "sub.isVisible('salesterr')"
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "sub.icsprtaddchg.custtype",
+                              "label": "global.customer.type",
+                              "meta": "CustType",
+                              "conditionShow": "sub.isVisible('custtype')"
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "sub.icsprtaddchg.certcode",
+                              "label": "global.certificate.license",
+                              "meta": "CertificateLicense",
+                              "conditionShow": "sub.isVisible('certcode')"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "sub.icsprtaddchg.countrycd",
+                              "label": "global.country.code",
+                              "meta": "Country",
+                              "conditionShow": "sub.isVisible('countrycd')"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 12,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 13,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 15,
+                              "type": "CUSTOM",
+                              "subType": "UserFields",
+                              "options": {
+                                "tableName": "icsprt",
+                                "objectRef": "sub.icsprtaddchg"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

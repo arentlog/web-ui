@@ -1,0 +1,543 @@
+{
+  "viewId": "ic-icses-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.extended.serial",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.serial",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.icses.currstatus",
+                              "label": "global.stage",
+                              "required": false,
+                              "type3": "SET",
+                              "metaGroup": "IC",
+                              "meta": "SerialStageType"
+                            },
+                            {
+                              "id": 67,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.icses.reasunavty",
+                              "label": "global.reason.unavailable",
+                              "required": false,
+                              "type3": "CODES",
+                              "meta": "ReasonUnavailable",
+                              "conditionShow": "dtl.icses.currstatus.toUpperCase() === 'U'"
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icses.binloc",
+                              "label": "global.bin.location",
+                              "required": false,
+                              "type3": "SET",
+                              "metaGroup": "IC",
+                              "meta": "SerialStageType",
+                              "dataFormat": "BinLoc"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icses.comment",
+                              "label": "global.comment",
+                              "required": false,
+                              "type3": "SET",
+                              "metaGroup": "IC",
+                              "meta": "SerialStageType",
+                              "maxLength": 24
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 23,
+                  "type": "EXP_AREA",
+                  "label": "global.reservation",
+                  "conditionShow": "dtl.icses.reservefl",
+                  "children": [
+                    {
+                      "id": 24,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 25,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 44,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.icses.ordertype",
+                              "label": "global.order.type",
+                              "size": "XS",
+                              "readonly": true,
+                              "dataFormat": "OrderType"
+                            },
+                            {
+                              "id": 45,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.icses.fullOrder",
+                              "label": "global.order.number",
+                              "readonly": true
+                            }
+                          ]
+                        },
+                        {
+                          "id": 43,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 48,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.icses.lineno",
+                              "label": "global.line.number",
+                              "size": "XS",
+                              "readonly": true,
+                              "conditionShow": "dtl.icses.lineno != 0"
+                            },
+                            {
+                              "id": 46,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.icses.seqno",
+                              "label": "global.seq.number",
+                              "size": "XS",
+                              "readonly": true,
+                              "conditionShow": "dtl.icses.seqno != 0"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 26,
+                  "type": "EXP_AREA",
+                  "label": "global.purchase",
+                  "children": [
+                    {
+                      "id": 27,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 28,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 52,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icses.vendno",
+                              "label": "global.vendor.number",
+                              "meta": "Vendor"
+                            },
+                            {
+                              "id": 62,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.icses.potext",
+                              "label": "global.purchase.order",
+                              "required": false,
+                              "type3": "SET",
+                              "metaGroup": "IC",
+                              "meta": "SerialStageType",
+                              "conditionShow": "dtl.icses.potext != ''"
+                            },
+                            {
+                              "id": 53,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "dtl.icses.receiptdt",
+                              "label": "global.receipt",
+                              "meta": "Vendor",
+                              "dataFormat": "DATE"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 51,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 55,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icses.whsefm",
+                              "label": "global.warehouse.to",
+                              "meta": "Warehouse"
+                            },
+                            {
+                              "id": 61,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icses.cost",
+                              "label": "global.cost",
+                              "meta": "Warehouse",
+                              "dataDesc": "dtl.icses.costLabel",
+                              "dataFormat": "CURRENCY",
+                              "digits": 7,
+                              "decimals": 5,
+                              "conditionShow": "dtl.sasoo.seecostfl",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 57,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.icses.fppaidfl",
+                              "label": "global.floor.plan.paid",
+                              "meta": "Warehouse",
+                              "dataFormat": "LOGICAL"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 29,
+                  "type": "EXP_AREA",
+                  "label": "global.sale",
+                  "children": [
+                    {
+                      "id": 30,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icses.custno",
+                              "label": "global.customer.number",
+                              "meta": "Customer"
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icses.shipto",
+                              "label": "global.ship.to",
+                              "meta": "ShipTo",
+                              "options": {
+                                "searchParams": {
+                                  "custno": {
+                                    "type": "REF",
+                                    "value": "dtl.icses.custno"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icses.whseto",
+                              "label": "global.warehouse.to",
+                              "meta": "Warehouse"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 32,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 39,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 38,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icses.invno",
+                                  "label": "global.invoice.number",
+                                  "digits": 9,
+                                  "meta": "ShipTo",
+                                  "dataFormat": "INTEGER_TEXT",
+                                  "size": "SM",
+                                  "options": {
+                                    "searchParams": {
+                                      "custno": {
+                                        "type": "REF",
+                                        "value": "dtl.icses.custno"
+                                      }
+                                    }
+                                  }
+                                },
+                                {
+                                  "id": 40,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icses.invsuf",
+                                  "label": "global.invoice.suffix",
+                                  "meta": "ShipTo",
+                                  "dataFormat": "INTEGER",
+                                  "digits": 2,
+                                  "sign": "+",
+                                  "size": "XS",
+                                  "options": {
+                                    "searchParams": {
+                                      "custno": {
+                                        "type": "REF",
+                                        "value": "dtl.icses.custno"
+                                      }
+                                    }
+                                  }
+                                },
+                                {
+                                  "id": 35,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icses.invlineno",
+                                  "label": "global.line.number",
+                                  "meta": "Warehouse",
+                                  "dataFormat": "INTEGER",
+                                  "sign": "+",
+                                  "digits": 3,
+                                  "size": "XS"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "dtl.icses.invoicedt",
+                              "label": "global.invoice.date",
+                              "dataFormat": "DATE"
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icses.price",
+                              "label": "global.price",
+                              "meta": "Warehouse",
+                              "dataFormat": "CURRENCY",
+                              "sign": "+",
+                              "digits": 7,
+                              "decimals": 5,
+                              "conditionReadonly": "base.isDetail() || dtl.sasoo.oepricefl === 'v'",
+                              "conditionShow": "dtl.sasoo.oepricefl !== 'n'",
+                              "conditionDisabled": "",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "dtl.icses.wexpdt",
+                              "label": "global.warranty.expiration",
+                              "dataFormat": "DATE"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "icses",
+                        "objectRef": "dtl.icses",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 63,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icses",
+      "contextValues": {
+        "key1": "dtl.icses.prod",
+        "key2": "dtl.icses.whse",
+        "key3": "dtl.icses.serialno"
+      }
+    },
+    {
+      "id": 64,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsd",
+      "contextValues": {
+        "key1": "dtl.icses.whse"
+      }
+    },
+    {
+      "id": 65,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsp",
+      "contextValues": {
+        "key1": "dtl.icses.prod"
+      }
+    },
+    {
+      "id": 66,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsw",
+      "contextValues": {
+        "key1": "dtl.icses.prod",
+        "key2": "dtl.icses.whse"
+      }
+    }
+  ]
+}

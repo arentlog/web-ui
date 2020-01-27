@@ -1,0 +1,481 @@
+{
+  "viewId": "ti-tiatc-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER",
+  "conditionShow": "base.isMaster()",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.tiatc",
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 18,
+                  "type": "EXP_AREA",
+                  "label": "global.primary.address",
+                  "children": [
+                    {
+                      "id": 19,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 68,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 69,
+                              "type": "CUSTOM",
+                              "subType": "AddressForm",
+                              "options": {
+                                "countryCdVisible": true,
+                                "addr2Visible": false,
+                                "addr3Visible": false,
+                                "addr1Model": "mst.tiatc.addr1",
+                                "addr2Model": "mst.tiatc.addr2",
+                                "addr3Model": "mst.tiatc.addr3",
+                                "cityModel": "mst.tiatc.city",
+                                "stateModel": "mst.tiatc.state",
+                                "zipCodeModel": "mst.tiatc.zipcd",
+                                "countryCodeModel": "mst.tiatc.country",
+                                "geoCodeModel": "mst.tiatc.geocd",
+                                "outOfCityFlagModel": "mst.tiatc.outofcityfl",
+                                "functionName": "tiatc",
+                                "addressLabel": "global.address",
+                                "geoCodeLookupCriteriaFunction": "mst.getGeoCodeLookupCriteria",
+                                "geoCodeVisible": true,
+                                "outOfCityVisible": true,
+                                "controlRef": "mst.addressControl",
+                                "useExpandedAddr": true
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 63,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 53,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "mst.tiatc.county",
+                              "label": "global.county.code",
+                              "conditionShow": "mst.tiatc.taxinterfacety.toLowerCase() !== 'e' && mst.tiatc.taxinterfacety.toLowerCase() !== 'a'",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 3,
+                              "size": "SM"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 32,
+                  "type": "EXP_AREA",
+                  "label": "global.secondary",
+                  "conditionShow": "mst.tiatc.taxinterfacety.toLowerCase() === 't'",
+                  "children": [
+                    {
+                      "id": 33,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 34,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "mst.tiatc.seccity",
+                              "label": "global.city",
+                              "conditionReadonly": "mst.tiatc.seccitysensitive === false",
+                              "maxLength": 26
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "mst.tiatc.seccounty",
+                              "label": "global.county",
+                              "conditionReadonly": "mst.tiatc.seccountysensitive === false",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 3,
+                              "size": "SM"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 35,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "mst.tiatc.seczipcd",
+                              "label": "global.zip.code",
+                              "conditionReadonly": "mst.tiatc.seczipcdsensitive === false",
+                              "size": "SM",
+                              "maxLength": 10
+                            },
+                            {
+                              "id": 62,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "mst.tiatc.secgeocd",
+                              "label": "global.geo.code",
+                              "meta": "GeoCodeSalesUseTax",
+                              "dataFormat": "INTEGER",
+                              "digits": 6,
+                              "size": "SM",
+                              "eventChange": "mst.secGeoCodeChanged()",
+                              "options": {
+                                "searchCriteriaFunction": "mst.getSecGeoCodeLookupCriteria()"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 6,
+                  "type": "EXP_AREA",
+                  "label": "global.tax.basis",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 8,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 9,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "mst.tiatc.grossamt",
+                              "label": "global.amount",
+                              "dataFormat": "DECIMAL",
+                              "digits": 8,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 10,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "mst.tiatc.exemptamt",
+                              "label": "global.exempt",
+                              "dataFormat": "DECIMAL",
+                              "digits": 8,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "mst.tiatc.serviceind",
+                              "label": "global.tax.type",
+                              "type3": "INLINE",
+                              "blankOption": false,
+                              "children": [
+                                {
+                                  "id": 28,
+                                  "type": "OPT",
+                                  "label": "global.sales",
+                                  "value": "S"
+                                },
+                                {
+                                  "id": 29,
+                                  "type": "OPT",
+                                  "label": "global.use",
+                                  "value": "U"
+                                },
+                                {
+                                  "id": 30,
+                                  "type": "OPT",
+                                  "label": "global.rental",
+                                  "value": "R",
+                                  "conditionShow": "mst.tiatc.taxinterfacety.toLowerCase() !== 'a'"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 11,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 12,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "mst.tiatc.prodcode",
+                              "label": "global.product.code",
+                              "maxLength": 25
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "mst.tiatc.location",
+                              "label": "global.location",
+                              "conditionReadonly": "mst.tiatc.locationsensitive === false",
+                              "maxLength": 1,
+                              "type3": "INLINE",
+                              "blankOption": false,
+                              "children": [
+                                {
+                                  "id": 64,
+                                  "type": "OPT",
+                                  "label": "global.point.of.acceptance",
+                                  "value": "A"
+                                },
+                                {
+                                  "id": 65,
+                                  "type": "OPT",
+                                  "label": "global.point.of.origin",
+                                  "value": "O"
+                                },
+                                {
+                                  "id": 66,
+                                  "type": "OPT",
+                                  "label": "global.ship.from",
+                                  "value": "F"
+                                },
+                                {
+                                  "id": 67,
+                                  "type": "OPT",
+                                  "label": "global.ship.to",
+                                  "value": "T"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 13,
+                              "type": "BTN",
+                              "subType": "PRI",
+                              "label": "global.submit",
+                              "submitForm": true,
+                              "eventValidated": "mst.submit()"
+                            },
+                            {
+                              "id": 14,
+                              "type": "BTN",
+                              "subType": "TER",
+                              "label": "global.reset",
+                              "eventClick": "mst.clear()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 36,
+                  "type": "EXP_AREA",
+                  "label": "global.taxes",
+                  "children": [
+                    {
+                      "id": 37,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 38,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "mst.tiatc.federalTax",
+                              "label": "global.federal.tax",
+                              "dataFormat": "DECIMAL",
+                              "decimals": 2,
+                              "digits": 8,
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "mst.tiatc.stateTax",
+                              "label": "global.state.tax",
+                              "dataFormat": "DECIMAL",
+                              "digits": 8,
+                              "decimals": 2,
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "mst.tiatc.countyTax",
+                              "label": "global.county.tax",
+                              "dataFormat": "DECIMAL",
+                              "digits": 8,
+                              "decimals": 2,
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 43,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "mst.tiatc.cityTax",
+                              "label": "global.city.tax",
+                              "dataFormat": "DECIMAL",
+                              "digits": 8,
+                              "decimals": 2,
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 44,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "mst.tiatc.districtTax",
+                              "label": "global.district.tax",
+                              "dataFormat": "DECIMAL",
+                              "digits": 8,
+                              "decimals": 2,
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 39,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 45,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "mst.tiatc.secstateTax",
+                              "label": "global.secondary.state.tax",
+                              "dataFormat": "DECIMAL",
+                              "digits": 8,
+                              "decimals": 2,
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 46,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "mst.tiatc.seccountyTax",
+                              "label": "global.secondary.county.tax",
+                              "dataFormat": "DECIMAL",
+                              "digits": 8,
+                              "decimals": 2,
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 47,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "mst.tiatc.seccityTax",
+                              "label": "global.secondary.city.tax",
+                              "dataFormat": "DECIMAL",
+                              "digits": 8,
+                              "decimals": 2,
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 48,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "mst.tiatc.errorfl",
+                              "label": "global.error",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "true"
+                            },
+                            {
+                              "id": 49,
+                              "type": "FIELD",
+                              "subType": "TEXT_AREA",
+                              "model": "mst.tiatc.errorcd",
+                              "label": "global.error.code",
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

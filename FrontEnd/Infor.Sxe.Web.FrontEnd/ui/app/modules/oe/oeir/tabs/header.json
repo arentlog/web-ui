@@ -1,0 +1,364 @@
+{
+  "viewId": "oe-oeir-detail-tabs-header",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isHeaderTabReadonly",
+  "children": [
+    {
+      "id": 7,
+      "type": "EXP_AREA",
+      "label": "global.billing.and.shipping.address",
+      "children": [
+        {
+          "id": 8,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 9,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "TOOLBAR",
+                  "label": "global.bill.to"
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "hdr.oeirHeaderRetrieveResults.billtoname",
+                  "label": "global.name",
+                  "readonly": true
+                },
+                {
+                  "id": 164,
+                  "type": "CUSTOM",
+                  "subType": "AddressInfo",
+                  "options": {
+                    "countryCdVisible": false,
+                    "addr1Model": "hdr.oeirHeaderRetrieveResults.billtoaddr1",
+                    "addr2Model": "hdr.oeirHeaderRetrieveResults.billtoaddr2",
+                    "addr3Model": "hdr.oeirHeaderRetrieveResults.billtoaddr3",
+                    "cityModel": "hdr.oeirHeaderRetrieveResults.billtocity",
+                    "stateModel": "hdr.oeirHeaderRetrieveResults.billtostate",
+                    "zipCodeModel": "hdr.oeirHeaderRetrieveResults.billtozip"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 13,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 15,
+                  "type": "TOOLBAR",
+                  "label": "global.ship.to"
+                },
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "hdr.oeirHeaderRetrieveResults.shiptoname",
+                  "label": "global.name",
+                  "readonly": true
+                },
+                {
+                  "id": 165,
+                  "type": "CUSTOM",
+                  "subType": "AddressInfo",
+                  "options": {
+                    "countryCdVisible": false,
+                    "addr1Model": "hdr.oeirHeaderRetrieveResults.shiptoaddr1",
+                    "addr2Model": "hdr.oeirHeaderRetrieveResults.shiptoaddr2",
+                    "addr3Model": "hdr.oeirHeaderRetrieveResults.shiptoaddr3",
+                    "cityModel": "hdr.oeirHeaderRetrieveResults.shiptocity",
+                    "stateModel": "hdr.oeirHeaderRetrieveResults.shiptostate",
+                    "zipCodeModel": "hdr.oeirHeaderRetrieveResults.shiptozip"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "type": "EXP_AREA",
+      "label": "global.shipping.information",
+      "children": [
+        {
+          "id": 11,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 12,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "hdr.oeirHeaderRetrieveResults.approvty",
+                  "label": "global.approve",
+                  "maxLength": 1,
+                  "autoFocus": true
+                },
+                {
+                  "id": 23,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "hdr.oeirHeaderRetrieveResults.shipviaty",
+                  "label": "global.ship.via",
+                  "meta": "ShipVia"
+                },
+                {
+                  "id": 26,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "hdr.oeirHeaderRetrieveResults.comment1",
+                  "label": "global.comments",
+                  "maxLength": 40
+                },
+                {
+                  "id": 27,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "hdr.oeirHeaderRetrieveResults.comment2",
+                  "label": "global.comment",
+                  "labelHidden": true,
+                  "maxLength": 40,
+                  "attachUp": true
+                }
+              ]
+            },
+            {
+              "id": 20,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 22,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "hdr.oeirHeaderRetrieveResults.termstype",
+                  "label": "global.terms",
+                  "meta": "Terms"
+                },
+                {
+                  "id": 24,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "hdr.oeirHeaderRetrieveResults.codfl",
+                  "label": "global.cash.on.delivery.paren.cod.paren",
+                  "dataFormat": "LOGICAL",
+                  "eventChange": "hdr.onCODChange()",
+                  "conditionDisabled": "!hdr.isCodEnabled || base.isHeaderTabReadonly"
+                },
+                {
+                  "id": 25,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "hdr.oeirHeaderRetrieveResults.cODCollAmt",
+                  "label": "global.added.cod",
+                  "dataFormat": "CURRENCY",
+                  "digits": 9,
+                  "decimals": 2,
+                  "conditionReadonly": "!hdr.isCodEnabled || base.isHeaderTabReadonly",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 28,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.update",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "eventClick": "hdr.update()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 160,
+      "type": "EXP_AREA",
+      "label": "global.addons",
+      "children": [
+        {
+          "id": 162,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 163,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 130,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "hdr.oeirHeaderRetrieveResults.freightinfl",
+                  "label": "global.freight.in.required",
+                  "dataFormat": "LOGICAL",
+                  "disabled": true
+                }
+              ]
+            },
+            {
+              "id": 167,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 131,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "hdr.oeirHeaderRetrieveResults.freightoutfl",
+                  "label": "global.freight.out.required",
+                  "dataFormat": "LOGICAL",
+                  "disabled": true
+                }
+              ]
+            },
+            {
+              "id": 168,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 132,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "hdr.oeirHeaderRetrieveResults.pmfl",
+                  "label": "global.update.freight.charges.from.parcel.management",
+                  "dataFormat": "LOGICAL",
+                  "disabled": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 161,
+          "type": "SUB_VIEW",
+          "subType": "JSON",
+          "viewPath": "oe/shared/additional-addons/additional-addons.json",
+          "controller": "OeAddonsCtrl as oeaa"
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "type": "EXP_AREA",
+      "label": "global.totals",
+      "children": [
+        {
+          "id": 53,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 54,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 77,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "hdr.oeirHeaderRetrieveResults.totalinvamt",
+                  "label": "global.order",
+                  "dataFormat": "CURRENCY",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 83,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "hdr.oeirHeaderRetrieveResults.numlines",
+                  "label": "symbol.pound.of.lines",
+                  "dataFormat": "INTEGER"
+                }
+              ]
+            },
+            {
+              "id": 166,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 81,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "hdr.oeirHeaderRetrieveResults.totalqtyord",
+                  "label": "global.quantity.ordered",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 82,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "hdr.oeirHeaderRetrieveResults.totalqtyship",
+                  "label": "global.quantity.shipped",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                }
+              ]
+            },
+            {
+              "id": 76,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 78,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "hdr.oeirHeaderRetrieveResults.totalweight",
+                  "label": "global.weight",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5,
+                    "maximumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 79,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "hdr.oeirHeaderRetrieveResults.totalcubes",
+                  "label": "global.cube",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5,
+                    "maximumFractionDigits": 5
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

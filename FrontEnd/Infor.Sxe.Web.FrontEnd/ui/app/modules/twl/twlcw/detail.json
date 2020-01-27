@@ -1,0 +1,372 @@
+{
+  "viewId": "twl-twlcw-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "menu.twlcw",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcw.whDesc",
+                              "label": "global.name",
+                              "maxLength": 30
+                            },
+                            {
+                              "id": 98,
+                              "type": "CUSTOM",
+                              "subType": "AddressForm",
+                              "options": {
+                                "conditionReadonly": "base.isDetail()",
+                                "addressLabel": "global.address",
+                                "addr1Model": "dtl.twlcw.addr1",
+                                "addr2Model": "dtl.twlcw.addr2",
+                                "addr3Model": "dtl.twlcw.addrExt1",
+                                "cityModel": "dtl.twlcw.city",
+                                "stateModel": "dtl.twlcw.state",
+                                "zipCodeModel": "dtl.twlcw.zip",
+                                "addr2Visible": true,
+                                "addr3Visible": true
+                              }
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcw.country",
+                              "label": "global.country",
+                              "maxLength": 20
+                            },
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlcw.region",
+                              "label": "global.region",
+                              "maxLength": 5
+                            }
+                          ]
+                        },
+                        {
+                          "id": 61,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 64,
+                              "type": "FIELD_SET",
+                              "label": "global.default.settings",
+                              "children": [
+                                {
+                                  "id": 127,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 43,
+                                      "type": "FIELD",
+                                      "subType": "LOOKUP",
+                                      "model": "dtl.twlcw.rcvZoneHold",
+                                      "label": "global.damaged.inventory.zone",
+                                      "meta": "TWLWhZone",
+                                      "size": "XS",
+                                      "options": {
+                                        "searchParams": {
+                                          "coNum": {
+                                            "type": "REF",
+                                            "value": "dtl.twlcw.coNum"
+                                          },
+                                          "whNum": {
+                                            "type": "REF",
+                                            "value": "dtl.twlcw.whNum"
+                                          },
+                                          "searchType": "zoneType",
+                                          "keyField": "G"
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "id": 39,
+                                      "type": "FIELD",
+                                      "subType": "LOOKUP",
+                                      "model": "dtl.twlcw.rcvZoneDefault",
+                                      "label": "global.receiving.zone",
+                                      "meta": "TWLWhZone",
+                                      "size": "XS",
+                                      "options": {
+                                        "searchParams": {
+                                          "coNum": {
+                                            "type": "REF",
+                                            "value": "dtl.twlcw.coNum"
+                                          },
+                                          "whNum": {
+                                            "type": "REF",
+                                            "value": "dtl.twlcw.whNum"
+                                          },
+                                          "searchType": "zoneType",
+                                          "keyField": "R"
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": 129,
+                              "type": "FIELD_SET",
+                              "label": "global.other.settings",
+                              "children": [
+                                {
+                                  "id": 128,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.twlcw.pmIrms",
+                                  "label": "global.parcel.management.maintained.by",
+                                  "type3": "SET",
+                                  "metaGroup": "TWL",
+                                  "meta": "ParcelManagementType",
+                                  "blankOption": false,
+                                  "conditionDisabled": "base.isDetail()"
+                                },
+                                {
+                                  "id": 21,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.twlcw.rowStatus",
+                                  "label": "global.active"
+                                },
+                                {
+                                  "id": 55,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.twlcw.qaInspection",
+                                  "label": "global.qa.inspection"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 119,
+                  "type": "EXP_AREA",
+                  "label": "global.warehouse.parameters",
+                  "children": [
+                    {
+                      "id": 120,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 121,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 110,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlcw.parameters.matPutAway",
+                              "label": "global.put.away.type",
+                              "type3": "SET",
+                              "metaGroup": "TWL",
+                              "meta": "PutAwayType",
+                              "blankOption": false,
+                              "conditionDisabled": "base.isDetail()"
+                            },
+                            {
+                              "id": 111,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlcw.parameters.pacType",
+                              "label": "global.packing.type",
+                              "type3": "SET",
+                              "metaGroup": "TWL",
+                              "meta": "PackingType",
+                              "blankOption": false,
+                              "conditionDisabled": "base.isDetail()"
+                            },
+                            {
+                              "id": 112,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlcw.parameters.picLabelFlag",
+                              "label": "global.pick.labels",
+                              "type3": "SET",
+                              "metaGroup": "TWL",
+                              "meta": "PickLabelType",
+                              "blankOption": false,
+                              "conditionDisabled": "base.isDetail()"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 122,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 123,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlcw.parameters.rcvPalletIdFlag",
+                              "label": "global.pallet.id",
+                              "type3": "SET",
+                              "metaGroup": "TWL",
+                              "meta": "PalletIdType",
+                              "blankOption": false,
+                              "conditionDisabled": "base.isDetail()"
+                            },
+                            {
+                              "id": 124,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlcw.parameters.labelPrintType",
+                              "label": "global.labels",
+                              "type3": "SET",
+                              "metaGroup": "TWL",
+                              "meta": "LabelType",
+                              "blankOption": false,
+                              "conditionDisabled": "base.isDetail()"
+                            },
+                            {
+                              "id": 125,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlcw.parameters.isPickFromDock",
+                              "label": "global.pick.from.dock"
+                            },
+                            {
+                              "id": 126,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlcw.parameters.isForceShip",
+                              "label": "global.allow.over.picking.if.item.allows.it"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,602 @@
+{
+  "viewId": "pi-piee-create",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.full.product",
+              "subLabel": "{{base.criteria.imptype + '  |  ' + base.criteria.slupdtno}}",
+              "controls": {
+                "navBtns": {
+                  "id": 31,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 32,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 33,
+                  "type": "BTN",
+                  "subType": "",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "eventClick": "dtl.productAddUpdate()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 63,
+                  "type": "BTN",
+                  "subType": "",
+                  "label": "global.reset",
+                  "icon": "icon-reset",
+                  "eventClick": "dtl.productReset()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 34,
+                  "type": "BTN",
+                  "subType": "",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "stateRef": "^.master"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 8,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 9,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "dtl.fullProduct.statuscd",
+                          "label": "global.update.code",
+                          "meta": "StatusUpdateCode",
+                          "type3": "SET",
+                          "conditionReadonly": "!dtl.fullProduct.statuscdenabled",
+                          "metaGroup": "SL"
+                        },
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.fullProduct.whse",
+                          "label": "global.warehouse",
+                          "meta": "Warehouse",
+                          "conditionReadonly": "!dtl.fullProduct.whseenabled"
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.fullProduct.prod",
+                          "label": "global.product",
+                          "meta": "ProdAll",
+                          "conditionReadonly": "!dtl.fullProduct.prodenabled",
+                          "eventChange": "dtl.productLookupChanged()"
+                        },
+                        {
+                          "id": 61,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.fullProduct.descrip1",
+                              "label": "global.description",
+                              "conditionReadonly": "!dtl.fullProduct.descrip1enabled",
+                              "size": "SM",
+                              "maxLength": 30
+                            },
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.fullProduct.descrip2",
+                              "conditionReadonly": "!dtl.fullProduct.descrip1enabled",
+                              "size": "XS",
+                              "labelHidden": true,
+                              "label": "global.empty",
+                              "maxLength": 30
+                            }
+                          ]
+                        },
+                        {
+                          "id": 64,
+                          "type": "FIELD",
+                          "subType": "TEXT_AREA",
+                          "model": "dtl.fullProduct.descrip3",
+                          "label": "global.extended.description",
+                          "conditionReadonly": "!dtl.fullProduct.descrip1enabled",
+                          "size": "LG",
+                          "maxLength": 256
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.fullProduct.seqno",
+                          "label": "global.sequence.number",
+                          "conditionReadonly": "!dtl.fullProduct.seqnoenabled",
+                          "dataFormat": "INTEGER_TEXT",
+                          "sign": "+",
+                          "digits": 3
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "dtl.fullProduct.pdscfl",
+                          "label": "pdsc.pdsv.price",
+                          "conditionReadonly": "!dtl.fullProduct.pdscflenabled",
+                          "dataFormat": "LOGICAL"
+                        },
+                        {
+                          "id": 22,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "dtl.fullProduct.icspfl",
+                          "label": "global.create.icsp",
+                          "conditionReadonly": "!dtl.fullProduct.icspflenabled",
+                          "dataFormat": "LOGICAL"
+                        },
+                        {
+                          "id": 54,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.fullProduct.baseprice",
+                              "label": "global.base.price",
+                              "conditionShow": "!dtl.fullProduct.basepricehidden",
+                              "dataFormat": "DECIMAL",
+                              "size": "SM",
+                              "conditionReadonly": "!dtl.fullProduct.basepriceenabled",
+                              "maxLength": 14,
+                              "decimals": 4,
+                              "digits": 7
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.fullProduct.currbaseprice",
+                              "conditionShow": "!dtl.fullProduct.basepricehidden",
+                              "readonly": true,
+                              "size": "SM",
+                              "labelHidden": true,
+                              "label": "global.empty"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 55,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.fullProduct.replcost",
+                              "label": "global.replacement.cost",
+                              "conditionShow": "!dtl.fullProduct.replcosthidden",
+                              "dataFormat": "DECIMAL",
+                              "size": "SM",
+                              "conditionReadonly": "!dtl.fullProduct.replcostenabled",
+                              "digits": 7,
+                              "decimals": 4,
+                              "maxLength": 14
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.fullProduct.currreplcost",
+                              "conditionShow": "!dtl.fullProduct.replcosthidden",
+                              "readonly": true,
+                              "size": "XS",
+                              "labelHidden": true,
+                              "label": "global.empty"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 56,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.fullProduct.lastcostfor",
+                              "label": "global.last.foreign.cost",
+                              "conditionReadonly": "!dtl.fullProduct.lastcostforenabled",
+                              "conditionShow": "!dtl.fullProduct.lastcostforhidden",
+                              "dataFormat": "DECIMAL",
+                              "size": "SM",
+                              "digits": 7,
+                              "decimals": 4,
+                              "maxLength": 14
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.fullProduct.currlastcostfor",
+                              "conditionShow": "!dtl.fullProduct.lastcostforhidden",
+                              "readonly": true,
+                              "size": "XS",
+                              "labelHidden": true,
+                              "label": "global.empty"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 39,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "dtl.fullProduct.effectdt",
+                          "label": "global.effective.date",
+                          "conditionShow": "!dtl.fullProduct.replcosthidden",
+                          "dataFormat": "DATE"
+                        },
+                        {
+                          "id": 42,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.fullProduct.termspct",
+                          "label": "global.terms.discount",
+                          "conditionReadonly": "!dtl.fullProduct.termspctenabled",
+                          "conditionShow": "replcosthidden",
+                          "dataFormat": "DECIMAL",
+                          "digits": 2,
+                          "decimals": 2
+                        },
+                        {
+                          "id": 44,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.fullProduct.vendno",
+                          "label": "global.vendor.number",
+                          "conditionReadonly": "!dtl.fullProduct.vendnoenabled",
+                          "meta": "Vendor"
+                        },
+                        {
+                          "id": 45,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.fullProduct.prodline",
+                          "label": "global.product.line",
+                          "conditionReadonly": "!dtl.fullProduct.prodlineenabled",
+                          "meta": "ProdLine",
+                          "options": {
+                            "searchParams": {
+                              "vendno": {
+                                "value": "dtl.fullProduct.vendno",
+                                "type": "REF"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 46,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.fullProduct.prodcat",
+                          "label": "global.product.category",
+                          "conditionReadonly": "!dtl.fullProduct.prodcatenabled",
+                          "meta": "ProdCat"
+                        },
+                        {
+                          "id": 47,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.fullProduct.pricetype",
+                          "label": "global.price.type",
+                          "conditionReadonly": "!dtl.fullProduct.pricetypeenabled",
+                          "meta": "ProdPriceTy"
+                        },
+                        {
+                          "id": 49,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.fullProduct.rebsubty",
+                          "label": "global.rebate.sub.type",
+                          "conditionReadonly": "!dtl.fullProduct.rebsubtyenabled",
+                          "conditionShow": "replcosthidden",
+                          "meta": "CustomerRebateType"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 7,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 10,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.fullProduct.slpbseqno",
+                          "label": "global.import.seq.number",
+                          "readonly": true
+                        },
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.fullProduct.lookupnm",
+                          "label": "global.lookup.name",
+                          "conditionReadonly": "!dtl.fullProduct.lookupnmenabled",
+                          "maxLength": 30
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.fullProduct.pdspsfl",
+                          "label": "global.price.sheet",
+                          "conditionReadonly": "!dtl.fullProduct.pdspsflenabled",
+                          "maxLength": 1
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "dtl.fullProduct.priceonty",
+                          "label": "global.multiplier",
+                          "conditionReadonly": "!dtl.fullProduct.priceontyenabled",
+                          "maxLength": 30,
+                          "type3": "SET",
+                          "metaGroup": "SL",
+                          "meta": "MultiplierType"
+                        },
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "dtl.fullProduct.icscfl",
+                          "label": "global.create.icsc",
+                          "conditionReadonly": "!dtl.fullProduct.icscflenabled",
+                          "dataFormat": "LOGICAL"
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "dtl.fullProduct.icswfl",
+                          "label": "global.create.icsw",
+                          "conditionReadonly": "!dtl.fullProduct.icswflenabled",
+                          "dataFormat": "LOGICAL"
+                        },
+                        {
+                          "id": 58,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.fullProduct.listprice",
+                              "label": "global.list.price",
+                              "conditionReadonly": "!dtl.fullProduct.listpriceenabled",
+                              "conditionShow": "!dtl.fullProduct.listpricehidden",
+                              "dataFormat": "DECIMAL",
+                              "size": "SM",
+                              "maxLength": 14,
+                              "decimals": 4,
+                              "digits": 7
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.fullProduct.currlistprice",
+                              "conditionShow": "!dtl.fullProduct.listpricehidden",
+                              "readonly": true,
+                              "size": "SM",
+                              "labelHidden": true,
+                              "label": "global.empty"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 59,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.fullProduct.stndcost",
+                              "label": "global.standard.cost",
+                              "conditionShow": "!dtl.fullProduct.stndcosthidden",
+                              "dataFormat": "DECIMAL",
+                              "size": "SM",
+                              "conditionReadonly": "!dtl.fullProduct.stndcostenabled",
+                              "maxLength": 14,
+                              "decimals": 4,
+                              "digits": 7
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.fullProduct.currstndcost",
+                              "conditionShow": "!dtl.fullProduct.stndcosthidden",
+                              "readonly": true,
+                              "size": "XS",
+                              "labelHidden": true,
+                              "label": "global.empty"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 60,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.fullProduct.rebatecost",
+                              "label": "global.rebate.cost",
+                              "conditionReadonly": "!dtl.fullProduct.rebatecostenabled",
+                              "conditionShow": "!dtl.fullProduct.rebatecosthidden",
+                              "dataFormat": "DECIMAL",
+                              "size": "SM",
+                              "decimals": 4,
+                              "maxLength": 14,
+                              "digits": 7
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.fullProduct.currrebcost",
+                              "conditionShow": "!dtl.fullProduct.rebatecosthidden",
+                              "readonly": true,
+                              "size": "XS",
+                              "labelHidden": true,
+                              "label": "global.empty"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 62,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.fullProduct.unitstock",
+                              "label": "global.unit",
+                              "conditionReadonly": "!dtl.fullProduct.unitstockenabled",
+                              "meta": "StockingUnit",
+                              "size": "SM"
+                            },
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.fullProduct.unitstnd",
+                              "conditionReadonly": "!dtl.fullProduct.unitstndenabled",
+                              "meta": "StandardPack",
+                              "size": "SM",
+                              "label": "global.standard.pack"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 43,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.fullProduct.weight",
+                          "label": "global.weight",
+                          "conditionReadonly": "!dtl.fullProduct.weightenabled",
+                          "meta": "ProdLine",
+                          "dataFormat": "DECIMAL_TEXT",
+                          "maxLength": 14,
+                          "decimals": 4,
+                          "digits": 7
+                        },
+                        {
+                          "id": 50,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.fullProduct.cubes",
+                          "label": "global.cube",
+                          "conditionReadonly": "!dtl.fullProduct.cubesenabled",
+                          "meta": "ProdLine",
+                          "dataFormat": "DECIMAL",
+                          "maxLength": 14,
+                          "decimals": 4,
+                          "digits": 7,
+                          "formatOptions": {
+                            "minimumFractionDigits": 4,
+                            "maximumFractionDigits": 4
+                          }
+                        },
+                        {
+                          "id": 51,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.fullProduct.slgroup",
+                          "label": "global.supplier.group",
+                          "conditionReadonly": "!dtl.fullProduct.slgroupenabled",
+                          "meta": "SupplierGroup"
+                        },
+                        {
+                          "id": 48,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.fullProduct.rebatety",
+                          "label": "menu.arsrt",
+                          "conditionReadonly": "!dtl.fullProduct.rebatetyenabled",
+                          "meta": "CustomerRebateType"
+                        },
+                        {
+                          "id": 52,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.fullProduct.user1",
+                          "label": "global.user.1",
+                          "conditionReadonly": "!dtl.fullProduct.user1enabled",
+                          "meta": "SupplierGroup"
+                        },
+                        {
+                          "id": 53,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.fullProduct.user2",
+                          "label": "global.user.2",
+                          "conditionReadonly": "!dtl.fullProduct.user1enabled",
+                          "meta": "SupplierGroup"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

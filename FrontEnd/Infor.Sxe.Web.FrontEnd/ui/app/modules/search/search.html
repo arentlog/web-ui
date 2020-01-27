@@ -1,0 +1,195 @@
+<style>
+#search .expandable-area .expandable-header {
+    border-top: 0px !important;
+    padding-top: 4px !important;
+}
+
+#search .expandable-area:last-child .expandable-footer {
+    border-bottom: 0px !important;
+}
+
+#search .expandable-area .title {
+   font-size: 20px !important;
+}
+
+.searchResultAlternateThumbnail {
+    width: 50px;
+    height: 50px;
+    margin: 3px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+    font-size: 18pt;
+    color: #ffffff;
+    float: left;
+}
+
+.breadcrumb li::after {
+    font-size: 12px;
+}
+
+.searchResultsLink {
+    margin-left: 39px;
+    margin-bottom: 1%;
+}
+
+#wrapper {
+    display:flex;
+    padding-top:4px;
+    border-bottom: 1px solid #cbcbcb;
+}
+
+#first {
+    width:70px;
+}
+#second {
+    width: 100%;
+}
+#third {
+    min-width:300px;
+    width:300px;
+    text-align:right;
+}
+#third > p {
+    font-size:1.2rem;
+    padding-right:10px;
+}
+
+.cssFade {
+    transition: 0.5s all;
+    opacity: 1;
+}
+.cssFade.ng-hide {
+    opacity: 0;
+}
+
+.cssFadeIn {
+    transition: 0.5s all;
+    opacity: 0;
+}
+.cssFadeIn.ng-show {
+    opacity: 1;
+}
+</style>
+
+<div id="search" class="page-container two-column fixed" initialize>
+
+   <!-- Main Search -->
+   <div ng-show="!base.hasSearch" style="margin: auto; width: 475px; position: relative; top: 30%;">
+      <form form-control data-validate-on="submit" style="height: auto;">
+         <div style="padding-left: 20px;">
+            <svg height="80px" width="80px">
+               <use xlink:href="#icon-logo" x="0" y="0"></use>
+            </svg>
+            <svg height="80px" width="300px" font-family="Helvetica, Arial" font-size="3.0rem">
+               <text x="10" y="50" fill="gray">{{::'special.search.title' | translate}}</text>
+            </svg>
+         </div>
+         <div class="field" style="padding-top: 10px;">
+            <label for="search-input-main" class="audible" translate>global.search</label>
+            <input type="text" id="search-input-main" class="required" ng-model="base.criteria.data" style="width: 350px; margin-right: 10px;" auto-focus autocomplete="off" />
+            <button class="btn-primary" type="submit" data-on-validated="base.search()" translate>global.search</button>
+         </div>
+      </form>
+   </div>
+
+   <!-- Sidebar -->
+   <section class="sidebar cssFade" ng-hide="!base.hasSearch || base.sidebarCollapsed || base.hideSidebar" style="height: 100%;" role="complementary">
+      <div class="content scrollable-y" style="height: calc(100% - 36px);">
+         <div class="accordion alternate" data-options="{allowOnePane: false}">
+
+            <!-- Search In -->
+            <div class="accordion-header is-expanded">
+               <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                  <use xlink:href="#icon-search"></use>
+               </svg>
+               <a href="#"><span translate>special.search.search.in</span></a>
+            </div>
+            <div class="accordion-pane">
+               <div class="accordion-content" style="padding: 0;">
+                  <div class="row">
+                     <div class="full column">
+                        <div class="field">
+                           <label for="repository" class="label"></label>
+                           <select id="repository" name="repository" class="dropdown"
+                                   ng-options="item.id as item.name for item in base.repositories | filter:base.showInRepoList"
+                                   ng-model="base.activeRepository" ng-change="base.search()"></select>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Facets -->
+            <div class="accordion-header is-expanded" ng-show="base.facets.length > 0">
+               <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                  <use xlink:href="#icon-filter"></use>
+               </svg>
+               <a href="#"><span translate>special.search.refine</span></a>
+            </div>
+            <div class="accordion-pane" ng-show="base.facets.length > 0">
+               <div class="accordion-content" style="padding: 18px 0 0 0;">
+                  <div class="row">
+                     <div class="full column">
+                        <div id="filter-container" style="display: none;">
+                           <div ng-repeat="facet in base.facets">
+                              <div class="field">
+                                 <label for="{{facet.id}}" class="label">{{facet.label}}</label>
+                                 <select multiple id="{{facet.id}}" name="{{facet.id}}" class="multiselect"
+                                         ng-model="base.activeFacet[facet.id]" ng-change="base.facetChange()">
+                                    <option ng-repeat="node in facet.FacetNodes" value="{{node.value}}">{{node.label}}</option>
+                                 </select>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+         </div>
+      </div>
+
+       <!-- Collapse button -->
+       <div style="height: 36px; text-align: right;">
+          <button class="btn-icon" title="{{'global.collapse' | translate}}" ng-click="base.sidebarCollapsed = true">
+             <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-collapse-app-tray"></use>
+             </svg>
+          </button>
+       </div>
+    </section>
+
+   <!-- Collapsed sidebar with expand button -->
+   <section class="sidebar collapsed-bar" ng-show="base.sidebarCollapsed" style="width: 36px; height: 100%;">
+      <div style="height: calc(100% - 36px);"></div>
+
+      <div style="height: 36px; text-align: right;">
+         <button class="btn-icon" style="" title="{{'global.expand' | translate}}" ng-click="base.sidebarCollapsed = false">
+            <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-expand-app-tray"></use>
+            </svg>
+         </button>
+      </div>
+   </section>
+
+    <!-- Search Results -->
+    <section id="search-view" class="main" ng-hide="!base.hasSearch" ng-class="base.hideSidebar ? 'full-width' : (base.sidebarCollapsed ? 'expanded-width' : '')" style="height: 100%;" role="main">
+        <div class="content scrollable-y" style="height: 100%;">
+            <div id="results-container" class="cssFade" style="padding: 10px 0 0 20px;">
+               <!-- Search -->
+               <form form-control data-validate-on="submit" style="padding-bottom: 40px;">
+                  <div class="compound-field">
+                     <label for="search-input-secondary" class="audible" translate>global.search</label>
+                     <input type="text" id="search-input-secondary" class="input-lg required" ng-model="base.criteria.data" style="margin-right: 10px;" autocomplete="off" />
+                     <button class="btn-primary" type="submit" data-on-validated="base.search()" translate>global.search</button>
+                     <button class="btn-tertiary" type="button" ng-click="base.reset()" translate>global.reset</button>
+                  </div>
+               </form>
+
+               <!-- Results -->
+               <div id="ies-results"></div>
+            </div>
+         </div>
+    </section>
+</div>

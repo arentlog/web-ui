@@ -1,0 +1,257 @@
+{
+  "viewId": "kp-kpsm-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.tally.mix",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.kpsm.prod",
+                              "label": "global.tally.product",
+                              "required": true,
+                              "meta": "ProdIcspAndXref",
+                              "conditionDisabled": "",
+                              "conditionReadonly": "!base.isCreate()",
+                              "autoFocus": true
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.kpsm.whse",
+                              "label": "global.warehouse",
+                              "meta": "Warehouse",
+                              "conditionDisabled": "",
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.kpsm.comprod",
+                              "label": "global.component.product",
+                              "meta": "ProdIcspAndXref",
+                              "conditionDisabled": "",
+                              "conditionReadonly": "!base.isCreate()",
+                              "required": true
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.kpsm.length",
+                              "label": "global.feet",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "maxLength": 2,
+                              "digits": 2,
+                              "size": "SM"
+                            },
+                            {
+                              "id": 28,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 29,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.kpsm.pomixpct",
+                                  "label": "global.purchase.order.mix.percent",
+                                  "dataFormat": "INTEGER",
+                                  "sign": "+",
+                                  "size": "SM",
+                                  "digits": 3
+                                },
+                                {
+                                  "id": 31,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.totalpomixpct",
+                                  "label": "global.total",
+                                  "dataFormat": "INTEGER",
+                                  "sign": "+",
+                                  "size": "XS",
+                                  "digits": 3,
+                                  "readonly": true
+                                }
+                              ]
+                            },
+                            {
+                              "id": 32,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 33,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.kpsm.oemixpct",
+                                  "label": "global.order.entry.mix.percent",
+                                  "size": "SM",
+                                  "dataFormat": "INTEGER",
+                                  "sign": "+",
+                                  "digits": 3
+                                },
+                                {
+                                  "id": 34,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.totaloemixpct",
+                                  "label": "global.total",
+                                  "size": "XS",
+                                  "dataFormat": "INTEGER",
+                                  "readonly": true,
+                                  "digits": 3
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "kpsm",
+                        "objectRef": "dtl.kpsm",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

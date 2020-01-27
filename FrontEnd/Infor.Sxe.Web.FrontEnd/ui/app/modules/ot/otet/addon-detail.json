@@ -1,0 +1,135 @@
+{
+  "viewId": "ot-otet-addondetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "ROW_DETAIL",
+  "conditionReadonly": "dtlc.isTotalsTabReadonly",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "type": "ROW",
+          "id": 3,
+          "children": [
+            {
+              "type": "COL",
+              "subType": "1",
+              "id": 4,
+              "children": [
+                {
+                  "id": 12,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 5,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "adddtl.addonRow.addonno",
+                      "label": "global.description",
+                      "autoFocus": true,
+                      "type3": "MANUAL",
+                      "optionsModel": "add.addonTypes",
+                      "eventChange": "adddtl.addonnoChanged()",
+                      "optionLabelField": "label",
+                      "optionValueField": "value"
+                    },
+                    {
+                      "id": 10,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "adddtl.addonRow.addonamt",
+                      "label": "global.amount",
+                      "dataFormat": "CURRENCY",
+                      "size": "SM",
+                      "eventChange": "adddtl.addonamtChanged()",
+                      "conditionDisabled": "dtlc.otet.otettrackdetail.afterrcvstg === true || dtlc.isTotalsTabReadonly",
+                      "digits": 8,
+                      "decimals": 2,
+                      "modelOptions": {
+                        "updateOn": "blur"
+                      },
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 20,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "adddtl.addonRow.addontype",
+                      "label": "global.type",
+                      "size": "SM",
+                      "meta": "AmountPercentType",
+                      "type3": "SET",
+                      "metaGroup": "OE",
+                      "blankOption": false,
+                      "eventChange": "adddtl.addontypeChanged()"
+                    },
+                    {
+                      "id": 21,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "adddtl.addonRow.addondistr",
+                      "label": "global.distribute.by",
+                      "type3": "SET",
+                      "metaGroup": "OT",
+                      "meta": "AddonUnits",
+                      "blankOption": false,
+                      "conditionDisabled": "adddtl.isDistributeByDisabled() || dtlc.isTotalsTabReadonly"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 14,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "adddtl.addonRow.addonnet",
+                  "label": "global.net.amount",
+                  "dataFormat": "CURRENCY"
+                }
+              ]
+            },
+            {
+              "id": 15,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.ok",
+                  "eventClick": "adddtl.ok()",
+                  "conditionDisabled": "dtlc.isTotalsTabReadonly"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.cancel",
+                  "eventClick": "adddtl.cancel()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

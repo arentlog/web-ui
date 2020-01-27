@@ -1,0 +1,276 @@
+{
+  "viewId": "ar-arece-detail-debits",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "TAB",
+  "children": [
+    {
+      "id": 175,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 176,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 179,
+              "type": "COMP_FLD",
+              "children": [
+                {
+                  "id": 178,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.newDebitMemo.invno",
+                  "label": "global.invoice.number",
+                  "dataFormat": "INTEGER_TEXT",
+                  "sign": "+",
+                  "digits": 8,
+                  "size": "SM",
+                  "required": true,
+                  "autoFocus": true,
+                  "eventChange": "dtl.onDebitFieldChange('invno')",
+                  "modelOptions": {
+                    "updateOn": "blur"
+                  }
+                },
+                {
+                  "id": 180,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.newDebitMemo.invsuf",
+                  "label": "global.suffix",
+                  "size": "XS",
+                  "dataFormat": "SuffixInput",
+                  "eventChange": "dtl.onDebitFieldChange('invsuf')",
+                  "maxLength": 2,
+                  "modelOptions": {
+                    "updateOn": "blur"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 181,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "base.newDebitMemo.amount",
+              "label": "global.amount",
+              "dataFormat": "DECIMAL",
+              "digits": 9,
+              "decimals": 2,
+              "size": "SM",
+              "sign": "+",
+              "required": true,
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            },
+            {
+              "id": 184,
+              "type": "FIELD",
+              "subType": "DROP_DOWN",
+              "model": "base.newDebitMemo.divno",
+              "label": "global.division.number",
+              "conditionReadonly": "!base.newDebitMemo.dbtdivnoenabled",
+              "type3": "MANUAL",
+              "optionsModel": "base.divnoDropDownOptions"
+            },
+            {
+              "id": 185,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "base.newDebitMemo.refer",
+              "label": "global.reference",
+              "eventChange": "dtl.onDebitFieldChange('refer')",
+              "modelOptions": {
+                "updateOn": "blur"
+              }
+            }
+          ]
+        },
+        {
+          "id": 177,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 186,
+              "type": "FIELD",
+              "subType": "LOOKUP",
+              "model": "base.newDebitMemo.custno",
+              "label": "global.customer.number",
+              "meta": "Customer",
+              "conditionReadonly": "!base.newDebitMemo.dbtcustnoenabled"
+            },
+            {
+              "id": 190,
+              "type": "FIELD",
+              "subType": "DATE",
+              "model": "base.newDebitMemo.invdt",
+              "label": "global.invoice.date",
+              "dataFormat": "DATE",
+              "required": true
+            },
+            {
+              "id": 191,
+              "type": "FIELD",
+              "subType": "DATE",
+              "model": "base.newDebitMemo.duedt",
+              "label": "global.due.date",
+              "dataFormat": "DATE",
+              "required": true
+            },
+            {
+              "id": 187,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "base.newDebitMemo.disputefl",
+              "label": "global.disputed",
+              "dataFormat": "LOGICAL"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 145,
+      "type": "GRID",
+      "model": "base.invoicesListDeb",
+      "controlRef": "base.grid3",
+      "options": {
+        "showCheckboxes": true,
+        "showDrilldown": false,
+        "selectable": "multiple",
+        "editable": true,
+        "events": {
+          "cellchange": "dtl.onDebitCellChange()",
+          "selected": "dtl.onGridRowSelected()"
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 146,
+          "type": "TOOLBAR",
+          "label": "global.debits",
+          "children": [
+            {
+              "id": 173,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.add",
+              "icon": "icon-add",
+              "eventClick": "dtl.onDebitDetailAdd()"
+            },
+            {
+              "id": 174,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.delete",
+              "icon": "icon-delete",
+              "conditionDisabled": "!base.grid3.isAnyRowSelected()",
+              "eventClick": "dtl.onDebitGridDelete()"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 148,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "invno",
+          "label": "global.invoice.number",
+          "dataFormat": "INTEGER_TEXT"
+        },
+        {
+          "id": 188,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "invsuf",
+          "label": "global.suffix",
+          "dataFormat": "Suffix"
+        },
+        {
+          "id": 153,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "amount",
+          "label": "global.amount",
+          "editable": true,
+          "digits": 9,
+          "decimals": 2,
+          "dataFormat": "CURRENCY",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 189,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "divno",
+          "label": "global.division",
+          "editable": true,
+          "sign": "+",
+          "digits": 4,
+          "cellEditable": "dtl.isDebitDivnoEditable()",
+          "dataFormat": "INTEGER_TEXT"
+        },
+        {
+          "id": 154,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "disputefl",
+          "label": "global.disputed",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 158,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "invdt",
+          "label": "global.invoice.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 152,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "duedt",
+          "label": "global.due.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 161,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "refer",
+          "label": "global.reference"
+        },
+        {
+          "id": 162,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "custno",
+          "label": "global.customer.number",
+          "editable": true,
+          "sign": "+",
+          "digits": 12,
+          "decimals": 0,
+          "cellEditable": "dtl.isDebitCustnoEditable()",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 160,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dbttxtmessage",
+          "label": "global.message"
+        }
+      ]
+    }
+  ]
+}

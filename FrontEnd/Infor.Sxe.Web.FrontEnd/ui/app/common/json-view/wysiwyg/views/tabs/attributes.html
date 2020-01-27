@@ -1,0 +1,187 @@
+<div class="row" initialize>
+   <div class="one-third column">
+      <!-- Required -->
+      <div class="field" ng-show="activeControl.type === 'FIELD' && activeControl.subType !== 'INFO'">
+         <input type="checkbox" id="fieldRequired" class="checkbox" ng-model="activeControl.required" ng-change="deleteIfFalse('required')" />
+         <label class="checkbox-label" for="fieldRequired" translate>Required</label>
+      </div>
+
+      <!-- Readonly -->
+      <div class="field" ng-show="activeControl.type === 'FIELD'">
+         <input type="checkbox" id="control-readonly" class="checkbox" ng-model="activeControl.readonly" ng-change="deleteIfFalse('readonly')" ng-disabled="activeControl.subType === 'INFO' || activeControl.subType === 'CHECKBOX' || activeControl.subType === 'RADIO_SET'" />
+         <label class="checkbox-label" for="control-readonly" translate>Readonly</label>
+      </div>
+
+      <!-- Disabled -->
+      <div class="field" ng-show="activeControl.type === 'FIELD'">
+         <input type="checkbox" id="control-disabled" class="checkbox" ng-model="activeControl.disabled" ng-change="deleteIfFalse('disabled')" ng-disabled="activeControl.subType !== 'CHECKBOX' && activeControl.subType !== 'RADIO_SET'" />
+         <label class="checkbox-label" for="control-disabled" translate>Disabled</label>
+      </div>
+
+      <!-- Auto-focus -->
+      <div class="field" ng-show="isType(['BTN', 'FIELD']) && activeControl.subType !== 'INFO'">
+         <input type="checkbox" id="field-auto-focus" class="checkbox" ng-model="activeControl.autoFocus" ng-change="deleteIfFalse('autoFocus')" />
+         <label class="checkbox-label" for="field-auto-focus" translate>Auto-focus</label>
+      </div>
+
+      <!-- Collapsed (Expandable Area) -->
+      <div class="field" ng-if="isType(['EXP_AREA'])">
+         <input type="checkbox" id="control-collapsed" class="checkbox" ng-model="activeControl.collapsed" ng-change="deleteIfFalse('collapsed')" />
+         <label class="checkbox-label" for="control-collapsed" translate>Collapsed</label>
+      </div>
+
+      <!-- Sidebar Popdown Button -->
+      <div class="field" ng-if="isType(['BTN'])" title="Associate this button with the module sidebar so that it only displays on smaller screens when the sidebar is hidden.">
+         <input type="checkbox" id="control-sidebar-btn" class="checkbox" ng-model="activeControl.sidebarPopdownButton" ng-change="deleteIfFalse('sidebarPopdownButton')" />
+         <label class="checkbox-label" for="control-sidebar-btn" translate>Sidebar Popdown Button</label>
+      </div>
+   </div>
+
+   <div class="one-third column">
+      <!-- Grid Column Conditions -->
+      <div ng-if="isType(['GRID_COL'])">
+         <!-- Cell Editable Function -->
+         <div class="field" title="(only available for editable grid columns) Reference to a function that determines which cells are editable by returning true or false. The function will be passed these params: row, cell, value, column, item.">
+            <label for="grid-column-cell-editable" translate>Cell Editable Function</label>
+            <input id="grid-column-cell-editable" type="text" ng-model="activeControl.cellEditable" ng-readonly="!activeControl.editable" />
+         </div>
+
+         <!-- Content Visible Function -->
+         <div class="field" title="Reference to a function that determines which cells have visible content by returning true or false. The function will be passed these params: row, cell, value, column, item.">
+            <label class="inline">
+               <span class="label-text">Content Visible Function</span>
+               <input type="text" ng-model="activeControl.contentVisible" />
+            </label>
+         </div>
+      </div>
+
+      <!-- Collapsed Condition (Expandable Area) -->
+      <div class="field" ng-if="isType(['EXP_AREA'])">
+         <label for="control-condition-collapsed" translate>Collapsed Condition</label>
+         <input id="control-condition-collapsed" type="text" ng-model="activeControl.conditionCollapsed" ng-change="deleteIfBlank('conditionCollapsed')" />
+      </div>
+
+      <!-- Selected Condition (Tab, Wizard Tick) -->
+      <div class="field" ng-if="isType(['TAB', 'WIZARD_TICK'])">
+         <label for="control-condition-selected" translate>Selected Condition</label>
+         <input id="control-condition-selected" type="text" ng-model="activeControl.conditionSelected" ng-change="deleteIfBlank('conditionSelected')" />
+      </div>
+
+      <div class="field" ng-show="activeControl.type === 'FIELD' && activeControl.subType !== 'INFO'">
+         <label for="control-condition-required" translate>Required Condition</label>
+         <input id="control-condition-required" type="text" ng-model="activeControl.conditionRequired" ng-disabled="activeControl.required" ng-change="deleteIfBlank('conditionRequired')" />
+      </div>
+
+      <div class="field" ng-show="isType(['VIEW', 'FORM', 'MODAL', 'ACTION_PANEL', 'SWAP_LIST']) || (isType(['FIELD']) && activeControl.subType !== 'CHECKBOX' && activeControl.subType !== 'RADIO_SET')" title="To make fields non-editable. Use on fields when the condition differs from the readonly condition on the form/view.">
+         <label for="controlConditionReadonly" translate>Readonly Condition</label>
+         <input id="controlConditionReadonly" type="text" ng-model="activeControl.conditionReadonly" ng-disabled="activeControl.readonly" ng-change="deleteIfBlank('conditionReadonly')" />
+      </div>
+
+      <div class="field" ng-show="isType(['BTN', 'FIELD', 'MENU_OPT', 'WIZARD_TICK'])" title="{{isType(['FIELD']) ? 'This should normally only be used for checkboxes and radio sets. Other fields should use a readonly condition.' : ' '}}">
+         <label for="controlConditionDisabled" translate>Disabled Condition</label>
+         <input id="controlConditionDisabled" type="text" ng-model="activeControl.conditionDisabled" ng-disabled="activeControl.disabled" ng-change="deleteIfBlank('conditionDisabled')" placeholder="{{activeControl.subType === 'CHECKBOX' || activeControl.subType === 'RADIO_SET' ? 'Only use if differs from the form condition' : ''}}" />
+      </div>
+
+      <!-- Warning for View Container & Visible Condition -->
+      <div ng-if="isType(['VIEW_CNTR'])" class="message"><svg class="icon icon-alert"><use xlink:href="#icon-alert"></use></svg><span>Warning: A Visible Condition on a View Container is normally not needed and may cause problems!</span></div>
+
+      <div class="field" ng-if="!isType(['MOD_CONTENT_HDR', 'MOD_SIDEBAR', 'MOD_SIDEBAR_CONTENT', 'MOD_SIDEBAR_FOOTER', 'MODAL', 'ACTION_PANEL', 'ROW', 'COL', 'GRID_COL', 'EXP_VIS_PANE', 'COMP_FLD', 'SWAP_LIST_LIST', 'CONTEXT_FIELD', 'HTML_CONTROL'])">
+         <label for="control-condition-show">Visible Condition</label>
+         <input id="control-condition-show" type="text" ng-model="activeControl.conditionShow" ng-change="deleteIfBlank('conditionShow')" />
+      </div>
+
+      <div class="field" ng-if="isType(['CUSTOM', 'SUB_VIEW', 'GRID_COL'])" title="{{isType(['GRID_COL']) ? 'Expression for when this grid column should be included' : 'Expression for when this control should be included. This uses the ng-if directive which removes the element from the DOM instead of just hiding it.'}}">
+         <label for="control-condition-include">Include Condition</label>
+         <input id="control-condition-include" type="text" ng-model="activeControl.conditionInclude" ng-change="deleteIfBlank('conditionInclude')" />
+      </div>
+
+      <div class="compound-field" ng-if="isType(['CHART', 'IMAGE'])">
+         <div class="field" title="Height of the control (i.e. 250px, 100%, etc.)">
+            <label for="control-height">Height</label>
+            <input id="control-height" type="text" class="input-sm" ng-model="activeControl.height" ng-change="deleteIfBlank('height')" />
+         </div>
+
+         <div class="field" title="Width of the control (i.e. 250px, 100%, etc.)">
+            <label for="control-width">Width</label>
+            <input id="control-width" type="text" class="input-sm" ng-model="activeControl.width" ng-change="deleteIfBlank('width')" />
+         </div>
+      </div>
+   </div>
+
+   <div class="one-third column">
+      <!-- Focus Condition -->
+      <div class="field" ng-if="isType(['FIELD'])" title="Expression for when to apply focus to this field. Only use this if Auto-focus is not sufficient (because it may override the user's personalization Auto-focus setting). For repeated focus, you need to reset the expression to false, let angular digest, then set to true (or use an incrementing number).">
+         <label class="inline">
+            <span class="label-text">Focus Condition (use with caution)</span>
+            <input type="text" ng-model="activeControl.conditionFocus" ng-readonly="activeControl.subType === 'INFO'" ng-change="deleteIfBlank('conditionFocus')"  />
+         </label>
+      </div>
+
+      <!-- Lazy Load -->
+      <div class="field" ng-if="isType(['SUB_VIEW'])" title="Wait to load this sub view until its containing tab or expandable area is activated. The default is Yes in order to improve performance. Some use cases may need to choose No in order to load the view right away.">
+         <label for="control-lazy-load" class="label">Lazy Load</label>
+         <select id="control-lazy-load" class="dropdown dropdown-sm" ng-model="activeControl.lazyLoad" ng-options="opt.value as opt.label for opt in yesNoDefaultOptions">
+         </select>
+      </div>
+
+      <div class="compound-field">
+         <!-- Sortable (Grid Column) -->
+         <div class="field" ng-if="isType(['GRID_COL'])" title="Allow column to be sorted. (The default is yes.)">
+            <label for="grid-column-sortable" class="label">Sortable</label>
+            <select id="grid-column-sortable" class="dropdown dropdown-sm" ng-model="activeControl.sortable" ng-options="opt.value as opt.label for opt in yesNoDefaultOptions" ng-change="gridColumnSortableChanged()">
+            </select>
+         </div>
+
+         <!-- Default Sort (Grid Column) -->
+         <div class="field" ng-if="isType(['GRID_COL'])" title="Activate column as the default sort column. (This option only works if the grid uses auto data binding via the Dataset Model option.)">
+            <label for="grid-column-default-sort" class="label" translate>Default Sort</label>
+            <select dropdown id="grid-column-default-sort" class="dropdown dropdown-sm" ng-model="activeControl.defaultSort" is-readonly="activeControl.sortable === false" ng-change="deleteIfBlank('defaultSort')">
+               <option value=""></option>
+               <option value="asc">Ascending</option>
+               <option value="desc">Descending</option>
+            </select>
+         </div>
+      </div>
+
+      <!-- Tooltip (General) -->
+      <div class="field" ng-if="isType(['BTN', 'FIELD'])" title="The string to display as the tooltip when the user hovers over this control.">
+         <label class="inline">
+            <span class="label-text">Tooltip</span>
+            <input type="text" ng-model="activeControl.tooltip" i18n-autocomplete ng-change="deleteIfBlank('tooltip')" />
+         </label>
+      </div>
+
+      <!-- Tooltip (Grid Column) -->
+      <div ng-if="isType(['GRID_COL'])">
+         <div class="compound-field">
+            <!-- Tooltip Type -->
+            <div class="field">
+               <label for="grid-column-tooltip-type" class="label" translate>Tooltip Type</label>
+               <select dropdown id="grid-column-tooltip-type" class="dropdown dropdown-sm" ng-model="activeControl.tooltipType" ng-change="gridColumnTooltipTypeChanged()">
+                  <option value=""></option>
+                  <!-- In the future a "tooltipFormatter" function option would be great for Soho to add. It would pass row, cell, value, etc. and use the returned string as the tooltip. -->
+                  <!--<option value="formatter">Formatter Function</option>-->
+                  <option value="value">Model Value</option>
+                  <option value="string">Static String</option>
+               </select>
+            </div>
+
+            <!-- Tooltip String -->
+            <div class="field" ng-show="activeControl.tooltipType === 'string'" title="The string to display as the tooltip when the user hovers over a cell.">
+               <label class="inline">
+                  <span class="label-text">Tooltip String</span>
+                  <input type="text" class="input-sm" ng-model="activeControl.tooltip" i18n-autocomplete ng-change="deleteIfBlank('tooltip')" />
+               </label>
+            </div>
+         </div>
+
+         <!-- Header Tooltip -->
+         <div class="field" title="The string to display as the tooltip when the user hovers over the column header.">
+            <label class="inline">
+               <span class="label-text">Header Tooltip</span>
+               <input type="text" ng-model="activeControl.headerTooltip" i18n-autocomplete ng-change="deleteIfBlank('headerTooltip')" />
+            </label>
+         </div>
+      </div>
+   </div>
+</div>

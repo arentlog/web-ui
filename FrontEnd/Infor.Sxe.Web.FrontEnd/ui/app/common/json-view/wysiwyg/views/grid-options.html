@@ -1,0 +1,197 @@
+<div style="width: 1180px; height: 450px; max-height: 500px; overflow-y: auto;" initialize>
+
+   <!-- Tabs -->
+   <div class="tab-container">
+      <ul class="tab-list">
+         <li class="tab"><a href="#grid-tab-general">General</a></li>
+         <li class="tab"><a href="#grid-tab-attributes">Attributes</a></li>
+         <li class="tab"><a href="#grid-tab-events">Events</a></li>
+         <li class="tab"><a href="#grid-tab-advanced">Advanced</a></li>
+      </ul>
+
+      <!-- General -->
+      <div id="grid-tab-general" class="tab-panel">
+         <div class="row">
+            <div class="one-third column">
+               <!-- Grid Sub-type -->
+               <div class="field">
+                  <label for="grid-sub-type" class="label">Grid Type</label>
+                  <select dropdown id="grid-sub-type" class="dropdown" ng-model="activeControl.subType" ng-change="deleteIfBlank('subType')">
+                     <option value="">Standard</option>
+                     <option value="LOOKUP_GRID">Lookup Grid</option>
+                  </select>
+               </div>
+
+               <!-- Control Reference -->
+               <div class="field" title="Controller-based reference for where to place the underlying SoHo grid API after it's ready (i.e. base.grid).">
+                  <label for="grid-control-reference" translate>Control Reference</label>
+                  <input id="grid-control-reference" type="text" ng-model="activeControl.controlRef" />
+               </div>
+            </div>
+
+            <div class="one-third column">
+               <!-- Data Set Model -->
+               <div class="field" title="Controller-based reference to the array of data to bind this grid to (i.e. base.dataset). The grid display will update (and revert to page 1) when objects are added/removed, or when the reference is changed to a new array. If only values on an object are changed, then use grid.updateRow(index) to refresh only that row.">
+                  <label for="grid-model" translate>Dataset Model</label>
+                  <input type="text" id="grid-model" ng-model="activeControl.model" />
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Attributes -->
+      <div id="grid-tab-attributes" class="tab-panel">
+         <div class="row">
+
+            <div class="one-third column">
+               <!-- Show Checkboxes -->
+               <div class="field">
+                  <input type="checkbox" id="grid-show-checkboxes" class="checkbox" ng-model="activeControl.options.showCheckboxes" />
+                  <label class="checkbox-label" for="grid-show-checkboxes" translate>Show Checkboxes</label>
+               </div>
+
+               <!-- Show Drill-down -->
+               <div class="field">
+                  <input type="checkbox" id="grid-show-drilldown" class="checkbox" ng-model="activeControl.options.showDrilldown" />
+                  <label class="checkbox-label" for="grid-show-drilldown" translate>Show Drilldown</label>
+               </div>
+
+               <!-- Show Expander -->
+               <div class="field">
+                  <input type="checkbox" id="grid-show-expander" class="checkbox" ng-model="activeControl.options.showExpander" />
+                  <label class="checkbox-label" for="grid-show-expander" translate>Show Expander</label>
+               </div>
+
+               <!-- Editable -->
+               <div class="field">
+                  <input type="checkbox" id="grid-editable" class="checkbox" ng-model="activeControl.options.editable" ng-change="gridEditableChanged()" />
+                  <label class="checkbox-label" for="grid-editable" translate>Editable</label>
+               </div>
+            </div>
+
+            <div class="one-third column">
+               <div class="compound-field">
+                  <!-- Selectable -->
+                  <div class="field">
+                     <label for="grid-selectable" class="label" translate>Selectable</label>
+                     <select dropdown id="grid-selectable" class="dropdown dropdown-sm" ng-model="activeControl.options.selectable" ng-options="opt.value as opt.label for opt in selectableOptions">
+                     </select>
+                  </div>
+
+                  <!-- Show Row Count -->
+                  <div class="field">
+                     <label for="grid-show-row-count" class="label">Show Row Count</label>
+                     <select id="grid-show-row-count" class="dropdown dropdown-sm" ng-model="activeControl.options.showRowCount" ng-options="opt.value as opt.label for opt in yesNoDefaultOptions">
+                     </select>
+                  </div>
+               </div>
+
+               <!-- Paging -->
+               <div class="compound-field">
+                  <div class="field">
+                     <label for="grid-paging" class="label" translate>Paging</label>
+                     <select id="grid-paging" class="dropdown dropdown-sm" ng-model="activeControl.options.paging" ng-options="opt.value as opt.label for opt in yesNoDefaultOptions">
+                     </select>
+                  </div>
+
+                  <!-- Default Page Size -->
+                  <div class="field">
+                     <label for="grid-page-size" class="label" translate>Default Page Size</label>
+                     <select id="grid-page-size" class="dropdown dropdown-sm" ng-model="activeControl.options.pagesize" ng-options="opt.value as opt.label for opt in defaultPageSizeOptions">
+                     </select>
+                  </div>
+               </div>
+
+               <!-- Show Filter Row -->
+               <div class="compound-field">
+                  <div class="field" title="Show the grid filter row by default (instead of only after the user chooses it).">
+                     <label for="grid-show-filter-row" class="label">Show Filter Row</label>
+                     <select id="grid-show-filter-row" class="dropdown dropdown-sm" ng-model="activeControl.options.filterable" ng-options="opt.value as opt.label for opt in yesNoDefaultOptions">
+                     </select>
+                  </div>
+
+                  <!-- Show Search Field -->
+                  <div class="field">
+                     <label for="grid-show-search-field" class="label">Show Search Field</label>
+                     <select id="grid-show-search-field" class="dropdown dropdown-sm" ng-model="activeControl.options.showSearchField" ng-options="opt.value as opt.label for opt in yesNoDefaultOptions">
+                     </select>
+                  </div>
+               </div>
+
+               <!-- Editable Condition -->
+               <div class="field" title="Only available for editable grids">
+                  <label for="grid-condition-editable" translate>Editable Condition</label>
+                  <input id="grid-condition-editable" type="text" ng-model="activeControl.conditionEditable" ng-disabled="!activeControl.options.editable" />
+               </div>
+
+               <!-- Visible -->
+               <div class="field">
+                  <label for="grid-condition-show" translate>Visible Condition</label>
+                  <input id="grid-condition-show" type="text" ng-model="activeControl.conditionShow" />
+               </div>
+            </div>
+
+            <div class="one-third column">
+               <!-- Expandable Row Detail Options -->
+               <fieldset ng-show="activeControl.options.showExpander">
+                  <legend>Expandable Row Detail</legend>
+
+                  <div class="field" title="File path of the view to use for the expanded row (i.e. ar/arele/row-detail.json).">
+                     <label for="grid-row-detail-template" ng-class="activeControl.options.showExpander ? 'required' : ''" translate>View File Path</label>
+                     <input id="grid-row-detail-template" type="text" ng-model="activeControl.options.rowDetailOptions.template" ng-readonly="!activeControl.options.showExpander" />
+                  </div>
+
+                  <div class="field" title="Controller to use for view of the expanded row (i.e. AreleRowDetailCtrl as row).">
+                     <label for="grid-row-detail-controller" ng-class="activeControl.options.showExpander ? 'required' : ''" translate>Controller</label>
+                     <input id="grid-row-detail-controller" type="text" ng-model="activeControl.options.rowDetailOptions.controller" ng-readonly="!activeControl.options.showExpander" />
+                  </div>
+
+                  <div class="field" title="Where to set the row params so they can be accessed in the controller via $scope (i.e. mst.rowParams).">
+                     <label for="grid-row-detail-params" ng-class="activeControl.options.showExpander ? 'required' : ''" translate>Reference to Params</label>
+                     <input id="grid-row-detail-params" type="text" ng-model="activeControl.options.rowDetailOptions.paramsReference" ng-readonly="!activeControl.options.showExpander" />
+                  </div>
+               </fieldset>
+            </div>
+         </div>
+      </div>
+
+      <!-- Events -->
+      <div id="grid-tab-events" class="tab-panel">
+         <div class="row">
+            <div class="one-third column">
+               <!-- Ready -->
+               <div class="field" title="After grid has been initialized and the underlying SoHo API is ready for use">
+                  <label for="grid-ready" translate>Ready</label>
+                  <input type="text" id="grid-ready" ng-model="activeControl.options.events.ready" />
+               </div>
+
+               <!-- Drill-down -->
+               <div class="field">
+                  <label for="grid-drilldown" translate>Drilldown</label>
+                  <input type="text" id="grid-drilldown" ng-model="activeControl.options.events.drilldown" />
+               </div>
+            </div>
+
+            <div class="one-third column">
+               <!-- Cell Change -->
+               <div class="field">
+                  <label for="grid-cell-change" translate>Cell Change</label>
+                  <input type="text" id="grid-cell-change" ng-model="activeControl.options.events.cellchange" />
+               </div>
+
+               <!-- Selected -->
+               <div class="field">
+                  <label for="grid-selected" translate>Selected</label>
+                  <input type="text" id="grid-selected" ng-model="activeControl.options.events.selected" />
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Advanced -->
+      <div id="grid-tab-advanced" class="tab-panel">
+         <div include-view="'/ui/app/common/json-view/wysiwyg/views/tabs/advanced.html'" data-type="HTML" data-lazy-load="true"></div>
+      </div>
+   </div>
+
+</div>

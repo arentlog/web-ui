@@ -1,0 +1,340 @@
+{
+  "viewId": "po-shared-tally-tally",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 39,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 40,
+          "type": "COL",
+          "subType": "1",
+          "children": [
+            {
+              "id": 38,
+              "type": "TOOLBAR",
+              "label": "global.blank.label.string.for.space",
+              "children": [
+                {
+                  "id": 31,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "securityLevel": 3,
+                  "eventClick": "tally.save()",
+                  "conditionShow": "!tally.isTallyOnBundle && !tally.poTallyCriteria.inquirefl",
+                  "conditionDisabled": "base.securitySubLevelLines < 3"
+                },
+                {
+                  "id": 30,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.calculate.new.mix",
+                  "icon": "icon-calculator",
+                  "conditionShow": "!tally.isTallyOnBundle && tally.poTallySingle.btncalculateenabled",
+                  "eventClick": "tally.calculateNewMix()",
+                  "conditionDisabled": "base.securitySubLevelLines < 3"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 3,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 8,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "tally.poTallyCriteria.qtyreq",
+              "label": "global.required.quantity",
+              "dataFormat": "DECIMAL",
+              "size": "SM",
+              "sign": "+",
+              "digits": 7,
+              "decimals": 0,
+              "conditionReadonly": "!tally.poTallySingle.qtyreqenabled || tally.isTallyOnBundle || base.securitySubLevelLines < 3",
+              "formatOptions": {
+                "minimumFractionDigits": 0,
+                "maximumFractionDigits": 0
+              }
+            },
+            {
+              "id": 42,
+              "type": "COMP_FLD",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "tally.poTallyCriteria.units",
+                  "label": "global.unit",
+                  "meta": "Units",
+                  "size": "SM",
+                  "conditionReadonly": "!tally.poTallySingle.unitenabled || tally.isTallyOnBundle || base.securitySubLevelLines < 3",
+                  "eventChange": "tally.leaveTallyField('unit')",
+                  "modelOptions": {
+                    "updateOn": "blur"
+                  },
+                  "options": {
+                    "searchParams": {
+                      "prod": {
+                        "type": "REF",
+                        "value": "tally.poTallyCriteria.prod"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "tally.poTallyCriteria.price",
+                  "label": "global.price",
+                  "maxLength": 5,
+                  "dataFormat": "CURRENCY",
+                  "eventChange": "tally.leaveTallyField('price')",
+                  "size": "SM",
+                  "sign": "+",
+                  "digits": 7,
+                  "decimals": 5,
+                  "conditionReadonly": "!tally.poTallySingle.priceenabled || tally.isTallyOnBundle || base.securitySubLevelLines < 3",
+                  "modelOptions": {
+                    "updateOn": "blur"
+                  },
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 5
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 11,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "tally.poTallyCriteria.prod",
+              "label": "global.product",
+              "dataDesc": "tally.poTallySingle.proddesc"
+            },
+            {
+              "id": 12,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "tally.poTallySingle.qtyact",
+              "label": "global.actual.quantity",
+              "dataFormat": "DECIMAL",
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            },
+            {
+              "id": 13,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "tally.poTallySingle.adjfactor",
+              "label": "global.adjustment.factor",
+              "conditionShow": "!tally.poTallySingle.adjfactorhidden"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "GRID",
+      "model": "tally.poTallyResultsFiltered",
+      "controlRef": "tally.tallyGrid",
+      "conditionShow": "",
+      "options": {
+        "showCheckboxes": true,
+        "showDrilldown": true,
+        "events": {
+          "drilldown": "tally.drillDown()"
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 6,
+          "type": "TOOLBAR",
+          "label": "global.tallies",
+          "children": [
+            {
+              "id": 33,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-new-document",
+              "label": "global.new",
+              "stateRef": "",
+              "securityLevel": 4,
+              "eventClick": "tally.newTallyComponent()",
+              "conditionDisabled": "tally.tallyGrid.isAnyRowSelected() || base.securitySubLevelLines < 4",
+              "conditionShow": "tally.isTallyDetailsVisible"
+            },
+            {
+              "id": 32,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.edit",
+              "icon": "icon-edit",
+              "securityLevel": 3,
+              "eventClick": "tally.editSequence()",
+              "conditionDisabled": "!tally.tallyGrid.isOneRowSelected() || base.securitySubLevelLines < 3",
+              "conditionShow": "tally.isTallyDetailsVisible"
+            },
+            {
+              "id": 35,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-delete",
+              "label": "global.delete",
+              "eventClick": "tally.deleteTallyComponent()",
+              "securityLevel": 5,
+              "conditionDisabled": "!tally.tallyGrid.isOneRowSelected() || base.securitySubLevelLines < 5",
+              "conditionShow": "tally.isTallyDetailsVisible"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 7,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qtyord",
+          "label": "global.order",
+          "dataFormat": "DECIMAL"
+        },
+        {
+          "id": 14,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "length",
+          "label": "global.length",
+          "dataFormat": "DECIMAL"
+        },
+        {
+          "id": 15,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "extend",
+          "label": "global.total.order",
+          "dataFormat": "DECIMAL"
+        },
+        {
+          "id": 16,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "shipprod",
+          "label": "global.product",
+          "eventClick": "tally.navigateToProduct()"
+        },
+        {
+          "id": 41,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "notesfl",
+          "label": "global.notes",
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 17,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "descrip1",
+          "label": "global.description"
+        },
+        {
+          "id": 19,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qtyavail",
+          "label": "global.quantity.available",
+          "dataFormat": "DECIMAL"
+        },
+        {
+          "id": 20,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "adjcost",
+          "label": "global.adjust.cost",
+          "dataFormat": "DECIMAL"
+        },
+        {
+          "id": 21,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "prodcost",
+          "label": "global.price",
+          "dataFormat": "DECIMAL"
+        },
+        {
+          "id": 22,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "invcost",
+          "label": "global.inventory.cost",
+          "dataFormat": "DECIMAL"
+        },
+        {
+          "id": 23,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qtyonhand",
+          "label": "global.on.hand",
+          "dataFormat": "DECIMAL"
+        },
+        {
+          "id": 24,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qtyonorder",
+          "label": "global.on.order",
+          "dataFormat": "DECIMAL"
+        },
+        {
+          "id": 25,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "statustype",
+          "label": "global.status",
+          "extra": true
+        },
+        {
+          "id": 26,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "countryoforigin",
+          "label": "global.country.of.origin"
+        },
+        {
+          "id": 27,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "tariffcd",
+          "label": "global.hs.code"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "viewId": "wt-wtia-updateapproval",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.approval.process",
+              "subLabel": "{{approveit.subTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 9,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 16,
+                  "type": "BTN",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "eventClick": "approveit.save()",
+                  "stateRef": "",
+                  "submitForm": false,
+                  "eventValidated": "",
+                  "conditionDisabled": "approveit.viewonly || linedtl.isLineItemsTabReadonly",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 17,
+                  "type": "BTN",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "",
+                  "stateRef": "wtia.linedetail"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 29,
+                  "type": "FIELD_SET",
+                  "label": "global.approval",
+                  "children": [
+                    {
+                      "id": 25,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 26,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 6,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "approveit.approvety",
+                              "label": "global.approval.type",
+                              "meta": "ApprovalType",
+                              "type3": "SET",
+                              "metaGroup": "WT",
+                              "eventChange": "approveit.changeApproveType()",
+                              "conditionDisabled": "approveit.viewonly",
+                              "blankOption": false,
+                              "conditionReadonly": "linedtl.isLineItemsTabReadonly"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 27,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 8,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "approveit.qtyship",
+                              "label": "global.quantity.shipped",
+                              "dataFormat": "DECIMAL",
+                              "conditionDisabled": "approveit.approvety != 'y' || approveit.viewonly",
+                              "sign": "+",
+                              "decimals": 2,
+                              "digits": 7,
+                              "conditionReadonly": "linedtl.isLineItemsTabReadonly",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "approveit.bofl",
+                              "label": "global.back.order",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "approveit.approvety != 'y' || approveit.viewonly || linedtl.isLineItemsTabReadonly"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 30,
+                  "type": "EXP_AREA",
+                  "label": "global.detail",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 21,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "approveit.wtiaDetail.shipprod",
+                              "label": "global.product"
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "approveit.wtiaDetail.qtyord",
+                              "label": "global.quantity.ordered",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 33,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 12,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "approveit.wtiaDetail.netAvailable",
+                              "label": "global.available",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 13,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "approveit.wtiaDetail.surplus",
+                              "label": "global.surplus",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 22,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 14,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "approveit.wtiaDetail.totalLineAmt",
+                              "label": "global.total.order",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

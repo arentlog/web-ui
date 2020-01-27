@@ -1,0 +1,257 @@
+{
+  "viewId": "ic-icsec-vendordetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.icsec",
+              "subLabel": "{{vdtl.subtitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "conditionDisabled": "!base.isDetail()",
+                      "stateRef": "^.vendorMaster"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "stateRef": "",
+                  "securityLevel": 4,
+                  "eventClick": "vdtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "conditionShow": "base.security.vendor >= 4"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": "",
+                  "securityLevel": 3,
+                  "conditionDisabled": "!base.isDetail()",
+                  "eventClick": "vdtl.edit()",
+                  "conditionShow": "base.security.vendor >= 3"
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "vdtl.delete()",
+                  "securityLevel": 5,
+                  "conditionDisabled": "!base.isDetail()",
+                  "conditionShow": "base.security.vendor >= 5"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "conditionDisabled": "base.isDetail()",
+                  "eventClick": "vdtl.cancel()",
+                  "conditionShow": "base.security.vendor >= 3"
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "vdtl.submit()",
+                  "securityLevel": 3,
+                  "conditionDisabled": "base.isDetail()",
+                  "conditionShow": "base.security.vendor >= 3"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 13,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 14,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 15,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "vdtl.icsec.keyno",
+                              "label": "global.vendor",
+                              "meta": "Vendor",
+                              "conditionReadonly": "!base.isCreate()",
+                              "required": true,
+                              "autoFocus": true
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "vdtl.icsec.altprod",
+                              "label": "global.vendor.product",
+                              "meta": "ProdIcspAndXref",
+                              "maxLength": 50
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "vdtl.icsec.leadtm",
+                              "label": "global.lead.time",
+                              "dataFormat": "INTEGER",
+                              "digits": 6,
+                              "sign": "+"
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "vdtl.icsec.unitstnd",
+                              "label": "global.standard.pack",
+                              "meta": "Units",
+                              "options": {
+                                "searchParams": {
+                                  "prod": {
+                                    "type": "REF",
+                                    "value": "vdtl.icsec.prod"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 20,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "vdtl.icsec.prod",
+                              "label": "global.our.product",
+                              "meta": "ProdIcspAndXref",
+                              "required": true,
+                              "maxLength": 50
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "vdtl.icsec.unitbuy",
+                              "label": "global.buy.unit",
+                              "meta": "Units",
+                              "options": {
+                                "searchParams": {
+                                  "prod": {
+                                    "type": "REF",
+                                    "value": "vdtl.icsec.prod"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "vdtl.icsec.price",
+                              "label": "global.price",
+                              "dataFormat": "DECIMAL",
+                              "digits": 6,
+                              "decimals": 5
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "vdtl.icsec.lastchgdt",
+                              "label": "global.last.change",
+                              "dataFormat": "DATE"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 16,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 19,
+                              "type": "CUSTOM",
+                              "subType": "UserFields",
+                              "options": {
+                                "tableName": "icsec",
+                                "objectRef": "vdtl.icsec",
+                                "conditionReadonly": "base.isDetail()"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

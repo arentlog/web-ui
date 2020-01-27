@@ -1,0 +1,175 @@
+{
+  "viewId": "ar-arsl-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.lock.box",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 23,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 24,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 5,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "stateRef": ".edit",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "conditionDisabled": "!base.isDetail()",
+                  "eventClick": "dtl.delete()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "conditionDisabled": "base.isDetail()",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "conditionDisabled": "base.isDetail()",
+                  "eventClick": "dtl.reset()"
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "conditionDisabled": "base.isDetail()",
+                  "eventClick": "dtl.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 12,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 13,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "type": "ROW",
+                      "id": 14,
+                      "children": [
+                        {
+                          "type": "COL",
+                          "subType": "1/2",
+                          "id": 15,
+                          "children": [
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "type3": "STANDARD",
+                              "meta": "Customer",
+                              "label": "global.customer.number",
+                              "required": true,
+                              "model": "dtl.arsl.custno",
+                              "conditionReadonly": "!base.isCreate()"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "COL",
+                          "subType": "1/2",
+                          "id": 17,
+                          "children": [
+                            {
+                              "subType": "TEXT_BOX",
+                              "label": "global.lock.box.number",
+                              "type": "FIELD",
+                              "required": true,
+                              "model": "dtl.arsl.lockboxno",
+                              "id": 18,
+                              "maxLength": 30
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 21,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "arsl",
+                        "objectRef": "dtl.arsl",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

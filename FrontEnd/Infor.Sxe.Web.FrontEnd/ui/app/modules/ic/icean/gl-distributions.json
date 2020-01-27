@@ -1,0 +1,171 @@
+{
+  "viewId": "ic-icean-gldistributions",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "gldc.isglDistribution()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "gl.distribution",
+              "subLabel": "{{gldc.iceanTransactionsResult.prod +  ' | '  + gldc.iceanTransactionsResult.whse +  ' | ' + gldc.iceanTransactionsResult.binloc1}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "gldc.cancel(false)",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 38,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.submit",
+                  "eventClick": "gldc.update()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 39,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "gldc.cancel(true)"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 27,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "label": "global.proof",
+                  "model": "gldc.proof",
+                  "dataFormat": "DECIMAL",
+                  "decimals": 2,
+                  "readonly": true,
+                  "autoFocus": true
+                },
+                {
+                  "id": 19,
+                  "type": "GRID",
+                  "model": "gldc.glModelList",
+                  "controlRef": "gldc.grid",
+                  "options": {
+                    "showCheckboxes": true,
+                    "rowDetailOptions": {
+                      "template": "ic/icean/gl-distribution-row-detail.json",
+                      "controller": "GLDistributionRowDetailCtrl as row",
+                      "paramsReference": "gldc.rowParams"
+                    },
+                    "showDrilldown": false
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 37,
+                      "type": "TOOLBAR",
+                      "label": "global.general.ledger",
+                      "children": [
+                        {
+                          "id": 8,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-new-document",
+                          "label": "global.new",
+                          "eventClick": "gldc.create()"
+                        },
+                        {
+                          "id": 49,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-edit",
+                          "label": "global.edit",
+                          "securityLevel": 3,
+                          "eventClick": "gldc.edit()",
+                          "conditionDisabled": "!gldc.grid.isOneRowSelected()"
+                        },
+                        {
+                          "id": 10,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "eventClick": "gldc.deleteRecord()",
+                          "conditionDisabled": "!gldc.grid.isOneRowSelected()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "accountType",
+                      "label": "global.account.type"
+                    },
+                    {
+                      "id": 34,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "accountNumber",
+                      "label": "global.account"
+                    },
+                    {
+                      "id": 35,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "amount",
+                      "label": "global.amount",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 36,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "accountName",
+                      "label": "global.account.name"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "type": "VIEW_CNTR",
+      "viewName": "glDistributionDetailView"
+    }
+  ]
+}

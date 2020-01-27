@@ -1,0 +1,806 @@
+{
+  "viewId": "oe-oeio-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 3,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 4,
+          "type": "TOOLBAR",
+          "label": "title.oeio",
+          "children": []
+        },
+        "content": {
+          "id": 5,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 15,
+              "type": "EXP_AREA",
+              "label": "global.advanced.search",
+              "collapsed": true,
+              "children": [
+                {
+                  "id": 134,
+                  "type": "CUSTOM",
+                  "subType": "AdvancedSearch",
+                  "options": {
+                    "criteria": "mst.advCriteria",
+                    "criteriaList": "mst.criteriaList",
+                    "criteriaView": "oe/oeio/advanced-criteria.json",
+                    "defaultSelectedCriteria": "mst.defaultSelectedCriteria",
+                    "searchFunction": "mst.search"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "GRID",
+              "id": 11,
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "conditionShow": "",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "selectable": "multiple",
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.orders",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "orderno",
+                  "label": "global.order.number"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "ordersuf",
+                  "label": "global.suffix",
+                  "dataFormat": "Suffix"
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "oenotesfl",
+                  "label": "global.order.notes",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 180,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "lineno",
+                  "label": "global.line.number",
+                  "conditionInclude": "!base.isHeaderSearch",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 181,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "specnstype",
+                  "label": "global.non.stock",
+                  "conditionInclude": "base.isLineSearch"
+                },
+                {
+                  "id": 182,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "commentfl",
+                  "label": "global.comment",
+                  "conditionInclude": "!base.isHeaderSearch",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 183,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "seqno",
+                  "label": "global.sequence.number",
+                  "conditionInclude": "base.isKitSearch || base.isKitAllSearch || base.isTallySearch",
+                  "dataFormat": "Sequence"
+                },
+                {
+                  "id": 184,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "shipprod",
+                  "label": "global.product",
+                  "eventClick": "mst.prodHyperlink()",
+                  "conditionInclude": "!base.isHeaderSearch"
+                },
+                {
+                  "id": 186,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prodnotesfl",
+                  "label": "global.product.notes",
+                  "conditionInclude": "!base.isHeaderSearch",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 187,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "proddesc",
+                  "label": "global.description",
+                  "conditionInclude": "base.isLineSearch || base.isKitSearch || base.isKitAllSearch || base.isTallySearch"
+                },
+                {
+                  "id": 188,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "compprod",
+                  "label": "global.component",
+                  "eventClick": "mst.compHyperlink()",
+                  "conditionInclude": "base.isKitSearch || base.isKitAllSearch || base.isTallySearch"
+                },
+                {
+                  "id": 189,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "compprodnotesfl",
+                  "label": "global.component.notes",
+                  "eventClick": "",
+                  "conditionInclude": "base.isKitSearch || base.isKitAllSearch || base.isTallySearch",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 190,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "compproddesc",
+                  "label": "global.component.description",
+                  "eventClick": "",
+                  "conditionInclude": "base.isKitSearch || base.isKitAllSearch || base.isTallySearch"
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "custno",
+                  "label": "global.customer.number",
+                  "eventClick": "mst.custHyperlink()",
+                  "dataFormat": "DECIMAL_TEXT"
+                },
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "arscname",
+                  "label": "global.customer.name",
+                  "conditionInclude": "base.isHeaderSearch || base.isLineSearch"
+                },
+                {
+                  "id": 26,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "custnotesfl",
+                  "label": "global.customer.notes",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 28,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "shipto",
+                  "label": "global.ship.to",
+                  "eventClick": "mst.shipToHyperlink()",
+                  "conditionInclude": "!base.isCoreSearch"
+                },
+                {
+                  "id": 29,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shiptonm",
+                  "label": "global.ship.to.name",
+                  "conditionInclude": "base.isHeaderSearch || base.isLineSearch"
+                },
+                {
+                  "id": 30,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "arssname",
+                  "label": "global.customer.ship.to.name",
+                  "conditionInclude": "base.isHeaderSearch || base.isLineSearch"
+                },
+                {
+                  "id": 31,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whse",
+                  "label": "global.warehouse"
+                },
+                {
+                  "id": 32,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "icsdname",
+                  "label": "global.warehouse.name",
+                  "conditionInclude": "base.isHeaderSearch || base.isLineSearch"
+                },
+                {
+                  "id": 223,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "divno",
+                  "label": "global.division",
+                  "type3": "CODES",
+                  "meta": "Division"
+                },
+                {
+                  "id": 33,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "transtype",
+                  "label": "global.type",
+                  "dataFormat": "OeOrderType"
+                },
+                {
+                  "id": 65,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "stagecd",
+                  "label": "global.stage",
+                  "conditionInclude": "!base.isCoreSearch",
+                  "dataFormat": "OeStage"
+                },
+                {
+                  "id": 191,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "stage",
+                  "label": "global.stage",
+                  "conditionInclude": "base.isCoreSearch"
+                },
+                {
+                  "id": 35,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "suspend",
+                  "label": "global.suspended.floor.plan"
+                },
+                {
+                  "id": 37,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "jobno",
+                  "label": "global.job.number"
+                },
+                {
+                  "id": 36,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "custpo",
+                  "label": "global.purchase.order"
+                },
+                {
+                  "id": 40,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "promisedt",
+                  "label": "global.promised.date",
+                  "conditionInclude": "!base.isCoreSearch",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 42,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "reqshipdt",
+                  "label": "global.requested.ship.date",
+                  "conditionInclude": "base.isHeaderSearch",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 44,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "shipdt",
+                  "label": "global.shipped.date",
+                  "conditionInclude": "!base.isCoreSearch",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 43,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "invoicedt",
+                  "label": "global.invoice.date",
+                  "conditionInclude": "!base.isCoreSearch",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 47,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totqtyord",
+                  "label": "global.quantity.ordered",
+                  "conditionInclude": "base.isHeaderSearch",
+                  "dataFormat": "DECIMAL"
+                },
+                {
+                  "id": 48,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totqtyshp",
+                  "label": "global.quantity.shipped",
+                  "conditionInclude": "base.isHeaderSearch",
+                  "dataFormat": "DECIMAL"
+                },
+                {
+                  "id": 49,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totinvamt",
+                  "label": "global.invoice.amount",
+                  "conditionInclude": "base.isHeaderSearch",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 50,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totlineord",
+                  "label": "global.ordered.amount",
+                  "conditionInclude": "base.isHeaderSearch",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 51,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totlineamt",
+                  "label": "global.shipped.amount",
+                  "conditionInclude": "base.isHeaderSearch",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 45,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "slsrepin",
+                  "label": "global.inside.sales.rep",
+                  "conditionInclude": "base.isHeaderSearch"
+                },
+                {
+                  "id": 46,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "slsrepout",
+                  "label": "global.outside.salesrep",
+                  "conditionInclude": "base.isHeaderSearch"
+                },
+                {
+                  "id": 192,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "ptlkitbofl",
+                  "label": "global.partial.kit.back.order",
+                  "conditionInclude": "base.isLineSearch",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 193,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "qtyneeded",
+                  "label": "global.quantity.needed",
+                  "conditionInclude": "base.isKitSearch || base.isKitAllSearch || base.isTallySearch",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 194,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "qtyord",
+                  "label": "global.quantity.ordered",
+                  "conditionInclude": "!base.isHeaderSearch && !base.isCoreSearch",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 195,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "qtyreservd",
+                  "label": "global.quantity.reserved",
+                  "conditionInclude": "base.isKitSearch || base.isKitAllSearch || base.isTallySearch",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 196,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "qtyship",
+                  "label": "global.quantity.shipped",
+                  "conditionInclude": "!base.isHeaderSearch && !base.isCoreSearch",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 197,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "reqfl",
+                  "label": "global.required",
+                  "conditionInclude": "base.isKitSearch || base.isKitAllSearch || base.isTallySearch",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 198,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "unit",
+                  "label": "global.unit",
+                  "conditionInclude": "!base.isHeaderSearch && !base.isCoreSearch"
+                },
+                {
+                  "id": 199,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "netord",
+                  "label": "global.net.ordered.amount",
+                  "conditionInclude": "base.isLineSearch",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 200,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "netamt",
+                  "label": "global.net.shipped.amount",
+                  "conditionInclude": "base.isLineSearch",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 201,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "bono",
+                  "label": "global.back.order.number",
+                  "conditionInclude": "base.isLineSearch",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 202,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prodcost",
+                  "label": "global.cost",
+                  "conditionInclude": "base.isLineSearch && base.sasoo.seecostfl",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5,
+                    "maximumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 203,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "priceoverfl",
+                  "label": "global.price.override",
+                  "conditionInclude": "base.isLineSearch",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 204,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "priceclty",
+                  "label": "global.price.calculation.type",
+                  "conditionInclude": "base.isLineSearch"
+                },
+                {
+                  "id": 205,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "lnPricecd",
+                  "label": "global.percent.level",
+                  "conditionInclude": "base.isLineSearch",
+                  "dataFormat": "DECIMAL"
+                },
+                {
+                  "id": 206,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "expiredt",
+                  "label": "global.expire.date",
+                  "conditionInclude": "base.isCoreSearch",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 207,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "qtysold",
+                  "label": "global.quantity.sold",
+                  "conditionInclude": "base.isCoreSearch",
+                  "dataFormat": "DECIMAL"
+                },
+                {
+                  "id": 208,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "qtyavail",
+                  "label": "global.quantity.available",
+                  "conditionInclude": "base.isCoreSearch",
+                  "dataFormat": "DECIMAL"
+                },
+                {
+                  "id": 209,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "corechg",
+                  "label": "global.core.charge",
+                  "conditionInclude": "base.isCoreSearch",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 210,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "statuscd",
+                  "label": "global.status",
+                  "conditionInclude": "base.isCoreSearch"
+                },
+                {
+                  "id": 63,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "orderDisp",
+                  "label": "global.disposition",
+                  "dataFormat": "OeOrderDisposition"
+                },
+                {
+                  "id": 38,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "takenby",
+                  "label": "global.taken.by",
+                  "conditionInclude": "!base.isCoreSearch"
+                },
+                {
+                  "id": 39,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "enterdt",
+                  "label": "global.entered.date",
+                  "conditionInclude": "!base.isCoreSearch",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 64,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "autoaltwhsefl",
+                  "label": "wt.billed",
+                  "conditionInclude": "!base.isCoreSearch",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 211,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "approvty",
+                  "label": "global.approval"
+                },
+                {
+                  "id": 53,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "trackerno",
+                  "label": "global.tracker.number",
+                  "conditionInclude": "base.isHeaderSearch"
+                },
+                {
+                  "id": 52,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "pkgno",
+                  "label": "global.package.number",
+                  "conditionInclude": "base.isHeaderSearch",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 66,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "origincd",
+                  "label": "global.origin.code",
+                  "conditionInclude": "base.isHeaderSearch || base.isLineSearch"
+                },
+                {
+                  "id": 67,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "origincopyty",
+                  "label": "global.origin.copy.type",
+                  "conditionInclude": "base.isHeaderSearch || base.isLineSearch"
+                },
+                {
+                  "id": 68,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "originorderno",
+                  "label": "global.origin.order.number",
+                  "conditionInclude": "base.isHeaderSearch || base.isLineSearch",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 69,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "originordersuf",
+                  "label": "global.origin.order.suffix",
+                  "conditionInclude": "base.isHeaderSearch || base.isLineSearch",
+                  "dataFormat": "Suffix"
+                },
+                {
+                  "id": 212,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "restrictcd",
+                  "label": "global.restriction.code",
+                  "conditionInclude": "base.isLineSearch || base.isKitAllSearch"
+                },
+                {
+                  "id": 213,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "restrictovrfl",
+                  "label": "global.restriction.override.only",
+                  "conditionInclude": "base.isLineSearch || base.isKitAllSearch",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 214,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "certcode",
+                  "label": "global.certificate.license.id",
+                  "conditionInclude": "base.isLineSearch || base.isKitAllSearch"
+                },
+                {
+                  "id": 215,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "custreserveovrfl",
+                  "label": "global.reservations.override",
+                  "conditionInclude": "base.isLineSearch || base.isKitAllSearch",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 216,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "custreservecontractno",
+                  "label": "global.reservations.contract",
+                  "conditionInclude": "base.isLineSearch || base.isKitAllSearch"
+                },
+                {
+                  "id": 217,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "ccsubmitdt",
+                  "label": "global.submit.date",
+                  "dataFormat": "DATE",
+                  "conditionInclude": "base.isSubmitSearch"
+                },
+                {
+                  "id": 218,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "vendretauth",
+                  "label": "global.vendor.return.authorization.no"
+                },
+                {
+                  "id": 219,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "saleswhse",
+                  "label": "global.sales.warehouse",
+                  "conditionInclude": "base.isAOSalesWhseOn"
+                },
+                {
+                  "id": 220,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "fulfillmentordfl",
+                  "label": "global.fulfillment.order",
+                  "conditionInclude": "base.isOrderFulfillmentOn",
+                  "dataFormat": "BooleanToYesNo",
+                  "eventClick": "mst.fulfillmentHyperlink()"
+                },
+                {
+                  "id": 221,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "fulfillmenttiedfl",
+                  "label": "global.fulfillment.tied.order",
+                  "conditionInclude": "base.isOrderFulfillmentOn",
+                  "dataFormat": "BooleanToYesNo",
+                  "eventClick": "mst.fulfillmentTiedHyperlink()"
+                },
+                {
+                  "id": 222,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "refer",
+                  "label": "global.reference"
+                },
+                {
+                  "id": 224,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "lspinvregstatus",
+                  "label": "global.lsp.inv.reg.status",
+                  "dataFormat": "LSPInvRegStatus",
+                  "conditionInclude": "base.isLSPMexicoOn"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,561 @@
+{
+  "viewId": "oe-oeet-selectproducts-shoppinglist-shoppinglist",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "!sl.isChildState()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.order.entry",
+              "subLabel": "global.shopping.list",
+              "controls": {
+                "navBtns": {
+                  "id": 233,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 234,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "sl.back()",
+                      "conditionShow": "false",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 261,
+                  "type": "BTN",
+                  "label": "global.finish",
+                  "icon": "icon-invoice-released",
+                  "eventClick": "base.finishOrder()"
+                },
+                {
+                  "id": 248,
+                  "type": "BTN",
+                  "label": "global.products",
+                  "icon": "icon-cart",
+                  "sidebarPopdownButton": true,
+                  "controls": {
+                    "popdown": {
+                      "id": 249,
+                      "type": "POPDOWN",
+                      "children": [
+                        {
+                          "id": 250,
+                          "type": "CARD",
+                          "label": "{{base.prodSidebarLabel}}",
+                          "children": [
+                            {
+                              "id": 251,
+                              "type": "SUB_VIEW",
+                              "subType": "HTML",
+                              "viewPath": "oe/oeet/shared/cart.html",
+                              "controller": "OeetCartCtrl as cart"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": 241,
+                  "type": "BTN",
+                  "subType": "MENU",
+                  "label": "global.line.entry",
+                  "children": [
+                    {
+                      "id": 242,
+                      "type": "MENU_OPT",
+                      "label": "global.advanced",
+                      "stateRef": "^.advancedLineEntry"
+                    },
+                    {
+                      "id": 244,
+                      "type": "MENU_OPT",
+                      "label": "global.easy",
+                      "eventClick": "sl.easyLineEntry()",
+                      "conditionDisabled": "base.oehdr.oetype === 'cr' || base.oehdr.oetype === 'do' || base.oehdr.oetype === 'rm'",
+                      "conditionShow": "base.oehdr.oetype !== 'cr' && base.oehdr.oetype !== 'do' && base.oehdr.oetype !== 'rm'"
+                    },
+                    {
+                      "id": 243,
+                      "type": "MENU_OPT",
+                      "label": "global.quick",
+                      "stateRef": "^.quickLineEntry",
+                      "conditionDisabled": "base.oehdr.oetype === 'cr' || base.oehdr.oetype === 'do' || base.oehdr.oetype === 'rm'",
+                      "conditionShow": "base.oehdr.oetype !== 'cr' && base.oehdr.oetype !== 'do' && base.oehdr.oetype !== 'rm'"
+                    },
+                    {
+                      "id": 245,
+                      "type": "MENU_OPT",
+                      "label": "global.return.multiple",
+                      "stateRef": "^.returnMultipleLines",
+                      "conditionDisabled": " base.oehdr.oetype === 'do'",
+                      "conditionShow": "base.oehdr.oetype !== 'do'"
+                    }
+                  ]
+                },
+                {
+                  "id": 246,
+                  "type": "BTN",
+                  "label": "global.customer.order.settings",
+                  "stateRef": "^.customerOrderSettings"
+                },
+                {
+                  "id": 247,
+                  "type": "BTN",
+                  "label": "global.edit.lines",
+                  "stateRef": "^.linesGrid"
+                },
+                {
+                  "id": 262,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.suspend",
+                  "eventClick": "base.suspend()",
+                  "conditionDisabled": "base.oehdr.oetype.toLowerCase() !== 'cs' && base.oehdr.oetype.toLowerCase() !== 'so' && base.oehdr.oetype.toLowerCase() !== 'do'"
+                },
+                {
+                  "id": 266,
+                  "type": "BTN",
+                  "label": "global.addons",
+                  "eventClick": "sl.addons()",
+                  "extra": true
+                },
+                {
+                  "id": 267,
+                  "type": "BTN",
+                  "label": "global.discounts",
+                  "eventClick": "sl.discounts()",
+                  "extra": true
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "controls": {
+                "contentHeader": {
+                  "id": 253,
+                  "type": "MOD_CONTENT_HDR",
+                  "children": [
+                    {
+                      "id": 254,
+                      "type": "WIZARD",
+                      "children": [
+                        {
+                          "id": 257,
+                          "type": "WIZARD_TICK",
+                          "label": "global.initiate",
+                          "conditionDisabled": "base.getStage() > 1",
+                          "conditionSelected": "base.getStage() === 1"
+                        },
+                        {
+                          "id": 258,
+                          "type": "WIZARD_TICK",
+                          "label": "global.select.products",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "conditionSelected": "base.getStage() === 2",
+                          "eventClick": "base.stageWizardSelectProducts()"
+                        },
+                        {
+                          "id": 259,
+                          "type": "WIZARD_TICK",
+                          "label": "global.taxes.and.totals",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "conditionSelected": "base.getStage() === 3",
+                          "eventClick": "base.stageWizardTaxesAndTotals()"
+                        },
+                        {
+                          "id": 260,
+                          "type": "WIZARD_TICK",
+                          "label": "global.collect.payment",
+                          "conditionSelected": "base.getStage() === 4",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "eventClick": "base.stageWizardCollectPayment()"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 49,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 50,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 53,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "sl.totalRecommended",
+                          "label": "global.total.recommended.within.shopping.list",
+                          "dataFormat": "CURRENCY"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 52,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 54,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "sl.totalOrdered",
+                          "label": "global.total.ordered",
+                          "dataFormat": "CURRENCY"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 6,
+                  "type": "GRID",
+                  "controlRef": "sl.shoppingListGrid",
+                  "model": "sl.shoppingListCollection",
+                  "options": {
+                    "showCheckboxes": true,
+                    "editable": true,
+                    "events": {
+                      "selected": "sl.rowSelectedSL()"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 7,
+                      "type": "TOOLBAR",
+                      "label": "global.shopping.list",
+                      "children": [
+                        {
+                          "id": 55,
+                          "type": "BTN",
+                          "subType": "MENU",
+                          "label": "global.actions",
+                          "children": [
+                            {
+                              "id": 56,
+                              "type": "MENU_OPT",
+                              "label": "global.clear.list",
+                              "icon": "icon-cancel",
+                              "eventClick": "sl.clear()"
+                            },
+                            {
+                              "id": 57,
+                              "type": "MENU_OPT",
+                              "label": "global.delete",
+                              "icon": "icon-delete",
+                              "securityLevel": 5,
+                              "eventClick": "sl.delete()"
+                            },
+                            {
+                              "id": 58,
+                              "type": "MENU_OPT",
+                              "label": "global.add.lines",
+                              "icon": "icon-new-document",
+                              "eventClick": "sl.addLines()",
+                              "securityLevel": 4,
+                              "conditionDisabled": "!sl.wlwhsechgfl"
+                            },
+                            {
+                              "id": 59,
+                              "type": "MENU_OPT",
+                              "label": "global.add.all.lines",
+                              "eventClick": "sl.addAllLines()",
+                              "icon": "icon-new-document",
+                              "securityLevel": 4,
+                              "conditionDisabled": "!sl.wlwhsechgfl"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 239,
+                          "type": "BTN",
+                          "label": "global.customer.reservations",
+                          "eventClick": "sl.customerReservations()",
+                          "conditionShow": "sl.isCustomerReservationsVisible"
+                        },
+                        {
+                          "id": 235,
+                          "type": "BTN",
+                          "label": "global.promotional.products",
+                          "eventClick": "sl.promotionalProducts()"
+                        },
+                        {
+                          "id": 236,
+                          "type": "BTN",
+                          "label": "global.past.sales",
+                          "eventClick": "sl.pastSales()"
+                        },
+                        {
+                          "id": 237,
+                          "type": "BTN",
+                          "label": "global.previous.orders",
+                          "eventClick": "sl.previousOrders()"
+                        },
+                        {
+                          "id": 238,
+                          "type": "BTN",
+                          "label": "global.product.list",
+                          "eventClick": "sl.productList()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 8,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.product",
+                      "model": "prod"
+                    },
+                    {
+                      "id": 263,
+                      "type": "GRID_COL",
+                      "subType": "IMAGE",
+                      "model": "image",
+                      "label": "global.image"
+                    },
+                    {
+                      "id": 13,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "descrip",
+                      "label": "global.description"
+                    },
+                    {
+                      "id": 11,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.notes",
+                      "model": "notesfl",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 14,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyrecommend",
+                      "label": "global.qty.recommended",
+                      "dataFormat": "DECIMAL_TEXT"
+                    },
+                    {
+                      "id": 15,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyord",
+                      "label": "global.qty.ordered",
+                      "editable": true,
+                      "eventChange": "sl.qtyOrdChange()",
+                      "dataFormat": "DECIMAL_TEXT"
+                    },
+                    {
+                      "id": 16,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "unit",
+                      "label": "global.unit"
+                    },
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "price",
+                      "label": "global.price",
+                      "dataFormat": "CURRENCY"
+                    },
+                    {
+                      "id": 10,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.non.stock",
+                      "model": "specnstype"
+                    },
+                    {
+                      "id": 19,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "netord",
+                      "label": "global.net.ordered",
+                      "dataFormat": "DECIMAL_TEXT"
+                    },
+                    {
+                      "id": 21,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "dsplqtyavail",
+                      "label": "global.quantity.available"
+                    },
+                    {
+                      "id": 20,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "whse",
+                      "label": "global.warehouse"
+                    },
+                    {
+                      "id": 18,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtybreakty",
+                      "label": "global.qty.break.type"
+                    },
+                    {
+                      "id": 22,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prodcat",
+                      "label": "global.product.category"
+                    },
+                    {
+                      "id": 32,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "lookupnm",
+                      "label": "global.lookup.name"
+                    },
+                    {
+                      "id": 33,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prodcost",
+                      "label": "global.cost",
+                      "dataFormat": "CURRENCY"
+                    },
+                    {
+                      "id": 34,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "marginamt",
+                      "label": "global.margin.amount",
+                      "dataFormat": "CURRENCY"
+                    },
+                    {
+                      "id": 35,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "marginpct",
+                      "label": "global.margin.percent",
+                      "dataFormat": "DECIMAL_TEXT"
+                    },
+                    {
+                      "id": 36,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "model": "lastpurdt",
+                      "label": "global.last.purch.date",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 37,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "lastprice",
+                      "label": "global.last.price",
+                      "dataFormat": "CURRENCY"
+                    },
+                    {
+                      "id": 38,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "totalstkqty",
+                      "label": "global.total.stock.qty",
+                      "dataFormat": "DECIMAL_TEXT"
+                    },
+                    {
+                      "id": 39,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "optionalwords",
+                      "label": "global.optn.product"
+                    },
+                    {
+                      "id": 40,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.brand.code",
+                      "model": "icspes.brandcode"
+                    },
+                    {
+                      "id": 41,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.mfg.product",
+                      "model": "icspes.mfgprod"
+                    },
+                    {
+                      "id": 42,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.vendor.product",
+                      "model": "icswes.vendprod"
+                    }
+                  ]
+                }
+              ]
+            },
+            "sidebar": {
+              "id": 255,
+              "type": "MOD_SIDEBAR",
+              "children": [
+                {
+                  "id": 256,
+                  "type": "SUB_VIEW",
+                  "subType": "HTML",
+                  "viewPath": "oe/oeet/shared/cart.html",
+                  "controller": "OeetCartCtrl as cart"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 240,
+      "type": "VIEW_CNTR",
+      "viewName": "shoppingListChildView",
+      "conditionShow": "sl.isChildState()"
+    },
+    {
+      "id": 264,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsp",
+      "contextValues": {
+        "key1": "sl.slProduct"
+      }
+    },
+    {
+      "id": 265,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Pdsc",
+      "contextValues": {
+        "key1": "sl.slPdrecno"
+      }
+    }
+  ]
+}

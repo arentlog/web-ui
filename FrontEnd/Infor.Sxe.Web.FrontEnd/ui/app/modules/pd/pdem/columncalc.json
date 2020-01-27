@@ -1,0 +1,195 @@
+{
+  "viewId": "pd-pdem-column-calc",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "pd.maintenance.wizard",
+              "subLabel": "{{colcalc.subTitle}}",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.previous",
+                  "icon": "icon-previous-page",
+                  "conditionShow": "!colcalc.isStep1",
+                  "eventClick": "colcalc.back()"
+                },
+                {
+                  "id": 17,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.next",
+                  "icon": "icon-next-page",
+                  "conditionShow": "!colcalc.isStep4",
+                  "eventClick": "colcalc.continue()"
+                },
+                {
+                  "id": 20,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.finish",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "conditionShow": "colcalc.isStep4",
+                  "eventClick": "colcalc.finish()"
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "stateRef": "pdem.master"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "WIZARD",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "WIZARD_TICK",
+                      "label": "global.step.1",
+                      "conditionSelected": "colcalc.isStep1",
+                      "eventClick": "colcalc.navigateToStep(1)"
+                    },
+                    {
+                      "id": 23,
+                      "type": "WIZARD_TICK",
+                      "label": "global.step.2",
+                      "conditionSelected": "colcalc.isStep2",
+                      "eventClick": "colcalc.continue()"
+                    },
+                    {
+                      "id": 24,
+                      "type": "WIZARD_TICK",
+                      "label": "global.step.3",
+                      "conditionSelected": "colcalc.isStep3",
+                      "eventClick": "colcalc.navigateToStep(3)"
+                    },
+                    {
+                      "id": 25,
+                      "type": "WIZARD_TICK",
+                      "label": "global.step.4",
+                      "conditionSelected": "colcalc.isStep4",
+                      "eventClick": "colcalc.navigateToStep(4)"
+                    }
+                  ]
+                },
+                {
+                  "id": 11,
+                  "type": "MESSAGE",
+                  "text": "{{colcalc.textMessage}}"
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "colcalc.colToUpdate",
+                  "label": "global.column.to.update",
+                  "type3": "MANUAL",
+                  "blankOption": false,
+                  "conditionShow": "colcalc.isStep1",
+                  "eventChange": "colcalc.isSelected()",
+                  "optionsModel": "base.enabledColumnList"
+                },
+                {
+                  "id": 16,
+                  "type": "MESSAGE",
+                  "text": "{{colcalc.step2Text}}",
+                  "conditionShow": "colcalc.isStep2"
+                },
+                {
+                  "id": 27,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "colcalc.columnValue",
+                  "label": "global.field",
+                  "labelHidden": true,
+                  "conditionShow": "colcalc.isStep2"
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "RADIO_SET",
+                  "model": "colcalc.step2option",
+                  "label": "global.blank.label.string.for.space",
+                  "type3": "SET",
+                  "metaGroup": "PD",
+                  "meta": "PDEMColumnCalcStep2Options",
+                  "conditionShow": "colcalc.isStep2",
+                  "eventChange": "colcalc.colLabelsEnabled()"
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "colcalc.colLabel",
+                  "label": "global.column.label",
+                  "type3": "MANUAL",
+                  "blankOption": false,
+                  "conditionShow": "colcalc.isStep2",
+                  "conditionReadonly": "colcalc.isDataFieldEnable",
+                  "optionsModel": "colcalc.PDEMColumns"
+                },
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "colcalc.value",
+                  "label": "global.value",
+                  "conditionShow": "colcalc.isStep2",
+                  "conditionReadonly": "colcalc.isConstantFieldEnabled"
+                },
+                {
+                  "id": 18,
+                  "type": "MESSAGE",
+                  "text": "{{colcalc.step3Text}}",
+                  "conditionShow": "colcalc.isStep3"
+                },
+                {
+                  "id": 28,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "colcalc.columnValue1",
+                  "label": "global.field",
+                  "labelHidden": true,
+                  "conditionShow": "colcalc.isStep3"
+                },
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "RADIO_SET",
+                  "model": "colcalc.step3option",
+                  "label": "global.blank.label.string.for.space",
+                  "type3": "SET",
+                  "metaGroup": "PD",
+                  "meta": "PDEMColumnCalcStep3Options",
+                  "conditionShow": "colcalc.isStep3"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

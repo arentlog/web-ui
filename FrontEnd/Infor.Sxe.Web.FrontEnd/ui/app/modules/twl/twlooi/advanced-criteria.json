@@ -1,0 +1,116 @@
+{
+  "viewId": "twl-twlooi-master-advancedcriteria",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 2,
+      "type": "COMP_FLD",
+      "children": [
+        {
+          "id": 147,
+          "type": "FIELD",
+          "subType": "INFO",
+          "model": "mst.advCriteria.coNum",
+          "label": "global.company",
+          "extra": true
+        },
+        {
+          "id": 148,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.whNum",
+          "label": "global.warehouse",
+          "readonly": false,
+          "meta": "TWLWarehouse",
+          "conditionReadonly": "base.restrictTWLWarehouse",
+          "conditionShow": "advsrch.isSelected('warehouse')",
+          "required": true,
+          "eventChange": "mst.advCriteriaWhseChange()"
+        },
+        {
+          "id": 99,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.carrier",
+          "label": "global.carrier",
+          "conditionShow": "advsrch.isSelected('carrier')",
+          "eventChange": "mst.setCarrier()",
+          "maxLength": 24,
+          "type3": "MANUAL",
+          "optionLabelField": "carrierId",
+          "optionValueField": "carrierId",
+          "optionsModel": "mst.carrierOptions",
+          "size": "SM"
+        },
+        {
+          "id": 72,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.shipCustCode",
+          "label": "global.customer.number",
+          "meta": "Customer",
+          "conditionShow": "advsrch.isSelected('customer') || advsrch.isSelected('shipto')"
+        },
+        {
+          "id": 144,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.rma",
+          "label": "global.return.merchandise.authorization",
+          "meta": "Customer",
+          "conditionShow": "advsrch.isSelected('rma')"
+        },
+        {
+          "id": 146,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.recordcountlimit",
+          "label": "global.record.limit",
+          "digits": 4,
+          "dataFormat": "INTEGER",
+          "sign": "+",
+          "conditionShow": "advsrch.isSelected('recordcountlimit')",
+          "size": "XS"
+        },
+        {
+          "id": 151,
+          "type": "EXP_AREA",
+          "label": "global.ship.to.address",
+          "conditionShow": "advsrch.isSelected('shipaddress')",
+          "collapsed": true,
+          "children": [
+            {
+              "id": 150,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "mst.advCriteria.shipName",
+              "label": "global.ship.to.name",
+              "meta": "Customer",
+              "conditionShow": "advsrch.isSelected('shipaddress')"
+            },
+            {
+              "id": 149,
+              "type": "CUSTOM",
+              "subType": "AddressForm",
+              "conditionShow": "advsrch.isSelected('shipaddress')",
+              "options": {
+                "countryCdVisible": false,
+                "addr2Visible": true,
+                "addr3Visible": false,
+                "addr1Model": "mst.advCriteria.shipAddr1",
+                "addr2Model": "mst.advCriteria.shipAddr2",
+                "addr3Model": "",
+                "cityModel": "mst.advCriteria.shipCity",
+                "stateModel": "mst.advCriteria.shipState",
+                "zipCodeModel": "mst.advCriteria.shipZip",
+                "addressLabel": "global.ship.to.address"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

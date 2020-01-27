@@ -1,0 +1,517 @@
+{
+  "viewId": "ar-arss-detail-job",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "TAB",
+  "conditionReadonly": "base.isDetail() || dtl.isJobTabReadonly",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.job",
+      "children": [
+        {
+          "id": 4,
+          "type": "ROW",
+          "children": [
+            {
+              "type": "COL",
+              "subType": "1/2",
+              "id": 5,
+              "children": [
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arss.jobdesc",
+                  "label": "global.description"
+                },
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arss.bondno",
+                  "label": "global.bond.number",
+                  "maxLength": 20
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.arss.bondedfl",
+                  "label": "global.bonded",
+                  "dataFormat": "LOGICAL"
+                }
+              ]
+            },
+            {
+              "type": "COL",
+              "subType": "1/2",
+              "id": 9,
+              "children": [
+                {
+                  "id": 18,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 71,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "dtl.jobAndRevision",
+                      "label": "global.job.identifier",
+                      "meta": "Job",
+                      "eventChange": "dtl.lookupJobResults()",
+                      "options": {
+                        "searchParams": {
+                          "jobid": {
+                            "type": "REF",
+                            "value": "dtl.arss.jmjobid"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "type": "EXP_AREA",
+      "label": "global.addresses",
+      "children": [
+        {
+          "id": 35,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 36,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "FIELD_SET",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 23,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.arss.gennm",
+                              "label": "global.name"
+                            },
+                            {
+                              "id": 19,
+                              "type": "CUSTOM",
+                              "subType": "AddressForm",
+                              "options": {
+                                "countryCdVisible": false,
+                                "addr2Visible": true,
+                                "addr3Visible": true,
+                                "addr1Model": "dtl.arss.genaddr1",
+                                "addr2Model": "dtl.arss.genaddr2",
+                                "addr3Model": "dtl.arss.genaddr3",
+                                "cityModel": "dtl.arss.gencity",
+                                "stateModel": "dtl.arss.genst",
+                                "zipCodeModel": "dtl.arss.genzip",
+                                "conditionReadonly": "base.isDetail() || dtl.isJobTabReadonly"
+                              }
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.arss.genphoneno",
+                              "label": "global.phone.number",
+                              "dataFormat": "PHONE",
+                              "maxLength": 14
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 37,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "FIELD_SET",
+                  "label": "global.owner",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 20,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.arss.ownnm",
+                              "label": "global.name"
+                            },
+                            {
+                              "id": 28,
+                              "type": "CUSTOM",
+                              "subType": "AddressForm",
+                              "options": {
+                                "countryCdVisible": false,
+                                "addr2Visible": true,
+                                "addr3Visible": true,
+                                "addr1Model": "dtl.arss.ownaddr1",
+                                "addr2Model": "dtl.arss.ownaddr2",
+                                "addr3Model": "dtl.arss.ownaddr3",
+                                "cityModel": "dtl.arss.owncity",
+                                "stateModel": "dtl.arss.ownst",
+                                "zipCodeModel": "dtl.arss.ownzip",
+                                "conditionReadonly": "base.isDetail() || dtl.isJobTabReadonly"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 38,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 39,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 30,
+                  "type": "FIELD_SET",
+                  "label": "global.lender",
+                  "children": [
+                    {
+                      "id": 31,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.arss.lennm",
+                              "label": "global.name"
+                            },
+                            {
+                              "id": 34,
+                              "type": "CUSTOM",
+                              "subType": "AddressForm",
+                              "options": {
+                                "countryCdVisible": false,
+                                "addr2Visible": true,
+                                "addr3Visible": true,
+                                "addr1Model": "dtl.arss.lenaddr1",
+                                "addr2Model": "dtl.arss.lenaddr2",
+                                "addr3Model": "dtl.arss.lenaddr3",
+                                "cityModel": "dtl.arss.lencity",
+                                "stateModel": "dtl.arss.lenst",
+                                "zipCodeModel": "dtl.arss.lenzip",
+                                "conditionReadonly": "base.isDetail() || dtl.isJobTabReadonly"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "type": "EXP_AREA",
+      "label": "global.preliminary.lien",
+      "children": [
+        {
+          "id": 41,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 42,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 52,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arss.lienprewith",
+                  "label": "global.with",
+                  "maxLength": 12
+                },
+                {
+                  "id": 59,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 55,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "dtl.arss.lienpredt",
+                      "label": "global.filed",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 53,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.arss.lienpreoper",
+                      "label": "global.filed.by",
+                      "maxLength": 4,
+                      "size": "XS"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 49,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 70,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arss.lienpreamt",
+                  "label": "global.amount",
+                  "dataFormat": "DECIMAL",
+                  "decimals": 2,
+                  "digits": 9,
+                  "sign": "+",
+                  "eventChange": "dtl.calculatePercentage()",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 58,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 57,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "dtl.arss.holdfl",
+                      "label": "global.hold.if.over",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 56,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.arss.holddays",
+                      "label": "global.hold.days",
+                      "size": "XS",
+                      "digits": 2,
+                      "dataFormat": "INTEGER"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "type": "EXP_AREA",
+      "label": "global.field.lien.not.line",
+      "children": [
+        {
+          "id": 45,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 46,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 61,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 62,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "dtl.arss.lienfiledt",
+                      "label": "global.filed",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 63,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.arss.lienfileoper",
+                      "label": "global.filed.by",
+                      "maxLength": 4,
+                      "size": "XS"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 50,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 60,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arss.lienamt",
+                  "label": "global.amount",
+                  "dataFormat": "DECIMAL",
+                  "decimals": 2,
+                  "digits": 9,
+                  "sign": "+",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "type": "EXP_AREA",
+      "label": "global.job.statistics",
+      "children": [
+        {
+          "id": 47,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 48,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 64,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.arss.startdt",
+                  "label": "global.start.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 65,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.arss.estcompdt",
+                  "label": "global.estimated.completion.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 66,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.arss.revestdt",
+                  "label": "global.revised.est.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 67,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.arss.jobclosedt",
+                  "label": "global.job.close.date",
+                  "dataFormat": "DATE",
+                  "eventChange": "dtl.jobCloseCheck()"
+                }
+              ]
+            },
+            {
+              "id": 51,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 68,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arss.salesamt",
+                  "label": "global.sales.jtd",
+                  "dataFormat": "DECIMAL",
+                  "decimals": 2,
+                  "digits": 8,
+                  "eventChange": "dtl.calculatePercentage()",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 69,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.calculatedPercentage",
+                  "label": "global.completion.percent",
+                  "dataFormat": "DECIMAL",
+                  "decimals": 2,
+                  "digits": 5,
+                  "readonly": true,
+                  "size": "XS",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

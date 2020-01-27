@@ -1,0 +1,170 @@
+{
+  "viewId": "wt-wtes-detail-wteslineitemsview",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 2,
+      "type": "GRID",
+      "model": "dtl.wtesLines",
+      "controlRef": "dtl.wtesLinesGrid",
+      "conditionEditable": "!dtl.isLineItemsTabReadonly",
+      "options": {
+        "showCheckboxes": true,
+        "showExpander": false,
+        "editable": true,
+        "events": {
+          "cellchange": "dtl.onQuantityShipChanged()",
+          "selected": "dtl.lineItemSelectionChange()"
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "global.line.items",
+          "children": [
+            {
+              "id": 4,
+              "type": "BTN",
+              "subType": "SEC",
+              "label": "global.serial",
+              "eventClick": "dtl.serial()",
+              "conditionShow": "dtl.wtSelectedLine.serlottype.toUpperCase() === 'S'",
+              "conditionDisabled": "dtl.wtSelectedLine.serlottype.toUpperCase() !== 'S'"
+            },
+            {
+              "id": 5,
+              "type": "BTN",
+              "subType": "SEC",
+              "label": "global.lot",
+              "eventClick": "dtl.lot()",
+              "conditionShow": "dtl.wtSelectedLine.serlottype.toUpperCase() === 'L'"
+            },
+            {
+              "id": 18,
+              "type": "BTN",
+              "subType": "PRI",
+              "label": "global.warehouse.manager",
+              "conditionShow": "dtl.wtesLinesGrid.isOneRowSelected() && dtl.wtSelectedLine.wmflship && dtl.wtSelectedLine.serlottype.toLowerCase() !== 'n'",
+              "eventClick": "dtl.lineWarehouse()"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 6,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "lineno",
+          "label": "global.line.number"
+        },
+        {
+          "id": 7,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "nonstockty",
+          "label": "global.non.stock",
+          "dataFormat": "NonstockType"
+        },
+        {
+          "id": 8,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "shipprod",
+          "label": "global.product"
+        },
+        {
+          "id": 9,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "proddesc",
+          "label": "global.description"
+        },
+        {
+          "id": 10,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qtyord",
+          "label": "global.quantity.ordered",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 11,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "unit",
+          "label": "global.unit"
+        },
+        {
+          "id": 12,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "stkqtyord",
+          "label": "global.stock.quantity.ordered",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 13,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qtyship",
+          "label": "global.quantity.ship",
+          "editable": true,
+          "decimals": 2,
+          "digits": 7,
+          "dataFormat": "DECIMAL",
+          "cellEditable": "dtl.isAllowEdit()",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 14,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "bofl",
+          "label": "bo.number",
+          "editable": true,
+          "dataFormat": "LOGICAL",
+          "cellEditable": "dtl.isAllowEdit()"
+        },
+        {
+          "id": 15,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "serlottype",
+          "label": "global.serial.lot",
+          "dataFormat": "IcProdWhseControlType"
+        },
+        {
+          "id": 16,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "binloc",
+          "label": "global.bin.location",
+          "dataFormat": "BinLoc"
+        },
+        {
+          "id": 17,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "msdsfl",
+          "label": "global.hazardous",
+          "dataFormat": "LOGICAL"
+        }
+      ]
+    }
+  ]
+}

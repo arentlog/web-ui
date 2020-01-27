@@ -1,0 +1,161 @@
+{
+  "viewId": "ic-icsr-create",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.icsr",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 18,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 20,
+                  "type": "EXP_AREA",
+                  "label": "global.required",
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 22,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.icsr.recordtype",
+                              "label": "global.type",
+                              "type3": "SET",
+                              "metaGroup": "IC",
+                              "meta": "RecordType",
+                              "blankOption": false,
+                              "eventChange": "dtl.setResetTypeDefaults()"
+                            },
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsr.whse",
+                              "label": "global.warehouse",
+                              "type3": "SET",
+                              "metaGroup": "IC",
+                              "meta": "Warehouse",
+                              "conditionShow": "dtl.icsr.recordtype === 'w' || dtl.icsr.recordtype === 'p'",
+                              "conditionRequired": "dtl.icsr.recordtype === 'w' || dtl.icsr.recordtype === 'p'"
+                            },
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsr.vendno",
+                              "label": "global.vendor",
+                              "type3": "SET",
+                              "metaGroup": "IC",
+                              "meta": "Vendor",
+                              "conditionRequired": "dtl.icsr.recordtype === 'v' || dtl.icsr.recordtype === 'p'",
+                              "conditionShow": "dtl.icsr.recordtype === 'v' || dtl.icsr.recordtype === 'p'"
+                            },
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsr.prodline",
+                              "label": "global.product.line",
+                              "type3": "SET",
+                              "metaGroup": "IC",
+                              "meta": "ProdLine",
+                              "conditionRequired": "dtl.icsr.recordtype === 'p'",
+                              "conditionShow": "dtl.icsr.recordtype === 'p'",
+                              "options": {
+                                "searchParams": {
+                                  "vendno": {
+                                    "type": "REF",
+                                    "value": "dtl.icsr.vendno"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 23,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 26,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "icsr",
+                        "objectRef": "dtl.icsr"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

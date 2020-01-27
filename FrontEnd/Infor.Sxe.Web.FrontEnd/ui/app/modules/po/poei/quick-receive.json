@@ -1,0 +1,197 @@
+{
+  "viewId": "po-poei-quickreceive",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "qr.isQuickReceive()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.quick.receive",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "qr.back()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 16,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-edit",
+                  "label": "global.detail",
+                  "stateRef": "",
+                  "securityLevel": 3,
+                  "conditionDisabled": "!qr.isPoSelected",
+                  "eventClick": "qr.drilldown()",
+                  "conditionShow": "base.isDrillDownAllowed"
+                },
+                {
+                  "id": 34,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.full.receipt",
+                  "conditionDisabled": "!qr.isFullReceiptEnabled",
+                  "eventClick": "qr.fullReceipt()",
+                  "icon": "icon-save",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 13,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-send-submit",
+                  "label": "global.final.update",
+                  "securityLevel": 3,
+                  "eventClick": "qr.finalUpdate()"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "MENU",
+                  "label": "global.actions",
+                  "children": [
+                    {
+                      "id": 35,
+                      "type": "MENU_OPT",
+                      "label": "global.cancel.receiving.work",
+                      "conditionDisabled": "!qr.isCancelReceivingEnabled",
+                      "eventClick": "qr.cancelReceiving()",
+                      "icon": "icon-cancel"
+                    },
+                    {
+                      "id": 10,
+                      "type": "MENU_OPT",
+                      "label": "global.receiving.report",
+                      "eventClick": "qr.generateReceivingReport()",
+                      "icon": "icon-create-report"
+                    },
+                    {
+                      "id": 11,
+                      "type": "MENU_OPT",
+                      "label": "global.receiving.labels",
+                      "eventClick": "qr.generateReceivingLabels()",
+                      "icon": "icon-create-report",
+                      "conditionDisabled": "!qr.isReceivingLabelsEnabled"
+                    }
+                  ]
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 20,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 8,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "qr.purchaseOrderNumber",
+                          "label": "global.purchase.order.number",
+                          "meta": "POOrders",
+                          "autoFocus": true,
+                          "eventChange": "qr.selectedPurchaseOrder()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 33,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 28,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "qr.selectedPoeiListResult.stagecdx",
+                          "label": "global.original.stage"
+                        },
+                        {
+                          "id": 29,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "qr.selectedPoeiListResult.transtype",
+                          "label": "global.type"
+                        },
+                        {
+                          "id": 30,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "qr.selectedPoeiListResult.name",
+                          "label": "global.name"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 38,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "qr.selectedPoeiListResult.whse",
+                          "label": "global.warehouse"
+                        },
+                        {
+                          "id": 32,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "qr.selectedPoeiListResult.batchdatcd",
+                          "label": "global.asn",
+                          "dataFormat": "LOGICAL"
+                        },
+                        {
+                          "id": 39,
+                          "type": "MESSAGE",
+                          "text": "global.this.purchase.order.is.a.correction",
+                          "conditionShow": "qr.selectedPoeiListResult.correctionfl"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "type": "VIEW_CNTR",
+      "viewName": "valueAddSurplus"
+    }
+  ]
+}

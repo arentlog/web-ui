@@ -1,0 +1,250 @@
+{
+  "viewId": "ic-icean-adjustwriteoff",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "awc.isadjustWriteoff()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "{{awc.title}}",
+              "subLabel": "{{awc.iceanTransactionsResult.prod +  ' | '  + awc.iceanTransactionsResult.whse +  ' | ' + awc.iceanTransactionsResult.binloc1}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 53,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.submit",
+                  "eventClick": "awc.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 54,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "stateRef": "^.master"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "EXP_AREA",
+                  "label": "global.current.levels",
+                  "children": [
+                    {
+                      "id": 63,
+                      "type": "GRID",
+                      "model": "awc.currentLevels",
+                      "controls": {
+                        "toolbar": {
+                          "id": 65,
+                          "type": "TOOLBAR",
+                          "label": "global.current.levels"
+                        }
+                      },
+                      "children": [
+                        {
+                          "id": 64,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "qty",
+                          "label": "global.quantity",
+                          "dataFormat": "DECIMAL_TEXT"
+                        },
+                        {
+                          "id": 66,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "unit",
+                          "label": "global.unit"
+                        },
+                        {
+                          "id": 67,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "amount",
+                          "label": "global.amount",
+                          "dataFormat": "DECIMAL_TEXT"
+                        },
+                        {
+                          "id": 68,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "total",
+                          "label": "global.total",
+                          "dataFormat": "DECIMAL_TEXT"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 62,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "awc.iceanMaintRetrieveSingle.balancetotal",
+                      "label": "global.balance.total",
+                      "dataFormat": "CURRENCY",
+                      "decimals": 2,
+                      "readonly": true,
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 42,
+                  "type": "EXP_AREA",
+                  "label": "global.adjustments",
+                  "children": [
+                    {
+                      "id": 43,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 44,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 46,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 47,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "awc.iceanMaintRetrieveSingle.qty",
+                                  "label": "global.quantity",
+                                  "size": "SM",
+                                  "dataFormat": "DECIMAL",
+                                  "conditionReadonly": "!awc.iceanMaintRetrieveSingle.enableqty",
+                                  "conditionFocus": "awc.iceanMaintRetrieveSingle.enableqty",
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 48,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "awc.iceanMaintRetrieveSingle.unit",
+                                  "label": "global.unit",
+                                  "size": "SM",
+                                  "conditionReadonly": "!awc.iceanMaintRetrieveSingle.enableunit"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 45,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 49,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 50,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "awc.iceanMaintRetrieveSingle.total",
+                                  "label": "global.totals",
+                                  "size": "SM",
+                                  "digits": 9,
+                                  "dataFormat": "CURRENCY",
+                                  "conditionReadonly": "!awc.iceanMaintRetrieveSingle.enabletotal",
+                                  "conditionFocus": "awc.iceanMaintRetrieveSingle.enabletotal && !awc.iceanMaintRetrieveSingle.enableqty",
+                                  "decimals": 2,
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 51,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "awc.iceanMaintRetrieveSingle.binloc",
+                                  "label": "global.bin.location",
+                                  "dataFormat": "BinLoc",
+                                  "conditionReadonly": "!awc.iceanMaintRetrieveSingle.enablebinloc"
+                                },
+                                {
+                                  "id": 52,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "awc.iceanMaintRetrieveSingle.amount",
+                                  "label": "global.amount",
+                                  "dataFormat": "CURRENCY",
+                                  "decimals": 2,
+                                  "readonly": true,
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 69,
+      "type": "VIEW_CNTR",
+      "viewName": "glDistributionView"
+    },
+    {
+      "id": 70,
+      "type": "VIEW_CNTR",
+      "viewName": "whseProdDetailsView"
+    }
+  ]
+}

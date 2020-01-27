@@ -1,0 +1,248 @@
+{
+  "viewId": "ar-aric-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isDetail()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "global.customer",
+          "subLabel": "{{base.sublabel}}",
+          "controls": {
+            "navBtns": {
+              "id": 12,
+              "type": "BTN_SET",
+              "subType": "TBAR_NAV",
+              "children": [
+                {
+                  "id": 13,
+                  "type": "BTN",
+                  "subType": "ICON",
+                  "icon": "icon-left-arrow",
+                  "stateRef": "^.master",
+                  "label": "special.button.back"
+                }
+              ]
+            }
+          },
+          "children": [
+            {
+              "id": 30,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.order.entry",
+              "stateRef": "oeet.initiate({custno: dtl.arsc.custno})",
+              "extra": true
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 27,
+              "type": "MESSAGE",
+              "text": "{{dtl.cmessage}}",
+              "icon": "icon-error",
+              "conditionShow": "dtl.cmessage"
+            },
+            {
+              "type": "TAB_SET",
+              "id": 5,
+              "children": [
+                {
+                  "type": "TAB",
+                  "id": 6,
+                  "label": "global.general",
+                  "subFunction": "General",
+                  "eventActivated": "dtl.generalTabActivated()",
+                  "tabId": "general",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "CUSTOM",
+                      "subType": "CustomerInquiryGeneral",
+                      "options": {
+                        "arscModel": "dtl.arsc",
+                        "shiptoFunction": "dtl.getShiptoForCustomerTab()",
+                        "groupidModel": "base.getGroupId()"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 8,
+                  "type": "TAB",
+                  "label": "global.period.balance.by.ship.to",
+                  "subFunction": "Period Balance by Ship To",
+                  "conditionSelected": "dtl.canSelecteShipToTab",
+                  "tabId": "period-balance-ship-to",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "ar/aric/tabs/period-balance-shipto.json",
+                      "controller": "AricPeriodBalanceShiptoCtrl as pbsc"
+                    }
+                  ]
+                },
+                {
+                  "id": 10,
+                  "type": "TAB",
+                  "label": "global.group",
+                  "subFunction": "Group",
+                  "conditionSelected": "dtl.canSelecteGroupToTab",
+                  "tabId": "group",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "SUB_VIEW",
+                      "viewPath": "ar/aric/tabs/group.json",
+                      "controller": "AricGroupCtrl as agc"
+                    }
+                  ]
+                },
+                {
+                  "id": 14,
+                  "type": "TAB",
+                  "label": "global.receivables.by.job",
+                  "subFunction": "Receivables by Job",
+                  "tabId": "receivables-by-job",
+                  "children": [
+                    {
+                      "id": 24,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "ar/aric/tabs/receivables-by-job.json",
+                      "controller": "AricReceivablesByJobCtrl as rbjc"
+                    }
+                  ]
+                },
+                {
+                  "id": 15,
+                  "type": "TAB",
+                  "label": "global.transactions",
+                  "subFunction": "Transactions",
+                  "conditionSelected": "dtl.canSelecteTransactionTab",
+                  "tabId": "transactions",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "CUSTOM",
+                      "subType": "CustomerInquiryTransactions",
+                      "options": {
+                        "arscModel": "dtl.arsc",
+                        "duedateModel": "dtl.duedateModel",
+                        "groupidModel": "base.getGroupId()",
+                        "shiptoModel": "base.getShipTo()"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 16,
+                  "type": "TAB",
+                  "label": "global.period.balance.history",
+                  "subFunction": "Period Balance History",
+                  "tabId": "period-balance-history",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "CustomerInquiryHistory",
+                      "options": {
+                        "arscModel": "dtl.arsc",
+                        "groupidModel": "base.getGroupId()"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 17,
+                  "type": "TAB",
+                  "label": "global.credit.exposure",
+                  "subFunction": "Credit Exposure",
+                  "conditionSelected": "dtl.canSelectCreditTab",
+                  "tabId": "credit-exposure",
+                  "children": [
+                    {
+                      "id": 25,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "ar/aric/tabs/credit-exposure.json",
+                      "controller": "AricCreditExposureCtrl as acec"
+                    }
+                  ]
+                },
+                {
+                  "id": 18,
+                  "type": "TAB",
+                  "label": "global.custom",
+                  "subFunction": "Custom",
+                  "tabId": "custom",
+                  "children": [
+                    {
+                      "id": 26,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "ar/aric/tabs/custom.json",
+                      "controller": "AricCustomCtrl as acc"
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "TAB",
+                  "label": "global.dnbi.integration",
+                  "subFunction": "DNBi",
+                  "conditionShow": "base.criteria.custno",
+                  "tabId": "dnbi-integration",
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "CUSTOM",
+                      "subType": "CustomerInquiryDnbi",
+                      "options": {
+                        "arscModel": "dtl.arsc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 23,
+      "type": "VIEW_CNTR",
+      "viewName": "transactionDetail"
+    },
+    {
+      "id": 28,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Arsc",
+      "contextValues": {
+        "key1": "dtl.arsc.custno"
+      }
+    },
+    {
+      "id": 29,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Arss",
+      "contextValues": {
+        "key1": "dtl.arsc.custno",
+        "key2": "dtl.arsc.shipto"
+      }
+    }
+  ]
+}

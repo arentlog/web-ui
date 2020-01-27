@@ -1,0 +1,144 @@
+{
+  "viewId": "gl-glsf-duplicatedetails",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "dupdtls.isDuplicateDetails()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.select.sequences.to.duplicate",
+              "subLabel": "{{base.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dupdtls.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-right-arrow",
+                  "label": "global.continue",
+                  "eventValidated": "alias.submit()",
+                  "eventClick": "dupdtls.continueWithDuplicate()",
+                  "conditionDisabled": "!dupdtls.sequencesGrid.isAnyRowSelected()"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dupdtls.back()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "EXP_AREA",
+                  "label": "global.copy.from",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 13,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dupdtls.glsfDuplicateCriteria.sourceName",
+                              "label": "global.design.name",
+                              "meta": "DesignName",
+                              "eventChange": "dupdtls.selectedDesignNameChanged()",
+                              "autoFocus": true
+                            },
+                            {
+                              "id": 14,
+                              "type": "GRID",
+                              "model": "dupdtls.glsfDuplicateSourceList",
+                              "controlRef": "dupdtls.sequencesGrid",
+                              "options": {
+                                "showCheckboxes": true
+                              },
+                              "controls": {
+                                "toolbar": {
+                                  "id": 15,
+                                  "type": "TOOLBAR",
+                                  "label": "global.sequences"
+                                }
+                              },
+                              "children": [
+                                {
+                                  "id": 16,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "seqno",
+                                  "label": "global.sequence.number"
+                                },
+                                {
+                                  "id": 17,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "recDesc",
+                                  "label": "global.record.type"
+                                },
+                                {
+                                  "id": 18,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "comment",
+                                  "label": "global.comment"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "type": "VIEW_CNTR",
+      "viewName": "duplicateFinish"
+    }
+  ]
+}

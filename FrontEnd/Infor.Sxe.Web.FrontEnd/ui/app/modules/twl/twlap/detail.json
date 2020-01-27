@@ -1,0 +1,191 @@
+{
+  "viewId": "twl-twlap-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "menu.twlap",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail() || ((!base.criteria.whNum) && (!base.criteriaUsed.whNum))",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlap.rowStatus",
+                              "label": "global.active"
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlap.printer",
+                              "label": "global.queue",
+                              "maxLength": 75,
+                              "size": "LG"
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlap.type",
+                              "label": "global.type",
+                              "meta": "PrinterType",
+                              "type3": "SET",
+                              "metaGroup": "TWL",
+                              "maxLength": 8,
+                              "required": true,
+                              "blankOption": false,
+                              "eventChange": "dtl.changeType()"
+                            },
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.printerModel",
+                              "label": "global.printer.model",
+                              "meta": "PrinterModel",
+                              "type3": "SET",
+                              "metaGroup": "TWL",
+                              "maxLength": 20,
+                              "size": "SM",
+                              "conditionShow": "dtl.twlap.type",
+                              "conditionRequired": "dtl.twlap.type",
+                              "blankOptionLabel": "global.select.printer"
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.printerLabelModel",
+                              "label": "global.label.printer.model",
+                              "meta": "PrinterLabelModel",
+                              "type3": "SET",
+                              "metaGroup": "TWL",
+                              "maxLength": 20,
+                              "size": "SM",
+                              "conditionShow": "!dtl.twlap.type",
+                              "conditionRequired": "!dtl.twlap.type",
+                              "blankOptionLabel": "global.select.printer"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

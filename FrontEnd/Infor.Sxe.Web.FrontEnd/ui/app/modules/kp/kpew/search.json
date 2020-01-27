@@ -1,0 +1,154 @@
+{
+  "viewId": "kp-kpew-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.fullWono",
+                  "label": "global.begin.work.order.number",
+                  "meta": "KPWorkOrder",
+                  "autoFocus": true,
+                  "contextValues": {
+                    "key1": "base.criteria.wono",
+                    "key2": "base.wosuf"
+                  },
+                  "options": {
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.stagecd",
+                  "label": "global.stage",
+                  "meta": "WorkOrderStageType",
+                  "type3": "SET",
+                  "metaGroup": "KP",
+                  "blankOption": true,
+                  "blankOptionLabel": "global.all"
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.whse",
+                  "label": "global.warehouse",
+                  "meta": "Warehouse",
+                  "required": true
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.searchstatuscd",
+                  "label": "global.status",
+                  "meta": "WorkOrderStatusType",
+                  "type3": "SET",
+                  "metaGroup": "KP",
+                  "blankOption": false
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.rrarinit",
+                  "label": "global.created.by",
+                  "maxLength": 4
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.shipprod",
+                  "label": "global.kit.product",
+                  "contextEntity": "Icsp",
+                  "meta": "ProdAll"
+                },
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.verno",
+                  "label": "global.version.number",
+                  "meta": "KitProductionVersion",
+                  "conditionDisabled": "!base.criteria.shipprod",
+                  "options": {
+                    "searchParams": {
+                      "prod": {
+                        "type": "REF",
+                        "value": "base.criteria.shipprod"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 17,
+                  "type": "FIELD_SET",
+                  "label": "global.limits",
+                  "children": [
+                    {
+                      "id": 18,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "base.criteria.tiedonlyfl",
+                      "label": "global.tied.only"
+                    },
+                    {
+                      "id": 19,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "base.criteria.returnfl",
+                      "label": "global.disassemblies"
+                    }
+                  ]
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Kpet",
+      "contextValues": {
+        "key1": "base.workOrderForNotes.wono",
+        "key2": "base.workOrderForNotes.wosuf"
+      }
+    }
+  ]
+}

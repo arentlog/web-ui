@@ -1,0 +1,302 @@
+{
+  "viewId": "twl-twlat-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.station",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail() || ((!base.criteria.whNum) && (!base.criteriaUsed.whNum))",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlat.stnType",
+                              "label": "global.type",
+                              "required": true,
+                              "type3": "SET",
+                              "metaGroup": "TWL",
+                              "meta": "StationType",
+                              "blankOption": false
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlat.rowStatus",
+                              "label": "global.active",
+                              "dataFormat": "LOGICAL"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 20,
+                  "type": "EXP_AREA",
+                  "label": "global.printer.setup",
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 22,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlat.labelQueue",
+                              "label": "global.label.printer.queue",
+                              "type3": "MANUAL",
+                              "optionLabelField": "label",
+                              "optionValueField": "value",
+                              "blankOption": false,
+                              "optionsModel": "dtl.labelQueueList"
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlat.labelPrinter",
+                              "label": "global.label.printer.type",
+                              "type3": "SET",
+                              "optionLabelField": "label",
+                              "optionValueField": "value",
+                              "blankOption": false,
+                              "optionsModel": "base.labelPrinterList",
+                              "metaGroup": "TWL",
+                              "meta": "PrinterTypeLabel"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 26,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlat.lineQueue",
+                              "label": "global.report.printer.queue",
+                              "type3": "MANUAL",
+                              "optionLabelField": "label",
+                              "optionValueField": "value",
+                              "blankOption": false,
+                              "optionsModel": "dtl.reportQueueList"
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlat.linePrinter",
+                              "label": "global.report.printer.type",
+                              "type3": "SET",
+                              "optionLabelField": "label",
+                              "optionValueField": "value",
+                              "blankOption": false,
+                              "optionsModel": "base.reportPrinterList",
+                              "metaGroup": "TWL",
+                              "meta": "PrinterTypeReport"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 23,
+                  "type": "EXP_AREA",
+                  "label": "global.activity.log",
+                  "children": [
+                    {
+                      "id": 24,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 25,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlat.lastLogin",
+                              "label": "global.last.log.in",
+                              "dataFormat": "TwlCharDateConversion"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlat.lastLogout",
+                              "label": "global.last.log.out",
+                              "dataFormat": "TwlCharDateConversion"
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlat.lastActivation",
+                              "label": "global.last.log.activation",
+                              "dataFormat": "TwlCharDateConversion"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 27,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlat.lastEmpNum",
+                              "label": "global.last.log.employee"
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlat.lastPid",
+                              "label": "global.pid.of.last.login"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,318 @@
+{
+  "viewId": "oe-shared-documentprint-documentprint",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.sales.order.document.print",
+              "controls": {
+                "navBtns": {
+                  "id": 9,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "oedp.back()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.submit",
+                  "submitForm": true,
+                  "eventValidated": "oedp.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "oedp.back()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 11,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 12,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "oedp.ordernox",
+                          "label": "global.order.number",
+                          "meta": "OEOrders",
+                          "required": true,
+                          "eventChange": "oedp.printInitialize()",
+                          "autoFocus": true
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "oedp.isUseWhereAppropriate",
+                          "label": "global.use.where.appropriate",
+                          "dataFormat": "LOGICAL"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 13,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "oedp.printPromoMsg",
+                          "label": "global.promo.message",
+                          "maxLength": 50
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "oedp.isAutomaticPrint",
+                          "label": "global.automatic.print",
+                          "dataFormat": "LOGICAL"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 28,
+                  "type": "EXP_AREA",
+                  "label": "global.print.acknowledgement",
+                  "children": [
+                    {
+                      "id": 29,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "oedp.isAcknowledgement",
+                              "label": "global.acknowledgement",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "oedp.isAcknowledgementDisabled"
+                            },
+                            {
+                              "id": 32,
+                              "type": "CUSTOM",
+                              "subType": "Printer",
+                              "options": {
+                                "functionName": "oeet",
+                                "subFunctionName": "Acknowledgement",
+                                "controlRef": "oedp.acknowledgementPrinter"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 33,
+                  "type": "EXP_AREA",
+                  "label": "global.print.pick.ticket",
+                  "children": [
+                    {
+                      "id": 34,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 35,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "oedp.isPrintTicket",
+                              "label": "global.pick.ticket",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "oedp.isPrintTicketDisabled"
+                            },
+                            {
+                              "id": 37,
+                              "type": "CUSTOM",
+                              "subType": "Printer",
+                              "options": {
+                                "controlRef": "oedp.pickticketPrinter",
+                                "functionName": "oeet",
+                                "subFunctionName": "Pick Ticket"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 38,
+                  "type": "EXP_AREA",
+                  "label": "global.print.delivery",
+                  "children": [
+                    {
+                      "id": 39,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 40,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "oedp.isDelivery",
+                              "label": "global.delivery",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "oedp.isDeliveryDisabled"
+                            },
+                            {
+                              "id": 42,
+                              "type": "CUSTOM",
+                              "subType": "Printer",
+                              "options": {
+                                "controlRef": "oedp.deliveryPrinter",
+                                "functionName": "oeet",
+                                "subFunctionName": "Delivery Document"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 43,
+                  "type": "EXP_AREA",
+                  "label": "global.print.invoice",
+                  "children": [
+                    {
+                      "id": 44,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 45,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 46,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "oedp.isInvoice",
+                              "label": "global.invoice",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "oedp.isInvoiceDisabled"
+                            },
+                            {
+                              "id": 47,
+                              "type": "CUSTOM",
+                              "subType": "Printer",
+                              "options": {
+                                "controlRef": "oedp.invoicePrinter",
+                                "functionName": "oeet",
+                                "subFunctionName": "invoice"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 48,
+                  "type": "EXP_AREA",
+                  "label": "global.print.receipt",
+                  "children": [
+                    {
+                      "id": 49,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 50,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 51,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "oedp.isReceipt",
+                              "label": "global.receipt",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "oedp.isReceiptDisabled"
+                            },
+                            {
+                              "id": 52,
+                              "type": "CUSTOM",
+                              "subType": "Printer",
+                              "options": {
+                                "controlRef": "oedp.receiptPrinter",
+                                "functionName": "oeet",
+                                "subFunctionName": "receipt"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

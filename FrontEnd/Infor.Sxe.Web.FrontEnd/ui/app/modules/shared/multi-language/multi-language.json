@@ -1,0 +1,244 @@
+{
+  "viewId": "shared-multi-language-multilanguage",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ml.isMultiLanguageMaster()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.multiple.language.setup",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "ml.back()"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "ml.criteria.codeval",
+                          "label": "global.product",
+                          "conditionShow": "ml.criteria.codeiden === 'p'"
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "ml.criteria.codeval",
+                          "label": "oe.addon",
+                          "conditionShow": "ml.criteria.codeiden === 'o'",
+                          "dataFormat": "INTEGER_TEXT"
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "ml.criteria.codeval",
+                          "label": "global.terms.code",
+                          "conditionShow": "ml.criteria.codeiden === 't'"
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "ml.criteria.codeval",
+                          "label": "po.addon",
+                          "conditionShow": "ml.criteria.codeiden === 'x'"
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "ml.criteria.descrip1",
+                          "label": "global.1st.description",
+                          "conditionShow": "ml.criteria.codeiden === 'p'"
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "ml.criteria.descrip2",
+                          "label": "global.2nd.description",
+                          "conditionShow": "ml.criteria.codeiden === 'p'"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "ml.criteria.descrip1",
+                          "label": "global.description",
+                          "conditionShow": "ml.criteria.codeiden !== 'p'"
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "ml.criteria.extended",
+                          "label": "global.extended.description",
+                          "readonly": true,
+                          "maxLength": 256,
+                          "conditionShow": "ml.criteria.codeiden === 'p'"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "GRID",
+                  "model": "ml.dataset",
+                  "controlRef": "ml.grid",
+                  "options": {
+                    "showDrilldown": true,
+                    "showExpander": false,
+                    "showCheckboxes": true,
+                    "events": {
+                      "drilldown": "ml.drilldown()"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 20,
+                      "type": "TOOLBAR",
+                      "label": "global.languages",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-new-document",
+                          "label": "global.new",
+                          "stateRef": ".create",
+                          "securityLevel": 4,
+                          "conditionDisabled": "ml.grid.isAnyRowSelected()"
+                        },
+                        {
+                          "id": 31,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-edit",
+                          "label": "global.edit",
+                          "stateRef": "",
+                          "securityLevel": 3,
+                          "eventClick": "ml.edit()",
+                          "conditionDisabled": "!ml.grid.isOneRowSelected()"
+                        },
+                        {
+                          "id": 32,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "eventClick": "ml.delete()",
+                          "securityLevel": 5,
+                          "conditionDisabled": "ml.grid.isNoRowSelected()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.language",
+                      "model": "langdesc"
+                    },
+                    {
+                      "id": 24,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "{{ml.descripLabel}}",
+                      "model": "descrip1"
+                    },
+                    {
+                      "id": 23,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.description.2",
+                      "model": "descrip2",
+                      "conditionInclude": "ml.criteria.codeiden === 'p'"
+                    },
+                    {
+                      "id": 22,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.extended.description",
+                      "model": "descrip3",
+                      "conditionInclude": "ml.criteria.codeiden === 'p'"
+                    },
+                    {
+                      "id": 25,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "edi.date.cd",
+                      "model": "edidtcd",
+                      "conditionInclude": "ml.criteria.codeiden === 't'"
+                    },
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "edi.type",
+                      "model": "editpcd",
+                      "conditionInclude": "ml.criteria.codeiden === 't'"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "type": "VIEW_CNTR",
+      "viewName": "mlDetail"
+    }
+  ]
+}

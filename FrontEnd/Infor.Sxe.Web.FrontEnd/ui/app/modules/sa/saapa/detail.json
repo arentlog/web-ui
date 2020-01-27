@@ -1,0 +1,281 @@
+{
+  "viewId": "sa-saapa-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.personalization",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 34,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-copy",
+                  "label": "global.copy",
+                  "eventClick": "dtl.copy()",
+                  "securityLevel": 4,
+                  "conditionDisabled": "!base.isDetail()"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.record.screenname",
+                              "label": "global.view.id",
+                              "maxLength": 78,
+                              "required": true,
+                              "autoFocus": true,
+                              "customMask": "[a-z0-9-]"
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.level",
+                              "label": "global.level",
+                              "type3": "MANUAL",
+                              "optionsModel": "base.personalizationLevelOptions",
+                              "optionLabelField": "label",
+                              "optionValueField": "value",
+                              "blankOption": false,
+                              "eventChange": "dtl.levelChanged()",
+                              "required": true
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.record.profile",
+                              "label": "global.profile",
+                              "meta": "ProfileName",
+                              "conditionRequired": "dtl.level === base.LEVEL_PROFILE",
+                              "conditionShow": "dtl.level === base.LEVEL_PROFILE"
+                            },
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.record.operator",
+                              "label": "global.user",
+                              "conditionRequired": "dtl.level === base.LEVEL_USER",
+                              "conditionShow": "dtl.level === base.LEVEL_USER",
+                              "meta": "Operator"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.record.functionname",
+                              "label": "global.function.name",
+                              "maxLength": 78,
+                              "required": true
+                            },
+                            {
+                              "id": 29,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 28,
+                                  "type": "FIELD",
+                                  "subType": "DATE",
+                                  "model": "dtl.record.transdt",
+                                  "label": "global.last.updated",
+                                  "dataFormat": "DATE",
+                                  "readonly": true,
+                                  "conditionShow": "!base.isCreate()"
+                                },
+                                {
+                                  "id": 30,
+                                  "type": "FIELD",
+                                  "subType": "TIME",
+                                  "model": "dtl.record.transtm",
+                                  "label": "global.update.time",
+                                  "dataFormat": "TIME",
+                                  "subFormat": "hhmm",
+                                  "readonly": true,
+                                  "conditionShow": "!base.isCreate()"
+                                },
+                                {
+                                  "id": 31,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.record.operinit",
+                                  "label": "global.operator",
+                                  "size": "XS",
+                                  "readonly": true,
+                                  "conditionShow": "!base.isCreate()"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 27,
+                              "type": "BTN",
+                              "subType": "SEC",
+                              "label": "global.developer",
+                              "eventClick": "dtl.goToDeveloper()",
+                              "conditionDisabled": "base.isEdit()",
+                              "conditionShow": "!base.isCreate()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 21,
+                  "type": "EXP_AREA",
+                  "label": "global.value",
+                  "collapsed": true,
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 23,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "TEXT_AREA",
+                              "model": "dtl.record.settingvalue",
+                              "label": "global.value",
+                              "size": "FULL",
+                              "height": "XL",
+                              "labelHidden": true,
+                              "customValidation": "dtl.validateJsonValue()",
+                              "validateOn": "blur"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

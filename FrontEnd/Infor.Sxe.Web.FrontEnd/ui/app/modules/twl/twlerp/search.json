@@ -1,0 +1,170 @@
+{
+  "viewId": "twl-twlerp-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.criteria.coNum",
+                  "label": "global.company.number",
+                  "readonly": true,
+                  "extra": true
+                },
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.whNum",
+                  "label": "global.warehouse",
+                  "readonly": false,
+                  "meta": "TWLWarehouse",
+                  "conditionReadonly": "base.restrictTWLWarehouse",
+                  "required": true
+                },
+                {
+                  "id": 17,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.criteria.fromZone",
+                      "label": "global.from.zone",
+                      "autoFocus": true,
+                      "meta": "TWLWhZone",
+                      "size": "XS",
+                      "options": {
+                        "searchParams": {
+                          "coNum": {
+                            "type": "REF",
+                            "value": "base.criteria.coNum"
+                          },
+                          "whNum": {
+                            "type": "REF",
+                            "value": "base.criteria.whNum"
+                          },
+                          "searchType": "all",
+                          "keyField": "all"
+                        }
+                      }
+                    },
+                    {
+                      "id": 15,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.criteria.aisle",
+                      "label": "global.from.aisle",
+                      "digits": 5,
+                      "dataFormat": "INTEGER",
+                      "size": "XS"
+                    }
+                  ]
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.toZone",
+                  "label": "global.to.zone",
+                  "autoFocus": true,
+                  "meta": "TWLWhZone",
+                  "size": "XS",
+                  "options": {
+                    "searchParams": {
+                      "coNum": {
+                        "type": "REF",
+                        "value": "base.criteria.coNum"
+                      },
+                      "whNum": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      },
+                      "searchType": "all",
+                      "keyField": "all"
+                    }
+                  }
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.absNum",
+                  "label": "global.item",
+                  "autoFocus": true,
+                  "meta": "TWLItem",
+                  "options": {
+                    "searchParams": {
+                      "whse": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "base.criteria.showTopOffs",
+                  "label": "global.show.top.offs",
+                  "dataFormat": "LOGICAL",
+                  "eventChange": "srch.topOffChange()"
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "base.criteria.showConsolidations",
+                  "label": "global.show.consolidations",
+                  "dataFormat": "LOGICAL",
+                  "eventChange": "srch.consolidateChange()"
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "base.criteria.showOther",
+                  "label": "global.show.nonstandard.replenishments",
+                  "dataFormat": "LOGICAL",
+                  "eventChange": "srch.consolidateChange()"
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

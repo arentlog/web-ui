@@ -1,0 +1,402 @@
+{
+  "viewId": "ap-apece-polineitems-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "po.line.detail",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "polndet.exit()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "eventClick": "",
+                  "submitForm": true,
+                  "eventValidated": "polndet.submit()"
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.manual.allocation",
+                  "icon": "icon-check",
+                  "conditionDisabled": "!polndet.isManualAllocationButtonEnabled()",
+                  "eventClick": "polndet.manualAllocation()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 43,
+                  "type": "EXP_AREA",
+                  "label": "global.proof",
+                  "children": [
+                    {
+                      "id": 48,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 49,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 50,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "polndet.poLineProof.proofTitle",
+                              "label": "global.blank.label.string.for.space"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 13,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "polndet.proofTitleQuantity",
+                              "label": "global.blank.label.string.for.space"
+                            },
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "polndet.poLineProof.pototqtyordstring",
+                              "label": "global.total"
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "polndet.poLineProof.uncostqtystring",
+                              "label": "global.uncosted"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 17,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "polndet.proofTitleAmount",
+                              "label": "global.blank.label.string.for.space"
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "polndet.poLineProof.pototinvamtstring",
+                              "label": "global.total"
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "polndet.poLineProof.uncostamtstring",
+                              "label": "global.uncosted"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 46,
+                  "type": "EXP_AREA",
+                  "label": "global.detail",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 10,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "polndet.poNumberString",
+                              "label": "global.purchase.order.number"
+                            },
+                            {
+                              "id": 11,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "polndet.poLineEditRecord.lineno",
+                              "label": "global.line.number",
+                              "dataFormat": "INTEGER_TEXT"
+                            },
+                            {
+                              "id": 12,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "polndet.poLineEditRecord.qtyord",
+                              "label": "global.inv.cost.qty",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 7,
+                              "decimals": 2,
+                              "eventChange": "polndet.fieldChanged('qtyord')",
+                              "conditionReadonly": "!polndet.poLineEditRecord.qtyordenabled",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "polndet.poLineEditRecord.cost",
+                              "label": "global.inv.unit.cost",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 7,
+                              "decimals": 5,
+                              "eventChange": "polndet.fieldChanged('cost')",
+                              "conditionReadonly": "!polndet.poLineEditRecord.costenabled",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              },
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 52,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "message.calculate.price.per.unit.when.extcost.entered",
+                                  "icon": "icon-load",
+                                  "isLabelTooltip": true,
+                                  "conditionDisabled": "!polndet.poLineEditRecord.perunitenabled",
+                                  "conditionShow": "!polndet.poLineEditRecord.perunithidden",
+                                  "eventClick": "polndet.fieldChanged('perunit')"
+                                }
+                              }
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "polndet.poLineEditRecord.costord",
+                              "label": "global.net.amount",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 7,
+                              "decimals": 5,
+                              "conditionReadonly": "!polndet.poLineEditRecord.costordenabled",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 47,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "polndet.poLineEditRecord.shipprod",
+                              "label": "global.product",
+                              "meta": "ProdAll",
+                              "eventChange": "polndet.fieldChanged('shipprod')",
+                              "conditionReadonly": "!polndet.poLineEditRecord.shipprodenabled"
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "polndet.poLineEditRecord.closefl",
+                              "label": "global.close.partial.line",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!polndet.poLineEditRecord.closeflenabled"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "polndet.poLineEditRecord.reconoverfl",
+                              "label": "global.override.tolerances",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!polndet.poLineEditRecord.reconoverflenabled"
+                            },
+                            {
+                              "id": 53,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "polndet.poLineEditRecord.lastcostupdtfl",
+                              "label": "global.update.icsec.cost",
+                              "dataFormat": "LOGICAL",
+                              "conditionShow": "!polndet.poLineEditRecord.lstcstupdtenabled"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "polndet.poLineEditRecord.proddesc",
+                              "label": "global.product.description",
+                              "maxLength": 24,
+                              "conditionReadonly": "!polndet.poLineEditRecord.proddescenabled"
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "polndet.poLineEditRecord.proddesc2",
+                              "label": "global.product.description.2",
+                              "maxLength": 24,
+                              "conditionReadonly": "!polndet.poLineEditRecord.proddesc2enabled"
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "polndet.poLineEditRecord.vendprod",
+                              "label": "global.vendor.product",
+                              "maxLength": 50,
+                              "conditionReadonly": "!polndet.poLineEditRecord.vendprodenabled"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 32,
+                  "type": "EXP_AREA",
+                  "label": "global.manual.addons.and.discount.allocation",
+                  "conditionShow": "polndet.manualAllocationGridVisible",
+                  "children": [
+                    {
+                      "id": 35,
+                      "type": "GRID",
+                      "model": "polndet.manualAllocationList",
+                      "controlRef": "polndet.manualAllocationListGrid",
+                      "options": {
+                        "showCheckboxes": true,
+                        "editable": true
+                      },
+                      "controls": {
+                        "toolbar": {
+                          "id": 36,
+                          "type": "TOOLBAR",
+                          "label": "global.addons"
+                        }
+                      },
+                      "children": [
+                        {
+                          "id": 37,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "label": "global.addon",
+                          "model": "addonno",
+                          "dataFormat": "INTEGER_TEXT"
+                        },
+                        {
+                          "id": 38,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "label": "global.description",
+                          "model": "descrip"
+                        },
+                        {
+                          "id": 39,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "label": "message.this.line.allocation",
+                          "model": "polnaddonamt",
+                          "editable": true,
+                          "eventChange": "polndet.onCellChange()",
+                          "dataFormat": "DECIMAL_TEXT"
+                        },
+                        {
+                          "id": 40,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "label": "global.addon.amount",
+                          "model": "origamt",
+                          "dataFormat": "DECIMAL_TEXT"
+                        },
+                        {
+                          "id": 41,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "label": "global.total.allocated",
+                          "model": "totallocamt",
+                          "dataFormat": "DECIMAL_TEXT"
+                        },
+                        {
+                          "id": 42,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "label": "global.addon.proof",
+                          "model": "addonproof",
+                          "dataFormat": "DECIMAL_TEXT"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

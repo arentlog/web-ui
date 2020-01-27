@@ -1,0 +1,267 @@
+{
+  "viewId": "va-vael-detail-vaeldetail-tabs-vaeldetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isDetail()",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.general",
+      "children": [
+        {
+          "id": 42,
+          "type": "COMP_FLD",
+          "children": []
+        },
+        {
+          "id": 15,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 16,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 17,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.valaborline.timeslsrep",
+                  "label": "global.operator",
+                  "required": true,
+                  "meta": "Operator",
+                  "conditionReadonly": "!base.isCreate()",
+                  "autoFocus": true,
+                  "options": {
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 40,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 46,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.vanox",
+                      "label": "global.value.add.order.number",
+                      "meta": "VAOrders",
+                      "required": true,
+                      "conditionReadonly": "!base.isCreate()",
+                      "eventChange": "dtl.orderSelected()",
+                      "contextValues": {
+                        "key1": "base.valaborline.vano",
+                        "key2": "base.valaborline.vasuf"
+                      },
+                      "options": {
+                        "allowEntry": true,
+                        "searchParams": {
+                          "vano": {
+                            "type": "REF",
+                            "value": "base.valaborline.vano"
+                          },
+                          "vasuf": {
+                            "type": "REF",
+                            "value": "base.valaborline.vasuf"
+                          }
+                        }
+                      },
+                      "controls": {
+                        "actionBtn": {
+                          "id": 47,
+                          "type": "BTN",
+                          "subType": "ICON",
+                          "label": "global.inquire",
+                          "icon": "icon-drilldown",
+                          "isLabelTooltip": true,
+                          "eventClick": "base.vaorderHyperlink()",
+                          "conditionDisabled": "!base.vanox || base.vanox === '0-00'"
+                        }
+                      }
+                    },
+                    {
+                      "id": 22,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.valaborline.seqno",
+                      "label": "global.sequence",
+                      "required": true,
+                      "conditionReadonly": "!base.isCreate()",
+                      "meta": "VASections",
+                      "eventChange": "dtl.changeOfVASequence()",
+                      "maxLength": 3,
+                      "options": {
+                        "allowEntry": true,
+                        "searchParams": {
+                          "vano": {
+                            "type": "REF",
+                            "value": "base.valaborline.vano"
+                          },
+                          "vasuf": {
+                            "type": "REF",
+                            "value": "base.valaborline.vasuf"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "id": 23,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.valaborline.shipprod",
+                      "label": "global.labor.product",
+                      "meta": "ProdIcspOnly",
+                      "required": true,
+                      "eventChange": "dtl.laborProductChanged()",
+                      "controls": {
+                        "actionBtn": {
+                          "id": 45,
+                          "type": "BTN",
+                          "subType": "ICON",
+                          "label": "global.inquire",
+                          "icon": "icon-drilldown",
+                          "isLabelTooltip": true,
+                          "eventClick": "base.shipprodHyperlink()",
+                          "conditionDisabled": "!base.valaborline.shipprod"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 41,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 29,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.valaborline.sctntype",
+                      "label": "global.section.type",
+                      "maxLength": 2,
+                      "readonly": true,
+                      "size": "XS"
+                    },
+                    {
+                      "id": 30,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.valaborline.sctncode",
+                      "label": "global.section.code",
+                      "maxLength": 6,
+                      "readonly": true,
+                      "size": "XS"
+                    },
+                    {
+                      "id": 31,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.valaborline.stagecddesc",
+                      "label": "global.stage",
+                      "maxLength": 6,
+                      "readonly": true,
+                      "size": "XS"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 18,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 26,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "base.valaborline.timeworkdt",
+                  "label": "global.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 37,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 35,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.valaborline.hours",
+                      "label": "global.hours",
+                      "size": "XS",
+                      "eventChange": "dtl.loadCharges()",
+                      "dataFormat": "INTEGER",
+                      "sign": "+",
+                      "digits": 3,
+                      "maxLength": 3
+                    },
+                    {
+                      "id": 36,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.valaborline.minutes",
+                      "label": "global.minutes",
+                      "size": "XS",
+                      "eventChange": "dtl.loadCharges()",
+                      "dataFormat": "INTEGER",
+                      "sign": "+",
+                      "digits": 2
+                    },
+                    {
+                      "id": 25,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.valaborline.prodcost",
+                      "label": "global.charge.hour",
+                      "dataFormat": "DECIMAL",
+                      "digits": 7,
+                      "decimals": 5,
+                      "sign": "+",
+                      "conditionShow": "(base.canSeeCosts() === true)",
+                      "eventChange": "dtl.loadCharges()",
+                      "size": "SM",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 28,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.valaborline.timecomment",
+                  "label": "global.comment",
+                  "maxLength": 30
+                },
+                {
+                  "id": 27,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.valaborline.netamt",
+                  "label": "global.total.charge",
+                  "dataFormat": "DECIMAL",
+                  "digits": 7,
+                  "decimals": 2,
+                  "sign": "+",
+                  "readonly": true,
+                  "conditionShow": "(base.canSeeCosts() === true)",
+                  "size": "SM",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

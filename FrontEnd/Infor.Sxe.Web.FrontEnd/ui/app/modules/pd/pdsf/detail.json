@@ -1,0 +1,629 @@
+{
+  "viewId": "pd-pdsf-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.future.price.cost.changes",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.customReset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.pdsf.prod",
+                              "label": "global.product",
+                              "required": true,
+                              "meta": "ProdAll",
+                              "conditionReadonly": "!base.isCreate()",
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 132,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "conditionDisabled": "!dtl.pdsf.prod",
+                                  "stateRef": "icip.detail({pk: dtl.pdsf.prod, pk2: dtl.pdsf.whse})"
+                                }
+                              }
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.pdsf.whse",
+                              "label": "global.warehouse",
+                              "meta": "Warehouse",
+                              "conditionReadonly": "!base.isCreate()"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "dtl.pdsf.effectdt",
+                              "label": "global.effective.date",
+                              "dataFormat": "DATE",
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 86,
+                              "type": "MESSAGE",
+                              "text": "{{base.pricetext}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 23,
+                  "type": "EXP_AREA",
+                  "label": "global.price.cost.details",
+                  "children": [
+                    {
+                      "id": 90,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 91,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 94,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 127,
+                                  "type": "MESSAGE",
+                                  "text": "global.base.price"
+                                },
+                                {
+                                  "id": 93,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.pdsf.basetype",
+                                  "label": "global.changed.by",
+                                  "type3": "SET",
+                                  "metaGroup": "PD",
+                                  "meta": "PriceCostBaseType",
+                                  "size": "SM",
+                                  "blankOption": false
+                                },
+                                {
+                                  "id": 95,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.pdsf.baseprice",
+                                  "label": "global.new.value",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 7,
+                                  "decimals": 5,
+                                  "size": "SM",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 5,
+                                    "maximumFractionDigits": 5
+                                  }
+                                },
+                                {
+                                  "id": 96,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.baseprice",
+                                  "label": "global.current.value",
+                                  "dataFormat": "DECIMAL",
+                                  "decimals": 5,
+                                  "digits": 7,
+                                  "size": "SM",
+                                  "readonly": true,
+                                  "dataDesc": "dtl.emptyspclabel",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 5,
+                                    "maximumFractionDigits": 5
+                                  }
+                                },
+                                {
+                                  "id": 97,
+                                  "type": "FIELD",
+                                  "subType": "DATE",
+                                  "model": "base.priceupddt",
+                                  "label": "global.date",
+                                  "dataFormat": "DATE",
+                                  "readonly": true
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 98,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 99,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 100,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 128,
+                                  "type": "MESSAGE",
+                                  "text": "global.list.price"
+                                },
+                                {
+                                  "id": 102,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.pdsf.listtype",
+                                  "label": "global.changed.by",
+                                  "type3": "SET",
+                                  "metaGroup": "PD",
+                                  "meta": "PriceCostListType",
+                                  "size": "SM",
+                                  "blankOption": false
+                                },
+                                {
+                                  "id": 103,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.pdsf.listprice",
+                                  "label": "global.new.value",
+                                  "dataFormat": "DECIMAL",
+                                  "decimals": 5,
+                                  "size": "SM",
+                                  "digits": 7,
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 5,
+                                    "maximumFractionDigits": 5
+                                  }
+                                },
+                                {
+                                  "id": 104,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.listprice",
+                                  "label": "global.current.value",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 7,
+                                  "decimals": 5,
+                                  "size": "SM",
+                                  "readonly": true,
+                                  "dataDesc": "base.emptyspclabel",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 5,
+                                    "maximumFractionDigits": 5
+                                  }
+                                },
+                                {
+                                  "id": 105,
+                                  "type": "FIELD",
+                                  "subType": "DATE",
+                                  "model": "base.priceupddt",
+                                  "label": "global.date",
+                                  "dataFormat": "DATE",
+                                  "readonly": true
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 106,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 107,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 108,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 129,
+                                  "type": "MESSAGE",
+                                  "text": "global.replacement.cost"
+                                },
+                                {
+                                  "id": 110,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.pdsf.repltype",
+                                  "label": "global.changed.by",
+                                  "type3": "SET",
+                                  "metaGroup": "PD",
+                                  "meta": "PriceCostReplacementType",
+                                  "size": "SM",
+                                  "conditionDisabled": "!base.enableCost('repl')",
+                                  "blankOption": false
+                                },
+                                {
+                                  "id": 111,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.pdsf.replcost",
+                                  "label": "global.new.value",
+                                  "size": "SM",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 7,
+                                  "decimals": 5,
+                                  "conditionDisabled": "!base.enableCost('repl')",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 5,
+                                    "maximumFractionDigits": 5
+                                  }
+                                },
+                                {
+                                  "id": 112,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.replcost",
+                                  "label": "global.current.value",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 7,
+                                  "decimals": 5,
+                                  "size": "SM",
+                                  "readonly": true,
+                                  "dataDesc": "base.speccostty",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 5,
+                                    "maximumFractionDigits": 5
+                                  }
+                                },
+                                {
+                                  "id": 113,
+                                  "type": "FIELD",
+                                  "subType": "DATE",
+                                  "model": "base.replcostdt",
+                                  "label": "global.date",
+                                  "dataFormat": "DATE",
+                                  "readonly": true
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 114,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 115,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 116,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 130,
+                                  "type": "MESSAGE",
+                                  "text": "global.standard.cost"
+                                },
+                                {
+                                  "id": 118,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.pdsf.stndtype",
+                                  "label": "global.changed.by",
+                                  "size": "SM",
+                                  "type3": "SET",
+                                  "metaGroup": "PD",
+                                  "meta": "PriceCostStandardType",
+                                  "conditionDisabled": "!base.enableCost('stnd')",
+                                  "blankOption": false
+                                },
+                                {
+                                  "id": 119,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.pdsf.stndcost",
+                                  "label": "global.new.value",
+                                  "size": "SM",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 7,
+                                  "decimals": 5,
+                                  "conditionDisabled": "!base.enableCost('stnd')",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 5,
+                                    "maximumFractionDigits": 5
+                                  }
+                                },
+                                {
+                                  "id": 120,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.stndcost",
+                                  "label": "global.current.value",
+                                  "size": "SM",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 7,
+                                  "decimals": 5,
+                                  "readonly": true,
+                                  "dataDesc": "base.speccostty",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 5,
+                                    "maximumFractionDigits": 5
+                                  }
+                                },
+                                {
+                                  "id": 121,
+                                  "type": "FIELD",
+                                  "subType": "DATE",
+                                  "model": "base.stndcostdt",
+                                  "label": "global.date",
+                                  "dataFormat": "DATE",
+                                  "readonly": true
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 123,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 124,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 125,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 131,
+                                  "type": "MESSAGE",
+                                  "text": "global.last.cost"
+                                },
+                                {
+                                  "id": 126,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.lastcost",
+                                  "label": "global.current.value",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 7,
+                                  "decimals": 5,
+                                  "size": "SM",
+                                  "readonly": true,
+                                  "dataDesc": "base.speccostty",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 5,
+                                    "maximumFractionDigits": 5
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 26,
+                  "type": "EXP_AREA",
+                  "label": "global.pricing.parameters",
+                  "children": [
+                    {
+                      "id": 27,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 28,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.pdsf.pround",
+                              "label": "global.round",
+                              "type3": "SET",
+                              "metaGroup": "PD",
+                              "meta": "PriceDiscountingRoundingType",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.pdsf.pexactrnd",
+                              "label": "global.user.target",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 3,
+                              "decimals": 2,
+                              "size": "SM"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 30,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.pdsf.ptarget",
+                              "label": "global.target",
+                              "type3": "SET",
+                              "metaGroup": "COMMON",
+                              "meta": "PriceTargetType",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.pdsf.pricetype",
+                              "label": "global.price.type",
+                              "meta": "ProdPriceTy"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "pdsf",
+                        "objectRef": "dtl.pdsf",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

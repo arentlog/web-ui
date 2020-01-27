@@ -1,0 +1,160 @@
+{
+  "viewId": "oe-oeet-selectproducts-lineentrychildstates-optionalproducts",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ale.isOptionalProducts()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.optional.products",
+              "subLabel": "{{aleOp.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "aleOp.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.submit",
+                  "icon": "icon-save",
+                  "eventClick": "aleOp.submit()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "GRID",
+                  "model": "aleOp.optionalProdCollection",
+                  "controlRef": "aleOp.grid",
+                  "options": {
+                    "showCheckboxes": false,
+                    "editable": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 11,
+                      "type": "TOOLBAR",
+                      "label": "global.results"
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 19,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "isSelected",
+                      "label": "global.selected",
+                      "editable": true,
+                      "eventChange": "aleOp.gridRowSelectedChanged()",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 12,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prod",
+                      "label": "global.product"
+                    },
+                    {
+                      "id": 13,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "completeDescription",
+                      "label": "global.description"
+                    },
+                    {
+                      "id": 14,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "notesfl",
+                      "label": "global.notes",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 15,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyship",
+                      "label": "global.quantity.shipped",
+                      "editable": true,
+                      "sign": "+",
+                      "digits": 9,
+                      "decimals": 2,
+                      "eventChange": "aleOp.gridRowCellChanged()",
+                      "dataFormat": "DECIMAL"
+                    },
+                    {
+                      "id": 16,
+                      "type": "GRID_COL",
+                      "subType": "LOOKUP",
+                      "model": "unit",
+                      "label": "global.unit",
+                      "editable": true,
+                      "eventChange": "aleOp.gridRowCellChanged()",
+                      "meta": "Units",
+                      "options": {
+                        "searchParams": {
+                          "prod": {
+                            "type": "REF",
+                            "value": "prod"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "dsplchrg",
+                      "label": "global.charge",
+                      "editable": true,
+                      "cellEditable": "dsplchrgenabled",
+                      "eventChange": "aleOp.gridRowCellChanged()",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 18,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyavail",
+                      "label": "global.quantity.available",
+                      "dataFormat": "DECIMAL"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

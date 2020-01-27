@@ -1,0 +1,107 @@
+{
+  "viewId": "ic-icsoc-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.levelcd",
+                  "label": "global.record.type",
+                  "type3": "MANUAL",
+                  "blankOption": false,
+                  "optionsModel": "base.recordTypeList",
+                  "eventChange": "setResetRecordDefaults()"
+                },
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.custno",
+                  "label": "global.customer",
+                  "autoFocus": true,
+                  "meta": "Customer",
+                  "conditionShow": "base.criteria.levelcd === 1 || base.criteria.levelcd === 2 || base.criteria.levelcd === 3 || base.criteria.levelcd === 4 || base.criteria.levelcd === 5"
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.shipto",
+                  "label": "global.ship.to",
+                  "meta": "ShipTo",
+                  "conditionShow": "base.criteria.levelcd === 1 || base.criteria.levelcd === 2 || base.criteria.levelcd === 3 || base.criteria.levelcd === 4 || base.criteria.levelcd === 5",
+                  "options": {
+                    "searchParams": {
+                      "custno": {
+                        "type": "REF",
+                        "value": "base.criteria.custno"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.custtype",
+                  "label": "global.customer.type",
+                  "meta": "CustType",
+                  "conditionShow": "base.criteria.levelcd === 6 || base.criteria.levelcd === 7 || base.criteria.levelcd === 8 || base.criteria.levelcd === 9"
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.pricetype",
+                  "label": "global.product.price.type",
+                  "meta": "ProdPriceTy",
+                  "conditionShow": "base.criteria.levelcd === 2 || base.criteria.levelcd === 3 || base.criteria.levelcd === 4 || base.criteria.levelcd === 5 || base.criteria.levelcd === 6 || base.criteria.levelcd === 7 || base.criteria.levelcd === 8 || base.criteria.levelcd === 9"
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.whse",
+                  "label": "global.warehouse\t",
+                  "meta": "Warehouse",
+                  "conditionShow": "base.criteria.levelcd === 2 || base.criteria.levelcd === 3 || base.criteria.levelcd === 6 || base.criteria.levelcd === 7"
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

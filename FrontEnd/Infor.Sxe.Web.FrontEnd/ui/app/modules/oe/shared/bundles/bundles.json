@@ -1,0 +1,395 @@
+{
+  "viewId": "oe-shared-bundles-bundles",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 39,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 40,
+          "type": "COL",
+          "subType": "1",
+          "children": [
+            {
+              "id": 38,
+              "type": "TOOLBAR",
+              "label": "global.blank.label.string.for.space",
+              "children": [
+                {
+                  "id": 31,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "securityLevel": 3,
+                  "conditionShow": "!bundles.isDetailEditMode && !bundles.inquiryMode",
+                  "eventClick": "bundles.save()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 3,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 8,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "bundles.oeBundlesCriteria.qtyreq",
+              "label": "global.required.quantity",
+              "dataFormat": "DECIMAL",
+              "size": "SM",
+              "digits": 7,
+              "conditionReadonly": "!bundles.oeBundlesControl.qtyreqenabled || bundles.isDetailEditMode"
+            },
+            {
+              "id": 9,
+              "type": "FIELD",
+              "subType": "LOOKUP",
+              "model": "bundles.oeBundlesCriteria.units",
+              "label": "global.unit",
+              "meta": "Units",
+              "size": "SM",
+              "readonly": true,
+              "options": {
+                "searchParams": {
+                  "prod": {
+                    "type": "REF",
+                    "value": "bundles.oeBundlesControl.prod"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 11,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "bundles.oeBundlesControl.prod",
+              "label": "global.product",
+              "dataDesc": "bundles.oeBundlesControl.proddesc"
+            },
+            {
+              "id": 12,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "bundles.oeBundlesControl.qtyact",
+              "label": "global.actual.quantity",
+              "dataFormat": "DECIMAL",
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            },
+            {
+              "id": 42,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "bundles.oeBundlesControl.qtybf",
+              "label": "global.actual.bf",
+              "dataFormat": "DECIMAL",
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            },
+            {
+              "id": 13,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "bundles.oeBundlesControl.adjfactor",
+              "label": "global.adjustment.factor"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "GRID",
+      "model": "bundles.oeBundlesResults",
+      "controlRef": "bundles.bundlesGrid",
+      "conditionShow": "!bundles.isDetailEditMode",
+      "options": {
+        "showCheckboxes": true,
+        "showDrilldown": true,
+        "events": {
+          "drilldown": "bundles.drillDown()",
+          "selected": ""
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 6,
+          "type": "TOOLBAR",
+          "label": "global.bundles",
+          "children": [
+            {
+              "id": 33,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-new-document",
+              "label": "global.new",
+              "stateRef": "",
+              "securityLevel": 4,
+              "eventClick": "bundles.addBundle()",
+              "conditionDisabled": "bundles.bundlesGrid.isAnyRowSelected()",
+              "conditionShow": "bundles.oeBundlesControl.btnaddenabled"
+            },
+            {
+              "id": 67,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-edit",
+              "label": "global.edit",
+              "stateRef": "",
+              "securityLevel": 3,
+              "eventClick": "bundles.editBundle()",
+              "conditionDisabled": "!bundles.bundlesGrid.isOneRowSelected()"
+            },
+            {
+              "id": 66,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-delete",
+              "label": "global.delete",
+              "eventClick": "bundles.deleteBundle()",
+              "securityLevel": 5,
+              "conditionDisabled": "!bundles.bundlesGrid.isOneRowSelected()",
+              "conditionShow": "bundles.oeBundlesControl.btndeleteenabled"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 16,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dispbundleid",
+          "label": "global.bundle.id"
+        },
+        {
+          "id": 45,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "totbf",
+          "label": "global.total.bf"
+        },
+        {
+          "id": 68,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "totlf",
+          "label": "global.total.lf"
+        },
+        {
+          "id": 46,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty1",
+          "label": "{{bundles.oeBundlesControl.columnlabel1}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden1",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 47,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty2",
+          "label": "{{bundles.oeBundlesControl.columnlabel2}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden2",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 51,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty3",
+          "label": "{{bundles.oeBundlesControl.columnlabel3}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden3",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 52,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty4",
+          "label": "{{bundles.oeBundlesControl.columnlabel4}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden4",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 55,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty5",
+          "label": "{{bundles.oeBundlesControl.columnlabel5}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden5",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 65,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty6",
+          "label": "{{bundles.oeBundlesControl.columnlabel6}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden6",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 64,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty7",
+          "label": "{{bundles.oeBundlesControl.columnlabel7}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden7",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 63,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty8",
+          "label": "{{bundles.oeBundlesControl.columnlabel8}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden8",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 62,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty9",
+          "label": "{{bundles.oeBundlesControl.columnlabel9}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden9",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 61,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty10",
+          "label": "{{bundles.oeBundlesControl.columnlabel10}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden10",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 60,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty11",
+          "label": "{{bundles.oeBundlesControl.columnlabel11}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden11",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 59,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty12",
+          "label": "{{bundles.oeBundlesControl.columnlabel12}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden12",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 58,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty13",
+          "label": "{{bundles.oeBundlesControl.columnlabel13}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden13",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 57,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty14",
+          "label": "{{bundles.oeBundlesControl.columnlabel14}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden14",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 56,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty15",
+          "label": "{{bundles.oeBundlesControl.columnlabel15}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden15",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 54,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty16",
+          "label": "{{bundles.oeBundlesControl.columnlabel16}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden16",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 53,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty17",
+          "label": "{{bundles.oeBundlesControl.columnlabel17}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden17",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 50,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty18",
+          "label": "{{bundles.oeBundlesControl.columnlabel18}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden18",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 49,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty19",
+          "label": "{{bundles.oeBundlesControl.columnlabel19}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden19",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 48,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty20",
+          "label": "{{bundles.oeBundlesControl.columnlabel20}}",
+          "conditionInclude": "bundles.initComplete && !bundles.oeBundlesControl.columnhidden20",
+          "dataFormat": "DECIMAL_TEXT"
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "type": "SUB_VIEW",
+      "subType": "JSON",
+      "viewPath": "oe/shared/bundles/bundles-detail.json",
+      "controller": "OeBundlesDetailCtrl as bd",
+      "conditionInclude": "bundles.isDetailEditMode"
+    }
+  ]
+}

@@ -1,0 +1,652 @@
+{
+  "viewId": "ar-arss-detail-ordering",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "TAB",
+  "conditionReadonly": "base.isDetail() || dtl.isOrderingTabReadonly",
+  "children": [
+    {
+      "id": 4,
+      "type": "EXP_AREA",
+      "label": "global.order.entry",
+      "children": [
+        {
+          "type": "ROW",
+          "id": 2,
+          "children": [
+            {
+              "type": "COL",
+              "subType": "1/2",
+              "id": 5,
+              "children": [
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.arss.shipviaty",
+                  "label": "global.ship.via",
+                  "meta": "ShipVia",
+                  "type3": "STANDARD"
+                },
+                {
+                  "id": 25,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arss.custshipto",
+                  "label": "global.customer.ship.to",
+                  "meta": "ShipTo",
+                  "maxLength": 30
+                },
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arss.shipinstr",
+                  "label": "global.instructions",
+                  "maxLength": 30
+                },
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "TEXT_AREA",
+                  "model": "dtl.arss.extshipinstr",
+                  "label": "global.extended.shipping.instructions",
+                  "maxLength": 256
+                },
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.arss.slsrepin",
+                  "label": "global.sales.rep.in",
+                  "meta": "SalesRep"
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.arss.slsrepout",
+                  "label": "global.sales.rep.out",
+                  "required": true,
+                  "meta": "SalesRep"
+                },
+                {
+                  "id": 21,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.arss.whse",
+                  "label": "global.default.warehouse",
+                  "meta": "Warehouse",
+                  "type3": "STANDARD"
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arss.pickprno",
+                  "dataFormat": "INTEGER",
+                  "label": "global.pick.priority",
+                  "digits": 9,
+                  "sign": "+"
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arss.noinvcopy",
+                  "dataFormat": "INTEGER",
+                  "label": "global.invoice.copies",
+                  "digits": 1,
+                  "sign": "+"
+                },
+                {
+                  "id": 95,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.invtoflDisplay",
+                  "label": "global.invoice.to",
+                  "type3": "INLINE",
+                  "blankOption": false,
+                  "eventChange": "dtl.changeInvtoflDisplay()",
+                  "children": [
+                    {
+                      "id": 96,
+                      "type": "OPT",
+                      "label": "global.ship.to",
+                      "value": "true"
+                    },
+                    {
+                      "id": 97,
+                      "type": "OPT",
+                      "label": "global.bill.to",
+                      "value": "false"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "COL",
+              "subType": "1/2",
+              "id": 17,
+              "children": [
+                {
+                  "id": 27,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.arss.subfl",
+                  "label": "global.allow.substitutes"
+                },
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.arss.bofl",
+                  "label": "global.allow.back.order"
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.arss.poreqfl",
+                  "label": "global.require.po.number"
+                },
+                {
+                  "id": 28,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.arss.restrictfl",
+                  "label": "global.restricted"
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.arss.lnshipcompfl",
+                  "label": "global.line.ship.complete",
+                  "conditionDisabled": "base.isDetail() || dtl.isOrderingTabReadonly || !dtl.arss.bofl"
+                },
+                {
+                  "id": 112,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.arss.linetermsfl",
+                  "label": "global.line.terms"
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.arss.salesterr",
+                  "label": "global.territory",
+                  "meta": "Territories",
+                  "type3": "STANDARD"
+                },
+                {
+                  "id": 23,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arss.route",
+                  "label": "global.route.day.stop",
+                  "dataFormat": "Route"
+                },
+                {
+                  "id": 24,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arss.transferloc",
+                  "label": "global.transfer.location",
+                  "maxLength": 24
+                },
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arss.custpo",
+                  "label": "global.purchase.order.default",
+                  "maxLength": 22
+                },
+                {
+                  "id": 22,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.orderdisp",
+                  "label": "global.disposition",
+                  "type3": "SET",
+                  "meta": "Disposition",
+                  "metaGroup": "AR"
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.frttermscd",
+                  "label": "global.freight.terms",
+                  "type3": "CODES",
+                  "meta": "FreightTerm"
+                },
+                {
+                  "id": 110,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.allowfulfillmentty",
+                  "label": "global.sales.order.fulfillment",
+                  "type3": "SET",
+                  "meta": "AllowFulfillmentOrders",
+                  "metaGroup": "AR",
+                  "conditionShow": "base.isOrderFulfillmentOn",
+                  "blankOption": false
+                },
+                {
+                  "id": 111,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.sigreqtype",
+                  "label": "global.signature.cenpos.require",
+                  "type3": "SET",
+                  "metaGroup": "OE",
+                  "meta": "SignatureRequiredTypes"
+                },
+                {
+                  "id": 113,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arss.bolimit",
+                  "label": "global.back.order.limit",
+                  "dataFormat": "INTEGER",
+                  "maxLength": 2,
+                  "sign": "+",
+                  "digits": 2,
+                  "size": "XS",
+                  "conditionDisabled": "!dtl.arss.bofl"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "type": "EXP_AREA",
+      "label": "global.pricing",
+      "children": [
+        {
+          "id": 31,
+          "type": "ROW",
+          "children": [
+            {
+              "type": "COL",
+              "subType": "1/2",
+              "id": 32,
+              "children": [
+                {
+                  "id": 33,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.arss.pricetype",
+                  "label": "global.price.type",
+                  "meta": "CustomerPriceType",
+                  "controls": {
+                    "actionBtn": {
+                      "id": 108,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.multiple.price.type",
+                      "icon": "icon-history",
+                      "stateRef": "arspt.master({custno: dtl.arss.custno, shipto: dtl.arss.shipto})"
+                    }
+                  }
+                },
+                {
+                  "id": 40,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.arss.rebatety",
+                  "label": "global.rebate.type",
+                  "meta": "CustomerRebateType",
+                  "controls": {
+                    "actionBtn": {
+                      "id": 109,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.multiple.rebate.type",
+                      "icon": "icon-history",
+                      "stateRef": "arsrt.master({custno: dtl.arss.custno, shipto: dtl.arss.shipto})"
+                    }
+                  }
+                },
+                {
+                  "id": 34,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.spcdefaultty",
+                  "label": "oe.spc.default",
+                  "type3": "SET",
+                  "meta": "SpecialDefaultType",
+                  "metaGroup": "AR"
+                },
+                {
+                  "id": 37,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.arss.pdcustno",
+                  "label": "pd.customer.number",
+                  "meta": "Customer"
+                }
+              ]
+            },
+            {
+              "type": "COL",
+              "subType": "1/2",
+              "id": 39,
+              "children": [
+                {
+                  "id": 41,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.pricecd",
+                  "label": "global.price.level",
+                  "type3": "SET",
+                  "meta": "Numeric",
+                  "metaGroup": "AR"
+                },
+                {
+                  "id": 35,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.wodisccd",
+                  "label": "global.order.discount",
+                  "type3": "SET",
+                  "meta": "Numeric",
+                  "metaGroup": "AR"
+                },
+                {
+                  "id": 42,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.disccd",
+                  "label": "global.line.discount",
+                  "type3": "SET",
+                  "meta": "Numeric",
+                  "metaGroup": "AR"
+                },
+                {
+                  "id": 38,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.arss.srallownegoverfl",
+                  "label": "global.show.negative.quote.overage"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "type": "EXP_AREA",
+      "label": "global.payment",
+      "children": [
+        {
+          "id": 48,
+          "type": "ROW",
+          "children": [
+            {
+              "type": "COL",
+              "subType": "1/2",
+              "id": 49,
+              "children": [
+                {
+                  "id": 50,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.mediacd",
+                  "label": "global.payment.type",
+                  "type3": "CODES",
+                  "meta": "Payment"
+                }
+              ]
+            },
+            {
+              "type": "COL",
+              "subType": "1/2",
+              "id": 53,
+              "children": [
+                {
+                  "id": 56,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.arss.ccblockfl",
+                  "label": "global.block.credit.card.creation"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 64,
+      "type": "EXP_AREA",
+      "label": "global.addons",
+      "children": [
+        {
+          "id": 66,
+          "type": "ROW",
+          "children": [
+            {
+              "type": "COL",
+              "subType": "1/2",
+              "id": 67,
+              "children": [
+                {
+                  "id": 79,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.arss.inbndfrtfl",
+                  "label": "global.require.freight.in"
+                },
+                {
+                  "id": 68,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.addonnum1",
+                  "label": "number.1",
+                  "type3": "CODES",
+                  "meta": "Addon"
+                },
+                {
+                  "id": 69,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.addonnum2",
+                  "label": "number.2",
+                  "type3": "CODES",
+                  "meta": "Addon"
+                },
+                {
+                  "id": 70,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.addonnum3",
+                  "label": "number.3",
+                  "type3": "CODES",
+                  "meta": "Addon"
+                },
+                {
+                  "id": 71,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.addonnum4",
+                  "label": "number.4",
+                  "type3": "CODES",
+                  "meta": "Addon"
+                },
+                {
+                  "id": 72,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.billdirectaddon",
+                  "label": "global.bill.direct.po.addons",
+                  "type3": "SET",
+                  "meta": "DirectPOAddonType",
+                  "metaGroup": "AR",
+                  "conditionShow": "dtl.isDirectPOAddonVisible"
+                }
+              ]
+            },
+            {
+              "type": "COL",
+              "subType": "1/2",
+              "id": 74,
+              "children": [
+                {
+                  "id": 80,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.arss.outbndfrtfl",
+                  "label": "global.require.freight.out"
+                },
+                {
+                  "id": 75,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.addonnum5",
+                  "label": "number.5",
+                  "type3": "CODES",
+                  "meta": "Addon"
+                },
+                {
+                  "id": 76,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.addonnum6",
+                  "label": "number.6",
+                  "type3": "CODES",
+                  "meta": "Addon"
+                },
+                {
+                  "id": 77,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.addonnum7",
+                  "label": "number.7",
+                  "type3": "CODES",
+                  "meta": "Addon"
+                },
+                {
+                  "id": 78,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.addonnum8",
+                  "label": "number.8",
+                  "type3": "CODES",
+                  "meta": "Addon"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 98,
+      "type": "EXP_AREA",
+      "label": "global.credit",
+      "children": [
+        {
+          "id": 99,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 100,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 107,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 101,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.arss.credlim",
+                      "label": "global.credit.limit",
+                      "dataFormat": "INTEGER",
+                      "digits": 9,
+                      "sign": "+"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 103,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 106,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 102,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.arss.holdpercd",
+                      "label": "global.hold.period",
+                      "dataFormat": "INTEGER",
+                      "digits": 1,
+                      "sign": "+",
+                      "size": "XS"
+                    },
+                    {
+                      "id": 104,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "dtl.arss.enterdt",
+                      "label": "global.opened",
+                      "dataFormat": "DATE"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 90,
+      "type": "EXP_AREA",
+      "label": "global.intrastat",
+      "children": [
+        {
+          "id": 92,
+          "type": "ROW",
+          "children": [
+            {
+              "type": "COL",
+              "subType": "1",
+              "id": 93,
+              "children": [
+                {
+                  "id": 94,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arss.intratodcd",
+                  "label": "global.terms.of.delivery",
+                  "type3": "CODES",
+                  "meta": "TermsDelivery"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

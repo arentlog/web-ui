@@ -1,0 +1,255 @@
+{
+  "viewId": "pd-pder-detail-vendorreceipts",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "Tab",
+  "children": [
+    {
+      "id": 3,
+      "type": "GRID",
+      "controlRef": "dtl.vendorGrid",
+      "model": "dtl.pdergetreceiptresults",
+      "conditionEditable": "!dtl.isVendorTabReadonly",
+      "options": {
+        "editable": true,
+        "showCheckboxes": true,
+        "selectable": "multiple",
+        "events": {
+          "cellchange": "dtl.vendorGridCellChange()"
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 4,
+          "type": "TOOLBAR",
+          "label": "global.vendor.receipts",
+          "children": [
+            {
+              "id": 26,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-new-document",
+              "label": "global.new",
+              "securityLevel": 4,
+              "eventClick": "dtl.addVendorReceipt()",
+              "conditionDisabled": "dtl.vendorGrid.isAnyRowSelected()"
+            },
+            {
+              "id": 19,
+              "type": "BTN",
+              "subType": "MENU",
+              "label": "global.status",
+              "conditionDisabled": "!dtl.vendorGrid.isAnyRowSelected() || dtl.isVendorTabReadonly",
+              "children": [
+                {
+                  "id": 20,
+                  "type": "MENU_OPT",
+                  "label": "global.active",
+                  "icon": "icon-confirm",
+                  "eventClick": "dtl.changeVendorReceiptStatus(true)"
+                },
+                {
+                  "id": 22,
+                  "type": "MENU_OPT",
+                  "label": "global.update",
+                  "icon": "icon-save",
+                  "eventClick": "dtl.changeVendorReceiptStatus(false)"
+                }
+              ]
+            },
+            {
+              "id": 34,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.value.added.taxes",
+              "icon": "icon-expense-report",
+              "eventClick": "dtl.getVatAnalysis('view', -1)",
+              "conditionDisabled": "!dtl.vendorGrid.isOneRowSelected()",
+              "conditionShow": "dtl.taxInterfaceType === 's' && dtl.taxMethodType === 'v'"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 6,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "statustype",
+          "label": "global.status",
+          "editable": true,
+          "blankOption": false,
+          "type3": "INLINE",
+          "customFormatter": "dtl.vendorStatusFormatter()",
+          "children": [
+            {
+              "id": 23,
+              "type": "OPT",
+              "label": "global.active",
+              "value": "a"
+            },
+            {
+              "id": 25,
+              "type": "OPT",
+              "label": "global.update",
+              "value": "u"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "claimseqno",
+          "label": "global.sequence.number",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 8,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "receiptdt",
+          "label": "global.receipt.date",
+          "editable": true,
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 9,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "receiptamt",
+          "label": "global.receipt.amount",
+          "editable": true,
+          "digits": 9,
+          "decimals": 2,
+          "dataFormat": "CURRENCY"
+        },
+        {
+          "id": 10,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "apinvno",
+          "label": "global.invoice.number",
+          "editable": true,
+          "maxLength": 15
+        },
+        {
+          "id": 11,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "sourcepros",
+          "label": "global.created.by"
+        },
+        {
+          "id": 12,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "jrnlno",
+          "eventClick": "dtl.glInquiryHyperlink()",
+          "label": "global.journal.number"
+        },
+        {
+          "id": 13,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "setno",
+          "label": "global.set.number",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 14,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "postdt",
+          "label": "global.post.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 15,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "srcupdtty",
+          "label": "global.update.type",
+          "customFormatter": "dtl.updateTypeFormatter()"
+        },
+        {
+          "id": 16,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "refer",
+          "label": "global.reference",
+          "editable": true
+        },
+        {
+          "id": 17,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "divno",
+          "label": "global.division.number",
+          "editable": true,
+          "type3": "CODES",
+          "meta": "Division"
+        },
+        {
+          "id": 27,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "action",
+          "label": "global.action",
+          "extra": true
+        },
+        {
+          "id": 28,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "claimno",
+          "label": "global.claim.number",
+          "extra": true,
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 29,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "claimno",
+          "label": "global.claim.number",
+          "extra": true,
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 33,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "vendno",
+          "label": "global.vendor.number",
+          "extra": true,
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 30,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "vendname",
+          "label": "global.vendor.name",
+          "extra": true
+        },
+        {
+          "id": 31,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "vendnotesf",
+          "label": "global.vendor.notes",
+          "extra": true
+        },
+        {
+          "id": 32,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "userfield",
+          "label": "global.user.field",
+          "extra": true
+        }
+      ]
+    }
+  ]
+}

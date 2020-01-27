@@ -1,0 +1,262 @@
+{
+  "viewId": "oe-oeif-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.oeif",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 5,
+              "type": "EXP_AREA",
+              "label": "global.advanced.search",
+              "collapsed": true,
+              "children": [
+                {
+                  "id": 6,
+                  "type": "CUSTOM",
+                  "subType": "AdvancedSearch",
+                  "options": {
+                    "criteria": "mst.advCriteria",
+                    "criteriaList": "mst.criteriaList",
+                    "criteriaView": "oe/oeif/advanced-criteria.json",
+                    "defaultSelectedCriteria": "mst.defaultSelectedCriteria",
+                    "searchFunction": "mst.search"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 7,
+              "type": "GRID",
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showDrilldown": true,
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                },
+                "showCheckboxes": true,
+                "selectable": "multiple"
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 8,
+                  "type": "TOOLBAR",
+                  "label": "global.fulfillment.order",
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "BTN",
+                      "subType": "PRI",
+                      "label": "global.override.billing.code",
+                      "icon": "icon-edit",
+                      "securityLevel": 3,
+                      "conditionShow": "mst.isConsolFulfillmentOn()",
+                      "conditionDisabled": "base.grid.isNoRowSelected()",
+                      "eventClick": "mst.overrideRule()"
+                    },
+                    {
+                      "id": 17,
+                      "type": "BTN",
+                      "subType": "PRI",
+                      "label": "global.submit.fulfillment",
+                      "conditionDisabled": "base.grid.isNoRowSelected()",
+                      "eventClick": "mst.submitOrders()",
+                      "securityLevel": 4
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 9,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "orderno",
+                  "label": "global.order.number",
+                  "eventClick": "mst.orderHyperlink()",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 28,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "ordersuf",
+                  "label": "global.suffix",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 10,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.order.stage",
+                  "model": "stagecd",
+                  "dataFormat": "OeStage"
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "label": "global.customer.number",
+                  "model": "custno",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "eventClick": "mst.customerHyperlink()"
+                },
+                {
+                  "id": 29,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "custnonm",
+                  "label": "global.customer.name"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "label": "global.ship.to",
+                  "model": "shipto",
+                  "eventClick": "mst.shipToHyperlink()"
+                },
+                {
+                  "id": 30,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shiptonm",
+                  "label": "global.ship.to.name"
+                },
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whse",
+                  "label": "global.warehouse"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "label": "global.fulfillment.stage",
+                  "model": "fulfillmentstgcd",
+                  "type3": "SET",
+                  "metaGroup": "OE",
+                  "meta": "FulfillmentStageCode"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "label": "global.req.ship.date",
+                  "model": "reqshipdt",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "label": "global.promised.date",
+                  "model": "promisedt",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "fulfillmentbillcd",
+                  "label": "global.billing.code",
+                  "type3": "SET",
+                  "metaGroup": "OE",
+                  "meta": "FulfillmentBillingCode",
+                  "contentVisible": "mst.isConsolFulfillmentOn()"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.total.quantity.ordered",
+                  "model": "totqtyord",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "contentVisible": "mst.isQuantityVisible()"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.total.quantity.shipped",
+                  "model": "totqtyship",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "contentVisible": "mst.isQuantityVisible()"
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.percent.shipped",
+                  "model": "qtypercent",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "contentVisible": "mst.isQuantityVisible()"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.total.invoiced.ordered.quantity",
+                  "model": "totinvord",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "contentVisible": "mst.isQuantityVisible()"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.total.invoiced.shipped.quantity",
+                  "model": "totinvship",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "contentVisible": "mst.isQuantityVisible()"
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "invpercent",
+                  "label": "global.percent.invoiced",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "contentVisible": "mst.isQuantityVisible()"
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "releasefl",
+                  "label": "global.ready.to.release",
+                  "dataFormat": "BooleanToYesNo",
+                  "conditionInclude": "base.isAOConsolFulfillmentOn",
+                  "contentVisible": "mst.isReadyVisible()"
+                },
+                {
+                  "id": 31,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "errormsg",
+                  "label": "global.messages"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

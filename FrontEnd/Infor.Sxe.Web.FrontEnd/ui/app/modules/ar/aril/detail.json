@@ -1,0 +1,329 @@
+{
+  "viewId": "ar-aril-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.aril",
+          "subLabel": "{{dtl.subTitle}}",
+          "controls": {
+            "navBtns": {
+              "id": 4,
+              "type": "BTN_SET",
+              "subType": "TBAR_NAV",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "BTN",
+                  "subType": "ICON",
+                  "label": "special.button.back",
+                  "icon": "icon-left-arrow",
+                  "stateRef": "^.master"
+                }
+              ]
+            }
+          }
+        },
+        "content": {
+          "id": 6,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 9,
+              "type": "EXP_AREA",
+              "label": "global.batch",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.arilBatchSingle.fibatch",
+                          "label": "global.batch"
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.arilBatchSingle.fitrans",
+                          "label": "global.transactions"
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.arilBatchSingle.recvdt",
+                          "label": "global.receive.date",
+                          "dataFormat": "DATE"
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.arilBatchSingle.chkcnt",
+                          "label": "global.check.cnt"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 17,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.arilBatchSingle.rtpfl",
+                          "label": "global.status",
+                          "dataFormat": "BooleanToYesNo"
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.arilBatchSingle.add1",
+                          "label": "global.add.data.1"
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.arilBatchSingle.add2",
+                          "label": "global.add.data.2"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 47,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.arilBatchSingle.add3",
+                          "label": "global.add.data.3"
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.arilBatchSingle.add4",
+                          "label": "global.add.data.4"
+                        },
+                        {
+                          "id": 22,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.arilBatchSingle.add5",
+                          "label": "global.add.data.5"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 25,
+              "type": "GRID",
+              "controlRef": "dtl.arilCheckResultsGrid",
+              "model": "dtl.arilCheckResults",
+              "options": {
+                "showCheckboxes": true,
+                "events": {
+                  "selected": "dtl.onRecordSelection()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 26,
+                  "type": "TOOLBAR",
+                  "label": "global.checks",
+                  "children": [
+                    {
+                      "id": 27,
+                      "type": "BTN",
+                      "subType": "SEC",
+                      "label": "global.transactions",
+                      "eventClick": "dtl.transactions()",
+                      "icon": "icon-workflow",
+                      "conditionDisabled": "!dtl.arilCheckResultsGrid.isAnyRowSelected()"
+                    },
+                    {
+                      "id": 28,
+                      "type": "BTN",
+                      "subType": "SEC",
+                      "label": "global.transmission",
+                      "eventClick": "dtl.transmission()",
+                      "icon": "icon-launch",
+                      "conditionDisabled": "!dtl.arilCheckResultsGrid.isAnyRowSelected()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 29,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "fibatch",
+                  "label": "global.batch"
+                },
+                {
+                  "id": 30,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "custno",
+                  "label": "global.customer.number",
+                  "dataFormat": "DECIMAL_TEXT"
+                },
+                {
+                  "id": 31,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "custnotes",
+                  "label": "global.customer.notes",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 32,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "checkno",
+                  "label": "global.check.number",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 33,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "checkseq",
+                  "label": "global.sequence.number",
+                  "dataFormat": "Sequence"
+                },
+                {
+                  "id": 34,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "checkamt",
+                  "label": "global.check.amount",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 35,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "autopostfl",
+                  "label": "question.auto.posted",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 36,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "base.arilBatchSingle.fibatch",
+                  "label": "global.batch"
+                },
+                {
+                  "id": 37,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "base.arilBatchSingle.fitrans",
+                  "label": "global.transactions",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 38,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "base.arilBatchSingle.recvdt",
+                  "label": "global.receive.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 39,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "statfl",
+                  "label": "global.status",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 40,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "adddata1",
+                  "label": "global.add.data.1"
+                },
+                {
+                  "id": 41,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "adddata2",
+                  "label": "global.add.data.2"
+                },
+                {
+                  "id": 42,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "adddata3",
+                  "label": "global.add.data.3"
+                },
+                {
+                  "id": 43,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "adddata4",
+                  "label": "global.add.data.4"
+                },
+                {
+                  "id": 44,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "adddata5",
+                  "label": "global.add.data.5"
+                },
+                {
+                  "id": 45,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "pymttranscd",
+                  "label": "global.transaction.type"
+                },
+                {
+                  "id": 46,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "pymttransno",
+                  "label": "global.transaction.number"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

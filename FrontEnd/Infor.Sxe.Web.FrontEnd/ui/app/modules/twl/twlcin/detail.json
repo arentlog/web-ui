@@ -1,0 +1,333 @@
+{
+  "viewId": "twl-twlcin-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "true",
+      "conditionShow": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.twlcin",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 31,
+                  "type": "BTN",
+                  "subType": "MENU",
+                  "label": "global.inquiries",
+                  "children": [
+                    {
+                      "id": 32,
+                      "type": "MENU_OPT",
+                      "label": "global.transaction.detail",
+                      "eventClick": "dtl.showTransactions()",
+                      "conditionDisabled": "!dtl.twlcin.isTransEnabled"
+                    },
+                    {
+                      "id": 33,
+                      "type": "MENU_OPT",
+                      "label": "global.pending.movement",
+                      "eventClick": "dtl.showPendingMovement()",
+                      "conditionDisabled": "!dtl.twlcin.isMovesEnabled"
+                    },
+                    {
+                      "id": 34,
+                      "type": "MENU_OPT",
+                      "label": "global.pending.replenishment",
+                      "eventClick": "dtl.showPendingReplenishment()",
+                      "conditionDisabled": "!dtl.twlcin.isReplsEnabled"
+                    },
+                    {
+                      "id": 35,
+                      "type": "MENU_OPT",
+                      "label": "global.pending.picks",
+                      "eventClick": "dtl.showPendingPicks()",
+                      "conditionDisabled": "!dtl.twlcin.isPicksEnabled"
+                    },
+                    {
+                      "id": 36,
+                      "type": "MENU_OPT",
+                      "label": "global.serial.numbers",
+                      "eventClick": "dtl.showSerialNumbers()",
+                      "conditionDisabled": "!dtl.twlcin.isSerialEnabled"
+                    }
+                  ]
+                },
+                {
+                  "id": 76,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.print.receiving.labels",
+                  "eventClick": "dtl.printReceivingLabels()",
+                  "icon": "icon-print"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.binNum",
+                              "label": "global.location",
+                              "maxLength": 60,
+                              "required": true
+                            },
+                            {
+                              "id": 43,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.palletId",
+                              "label": "global.pallet.id"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 77,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 44,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.absNum",
+                              "label": "global.item"
+                            },
+                            {
+                              "id": 45,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.itemDesc",
+                              "label": "global.description"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 41,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.totalQty",
+                              "label": "global.quantity",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 46,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.caseQuantity",
+                              "label": "global.case.quantity",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 4,
+                                "maximumFractionDigits": 4
+                              }
+                            },
+                            {
+                              "id": 47,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.rtnCategory",
+                              "label": "global.return.category"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 48,
+                  "type": "EXP_AREA",
+                  "label": "global.inventory.status.information",
+                  "children": [
+                    {
+                      "id": 49,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 50,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 67,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.stockStat",
+                              "label": "global.stock.status",
+                              "dataFormat": "TwlStockStatus"
+                            },
+                            {
+                              "id": 64,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.cargoControl",
+                              "label": "global.cargo.control"
+                            },
+                            {
+                              "id": 54,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.dateTimeRec",
+                              "label": "global.received",
+                              "dataFormat": "TwlCharDateConversion"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 78,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 55,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.poNumberDisplay",
+                              "label": "global.purchase.order"
+                            },
+                            {
+                              "id": 53,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.rtnPalletFull",
+                              "label": "global.full.pallet",
+                              "conditionDisabled": "true",
+                              "dataFormat": "BooleanToYesNo"
+                            },
+                            {
+                              "id": 63,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.lot",
+                              "label": "global.lot"
+                            },
+                            {
+                              "id": 62,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.dateExpiration",
+                              "label": "global.expiration.date",
+                              "dataFormat": "DATE"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 73,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 58,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.cycleFlag",
+                              "label": "global.cycle.count.flag",
+                              "conditionDisabled": "true",
+                              "dataFormat": "BooleanToYesNo"
+                            },
+                            {
+                              "id": 59,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.cycleLevel",
+                              "label": "global.cycle.count.type"
+                            },
+                            {
+                              "id": 60,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.twlcin.cycleId",
+                              "label": "global.cycle.count.wave"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 75,
+      "type": "VIEW_CNTR",
+      "viewName": "subDetailViewContainer"
+    }
+  ]
+}

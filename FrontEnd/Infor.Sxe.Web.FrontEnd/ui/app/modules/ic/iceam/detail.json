@@ -1,0 +1,451 @@
+{
+  "viewId": "ic-iceam-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.adjust.core.master.detail",
+              "subLabel": "{{dtl.formatedOrderNo}}",
+              "controls": {
+                "navBtns": {
+                  "id": 87,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 88,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 15,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "eventClick": "dtl.edit()"
+                },
+                {
+                  "id": 16,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()"
+                },
+                {
+                  "id": 17,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventClick": "",
+                  "conditionDisabled": "",
+                  "eventValidated": "dtl.submit()"
+                },
+                {
+                  "id": 18,
+                  "type": "BTN",
+                  "label": "global.reset",
+                  "icon": "icon-reset",
+                  "eventClick": "dtl.reset()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 19,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 6,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "dtl.iceamdetail.transty",
+                          "label": "global.transaction.type",
+                          "value": "O",
+                          "meta": "OrderType",
+                          "type3": "SET",
+                          "metaGroup": "IC",
+                          "conditionReadonly": "dtl.iceamdetail.mode.toLowerCase() === 'c'",
+                          "autoFocus": true,
+                          "blankOption": false
+                        }
+                      ]
+                    },
+                    {
+                      "id": 21,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 37,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.iceamdetail.repairordno",
+                          "label": "sw.order.number",
+                          "meta": "OEOrders",
+                          "type3": "STANDARD",
+                          "conditionDisabled": "dtl.iceamdetail.transty.toLowerCase() !== 'o'",
+                          "conditionReadonly": "dtl.iceamdetail.mode.toLowerCase() === 'c'"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 80,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 81,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 7,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.formatedOrderNo",
+                          "label": "global.order.number",
+                          "meta": "OEOrders",
+                          "type3": "STANDARD",
+                          "eventChange": "dtl.fieldChanged('orderNumber')",
+                          "conditionShow": "dtl.iceamdetail.transty.toLowerCase() === 'o'",
+                          "conditionReadonly": "dtl.iceamdetail.mode.toLowerCase() === 'c'"
+                        },
+                        {
+                          "id": 83,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.formatedOrderNo",
+                          "label": "global.purchase.order.number",
+                          "meta": "POOrders",
+                          "type3": "STANDARD",
+                          "conditionShow": "dtl.iceamdetail.transty.toLowerCase() === 'p'",
+                          "conditionReadonly": "dtl.iceamdetail.mode.toLowerCase() === 'c'",
+                          "eventChange": "dtl.fieldChanged('orderNumber')",
+                          "options": {
+                            "allowEntry": "dtl.formatedOrderNo == '0' || dtl.formatedOrderNo == '0-00'"
+                          }
+                        },
+                        {
+                          "id": 84,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.formatedOrderNo",
+                          "label": "wt.number",
+                          "meta": "WTOrders",
+                          "type3": "STANDARD",
+                          "eventChange": "dtl.fieldChanged('orderNumber')",
+                          "conditionShow": "dtl.iceamdetail.transty.toLowerCase() === 'w'",
+                          "conditionReadonly": "dtl.iceamdetail.mode.toLowerCase() === 'c'"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 82,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 39,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.iceamdetail.repairlineno",
+                          "label": "global.line.number",
+                          "size": "SM",
+                          "conditionDisabled": "dtl.iceamdetail.transty.toLowerCase() !== 'o'",
+                          "conditionReadonly": "dtl.iceamdetail.mode.toLowerCase() === 'c'"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 22,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 23,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 8,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.iceamdetail.lineno",
+                          "label": "global.line.number",
+                          "dataFormat": "INTEGER",
+                          "size": "SM",
+                          "digits": 3,
+                          "required": true,
+                          "conditionReadonly": "dtl.iceamdetail.mode.toLowerCase() === 'c'",
+                          "eventChange": "dtl.lineNumberChange()"
+                        },
+                        {
+                          "id": 9,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.iceamdetail.custno",
+                          "label": "global.customer.number",
+                          "meta": "Customer",
+                          "type3": "STANDARD",
+                          "required": true,
+                          "conditionDisabled": "dtl.iceamdetail.transty.toLowerCase() !== 'o'",
+                          "conditionReadonly": "dtl.iceamdetail.mode.toLowerCase() === 'c'"
+                        },
+                        {
+                          "id": 10,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.iceamdetail.vendno",
+                          "label": "global.vendor",
+                          "meta": "Vendor",
+                          "type3": "STANDARD",
+                          "conditionDisabled": "dtl.iceamdetail.transty.toLowerCase() !== 'p'",
+                          "conditionReadonly": "dtl.iceamdetail.mode.toLowerCase() === 'c'"
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.iceamdetail.implyprod",
+                          "label": "global.implied.product",
+                          "meta": "ProdAll",
+                          "type3": "STANDARD",
+                          "conditionReadonly": "dtl.iceamdetail.mode.toLowerCase() === 'c'"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 85,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.iceamdetail.origprod",
+                          "label": "global.original.product",
+                          "meta": "ProdAll",
+                          "type3": "STANDARD",
+                          "required": true,
+                          "conditionReadonly": "dtl.iceamdetail.mode.toLowerCase() === 'c'",
+                          "eventChange": "dtl.originalProductChange()"
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.iceamdetail.coreprod",
+                          "label": "global.core.product",
+                          "meta": "ProdAll",
+                          "type3": "STANDARD",
+                          "conditionReadonly": "dtl.iceamdetail.mode.toLowerCase() === 'c'"
+                        },
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dtl.iceamdetail.whse",
+                          "label": "global.warehouse",
+                          "meta": "Warehouse",
+                          "type3": "STANDARD",
+                          "required": true,
+                          "conditionReadonly": "dtl.iceamdetail.mode.toLowerCase() === 'c'"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 44,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 45,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 55,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "dtl.iceamdetail.coreduedt",
+                          "label": "global.core.due.date",
+                          "dataFormat": "DATE",
+                          "required": true
+                        },
+                        {
+                          "id": 46,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.iceamdetail.corechg",
+                          "label": "global.core.charge",
+                          "dataFormat": "DECIMAL",
+                          "size": "SM",
+                          "decimals": 2,
+                          "digits": 7
+                        },
+                        {
+                          "id": 59,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.iceamdetail.corevalue",
+                          "label": "global.core.value",
+                          "dataFormat": "DECIMAL",
+                          "size": "SM",
+                          "decimals": 2,
+                          "digits": 7
+                        },
+                        {
+                          "id": 65,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.iceamdetail.intclaimno",
+                          "label": "global.claim.number",
+                          "dataFormat": "INTEGER",
+                          "size": "SM",
+                          "digits": 8
+                        },
+                        {
+                          "id": 69,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "dtl.iceamdetail.invoicedt",
+                          "label": "global.invoice.date",
+                          "dataFormat": "DATE",
+                          "size": "SM"
+                        },
+                        {
+                          "id": 74,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.iceamdetail.price",
+                          "label": "global.price",
+                          "size": "SM",
+                          "dataFormat": "CURRENCY",
+                          "decimals": 2,
+                          "digits": 7
+                        },
+                        {
+                          "id": 79,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "dtl.iceamdetail.pfpfl",
+                          "label": "question.primary.failed.part"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 50,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 51,
+                          "type": "FIELD",
+                          "subType": "RADIO_SET",
+                          "model": "dtl.iceamdetail.statusfl",
+                          "label": "global.status",
+                          "meta": "Status",
+                          "type3": "SET",
+                          "metaGroup": "COMMON",
+                          "size": "SM"
+                        },
+                        {
+                          "id": 56,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.iceamdetail.qty",
+                          "label": "global.quantity",
+                          "dataFormat": "INTEGER",
+                          "required": true,
+                          "size": "SM",
+                          "digits": 7
+                        },
+                        {
+                          "id": 61,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.iceamdetail.qtyalloc",
+                          "label": "global.qty.allocated",
+                          "dataFormat": "INTEGER",
+                          "size": "SM",
+                          "digits": 7
+                        },
+                        {
+                          "id": 71,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.iceamdetail.qtybank",
+                          "label": "global.qty.bank",
+                          "size": "SM",
+                          "dataFormat": "INTEGER",
+                          "digits": 7
+                        },
+                        {
+                          "id": 66,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.iceamdetail.qtywarr",
+                          "label": "global.qty.warranty",
+                          "dataFormat": "INTEGER",
+                          "size": "SM",
+                          "digits": 7
+                        },
+                        {
+                          "id": 76,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.iceamdetail.implyqty",
+                          "label": "global.implied.quantity",
+                          "dataFormat": "INTEGER",
+                          "size": "SM",
+                          "digits": 7
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "viewId": "twl-twlclp-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.criteria.coNum",
+                  "label": "global.company.number",
+                  "extra": true
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.whNum",
+                  "label": "global.warehouse",
+                  "meta": "TWLWarehouse",
+                  "conditionReadonly": "base.restrictTWLWarehouse",
+                  "autoFocus": true,
+                  "required": true
+                },
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.printerId",
+                  "label": "global.label.printer",
+                  "blankOption": false,
+                  "meta": "TWLLabelPrinters",
+                  "autoFocus": true,
+                  "required": true,
+                  "options": {
+                    "searchParams": {
+                      "coNum": {
+                        "type": "REF",
+                        "value": "base.criteria.coNum"
+                      },
+                      "whNum": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.containerType",
+                  "label": "global.label.destination",
+                  "autoFocus": true,
+                  "blankOption": false,
+                  "type3": "SET",
+                  "metaGroup": "TWL",
+                  "meta": "LabelPrintContainerType",
+                  "eventChange": "base.changeContainerType()"
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.whZone",
+                  "label": "global.zone",
+                  "blankOption": false,
+                  "meta": "TWLWhZone",
+                  "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_LOCATION || base.criteria.containerType === base.CONTAINERTYPE_PRIMARYPICK",
+                  "options": {
+                    "searchParams": {
+                      "coNum": {
+                        "type": "REF",
+                        "value": "base.criteria.coNum"
+                      },
+                      "whNum": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.aisle",
+                  "label": "global.aisle",
+                  "dataFormat": "INTEGER",
+                  "digits": 4,
+                  "size": "XS",
+                  "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_LOCATION || base.criteria.containerType === base.CONTAINERTYPE_PRIMARYPICK"
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.absNum",
+                  "label": "global.product",
+                  "blankOption": false,
+                  "meta": "TWLItem",
+                  "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_INVENTORY || base.criteria.containerType === base.CONTAINERTYPE_ITEM",
+                  "options": {
+                    "searchParams": {
+                      "whse": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.binNum",
+                  "label": "global.bin.location",
+                  "maxLength": 10,
+                  "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_LOCATION || base.criteria.containerType === base.CONTAINERTYPE_INVENTORY || base.criteria.containerType === base.CONTAINERTYPE_PRIMARYPICK"
+                },
+                {
+                  "id": 17,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.palletId",
+                  "label": "global.pallet",
+                  "meta": "TWLPallets",
+                  "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_INVENTORY"
+                },
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.prodGrp",
+                  "label": "global.product.category",
+                  "meta": "TWLProductCategory",
+                  "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_ITEM",
+                  "options": {
+                    "searchParams": {
+                      "coNum": {
+                        "type": "REF",
+                        "value": "base.criteria.coNum"
+                      },
+                      "whNum": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

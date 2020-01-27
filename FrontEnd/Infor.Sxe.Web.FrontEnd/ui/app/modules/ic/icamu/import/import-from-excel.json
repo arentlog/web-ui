@@ -1,0 +1,212 @@
+{
+  "viewId": "ic-icamu-import-importfromexcel",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ife.isImportFromExcel()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.icamu",
+              "subLabel": "global.import.from.excel",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 28,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.delete",
+                  "icon": "icon-delete-grid-row",
+                  "conditionShow": "ife.isFileImported",
+                  "eventClick": "ife.deleteNewData()",
+                  "conditionDisabled": "!ife.grid.isAnyRowSelected()"
+                },
+                {
+                  "id": 14,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.submit",
+                  "icon": "icon-confirm",
+                  "submitForm": true,
+                  "eventValidated": "ife.submit()",
+                  "conditionShow": "ife.importDataCollection && ife.isFileImported"
+                },
+                {
+                  "id": 15,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "conditionShow": "ife.isFileImported",
+                  "eventClick": "ife.cancel()"
+                },
+                {
+                  "id": 13,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.import.file",
+                  "icon": "icon-tree-xls",
+                  "eventClick": "ife.importFile()",
+                  "conditionShow": "!ife.isFileImported"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 8,
+                          "type": "FIELD",
+                          "subType": "FILE",
+                          "model": "ife.importedFile",
+                          "label": "global.file.to.import",
+                          "conditionShow": "!ife.isFileImported",
+                          "autoFocus": true,
+                          "multiple": false
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 9,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "ife.maxLines",
+                          "label": "global.max.lines",
+                          "dataFormat": "INTEGER",
+                          "size": "SM",
+                          "conditionShow": "!ife.isFileImported",
+                          "sign": "+",
+                          "digits": 5
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 16,
+                  "type": "MESSAGE",
+                  "text": "{{ife.importedFile.name}}",
+                  "icon": "icon-tree-xls",
+                  "conditionShow": "ife.importedFile.name && ife.isFileImported"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID",
+                  "model": "ife.importDataCollection",
+                  "controlRef": "ife.grid",
+                  "conditionShow": "ife.isFileImported",
+                  "options": {
+                    "showDrilldown": true,
+                    "events": {
+                      "drilldown": "ife.drilldown()"
+                    },
+                    "showCheckboxes": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 18,
+                      "type": "TOOLBAR",
+                      "label": "global.lines"
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "processfl",
+                      "label": "global.ok.to.process",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 25,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "worksheetno",
+                      "label": "global.worksheet.number",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 22,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "loadrow",
+                      "label": "global.row.number",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 20,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.warehouse",
+                      "model": "whse"
+                    },
+                    {
+                      "id": 19,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.product",
+                      "model": "prod"
+                    },
+                    {
+                      "id": 23,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "errormsg",
+                      "label": "global.message"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "type": "VIEW_CNTR",
+      "viewName": "importFromExcelChildView"
+    }
+  ]
+}

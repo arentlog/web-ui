@@ -1,0 +1,228 @@
+{
+  "viewId": "sa-sasgs-copy",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.sales.use.taxes",
+              "subLabel": "{{cpy.copySubTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "cpy.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "submitForm": true,
+                  "eventValidated": "cpy.submit()"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "cpy.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "cpy.request.torecty",
+                          "label": "global.type",
+                          "type3": "SET",
+                          "metaGroup": "SA",
+                          "meta": "RecType",
+                          "required": true
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "cpy.request.totaxgroup",
+                          "label": "global.group",
+                          "type3": "CODES",
+                          "meta": "TaxGroup",
+                          "blankOption": false,
+                          "required": true
+                        }
+                      ]
+                    },
+                    {
+                      "id": 15,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "cpy.request.tostatecd",
+                          "label": "global.state",
+                          "maxLength": 2,
+                          "conditionShow": "cpy.request.torecty === 2",
+                          "conditionRequired": "cpy.request.torecty >= 2",
+                          "eventChange": "cpy.getDescription()",
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          }
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "cpy.request.tostatecd",
+                          "label": "global.state",
+                          "conditionShow": "cpy.request.torecty >= 3",
+                          "conditionRequired": "cpy.request.torecty >= 2",
+                          "meta": "TaxMasterState"
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "cpy.request.tocountycd",
+                          "label": "global.county",
+                          "maxLength": 12,
+                          "conditionShow": "cpy.request.torecty === 3",
+                          "conditionRequired": "cpy.request.torecty >= 3",
+                          "eventChange": "cpy.getDescription()",
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          }
+                        },
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "cpy.request.tocountycd",
+                          "label": "global.county",
+                          "conditionShow": "cpy.request.torecty >= 4",
+                          "conditionRequired": "cpy.request.torecty >= 3",
+                          "meta": "TaxMasterCounty",
+                          "options": {
+                            "searchParams": {
+                              "statecd": {
+                                "type": "REF",
+                                "value": "cpy.request.tostatecd"
+                              }
+                            },
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "cpy.request.tocitycd",
+                          "label": "global.city",
+                          "maxLength": 12,
+                          "conditionShow": "cpy.request.torecty === 4",
+                          "conditionRequired": "cpy.request.torecty >= 4",
+                          "eventChange": "cpy.getDescription()",
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          }
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "cpy.request.tocitycd",
+                          "label": "global.city",
+                          "maxLength": 12,
+                          "conditionShow": "cpy.request.torecty >= 5",
+                          "conditionRequired": "cpy.request.torecty >= 4",
+                          "meta": "TaxMasterCity",
+                          "options": {
+                            "allowEntry": true,
+                            "searchParams": {
+                              "statecd": {
+                                "type": "REF",
+                                "value": "cpy.request.tostatecd"
+                              },
+                              "countycd": {
+                                "type": "REF",
+                                "value": "cpy.request.tocountycd"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "cpy.request.toothercd",
+                          "label": "global.other",
+                          "maxLength": 12,
+                          "conditionShow": "cpy.request.torecty === 5",
+                          "conditionRequired": "cpy.request.torecty === 5",
+                          "eventChange": "cpy.getDescription()",
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          }
+                        },
+                        {
+                          "id": 22,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "cpy.request.todescrip",
+                          "label": "global.description",
+                          "maxLength": 24,
+                          "required": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

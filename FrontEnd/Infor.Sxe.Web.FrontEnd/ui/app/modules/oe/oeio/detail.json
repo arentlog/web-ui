@@ -1,0 +1,230 @@
+{
+  "viewId": "oe-oeio-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isDetail()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "global.order.inquiry",
+          "subLabel": "{{dtl.subTitle}}",
+          "controls": {
+            "navBtns": {
+              "id": 12,
+              "type": "BTN_SET",
+              "subType": "TBAR_NAV",
+              "children": [
+                {
+                  "id": 13,
+                  "type": "BTN",
+                  "subType": "ICON",
+                  "icon": "icon-left-arrow",
+                  "stateRef": "^.master",
+                  "label": "special.button.back"
+                }
+              ]
+            }
+          }
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "type": "TAB_SET",
+              "id": 5,
+              "children": [
+                {
+                  "type": "TAB",
+                  "id": 6,
+                  "label": "global.header",
+                  "subFunction": "Header",
+                  "tabId": "header",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/oeio/tabs/header.json",
+                      "controller": "OeioDetailHeaderCtrl as hdr"
+                    }
+                  ]
+                },
+                {
+                  "id": 8,
+                  "type": "TAB",
+                  "label": "global.line.detail",
+                  "subFunction": "Line Details",
+                  "tabId": "line-detail",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "CUSTOM",
+                      "subType": "OELineDetails",
+                      "options": {
+                        "headerModel": "dtl.oeeh"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 10,
+                  "type": "TAB",
+                  "label": "global.line.history",
+                  "subFunction": "Line History",
+                  "tabId": "line-history",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/oeio/tabs/line-history.json",
+                      "controller": "OeioDetailLineHistoryCtrl as lnhist"
+                    }
+                  ]
+                },
+                {
+                  "id": 14,
+                  "type": "TAB",
+                  "label": "global.totals",
+                  "subFunction": "Totals",
+                  "tabId": "totals",
+                  "children": [
+                    {
+                      "id": 23,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/oeio/tabs/totals.json",
+                      "controller": "OeioDetailTotalsCtrl as tot"
+                    }
+                  ]
+                },
+                {
+                  "id": 18,
+                  "type": "TAB",
+                  "label": "global.taxes",
+                  "subFunction": "Taxes",
+                  "tabId": "taxes",
+                  "children": [
+                    {
+                      "id": 24,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/oeio/tabs/taxes.json",
+                      "controller": "OeioDetailTaxesCtrl as tax"
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "TAB",
+                  "label": "global.packages",
+                  "subFunction": "Packages",
+                  "tabId": "packages",
+                  "children": [
+                    {
+                      "id": 25,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/oeio/tabs/packages.json"
+                    }
+                  ]
+                },
+                {
+                  "id": 20,
+                  "type": "TAB",
+                  "label": "global.history",
+                  "subFunction": "History",
+                  "tabId": "history",
+                  "children": [
+                    {
+                      "id": 26,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/oeio/tabs/history.json",
+                      "controller": "OeioDetailHistoryCtrl as hist"
+                    }
+                  ]
+                },
+                {
+                  "id": 21,
+                  "type": "TAB",
+                  "label": "global.custom",
+                  "subFunction": "Custom",
+                  "tabId": "custom",
+                  "children": [
+                    {
+                      "id": 27,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/oeio/tabs/custom.json"
+                    }
+                  ]
+                },
+                {
+                  "id": 22,
+                  "type": "TAB",
+                  "label": "global.warehouse.logistics.inquiry",
+                  "subFunction": "WL Inquiry",
+                  "conditionShow": "dtl.wlTabVisible",
+                  "tabId": "warehouse-logistics-inquiry",
+                  "children": [
+                    {
+                      "id": 28,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/oeio/tabs/wl-inquiry.json",
+                      "controller": "OeioDetailWarehouseLogisticsCtrl as wl"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 29,
+      "type": "VIEW_CNTR",
+      "viewName": "lineDetail"
+    },
+    {
+      "id": 30,
+      "type": "VIEW_CNTR",
+      "viewName": "cardDetail"
+    },
+    {
+      "id": 31,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Oeeh",
+      "contextValues": {
+        "key1": "dtl.oeeh.orderno",
+        "key2": "dtl.oeeh.ordersuf"
+      }
+    },
+    {
+      "id": 32,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Arsc",
+      "contextValues": {
+        "key1": "dtl.oeeh.custno"
+      }
+    },
+    {
+      "id": 33,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Arss",
+      "contextValues": {
+        "key1": "dtl.oeeh.custno",
+        "key2": "dtl.oeeh.shipto"
+      }
+    }
+  ]
+}

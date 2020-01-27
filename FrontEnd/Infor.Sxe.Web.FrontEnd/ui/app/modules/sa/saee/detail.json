@@ -1,0 +1,307 @@
+{
+  "viewId": "sa-saee-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "conditionShow": "base.isDetail() || base.isEdit() || base.isCreate()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.saee",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 37,
+                      "type": "TOOLBAR",
+                      "label": "global.blank.label.string.for.space",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "BTN",
+                          "label": "global.amount",
+                          "eventClick": "dtl.launchSelectionFieldsAmt()",
+                          "conditionDisabled": "base.isDetail()",
+                          "conditionShow": "!base.isCreate()"
+                        },
+                        {
+                          "id": 33,
+                          "type": "BTN",
+                          "label": "global.character",
+                          "eventClick": "dtl.launchSelectionFieldsChar()",
+                          "conditionDisabled": "base.isDetail()",
+                          "conditionShow": "!base.isCreate()"
+                        },
+                        {
+                          "id": 34,
+                          "type": "BTN",
+                          "label": "global.price",
+                          "eventClick": "dtl.launchSelectionFieldsPrc()",
+                          "conditionDisabled": "base.isDetail()",
+                          "conditionShow": "!base.isCreate()"
+                        },
+                        {
+                          "id": 35,
+                          "type": "BTN",
+                          "label": "global.date",
+                          "eventClick": "dtl.launchSelectionFieldsDate()",
+                          "conditionDisabled": "base.isDetail()",
+                          "conditionShow": "!base.isCreate()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.saee.eventname",
+                              "label": "global.event.name",
+                              "required": true,
+                              "conditionReadonly": "!base.isCreate()",
+                              "maxLength": 20
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.saee.shortdesc",
+                              "label": "global.short.description",
+                              "required": false,
+                              "maxLength": 40,
+                              "size": "LG"
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.saee.triggername",
+                              "label": "global.trigger.name",
+                              "required": true,
+                              "meta": "TriggerName"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.saee.sourcename",
+                              "label": "global.source.name",
+                              "required": true,
+                              "maxLength": 20
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.saee.standardty",
+                              "label": "global.standard.type",
+                              "required": false,
+                              "type3": "SET",
+                              "metaGroup": "SA",
+                              "meta": "StandardTypes",
+                              "blankOption": false
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "TEXT_AREA",
+                              "model": "dtl.saee.longdesc",
+                              "label": "global.long.description",
+                              "required": false,
+                              "size": "LG",
+                              "maxLength": 750
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD_SET",
+                              "label": "global.action.range.options",
+                              "children": [
+                                {
+                                  "id": 24,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.saee.custnoactionfl",
+                                  "label": "global.customer",
+                                  "dataFormat": "LOGICAL"
+                                },
+                                {
+                                  "id": 25,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.saee.vendnoactionfl",
+                                  "label": "global.vendor",
+                                  "dataFormat": "LOGICAL"
+                                },
+                                {
+                                  "id": 26,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.saee.prodactionfl",
+                                  "label": "global.product.product.category",
+                                  "dataFormat": "LOGICAL"
+                                },
+                                {
+                                  "id": 27,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.saee.whseactionfl",
+                                  "label": "global.warehouse",
+                                  "dataFormat": "LOGICAL"
+                                },
+                                {
+                                  "id": 28,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.saee.regionactionfl",
+                                  "label": "global.region",
+                                  "dataFormat": "LOGICAL"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "event_setup",
+                        "objectRef": "dtl.saee",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "type": "VIEW_CNTR",
+      "viewName": "selectionFields"
+    }
+  ]
+}

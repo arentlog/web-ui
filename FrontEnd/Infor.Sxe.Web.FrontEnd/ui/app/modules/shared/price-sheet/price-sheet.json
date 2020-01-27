@@ -1,0 +1,269 @@
+{
+  "viewId": "shared-price-sheet-pricesheet",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.sheet.prices",
+              "subLabel": "{{psht.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "psht.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "psht.back()",
+                  "conditionDisabled": "base.isDetail()",
+                  "stateRef": ""
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "psht.pdsps.pricesheet",
+                              "label": "global.price.sheet",
+                              "maxLength": 15,
+                              "conditionReadonly": "!base.isCreate()",
+                              "readonly": true
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "psht.pdsps.effectivedt",
+                              "label": "global.sheet.date",
+                              "required": false,
+                              "readonly": true,
+                              "dataFormat": "DATE"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 51,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "psht.pdsps.baseprice",
+                              "label": "global.base.price",
+                              "required": false,
+                              "size": "SM",
+                              "readonly": true,
+                              "conditionShow": "psht.priceSheetVisibility('price')",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "psht.pdsps.listprice",
+                              "label": "global.list.price",
+                              "required": false,
+                              "size": "SM",
+                              "readonly": true,
+                              "conditionShow": "psht.priceSheetVisibility('price')",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "psht.pdsps.replcost",
+                              "label": "global.replacement.cost",
+                              "required": false,
+                              "size": "SM",
+                              "readonly": true,
+                              "conditionShow": "psht.priceSheetVisibility('cost')",
+                              "dataFormat": "DECIMAL",
+                              "dataDesc": "psht.pdsps.costper",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "psht.pdsps.rebatecost",
+                              "label": "global.rebate.cost",
+                              "required": false,
+                              "size": "SM",
+                              "readonly": true,
+                              "conditionShow": "psht.priceSheetVisibility('cost')",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "psht.pdsps.stndcost",
+                              "label": "global.standard.cost",
+                              "required": false,
+                              "size": "SM",
+                              "readonly": true,
+                              "conditionShow": "psht.priceSheetVisibility('cost')",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 37,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 38,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 39,
+                              "type": "GRID",
+                              "model": "psht.columnMatrix",
+                              "options": {
+                                "editable": true,
+                                "paging": false
+                              },
+                              "controls": {
+                                "toolbar": {
+                                  "id": 40,
+                                  "type": "TOOLBAR",
+                                  "label": "global.columns"
+                                }
+                              },
+                              "children": [
+                                {
+                                  "id": 41,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "seqno",
+                                  "label": "global.sequence.number",
+                                  "dataFormat": "INTEGER"
+                                },
+                                {
+                                  "id": 42,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "custmatrix",
+                                  "label": "global.customer.columns",
+                                  "editable": false,
+                                  "sign": "+",
+                                  "digits": 7,
+                                  "decimals": 5,
+                                  "conditionInclude": "psht.priceSheetVisibility('price')",
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 5,
+                                    "maximumFractionDigits": 5
+                                  }
+                                },
+                                {
+                                  "id": 45,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "vendmatrix",
+                                  "label": "global.vendor.columns",
+                                  "editable": false,
+                                  "sign": "+",
+                                  "digits": 7,
+                                  "decimals": 5,
+                                  "conditionInclude": "psht.priceSheetVisibility('cost')",
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 5,
+                                    "maximumFractionDigits": 5
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

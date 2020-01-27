@@ -1,0 +1,208 @@
+{
+  "viewId": "twl-twlasp-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.system.parameter.details",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 28,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "securityLevel": 3,
+                  "conditionDisabled": "dtl.isEditLockedDown",
+                  "eventClick": "dtl.save()"
+                },
+                {
+                  "id": 13,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-delete",
+                  "label": "global.delete.warehouse.specific.parameter",
+                  "eventClick": "dtl.deleteWarehouseSpecific()",
+                  "securityLevel": 5,
+                  "conditionShow": "!dtl.isGlobal"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 31,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 32,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 29,
+                          "type": "MESSAGE",
+                          "text": "message.this.system.parameter.can.not.be.modified",
+                          "icon": "icon-info",
+                          "conditionShow": "dtl.isEditLockedDown"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 33,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.sysparDef.name",
+                          "label": "global.name"
+                        },
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.paramTypeName",
+                          "label": "global.parameter.type"
+                        },
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.isGlobal",
+                          "label": "global.level",
+                          "dataFormat": "BooleanToString",
+                          "formatOptions": {
+                            "trueString": "global.global",
+                            "falseString": "global.warehouse"
+                          }
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.parameterValue",
+                          "label": "global.value",
+                          "conditionShow": "dtl.isTextVisible",
+                          "conditionReadonly": "!dtl.isEditMode",
+                          "conditionFocus": "dtl.isTextVisible"
+                        },
+                        {
+                          "id": 26,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "dtl.parameterValue",
+                          "label": "global.value",
+                          "conditionShow": "dtl.isDropdownVisible",
+                          "conditionReadonly": "!dtl.isEditMode || dtl.isDropdownForceDisable",
+                          "conditionFocus": "dtl.isDropdownVisible",
+                          "type3": "MANUAL",
+                          "optionsModel": "dtl.dropdownValues",
+                          "optionValueField": "value",
+                          "optionLabelField": "label",
+                          "blankOption": false
+                        },
+                        {
+                          "id": 27,
+                          "type": "FIELD",
+                          "subType": "MULTI_SELECT",
+                          "model": "dtl.parameterValueMultiSelect",
+                          "label": "global.value",
+                          "conditionShow": "dtl.isMultiSelectVisible",
+                          "conditionFocus": "dtl.isMultiSelectVisible",
+                          "type3": "MANUAL",
+                          "optionsModel": "dtl.multiSelectValues",
+                          "optionValueField": "value",
+                          "blankOption": false,
+                          "optionLabelField": "label",
+                          "conditionReadonly": "!dtl.isEditMode"
+                        },
+                        {
+                          "id": 25,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "dtl.parameterValueLogical",
+                          "label": "global.value",
+                          "conditionShow": "dtl.isCheckboxVisible",
+                          "conditionReadonly": "!dtl.isEditMode",
+                          "conditionFocus": "dtl.isCheckboxVisible",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!dtl.isEditMode"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "dtl.sysparDef.userSettable",
+                          "label": "global.user.changeable",
+                          "dataFormat": "LOGICAL",
+                          "disabled": true
+                        },
+                        {
+                          "id": 23,
+                          "type": "FIELD",
+                          "subType": "TEXT_AREA",
+                          "model": "dtl.sysparDef.description",
+                          "label": "global.description",
+                          "size": "LG",
+                          "height": "XL",
+                          "readonly": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

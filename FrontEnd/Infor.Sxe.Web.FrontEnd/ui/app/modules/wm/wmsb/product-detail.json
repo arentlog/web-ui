@@ -1,0 +1,309 @@
+{
+  "viewId": "wm-wmsb-productdetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.product.detail",
+              "controls": {
+                "navBtns": {
+                  "id": 20,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 56,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "securityLevel": 3,
+                  "conditionDisabled": "proddtl.isChangeMode() || proddtl.isAddMode()",
+                  "conditionShow": "!(proddtl.isChangeMode() || proddtl.isAddMode())",
+                  "eventClick": "proddtl.editSelected()"
+                },
+                {
+                  "id": 22,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "securityLevel": 3,
+                  "eventClick": "proddtl.submit()",
+                  "conditionDisabled": "!(proddtl.isChangeMode() || proddtl.isAddMode())"
+                },
+                {
+                  "id": 23,
+                  "type": "BTN",
+                  "subType": "SEC",
+                  "label": "global.cancel",
+                  "stateRef": "^"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 16,
+                  "type": "EXP_AREA",
+                  "label": "global.product.detail",
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "proddtl.wmsbp.prod",
+                              "label": "global.product",
+                              "conditionReadonly": "!proddtl.isAddMode()",
+                              "required": true,
+                              "meta": "ProdAll",
+                              "eventChange": "proddtl.changeProduct()"
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "proddtl.wmsbp.unitstock",
+                              "label": "global.stocking",
+                              "readonly": true,
+                              "meta": "StockingUnit"
+                            },
+                            {
+                              "id": 35,
+                              "type": "FIELD_SET",
+                              "label": "global.quantities",
+                              "children": [
+                                {
+                                  "id": 48,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 39,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "proddtl.wmsbp.qtyonhand",
+                                      "label": "global.on.hand",
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 9,
+                                      "decimals": 2,
+                                      "conditionReadonly": "!proddtl.wmsbp.qtyonhandenablefl || !(proddtl.isChangeMode() || proddtl.isAddMode())",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 52,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "proddtl.wmsbp.qtycommitted",
+                                      "label": "global.committed",
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 9,
+                                      "decimals": 2,
+                                      "conditionReadonly": "!proddtl.wmsbp.qtycommittedenablefl || !(proddtl.isChangeMode() || proddtl.isAddMode())",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 53,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "proddtl.wmsbp.qtyreceived",
+                                      "label": "global.received",
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 9,
+                                      "decimals": 2,
+                                      "conditionReadonly": "!proddtl.wmsbp.qtyreceivedenablefl || !(proddtl.isChangeMode() || proddtl.isAddMode())",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 54,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "proddtl.wmsbp.maxqty",
+                                      "label": "global.maximum",
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 9,
+                                      "decimals": 2,
+                                      "conditionReadonly": "!proddtl.wmsbp.maxqtyenablefl || !(proddtl.isChangeMode() || proddtl.isAddMode())",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 55,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "proddtl.wmsbp.minqty",
+                                      "label": "global.minimum",
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 9,
+                                      "decimals": 2,
+                                      "conditionReadonly": "!proddtl.wmsbp.minqtyenablefl || !(proddtl.isChangeMode() || proddtl.isAddMode())",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 19,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "proddtl.wmsbp.whse",
+                              "label": "global.warehouse",
+                              "readonly": true,
+                              "meta": "Warehouse"
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "proddtl.wmsbp.binloc",
+                              "label": "global.bin.location",
+                              "readonly": true,
+                              "meta": "BinLocation",
+                              "dataFormat": "BinLoc"
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD_SET",
+                              "label": "global.dates",
+                              "children": [
+                                {
+                                  "id": 50,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 43,
+                                      "type": "FIELD",
+                                      "subType": "DATE",
+                                      "model": "proddtl.wmsbp.fstoredt",
+                                      "label": "global.first.stored",
+                                      "dataFormat": "DATE",
+                                      "conditionReadonly": "!proddtl.isChangeMode() && !proddtl.isAddMode()"
+                                    },
+                                    {
+                                      "id": 44,
+                                      "type": "FIELD",
+                                      "subType": "DATE",
+                                      "model": "proddtl.wmsbp.lstoredt",
+                                      "label": "global.last.stored",
+                                      "dataFormat": "DATE",
+                                      "conditionReadonly": "!proddtl.isChangeMode() && !proddtl.isAddMode()"
+                                    },
+                                    {
+                                      "id": 45,
+                                      "type": "FIELD",
+                                      "subType": "DATE",
+                                      "model": "proddtl.wmsbp.lpickdt",
+                                      "label": "global.last.picked",
+                                      "dataFormat": "DATE",
+                                      "conditionReadonly": "!proddtl.isChangeMode() && !proddtl.isAddMode()"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD_SET",
+                              "label": "global.counts",
+                              "children": [
+                                {
+                                  "id": 51,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 46,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "proddtl.wmsbp.tmstored",
+                                      "label": "global.times.stored",
+                                      "dataFormat": "INTEGER",
+                                      "sign": "+",
+                                      "digits": 6,
+                                      "size": "SM",
+                                      "conditionReadonly": "!proddtl.isChangeMode() && !proddtl.isAddMode()"
+                                    },
+                                    {
+                                      "id": 47,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "proddtl.wmsbp.tmpicked",
+                                      "label": "global.times.picked",
+                                      "dataFormat": "INTEGER",
+                                      "sign": "+",
+                                      "digits": 6,
+                                      "size": "SM",
+                                      "conditionReadonly": "!proddtl.isChangeMode() && !proddtl.isAddMode()"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,316 @@
+{
+  "viewId": "edi-etcc-errors",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 15,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 43,
+          "type": "COL",
+          "subType": "1/3",
+          "children": [
+            {
+              "id": 18,
+              "type": "FIELD",
+              "subType": "DROP_DOWN",
+              "model": "drldwn.errorCriteria.level",
+              "label": "global.section",
+              "type3": "SET",
+              "blankOption": false,
+              "metaGroup": "EDI",
+              "meta": "SectionType",
+              "eventChange": "drldwn.errorSectionChanged()",
+              "size": "SM"
+            },
+            {
+              "id": 20,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "drldwn.errorCriteria.alllines",
+              "label": "global.all.lines",
+              "dataFormat": "LOGICAL",
+              "conditionShow": "drldwn.errorCriteria.level === 'l'",
+              "eventChange": "drldwn.allLinesChanged()"
+            },
+            {
+              "id": 24,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "drldwn.errorCriteria.lineno",
+              "label": "global.line.number",
+              "dataFormat": "INTEGER_TEXT",
+              "sign": "+",
+              "digits": 3,
+              "conditionShow": "drldwn.errorCriteria.level === 'l' && !drldwn.errorCriteria.alllines === true",
+              "size": "XS"
+            },
+            {
+              "id": 44,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "drldwn.errorCriteria.showall",
+              "label": "global.include.corrected",
+              "dataFormat": "LOGICAL"
+            },
+            {
+              "id": 21,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "drldwn.errorCriteria.showerrors",
+              "label": "global.include.errors",
+              "dataFormat": "LOGICAL"
+            },
+            {
+              "id": 22,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "drldwn.errorCriteria.showexceptions",
+              "label": "global.exceptions",
+              "dataFormat": "LOGICAL"
+            },
+            {
+              "id": 23,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "drldwn.errorCriteria.showinfor",
+              "label": "global.informational",
+              "dataFormat": "LOGICAL"
+            },
+            {
+              "id": 45,
+              "type": "BTN",
+              "subType": "PRI",
+              "label": "global.search",
+              "icon": "icon-search",
+              "eventClick": "drldwn.errorSearch()"
+            }
+          ]
+        },
+        {
+          "id": 32,
+          "type": "COL",
+          "subType": "1/6",
+          "children": [
+            {
+              "id": 41,
+              "type": "FIELD_SET",
+              "label": "global.errors.to.correct",
+              "conditionShow": "drldwn.errorCriteria.showerrors",
+              "children": [
+                {
+                  "id": 34,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.errorsTotals.tothdrerr",
+                  "label": "global.header",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 35,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.errorsTotals.totlnerr",
+                  "label": "global.line",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 36,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.errorsTotals.toterr",
+                  "label": "global.total",
+                  "dataFormat": "INTEGER_TEXT"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "type": "COL",
+          "subType": "1/6",
+          "children": [
+            {
+              "id": 42,
+              "type": "FIELD_SET",
+              "label": "global.exceptions.to.correct",
+              "conditionShow": "drldwn.errorCriteria.showexceptions",
+              "children": [
+                {
+                  "id": 38,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.errorsTotals.tothdrexc",
+                  "label": "global.header",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 39,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.errorsTotals.totlnexc",
+                  "label": "global.line",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 40,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.errorsTotals.totexc",
+                  "label": "global.total",
+                  "dataFormat": "INTEGER_TEXT"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 46,
+          "type": "COL",
+          "subType": "1/6",
+          "children": [
+            {
+              "id": 47,
+              "type": "FIELD_SET",
+              "label": "global.informational",
+              "conditionShow": "drldwn.errorCriteria.showinfor",
+              "children": [
+                {
+                  "id": 48,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.errorsTotals.tothdrinf",
+                  "label": "global.header",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 49,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.errorsTotals.totlninf",
+                  "label": "global.line",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 50,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "drldwn.errorsTotals.totinf",
+                  "label": "global.total",
+                  "dataFormat": "INTEGER_TEXT"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "GRID",
+      "model": "drldwn.errorResults",
+      "controlRef": "drldwn.errorResultsGrid",
+      "options": {
+        "showCheckboxes": true
+      },
+      "controls": {
+        "toolbar": {
+          "id": 6,
+          "type": "TOOLBAR",
+          "label": "global.errors",
+          "children": [
+            {
+              "id": 28,
+              "type": "BTN",
+              "subType": "MENU",
+              "label": "global.actions",
+              "conditionDisabled": "!drldwn.errorResultsGrid.isAnyRowSelected()",
+              "children": [
+                {
+                  "id": 29,
+                  "type": "MENU_OPT",
+                  "label": "global.correction.toggle",
+                  "icon": "icon-checkbox",
+                  "eventClick": "drldwn.correctionToggle()",
+                  "conditionDisabled": "!base.changeModeSecurityEnabled()"
+                },
+                {
+                  "id": 30,
+                  "type": "MENU_OPT",
+                  "label": "global.last.update",
+                  "icon": "icon-clock",
+                  "eventClick": "drldwn.lastUpdate()"
+                },
+                {
+                  "id": 31,
+                  "type": "MENU_OPT",
+                  "label": "global.approve.transaction",
+                  "icon": "icon-confirm",
+                  "conditionDisabled": "!drldwn.isErrorsApproveTransactionsEnabled()",
+                  "eventClick": "drldwn.approveTransactions()"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 7,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "corrected",
+          "label": "global.corrected",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 51,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "leveldisplay",
+          "label": "global.section"
+        },
+        {
+          "id": 10,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "errty",
+          "label": "global.error.type",
+          "dataFormat": "EdiETCCErrorType"
+        },
+        {
+          "id": 11,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "fieldty",
+          "label": "global.error"
+        },
+        {
+          "id": 12,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "errdesc",
+          "label": "global.error.description"
+        },
+        {
+          "id": 13,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "edivalue",
+          "label": "global.transaction.value"
+        },
+        {
+          "id": 14,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "sxevalue",
+          "label": "sxe.value"
+        }
+      ]
+    }
+  ]
+}

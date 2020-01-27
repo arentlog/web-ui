@@ -1,0 +1,296 @@
+{
+  "viewId": "cr-crec-quickentry",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.quick.entry",
+              "controls": {
+                "navBtns": {
+                  "id": 35,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 36,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 24,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.update",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "eventClick": "qe.saveChanges()"
+                },
+                {
+                  "id": 26,
+                  "type": "BTN",
+                  "subType": "SEC",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "qe.cancel()",
+                  "conditionDisabled": "!qe.stage2"
+                },
+                {
+                  "id": 25,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.clear",
+                  "icon": "",
+                  "eventClick": "qe.clear()"
+                },
+                {
+                  "id": 38,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.check.number.range",
+                  "eventClick": "qe.launchVoidCheck()",
+                  "conditionShow": "qe.isCheckRange"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "qe.crecqc.bankno",
+                          "label": "global.bank.number",
+                          "conditionReadonly": "qe.isBankCheckEnable",
+                          "eventChange": "qe.onBankNoChanged()",
+                          "type3": "MANUAL",
+                          "optionsModel": "base.banknoDropDownOptions"
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "qe.crecqc.enterdt",
+                          "label": "global.post",
+                          "type3": "SET",
+                          "metaGroup": "CR",
+                          "meta": "TransactionType",
+                          "dataFormat": "DATE",
+                          "maxLength": 10,
+                          "conditionReadonly": "!qe.crecqc.enterdtSensitive"
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "qe.crecqc.checkno",
+                          "label": "global.check",
+                          "meta": "Bank",
+                          "eventChange": "qe.validateCRECCheckNo()",
+                          "dataFormat": "INTEGER_TEXT",
+                          "digits": 8,
+                          "sign": "+",
+                          "conditionReadonly": "!qe.crecqc.checknoSensitive",
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          }
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "qe.crecqc.amount",
+                          "label": "global.amount",
+                          "meta": "Bank",
+                          "dataFormat": "DECIMAL",
+                          "digits": 9,
+                          "decimals": 2,
+                          "conditionReadonly": "!qe.crecqc.amountSensitive",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "qe.crecqc.modulenm",
+                          "label": "global.source",
+                          "type3": "SET",
+                          "metaGroup": "CR",
+                          "meta": "CheckSourceType",
+                          "conditionReadonly": "!qe.crecqc.modulenmSensitive",
+                          "blankOption": false
+                        }
+                      ]
+                    },
+                    {
+                      "id": 8,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "qe.crecqc.ckrectype",
+                          "label": "global.type",
+                          "type3": "SET",
+                          "metaGroup": "CR",
+                          "meta": "TransactionType",
+                          "eventChange": "qe.transTypeChange()",
+                          "conditionReadonly": "qe.isBankCheckEnable",
+                          "blankOption": false
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "qe.crecqc.clearfl",
+                          "label": "global.cleared",
+                          "type3": "SET",
+                          "metaGroup": "CR",
+                          "meta": "ClearedValues",
+                          "blankOption": false,
+                          "conditionReadonly": "!qe.crecqc.clearflSensitive"
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "qe.crecqc.refer",
+                          "label": "global.reference",
+                          "meta": "Bank",
+                          "maxLength": 24,
+                          "conditionReadonly": "!qe.crecqc.referSensitive"
+                        },
+                        {
+                          "id": 39,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "qe.crsb.curbookbal",
+                          "label": "global.current.book.balance"
+                        },
+                        {
+                          "id": 37,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "qe.crecqc.frombankno",
+                          "label": "global.transfer.from",
+                          "conditionShow": "qe.crecqc.ckrectype === 7",
+                          "type3": "MANUAL",
+                          "optionsModel": "base.banknoDropDownOptions"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "GRID",
+                  "model": "qe.dataset",
+                  "controls": {
+                    "toolbar": {
+                      "id": 20,
+                      "type": "TOOLBAR",
+                      "label": "global.quick.entry"
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "bankno",
+                      "label": "global.bank.number",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "ckrectype",
+                      "label": "global.type",
+                      "customFormatter": "qe.recordTypeFormatter()"
+                    },
+                    {
+                      "id": 30,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "checkno",
+                      "label": "global.check.number",
+                      "dataFormat": "DECIMAL_TEXT"
+                    },
+                    {
+                      "id": 31,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "amount",
+                      "label": "global.amount",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 32,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "clearfl",
+                      "label": "global.cleared",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 33,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "model": "enterdt",
+                      "label": "global.posted",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 34,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "refer",
+                      "label": "global.reference"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

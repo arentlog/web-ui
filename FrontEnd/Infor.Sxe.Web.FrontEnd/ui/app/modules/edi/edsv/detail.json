@@ -1,0 +1,300 @@
+{
+  "viewId": "edi-edsv-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.edsv",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": "",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3,
+                  "eventClick": "dtl.customEdit()"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.edsv.typecd",
+                              "label": "global.type",
+                              "required": true,
+                              "conditionReadonly": "!base.isCreate()",
+                              "meta": "VendorUserType",
+                              "type3": "SET",
+                              "metaGroup": "EDI",
+                              "eventChange": "dtl.changeTypeCode()",
+                              "blankOption": false,
+                              "conditionFocus": "base.isCreate()"
+                            },
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.edsv.vendno",
+                              "label": "global.vendor.number",
+                              "required": true,
+                              "meta": "Vendor",
+                              "conditionReadonly": "!base.isCreate()",
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 28,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "eventClick": "dtl.navigateToVendor()",
+                                  "conditionDisabled": "!dtl.edsv.vendno"
+                                }
+                              }
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.edsv.vendorid",
+                              "label": "global.vendor.customer.id",
+                              "conditionReadonly": "!base.isCreate()",
+                              "required": true,
+                              "maxLength": 78
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.edsv.contractno",
+                              "label": "global.contract",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.edsv.typecd !== 'w'",
+                              "maxLength": 30
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.edsv.custno",
+                              "label": "global.customer.number",
+                              "meta": "Customer",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.edsv.typecd === 'cl'",
+                              "conditionRequired": "dtl.edsv.typecd === 'cl'",
+                              "conditionFocus": "dtl.edsv.typecd === 'cl' && base.isEdit()",
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 29,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "eventClick": "dtl.navigateToCustomer()",
+                                  "conditionDisabled": "!dtl.edsv.custno"
+                                }
+                              }
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.edsv.shipto",
+                              "label": "global.ship.to",
+                              "meta": "ShipTo",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.edsv.typecd === 'cl'",
+                              "options": {
+                                "searchParams": {
+                                  "custno": {
+                                    "type": "REF",
+                                    "value": "dtl.edsv.custno"
+                                  }
+                                }
+                              },
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 30,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "eventClick": "dtl.navigateToShipto()",
+                                  "conditionDisabled": "!dtl.edsv.shipto"
+                                }
+                              }
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.edsv.custrebty",
+                              "label": "global.customer.rebate.type",
+                              "meta": "CustomerRebateType",
+                              "conditionRequired": "dtl.edsv.typecd === 'cr'",
+                              "conditionShow": "dtl.edsv.typecd === 'cr'",
+                              "conditionFocus": "dtl.edsv.typecd === 'cr' && base.isEdit()"
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.edsv.custtype",
+                              "label": "global.customer.type",
+                              "conditionShow": "dtl.edsv.typecd === 'ct'",
+                              "meta": "CustType",
+                              "conditionRequired": "dtl.edsv.typecd === 'ct'",
+                              "conditionFocus": "dtl.edsv.typecd === 'ct' && base.isEdit()"
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.edsv.whse",
+                              "label": "global.warehouse",
+                              "conditionShow": "dtl.edsv.typecd === 'w'",
+                              "meta": "Warehouse",
+                              "conditionRequired": "dtl.edsv.typecd === 'w'",
+                              "conditionFocus": "dtl.edsv.typecd === 'w' && base.isEdit()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "edsv",
+                        "objectRef": "dtl.edsv",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

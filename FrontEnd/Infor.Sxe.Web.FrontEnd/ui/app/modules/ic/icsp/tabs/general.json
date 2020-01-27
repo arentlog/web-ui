@@ -1,0 +1,775 @@
+{
+  "viewId": "ic-icsp-detail-tabs-general",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isDetail() || dtl.isGeneralTabReadonly",
+  "children": [
+    {
+      "id": 90,
+      "type": "EXP_AREA",
+      "label": "global.blank.label.string.for.space",
+      "children": [
+        {
+          "id": 4,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 5,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 2,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.descrip1",
+                  "label": "global.brief.description",
+                  "maxLength": 24
+                },
+                {
+                  "id": 3,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.descrip2",
+                  "label": "global.2nd.description",
+                  "maxLength": 24,
+                  "labelHidden": true,
+                  "attachUp": true
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.lookupnm",
+                  "label": "global.lookup.name",
+                  "maxLength": 15
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.seqno",
+                  "label": "global.sequence.number",
+                  "maxLength": 3,
+                  "dataFormat": "INTEGER",
+                  "digits": 3,
+                  "sign": "+"
+                }
+              ]
+            },
+            {
+              "id": 6,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsp.statustype",
+                  "label": "global.status",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "ProductStatusType",
+                  "blankOption": false,
+                  "conditionDisabled": "",
+                  "conditionReadonly": "base.isDetail() || dtl.icsp.noupdtfl || dtl.isGeneralTabReadonly"
+                },
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "TEXT_AREA",
+                  "model": "dtl.icsp.descrip3",
+                  "label": "global.extended.description",
+                  "size": "LG",
+                  "maxLength": 256
+                },
+                {
+                  "id": 89,
+                  "type": "BTN",
+                  "label": "global.enter.description.in.multiple.language",
+                  "conditionShow": "dtl.sasc.langcd !== ''",
+                  "eventClick": "dtl.multiLangClick()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "type": "EXP_AREA",
+      "label": "global.logistics",
+      "children": [
+        {
+          "id": 11,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 12,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.bolclass",
+                  "label": "global.bill.of.lading.rate",
+                  "maxLength": 6
+                },
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.weight",
+                  "label": "global.weight",
+                  "dataFormat": "DECIMAL",
+                  "digits": 7,
+                  "decimals": 5,
+                  "sign": "+",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5,
+                    "maximumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 24,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.cubes",
+                  "label": "global.cube",
+                  "dataFormat": "DECIMAL",
+                  "digits": 7,
+                  "decimals": 5,
+                  "sign": "+",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5,
+                    "maximumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 93,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.taxweight",
+                  "label": "global.taxation.weight",
+                  "dataFormat": "DECIMAL",
+                  "digits": 7,
+                  "decimals": 5,
+                  "sign": "+",
+                  "conditionShow": "base.allowExpandedTaxGroups",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5,
+                    "maximumFractionDigits": 5
+                  }
+                }
+              ]
+            },
+            {
+              "id": 15,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.length",
+                  "label": "global.length",
+                  "dataFormat": "DECIMAL",
+                  "digits": 6,
+                  "decimals": 5,
+                  "sign": "+",
+                  "required": false,
+                  "eventChange": "dtl.calcCube()",
+                  "conditionShow": "base.showLWH",
+                  "conditionRequired": "dtl.icsp.lwhrequiredfl && dtl.icsp.statustype.toUpperCase() !== 'L'",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5,
+                    "maximumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 26,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.width",
+                  "label": "global.width",
+                  "dataFormat": "DECIMAL",
+                  "digits": 6,
+                  "decimals": 5,
+                  "sign": "+",
+                  "required": false,
+                  "eventChange": "dtl.calcCube()",
+                  "conditionShow": "base.showLWH",
+                  "conditionRequired": "dtl.icsp.lwhrequiredfl && dtl.icsp.statustype.toUpperCase() !== 'L'",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5,
+                    "maximumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 25,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.height",
+                  "label": "global.height",
+                  "dataFormat": "DECIMAL",
+                  "digits": 6,
+                  "decimals": 5,
+                  "sign": "+",
+                  "required": false,
+                  "eventChange": "dtl.calcCube()",
+                  "conditionShow": "base.showLWH",
+                  "conditionRequired": "dtl.icsp.lwhrequiredfl && dtl.icsp.statustype.toUpperCase() !== 'L'",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5,
+                    "maximumFractionDigits": 5
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "type": "EXP_AREA",
+      "label": "global.units",
+      "children": [
+        {
+          "id": 28,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 29,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 31,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsp.unitstock",
+                  "label": "global.stocking",
+                  "meta": "Units",
+                  "required": true,
+                  "conditionReadonly": "base.isDetail() || dtl.icsp.noupdtfl || dtl.isGeneralTabReadonly",
+                  "size": "SM",
+                  "maxLength": 4,
+                  "options": {
+                    "allowEntry": true,
+                    "searchParams": {
+                      "prod": {
+                        "type": "REF",
+                        "value": "dtl.icsp.prod"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 33,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsp.unitsell",
+                  "label": "global.selling",
+                  "meta": "Units",
+                  "maxLength": 4,
+                  "size": "SM",
+                  "options": {
+                    "allowEntry": true,
+                    "searchParams": {
+                      "prod": {
+                        "type": "REF",
+                        "value": "dtl.icsp.prod"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": 30,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 34,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsp.unitcnt",
+                  "label": "global.counting",
+                  "meta": "Units",
+                  "maxLength": 4,
+                  "size": "SM",
+                  "options": {
+                    "allowEntry": true,
+                    "searchParams": {
+                      "prod": {
+                        "type": "REF",
+                        "value": "dtl.icsp.prod"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "type": "EXP_AREA",
+      "label": "global.kit",
+      "children": [
+        {
+          "id": 36,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 37,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 38,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsp.kittype",
+                  "label": "global.kit.type",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "KitType",
+                  "blankOption": false,
+                  "conditionReadonly": "base.isDetail() || dtl.icsp.noupdtfl || base.noKit || dtl.isGeneralTabReadonly || dtl.isGeneralTabReadonly",
+                  "eventChange": "dtl.kitTypeChanged()"
+                },
+                {
+                  "id": 40,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsp.kitrollty",
+                  "label": "oe.kit.rollup",
+                  "type3": "SET",
+                  "metaGroup": "OE",
+                  "meta": "KitRollupType",
+                  "blankOption": false,
+                  "conditionReadonly": "base.isDetail() || base.noKit || dtl.isGeneralTabReadonly"
+                },
+                {
+                  "id": 41,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsp.bodtransferty",
+                  "label": "global.allow.transfer",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "TransferType",
+                  "blankOption": false
+                },
+                {
+                  "id": 42,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsp.tiedcompprt",
+                  "label": "global.print.tied.components",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "CompPrtTransType",
+                  "blankOption": false
+                }
+              ]
+            },
+            {
+              "id": 39,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 43,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsp.vaassemblyty",
+                  "label": "va.assembly.type",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "VAAssemblyType",
+                  "blankOption": true,
+                  "blankOptionLabel": "global.not.assembly",
+                  "conditionReadonly": "base.isDetail() || dtl.icsp.kittype !== '' || dtl.isGeneralTabReadonly",
+                  "eventChange": "dtl.setResetVaAssemblyTy()"
+                },
+                {
+                  "id": 45,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 44,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.icsp.vacutofflength",
+                      "label": "va.cutoff.length",
+                      "type3": "SET",
+                      "metaGroup": "IC",
+                      "meta": "VAAssemblyType",
+                      "blankOption": false,
+                      "dataFormat": "DECIMAL",
+                      "digits": 1,
+                      "decimals": 5,
+                      "sign": "+",
+                      "size": "SM",
+                      "conditionReadonly": "base.isDetail() || dtl.icsp.kittype || dtl.icsp.vaassemblyty || dtl.isGeneralTabReadonly",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 46,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "dtl.icsp.unitvaassembly",
+                      "label": "va.cutoff.unit",
+                      "type3": "SET",
+                      "metaGroup": "IC",
+                      "meta": "Units",
+                      "blankOption": false,
+                      "size": "SM",
+                      "conditionReadonly": "base.isDetail() || dtl.icsp.kittype || dtl.icsp.vaassemblyty || dtl.isGeneralTabReadonly",
+                      "options": {
+                        "searchParams": {
+                          "prod": {
+                            "type": "REF",
+                            "value": "dtl.icsp.prod"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 47,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsp.randommixfl",
+                  "label": "global.random.comp.mix",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 48,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsp.memomixfl",
+                  "label": "global.allow.memo.tally",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 49,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsp.reqbundleidfl",
+                  "label": "message.bundle.id.required",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 50,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsp.kitnsreqfl",
+                  "label": "global.require.nonstock.component",
+                  "dataFormat": "LOGICAL",
+                  "conditionDisabled": "base.isDetail() || base.noKit || dtl.isGeneralTabReadonly"
+                },
+                {
+                  "id": 51,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsp.exponinvfl",
+                  "label": "global.print.on.invoice",
+                  "dataFormat": "LOGICAL",
+                  "conditionDisabled": "base.isDetail() || base.noKit || dtl.isGeneralTabReadonly"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "type": "EXP_AREA",
+      "label": "global.category",
+      "children": [
+        {
+          "id": 53,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 54,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 71,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsp.prodcat",
+                  "label": "global.category",
+                  "meta": "ProdCat",
+                  "required": true,
+                  "conditionReadonly": "base.isDetail() || dtl.icsp.noupdtfl || dtl.isGeneralTabReadonly"
+                },
+                {
+                  "id": 73,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.mfgprod",
+                  "label": "global.manufacturer.product",
+                  "maxLength": 50,
+                  "size": "LG"
+                },
+                {
+                  "id": 74,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsp.altprodgrp",
+                  "label": "global.alternate.product.group",
+                  "meta": "AltProdGroup",
+                  "required": false
+                },
+                {
+                  "id": 76,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsp.eccnclasscd",
+                  "label": "global.eccn.class.code",
+                  "meta": "ECCNClass",
+                  "required": false
+                },
+                {
+                  "id": 88,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsp.prodpreference",
+                  "label": "global.preference",
+                  "meta": "ProdPref",
+                  "required": false
+                },
+                {
+                  "id": 77,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsp.countryoforigin",
+                  "label": "global.country.of.origin",
+                  "type3": "CODES",
+                  "meta": "Country"
+                },
+                {
+                  "id": 91,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsp.modelcode",
+                  "label": "global.model",
+                  "meta": "ProductModel"
+                }
+              ]
+            },
+            {
+              "id": 72,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 92,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsp.rentprodcat",
+                  "label": "global.rental.category",
+                  "meta": "ProdCat"
+                },
+                {
+                  "id": 81,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsp.lifocat",
+                  "label": "global.lifo",
+                  "type3": "CODES",
+                  "meta": "LIFOCat"
+                },
+                {
+                  "id": 82,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsp.brandcode",
+                  "label": "global.brand",
+                  "type3": "CODES",
+                  "meta": "BrandCode"
+                },
+                {
+                  "id": 83,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.unspsc",
+                  "label": "global.unspsc.code",
+                  "maxLength": 12
+                },
+                {
+                  "id": 84,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsp.prodtier",
+                  "label": "global.tier",
+                  "type3": "CODES",
+                  "meta": "ProdTier"
+                },
+                {
+                  "id": 85,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.prodtiergrp",
+                  "label": "global.tier.group",
+                  "maxLength": 12
+                },
+                {
+                  "id": 86,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsp.tariffcd",
+                  "label": "global.harmonized.system.tariff.code",
+                  "type3": "CODES",
+                  "meta": "Tariff"
+                },
+                {
+                  "id": 75,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsp.ncnr",
+                  "label": "global.non.cancellable",
+                  "dataFormat": "LOGICAL",
+                  "subFormat": "YBlank"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "type": "EXP_AREA",
+      "label": "global.msds",
+      "children": [
+        {
+          "id": 56,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 57,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 87,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 68,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "dtl.icsp.msdsfl",
+                      "label": "global.msds.product",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 69,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.icsp.msdssheetno",
+                      "label": "global.msds.sheet.number",
+                      "maxLength": 10,
+                      "size": "SM"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 67,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 70,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.icsp.msdschgdt",
+                  "label": "global.last.change.date",
+                  "dataFormat": "DATE"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 58,
+      "type": "EXP_AREA",
+      "label": "global.ecommerce",
+      "children": [
+        {
+          "id": 59,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 60,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 62,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.webpage",
+                  "label": "global.internal.web.page",
+                  "size": "LG",
+                  "maxLength": 100
+                },
+                {
+                  "id": 64,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.edicd",
+                  "label": "edi.code",
+                  "size": "XS",
+                  "maxLength": 2
+                }
+              ]
+            },
+            {
+              "id": 61,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 63,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.webpageext",
+                  "label": "global.external.web.page",
+                  "size": "LG",
+                  "maxLength": 100
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

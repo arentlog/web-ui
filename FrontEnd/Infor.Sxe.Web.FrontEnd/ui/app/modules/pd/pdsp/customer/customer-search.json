@@ -1,0 +1,184 @@
+{
+  "viewId": "pd-pdsp-search-customersearch",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.clevelcd",
+                  "label": "global.price.records",
+                  "type3": "MANUAL",
+                  "blankOption": false,
+                  "optionsModel": "base.levelCodePDSC",
+                  "eventChange": "base.changeSearchLevelCd()"
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.pdrecno",
+                  "label": "global.record.number",
+                  "dataFormat": "INTEGER_TEXT",
+                  "conditionShow": "base.criteria.clevelcd === 'c0'",
+                  "maxLength": 8,
+                  "digits": 8,
+                  "sign": "+"
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.custno",
+                  "label": "global.customer",
+                  "meta": "Customer",
+                  "conditionShow": "base.criteria.clevelcd === 'c1' || base.criteria.clevelcd === 'c2p' || base.criteria.clevelcd === 'c2l' || base.criteria.clevelcd === 'c2c' || base.criteria.clevelcd === 'c2r' || base.criteria.clevelcd === 'c5'"
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.shipto",
+                  "label": "global.ship.to.job",
+                  "meta": "ShipTo",
+                  "conditionShow": "(base.criteria.clevelcd === 'c1' || base.criteria.clevelcd === 'c2p' || base.criteria.clevelcd === 'c2l' || base.criteria.clevelcd === 'c2c' || base.criteria.clevelcd === 'c2r' || base.criteria.clevelcd === 'c5') && base.fieldIsVisible('shipto')",
+                  "options": {
+                    "searchParams": {
+                      "custno": {
+                        "type": "REF",
+                        "value": "base.criteria.custno"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.prod",
+                  "label": "global.product",
+                  "meta": "ProdAll",
+                  "conditionShow": "base.criteria.clevelcd === 'c1' || base.criteria.clevelcd === 'c3' || base.criteria.clevelcd === 'c7'"
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.prodpricety",
+                  "label": "global.product.price.type",
+                  "meta": "ProdPriceTy",
+                  "conditionShow": "base.criteria.clevelcd === 'c2p' || base.criteria.clevelcd === 'c4p' || base.criteria.clevelcd === 'c8'"
+                },
+                {
+                  "id": 17,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.prodline",
+                  "label": "global.product.line",
+                  "meta": "ProdLine",
+                  "conditionShow": "base.criteria.clevelcd === 'c2l'",
+                  "options": {
+                    "searchParams": {
+                      "vendno": {
+                        "type": "REF",
+                        "value": "base.criteria.vendno"
+                      },
+                      "prodline": {
+                        "type": "REF",
+                        "value": "base.criteria.prodline"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.vendno",
+                  "label": "global.vendor.number",
+                  "meta": "Vendor",
+                  "conditionShow": "base.criteria.clevelcd === 'c2l'"
+                },
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.custpricety",
+                  "label": "global.customer.price.type",
+                  "meta": "CustomerPriceType",
+                  "conditionShow": "base.criteria.clevelcd === 'c3' || base.criteria.clevelcd === 'c4p' || base.criteria.clevelcd === 'c4r' || base.criteria.clevelcd === 'c6'"
+                },
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.prodcat",
+                  "label": "global.product.category",
+                  "meta": "ProdCat",
+                  "conditionShow": "base.criteria.clevelcd === 'c2c'"
+                },
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.rebtype",
+                  "label": "global.rebate.type",
+                  "meta": "ProductRebateType",
+                  "conditionShow": "base.criteria.clevelcd === 'c2r' || base.criteria.clevelcd === 'c4r'"
+                },
+                {
+                  "id": 22,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.rebsubty",
+                  "label": "global.rebate.sub.type",
+                  "meta": "ProductRebateSubType",
+                  "conditionShow": "base.pdscRebSubTyAOData && (base.criteria.clevelcd === 'c2r' || base.criteria.clevelcd === 'c4r')"
+                },
+                {
+                  "id": 21,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.iRecordlimit",
+                  "label": "global.record.limit",
+                  "dataFormat": "INTEGER_TEXT",
+                  "digits": 4
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "csrch.submit(base.criteria.clevelcd)"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "csrch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,492 @@
+{
+  "viewId": "va-vaet-tabs-lineitems-sourcing",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isLineSource()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "{{linesrc.srcTitle}}",
+              "subLabel": "{{linesrc.srcSubTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 45,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "linesrc.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 46,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "linesrc.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "EXP_AREA",
+                  "label": "global.document.informaton",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 10,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "base.lineSourcingRecord.ordertype",
+                              "label": "global.source.order.type",
+                              "conditionReadonly": "!base.lineSourcingRecord.ordertypeenabled",
+                              "type3": "MANUAL",
+                              "eventChange": "linesrc.fieldChange('ordertype')",
+                              "optionsModel": "linesrc.orderTypes",
+                              "optionLabelField": "typeName",
+                              "optionValueField": "typeValue",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.lineSourcingRecord.orderaltno",
+                              "label": "global.purchase.order.number",
+                              "meta": "POOrders",
+                              "dataFormat": "INTEGER_TEXT",
+                              "digits": 8,
+                              "sign": "+",
+                              "conditionShow": "base.lineSourcingRecord.ordertype.toLowerCase() === 'p'",
+                              "conditionReadonly": "!base.lineSourcingRecord.orderaltnoenabled",
+                              "eventChange": "linesrc.fieldChange('orderaltno')"
+                            },
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.lineSourcingRecord.orderaltno",
+                              "label": "global.warehouse.transfer.number",
+                              "meta": "WTOrders",
+                              "dataFormat": "INTEGER_TEXT",
+                              "conditionShow": "base.lineSourcingRecord.ordertype.toLowerCase() === 't'",
+                              "conditionReadonly": "!base.lineSourcingRecord.orderaltnoenabled",
+                              "eventChange": "linesrc.fieldChange('orderaltno')",
+                              "sign": "+",
+                              "digits": 8
+                            },
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.lineSourcingRecord.orderaltno",
+                              "label": "global.value.add.order.number",
+                              "meta": "VAOrders",
+                              "conditionShow": "base.lineSourcingRecord.ordertype.toLowerCase() === 'f'",
+                              "conditionReadonly": "!base.lineSourcingRecord.orderaltnoenabled",
+                              "eventChange": "linesrc.fieldChange('orderaltno')",
+                              "dataFormat": "INTEGER_TEXT",
+                              "sign": "+",
+                              "digits": 8
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.lineSourcingRecord.vaverno",
+                              "label": "global.version.number",
+                              "meta": "ValueAddVersion",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 3,
+                              "conditionReadonly": "!base.lineSourcingRecord.vavernoenabled",
+                              "conditionShow": "base.lineSourcingRecord.ordertype.toLowerCase() === 'f'",
+                              "eventChange": "linesrc.fieldChange('verno')"
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "base.lineSourcingRecord.backordertype",
+                              "label": "global.disposition",
+                              "type3": "SET",
+                              "metaGroup": "VA",
+                              "meta": "VABackOrderTypes",
+                              "blankOption": false,
+                              "conditionReadonly": "!base.lineSourcingRecord.backordertypeenabled",
+                              "eventChange": "linesrc.fieldChange('botype')"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 11,
+                  "type": "EXP_AREA",
+                  "label": "global.purchase.order",
+                  "conditionShow": "base.lineSourcingRecord.ordertype.toLowerCase() === 'p'",
+                  "children": [
+                    {
+                      "id": 12,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.lineSourcingRecord.vendno",
+                              "label": "global.vendor.number",
+                              "meta": "Vendor",
+                              "dataFormat": "DECIMAL_TEXT",
+                              "conditionReadonly": "!base.lineSourcingRecord.vendnoenabled",
+                              "eventChange": "linesrc.fieldChange('vendno')",
+                              "sign": "+",
+                              "digits": 12,
+                              "decimals": 0
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.lineSourcingRecord.shipfmno",
+                              "label": "global.ship.from",
+                              "meta": "ShipFrom",
+                              "conditionReadonly": "!base.lineSourcingRecord.shipfmnoenabled",
+                              "eventChange": "linesrc.fieldChange('shipfmno')",
+                              "options": {
+                                "searchParams": {
+                                  "vendno": {
+                                    "type": "REF",
+                                    "value": "base.lineSourcingRecord.vendno"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "base.lineSourcingRecord.poduedate",
+                              "label": "global.due.date",
+                              "dataFormat": "DATE",
+                              "conditionReadonly": "!base.lineSourcingRecord.poduedateenabled"
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.lineSourcingRecord.poshipvia",
+                              "label": "global.ship.via",
+                              "meta": "ShipVia",
+                              "conditionReadonly": "!base.lineSourcingRecord.poshipviaenabled",
+                              "eventChange": "linesrc.fieldChange('poshipvia')"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.lineSourcingRecord.phoneno",
+                              "label": "global.phone.number",
+                              "dataFormat": "PHONE",
+                              "readonly": true,
+                              "conditionShow": "base.lineSourcingRecord.miscvendor"
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.lineSourcingRecord.faxphoneno",
+                              "label": "global.fax.number",
+                              "readonly": true,
+                              "conditionShow": "base.lineSourcingRecord.miscvendor"
+                            },
+                            {
+                              "id": 51,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.lineSourcingRecord.expediter",
+                              "label": "global.expediter",
+                              "readonly": true,
+                              "conditionShow": "base.lineSourcingRecord.miscvendor"
+                            },
+                            {
+                              "id": 49,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "base.lineSourcingRecord.orderdate",
+                              "label": "global.order.date",
+                              "dataFormat": "DATE",
+                              "conditionShow": "!base.lineSourcingRecord.orderdatehidden && base.lineSourcingRecord.miscvendor",
+                              "readonly": true
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "base.lineSourcingRecord.fob",
+                              "label": "global.freight.on.board",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!base.lineSourcingRecord.fobenabled",
+                              "conditionShow": "base.lineSourcingRecord.miscvendor"
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "base.lineSourcingRecord.confirm",
+                              "label": "global.confirm",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!base.lineSourcingRecord.confirmenabled",
+                              "conditionShow": "base.lineSourcingRecord.miscvendor"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 23,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.lineSourcingRecord.phoneno",
+                              "label": "global.phone.number",
+                              "dataFormat": "PHONE",
+                              "readonly": true,
+                              "conditionShow": "!base.lineSourcingRecord.miscvendor"
+                            },
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.lineSourcingRecord.faxphoneno",
+                              "label": "global.fax.number",
+                              "readonly": true,
+                              "conditionShow": "!base.lineSourcingRecord.miscvendor"
+                            },
+                            {
+                              "id": 48,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "base.lineSourcingRecord.orderdate",
+                              "label": "global.order.date",
+                              "dataFormat": "DATE",
+                              "conditionShow": "!base.lineSourcingRecord.orderdatehidden && !base.lineSourcingRecord.miscvendor",
+                              "readonly": true
+                            },
+                            {
+                              "id": 50,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.lineSourcingRecord.expediter",
+                              "label": "global.expediter",
+                              "readonly": true,
+                              "conditionShow": "!base.lineSourcingRecord.miscvendor"
+                            },
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "base.lineSourcingRecord.fob",
+                              "label": "global.freight.on.board",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!base.lineSourcingRecord.fobenabled",
+                              "conditionShow": "!base.lineSourcingRecord.miscvendor"
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "base.lineSourcingRecord.confirm",
+                              "label": "global.confirm",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!base.lineSourcingRecord.confirmenabled",
+                              "conditionShow": "!base.lineSourcingRecord.miscvendor"
+                            },
+                            {
+                              "id": 47,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.lineSourcingRecord.manualname",
+                              "label": "global.ship.to",
+                              "conditionShow": "base.lineSourcingRecord.miscvendor",
+                              "maxLength": 30
+                            },
+                            {
+                              "id": 37,
+                              "type": "CUSTOM",
+                              "subType": "AddressForm",
+                              "conditionShow": "base.lineSourcingRecord.miscvendor",
+                              "options": {
+                                "countryCdVisible": false,
+                                "addr2Visible": true,
+                                "addr3Visible": true,
+                                "addr1Model": "base.lineSourcingRecord.manualaddr1",
+                                "addr2Model": "base.lineSourcingRecord.manualaddr2",
+                                "addr3Model": "base.lineSourcingRecord.manualaddr3",
+                                "cityModel": "base.lineSourcingRecord.manualcity",
+                                "stateModel": "base.lineSourcingRecord.manualstate",
+                                "zipCodeModel": "base.lineSourcingRecord.manualzipcd",
+                                "addressLabel": "global.manual.address",
+                                "controlRef": "linesrc.addressControl"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.warehouse.transfer",
+                  "conditionShow": "base.lineSourcingRecord.ordertype.toLowerCase() === 't'",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.lineSourcingRecord.wtwhse",
+                              "label": "global.warehouse",
+                              "meta": "Warehouse",
+                              "conditionReadonly": "!base.lineSourcingRecord.wtwhseenabled",
+                              "eventChange": "linesrc.fieldChange('wtwhse')"
+                            },
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "base.lineSourcingRecord.wtduedate",
+                              "label": "global.due.date",
+                              "dataFormat": "DATE",
+                              "conditionReadonly": "!base.lineSourcingRecord.wtduedateenabled"
+                            },
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.lineSourcingRecord.wtshipvia",
+                              "label": "global.ship.via",
+                              "meta": "ShipVia",
+                              "conditionReadonly": "!base.lineSourcingRecord.wtshipviaenabled",
+                              "eventChange": "linesrc.fieldChange('wtshipvia')"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 41,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "base.lineSourcingRecord.backtietype",
+                              "label": "global.back.tie.type",
+                              "type3": "SET",
+                              "metaGroup": "VA",
+                              "meta": "VASourceBackTieTypes",
+                              "blankOption": false,
+                              "conditionReadonly": "!base.lineSourcingRecord.backtietypeenabled",
+                              "conditionShow": "!base.lineSourcingRecord.backtietypehidden"
+                            },
+                            {
+                              "id": 43,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.lineSourcingRecord.powtaltno",
+                              "label": "global.back.tie.order.number",
+                              "dataFormat": "INTEGER_TEXT",
+                              "digits": 8,
+                              "sign": "+",
+                              "conditionReadonly": "!base.lineSourcingRecord.powtaltnoenabled",
+                              "conditionShow": "!base.lineSourcingRecord.powtaltnohidden"
+                            },
+                            {
+                              "id": 44,
+                              "type": "BTN",
+                              "subType": "SEC",
+                              "label": "global.sourcing",
+                              "conditionShow": "!base.lineSourcingRecord.backtiesrchidden",
+                              "conditionDisabled": "!base.lineSourcingRecord.backtiesrcenabled",
+                              "eventClick": "linesrc.backtieSourcing()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "type": "VIEW_CNTR",
+      "viewName": "subLineSrc"
+    }
+  ]
+}

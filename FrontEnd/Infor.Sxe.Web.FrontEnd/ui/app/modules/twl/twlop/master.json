@@ -1,0 +1,152 @@
+{
+  "viewId": "twl-twlop-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.twlop",
+          "subLabel": "{{base.getSubTitle()}}",
+          "children": [
+            {
+              "id": 19,
+              "type": "TOOLBAR",
+              "label": "",
+              "children": [
+                {
+                  "id": 20,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.synchronize",
+                  "eventClick": "mst.synchronize()",
+                  "icon": "icon-load"
+                }
+              ]
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "type": "GRID",
+              "id": 5,
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": false,
+                "selectable": "multiple",
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                },
+                "editable": true
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.product.categories",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-new-document",
+                      "label": "global.new",
+                      "eventClick": "mst.create()",
+                      "conditionDisabled": "base.grid.isAnyRowSelected() || ((!base.criteria.whNum) && (!base.criteriaUsed.whNum))",
+                      "securityLevel": 4
+                    },
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-delete",
+                      "label": "global.delete",
+                      "eventClick": "mst.delete()",
+                      "conditionDisabled": "base.grid.isNoRowSelected()",
+                      "securityLevel": 5
+                    },
+                    {
+                      "id": 8,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-save",
+                      "label": "global.submit",
+                      "eventClick": "mst.submit()",
+                      "securityLevel": 3,
+                      "conditionDisabled": "!base.dataset.length"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prodcat",
+                  "label": "global.product.category"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "description",
+                  "label": "global.description",
+                  "editable": true,
+                  "maxLength": 25
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "pickSequence",
+                  "label": "global.pick.sequence",
+                  "dataFormat": "Sequence",
+                  "editable": true,
+                  "maxLength": 3
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "addfl",
+                  "label": "global.allow.add",
+                  "dataFormat": "LOGICAL",
+                  "editable": true
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "changefl",
+                  "label": "global.allow.change",
+                  "dataFormat": "LOGICAL",
+                  "editable": true
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "restrictfl",
+                  "label": "global.restrict.change",
+                  "dataFormat": "LOGICAL",
+                  "editable": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

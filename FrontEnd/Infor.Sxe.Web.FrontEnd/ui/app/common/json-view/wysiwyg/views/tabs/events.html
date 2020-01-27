@@ -1,0 +1,117 @@
+<div class="row" initialize>
+   <!-- Actions -->
+   <div class="one-third column">
+      <div class="field" ng-if="isType(['BTN', 'MENU_OPT', 'WIZARD_TICK'])" title="State to navigate to - i.e. ^.master or icsw.detail({pk: dtl.icswb.prod, pk2: dtl.icswb.whse}). This uses the ui-sref directive of the Angular UI Router. You can enter any value that ui-sref can handle.">
+         <label for="control-state-ref" translate>Navigate to State</label>
+         <input id="control-state-ref" type="text" ng-model="activeControl.stateRef" ng-change="deleteIfBlank('stateRef')" ng-disabled="activeControl.submitForm" />
+      </div>
+
+      <div class="field" ng-if="isType(['BTN', 'MENU_OPT', 'GRID_COL', 'WIZARD_TICK'])">
+         <label for="control-event-click" translate>Click</label>
+         <input id="control-event-click" type="text" ng-model="activeControl.eventClick" ng-change="deleteIfBlank('eventClick')" ng-disabled="activeControl.submitForm" />
+      </div>
+   </div>
+
+   <div class="one-third column" ng-if="activeControl.type === 'BTN'">
+      <!-- Reset Form Button -->
+      <div class="field" title="Resets the parent form (clears errors but does not clear values). You can still have a click event together with this option.">
+         <input type="checkbox" id="button-reset-form" class="checkbox" ng-model="activeControl.resetForm" ng-change="deleteIfFalse('resetForm')" />
+         <label class="checkbox-label" for="button-reset-form" translate>Reset Form</label>
+      </div>
+
+      <!-- Submit Form Button -->
+      <div class="field" title="Submits the parent form for validation and then calls the form validation success event.">
+         <input type="checkbox" id="button-submit-form" class="checkbox" ng-model="activeControl.submitForm" ng-change="deleteIfFalse('submitForm')" />
+         <label class="checkbox-label" for="button-submit-form" translate>Submit & Validate Form</label>
+      </div>
+
+      <!-- Form Validation Success -->
+      <div class="field" title="Action to perform after the form submits and has passed validation (i.e. dtl.submit())">
+         <label for="control-event-validated" translate>Form Validation Success</label>
+         <input id="control-event-validated" type="text" ng-model="activeControl.eventValidated" ng-change="deleteIfBlank('eventValidated')" required-if="activeControl.submitForm" ng-disabled="!activeControl.submitForm" />
+      </div>
+
+      <!-- TODO: figure out where we want to define this: Submit on Enter -->
+      <!--<div class="field" ng-show="activeControl.submitForm">-->
+      <!--<input type="checkbox" id="button-submit-enter" class="checkbox" ng-model="activeControl.submitOnEnter" />-->
+      <!--<label class="checkbox-label" for="button-submit-enter" translate>Submit on Enter Key</label>-->
+      <!--</div>-->
+   </div>
+
+   <!-- Listeners -->
+   <div class="one-third column">
+      <!-- Change -->
+      <div class="field" ng-if="isType(['FIELD', 'GRID_COL', 'SWAP_LIST'])" ng-show="activeControl.subType !== 'INFO'" title="{{isType(['GRID_COL']) ? 'Function to call when the user changes a cell in this column. SoHo passes two params to your function: e (the event) and args (which contains row, cell, value, oldValue, etc. ). You can get the row object from your dataset array using args.row as the index.' : 'Expression to evaluate when the user changes this field (i.e. dtl.productChanged()). If it is a lookup field, an args parameter will be passed to your function containing useful info about the change (key values, type of change, etc.).'}}">
+         <label for="control-event-change" translate>Change</label>
+         <input id="control-event-change" type="text" ng-model="activeControl.eventChange" ng-change="deleteIfBlank('eventChange')" />
+      </div>
+
+      <!-- Enter Edit Mode (Grid Column) -->
+      <div class="field" ng-if="isType(['GRID_COL'])" title="Function to call when entering edit mode for a cell in this column. Soho passes two params to your function: e (the event) and args (which contains row, cell, item, value, oldValue, etc. ).">
+         <label for="control-event-enter-edit-mode" translate>Enter Edit Mode</label>
+         <input id="control-event-enter-edit-mode" type="text" ng-model="activeControl.eventEnterEditMode" ng-change="deleteIfBlank('eventEnterEditMode')" />
+      </div>
+
+      <!-- Exit Edit Mode (Grid Column) -->
+      <div class="field" ng-if="isType(['GRID_COL'])" title="Function to call when exiting edit mode for a cell in this column. Soho passes two params to your function: e (the event) and args (which contains row, cell, item, value, oldValue, etc. ). Normally it's best to use the change event, but this event fires even if the value doesn't change.">
+         <label for="control-event-exit-edit-mode" translate>Exit Edit Mode</label>
+         <input id="control-event-exit-edit-mode" type="text" ng-model="activeControl.eventExitEditMode" ng-change="deleteIfBlank('eventExitEditMode')" />
+      </div>
+
+      <!-- Custom Validation -->
+      <div class="field" ng-if="isType(['FIELD'])" ng-show="!isFieldType(['INFO', 'RADIO_SET'])" title="Expression to evaluate to determine validity of this field's value (i.e. dtl.validateQuantity()). This is automatically wired into the form submission event. For invalid values, your function should return the error message to display. For valid values, it should return true.">
+         <label for="control-custom-validation" translate>Custom Validation</label>
+         <input id="control-custom-validation" type="text" ng-model="activeControl.customValidation" ng-change="deleteIfBlank('customValidation')" />
+      </div>
+
+      <!-- Activated (Tab) -->
+      <div class="field" ng-if="isType(['TAB'])" title="This expression will execute every time this tab is activated (clicked, initial activation, etc.).">
+         <label for="control-event-activated" translate>Activated</label>
+         <input type="text" id="control-event-activated" ng-model="activeControl.eventActivated" ng-change="deleteIfBlank('eventActivated')" />
+      </div>
+
+      <!-- Ready -->
+      <div class="field" ng-if="isType(['TAB_SET', 'EXP_AREA', 'FORM', 'VIEW'])" title="After control has been initialized and the underlying API is ready for use">
+         <label for="control-event-ready" translate>Ready</label>
+         <input type="text" id="control-event-ready" ng-model="activeControl.eventReady" ng-change="deleteIfBlank('eventReady')" />
+      </div>
+
+      <!-- Expand (Exp Area) -->
+      <div class="field" ng-if="isType(['EXP_AREA'])" title="Expression to execute every time this control is expanded (initial expansion or user clicks to expand).">
+         <label class="inline">
+            <span class="label-text" translate>Expand</span>
+            <input type="text" ng-model="activeControl.eventExpand" ng-change="deleteIfBlank('eventExpand')" />
+         </label>
+      </div>
+
+      <!-- Collapse (Exp Area) -->
+      <div class="field" ng-if="isType(['EXP_AREA'])" title="Expression to execute every time this control is collapsed.">
+         <label class="inline">
+            <span class="label-text" translate>Collapse</span>
+            <input type="text" ng-model="activeControl.eventCollapse" ng-change="deleteIfBlank('eventCollapse')" />
+         </label>
+      </div>
+   </div>
+
+   <!-- Field Model Options -->
+   <div class="one-third column" ng-if="activeControl.type === 'FIELD'">
+      <!-- Update On (when to perform model updates) -->
+      <!-- Important! We can't allow empty string to be stored for this because angular treats that as never update the model (so we forceDeleteIfBlank). -->
+      <div class="field" ng-show="activeControl.subType !== 'INFO'" title="When to apply the changed value to the model and call 'Change' events. By default this happens after every keystroke for text input fields and after selection for other fields. But in some cases we want to choose 'Blur' so that we are not firing calls to the server after each typed character.">
+         <label for="control-model-update-on" class="label" translate>Update Model On</label>
+         <select id="control-model-update-on" class="dropdown dropdown-sm" ng-model="activeControl.modelOptions.updateOn" ng-change="forceDeleteIfBlank('modelOptions.updateOn')">
+            <option value="">Default</option>
+            <option value="blur">Blur</option>
+         </select>
+      </div>
+
+      <!-- Validate On (when to perform custom validation) -->
+      <div class="field" ng-show="!isFieldType(['INFO', 'RADIO_SET'])" title="When to call the custom validation event. By default this happens after every keystroke for text input fields and after selection for other fields. But in some cases we may want to only do this after the user leaves the field. (Note that custom validation always happens upon form submission.)">
+         <label for="control-validate-on" class="label" translate>Validate On</label>
+         <select id="control-validate-on" class="dropdown dropdown-sm" ng-model="activeControl.validateOn" ng-change="deleteIfBlank('validateOn')">
+            <option value="">Default</option>
+            <option value="blur">Blur</option>
+         </select>
+      </div>
+   </div>
+</div>

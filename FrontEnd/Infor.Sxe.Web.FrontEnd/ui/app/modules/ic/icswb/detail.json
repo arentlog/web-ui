@@ -1,0 +1,225 @@
+{
+  "viewId": "ic-icswb-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.bin.location",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 22,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 23,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 5,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "conditionDisabled": "base.isDetail()",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 12,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 13,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "type": "ROW",
+                      "id": 14,
+                      "children": [
+                        {
+                          "type": "COL",
+                          "subType": "1/2",
+                          "id": 15,
+                          "children": [
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icswb.prod",
+                              "required": true,
+                              "label": "global.product",
+                              "meta": "ProdAll",
+                              "type3": "STANDARD",
+                              "conditionReadonly": "!base.isCreate()",
+                              "eventChange": "base.loadBinLocations( dtl.icswb.prod, dtl.icswb.whse)"
+                            },
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icswb.whse",
+                              "label": "global.warehouse",
+                              "required": true,
+                              "meta": "Warehouse",
+                              "type3": "STANDARD",
+                              "conditionReadonly": "!base.isCreate()",
+                              "eventChange": "base.loadBinLocations( dtl.icswb.prod, dtl.icswb.whse)"
+                            },
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icswb.binloc",
+                              "label": "global.bin.location",
+                              "required": true,
+                              "dataFormat": "BinLoc"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "COL",
+                          "subType": "1/2",
+                          "id": 18,
+                          "children": [
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.binloc1",
+                              "label": "global.bin.location.number1",
+                              "dataFormat": "BinLoc"
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.binloc2",
+                              "label": "global.bin.location.number2",
+                              "dataFormat": "BinLoc"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.brand",
+                              "label": "global.brand"
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.vendprod",
+                              "label": "global.vendor.product"
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.mfgprod",
+                              "label": "global.manufacturer.product"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 20,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "icswb",
+                        "objectRef": "dtl.icswb",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  http://go.microsoft.com/fwlink/?LinkId=301880
+  -->
+<configuration>
+   <configSections>
+      <section name="system.identityModel" type="System.IdentityModel.Configuration.SystemIdentityModelSection, System.IdentityModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089" />
+      <section name="system.identityModel.services" type="System.IdentityModel.Services.Configuration.SystemIdentityModelServicesSection, System.IdentityModel.Services, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089" />
+   </configSections>
+  <appSettings>
+    <add key="webpages:Version" value="3.0.0.0" />
+    <add key="webpages:Enabled" value="false" />
+    <add key="ClientValidationEnabled" value="true" />
+    <add key="UnobtrusiveJavaScriptEnabled" value="true" />
+    <add key="PROGRESS.Session.Url" value="http://internal-AppserverELB-PAS-11x-1603117207.us-east-1.elb.amazonaws.com/apsv" />
+    <add key="PROGRESS.Session.SessionModel" value="1" />
+    <add key="PROGRESS.Session.InitialConnections" value="1" />
+    <add key="PROGRESS.Session.MinConnections" value="1" />
+    <add key="PROGRESS.Session.MaxConnections" value="100" />
+    <add key="PROGRESS.Session.NsClientPortRetry" value="5" />
+    <add key="PROGRESS.Session.NsClientPortRetryInterval" value="250" />
+    <add key="PROGRESS.Session.WaitIfBusy" value="1" />
+    <add key="PROGRESS.Session.RequestWaitTimeout" value="10" />
+    <add key="PROGRESS.Session.EnableTracing" value="0" />
+    <add key="PROGRESS.Session.LoggingLevel" value="3" />
+    <add key="PROGRESS.Session.LogFileName" value="c:\temp\Progress4GLOpenClientH5.log" />
+    <add key="PROGRESS.Session.HttpTimeout" value="300" />
+    <add key="Infor.Progress.OwnsConnection" value="true" />
+    <!--
+      A logical property that allows you to enable or disable compression. This property must be set before establishing the connection between AppServer and the .NET Open Client.
+      If this property is modified after the connection is established, it does not affect the existing session between other clients and the AppServer.
+      -->
+    <add key="PROGRESS.Session.CompressionEnabled" value="false" />
+    <!--
+      An integer value that sets the minimum size in bytes that a message body must have before it can be compressed. The minimum value for compression threshold is 256.
+      The range for compression is 256-32764. If a value is set beyond the specified range, then, the value that is closest to the range is used. If a value greater than
+      32764 or less than 256 is used, then, the size of the message is set to 32764 or 256 bytes respectively.
+      -->
+    <add key="PROGRESS.Session.CompressionThreshold" value="256" />
+    <!--
+      An integer value that sets the compression level for compressing the body of a message sent to and from the AppServer. The highest supported value for compression is 9.
+      The valid range for compression is 1-9. If a value is set beyond the range, then, the value that is closest to the range is used. If a value greater than 9 or less than 1
+      is used, then, the compression level is set to 9 or 1 respectively. The higher the level of compression, the more time it takes to compress a message.
+      Higher compression level results in smaller messages.
+      -->
+    <add key="PROGRESS.Session.CompressionLevel" value="5" />
+    <!-- Single Sign On (SSO) / Manual Sign On settings (MSO)-->
+    <add key="Infor.SSO.Enabled" value="true" />
+    <add key="Infor.MultiTenant" value="true" />
+    <add key="Infor.SSO.TokenForIdentity" value="http://schemas.infor.com/claims/Identity2" />
+    <add key="Infor.SSO.TokenForTenant" value="http://schemas.infor.com/claims/Tenant" />
+    <!--Auto Provision Settings (used for Cloud Only)        -->
+    <add key="Infor.SSO.AutoProvisionEnabled" value="true" />
+    <add key="Infor.SSO.TokenForEmail" value="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress" />
+    <add key="Infor.SSO.TokenForGivenName" value="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname" />
+    <add key="Infor.SSO.TokenForLastName" value="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname" />
+    <add key="Infor.SSO.TokenForAccountingEntities" value="http://schemas.infor.com/claims/AccountingEntity" />
+    <add key="Infor.SSO.TokenForSecurity" value="http://schemas.infor.com/claims/SecurityRole" />
+     <!-- Application encrypt keys - Do not change -->
+    <add key="Infor.EncryptKey" value="23v3mKi8/X+iMxhBhmMdcvIv5HB6ob2EGO+mvihUVZE=" />
+    <add key="Infor.EncryptIV" value="Vyg1Dh5NiVoC3KVwFg5ZXg==" />
+     <!-- IDM Settings. -->
+     <add key="Infor.IDM.ConsumerKey" value="-WEnHt5Nb.Ws5uauCYIp" />
+     <add key="Infor.IDM.SharedSecret" value="s6bmk8ohy.I.V02KLwrC" />
+     <add key="Infor.IDM.UseCache" value="true" />
+     <add key="Infor.IDM.CacheExpirationAbsolute" value="60" />
+	 <!-- ION API Settings -->
+	 <add key="Infor.IONAPI.RpEndpoint" value="/idp/sts.wst" />
+	 <add key="Infor.IONAPI.AppliesToEndpoint" value="/as/token.oauth2" />
+	 <add key="Infor.IONAPI.TokenType" value="oauth-v2:access:token:response|via|urn:ietf:params:oauth:grant-type:saml2-bearer" />
+     <!-- Removed as part of the IBM AppScan, Not required and a possible performance boost also. -->
+    <add key="PageInspector:ServerCodeMappingSupport" value="Disabled" />
+  </appSettings>
+  <!--
+    For a description of web.config changes see http://go.microsoft.com/fwlink/?LinkId=235367.
+
+    The following attributes can be set on the <httpRuntime> tag.
+      <system.Web>
+        <httpRuntime targetFramework="4.5" />
+      </system.Web>
+  -->
+   <system.web>
+      <authorization>
+         <deny users="?" />
+      </authorization>
+      <authentication mode="None" />
+      <machineKey validationKey="EF5201280C561BF8E2A969086C586357EC07B0A7A49B9DBD2E7CC4FA26BCE91AF8A9D7A62E9EA4DF4C73D791E1E71F343BC6BF22487F4BBA04E773AEC3D6872F" decryptionKey="A6A5FAE25F734E4B9DDCB565459866364AD4FBDF15D52764" validation="SHA1" decryption="AES" />
+      <compilation debug="false" targetFramework="4.6.1" >
+         <assemblies>
+            <add assembly="System.Runtime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+         </assemblies>
+      </compilation>
+      <httpRuntime enableVersionHeader="false" requestValidationMode="4.5" encoderType="System.Web.Security.AntiXss.AntiXssEncoder,System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" requestPathInvalidCharacters="" maxRequestLength="1048576" />
+   </system.web>
+  <runtime>
+     <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+        <dependentAssembly>
+           <assemblyIdentity name="Newtonsoft.Json" culture="neutral" publicKeyToken="30ad4fe6b2a6aeed" />
+           <bindingRedirect oldVersion="0.0.0.0-12.0.0.0" newVersion="12.0.0.0" />
+        </dependentAssembly>
+        <dependentAssembly>
+           <assemblyIdentity name="System.Web.Http" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+           <bindingRedirect oldVersion="0.0.0.0-5.2.7.0" newVersion="5.2.7.0" />
+        </dependentAssembly>
+        <dependentAssembly>
+           <assemblyIdentity name="System.Web.Http.WebHost" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+           <bindingRedirect oldVersion="0.0.0.0-5.2.7.0" newVersion="5.2.7.0" />
+        </dependentAssembly>
+        <dependentAssembly>
+           <assemblyIdentity name="System.Net.Http.Formatting" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+           <bindingRedirect oldVersion="0.0.0.0-5.2.7.0" newVersion="5.2.7.0" />
+        </dependentAssembly>
+        <dependentAssembly>
+           <assemblyIdentity name="System.ValueTuple" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />
+           <bindingRedirect oldVersion="0.0.0.0-4.0.1.1" newVersion="4.0.1.1" />
+        </dependentAssembly>
+        <dependentAssembly>
+           <assemblyIdentity name="Ninject" publicKeyToken="c7192dc5380945e7" culture="neutral" />
+           <bindingRedirect oldVersion="0.0.0.0-3.3.4.0" newVersion="3.3.4.0" />
+        </dependentAssembly>
+        <dependentAssembly>
+           <assemblyIdentity name="System.Web.Helpers" publicKeyToken="31bf3856ad364e35" />
+           <bindingRedirect oldVersion="1.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
+        </dependentAssembly>
+        <dependentAssembly>
+           <assemblyIdentity name="System.Web.WebPages" publicKeyToken="31bf3856ad364e35" />
+           <bindingRedirect oldVersion="1.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
+        </dependentAssembly>
+        <dependentAssembly>
+           <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
+           <bindingRedirect oldVersion="0.0.0.0-5.2.7.0" newVersion="5.2.7.0" />
+        </dependentAssembly>
+        <dependentAssembly>
+           <assemblyIdentity name="Ninject.Web.Common" publicKeyToken="c7192dc5380945e7" culture="neutral" />
+           <bindingRedirect oldVersion="0.0.0.0-3.3.1.0" newVersion="3.3.1.0" />
+        </dependentAssembly>
+     </assemblyBinding>
+  </runtime>
+  <system.webServer>
+    <httpProtocol>
+      <customHeaders>
+        <!-- X-Frame-Options needs to be set to the main Mingle-Site that  -->
+        <add name="X-Frame-Options" value="Allow-From https://mingleinteg01-portal.mingledev.infor.com" />
+        <!-- Content-Security-Policy needs to be set to the main Mingle-Site that  -->
+        <add name="Content-Security-Policy" value="frame-ancestors https://mingleinteg01-portal.mingledev.infor.com" />
+      </customHeaders>
+    </httpProtocol>
+    <handlers>
+      <remove name="ExtensionlessUrlHandler-Integrated-4.0" />
+      <remove name="OPTIONSVerbHandler" />
+      <remove name="TRACEVerbHandler" />
+      <add name="ExtensionlessUrlHandler-Integrated-4.0" path="*." verb="*" type="System.Web.Handlers.TransferRequestHandler" preCondition="integratedMode,runtimeVersionv4.0" />
+    </handlers>
+     <modules runAllManagedModulesForAllRequests="true">
+        <remove name="FormsAuthentication" />
+        <remove name="WebDavModule" />
+        <add name="WSFederationAuthenticationModule" type="System.IdentityModel.Services.WSFederationAuthenticationModule, System.IdentityModel.Services, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" preCondition="managedHandler" />
+        <add name="SessionAuthenticationModule" type="System.IdentityModel.Services.SessionAuthenticationModule, System.IdentityModel.Services, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" preCondition="managedHandler" />
+     </modules>
+    <defaultDocument>
+      <files>
+        <clear />
+        <add value="ui/app/index.html" />
+      </files>
+    </defaultDocument>
+    <staticContent>
+      <remove fileExtension=".json" />
+      <mimeMap fileExtension=".json" mimeType="application/json; charset=UTF-8" />
+    </staticContent>
+    <security>
+      <requestFiltering>
+         <!-- maxAllowedContentLength, for IIS, in bytes -->
+         <requestLimits maxAllowedContentLength="1073741824"></requestLimits>
+      </requestFiltering>
+    </security>
+  </system.webServer>
+  <uri>
+    <schemeSettings>
+      <add name="http" genericUriParserOptions="DontUnescapePathDotsAndSlashes" />
+    </schemeSettings>
+  </uri>
+     <!-- If you intend using https, ensure you use urls with https and requiressl = true -->
+   <!-- IMPORTANT !!!!  The REST URL for Progress must be exposed via HTTPS if you want to use HTTPS for the application -->
+
+   <system.identityModel>
+      <identityConfiguration saveBootstrapContext="true">
+         <audienceUris>
+            <add value="https://sxehtml5webui.cloud.infor.com/sxe/" />
+         </audienceUris>
+         <securityTokenHandlers>
+            <add type="System.IdentityModel.Services.Tokens.MachineKeySessionSecurityTokenHandler, System.IdentityModel.Services, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <remove type="System.IdentityModel.Tokens.SessionSecurityTokenHandler, System.IdentityModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+         </securityTokenHandlers>
+         <issuerNameRegistry type="System.IdentityModel.Tokens.ConfigurationBasedIssuerNameRegistry, System.IdentityModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+            <trustedIssuers>
+               <add thumbprint="53D06038470F459CCF90180D9BA2B6136BD89395" />
+            </trustedIssuers>
+         </issuerNameRegistry>
+         <certificateValidation certificateValidationMode="None" />
+      </identityConfiguration>
+   </system.identityModel>
+   <system.identityModel.services>
+      <federationConfiguration>
+         <cookieHandler name="Infor.Sxe.STS.H5" requireSsl="false" />
+         <wsFederation passiveRedirectEnabled="true" issuer="https://mingleinteg01-sso.mingledev.infor.com/idp/prp.wsf" realm="https://sxehtml5webui.cloud.infor.com/sxe/" requireHttps="true" />
+      </federationConfiguration>
+   </system.identityModel.services>
+</configuration>

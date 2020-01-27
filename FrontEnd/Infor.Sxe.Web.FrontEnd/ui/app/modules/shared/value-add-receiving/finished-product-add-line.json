@@ -1,0 +1,195 @@
+{
+  "viewId": "shared-value-add-receiving-finishedproductaddline",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 3,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 4,
+          "type": "TOOLBAR",
+          "label": "global.value.add.finished.product.receiving.add.line",
+          "subLabel": "{{varfpa.getSubTitle()}}",
+          "controls": {
+            "navBtns": {
+              "id": 8,
+              "type": "BTN_SET",
+              "subType": "TBAR_NAV",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "ICON",
+                  "label": "special.button.back",
+                  "icon": "icon-left-arrow",
+                  "stateRef": "^"
+                }
+              ]
+            }
+          },
+          "children": [
+            {
+              "id": 6,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-confirm",
+              "label": "global.ok",
+              "eventClick": "varfpa.save()"
+            },
+            {
+              "id": 7,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-cancel",
+              "label": "global.cancel",
+              "eventClick": "varfpa.cancel()"
+            }
+          ]
+        },
+        "content": {
+          "id": 5,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 10,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 11,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "varfpa.vaLineAddChange.groupprodty",
+                      "label": "global.type",
+                      "type3": "SET",
+                      "metaGroup": "VA",
+                      "meta": "FinishedProductType",
+                      "blankOption": false
+                    },
+                    {
+                      "id": 13,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "varfpa.vaLineAddChange.nonstockty",
+                      "label": "global.line.type",
+                      "type3": "SET",
+                      "metaGroup": "VA",
+                      "meta": "FinishedProductLineType",
+                      "blankOption": false,
+                      "conditionShow": "varfpa.vaLineAddChange.groupprodty === varfp.TYPE_PRODUCT"
+                    },
+                    {
+                      "id": 14,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "varfpa.vaLineAddChange.shipprod",
+                      "label": "global.product",
+                      "meta": "ProdAll",
+                      "conditionShow": "varfpa.vaLineAddChange.groupprodty === varfp.TYPE_PRODUCT && varfpa.vaLineAddChange.nonstockty.toLowerCase() !== 'n'"
+                    },
+                    {
+                      "id": 16,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "varfpa.vaLineAddChange.groupnm",
+                      "label": "global.group",
+                      "meta": "KitGroup",
+                      "conditionShow": "varfpa.vaLineAddChange.groupprodty === varfp.TYPE_GROUP"
+                    }
+                  ]
+                },
+                {
+                  "id": 12,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "varfpa.vaLineAddChange.qtyneeded",
+                      "label": "global.quantity.needed",
+                      "dataFormat": "DECIMAL",
+                      "digits": 7,
+                      "decimals": 2
+                    },
+                    {
+                      "id": 18,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "varfpa.vaLineAddChange.unit",
+                      "label": "global.unit",
+                      "meta": "Units",
+                      "conditionShow": "varfpa.vaLineAddChange.groupprodty === varfp.TYPE_PRODUCT",
+                      "options": {
+                        "searchParams": {
+                          "prod": {
+                            "type": "REF",
+                            "value": "varfpa.vaLineAddChange.shipprod"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "id": 19,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "varfpa.vaLineAddChange.reasunavty",
+                      "label": "global.unavailable.reason",
+                      "meta": "ReasonUnavailable"
+                    },
+                    {
+                      "id": 20,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "varfpa.vaLineAddChange.qtybasetotfl",
+                      "label": "global.qty.based.on.total",
+                      "dataFormat": "LOGICAL"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 21,
+              "type": "EXP_AREA",
+              "label": "global.non.stock",
+              "conditionShow": "varfpa.vaLineAddChange.groupprodty === varfp.TYPE_PRODUCT && varfpa.vaLineAddChange.nonstockty.toLowerCase() === 'n'",
+              "children": [
+                {
+                  "id": 22,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 23,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 24,
+                          "type": "CUSTOM",
+                          "subType": "NonStockDetailsValueAdd",
+                          "options": {
+                            "isAddMode": true,
+                            "vaLineModel": "varfpa.vaLineAddChange"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

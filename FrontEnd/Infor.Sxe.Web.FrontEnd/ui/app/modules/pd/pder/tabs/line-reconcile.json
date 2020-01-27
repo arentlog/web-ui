@@ -1,0 +1,515 @@
+{
+  "viewId": "pd-pder-detail-linereconcile",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "Tab",
+  "children": [
+    {
+      "id": 3,
+      "type": "EXP_AREA",
+      "label": "global.additional.filters",
+      "children": [
+        {
+          "id": 4,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 5,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 17,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.pderGetItemCriteria.contract",
+                  "label": "global.contract.number",
+                  "dataFormat": null,
+                  "maxLength": 20,
+                  "autoFocus": true
+                },
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.pderGetItemCriteria.custno",
+                  "label": "global.customer.number",
+                  "meta": "Customer",
+                  "controls": {
+                    "actionBtn": {
+                      "id": 62,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "global.inquire",
+                      "icon": "icon-drilldown",
+                      "isLabelTooltip": true,
+                      "conditionDisabled": "!dtl.pderGetItemCriteria.custno",
+                      "stateRef": "aric.detail ({pk: dtl.pderGetItemCriteria.custno})"
+                    }
+                  }
+                },
+                {
+                  "id": 23,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.pderGetItemCriteria.pono",
+                  "label": "global.purchase.order.number",
+                  "meta": "POOrders",
+                  "conditionShow": "dtl.selectedRecord.rebatecd === 'p'",
+                  "controls": {
+                    "actionBtn": {
+                      "id": 64,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "global.inquire",
+                      "icon": "icon-drilldown",
+                      "isLabelTooltip": true,
+                      "conditionShow": "dtl.selectedRecord.rebatecd === 'p'",
+                      "conditionDisabled": "!dtl.pderGetItemCriteria.pono",
+                      "eventClick": "dtl.navigateToPoip()"
+                    }
+                  }
+                },
+                {
+                  "id": 24,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.pderGetItemCriteria.orderno",
+                  "label": "global.order.number",
+                  "meta": "OEOrders",
+                  "conditionShow": "dtl.selectedRecord.rebatecd !== 'p'",
+                  "controls": {
+                    "actionBtn": {
+                      "id": 63,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "global.inquire",
+                      "icon": "icon-drilldown",
+                      "isLabelTooltip": true,
+                      "conditionShow": "dtl.selectedRecord.rebatecd !== 'p'",
+                      "conditionDisabled": "!dtl.pderGetItemCriteria.orderno",
+                      "eventClick": "dtl.navigateToOeio()"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": 15,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.pderGetItemCriteria.prod",
+                  "label": "global.product.number",
+                  "meta": "ProdAll",
+                  "controls": {
+                    "actionBtn": {
+                      "id": 65,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "global.inquire",
+                      "icon": "icon-drilldown",
+                      "isLabelTooltip": true,
+                      "stateRef": "icip.detail ({pk: dtl.pderGetItemCriteria.prod})",
+                      "conditionDisabled": "!dtl.pderGetItemCriteria.prod"
+                    }
+                  }
+                },
+                {
+                  "id": 21,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.pderGetItemCriteria.invoicefromdate",
+                  "label": "global.invoice.po.from.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 25,
+                  "type": "FIELD",
+                  "subType": "MULTI_SELECT",
+                  "model": "dtl.selectedStatusTypes",
+                  "label": "global.status.type",
+                  "type3": "INLINE",
+                  "children": [
+                    {
+                      "id": 26,
+                      "type": "OPT",
+                      "label": "global.printed",
+                      "value": "p"
+                    },
+                    {
+                      "id": 27,
+                      "type": "OPT",
+                      "label": "global.disputed",
+                      "value": "d"
+                    },
+                    {
+                      "id": 28,
+                      "type": "OPT",
+                      "label": "global.updated",
+                      "value": "u"
+                    },
+                    {
+                      "id": 29,
+                      "type": "OPT",
+                      "label": "global.reconciled",
+                      "value": "r"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 16,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.pderGetItemCriteria.whse",
+                  "label": "global.warehouse",
+                  "meta": "Warehouse"
+                },
+                {
+                  "id": 22,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.pderGetItemCriteria.invoicetodate",
+                  "label": "global.invoice.po.to.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 30,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": false,
+                  "eventClick": "dtl.filterLineReconcile()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "GRID",
+      "model": "dtl.pdergetitemresults",
+      "controlRef": "dtl.lineGrid",
+      "conditionEditable": "!dtl.isLineTabReadonly",
+      "options": {
+        "editable": true,
+        "selectable": "multiple",
+        "showCheckboxes": true,
+        "events": {
+          "cellchange": "dtl.lineGridCellChange()"
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 7,
+          "type": "TOOLBAR",
+          "label": "global.line.reconciliation",
+          "children": [
+            {
+              "id": 10,
+              "type": "BTN",
+              "subType": "MENU",
+              "label": "global.status",
+              "conditionDisabled": "!dtl.lineGrid.isAnyRowSelected() || dtl.isLineTabReadonly",
+              "children": [
+                {
+                  "id": 12,
+                  "type": "MENU_OPT",
+                  "label": "global.print",
+                  "icon": "icon-print",
+                  "eventClick": "dtl.changeItemStatus('p')"
+                },
+                {
+                  "id": 13,
+                  "type": "MENU_OPT",
+                  "label": "global.dispute",
+                  "eventClick": "dtl.changeItemStatus('d')"
+                },
+                {
+                  "id": 14,
+                  "type": "MENU_OPT",
+                  "label": "global.update",
+                  "eventClick": "dtl.changeItemStatus('u')"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 8,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "statustype",
+          "label": "global.status",
+          "type3": "INLINE",
+          "editable": true,
+          "blankOption": false,
+          "customFormatter": "dtl.lineReconcileStatusFormatter()",
+          "children": [
+            {
+              "id": 31,
+              "type": "OPT",
+              "label": "global.printed",
+              "value": "p"
+            },
+            {
+              "id": 32,
+              "type": "OPT",
+              "label": "global.disputed",
+              "value": "d"
+            },
+            {
+              "id": 33,
+              "type": "OPT",
+              "label": "global.updated",
+              "value": "u"
+            }
+          ]
+        },
+        {
+          "id": 35,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "contractno",
+          "label": "global.contract.number"
+        },
+        {
+          "id": 36,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "shipprod",
+          "label": "global.product"
+        },
+        {
+          "id": 37,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "proddesc",
+          "label": "global.description"
+        },
+        {
+          "id": 38,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "unit",
+          "label": "global.unit"
+        },
+        {
+          "id": 39,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "actstkqty",
+          "label": "global.actual.quantity",
+          "editable": true,
+          "sign": "+",
+          "digits": 7,
+          "decimals": 2,
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2
+          }
+        },
+        {
+          "id": 40,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qtyship",
+          "label": "global.claim.qty",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2
+          }
+        },
+        {
+          "id": 41,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "rebateamt",
+          "label": "global.actual.amt",
+          "editable": true,
+          "sign": "+",
+          "digits": 5,
+          "decimals": 5,
+          "dataFormat": "CURRENCY"
+        },
+        {
+          "id": 42,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "rptrebamt",
+          "label": "global.claim.amount",
+          "dataFormat": "CURRENCY"
+        },
+        {
+          "id": 43,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dsplyprccostper",
+          "label": "global.price.cost.per"
+        },
+        {
+          "id": 44,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "actnetamt",
+          "label": "global.act.net",
+          "dataFormat": "CURRENCY"
+        },
+        {
+          "id": 45,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "claimnetamt",
+          "label": "global.claim.net",
+          "dataFormat": "CURRENCY"
+        },
+        {
+          "id": 46,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "invpodt",
+          "label": "global.invoice.po.dt",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 47,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "eventClick": "dtl.navigateToOrderInquiry()",
+          "model": "orderno",
+          "label": "global.invoice.po.number"
+        },
+        {
+          "id": 48,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "ordersuf",
+          "label": "global.suffix",
+          "dataFormat": "Suffix"
+        },
+        {
+          "id": 49,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "lineno",
+          "label": "global.line.number",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 50,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "seqno",
+          "label": "global.sequence.number",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 51,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dsplydropshipty",
+          "label": "global.ship.type"
+        },
+        {
+          "id": 53,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "eventClick": "dtl.aricHyperLink()",
+          "model": "custno",
+          "label": "global.customer.number"
+        },
+        {
+          "id": 54,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "custname",
+          "label": "global.customer.name"
+        },
+        {
+          "id": 55,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "whse",
+          "label": "global.warehouse"
+        },
+        {
+          "id": 56,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "whsedesc",
+          "label": "global.warehouse.name"
+        },
+        {
+          "id": 57,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "jrnlno",
+          "eventClick": "dtl.glInquiryHyperlink()",
+          "label": "global.journal.number"
+        },
+        {
+          "id": 58,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "prodnotesfl",
+          "label": "global.product.notes",
+          "extra": true,
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 59,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "ordernotesfl",
+          "label": "global.order.notes",
+          "extra": true,
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 60,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "custnotesfl",
+          "label": "global.customer.notes",
+          "extra": true,
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 61,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "userfield",
+          "label": "global.user.field",
+          "extra": true
+        },
+        {
+          "id": 66,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "rptexrate",
+          "label": "global.exchange.rate",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        }
+      ]
+    }
+  ]
+}

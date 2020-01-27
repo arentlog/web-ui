@@ -1,0 +1,163 @@
+{
+  "viewId": "sa-saee-selectionfield",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "sf.isSelectionFieldsMaster()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "{{sf.getLabel()}}",
+              "subLabel": "{{sf.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "sf.back()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "submitForm": true,
+                  "eventValidated": "sf.submit()"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "sf.back()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "GRID",
+                  "model": "sf.dataset",
+                  "controlRef": "sf.grid",
+                  "options": {
+                    "showDrilldown": false,
+                    "showCheckboxes": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 11,
+                      "type": "TOOLBAR",
+                      "label": "global.selection.fields",
+                      "children": [
+                        {
+                          "id": 17,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-new-document",
+                          "label": "global.new",
+                          "stateRef": ".create",
+                          "securityLevel": 4,
+                          "conditionDisabled": "sf.grid.isAnyRowSelected()"
+                        },
+                        {
+                          "id": 18,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "eventClick": "sf.delete()",
+                          "securityLevel": 5,
+                          "conditionDisabled": "sf.grid.isNoRowSelected()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 12,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "arraypos",
+                      "label": "global.array.position",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 13,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "fieldname",
+                      "label": "global.field.name"
+                    },
+                    {
+                      "id": 14,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "fieldlabel",
+                      "label": "global.label"
+                    },
+                    {
+                      "id": 19,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "fieldlength",
+                      "label": "global.field.length",
+                      "conditionInclude": "sf.fieldType === 'c'"
+                    },
+                    {
+                      "id": 20,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "allowblankfl",
+                      "label": "question.allow.blanks",
+                      "conditionInclude": "sf.fieldType === 'c'",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 15,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "pricecostty",
+                      "label": "global.price.cost",
+                      "conditionInclude": "sf.fieldType === 'a' || sf.fieldType === 'p'",
+                      "dataFormat": "SaPriceCostType"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "type": "VIEW_CNTR",
+      "viewName": "selectionFieldsCreate"
+    }
+  ]
+}

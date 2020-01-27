@@ -1,0 +1,389 @@
+{
+  "viewId": "po-poera-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.poera",
+          "children": [
+            {
+              "id": 38,
+              "type": "BTN",
+              "label": "global.run.po.rrar.report",
+              "icon": "icon-document",
+              "eventClick": "base.runReportLaunch()",
+              "conditionDisabled": "!mst.isBuyerEntered()"
+            },
+            {
+              "id": 39,
+              "type": "BTN",
+              "label": "global.merge",
+              "icon": "icon-document",
+              "eventClick": "base.runMergeLaunch()",
+              "conditionDisabled": "!mst.isBuyerEntered()"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 6,
+              "type": "GRID",
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                },
+                "editable": true
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 5,
+                  "type": "TOOLBAR",
+                  "label": "global.reports",
+                  "children": [
+                    {
+                      "id": 40,
+                      "type": "BTN",
+                      "label": "global.new",
+                      "icon": "icon-new-document",
+                      "securityLevel": 4,
+                      "eventClick": "mst.create()",
+                      "conditionDisabled": "base.grid.isAnyRowSelected()"
+                    },
+                    {
+                      "id": 41,
+                      "type": "BTN",
+                      "label": "global.edit",
+                      "icon": "icon-edit",
+                      "securityLevel": 3,
+                      "conditionDisabled": "!base.grid.isOneRowSelected()",
+                      "eventClick": "mst.edit()"
+                    },
+                    {
+                      "id": 42,
+                      "type": "BTN",
+                      "label": "global.delete",
+                      "icon": "icon-delete",
+                      "securityLevel": 5,
+                      "conditionDisabled": "base.grid.isNoRowSelected()",
+                      "eventClick": "mst.deleteRows()"
+                    },
+                    {
+                      "id": 50,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.full.refresh",
+                      "eventClick": "mst.fullRefresh()",
+                      "icon": "icon-refresh",
+                      "conditionDisabled": "!base.grid.isAnyRowSelected()"
+                    },
+                    {
+                      "id": 43,
+                      "type": "BTN",
+                      "subType": "MENU",
+                      "label": "global.actions",
+                      "conditionDisabled": "!base.grid.isAnyRowSelected()",
+                      "children": [
+                        {
+                          "id": 44,
+                          "type": "MENU_OPT",
+                          "label": "global.set.merge.flag.on",
+                          "icon": "icon-check",
+                          "eventClick": "mst.updateMergeFlag(true)"
+                        },
+                        {
+                          "id": 45,
+                          "type": "MENU_OPT",
+                          "label": "global.set.merge.flag.off",
+                          "icon": "icon-close",
+                          "eventClick": "mst.updateMergeFlag(false)"
+                        },
+                        {
+                          "id": 47,
+                          "type": "MENU_OPT",
+                          "label": "global.refresh.documents",
+                          "icon": "icon-refresh",
+                          "eventClick": "mst.refreshDocuments()"
+                        },
+                        {
+                          "id": 48,
+                          "type": "MENU_OPT",
+                          "label": "global.vendor.change",
+                          "icon": "icon-redo",
+                          "eventClick": "mst.vendorChange()"
+                        },
+                        {
+                          "id": 49,
+                          "type": "MENU_OPT",
+                          "label": "global.take.vendor.credit",
+                          "icon": "icon-redo",
+                          "eventClick": "mst.takeVendorCredit()"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "reportno",
+                  "label": "global.report.number",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 8,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.vendor.number",
+                  "model": "vendno",
+                  "dataFormat": "DECIMAL_TEXT"
+                },
+                {
+                  "id": 9,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.lookup.name",
+                  "model": "lookupnm"
+                },
+                {
+                  "id": 10,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.notes",
+                  "model": "notesfl",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.warehouse",
+                  "model": "whse"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "icsdname",
+                  "label": "global.warehouse.name"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prodline",
+                  "label": "global.product.line"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipfmno",
+                  "label": "global.ship.from.number",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "billtowhse",
+                  "label": "global.bill.to.warehouse"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "buyer",
+                  "label": "global.buyer"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "mergefl",
+                  "label": "global.merge",
+                  "dataFormat": "LOGICAL",
+                  "editable": true,
+                  "eventChange": "mst.gridCellChange()"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totlineamtdec",
+                  "label": "global.amount",
+                  "dataFormat": "CURRENCY"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "purchprio",
+                  "label": "global.purchase.priority"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totrush",
+                  "label": "global.rush",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totorderpt",
+                  "label": "global.order.point",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totcrit",
+                  "label": "global.critical",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totnpna",
+                  "label": "global.npna",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totties",
+                  "label": "global.documents",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "consty",
+                  "label": "global.consolidate"
+                },
+                {
+                  "id": 26,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "createdt",
+                  "label": "global.create.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "pcttarget",
+                  "label": "symbol.percent.target"
+                },
+                {
+                  "id": 28,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "nolines",
+                  "label": "symbol.pound.of.lines",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 29,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "lastpowtdt",
+                  "label": "global.last.review",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 30,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "revcyclin",
+                  "label": "global.review.cycle.days",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 31,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totcubesi",
+                  "label": "global.cubes",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 32,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totweighti",
+                  "label": "global.weight",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 33,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totqtyordi",
+                  "label": "global.qty.ordered",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 34,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "addlcarrycost",
+                  "label": "global.additional.carrying.cost"
+                },
+                {
+                  "id": 35,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "blno",
+                  "label": "global.blanket.purchase.order.number",
+                  "dataFormat": "INTEGER_TEXT",
+                  "eventClick": "mst.poipHyperlinkClicked()"
+                },
+                {
+                  "id": 36,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "blsuf",
+                  "label": "global.suffix",
+                  "dataFormat": "Suffix"
+                },
+                {
+                  "id": 37,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totsuper",
+                  "label": "global.total.superseded.products",
+                  "dataFormat": "INTEGER_TEXT"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

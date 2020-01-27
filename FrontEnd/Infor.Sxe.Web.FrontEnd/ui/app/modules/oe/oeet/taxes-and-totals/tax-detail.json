@@ -1,0 +1,343 @@
+{
+  "viewId": "oe-oeet-taxesandtotals-taxdetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "!base.isTaxesandTotalsEnabled",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.tax.detail",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "tattd.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "submitForm": true,
+                  "eventValidated": "tattd.save()",
+                  "conditionDisabled": "!base.isTaxesandTotalsEnabled"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "tattd.cancel()",
+                  "conditionDisabled": "!base.isTaxesandTotalsEnabled"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 39,
+                          "type": "EXP_AREA",
+                          "label": "global.override.detail",
+                          "children": [
+                            {
+                              "id": 40,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 41,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 12,
+                                      "type": "COMP_FLD",
+                                      "children": [
+                                        {
+                                          "id": 13,
+                                          "type": "FIELD",
+                                          "subType": "CHECKBOX",
+                                          "model": "tat.taxSettings.taxoverfl",
+                                          "label": "global.tax.override",
+                                          "disabled": true
+                                        },
+                                        {
+                                          "id": 14,
+                                          "type": "FIELD",
+                                          "subType": "DROP_DOWN",
+                                          "model": "tat.taxSettings.overridetype",
+                                          "label": "global.reason",
+                                          "type3": "CODES",
+                                          "metaGroup": "OE",
+                                          "conditionDisabled": "!tat.taxSettings.canoverridefl",
+                                          "meta": "TaxOverrideReason",
+                                          "eventChange": "tattd.overrideReasonChanged()"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 36,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 38,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 15,
+                          "type": "EXP_AREA",
+                          "label": "global.jurisdiction",
+                          "children": [
+                            {
+                              "id": 16,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 17,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 18,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "tattd.selectedTaxDetail.recty",
+                                      "label": "global.tax.type",
+                                      "type3": "SET",
+                                      "metaGroup": "OE",
+                                      "conditionDisabled": "!tattd.isTypeEnabled",
+                                      "eventChange": "tattd.taxDetailTypeChanged()",
+                                      "optionsModel": "",
+                                      "meta": "TaxType"
+                                    },
+                                    {
+                                      "id": 19,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "tattd.selectedTaxDetail.statecd",
+                                      "label": "global.state",
+                                      "conditionDisabled": "!tattd.isStateEnabled",
+                                      "type3": "MANUAL",
+                                      "optionsModel": "tattd.stateTypes",
+                                      "eventChange": "tattd.taxDetailStateChanged()"
+                                    },
+                                    {
+                                      "id": 20,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "tattd.selectedTaxDetail.countycd",
+                                      "label": "global.county",
+                                      "type3": "MANUAL",
+                                      "optionsModel": "tattd.countyTypes",
+                                      "conditionDisabled": "!tattd.isCountyEnabled",
+                                      "eventChange": "tattd.taxDetailCountyChanged()"
+                                    },
+                                    {
+                                      "id": 21,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "tattd.selectedTaxDetail.citycd",
+                                      "label": "global.city",
+                                      "type3": "MANUAL",
+                                      "optionsModel": "tattd.cityTypes",
+                                      "conditionDisabled": "!tattd.isCityEnabled",
+                                      "eventChange": "tattd.taxDetailCityChanged()"
+                                    },
+                                    {
+                                      "id": 22,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "tattd.selectedTaxDetail.othercd",
+                                      "label": "global.other",
+                                      "type3": "MANUAL",
+                                      "optionsModel": "tattd.otherTypes",
+                                      "conditionDisabled": "!tattd.isOtherEnabled",
+                                      "eventChange": "",
+                                      "blankOption": false
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 37,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 23,
+                          "type": "EXP_AREA",
+                          "label": "global.amounts.and.values",
+                          "children": [
+                            {
+                              "id": 24,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 25,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 26,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "tattd.selectedTaxDetail.taxsalebase",
+                                      "label": "global.sale.base",
+                                      "dataFormat": "CURRENCY",
+                                      "digits": 9,
+                                      "decimals": 2
+                                    },
+                                    {
+                                      "id": 27,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "tattd.selectedTaxDetail.taxsaleamt",
+                                      "label": "global.sale.amount",
+                                      "dataFormat": "CURRENCY",
+                                      "digits": 9,
+                                      "decimals": 2
+                                    },
+                                    {
+                                      "id": 28,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "tattd.selectedTaxDetail.taxsalert",
+                                      "label": "global.sale.rate",
+                                      "dataFormat": "PERCENT",
+                                      "digits": 3,
+                                      "decimals": 3
+                                    },
+                                    {
+                                      "id": 29,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "tattd.selectedTaxDetail.taxuseamt",
+                                      "label": "global.use.amount",
+                                      "dataFormat": "CURRENCY",
+                                      "digits": 9,
+                                      "decimals": 2
+                                    },
+                                    {
+                                      "id": 30,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "tattd.selectedTaxDetail.taxusert",
+                                      "label": "global.use.rate",
+                                      "dataFormat": "PERCENT",
+                                      "digits": 3,
+                                      "decimals": 3
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 31,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 32,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "tattd.selectedTaxDetail.taxtransamt",
+                                      "label": "global.transit.amount",
+                                      "dataFormat": "CURRENCY",
+                                      "digits": 9,
+                                      "decimals": 2
+                                    },
+                                    {
+                                      "id": 33,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "tattd.selectedTaxDetail.taxtransrt",
+                                      "label": "global.transit.rate",
+                                      "dataFormat": "PERCENT",
+                                      "digits": 3,
+                                      "decimals": 3
+                                    },
+                                    {
+                                      "id": 34,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "tattd.selectedTaxDetail.taxexcamt",
+                                      "label": "global.excise.amount",
+                                      "dataFormat": "CURRENCY",
+                                      "digits": 9,
+                                      "decimals": 2
+                                    },
+                                    {
+                                      "id": 35,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "tattd.selectedTaxDetail.taxexcrt",
+                                      "label": "global.excise.rate",
+                                      "dataFormat": "PERCENT",
+                                      "digits": 3,
+                                      "decimals": 3
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

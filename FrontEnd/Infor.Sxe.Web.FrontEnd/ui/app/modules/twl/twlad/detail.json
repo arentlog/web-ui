@@ -1,0 +1,244 @@
+{
+  "viewId": "twl-twlad-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "menu.twlad",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail() || ((!base.criteria.whNum) && (!base.criteriaUsed.whNum))",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlad.rowStatus",
+                              "label": "global.active"
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlad.deptName",
+                              "label": "global.name",
+                              "maxLength": 15
+                            },
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.twlad.deptType",
+                              "label": "global.department.type",
+                              "meta": "DepartmentType",
+                              "type3": "SET",
+                              "metaGroup": "TWL",
+                              "blankOption": false,
+                              "eventChange": "dtl.defaultBins()"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 23,
+                      "type": "EXP_AREA",
+                      "label": "global.extra.fields",
+                      "children": [
+                        {
+                          "id": 24,
+                          "type": "ROW",
+                          "children": [
+                            {
+                              "id": 25,
+                              "type": "COL",
+                              "subType": "1",
+                              "children": [
+                                {
+                                  "id": 20,
+                                  "type": "FIELD",
+                                  "subType": "LOOKUP",
+                                  "model": "dtl.twlad.pickBin",
+                                  "label": "global.pick.location",
+                                  "meta": "TWLBinLocation",
+                                  "conditionReadonly": "dtl.twlad.deptType.toUpperCase() === 'RE' || dtl.twlad.deptType.toUpperCase() === 'TN' || base.isDetail()",
+                                  "conditionRequired": "twlad.deptType.toUpperCase() === 'WO'",
+                                  "options": {
+                                    "searchParams": {
+                                      "coNum": {
+                                        "type": "REF",
+                                        "value": "base.criteriaUsed.coNum"
+                                      },
+                                      "whNum": {
+                                        "type": "REF",
+                                        "value": "base.criteriaUsed.whNum"
+                                      }
+                                    }
+                                  }
+                                },
+                                {
+                                  "id": 21,
+                                  "type": "FIELD",
+                                  "subType": "LOOKUP",
+                                  "model": "dtl.twlad.stageIn",
+                                  "label": "global.staging.inbin",
+                                  "meta": "TWLBinLocation",
+                                  "conditionReadonly": "dtl.twlad.deptType.toUpperCase() === 'RE' || base.isDetail()",
+                                  "conditionRequired": "twlad.deptType.toUpperCase() === 'WO'",
+                                  "options": {
+                                    "searchParams": {
+                                      "coNum": {
+                                        "type": "REF",
+                                        "value": "base.criteriaUsed.coNum"
+                                      },
+                                      "whNum": {
+                                        "type": "REF",
+                                        "value": "base.criteriaUsed.whNum"
+                                      }
+                                    }
+                                  }
+                                },
+                                {
+                                  "id": 22,
+                                  "type": "FIELD",
+                                  "subType": "LOOKUP",
+                                  "model": "dtl.twlad.stageOut",
+                                  "label": "global.staging.outbin",
+                                  "meta": "TWLBinLocation",
+                                  "conditionReadonly": "dtl.twlad.deptType.toUpperCase() == 'RE' || base.isDetail()",
+                                  "conditionRequired": "twlad.deptType.toUpperCase() === 'WO'",
+                                  "options": {
+                                    "searchParams": {
+                                      "coNum": {
+                                        "type": "REF",
+                                        "value": "base.criteriaUsed.coNum"
+                                      },
+                                      "whNum": {
+                                        "type": "REF",
+                                        "value": "base.criteriaUsed.whNum"
+                                      }
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

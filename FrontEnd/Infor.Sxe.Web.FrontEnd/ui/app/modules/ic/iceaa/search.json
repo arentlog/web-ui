@@ -1,0 +1,209 @@
+{
+  "viewId": "ic-iceaa-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 10,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 11,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.transty",
+                  "label": "global.transaction.type",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "TransactionsType",
+                  "blankOption": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 19,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 20,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.orderno",
+                  "label": "global.order.number",
+                  "type3": "STANDARD",
+                  "meta": "OEOrders",
+                  "contextValues": {
+                    "key1": "base.orderno.split('-')[0]",
+                    "key2": "base.orderno.split('-')[1]"
+                  },
+                  "conditionShow": "base.criteria.transty === 'o'",
+                  "controls": {
+                    "actionBtn": {
+                      "id": 24,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "global.inquire",
+                      "icon": "icon-drilldown",
+                      "isLabelTooltip": true,
+                      "stateRef": "oeio.detail ({pk: base.orderno.split('-')[0], pk2: base.orderno.split('-')[1]})",
+                      "conditionDisabled": "!base.orderno"
+                    }
+                  }
+                },
+                {
+                  "id": 23,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.poorderno",
+                  "label": "global.purchase.order.number",
+                  "type3": "STANDARD",
+                  "meta": "POOrders",
+                  "conditionShow": "base.criteria.transty === 'p'",
+                  "controls": {
+                    "actionBtn": {
+                      "id": 25,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "global.inquire",
+                      "icon": "icon-drilldown",
+                      "isLabelTooltip": true,
+                      "stateRef": "poip.detail ({pk: base.poorderno.split('-')[0], pk2: base.poorderno.split('-')[1]})",
+                      "conditionDisabled": "!base.poorderno"
+                    }
+                  },
+                  "contextValues": {
+                    "key1": "base.poorderno.split('-')[0]",
+                    "key2": "base.poorderno.split('-')[1]"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "type3": "STANDARD",
+                  "meta": "Warehouse",
+                  "model": "base.criteria.whse",
+                  "label": "global.warehouse",
+                  "autoFocus": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 14,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.lineno",
+                  "label": "global.line.number",
+                  "maxLength": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 17,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.prod",
+                  "label": "global.product.number",
+                  "type3": "STANDARD",
+                  "meta": "ProdAll",
+                  "controls": {
+                    "actionBtn": {
+                      "id": 26,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "global.inquire",
+                      "icon": "icon-drilldown",
+                      "isLabelTooltip": true,
+                      "conditionDisabled": "!base.criteria.prod",
+                      "stateRef": "icip.detail ({pk: base.criteria.prod, pk2: base.criteria.whse})"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 7,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

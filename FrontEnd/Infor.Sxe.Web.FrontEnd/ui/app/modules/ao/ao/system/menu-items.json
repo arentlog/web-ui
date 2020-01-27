@@ -1,0 +1,514 @@
+{
+  "viewId": "ao-ao-system-system-menuitems",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 76,
+      "type": "EXP_AREA",
+      "label": "global.search",
+      "children": [
+        {
+          "id": 6,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 7,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "menuitem.selectedMenuSet",
+                  "label": "global.menu.set",
+                  "conditionReadonly": "menuitem.editMode()",
+                  "size": "XS"
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "menuitem.selectedMenuFunction",
+                  "label": "global.name",
+                  "meta": "MenuItem",
+                  "conditionReadonly": "menuitem.editMode()",
+                  "options": {
+                    "searchParams": {
+                      "menuSet": {
+                        "type": "REF",
+                        "value": "menuitem.selectedMenuSet"
+                      },
+                      "trmgrlang": {
+                        "value": "menuitem.selectedMenuItemLanguage",
+                        "type": "REF"
+                      }
+                    },
+                    "allowEntry": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": 9,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "menuitem.selectedMenuItemLanguage",
+                  "label": "global.language",
+                  "type3": "MANUAL",
+                  "blankOptionLabel": "global.default.language",
+                  "conditionReadonly": "menuitem.editMode() && !menuitem.newRecord",
+                  "optionsModel": "menuitem.languageTypes",
+                  "optionLabelField": "descrip",
+                  "optionValueField": "trmgrlang",
+                  "blankOption": false
+                },
+                {
+                  "id": 79,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "conditionDisabled": "menuitem.editMode()",
+                  "eventClick": "menuitem.menuItemLoad()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 69,
+      "type": "TOOLBAR",
+      "label": "global.blank.label.string.for.space",
+      "children": [
+        {
+          "id": 74,
+          "type": "BTN",
+          "subType": "PRI",
+          "label": "global.new",
+          "icon": "icon-new-document",
+          "securityLevel": 4,
+          "eventClick": "menuitem.create()",
+          "conditionDisabled": "menuitem.editMode()"
+        },
+        {
+          "id": 83,
+          "type": "BTN",
+          "subType": "TER",
+          "icon": "icon-copy",
+          "label": "global.copy",
+          "eventClick": "menuitem.copy()",
+          "securityLevel": 4,
+          "conditionDisabled": "menuitem.editMode() || !menuitem.selectedMenuItem"
+        },
+        {
+          "id": 73,
+          "type": "BTN",
+          "subType": "PRI",
+          "label": "global.edit",
+          "icon": "icon-edit",
+          "securityLevel": 3,
+          "eventClick": "menuitem.edit()",
+          "conditionDisabled": "menuitem.editMode() || !menuitem.selectedMenuItem"
+        },
+        {
+          "id": 75,
+          "type": "BTN",
+          "subType": "PRI",
+          "label": "global.save",
+          "icon": "icon-save",
+          "securityLevel": 3,
+          "conditionDisabled": "!menuitem.editMode()",
+          "eventClick": "menuitem.save()"
+        },
+        {
+          "id": 84,
+          "type": "BTN",
+          "subType": "TER",
+          "icon": "icon-reset",
+          "label": "global.reset",
+          "eventClick": "menuitem.reset()",
+          "conditionDisabled": "!menuitem.editMode()"
+        },
+        {
+          "id": 80,
+          "type": "BTN",
+          "subType": "TER",
+          "icon": "icon-cancel",
+          "label": "global.cancel",
+          "conditionDisabled": "!menuitem.editMode()",
+          "eventClick": "menuitem.cancel()"
+        },
+        {
+          "id": 71,
+          "type": "BTN",
+          "subType": "PRI",
+          "label": "global.delete",
+          "icon": "icon-delete",
+          "securityLevel": 5,
+          "conditionDisabled": "!menuitem.selectedMenuFunction",
+          "eventClick": "menuitem.delete()"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "type": "EXP_AREA",
+      "label": "global.general",
+      "conditionShow": "menuitem.selectedMenuItem",
+      "children": [
+        {
+          "id": 23,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 24,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 25,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "menuitem.selectedMenuItem.menuset",
+                  "label": "global.menu.set",
+                  "conditionReadonly": "!menuitem.editMode()",
+                  "size": "XS"
+                },
+                {
+                  "id": 28,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "menuitem.selectedMenuItem.functionname",
+                  "label": "global.name",
+                  "meta": "MenuItem",
+                  "conditionReadonly": "!menuitem.editMode()",
+                  "options": {
+                    "allowEntry": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": 27,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 26,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "menuitem.selectedMenuItem.windowtitle",
+                  "label": "global.window.title",
+                  "conditionReadonly": "!menuitem.editMode()",
+                  "size": "LG"
+                },
+                {
+                  "id": 29,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "menuitem.selectedMenuItem.minSecurityLevel",
+                  "label": "global.minimum.security.level",
+                  "type3": "SET",
+                  "metaGroup": "COMMON",
+                  "meta": "SecurityTypeNumeric",
+                  "conditionReadonly": "!menuitem.editMode()",
+                  "conditionShow": "!menuitem.newRecord",
+                  "size": "SM"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "type": "EXP_AREA",
+      "label": "global.navigator.settings",
+      "conditionShow": "menuitem.selectedMenuItem && !menuitem.newRecord",
+      "children": [
+        {
+          "id": 31,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 32,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 33,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "menuitem.selectedMenuItem.menutitle",
+                  "label": "global.menu.title",
+                  "conditionReadonly": "!menuitem.editMode()",
+                  "size": "LG"
+                },
+                {
+                  "id": 34,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "menuitem.selectedMenuItem.tiptext",
+                  "label": "global.tooltip",
+                  "conditionReadonly": "!menuitem.editMode()",
+                  "size": "LG"
+                },
+                {
+                  "id": 38,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "menuitem.selectedMenuItem.parentpos",
+                  "label": "global.button.position",
+                  "maxLength": 7,
+                  "dataFormat": "INTEGER",
+                  "conditionReadonly": "!menuitem.editMode()",
+                  "size": "SM",
+                  "digits": 7
+                }
+              ]
+            },
+            {
+              "id": 35,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 36,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "menuitem.selectedMenuItem.buttontitle",
+                  "label": "global.button.label",
+                  "conditionReadonly": "!menuitem.editMode()"
+                },
+                {
+                  "id": 37,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "menuitem.selectedMenuItem.parentmenu",
+                  "label": "global.parent.menu",
+                  "conditionReadonly": "!menuitem.editMode()",
+                  "meta": "MenuItem"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "type": "EXP_AREA",
+      "label": "global.execution.settings",
+      "conditionShow": "menuitem.selectedMenuItem && !menuitem.newRecord",
+      "children": [
+        {
+          "id": 40,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 42,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 44,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "menuitem.selectedMenuItem.recordtype",
+                  "label": "global.record.type",
+                  "conditionReadonly": "!menuitem.editMode()",
+                  "type3": "MANUAL",
+                  "optionsModel": "menuitem.recordTypeList",
+                  "optionLabelField": "name",
+                  "optionValueField": "typeCode",
+                  "eventChange": "menuitem.menuItemRecTypeChange()"
+                },
+                {
+                  "id": 48,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "menuitem.selectedMenuItem.keyviewer",
+                  "label": "{{menuitem.aoSystemMenuItemRecordType.keyviewerLabel}}",
+                  "conditionShow": "!menuitem.aoSystemMenuItemRecordType.keyviewerHidden",
+                  "conditionReadonly": "!menuitem.editMode()"
+                },
+                {
+                  "id": 45,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "menuitem.selectedMenuItem.nxtrendOurproc",
+                  "label": "global.internal.name",
+                  "maxLength": 8,
+                  "conditionReadonly": "!menuitem.editMode()"
+                },
+                {
+                  "id": 68,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "menuitem.selectedMenuItem.website",
+                  "label": "{{menuitem.aoSystemMenuItemRecordType.websiteLabel}}",
+                  "conditionShow": "!menuitem.aoSystemMenuItemRecordType.websiteHidden",
+                  "conditionReadonly": "!menuitem.editMode()"
+                },
+                {
+                  "id": 49,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "menuitem.selectedMenuItem.browsename",
+                  "label": "{{menuitem.aoSystemMenuItemRecordType.browsenameLabel}}",
+                  "conditionShow": "!menuitem.aoSystemMenuItemRecordType.browsenameHidden",
+                  "conditionReadonly": "!menuitem.editMode()"
+                }
+              ]
+            },
+            {
+              "id": 41,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 46,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "menuitem.selectedMenuItem.standardty",
+                  "label": "global.standard",
+                  "type3": "SET",
+                  "metaGroup": "COMMON",
+                  "meta": "StandardType",
+                  "conditionReadonly": "!menuitem.editMode()"
+                },
+                {
+                  "id": 50,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "menuitem.selectedMenuItem.crmsubject",
+                  "label": "global.subject",
+                  "type3": "SET",
+                  "metaGroup": "COMMON",
+                  "meta": "SubjectType",
+                  "conditionReadonly": "!menuitem.editMode()"
+                },
+                {
+                  "id": 47,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "menuitem.selectedMenuItem.functionprocedure",
+                  "label": "{{menuitem.aoSystemMenuItemRecordType.functionprocedureLabel}}",
+                  "conditionShow": "!menuitem.aoSystemMenuItemRecordType.functionprocedureHidden",
+                  "conditionReadonly": "!menuitem.editMode()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "type": "GRID",
+      "model": "menuitem.dataset",
+      "controlRef": "menuitem.grid",
+      "conditionShow": "menuitem.selectedMenuItem && !menuitem.newRecord",
+      "conditionEditable": "menuitem.editMode()",
+      "options": {
+        "editable": true,
+        "showCheckboxes": true
+      },
+      "controls": {
+        "toolbar": {
+          "id": 14,
+          "type": "TOOLBAR",
+          "label": "global.menu.items",
+          "children": [
+            {
+              "id": 51,
+              "type": "BTN",
+              "subType": "MENU",
+              "label": "global.new",
+              "icon": "icon-new-document",
+              "securityLevel": 4,
+              "conditionDisabled": "!menuitem.editMode()",
+              "children": [
+                {
+                  "id": 81,
+                  "type": "MENU_OPT",
+                  "label": "global.insert.before",
+                  "eventClick": "menuitem.addSubItem(0)",
+                  "conditionDisabled": "!menuitem.grid.isOneRowSelected()"
+                },
+                {
+                  "id": 82,
+                  "type": "MENU_OPT",
+                  "label": "global.insert.after",
+                  "eventClick": "menuitem.addSubItem(1)"
+                }
+              ]
+            },
+            {
+              "id": 53,
+              "type": "BTN",
+              "subType": "PRI",
+              "label": "global.delete",
+              "icon": "icon-delete",
+              "securityLevel": 5,
+              "conditionDisabled": "menuitem.grid.isNoRowSelected() || !menuitem.editMode()",
+              "eventClick": "menuitem.deleteSubItems()"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 15,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.name",
+          "editable": true,
+          "model": "folderfunctionnames"
+        },
+        {
+          "id": 16,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.label",
+          "model": "folderlabels",
+          "editable": true
+        },
+        {
+          "id": 17,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.type",
+          "model": "folderfunctiontype",
+          "editable": true
+        },
+        {
+          "id": 18,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.procedure",
+          "model": "folderviewername",
+          "editable": true
+        },
+        {
+          "id": 19,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.instruction",
+          "model": "folderinstructions",
+          "editable": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,525 @@
+{
+  "viewId": "twl-twloar-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "conditionShow": "base.isDetailOrEdit()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.auto.drop.rule",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail() || ((!base.criteria.whNum) && (!base.criteriaUsed.whNum))",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 74,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.assign.employees",
+                  "conditionDisabled": "base.isDetail()",
+                  "eventClick": "dtl.assignEmployees()",
+                  "icon": "icon-user-avatar"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 54,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 55,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 56,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twloar.active",
+                              "label": "global.active",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 71,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 19,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_AREA",
+                                  "model": "dtl.twloar.criteria",
+                                  "label": "global.criteria",
+                                  "maxLength": 500,
+                                  "size": "LG"
+                                },
+                                {
+                                  "id": 69,
+                                  "type": "FIELD",
+                                  "subType": "LOOKUP",
+                                  "model": "dtl.twloar.tempFieldName",
+                                  "label": "global.field.name",
+                                  "meta": "TWLDbFieldName",
+                                  "eventChange": "dtl.saveTempFieldName()",
+                                  "options": {
+                                    "searchParams": {
+                                      "tableName": "ordhdr"
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 72,
+                              "type": "BTN",
+                              "subType": "SEC",
+                              "label": "global.test.rule",
+                              "eventClick": "dtl.testRule(true)",
+                              "conditionDisabled": "!base.isDetail()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.criteria",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 68,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 20,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.twloar.drpNow",
+                                  "label": "global.immediately.drop",
+                                  "dataFormat": "LOGICAL",
+                                  "eventChange": "dtl.dropNowChanged()",
+                                  "conditionDisabled": "base.isDetail() || dtl.twloar.everyNum > 0"
+                                },
+                                {
+                                  "id": 21,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.twloar.printerId",
+                                  "label": "global.printer",
+                                  "meta": null,
+                                  "size": "SM",
+                                  "conditionReadonly": "base.isDetail() || !dtl.twloar.drpNow",
+                                  "options": {
+                                    "searchParams": {
+                                      "coNum": {
+                                        "type": "REF",
+                                        "value": "dtl.twloar.coNum"
+                                      },
+                                      "whNum": {
+                                        "type": "REF",
+                                        "value": "dtl.twloar.whNum"
+                                      }
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 57,
+                              "type": "FIELD_SET",
+                              "label": "global.action.time",
+                              "children": [
+                                {
+                                  "id": 22,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.twloar.drpDays8",
+                                  "label": "global.everyday",
+                                  "dataFormat": "LOGICAL",
+                                  "eventChange": "dtl.setEveryDay()"
+                                },
+                                {
+                                  "id": 23,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.twloar.drpDays1",
+                                  "label": "global.sunday",
+                                  "dataFormat": "LOGICAL",
+                                  "conditionDisabled": "base.isDetail() || dtl.twloar.drpDays8"
+                                },
+                                {
+                                  "id": 24,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.twloar.drpDays2",
+                                  "label": "global.monday",
+                                  "dataFormat": "LOGICAL",
+                                  "conditionDisabled": "base.isDetail() || dtl.twloar.drpDays8"
+                                },
+                                {
+                                  "id": 25,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.twloar.drpDays3",
+                                  "label": "global.tuesday",
+                                  "dataFormat": "LOGICAL",
+                                  "conditionDisabled": "base.isDetail() || dtl.twloar.drpDays8"
+                                },
+                                {
+                                  "id": 26,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.twloar.drpDays4",
+                                  "label": "global.wednesday",
+                                  "dataFormat": "LOGICAL",
+                                  "conditionDisabled": "base.isDetail() || dtl.twloar.drpDays8"
+                                },
+                                {
+                                  "id": 27,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.twloar.drpDays5",
+                                  "label": "global.thursday",
+                                  "dataFormat": "LOGICAL",
+                                  "conditionDisabled": "base.isDetail() || dtl.twloar.drpDays8"
+                                },
+                                {
+                                  "id": 28,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.twloar.drpDays6",
+                                  "label": "global.friday",
+                                  "dataFormat": "LOGICAL",
+                                  "conditionDisabled": "base.isDetail() || dtl.twloar.drpDays8"
+                                },
+                                {
+                                  "id": 29,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.twloar.drpDays7",
+                                  "label": "global.saturday",
+                                  "dataFormat": "LOGICAL",
+                                  "conditionDisabled": "base.isDetail() || dtl.twloar.drpDays8"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 64,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 30,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.twloar.everyNum",
+                                  "label": "global.execute.every",
+                                  "dataFormat": "INTEGER",
+                                  "maxLength": 2,
+                                  "sign": "+",
+                                  "digits": 25,
+                                  "size": "XS",
+                                  "conditionReadonly": "base.isDetail() || dtl.twloar.drpNow"
+                                },
+                                {
+                                  "id": 31,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.twloar.everyWhat",
+                                  "label": "global.option",
+                                  "type3": "SET",
+                                  "metaGroup": "TWL",
+                                  "meta": "MinHourType",
+                                  "size": "SM",
+                                  "blankOption": false,
+                                  "conditionReadonly": "base.isDetail() || dtl.twloar.drpNow"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 51,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 60,
+                                  "type": "FIELD",
+                                  "subType": "TIME",
+                                  "model": "dtl.twloar.starttm",
+                                  "label": "global.start.time",
+                                  "dataFormat": "TIME",
+                                  "subFormat": "SecondsSinceMidnight",
+                                  "conditionReadonly": "base.isDetail() || dtl.twloar.drpNow || dtl.twloar.specTm1"
+                                },
+                                {
+                                  "id": 61,
+                                  "type": "FIELD",
+                                  "subType": "TIME",
+                                  "model": "dtl.twloar.stoptm",
+                                  "label": "global.stop.time",
+                                  "dataFormat": "TIME",
+                                  "subFormat": "SecondsSinceMidnight",
+                                  "conditionReadonly": "base.isDetail() || dtl.twloar.drpNow || dtl.twloar.specTm1"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 50,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twloar.priority",
+                              "label": "global.priority",
+                              "dataFormat": "INTEGER",
+                              "maxLength": 3,
+                              "sign": "+",
+                              "digits": 3,
+                              "size": "XS"
+                            },
+                            {
+                              "id": 62,
+                              "type": "FIELD_SET",
+                              "label": "global.specific",
+                              "children": [
+                                {
+                                  "id": 65,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 33,
+                                      "type": "FIELD",
+                                      "subType": "TIME",
+                                      "model": "dtl.twloar.specTm1",
+                                      "label": "global.specific.time1",
+                                      "dataFormat": "TIME",
+                                      "subFormat": "SecondsSinceMidnight",
+                                      "conditionReadonly": "base.isDetail() || dtl.twloar.drpNow || dtl.twloar.everyNum > 0"
+                                    },
+                                    {
+                                      "id": 34,
+                                      "type": "FIELD",
+                                      "subType": "TIME",
+                                      "model": "dtl.twloar.specTm2",
+                                      "label": "global.specific.time2",
+                                      "dataFormat": "TIME",
+                                      "subFormat": "SecondsSinceMidnight",
+                                      "conditionReadonly": "base.isDetail() || dtl.twloar.drpNow || dtl.twloar.everyNum > 0"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 66,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 35,
+                                      "type": "FIELD",
+                                      "subType": "TIME",
+                                      "model": "dtl.twloar.specTm3",
+                                      "label": "global.specific.time3",
+                                      "dataFormat": "TIME",
+                                      "subFormat": "SecondsSinceMidnight",
+                                      "conditionReadonly": "base.isDetail() || dtl.twloar.drpNow || dtl.twloar.everyNum > 0"
+                                    },
+                                    {
+                                      "id": 36,
+                                      "type": "FIELD",
+                                      "subType": "TIME",
+                                      "model": "dtl.twloar.specTm4",
+                                      "label": "global.specific.time4",
+                                      "dataFormat": "TIME",
+                                      "subFormat": "SecondsSinceMidnight",
+                                      "conditionReadonly": "base.isDetail() || dtl.twloar.drpNow || dtl.twloar.everyNum > 0"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 67,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 37,
+                                      "type": "FIELD",
+                                      "subType": "TIME",
+                                      "model": "dtl.twloar.specTm5",
+                                      "label": "global.specific.time5",
+                                      "dataFormat": "TIME",
+                                      "subFormat": "SecondsSinceMidnight",
+                                      "conditionReadonly": "base.isDetail() || dtl.twloar.drpNow || dtl.twloar.everyNum > 0"
+                                    },
+                                    {
+                                      "id": 38,
+                                      "type": "FIELD",
+                                      "subType": "TIME",
+                                      "model": "dtl.twloar.specTm6",
+                                      "label": "global.specific.time6",
+                                      "dataFormat": "TIME",
+                                      "subFormat": "SecondsSinceMidnight",
+                                      "conditionReadonly": "base.isDetail() || dtl.twloar.drpNow || dtl.twloar.everyNum > 0"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": 63,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 32,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.twloar.nextrundt",
+                                  "label": "global.execute.next.date",
+                                  "dataFormat": "DATE",
+                                  "size": "SM",
+                                  "readonly": true
+                                },
+                                {
+                                  "id": 52,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.twloar.nextruntm",
+                                  "label": "global.execute.next.time",
+                                  "dataFormat": "TIME",
+                                  "subFormat": "SecondsSinceMidnight",
+                                  "size": "SM",
+                                  "readonly": true
+                                }
+                              ]
+                            },
+                            {
+                              "id": 53,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twloar.transUser",
+                              "label": "global.transaction.user",
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 75,
+      "type": "VIEW_CNTR",
+      "viewName": "subDetail"
+    }
+  ]
+}

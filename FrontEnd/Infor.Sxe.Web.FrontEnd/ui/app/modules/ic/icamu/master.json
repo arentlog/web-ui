@@ -1,0 +1,358 @@
+{
+  "viewId": "ic-icamu-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.icamu",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 5,
+              "type": "GRID",
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                },
+                "selectable": "multiple"
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.exception.processing.center",
+                  "children": [
+                    {
+                      "id": 45,
+                      "type": "BTN",
+                      "subType": "PRI",
+                      "label": "global.select.updated",
+                      "icon": "icon-check",
+                      "eventClick": "base.selectUpdatedRows()"
+                    },
+                    {
+                      "id": 46,
+                      "type": "BTN",
+                      "subType": "PRI",
+                      "label": "global.delete",
+                      "icon": "icon-delete",
+                      "securityLevel": 5,
+                      "conditionDisabled": "base.grid.isNoRowSelected()",
+                      "eventClick": "mst.deleteRecords()"
+                    },
+                    {
+                      "id": 37,
+                      "type": "BTN",
+                      "subType": "MENU",
+                      "label": "global.action",
+                      "children": [
+                        {
+                          "id": 38,
+                          "type": "MENU_OPT",
+                          "label": "global.value.change.inquiry",
+                          "stateRef": "icamu.valuechangeinquiry",
+                          "icon": "icon-history"
+                        },
+                        {
+                          "id": 39,
+                          "type": "MENU_OPT",
+                          "label": "global.manual.product.list",
+                          "stateRef": "icamu.manualproductlist",
+                          "icon": "icon-new-document",
+                          "securityLevel": 4,
+                          "conditionShow": "base.icmanlistty.toLowerCase() === 'm' || base.icmanlistty.toLowerCase() === 'b'"
+                        },
+                        {
+                          "id": 40,
+                          "type": "MENU_OPT",
+                          "label": "global.mass.update",
+                          "stateRef": "icamu.massupdate",
+                          "icon": "icon-launch",
+                          "conditionDisabled": "base.grid.isNoRowSelected()",
+                          "conditionShow": "base.icmassmaintfl"
+                        },
+                        {
+                          "id": 41,
+                          "type": "MENU_OPT",
+                          "label": "global.import.from.excel",
+                          "icon": "icon-import",
+                          "eventClick": "mst.importFromExcel()",
+                          "conditionShow": "base.icmanlistty.toLowerCase() === 'e' || base.icmanlistty.toLowerCase() === 'b'"
+                        },
+                        {
+                          "id": 42,
+                          "type": "MENU_OPT",
+                          "label": "global.recalculate.ordering.controls",
+                          "conditionDisabled": "!base.grid.isOneRowSelected()",
+                          "icon": "icon-launch",
+                          "eventClick": "base.callRecalculate()"
+                        },
+                        {
+                          "id": 43,
+                          "type": "MENU_OPT",
+                          "label": "global.maintain.warehouse.product",
+                          "eventClick": "mst.callMaintainProduct()",
+                          "icon": "icon-launch",
+                          "conditionDisabled": "!base.grid.isOneRowSelected()"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "statusmess",
+                  "label": "global.updated"
+                },
+                {
+                  "id": 8,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whse",
+                  "label": "global.warehouse"
+                },
+                {
+                  "id": 9,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "prod",
+                  "label": "global.product",
+                  "eventClick": "base.prodHyperlink()"
+                },
+                {
+                  "id": 10,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "notesfl",
+                  "label": "global.product.notes",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "descrip",
+                  "label": "global.product.description"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "recordtype",
+                  "label": "global.type"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "class",
+                  "label": "global.class",
+                  "dataFormat": "INTEGER"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "icswclass",
+                  "label": "global.class.current",
+                  "dataFormat": "INTEGER"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "orderpt",
+                  "label": "global.order.point",
+                  "dataFormat": "DECIMAL_TEXT"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "linept",
+                  "label": "global.line.point",
+                  "dataFormat": "DECIMAL_TEXT"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "orderqty",
+                  "label": "global.order.quantity",
+                  "dataFormat": "DECIMAL_TEXT"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "frozenmmyy",
+                  "label": "global.frozen.date",
+                  "customFormatter": "base.frozenDateFormatter()"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "frozenmos",
+                  "label": "global.number.of.months",
+                  "dataFormat": "INTEGER"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "frozentypedesc",
+                  "label": "global.frozen.reason"
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "frozendesc",
+                  "label": "global.selected.reason.s"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "icswfrozenmmyy",
+                  "label": "global.frozen.date.current",
+                  "customFormatter": "base.frozenDateFormatter()"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "icswfrzntypedesc",
+                  "label": "global.frozen.reason.current"
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "linehits",
+                  "label": "global.line.hits",
+                  "dataFormat": "INTEGER_TEXT",
+                  "conditionInclude": "!icamusingle.linehitsHidden"
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "oorderpt",
+                  "label": "global.raw.order.point",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "conditionInclude": "!icamusingle.oorderptHidden"
+                },
+                {
+                  "id": 30,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "olinept",
+                  "label": "global.raw.line.point",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "conditionInclude": "!icamusingle.olineptHidden"
+                },
+                {
+                  "id": 26,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whserank",
+                  "label": "global.warehouse.rank",
+                  "conditionInclude": "!icamusingle.whserankHidden"
+                },
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "safetyqty",
+                  "label": "global.safety.quantity",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "conditionInclude": "!icamusingle.safetyqtyHidden"
+                },
+                {
+                  "id": 31,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "usage",
+                  "label": "global.usage.qty",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "conditionInclude": "!icamusingle.usageHidden"
+                },
+                {
+                  "id": 28,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "updatemess",
+                  "label": "global.message"
+                },
+                {
+                  "id": 29,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "statusdesc",
+                  "label": "global.status",
+                  "customFormatter": "base.statusDescripFormatter()"
+                },
+                {
+                  "id": 35,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "abcrankty",
+                  "label": "abc.rank"
+                },
+                {
+                  "id": 32,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "extdescrip",
+                  "label": "global.extended.description"
+                },
+                {
+                  "id": 33,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "ncnr",
+                  "label": "global.ncnr"
+                },
+                {
+                  "id": 34,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "countryname",
+                  "label": "global.country"
+                },
+                {
+                  "id": 36,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "tariffcd",
+                  "label": "global.hs.code"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

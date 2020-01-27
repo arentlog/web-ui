@@ -1,0 +1,200 @@
+{
+  "viewId": "ar-aremt-splitpayrecords",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.split.payment.records",
+              "subLabel": "{{spr.aremtRecord.invnosuf}}",
+              "controls": {
+                "navBtns": {
+                  "id": 25,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 26,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 5,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "eventClick": "spr.save()"
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "spr.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 7,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 17,
+                  "type": "GRID",
+                  "model": "spr.splitPayCollection",
+                  "options": {
+                    "showCheckboxes": true,
+                    "selectable": "single",
+                    "editable": true,
+                    "events": {
+                      "cellchange": "spr.SplitPayGridCellChange()"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 8,
+                      "type": "TOOLBAR",
+                      "label": "global.payments"
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 18,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.column"
+                    },
+                    {
+                      "id": 19,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "paymentno",
+                      "label": "global.payment",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 20,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "amount",
+                      "label": "global.amount",
+                      "editable": true,
+                      "dataFormat": "DECIMAL"
+                    },
+                    {
+                      "id": 21,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "origdisc",
+                      "label": "global.discount",
+                      "editable": true,
+                      "dataFormat": "DECIMAL"
+                    },
+                    {
+                      "id": 22,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "disputed",
+                      "label": "global.disputed",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 23,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "model": "duedate",
+                      "label": "global.due.date",
+                      "editable": true,
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 24,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "model": "discountdate",
+                      "label": "global.discount.date",
+                      "editable": true,
+                      "dataFormat": "DATE"
+                    }
+                  ]
+                },
+                {
+                  "type": "ROW",
+                  "id": 10,
+                  "children": [
+                    {
+                      "type": "COL",
+                      "subType": "1/2",
+                      "id": 11,
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "spr.totalAmount",
+                          "dataFormat": "CURRENCY",
+                          "label": "global.amount",
+                          "conditionReadonly": "true"
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "spr.totalDiscount",
+                          "dataFormat": "DECIMAL",
+                          "label": "global.discount"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "COL",
+                      "subType": "1/2",
+                      "id": 14,
+                      "children": [
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "spr.amountProof",
+                          "label": "global.amount.proof",
+                          "dataFormat": "DECIMAL"
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "spr.discountProof",
+                          "dataFormat": "DECIMAL",
+                          "label": "global.discount.proof"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

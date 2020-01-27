@@ -1,0 +1,101 @@
+{
+  "viewId": "pd-pdem-step1",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.includesStep1()",
+      "children": [
+        {
+          "id": 11,
+          "type": "MESSAGE",
+          "text": "message.welcome.to.the.infor.distribution.sxe.product.pri"
+        },
+        {
+          "id": 15,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 16,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.pdemNewSet.setid",
+                  "label": "global.set.id",
+                  "maxLength": 30,
+                  "required": true
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.pdemNewSet.description",
+                  "label": "global.description",
+                  "maxLength": 40,
+                  "required": true
+                }
+              ]
+            },
+            {
+              "id": 17,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "RADIO_SET",
+                  "model": "base.pdemNewSet.dropdowntype",
+                  "label": "global.record.type",
+                  "type3": "SET",
+                  "blankOption": false,
+                  "metaGroup": "PD",
+                  "meta": "PDEMRecordTypes",
+                  "required": true,
+                  "eventChange": "create.loadRecordTypeDefault (base.pdemNewSet.dropdowntype)"
+                },
+                {
+                  "id": 18,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 12,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "base.pdemNewSet.destination",
+                      "label": "global.price.records",
+                      "type3": "MANUAL",
+                      "blankOption": false,
+                      "optionsModel": "base.levelCodePDSC",
+                      "conditionShow": "base.pdemNewSet.dropdowntype.toLowerCase() === 'p'",
+                      "eventChange": "create.resetDestination()"
+                    },
+                    {
+                      "id": 13,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "base.pdemNewSet.destination",
+                      "label": "global.rebate.records",
+                      "type3": "MANUAL",
+                      "blankOption": false,
+                      "optionsModel": "base.levelCodePDSR",
+                      "conditionShow": "base.pdemNewSet.dropdowntype.toLowerCase() === 'r'",
+                      "eventChange": "create.resetDestination()"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

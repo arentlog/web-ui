@@ -1,0 +1,290 @@
+{
+  "viewId": "va-vaet-extendin",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.extended.information",
+              "subLabel": "{{sctnextin.detailSubTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 8,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^",
+                      "conditionDisabled": "sctnextin.isContinueClicked === false && base.isSectionInAddMode()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "sctnextin.submit()",
+                  "securityLevel": 3,
+                  "conditionDisabled": "sctnextin.isContinueClicked === false"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "stateRef": "^",
+                  "conditionDisabled": "sctnextin.isContinueClicked === false && base.isSectionInAddMode()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "EXP_AREA",
+                  "label": "global.shipping.details",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "sctnextin.sectionExtendIN.destvendno",
+                              "label": "global.ship.to.vendor.number",
+                              "meta": "Vendor",
+                              "dataFormat": "DECIMAL_TEXT",
+                              "decimals": 0,
+                              "digits": 12,
+                              "sign": "+",
+                              "conditionReadonly": "sctnextin.isContinueClicked === true",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "sctnextin.sectionExtendIN.destshipfmno",
+                              "label": "global.ship.from",
+                              "meta": "ShipFrom",
+                              "conditionReadonly": "sctnextin.isContinueClicked === true",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "sctnextin.sectionExtendIN.destwhse",
+                              "label": "global.or.warehouse",
+                              "meta": "Warehouse",
+                              "conditionReadonly": "sctnextin.isContinueClicked === true",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 20,
+                              "type": "BTN",
+                              "subType": "PRI",
+                              "label": "global.save.and.continue",
+                              "conditionDisabled": "sctnextin.isContinueClicked === true",
+                              "eventClick": "sctnextin.continueExtend()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 13,
+                  "type": "EXP_AREA",
+                  "label": "global.extended.shipping.details",
+                  "children": [
+                    {
+                      "id": 14,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 15,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "sctnextin.sectionExtendIN.destname",
+                              "label": "global.ship.to",
+                              "conditionReadonly": "sctnextin.isContinueClicked === false",
+                              "maxLength": 30
+                            },
+                            {
+                              "id": 23,
+                              "type": "CUSTOM",
+                              "subType": "AddressForm",
+                              "options": {
+                                "countryCdVisible": false,
+                                "addr2Visible": true,
+                                "addr3Visible": true,
+                                "addr1Model": "sctnextin.sectionExtendIN.destaddr1",
+                                "addr2Model": "sctnextin.sectionExtendIN.destaddr2",
+                                "addr3Model": "sctnextin.sectionExtendIN.destaddr3",
+                                "cityModel": "sctnextin.sectionExtendIN.destcity",
+                                "stateModel": "sctnextin.sectionExtendIN.deststate",
+                                "zipCodeModel": "sctnextin.sectionExtendIN.destzipcd",
+                                "conditionReadonly": "sctnextin.isContinueClicked === false",
+                                "addressLabel": "global.address",
+                                "controlRef": "sctnextin.addressControl"
+                              }
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "sctnextin.sectionExtendIN.reqshipdt",
+                              "label": "global.req.ship.date",
+                              "dataFormat": "DATE",
+                              "conditionReadonly": "sctnextin.isContinueClicked === false"
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "sctnextin.sectionExtendIN.promisedt",
+                              "label": "global.promised.date",
+                              "dataFormat": "DATE",
+                              "conditionReadonly": "sctnextin.isContinueClicked === false"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 21,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "sctnextin.sectionExtendIN.shipviaty",
+                              "label": "global.ship.via",
+                              "meta": "ShipVia",
+                              "conditionReadonly": "sctnextin.isContinueClicked === false"
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "sctnextin.sectionExtendIN.shipinstr",
+                              "label": "global.instructions",
+                              "maxLength": 30,
+                              "conditionReadonly": "sctnextin.isContinueClicked === false"
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "sctnextin.sectionExtendIN.refer",
+                              "label": "global.reference",
+                              "meta": "Reference",
+                              "conditionReadonly": "sctnextin.isContinueClicked === false",
+                              "eventChange": "sctnextin.referenceLookupChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "sctnextin.sectionExtendIN.stagearea",
+                              "label": "global.staging.area",
+                              "dataFormat": "BinLoc",
+                              "conditionReadonly": "sctnextin.isContinueClicked === false"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "sctnextin.sectionExtendIN.route",
+                              "label": "global.route.day.stop",
+                              "dataFormat": "Route",
+                              "conditionReadonly": "sctnextin.isContinueClicked === false"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "sctnextin.sectionExtendIN.orderdisp",
+                              "label": "global.disposition",
+                              "type3": "SET",
+                              "metaGroup": "VA",
+                              "meta": "DispositionType",
+                              "blankOption": false,
+                              "conditionReadonly": "sctnextin.isContinueClicked === false"
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "sctnextin.sectionExtendIN.jrnlno",
+                              "label": "global.journal",
+                              "meta": "Journal",
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

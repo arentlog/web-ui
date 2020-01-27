@@ -1,0 +1,589 @@
+{
+  "viewId": "ic-icsw-detail-tabs-general",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isDetail() || dtl.isGeneralTabReadonly",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.general",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 5,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.statustype",
+                  "label": "global.status",
+                  "type3": "MANUAL",
+                  "blankOption": false,
+                  "conditionReadonly": "!dtl.statusTypeEnablement || base.isDetail() || dtl.isGeneralTabReadonly",
+                  "eventChange": "dtl.statusTypeChanged()",
+                  "optionsModel": "dtl.statusTypes",
+                  "optionLabelField": "label",
+                  "optionValueField": "value"
+                },
+                {
+                  "id": 8,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "dtl.icsw.serlottype",
+                      "label": "global.control",
+                      "type3": "SET",
+                      "metaGroup": "IC",
+                      "meta": "WarehouseProductControlType",
+                      "size": "SM",
+                      "conditionReadonly": "!dtl.allowStatusChange || base.isDetail() || dtl.isGeneralTabReadonly"
+                    },
+                    {
+                      "id": 10,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "dtl.icsw.snpocd",
+                      "label": "global.serial.receiving",
+                      "type3": "SET",
+                      "metaGroup": "IC",
+                      "meta": "WarehouseProductSnpoType",
+                      "blankOption": false,
+                      "size": "SM",
+                      "conditionShow": "dtl.icsw.serlottype.toUpperCase() === 'S'"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 18,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsw.prodpreference",
+                  "label": "global.preference",
+                  "meta": "ProdPref"
+                },
+                {
+                  "id": 19,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "dtl.icsw.reservety",
+                      "label": "global.reservation",
+                      "type3": "SET",
+                      "metaGroup": "IC",
+                      "meta": "WarehouseProductReservety",
+                      "size": "SM"
+                    },
+                    {
+                      "id": 12,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.icsw.reservedays",
+                      "label": "global.leeway",
+                      "dataFormat": "INTEGER",
+                      "sign": "+",
+                      "digits": 2,
+                      "size": "SM"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsw.smanalfl",
+                  "label": "global.sales.manager",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsw.autofillfl",
+                  "label": "global.auto.bo.fill",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsw.boshortfl",
+                  "label": "bo.all.if.short",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 17,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsw.countfl",
+                  "label": "global.count.required",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 25,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "dtl.upccode",
+                  "label": "global.upc.number"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "type": "EXP_AREA",
+      "label": "global.pricing",
+      "children": [
+        {
+          "id": 21,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 23,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 24,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsw.pricetype",
+                  "label": "global.price.type",
+                  "meta": "ProdPriceTy",
+                  "size": "SM"
+                }
+              ]
+            },
+            {
+              "id": 27,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 26,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsw.baseprice",
+                  "label": "global.base.price",
+                  "dataFormat": "DECIMAL",
+                  "decimals": 5,
+                  "digits": 7,
+                  "sign": "+",
+                  "conditionShow": "dtl.sasoo.oepricefl.toUpperCase() !== 'N'",
+                  "conditionDisabled": "dtl.sasoo.oepricefl.toUpperCase() !== 'E' || dtl.isGeneralTabReadonly",
+                  "size": "SM",
+                  "formatOptions": {
+                    "maximumFractionDigits": 5,
+                    "minimumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 28,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsw.listprice",
+                  "label": "global.list.price",
+                  "dataFormat": "DECIMAL",
+                  "sign": "+",
+                  "digits": 7,
+                  "decimals": 5,
+                  "conditionShow": "dtl.sasoo.oepricefl.toUpperCase() !== 'N'",
+                  "conditionDisabled": "dtl.sasoo.oepricefl.toUpperCase() !== 'E' || dtl.isGeneralTabReadonly",
+                  "size": "SM",
+                  "formatOptions": {
+                    "maximumFractionDigits": 5,
+                    "minimumFractionDigits": 5
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "type": "EXP_AREA",
+      "label": "global.authorized.replenishment.path",
+      "children": [
+        {
+          "id": 30,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 32,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 33,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsw.arptype",
+                  "label": "global.type",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "ARPType"
+                },
+                {
+                  "id": 39,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsw.arppushfl",
+                  "label": "question.push",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "PushPullType",
+                  "blankOption": false,
+                  "size": "SM"
+                },
+                {
+                  "id": 35,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsw.arpvendno",
+                  "label": "global.vendor",
+                  "conditionShow": "",
+                  "meta": "Vendor",
+                  "conditionRequired": "dtl.icsw.arptype === 'V' || dtl.icsw.arptype === 'M' || base.icRequireVendProdLine === base.VENDORPRODUCTLINE || base.icRequireVendProdLine === base.VENDOR"
+                },
+                {
+                  "id": 34,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsw.arpwhse",
+                  "label": "global.warehouse",
+                  "conditionShow": "",
+                  "meta": "Warehouse",
+                  "conditionRequired": "dtl.icsw.arptype === 'W' || dtl.icsw.arptype === 'C'"
+                }
+              ]
+            },
+            {
+              "id": 31,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 36,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsw.prodline",
+                  "label": "global.product.line",
+                  "meta": "ProdLine",
+                  "conditionRequired": "dtl.icsw.arptype === 'V' || dtl.icsw.arptype === 'M' || base.icRequireVendProdLine === base.VENDORPRODUCTLINE",
+                  "eventChange": "dtl.prodlineChanged()",
+                  "options": {
+                    "searchParams": {
+                      "vendno": {
+                        "type": "REF",
+                        "value": "dtl.icsw.arpvendno"
+                      },
+                      "whse": {
+                        "type": "REF",
+                        "value": "dtl.icsw.whse"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 37,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsw.vendprod",
+                  "label": "global.vendor.product",
+                  "maxLength": 50
+                },
+                {
+                  "id": 38,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsw.famgrptype",
+                  "label": "global.family.group",
+                  "type3": "CODES",
+                  "meta": "FamilyGroup"
+                },
+                {
+                  "id": 40,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsw.ncnr",
+                  "label": "global.non.cancellable",
+                  "dataFormat": "LOGICAL",
+                  "subFormat": "YBlank"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "type": "EXP_AREA",
+      "label": "global.rebates",
+      "children": [
+        {
+          "id": 42,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 44,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 45,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsw.rebatety",
+                  "label": "global.rebate.type",
+                  "meta": "ProductRebateType"
+                }
+              ]
+            },
+            {
+              "id": 43,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 46,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsw.rebsubty",
+                  "label": "global.rebate.sub.type",
+                  "meta": "ProductRebateSubType"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "type": "EXP_AREA",
+      "label": "global.location",
+      "children": [
+        {
+          "id": 48,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 50,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 51,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsw.binloc1",
+                  "label": "global.bin.location.number1",
+                  "dataFormat": "BinLoc",
+                  "conditionReadonly": "dtl.wlWhse || dtl.wlEsbGl || base.isDetail() || dtl.isGeneralTabReadonly"
+                },
+                {
+                  "id": 52,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsw.binloc2",
+                  "label": "global.bin.location.number2",
+                  "dataFormat": "BinLoc",
+                  "conditionReadonly": "dtl.wlWhse || dtl.wlEsbGl || base.isDetail() || dtl.isGeneralTabReadonly"
+                },
+                {
+                  "id": 73,
+                  "type": "BTN",
+                  "subType": "SEC",
+                  "label": "global.additional.bins",
+                  "conditionDisabled": "dtl.wlWhse || dtl.wlEsbGl || dtl.isGeneralTabReadonly",
+                  "stateRef": "icswb.create({ prod: dtl.icsw.prod, whse: dtl.icsw.whse})"
+                }
+              ]
+            },
+            {
+              "id": 49,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 53,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsw.wmfl",
+                  "label": "global.warehouse.manager",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 54,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsw.bintype",
+                  "label": "global.bin.type",
+                  "type3": "CODES",
+                  "meta": "BinType"
+                },
+                {
+                  "id": 55,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsw.wmallocty",
+                  "label": "global.allocation.type",
+                  "type3": "SET",
+                  "metaGroup": "WM",
+                  "meta": "AllocationType"
+                },
+                {
+                  "id": 56,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsw.wmpriority",
+                  "label": "global.priority",
+                  "type3": "SET",
+                  "metaGroup": "WM",
+                  "meta": "Priority"
+                },
+                {
+                  "id": 57,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsw.wmrestrict",
+                  "label": "global.restrict.to",
+                  "dataFormat": "BinLocFirstHalf",
+                  "maxLength": 4,
+                  "size": "SM"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 58,
+      "type": "EXP_AREA",
+      "label": "global.freight",
+      "children": [
+        {
+          "id": 59,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 61,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 62,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 63,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "dtl.icsw.frtfreefl",
+                      "label": "global.freight.free",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 65,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.icsw.frtextra2",
+                      "label": "global.extra.freight.2",
+                      "dataFormat": "DECIMAL",
+                      "sign": "+",
+                      "digits": 7,
+                      "decimals": 5,
+                      "size": "SM",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 64,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.icsw.frtextra1",
+                      "label": "global.extra.freight.1",
+                      "dataFormat": "DECIMAL",
+                      "sign": "+",
+                      "decimals": 5,
+                      "digits": 7,
+                      "size": "SM",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 67,
+      "type": "EXP_AREA",
+      "label": "global.esource",
+      "children": [
+        {
+          "id": 68,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 69,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 70,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsw.autoesrcbofl",
+                  "label": "question.automatically.source.bo",
+                  "dataFormat": "LOGICAL"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

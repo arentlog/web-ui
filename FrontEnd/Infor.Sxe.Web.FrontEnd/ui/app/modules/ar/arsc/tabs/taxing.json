@@ -1,0 +1,279 @@
+{
+  "viewId": "ar-arsc-detail-taxing",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "TAB",
+  "conditionReadonly": "base.isDetail() || dtl.isTaxingTabReadonly",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.taxing.information",
+      "children": [
+        {
+          "id": 4,
+          "type": "ROW",
+          "children": [
+            {
+              "type": "COL",
+              "subType": "1/2",
+              "id": 5,
+              "children": [
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arsc.statecdSUT",
+                  "label": "global.state",
+                  "type3": "CODES",
+                  "meta": "State",
+                  "conditionShow": "dtl.taxMethodType === 's'",
+                  "conditionRequired": "dtl.statecdSUTRequired",
+                  "eventChange": "dtl.changeTaxingStateCd()"
+                },
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arsc.countycd",
+                  "label": "global.county",
+                  "type3": "MANUAL",
+                  "optionLabelField": "descrip",
+                  "optionValueField": "countycd",
+                  "optionsModel": "dtl.taxingCounties",
+                  "conditionShow": "dtl.taxMethodType === 's'",
+                  "conditionDisabled": "!dtl.arsc.statecd || dtl.isTaxingTabReadonly",
+                  "eventChange": "dtl.changeTaxingCountyCd()"
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arsc.citycd",
+                  "label": "global.city",
+                  "type3": "MANUAL",
+                  "optionLabelField": "descrip",
+                  "optionValueField": "citycd",
+                  "conditionShow": "dtl.taxMethodType === 's'",
+                  "optionsModel": "dtl.taxingCities",
+                  "conditionDisabled": "!dtl.arsc.countycd || dtl.isTaxingTabReadonly",
+                  "eventChange": "dtl.changeTaxingCityCd()"
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arsc.other1cd",
+                  "label": "global.other.1",
+                  "type3": "MANUAL",
+                  "optionLabelField": "descrip",
+                  "optionValueField": "othercd",
+                  "conditionShow": "dtl.taxMethodType === 's'",
+                  "optionsModel": "dtl.taxingOthers",
+                  "conditionDisabled": "!dtl.arsc.citycd || dtl.isTaxingTabReadonly"
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arsc.other2cd",
+                  "label": "global.other.2",
+                  "type3": "MANUAL",
+                  "optionLabelField": "descrip",
+                  "optionValueField": "othercd",
+                  "conditionShow": "dtl.taxMethodType === 's'",
+                  "optionsModel": "dtl.taxingOthers",
+                  "conditionDisabled": "!dtl.arsc.citycd || dtl.isTaxingTabReadonly"
+                }
+              ]
+            },
+            {
+              "type": "COL",
+              "subType": "1/2",
+              "id": 11,
+              "children": [
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arsc.statecdVAT",
+                  "label": "global.state",
+                  "conditionShow": "dtl.taxMethodType === 'v'",
+                  "type3": "CODES",
+                  "meta": "Province"
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arsc.statecdGST",
+                  "label": "global.province",
+                  "conditionShow": "dtl.taxMethodType === 'g'",
+                  "type3": "CODES",
+                  "meta": "Province"
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arsc.taxauth",
+                  "label": "global.authority",
+                  "conditionShow": "dtl.taxMethodType === 'g'",
+                  "type3": "MANUAL",
+                  "optionLabelField": "descrip",
+                  "optionValueField": "taxauth",
+                  "optionsModel": "dtl.taxingAuthorities",
+                  "conditionDisabled": "!dtl.arsc.statecd || dtl.isTaxingTabReadonly"
+                },
+                {
+                  "id": 43,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arsc.taxGroup",
+                  "label": "global.tax.group",
+                  "conditionShow": "dtl.taxMethodType === 'v' && dtl.taxInterfaceType === 's'",
+                  "type3": "CODES",
+                  "meta": "TaxGroup"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "type": "EXP_AREA",
+      "label": "global.taxable.status",
+      "children": [
+        {
+          "id": 17,
+          "type": "ROW",
+          "children": [
+            {
+              "type": "COL",
+              "subType": "1/2",
+              "id": 18,
+              "children": [
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arsc.nontaxtype",
+                  "label": "global.non.tax.reason",
+                  "type3": "CODES",
+                  "meta": "NonTaxReason",
+                  "conditionRequired": "dtl.arsc.taxablety==='n'"
+                },
+                {
+                  "id": 42,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.arsc.settdisctype",
+                  "label": "global.settlement.discount.tax",
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "SettleDiscTaxCodeType",
+                  "conditionShow": "dtl.taxMethodType === 'v' && dtl.taxInterfaceType === 's'",
+                  "blankOptionLabel": "global.default"
+                }
+              ]
+            },
+            {
+              "type": "COL",
+              "subType": "1/2",
+              "id": 20,
+              "children": [
+                {
+                  "id": 21,
+                  "type": "FIELD",
+                  "subType": "RADIO_SET",
+                  "model": "dtl.arsc.taxablety",
+                  "type3": "SET",
+                  "meta": "TaxingStatus",
+                  "label": "global.taxable.type",
+                  "metaGroup": "AR",
+                  "conditionDisabled": "base.isDetail() || dtl.isTaxingTabReadonly"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "type": "EXP_AREA",
+      "label": "global.certification",
+      "children": [
+        {
+          "id": 24,
+          "type": "ROW",
+          "children": [
+            {
+              "type": "COL",
+              "subType": "1/2",
+              "id": 25,
+              "children": [
+                {
+                  "id": 26,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arsc.taxcert",
+                  "label": "{{dtl.getTaxCertLabel()}}",
+                  "conditionShow": "dtl.taxMethodType === 's' || dtl.taxMethodType === 'g'",
+                  "conditionReadonly": "base.isDetail() || (base.isEdit() && (dtl.taxMethodType === 'g' && dtl.sasgs.harmonizedfl)) || dtl.isTaxingTabReadonly",
+                  "maxLength": 22
+                },
+                {
+                  "id": 33,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arsc.taxreg",
+                  "label": "pst.registration.number",
+                  "conditionShow": "dtl.taxMethodType === 'g'",
+                  "maxLength": 20
+                },
+                {
+                  "id": 38,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arsc.gstcert",
+                  "label": "{{dtl.getCanadianTaxCertLabel()}}",
+                  "conditionShow": "dtl.taxMethodType === 'g' || dtl.taxMethodType === 'v'",
+                  "maxLength": 16
+                }
+              ]
+            },
+            {
+              "type": "COL",
+              "subType": "1/2",
+              "id": 27,
+              "children": [
+                {
+                  "id": 28,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.arsc.taxdt",
+                  "dataFormat": "DATE",
+                  "label": "{{dtl.getTaxExpDateLabel()}}",
+                  "conditionShow": "dtl.taxMethodType === 's' || dtl.taxMethodType === 'g'",
+                  "conditionReadonly": "base.isDetail() || (base.isEdit() && (dtl.taxMethodType === 'g' && dtl.sasgs.harmonizedfl)) || dtl.isTaxingTabReadonly"
+                },
+                {
+                  "id": 37,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.arsc.gstreg",
+                  "label": "{{dtl.getCanadianTaxRegLabel()}}",
+                  "conditionShow": "dtl.taxMethodType === 'g' || dtl.taxMethodType === 'v'",
+                  "maxLength": 15
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

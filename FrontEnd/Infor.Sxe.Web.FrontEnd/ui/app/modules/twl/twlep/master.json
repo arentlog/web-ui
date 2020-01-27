@@ -1,0 +1,501 @@
+{
+  "viewId": "twl-twlep-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isMaster()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.twlep",
+          "subLabel": "{{base.getSubTitle()}}",
+          "children": [
+            {
+              "id": 167,
+              "type": "BTN",
+              "subType": "PRI",
+              "label": "global.finish.physical",
+              "conditionShow": "base.twlep.isPhysical",
+              "eventClick": "base.finishPhysicalInit()"
+            },
+            {
+              "id": 168,
+              "type": "BTN",
+              "subType": "PRI",
+              "label": "global.set.physical",
+              "conditionShow": "!base.twlep.isPhysical",
+              "eventClick": "base.setPhysical()",
+              "conditionDisabled": "!base.criteriaUsed.whNum"
+            },
+            {
+              "id": 176,
+              "type": "BTN",
+              "subType": "PRI",
+              "label": "global.set.physical.errors",
+              "eventClick": "base.showPhysicalErrors()",
+              "conditionShow": "base.twlep.physinvseterror"
+            },
+            {
+              "id": 177,
+              "type": "BTN",
+              "subType": "MENU",
+              "label": "global.inquiries",
+              "children": [
+                {
+                  "id": 178,
+                  "type": "MENU_OPT",
+                  "label": "global.uncounted.locations",
+                  "conditionDisabled": "!base.twlep.isLocUnc",
+                  "eventClick": "base.showUncountedLocations()"
+                },
+                {
+                  "id": 179,
+                  "type": "MENU_OPT",
+                  "label": "global.uncounted.inventory",
+                  "conditionDisabled": "!base.twlep.isInvUnc",
+                  "eventClick": "base.showUncountedInventory()"
+                },
+                {
+                  "id": 180,
+                  "type": "MENU_OPT",
+                  "label": "global.discrepancy.locations",
+                  "conditionDisabled": "!base.twlep.isLocDis",
+                  "eventClick": "base.showDiscrepancyLocations()"
+                },
+                {
+                  "id": 181,
+                  "type": "MENU_OPT",
+                  "label": "global.discrepancy.inventory",
+                  "conditionDisabled": "!base.twlep.isInvDis",
+                  "eventClick": "base.showDiscrepancyInventory()"
+                },
+                {
+                  "id": 182,
+                  "type": "MENU_OPT",
+                  "label": "global.discrepancy.zone.locations",
+                  "conditionDisabled": "!base.twlep.isZoneDis",
+                  "eventClick": "base.showDiscrepancyZoneLocations()"
+                },
+                {
+                  "id": 183,
+                  "type": "MENU_OPT",
+                  "label": "global.not.active.locations",
+                  "conditionDisabled": "!base.twlep.isLocNact",
+                  "eventClick": "base.showNotActiveLocations()"
+                }
+              ]
+            },
+            {
+              "id": 191,
+              "type": "BTN",
+              "subType": "MENU",
+              "label": "global.reports",
+              "children": [
+                {
+                  "id": 192,
+                  "type": "MENU_OPT",
+                  "label": "report.physical.inventory.summary",
+                  "eventClick": "base.reportPhysInvSummary()"
+                },
+                {
+                  "id": 193,
+                  "type": "MENU_OPT",
+                  "label": "report.physical.inventory.valuation",
+                  "eventClick": "base.reportPhysInvVal()"
+                },
+                {
+                  "id": 194,
+                  "type": "MENU_OPT",
+                  "label": "report.physical.inventory.variances",
+                  "eventClick": "base.reportPhysInvVar()"
+                },
+                {
+                  "id": 195,
+                  "type": "MENU_OPT",
+                  "label": "report.physical.transactions",
+                  "eventClick": "base.reportPhysTransactions()"
+                },
+                {
+                  "id": 196,
+                  "type": "MENU_OPT",
+                  "label": "report.physical.uncounted.inventory",
+                  "eventClick": "base.reportPhysUncountedInventory()"
+                },
+                {
+                  "id": 197,
+                  "type": "MENU_OPT",
+                  "label": "report.physical.uncounted.locations",
+                  "eventClick": "base.reportPhysUncountedTransactions()"
+                }
+              ]
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 117,
+              "type": "EXP_AREA",
+              "label": "global.status",
+              "conditionShow": "base.twlep.isPhysical",
+              "children": [
+                {
+                  "id": 118,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 128,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 141,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.twlep.chStart",
+                          "label": "global.started",
+                          "dataFormat": "TwlCharDateConversion",
+                          "conditionShow": "base.twlep.isPhysical"
+                        },
+                        {
+                          "id": 142,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.twlep.lastCnt",
+                          "label": "global.last.count",
+                          "dataFormat": "TwlCharDateConversion",
+                          "conditionShow": "base.twlep.isPhysical"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 140,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 143,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.statusLabel",
+                          "label": "global.status",
+                          "conditionShow": "base.twlep.isPhysical"
+                        },
+                        {
+                          "id": 144,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.twlep.elapsed",
+                          "label": "global.elapsed.time",
+                          "conditionShow": "base.twlep.isPhysical"
+                        },
+                        {
+                          "id": 166,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.twlep.deactivateDt",
+                          "label": "global.deactivated",
+                          "conditionShow": "base.twlep.isDeactivated",
+                          "dataFormat": "TwlCharDateConversion"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 171,
+              "type": "EXP_AREA",
+              "label": "global.counts",
+              "conditionShow": "base.twlep.isPhysical",
+              "children": [
+                {
+                  "id": 172,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 173,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 138,
+                          "type": "ROW",
+                          "children": [
+                            {
+                              "id": 139,
+                              "type": "COL",
+                              "subType": "1/3",
+                              "children": [
+                                {
+                                  "id": 147,
+                                  "type": "FIELD_SET",
+                                  "label": "global.locations",
+                                  "children": [
+                                    {
+                                      "id": 148,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "base.twlep.locUnc",
+                                      "label": "global.uncounted",
+                                      "dataFormat": "INTEGER",
+                                      "conditionShow": "base.twlep.isPhysical"
+                                    },
+                                    {
+                                      "id": 149,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "base.twlep.locCnt",
+                                      "label": "global.counted",
+                                      "dataFormat": "INTEGER",
+                                      "conditionShow": "base.twlep.isPhysical"
+                                    },
+                                    {
+                                      "id": 150,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "base.twlep.locCor",
+                                      "label": "global.correct",
+                                      "dataFormat": "INTEGER",
+                                      "conditionShow": "base.twlep.isPhysical"
+                                    },
+                                    {
+                                      "id": 151,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "base.twlep.locCorPcnt",
+                                      "label": "global.percent.correct",
+                                      "dataFormat": "DECIMAL",
+                                      "conditionShow": "base.twlep.isPhysical",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 152,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "base.twlep.locCompPcnt",
+                                      "label": "global.percent.complete",
+                                      "dataFormat": "DECIMAL",
+                                      "conditionShow": "base.twlep.isPhysical",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": 170,
+                              "type": "COL",
+                              "subType": "1/3",
+                              "children": [
+                                {
+                                  "id": 153,
+                                  "type": "FIELD_SET",
+                                  "label": "global.inventory",
+                                  "children": [
+                                    {
+                                      "id": 154,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "base.twlep.invUnc",
+                                      "label": "global.uncounted",
+                                      "dataFormat": "INTEGER",
+                                      "conditionShow": "base.twlep.isPhysical"
+                                    },
+                                    {
+                                      "id": 155,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "base.twlep.invCnt",
+                                      "label": "global.counted",
+                                      "dataFormat": "INTEGER",
+                                      "conditionShow": "base.twlep.isPhysical"
+                                    },
+                                    {
+                                      "id": 156,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "base.twlep.invCor",
+                                      "label": "global.correct",
+                                      "dataFormat": "INTEGER",
+                                      "conditionShow": "base.twlep.isPhysical"
+                                    },
+                                    {
+                                      "id": 157,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "base.twlep.invCorPcnt",
+                                      "label": "global.percent.correct",
+                                      "dataFormat": "DECIMAL",
+                                      "conditionShow": "base.twlep.isPhysical",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 158,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "base.twlep.invCompPcnt",
+                                      "label": "global.percent.complete",
+                                      "dataFormat": "DECIMAL",
+                                      "conditionShow": "base.twlep.isPhysical",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": 165,
+                              "type": "COL",
+                              "subType": "1/3",
+                              "children": [
+                                {
+                                  "id": 159,
+                                  "type": "FIELD_SET",
+                                  "label": "global.units",
+                                  "children": [
+                                    {
+                                      "id": 160,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "base.twlep.unitUnc",
+                                      "label": "global.uncounted",
+                                      "dataFormat": "DECIMAL",
+                                      "conditionShow": "base.twlep.isPhysical",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 161,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "base.twlep.unitCnt",
+                                      "label": "global.counted",
+                                      "dataFormat": "DECIMAL",
+                                      "conditionShow": "base.twlep.isPhysical",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 162,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "base.twlep.unitCor",
+                                      "label": "global.correct",
+                                      "dataFormat": "DECIMAL",
+                                      "conditionShow": "base.twlep.isPhysical",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 163,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "base.twlep.unitCorPcnt",
+                                      "label": "global.percent.correct",
+                                      "dataFormat": "DECIMAL",
+                                      "conditionShow": "base.twlep.isPhysical",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 164,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "base.twlep.unitCompPcnt",
+                                      "label": "global.percent.complete",
+                                      "dataFormat": "DECIMAL",
+                                      "conditionShow": "base.twlep.isPhysical",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 175,
+      "type": "VIEW_CNTR",
+      "viewName": "physErrorsViewContainer",
+      "conditionShow": "dtlpe.isDetailPhysicalError()"
+    },
+    {
+      "id": 184,
+      "type": "VIEW_CNTR",
+      "viewName": "uncountedLocationsContainer",
+      "conditionShow": "dtlul.isDetailUncountedLocations()"
+    },
+    {
+      "id": 185,
+      "type": "VIEW_CNTR",
+      "viewName": "uncountedInventoryContainer",
+      "conditionShow": "dtlui.isDetailUncountedInventory()"
+    },
+    {
+      "id": 186,
+      "type": "VIEW_CNTR",
+      "viewName": "discrepancyLocationsContainer",
+      "conditionShow": "dtldl.isDetailDiscrepancyLocations()"
+    },
+    {
+      "id": 187,
+      "type": "VIEW_CNTR",
+      "viewName": "discrepancyInventoryContainer",
+      "conditionShow": "dtldi.isDetailDiscrepancyInventory()"
+    },
+    {
+      "id": 189,
+      "type": "VIEW_CNTR",
+      "viewName": "discrepancyZoneLocationsContainer",
+      "conditionShow": "dtldzl.isDetailDiscrepancyZoneLocations()"
+    },
+    {
+      "id": 188,
+      "type": "VIEW_CNTR",
+      "viewName": "notActiveLocationsContainer",
+      "conditionShow": "dtlnal.isDetailNotActiveLocations()"
+    }
+  ]
+}

@@ -1,0 +1,326 @@
+{
+  "viewId": "kp-kpew-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 60,
+      "type": "FORM",
+      "conditionShow": "base.isMaster()",
+      "children": [
+        {
+          "id": 2,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 3,
+              "type": "TOOLBAR",
+              "label": "title.kpew",
+              "children": [
+                {
+                  "id": 42,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.quick.work.order.entry",
+                  "icon": "icon-quick-access",
+                  "stateRef": "^.quickWorkOrderEntry"
+                }
+              ]
+            },
+            "content": {
+              "id": 4,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "GRID",
+                  "controlRef": "base.grid",
+                  "model": "base.dataset",
+                  "options": {
+                    "showCheckboxes": true,
+                    "showExpander": true,
+                    "showDrilldown": false,
+                    "editable": false,
+                    "rowDetailOptions": {
+                      "template": "kp/kpew/row-detail.json",
+                      "controller": "KpewRowDetailCtrl as rwd",
+                      "paramsReference": "mst.rowParams"
+                    },
+                    "events": {
+                      "selected": "mst.selectedRecordChanged()"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 5,
+                      "type": "TOOLBAR",
+                      "label": "global.work.orders",
+                      "children": [
+                        {
+                          "id": 47,
+                          "type": "BTN",
+                          "label": "global.accept",
+                          "eventClick": "mst.accept()",
+                          "icon": "icon-save-new",
+                          "conditionDisabled": "base.grid.isNoRowSelected()"
+                        },
+                        {
+                          "id": 48,
+                          "type": "BTN",
+                          "label": "global.cancel",
+                          "eventClick": "mst.cancel()",
+                          "icon": "icon-cancel",
+                          "conditionDisabled": "base.grid.isNoRowSelected()"
+                        },
+                        {
+                          "id": 49,
+                          "type": "BTN",
+                          "label": "global.delete",
+                          "eventClick": "mst.deleteRec()",
+                          "icon": "icon-delete",
+                          "securityLevel": 5,
+                          "conditionDisabled": "base.grid.isNoRowSelected()"
+                        },
+                        {
+                          "id": 50,
+                          "type": "BTN",
+                          "label": "global.clear",
+                          "eventClick": "mst.clear()",
+                          "icon": "icon-clear-screen",
+                          "conditionDisabled": "base.grid.isNoRowSelected()"
+                        },
+                        {
+                          "id": 51,
+                          "type": "BTN",
+                          "label": "global.print",
+                          "eventClick": "mst.print()",
+                          "icon": "icon-print",
+                          "conditionDisabled": "!base.grid.isOneRowSelected()"
+                        },
+                        {
+                          "id": 39,
+                          "type": "BTN",
+                          "label": "global.submit",
+                          "eventClick": "mst.submit()",
+                          "icon": "icon-save",
+                          "securityLevel": 3
+                        },
+                        {
+                          "id": 32,
+                          "type": "BTN",
+                          "label": "global.components",
+                          "eventClick": "mst.showComponents()",
+                          "conditionDisabled": "!base.grid.isOneRowSelected()"
+                        },
+                        {
+                          "id": 62,
+                          "type": "BTN",
+                          "label": "global.availability",
+                          "eventClick": "mst.availability()",
+                          "conditionDisabled": "!base.grid.isOneRowSelected()"
+                        },
+                        {
+                          "id": 44,
+                          "type": "BTN",
+                          "label": "global.extended.information",
+                          "eventClick": "mst.extendedInfo()",
+                          "conditionDisabled": "mst.isExtendedInfoDisabled()"
+                        },
+                        {
+                          "id": 45,
+                          "type": "BTN",
+                          "label": "global.work.order.ties",
+                          "eventClick": "mst.workorderTies()",
+                          "conditionDisabled": "mst.isWorkorderTiesDisabled()"
+                        },
+                        {
+                          "id": 46,
+                          "type": "BTN",
+                          "label": "global.serials.lots",
+                          "eventClick": "mst.seriallot()",
+                          "conditionDisabled": "mst.isSerialLotDisabled()"
+                        },
+                        {
+                          "id": 63,
+                          "type": "BTN",
+                          "label": "global.warehouse.manager",
+                          "eventClick": "mst.warehouseManager()",
+                          "conditionShow": "mst.isWarehouseManagerVisible()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "GRID_COL",
+                      "subType": "HYPERLINK",
+                      "model": "wono",
+                      "label": "global.work.order.number",
+                      "dataFormat": "INTEGER_TEXT",
+                      "eventClick": "mst.navigateToWorkOrderInquiry()"
+                    },
+                    {
+                      "id": 11,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "wosuf",
+                      "label": "global.suffix",
+                      "dataFormat": "Suffix"
+                    },
+                    {
+                      "id": 12,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "notesfl",
+                      "label": "global.notes",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 13,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "stagecd",
+                      "label": "global.stage",
+                      "dataFormat": "KpStage"
+                    },
+                    {
+                      "id": 15,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "rrarinit",
+                      "label": "global.initials"
+                    },
+                    {
+                      "id": 16,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "orderaltno",
+                      "label": "global.tied.order.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "orderaltsuf",
+                      "label": "global.suffix",
+                      "dataFormat": "Suffix"
+                    },
+                    {
+                      "id": 19,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "ordertype",
+                      "label": "global.tie",
+                      "dataFormat": "OrderType"
+                    },
+                    {
+                      "id": 21,
+                      "type": "GRID_COL",
+                      "subType": "HYPERLINK",
+                      "model": "shipprod",
+                      "label": "global.kit",
+                      "eventClick": "mst.navigateToKitProdInquiry()"
+                    },
+                    {
+                      "id": 22,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyord",
+                      "label": "global.ordered",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 23,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "unit",
+                      "label": "global.unit"
+                    },
+                    {
+                      "id": 24,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "statuscd",
+                      "label": "global.status"
+                    },
+                    {
+                      "id": 25,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "model": "enterdt",
+                      "label": "global.enter.date",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prodnotes",
+                      "label": "global.product.notes",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 8,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "seqaltno",
+                      "label": "global.sequence.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "kitbuild",
+                      "label": "global.kit.department"
+                    },
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "proddesc",
+                      "label": "global.product.description"
+                    },
+                    {
+                      "id": 30,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "verno",
+                      "label": "global.version.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 31,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "msdsfl",
+                      "label": "global.hazardous",
+                      "dataFormat": "LOGICAL"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "type": "VIEW_CNTR",
+      "viewName": "orderStatus"
+    },
+    {
+      "id": 64,
+      "type": "VIEW_CNTR",
+      "viewName": "binAllocation"
+    }
+  ]
+}

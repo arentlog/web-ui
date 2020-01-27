@@ -1,0 +1,181 @@
+{
+  "viewId": "oe-oeet-taxesandtotals-addons-addons",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.oeet",
+              "subLabel": "global.addons",
+              "controls": {
+                "navBtns": {
+                  "id": 20,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "add.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 11,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 12,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.oehdr.billdirectaddon",
+                          "label": "global.bill.direct.po.addons",
+                          "meta": "BillDirectAddonsType",
+                          "conditionDisabled": "add.billDirectAddonValue !== 'yes'",
+                          "conditionShow": "add.billDirectAddonValue === 'yes'",
+                          "type3": "SET",
+                          "metaGroup": "OE",
+                          "eventChange": "add.billDirectAddonsChanged()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 30,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 28,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.oehdr.pmfl",
+                          "label": "global.external.shipping.override",
+                          "dataFormat": "LOGICAL",
+                          "eventChange": "add.billDirectAddonsChanged()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 26,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 25,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "add.total",
+                          "label": "global.addon.total",
+                          "dataFormat": "CURRENCY"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 14,
+                  "type": "GRID",
+                  "controlRef": "add.grid",
+                  "options": {
+                    "showCheckboxes": true,
+                    "selectable": "multiple",
+                    "editable": false,
+                    "showDrilldown": false,
+                    "showExpander": true,
+                    "rowDetailOptions": {
+                      "template": "oe/oeet/taxes-and-totals/addons/addon-detail.json",
+                      "controller": "OeetAddonDetailCtrl as adddtl",
+                      "paramsReference": "add.rowParams"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 8,
+                      "type": "TOOLBAR",
+                      "label": "global.addons",
+                      "children": [
+                        {
+                          "id": 22,
+                          "type": "BTN",
+                          "label": "global.new",
+                          "icon": "icon-new-document",
+                          "securityLevel": 4,
+                          "eventClick": "add.new()"
+                        },
+                        {
+                          "id": 10,
+                          "type": "BTN",
+                          "label": "global.delete",
+                          "icon": "icon-delete",
+                          "eventClick": "add.delete()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "addondesc",
+                      "label": "global.description"
+                    },
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "addonamt",
+                      "label": "global.amount",
+                      "dataFormat": "CURRENCY"
+                    },
+                    {
+                      "id": 18,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "addontype",
+                      "label": "global.type",
+                      "dataFormat": "OeAddOnType"
+                    },
+                    {
+                      "id": 19,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "addonnet",
+                      "label": "global.net.amount",
+                      "dataFormat": "CURRENCY"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

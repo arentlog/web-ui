@@ -1,0 +1,324 @@
+{
+  "viewId": "edi-etcc-master-documents",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "conditionShow": "base.isMaster() && base.docMode",
+  "children": [
+    {
+      "id": 5,
+      "type": "GRID",
+      "controlRef": "base.grid",
+      "model": "base.dataset",
+      "options": {
+        "showCheckboxes": true,
+        "showDrilldown": true,
+        "events": {
+          "drilldown": "mst.drilldown()"
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 6,
+          "type": "TOOLBAR",
+          "label": "global.documents",
+          "children": [
+            {
+              "id": 81,
+              "type": "BTN",
+              "label": "global.delete",
+              "icon": "icon-delete",
+              "securityLevel": 5,
+              "eventClick": "mst.deleteRows()",
+              "conditionDisabled": "base.grid.isNoRowSelected()"
+            },
+            {
+              "id": 74,
+              "type": "BTN",
+              "subType": "MENU",
+              "label": "global.actions",
+              "conditionDisabled": "!base.grid.isAnyRowSelected()",
+              "children": [
+                {
+                  "id": 75,
+                  "type": "MENU_OPT",
+                  "label": "global.place.on.e.hold",
+                  "eventClick": "mst.launchEHold()",
+                  "conditionDisabled": "!mst.placeEholdOptionEnabled()",
+                  "icon": "icon-flag"
+                },
+                {
+                  "id": 76,
+                  "type": "MENU_OPT",
+                  "label": "global.view.errors.messages",
+                  "conditionDisabled": "!mst.viewErrorsEnabled()",
+                  "eventClick": "mst.viewErrors()",
+                  "icon": "icon-drilldown"
+                },
+                {
+                  "id": 77,
+                  "type": "MENU_OPT",
+                  "label": "sxe.document",
+                  "conditionDisabled": "!mst.sxeDocumentOptionEnabled()",
+                  "eventClick": "mst.launchSXeDocument()",
+                  "icon": "icon-quick-access"
+                },
+                {
+                  "id": 78,
+                  "type": "MENU_OPT",
+                  "label": "global.approve.transaction",
+                  "conditionDisabled": "!mst.approveTransactionsOptionEnabled()",
+                  "eventClick": "mst.approveTransaction()",
+                  "icon": "icon-confirm"
+                },
+                {
+                  "id": 79,
+                  "type": "MENU_OPT",
+                  "label": "global.cancel.transaction",
+                  "conditionDisabled": "!mst.updateCancelOptionsEnabled()",
+                  "eventClick": "mst.cancelTransactions()",
+                  "icon": "icon-cancel"
+                },
+                {
+                  "id": 80,
+                  "type": "MENU_OPT",
+                  "label": "global.update.transactions",
+                  "conditionDisabled": "!mst.updateCancelOptionsEnabled()",
+                  "eventClick": "mst.updateTransactions()",
+                  "icon": "icon-process"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 7,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "docId",
+          "label": "global.document.id",
+          "dataFormat": "INTEGER_TEXT"
+        },
+        {
+          "id": 8,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.status",
+          "model": "docStatus",
+          "dataFormat": "EdiETCCDocStatus"
+        },
+        {
+          "id": 10,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.update.status",
+          "model": "eDIHupdstat",
+          "dataFormat": "EdiETCCUpdateStatus"
+        },
+        {
+          "id": 9,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "symbol.pound.hdr.exceptions",
+          "model": "eDIHexccnt",
+          "dataFormat": "INTEGER_TEXT"
+        },
+        {
+          "id": 11,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "symbol.pound.hdr.errors",
+          "model": "eDIHerrcnt",
+          "dataFormat": "INTEGER_TEXT"
+        },
+        {
+          "id": 26,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "eDILexccnt",
+          "label": "symbol.pound.ln.exceptions",
+          "dataFormat": "INTEGER_TEXT"
+        },
+        {
+          "id": 27,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "eDILerrcnt",
+          "label": "symbol.pound.ln.errors",
+          "dataFormat": "INTEGER_TEXT"
+        },
+        {
+          "id": 28,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "oEEHordernosuf",
+          "label": "{{base.referenceTitle}}"
+        },
+        {
+          "id": 29,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.notes",
+          "model": "oEEHordnotesfl",
+          "dataFormat": "NotesFlag",
+          "conditionInclude": "self.oEEHordnotesflVisible"
+        },
+        {
+          "id": 30,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "oEEHcustno",
+          "label": "{{base.partnerTitle}}",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 31,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.notes",
+          "model": "oEEHcustnotesfl",
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 32,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "{{base.shipToTitle}}",
+          "model": "oEEHshipto"
+        },
+        {
+          "id": 33,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.notes",
+          "model": "oEEHshiptonotesfl",
+          "contentVisible": "",
+          "conditionInclude": "base.isShipToNotesFlagVisible()",
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 34,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.name",
+          "model": "oEEHcustname"
+        },
+        {
+          "id": 35,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.partner.ref.number",
+          "model": "oEEHcustpo"
+        },
+        {
+          "id": 36,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "oEEHwhse",
+          "label": "global.warehouse",
+          "conditionInclude": "base.isWarehouseVisible()"
+        },
+        {
+          "id": 37,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "oEEHapprovty",
+          "label": "global.approval.type",
+          "dataFormat": "ApprovalType",
+          "contentVisible": "",
+          "conditionInclude": "base.isApprovalTypeVisible()"
+        },
+        {
+          "id": 38,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "oEEHstage",
+          "label": "global.stage",
+          "dataFormat": "OrderStage",
+          "conditionInclude": "base.isStageVisible()"
+        },
+        {
+          "id": 39,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.vendor.number",
+          "model": "oEEHarpvendno",
+          "conditionInclude": "base.isARPVendorNumberVisible()",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 40,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "label": "global.due.date",
+          "model": "oEEHDueDt",
+          "conditionInclude": "base.isDueDateVisible()",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 41,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "oEEHslsrepin",
+          "label": "{{base.salesRepInTitle}}",
+          "conditionInclude": "base.isSalesRepInVisible()"
+        },
+        {
+          "id": 42,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "oEEHslsrepout",
+          "label": "global.sales.rep.out",
+          "conditionInclude": "base.isSalesRepOutVisible()"
+        },
+        {
+          "id": 43,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "ackrsn",
+          "label": "global.ack.reason",
+          "conditionInclude": "base.isAckReasonVisible()",
+          "dataFormat": "PoAcknowledgementType"
+        },
+        {
+          "id": 44,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "createdt",
+          "label": "global.create.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 45,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "createtmdisplay",
+          "label": "global.create.time"
+        },
+        {
+          "id": 46,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "docTxnType",
+          "label": "global.process.type"
+        },
+        {
+          "id": 47,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "docNm",
+          "label": "global.transaction.type"
+        },
+        {
+          "id": 48,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "docFrom",
+          "label": "global.document.reference"
+        }
+      ]
+    }
+  ]
+}

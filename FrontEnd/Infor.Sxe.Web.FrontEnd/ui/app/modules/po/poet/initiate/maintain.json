@@ -1,0 +1,334 @@
+{
+  "viewId": "po-poet-maintain",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "mp.isMaintain()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.poet",
+              "subLabel": "global.maintain",
+              "children": [
+                {
+                  "id": 13,
+                  "type": "BTN",
+                  "label": "global.next",
+                  "icon": "icon-right-arrow",
+                  "submitForm": true,
+                  "eventValidated": "mp.continue()"
+                },
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "label": "global.create",
+                  "icon": "icon-new-document",
+                  "eventClick": "mp.create()",
+                  "conditionShow": "!mp.isPurchaseOrderVerified",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 23,
+                  "type": "BTN",
+                  "label": "global.delete",
+                  "icon": "icon-delete",
+                  "eventClick": "mp.delete()",
+                  "conditionDisabled": "",
+                  "securityLevel": 4,
+                  "conditionShow": "!mp.isPurchaseOrderVerfied"
+                },
+                {
+                  "id": 14,
+                  "type": "BTN",
+                  "label": "global.copy",
+                  "icon": "icon-copy",
+                  "conditionDisabled": "",
+                  "conditionShow": "!mp.isPurchaseOrderVerified",
+                  "securityLevel": 4,
+                  "eventClick": "mp.copy()"
+                },
+                {
+                  "id": 15,
+                  "type": "BTN",
+                  "label": "global.print",
+                  "icon": "icon-print",
+                  "conditionShow": "!mp.isPurchaseOrderVerified",
+                  "eventClick": "mp.print()"
+                },
+                {
+                  "id": 25,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "conditionShow": "mp.isPurchaseOrderVerified",
+                  "eventClick": "mp.cancel()"
+                },
+                {
+                  "id": 33,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.entry.defaults",
+                  "eventClick": "mp.entryDefaultsClicked()",
+                  "icon": "icon-genealogy",
+                  "conditionShow": "!mp.isPurchaseOrderVerified"
+                },
+                {
+                  "id": 35,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.import.from.excel",
+                  "eventClick": "mp.importFromExcel()",
+                  "icon": "icon-import",
+                  "conditionShow": "!mp.isPurchaseOrderVerified"
+                },
+                {
+                  "id": 32,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.manual.acknowledgement",
+                  "eventClick": "mp.launchManualAcknowledgement()",
+                  "icon": "icon-drilldown"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 8,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 24,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "mp.purchaseOrderNumber",
+                          "label": "global.purchase.order.number",
+                          "meta": "POOrders",
+                          "type3": "STANDARD",
+                          "required": true,
+                          "autoFocus": true,
+                          "conditionReadonly": "mp.isPurchaseOrderVerified",
+                          "eventChange": "mp.purchaseOrderChanged()"
+                        },
+                        {
+                          "id": 10,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.pohdr.vendno",
+                          "label": "global.vendor",
+                          "meta": "Vendor",
+                          "type3": "STANDARD",
+                          "required": false,
+                          "readonly": true
+                        },
+                        {
+                          "id": 38,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.pohdr.shipfmno",
+                          "label": "global.ship.from.number",
+                          "meta": "ShipFrom",
+                          "type3": "STANDARD",
+                          "required": false,
+                          "readonly": true,
+                          "options": {
+                            "searchParams": {
+                              "vendno": {
+                                "type": "REF",
+                                "value": "base.pohdr.vendno"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.pohdr.potype",
+                          "label": "global.purchase.order.type",
+                          "meta": "PurchaseOrderEntryTransaction",
+                          "type3": "CODES",
+                          "metaGroup": "OE",
+                          "blankOption": false,
+                          "readonly": true
+                        },
+                        {
+                          "id": 27,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.pohdr.whse",
+                          "label": "global.ship.to.warehouse",
+                          "meta": "Warehouse",
+                          "type3": "STANDARD",
+                          "required": false,
+                          "readonly": true,
+                          "options": {
+                            "searchParams": {}
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 7,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 29,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.pohdr.billtowhse",
+                          "label": "global.bill.to.warehouse",
+                          "meta": "Warehouse",
+                          "type3": "STANDARD",
+                          "required": false,
+                          "conditionReadonly": "!mp.isPurchaseOrderVerified",
+                          "options": {
+                            "searchParams": {}
+                          }
+                        },
+                        {
+                          "id": 28,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.pohdr.reqshipdt",
+                          "label": "global.requested.ship.date",
+                          "dataFormat": "DATE",
+                          "conditionReadonly": "!mp.isPurchaseOrderVerified"
+                        },
+                        {
+                          "id": 30,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.pohdr.expshipdt",
+                          "label": "global.expected.ship.date",
+                          "dataFormat": "DATE",
+                          "conditionReadonly": "!mp.isPurchaseOrderVerified"
+                        },
+                        {
+                          "id": 42,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.pohdr.duedt",
+                          "label": "global.due.date",
+                          "dataFormat": "DATE",
+                          "conditionReadonly": "!mp.isPurchaseOrderVerified"
+                        },
+                        {
+                          "id": 31,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.pohdr.shipviaty",
+                          "label": "global.ship.via.type",
+                          "meta": "ShipViaApsdLimited",
+                          "conditionReadonly": "!mp.isPurchaseOrderVerified",
+                          "conditionShow": "base.isShipViaLimited",
+                          "options": {
+                            "searchParams": {
+                              "vendno": {
+                                "type": "REF",
+                                "value": "base.pohdr.vendno"
+                              },
+                              "shipfmno": {
+                                "type": "REF",
+                                "value": "base.pohdr.shipfmno"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 40,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.pohdr.shipviaty",
+                          "label": "global.ship.via.type",
+                          "conditionShow": "!base.isShipViaLimited",
+                          "meta": "ShipVia",
+                          "conditionReadonly": "!mp.isPurchaseOrderVerified"
+                        },
+                        {
+                          "id": 39,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.pohdr.termstype",
+                          "label": "global.terms.type",
+                          "meta": "Terms",
+                          "conditionReadonly": "!mp.isPurchaseOrderVerified"
+                        },
+                        {
+                          "id": 36,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.pohdr.manname",
+                          "label": "global.manual.name",
+                          "conditionShow": "base.isManualAddressVisible",
+                          "conditionReadonly": "!mp.isPurchaseOrderVerified"
+                        },
+                        {
+                          "id": 37,
+                          "type": "CUSTOM",
+                          "subType": "AddressForm",
+                          "conditionShow": "base.isManualAddressVisible",
+                          "options": {
+                            "countryCdVisible": false,
+                            "addr2Visible": true,
+                            "addr3Visible": true,
+                            "addr1Model": "base.pohdr.manaddr1",
+                            "addr2Model": "base.pohdr.manaddr2",
+                            "addr3Model": "base.pohdr.manaddr3",
+                            "cityModel": "base.pohdr.mancity",
+                            "stateModel": "base.pohdr.manstate",
+                            "zipCodeModel": "base.pohdr.manzipcd",
+                            "controlRef": "mp.addressControl",
+                            "conditionReadonly": "!mp.isPurchaseOrderVerified",
+                            "addressLabel": "global.manual.address"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 74,
+                  "type": "CUSTOM",
+                  "subType": "UserFields",
+                  "extra": true,
+                  "options": {
+                    "tableName": "poeh",
+                    "objectRef": "base.pohdr"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "type": "VIEW_CNTR",
+      "viewName": "orderStatus"
+    },
+    {
+      "id": 41,
+      "type": "VIEW_CNTR",
+      "viewName": "childView"
+    }
+  ]
+}

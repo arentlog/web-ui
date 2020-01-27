@@ -1,0 +1,195 @@
+{
+  "viewId": "wt-wtet-initiate-print",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.warehouse.transfer",
+              "subLabel": "global.print",
+              "children": [
+                {
+                  "id": 24,
+                  "type": "BTN",
+                  "label": "global.submit",
+                  "icon": "icon-confirm",
+                  "eventClick": "",
+                  "submitForm": true,
+                  "eventValidated": "wtPrint.submit()",
+                  "conditionDisabled": "!wtPrint.fullOrderNumber || !wtPrint.printLoadCriteria.pickprintfl"
+                },
+                {
+                  "id": 15,
+                  "type": "BTN",
+                  "label": "global.create",
+                  "icon": "icon-new-document",
+                  "eventClick": "wtPrint.create()"
+                },
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "label": "global.maintain",
+                  "icon": "icon-edit",
+                  "eventClick": "wtPrint.maintain()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 23,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-delete",
+                  "eventClick": "wtPrint.delete()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 14,
+                  "type": "BTN",
+                  "label": "global.copy",
+                  "icon": "icon-copy",
+                  "eventClick": "wtPrint.copy()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 85,
+                  "type": "BTN",
+                  "label": "global.entry.defaults",
+                  "icon": "icon-genealogy",
+                  "eventClick": "wtPrint.entryDefaultsClicked()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 84,
+                  "type": "BTN",
+                  "label": "global.import.from.excel",
+                  "icon": "icon-import",
+                  "eventClick": "wtPrint.importFromExcel()",
+                  "securityLevel": 4
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 39,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 40,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 41,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "wtPrint.fullOrderNumber",
+                          "label": "global.transfer.order.number",
+                          "meta": "WTOrders",
+                          "autoFocus": true,
+                          "eventChange": "wtPrint.orderChanged()"
+                        },
+                        {
+                          "id": 45,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.autoPrintData.autoPrint",
+                          "label": "global.automatic.print",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!wtPrint.autoPrintEnabled",
+                          "eventChange": "wtPrint.autoPrintChanged()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 43,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 82,
+                          "type": "FIELD_SET",
+                          "label": "global.print.options",
+                          "children": [
+                            {
+                              "id": 50,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "wtPrint.printLoadCriteria.pickprintfl",
+                              "label": "global.pick.ticket",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!wtPrint.isPrintPickTicketEnabled"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 79,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 81,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 67,
+                          "type": "EXP_AREA",
+                          "label": "global.print.pick.ticket",
+                          "conditionShow": "wtPrint.printLoadCriteria.pickprintfl",
+                          "children": [
+                            {
+                              "id": 68,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 69,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 83,
+                                      "type": "CUSTOM",
+                                      "subType": "Printer",
+                                      "options": {
+                                        "controlRef": "wtPrint.pickTicketControl",
+                                        "functionName": "wtet",
+                                        "subFunctionName": "",
+                                        "defaultPrintType": "",
+                                        "eventReady": "wtPrint.pickTicketReady()",
+                                        "printerSettingsModel": "wtPrint.pickTicketSettings",
+                                        "printWarehouse": "wtPrint.printWtWarehouse"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

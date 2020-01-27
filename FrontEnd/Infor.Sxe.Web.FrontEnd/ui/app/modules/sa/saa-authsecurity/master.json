@@ -1,0 +1,149 @@
+{
+  "viewId": "sa-saa-authsecurity-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.saa-authsecurity",
+          "subLabel": "{{base.selectedOper}}",
+          "controls": {
+            "navBtns": {
+              "id": 25,
+              "type": "BTN_SET",
+              "subType": "TBAR_NAV",
+              "children": []
+            }
+          },
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 6,
+              "type": "GRID",
+              "htmlId": "saa-authsecurity-master-grid",
+              "model": "base.dataset",
+              "controlRef": "base.grid",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": false,
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 5,
+                  "type": "TOOLBAR",
+                  "label": "global.authorization.points",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "BTN",
+                      "label": "global.point.security.if.blank.operator",
+                      "conditionDisabled": "mst.isPointSecurityDisabled()",
+                      "eventClick": "mst.toPointSecurity()"
+                    },
+                    {
+                      "id": 11,
+                      "type": "BTN",
+                      "subType": "MENU",
+                      "label": "global.actions",
+                      "conditionDisabled": "mst.isSetSecurityDisabled()",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "MENU_OPT",
+                          "label": "global.not.authorized",
+                          "icon": "icon-cancel",
+                          "eventClick": "mst.setSecurity(1)"
+                        },
+                        {
+                          "id": 13,
+                          "type": "MENU_OPT",
+                          "label": "global.authorized",
+                          "icon": "icon-checkbox",
+                          "eventClick": "mst.setSecurity(2)"
+                        },
+                        {
+                          "id": 14,
+                          "type": "MENU_OPT",
+                          "label": "global.grant.authority",
+                          "icon": "icon-user-avatar",
+                          "eventClick": "mst.setSecurity(3)"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "descrip",
+                  "label": "global.description",
+                  "width": 350
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "sectionname",
+                  "label": "global.screen"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "pointname",
+                  "label": "global.field"
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "functionname",
+                  "label": "global.function"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "modename",
+                  "label": "global.mode"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "securcd",
+                  "label": "global.security.level",
+                  "customFormatter": "base.levelToString",
+                  "dataFormat": "INTEGER"
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "transtype",
+                  "label": "global.transaction.type"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

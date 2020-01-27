@@ -1,0 +1,591 @@
+{
+  "viewId": "oe-oeet-selectproducts-lineentrychildstates-assembly",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ale.isAssembly()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.assembly",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.submit",
+                  "icon": "icon-save",
+                  "eventClick": "aleA.submit()",
+                  "conditionShow": "aleA.isSegmentConfigComplete"
+                },
+                {
+                  "id": 61,
+                  "type": "BTN",
+                  "label": "global.continue",
+                  "icon": "icon-next-page",
+                  "eventClick": "aleA.continue()",
+                  "conditionShow": "!aleA.isSegmentConfigComplete"
+                },
+                {
+                  "id": 62,
+                  "type": "BTN",
+                  "label": "global.back",
+                  "icon": "icon-previous-page",
+                  "eventClick": "aleA.back()",
+                  "conditionShow": "aleA.isAssemblyInfoComplete"
+                },
+                {
+                  "id": 63,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "aleA.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 35,
+                  "type": "EXP_AREA",
+                  "label": "global.assembly.information",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 13,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "aleA.assemblyInfo.preassemblylength",
+                              "label": "global.length",
+                              "dataFormat": "DECIMAL",
+                              "conditionShow": "aleA.assemblyInfo.preassemblylengthvisible",
+                              "sign": "+",
+                              "digits": 7,
+                              "decimals": 5,
+                              "conditionDisabled": "aleA.isAssemblyInfoComplete"
+                            },
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "aleA.assemblyInfo.qtytobuild",
+                              "label": "global.quantity.to.build",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 7,
+                              "decimals": 5,
+                              "conditionDisabled": "ale.isAssemblyInfoComplete"
+                            },
+                            {
+                              "id": 14,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "aleA.assemblyInfo.assemblyunit",
+                              "label": "global.variable.length.unit"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 12,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "aleA.assemblyInfo.displaywhse",
+                              "label": "global.assemble.va.kit.in.warehouse",
+                              "meta": "Warehouse",
+                              "dataDesc": "aleA.assemblyInfo.whsedesc",
+                              "conditionDisabled": "aleA.isAssemblyInfoComplete"
+                            },
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "aleA.assemblyInfo.verno",
+                              "label": "global.value.add.version.number",
+                              "meta": "ValueAddVersion",
+                              "conditionDisabled": "aleA.isAssemblyInfoComplete",
+                              "options": {
+                                "searchParams": {
+                                  "whse": {
+                                    "type": "REF",
+                                    "value": "aleA.assemblyInfo.displaywhse"
+                                  },
+                                  "Product": {
+                                    "type": "REF",
+                                    "value": "aleA.assemblyInfo.prod"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 18,
+                  "type": "EXP_AREA",
+                  "label": "global.segment.configuration",
+                  "conditionShow": "aleA.isAssemblyInfoComplete",
+                  "children": [
+                    {
+                      "id": 19,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 20,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "aleA.segmentConfig.prod",
+                              "label": "global.product",
+                              "dataDesc": "aleA.segmentConfig.proddesc"
+                            },
+                            {
+                              "id": 24,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 25,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment1Value",
+                                  "label": "global.segment.entry",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter1",
+                                  "conditionShow": "aleA.segment1Visible",
+                                  "mask": "{{aleA.segment1Mask}}",
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete"
+                                },
+                                {
+                                  "id": 36,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment2Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter2",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment2Visible",
+                                  "mask": "{{aleA.segment2Mask}}"
+                                },
+                                {
+                                  "id": 37,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment3Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter3",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment3Visible",
+                                  "mask": "{{aleA.segment3Mask}}"
+                                },
+                                {
+                                  "id": 39,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment4Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter4",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment4Visible",
+                                  "mask": "{{aleA.segment4Mask}}"
+                                },
+                                {
+                                  "id": 38,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment5Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter5",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment5Visible",
+                                  "mask": "{{aleA.segment5Mask}}"
+                                },
+                                {
+                                  "id": 40,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment6Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter6",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment6Visible",
+                                  "mask": "{{aleA.segment6Mask}}"
+                                },
+                                {
+                                  "id": 41,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment7Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter7",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment7Visible",
+                                  "mask": "{{aleA.segment7Mask}}"
+                                },
+                                {
+                                  "id": 42,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment8Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter8",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment8Visible",
+                                  "mask": "{{aleA.segment8Mask}}"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 44,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 45,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment8Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter9",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment9Visible",
+                                  "mask": "{{aleA.segment9Mask}}"
+                                },
+                                {
+                                  "id": 46,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment10Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter10",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment10Visible",
+                                  "mask": "{{aleA.segment10Mask}}"
+                                },
+                                {
+                                  "id": 47,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment11Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter11",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment11Visible",
+                                  "mask": "{{aleA.segment11Mask}}"
+                                },
+                                {
+                                  "id": 48,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment12Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter12",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment12Visible",
+                                  "mask": "{{aleA.segment12Mask}}"
+                                },
+                                {
+                                  "id": 49,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment13Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter13",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment13Visible",
+                                  "mask": "{{aleA.segment13Mask}}"
+                                },
+                                {
+                                  "id": 50,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment14Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter14",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment14Visible",
+                                  "mask": "{{aleA.segment14Mask}}"
+                                },
+                                {
+                                  "id": 51,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment15Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter15",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment15Visible",
+                                  "mask": "{{aleA.segment15Mask}}"
+                                },
+                                {
+                                  "id": 52,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment16Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter16",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment16Visible",
+                                  "mask": "{{aleA.segment16Mask}}"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 43,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 53,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment17Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter17",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment17Visible",
+                                  "mask": "{{aleA.segment17Mask}}"
+                                },
+                                {
+                                  "id": 54,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment18Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter18",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment18Visible",
+                                  "mask": "{{aleA.segment18Mask}}"
+                                },
+                                {
+                                  "id": 55,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment19Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter19",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment19Visible",
+                                  "mask": "{{aleA.segment19Mask}}"
+                                },
+                                {
+                                  "id": 56,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment20Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter20",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment20Visible",
+                                  "mask": "{{aleA.segment20Mask}}"
+                                },
+                                {
+                                  "id": 57,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment21Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter21",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment21Visible",
+                                  "mask": "{{aleA.segment21Mask}}"
+                                },
+                                {
+                                  "id": 58,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment22Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter22",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment22Visible",
+                                  "mask": "{{aleA.segment22Mask}}"
+                                },
+                                {
+                                  "id": 59,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment23Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter23",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment23Visible",
+                                  "mask": "{{aleA.segment23Mask}}"
+                                },
+                                {
+                                  "id": 60,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "aleA.segment24Value",
+                                  "label": "global.blank",
+                                  "size": "XS",
+                                  "dataDesc": "aleA.delimiter24",
+                                  "labelHidden": true,
+                                  "conditionReadonly": "!aleA.isAssemblyInfoComplete && aleA.isSegmentConfigComplete",
+                                  "conditionShow": "aleA.segment24Visible",
+                                  "mask": "{{aleA.segment24Mask}}"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 26,
+                  "type": "EXP_AREA",
+                  "label": "global.configure.non.stocks",
+                  "conditionShow": "aleA.isConfigureNonStocksRequired",
+                  "children": [
+                    {
+                      "id": 27,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 28,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "",
+                              "label": "message.the.following.products.do.not.exist.in.the.selected.warehouse",
+                              "readonly": true,
+                              "size": "LG"
+                            },
+                            {
+                              "id": 29,
+                              "type": "GRID",
+                              "controlRef": "aleA.nonStockGrid",
+                              "model": "aleA.nonStockCollection",
+                              "options": {
+                                "showCheckboxes": true,
+                                "selectable": "single"
+                              },
+                              "controls": {
+                                "toolbar": {
+                                  "id": 30,
+                                  "type": "TOOLBAR",
+                                  "label": "global.assembly.non.stocks"
+                                }
+                              },
+                              "children": [
+                                {
+                                  "id": 31,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "component",
+                                  "label": "global.component"
+                                },
+                                {
+                                  "id": 33,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "nsproddesc",
+                                  "label": "global.description"
+                                },
+                                {
+                                  "id": 34,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "vawhse",
+                                  "label": "global.value.add.warehouse"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

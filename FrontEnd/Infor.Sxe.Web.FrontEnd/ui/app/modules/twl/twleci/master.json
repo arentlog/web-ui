@@ -1,0 +1,272 @@
+{
+  "viewId": "twl-twleci-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isMaster()",
+      "controls": {
+        "toolbar": {
+          "id": 33,
+          "type": "TOOLBAR",
+          "label": "title.twleci",
+          "subLabel": "{{base.getSubTitle()}}",
+          "children": [
+            {
+              "id": 3,
+              "type": "BTN",
+              "subType": "MENU",
+              "label": "global.inquiries",
+              "conditionDisabled": "!base.isSinglewave",
+              "children": [
+                {
+                  "id": 4,
+                  "type": "MENU_OPT",
+                  "label": "global.transactions",
+                  "eventClick": "mst.showTransactions()",
+                  "conditionDisabled": "!base.summary.transEnabled"
+                },
+                {
+                  "id": 5,
+                  "type": "MENU_OPT",
+                  "label": "menu.twlei",
+                  "eventClick": "mst.showInvDisc()",
+                  "conditionDisabled": "!base.summary.invEnabled"
+                }
+              ]
+            },
+            {
+              "id": 34,
+              "type": "BTN",
+              "subType": "PRI",
+              "label": "global.employees",
+              "conditionDisabled": "!base.isSinglewave",
+              "eventClick": "mst.setEmployees()"
+            },
+            {
+              "id": 35,
+              "type": "BTN",
+              "subType": "PRI",
+              "label": "global.clear",
+              "conditionDisabled": "!base.grid.isAnyRowSelected()",
+              "eventClick": "mst.clearCycleCounts()"
+            }
+          ]
+        },
+        "content": {
+          "id": 6,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 7,
+              "type": "EXP_AREA",
+              "label": "global.summary",
+              "collapsed": true,
+              "children": [
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 10,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.summary.id",
+                          "label": "global.id",
+                          "conditionShow": "base.isSinglewave"
+                        },
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.summary.cycleString",
+                          "label": "global.information"
+                        },
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.summary.totalWaves",
+                          "label": "global.total.waves"
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.summary.requested",
+                          "label": "global.requested",
+                          "conditionShow": "base.isSinglewave",
+                          "dataFormat": "TwlCharDateConversion"
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.summary.started",
+                          "label": "global.started",
+                          "conditionShow": "base.isSinglewave",
+                          "dataFormat": "TwlCharDateConversion"
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.summary.completed",
+                          "label": "global.completed",
+                          "conditionShow": "base.isSinglewave",
+                          "dataFormat": "TwlCharDateConversion"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 16,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 17,
+                          "type": "FIELD_SET",
+                          "label": "global.totals",
+                          "children": [
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.summary.areOpen",
+                              "label": "global.open",
+                              "dataFormat": "INTEGER_TEXT"
+                            },
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.summary.areCounted",
+                              "label": "global.counted",
+                              "dataFormat": "INTEGER_TEXT"
+                            },
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.summary.totalCounts",
+                              "label": "global.total",
+                              "dataFormat": "INTEGER_TEXT"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.summary.cycleDisc",
+                          "label": "global.discrepancies",
+                          "dataFormat": "INTEGER_TEXT"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 22,
+              "type": "GRID",
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showDrilldown": false,
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                },
+                "showCheckboxes": true
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 23,
+                  "type": "TOOLBAR",
+                  "label": "menu.twlec",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whZone",
+                  "label": "global.zone"
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "binNum",
+                  "label": "global.location"
+                },
+                {
+                  "id": 26,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "absNum",
+                  "label": "global.item.number"
+                },
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "cycleId",
+                  "label": "global.cycle.count.wave"
+                },
+                {
+                  "id": 28,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totalQty",
+                  "label": "global.total.quantity",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 29,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "lot",
+                  "label": "global.lot"
+                },
+                {
+                  "id": 30,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "stockStat",
+                  "label": "global.stock.status",
+                  "dataFormat": "TwlStockStatusToName"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 31,
+      "type": "VIEW_CNTR",
+      "viewName": "subDetailViewContainer"
+    },
+    {
+      "id": 36,
+      "type": "VIEW_CNTR",
+      "viewName": "employeesContainer"
+    }
+  ]
+}

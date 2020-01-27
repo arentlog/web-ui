@@ -1,0 +1,254 @@
+{
+  "viewId": "ar-arsc-create",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "CREATE",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.customer",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 16,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 5,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 7,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "EXP_AREA",
+                  "label": "global.required",
+                  "children": [
+                    {
+                      "type": "ROW",
+                      "id": 9,
+                      "children": [
+                        {
+                          "type": "COL",
+                          "subType": "1/2",
+                          "id": 10,
+                          "children": [
+                            {
+                              "id": 11,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "label": "global.customer.number",
+                              "model": "dtl.arsc.custno",
+                              "maxLength": 12,
+                              "dataFormat": "INTEGER_TEXT",
+                              "sign": "+",
+                              "digits": 12
+                            },
+                            {
+                              "id": 14,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "label": "global.name",
+                              "required": true,
+                              "model": "dtl.arsc.name",
+                              "maxLength": "{{base.custNameMaxLength}}",
+                              "eventChange": "dtl.changeLookupNm('Name')"
+                            },
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.arsc.slsrepout",
+                              "label": "global.sales.rep.out",
+                              "required": true,
+                              "meta": "SalesRep"
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.arsc.termstype",
+                              "label": "global.terms",
+                              "meta": "Terms",
+                              "required": true
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.arsc.divno",
+                              "label": "global.division",
+                              "type3": "MANUAL",
+                              "conditionShow": "dtl.isDivisionRequired",
+                              "conditionRequired": "dtl.isDivisionRequired",
+                              "optionsModel": "dtl.divnoDropDownOptions"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "COL",
+                          "subType": "1/2",
+                          "id": 13,
+                          "children": [
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "RADIO_SET",
+                              "model": "dtl.arsc.taxablety",
+                              "type3": "SET",
+                              "meta": "TaxingStatus",
+                              "label": "global.taxable.type",
+                              "metaGroup": "AR",
+                              "conditionDisabled": "base.isDetail()",
+                              "required": true,
+                              "eventChange": "dtl.changeTaxableType()"
+                            },
+                            {
+                              "id": 12,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.arsc.statecd",
+                              "label": "global.taxing.state",
+                              "type3": "CODES",
+                              "meta": "State",
+                              "conditionShow": "dtl.taxMethodType == 's'",
+                              "conditionRequired": "dtl.taxMethodType == 's'"
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.arsc.statecd",
+                              "label": "global.taxing.province",
+                              "type3": "CODES",
+                              "meta": "Province",
+                              "conditionShow": "dtl.taxMethodType == 'g'",
+                              "conditionRequired": "dtl.taxMethodType == 'g'"
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.arsc.nontaxtype",
+                              "label": "global.non.tax.reason",
+                              "type3": "CODES",
+                              "meta": "NonTaxReason",
+                              "conditionRequired": "dtl.arsc.taxablety !== 'y'",
+                              "conditionShow": "dtl.arsc.taxablety !== 'y'"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 25,
+                  "type": "EXP_AREA",
+                  "label": "global.additional",
+                  "children": [
+                    {
+                      "id": 26,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 27,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.arsc.email",
+                              "label": "global.email",
+                              "dataFormat": "EMAIL",
+                              "maxLength": 60
+                            }
+                          ]
+                        },
+                        {
+                          "id": 28,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.arsc.lookupnm",
+                              "label": "global.lookup.name",
+                              "maxLength": 15,
+                              "conditionShow": "base.isValidateDupLookupNm",
+                              "eventChange": "dtl.changeLookupNm('Lkup')"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 29,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 32,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "arsc",
+                        "objectRef": "dtl.arsc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

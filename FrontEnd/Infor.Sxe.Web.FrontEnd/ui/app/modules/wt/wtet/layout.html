@@ -1,0 +1,78 @@
+<div class="page-container two-column fixed">
+
+   <!-- Side bar (Note: the initialize directive is purposefully on specific sections only in order to avoid double initialize problems) -->
+   <section sidebar class="sidebar" ng-hide="base.sidebarCollapsed || base.hideSidebar" style="height: 100%;" role="complementary">
+      <div class="content scrollable-y" style="height: calc(100% - 36px);">
+
+         <!-- Widget Accordion -->
+         <div class="accordion alternate" data-options="{allowOnePane: false}">
+
+            <!-- Widgets -->
+            <div class="accordion-header" ng-repeat-start="widget in ::sidebar.widgets" ng-class="::widget.expanded ? 'is-expanded' : null">
+               <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                  <use xlink:href="{{::widget.icon}}"></use>
+               </svg>
+               <a href="#"><span translate>{{::widget.title}}</span></a>
+            </div>
+            <div class="accordion-pane" ng-repeat-end style="position: relative;">
+
+               <!-- Personalize button -->
+               <div initialize ng-if="::widget.personalize" style="position: absolute; right: 12px;">
+                  <button class="btn-actions" type="button">
+                     <svg class="icon" focusable="false"><use xlink:href="#icon-more"></use></svg>
+                  </button>
+                  <ul class="popupmenu has-icons">
+                     <li dev-only><a ui-sref="{{::'wysiwyg.master({viewPath: \'' + (widget.jsonView || $state.current.data.module + '/' + $state.current.data.menuFn + '/search.json') + '\'})'}}"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-edit"></use></svg><span translate>global.edit</span></a></li>
+                     <li extension-menu><a ng-click="extmenu.extendView(widget.jsonView || $state.current.data.module + '/' + $state.current.data.menuFn + '/search.json')"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-workflow"></use></svg><span translate>global.extend</span></a></li>
+                     <li personalize-button><a ng-click="perbtn.personalizeView(widget.jsonView || $state.current.data.module + '/' + $state.current.data.menuFn + '/search.json')"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-settings"></use></svg><span translate>global.personalize</span></a></li>
+                  </ul>
+               </div>
+
+               <!-- Widget content -->
+               <div class="accordion-content" ng-class="::widget.contentClass" style="padding-left: 0;">
+
+                  <!-- Container for ui-view -->
+                  <div ng-if="::widget.uiView" ui-view="{{::widget.uiView}}"></div>
+
+                  <!-- Included HTML view -->
+                  <div ng-if="::widget.templateUrl" ng-include="::widget.templateUrl"></div>
+
+                  <!-- Included JSON view -->
+                  <div ng-if="::widget.jsonView" include-view="::widget.jsonView" data-controller="{{::widget.controller}}"></div>
+               </div>
+            </div>
+
+         </div>
+      </div>
+
+      <!-- Collapse button -->
+      <div initialize style="height: 36px; text-align: right;">
+         <button class="btn-icon" title="{{'global.collapse' | translate}}" ng-click="base.sidebarCollapsed = true">
+            <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-collapse-app-tray"></use>
+            </svg>
+         </button>
+      </div>
+   </section>
+
+   <!-- Collapsed sidebar with expand button -->
+   <section initialize class="sidebar collapsed-bar" ng-show="base.sidebarCollapsed" style="width: 36px; height: 100%;">
+      <div style="height: calc(100% - 36px);"></div>
+
+      <div style="height: 36px; text-align: right;">
+         <button class="btn-icon" style="" title="{{'global.expand' | translate}}" ng-click="base.sidebarCollapsed = false">
+            <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-expand-app-tray"></use>
+            </svg>
+         </button>
+      </div>
+   </section>
+
+   <!-- Content -->
+   <section class="main scrollable-y busy" ng-class="base.hideSidebar ? 'full-width' : (base.sidebarCollapsed ? 'expanded-width' : '')" style="height: 100%; background-color: inherit;" data-block-ui="false" role="main">
+      <div class="content" style="height: 100%;">
+         <!-- Main view (Initiate, Select Products, etc.) -->
+         <div ui-view="main" style="height: 100%;"></div>
+      </div>
+   </section>
+</div>

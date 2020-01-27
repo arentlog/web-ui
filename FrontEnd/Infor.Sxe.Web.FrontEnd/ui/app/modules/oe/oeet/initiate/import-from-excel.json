@@ -1,0 +1,410 @@
+{
+  "viewId": "oe-oeet-initiate-importfromexcel",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ife.isImportFromExcel()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.order.entry",
+              "subLabel": "global.import.from.excel",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.initiate"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.submit",
+                  "eventClick": "",
+                  "conditionShow": "ife.importDataCollection && ife.isFileImported",
+                  "submitForm": true,
+                  "eventValidated": "ife.submit()"
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "label": "global.import.file",
+                  "icon": "icon-tree-xls",
+                  "eventClick": "ife.importFile()",
+                  "conditionShow": "!ife.isFileImported"
+                },
+                {
+                  "id": 52,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "conditionShow": "ife.isFileImported",
+                  "eventClick": "ife.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 49,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 50,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 48,
+                          "type": "FIELD",
+                          "subType": "FILE",
+                          "model": "ife.importedFile",
+                          "label": "global.file.to.import",
+                          "autoFocus": true,
+                          "multiple": false,
+                          "conditionShow": "!ife.isFileImported"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 51,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "ife.maxLines",
+                          "label": "global.max.lines",
+                          "dataFormat": "INTEGER",
+                          "sign": "+",
+                          "size": "SM",
+                          "conditionShow": "!ife.isFileImported",
+                          "digits": 3
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 13,
+                  "type": "MESSAGE",
+                  "text": "{{ife.importedFile.name}}",
+                  "icon": "icon-tree-xls",
+                  "conditionShow": "ife.importedFile.name && ife.isFileImported"
+                },
+                {
+                  "id": 8,
+                  "type": "GRID",
+                  "controlRef": "ife.grid",
+                  "model": "ife.importDataCollection",
+                  "conditionShow": "ife.isFileImported",
+                  "options": {
+                    "showDrilldown": true,
+                    "events": {
+                      "drilldown": "ife.drilldown()"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 9,
+                      "type": "TOOLBAR",
+                      "label": "global.lines"
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "label": "global.ok.to.process",
+                      "model": "processfl",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 15,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "worksheetno",
+                      "label": "global.worksheet.number"
+                    },
+                    {
+                      "id": 16,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "seqno",
+                      "label": "global.row.number"
+                    },
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "lineno",
+                      "label": "global.line.number"
+                    },
+                    {
+                      "id": 18,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "whse",
+                      "label": "global.warehouse"
+                    },
+                    {
+                      "id": 19,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "custno",
+                      "label": "global.customer.number"
+                    },
+                    {
+                      "id": 20,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "name",
+                      "label": "global.customer.name"
+                    },
+                    {
+                      "id": 29,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prod",
+                      "label": "global.product"
+                    },
+                    {
+                      "id": 30,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "proddesc",
+                      "label": "global.product.description"
+                    },
+                    {
+                      "id": 31,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyord",
+                      "label": "global.quantity.ordered"
+                    },
+                    {
+                      "id": 32,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "unit",
+                      "label": "global.unit"
+                    },
+                    {
+                      "id": 33,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "price",
+                      "label": "global.price"
+                    },
+                    {
+                      "id": 21,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "shipto",
+                      "label": "global.ship.to"
+                    },
+                    {
+                      "id": 22,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "custpo",
+                      "label": "global.customer.po"
+                    },
+                    {
+                      "id": 23,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "placedby",
+                      "label": "global.placed.by"
+                    },
+                    {
+                      "id": 24,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "specnstype",
+                      "label": "global.line.type",
+                      "dataFormat": "LineType"
+                    },
+                    {
+                      "id": 25,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "shipviaty",
+                      "label": "global.ship.via"
+                    },
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "termstype",
+                      "label": "global.terms"
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "refer",
+                      "label": "global.reference"
+                    },
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "shipinstr",
+                      "label": "global.shipping.instructions"
+                    },
+                    {
+                      "id": 34,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "discamt",
+                      "label": "global.discount.amount"
+                    },
+                    {
+                      "id": 35,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "disctype",
+                      "label": "global.discount.type",
+                      "dataFormat": "OeAddOnType"
+                    },
+                    {
+                      "id": 36,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "vendno",
+                      "label": "global.vendor"
+                    },
+                    {
+                      "id": 37,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prodline",
+                      "label": "global.product.line"
+                    },
+                    {
+                      "id": 38,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prodcat",
+                      "label": "global.product.category"
+                    },
+                    {
+                      "id": 39,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prodcost",
+                      "label": "global.product.cost"
+                    },
+                    {
+                      "id": 40,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "tietype",
+                      "label": "global.tie.type"
+                    },
+                    {
+                      "id": 41,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "tiewhse",
+                      "label": "global.tie.warehouse"
+                    },
+                    {
+                      "id": 42,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "dropshipfl",
+                      "label": "global.direct.order",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 43,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "commentfl",
+                      "label": "global.comments",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 44,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "orderbreak",
+                      "label": "global.break"
+                    },
+                    {
+                      "id": 45,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "printfl",
+                      "label": "global.print",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 46,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "copycomfl",
+                      "label": "global.copy.comments",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 53,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "npfl",
+                      "label": "global.national.program",
+                      "dataFormat": "LOGICAL",
+                      "conditionInclude": "ife.isNationalProgramsOn"
+                    },
+                    {
+                      "id": 54,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "custprod",
+                      "label": "global.customer.product"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "type": "VIEW_CNTR",
+      "viewName": "importFromExcelChildView"
+    }
+  ]
+}

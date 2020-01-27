@@ -1,0 +1,571 @@
+{
+  "viewId": "ar-arece-update",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SUB_DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.cash.receipts.ready.for.update",
+              "subLabel": "",
+              "controls": {
+                "navBtns": {
+                  "id": 20,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "",
+                      "label": "special.button.back",
+                      "eventClick": "upd.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 5,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "eventClick": "upd.submit()"
+                },
+                {
+                  "id": 35,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "upd.cancel()",
+                  "stateRef": ""
+                }
+              ]
+            },
+            "content": {
+              "id": 7,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 40,
+                  "type": "EXP_AREA",
+                  "label": "global.unapplied.cash",
+                  "children": [
+                    {
+                      "id": 41,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 42,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 46,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.updateScreenSingle.unappliedAmt",
+                              "label": "global.unapplied.amount",
+                              "readonly": true,
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 47,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.updateScreenSingle.creditamount",
+                              "label": "global.credit.amount",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "autoFocus": true,
+                              "conditionReadonly": "!base.updateScreenSingle.creditamountenabled",
+                              "eventChange": "upd.fieldChanged('creditamount')",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              },
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 49,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 48,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.updateScreenSingle.creditrefer",
+                              "label": "global.reference",
+                              "maxLength": 24,
+                              "conditionReadonly": "!base.updateScreenSingle.creditreferenabled",
+                              "eventChange": "upd.fieldChanged('creditrefer')",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 50,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.updateScreenSingle.custno",
+                              "label": "global.customer",
+                              "conditionShow": "base.updateScreenSingle.custnovisible",
+                              "meta": "Customer",
+                              "conditionReadonly": "!base.updateScreenSingle.custnoenabled",
+                              "eventChange": "upd.fieldChanged('custno')"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 43,
+                  "type": "EXP_AREA",
+                  "label": "global.divisions",
+                  "children": [
+                    {
+                      "id": 44,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 45,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 55,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.updateScreenSingle.proofAmt",
+                              "label": "global.proof",
+                              "readonly": true,
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "size": "SM",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 56,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 57,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 63,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 64,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divno1",
+                                  "label": "global.division.number",
+                                  "conditionShow": "base.updateScreenSingle.divno1visible",
+                                  "conditionReadonly": "!base.updateScreenSingle.divno1enabled",
+                                  "dataFormat": "INTEGER_TEXT",
+                                  "sign": "+",
+                                  "digits": 4,
+                                  "size": "XS"
+                                },
+                                {
+                                  "id": 65,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divamount1",
+                                  "label": "global.amount",
+                                  "conditionReadonly": "!base.updateScreenSingle.divamount1enabled",
+                                  "conditionShow": "base.updateScreenSingle.divamount1visible",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "eventChange": "upd.fieldChanged('divamount-1')",
+                                  "size": "SM",
+                                  "modelOptions": {
+                                    "updateOn": "blur"
+                                  },
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 69,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 70,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divno2",
+                                  "label": "global.division.number",
+                                  "conditionShow": "base.updateScreenSingle.divno2visible",
+                                  "conditionReadonly": "!base.updateScreenSingle.divno2enabled",
+                                  "dataFormat": "INTEGER_TEXT",
+                                  "sign": "+",
+                                  "digits": 4,
+                                  "size": "XS"
+                                },
+                                {
+                                  "id": 71,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divamount2",
+                                  "label": "global.amount",
+                                  "conditionReadonly": "!base.updateScreenSingle.divamount2enabled",
+                                  "conditionShow": "base.updateScreenSingle.divamount2visible",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "eventChange": "upd.fieldChanged('divamount-2')",
+                                  "size": "SM",
+                                  "modelOptions": {
+                                    "updateOn": "blur"
+                                  },
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 72,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 75,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divno3",
+                                  "label": "global.division.number",
+                                  "conditionShow": "base.updateScreenSingle.divno3visible",
+                                  "conditionReadonly": "!base.updateScreenSingle.divno3enabled",
+                                  "dataFormat": "INTEGER_TEXT",
+                                  "sign": "+",
+                                  "digits": 4,
+                                  "size": "XS"
+                                },
+                                {
+                                  "id": 78,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divamount3",
+                                  "label": "global.amount",
+                                  "conditionReadonly": "!base.updateScreenSingle.divamount3enabled",
+                                  "conditionShow": "base.updateScreenSingle.divamount3visible",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "eventChange": "upd.fieldChanged('divamount-3')",
+                                  "size": "SM",
+                                  "modelOptions": {
+                                    "updateOn": "blur"
+                                  },
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 73,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 76,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divno4",
+                                  "label": "global.division.number",
+                                  "conditionShow": "base.updateScreenSingle.divno4visible",
+                                  "conditionReadonly": "!base.updateScreenSingle.divno4enabled",
+                                  "dataFormat": "INTEGER_TEXT",
+                                  "sign": "+",
+                                  "digits": 4,
+                                  "size": "XS"
+                                },
+                                {
+                                  "id": 79,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divamount4",
+                                  "label": "global.amount",
+                                  "conditionReadonly": "!base.updateScreenSingle.divamount4enabled",
+                                  "conditionShow": "base.updateScreenSingle.divamount4visible",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "eventChange": "upd.fieldChanged('divamount-4')",
+                                  "size": "SM",
+                                  "modelOptions": {
+                                    "updateOn": "blur"
+                                  },
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 74,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 77,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divno5",
+                                  "label": "global.division.number",
+                                  "conditionShow": "base.updateScreenSingle.divno5visible",
+                                  "conditionReadonly": "!base.updateScreenSingle.divno5enabled",
+                                  "dataFormat": "INTEGER_TEXT",
+                                  "sign": "+",
+                                  "digits": 4,
+                                  "size": "XS"
+                                },
+                                {
+                                  "id": 80,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divamount5",
+                                  "label": "global.amount",
+                                  "conditionReadonly": "!base.updateScreenSingle.divamount5enabled",
+                                  "conditionShow": "base.updateScreenSingle.divamount5visible",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "eventChange": "upd.fieldChanged('divamount-5')",
+                                  "size": "SM",
+                                  "modelOptions": {
+                                    "updateOn": "blur"
+                                  },
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 58,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 66,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 67,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divno6",
+                                  "label": "global.division.number",
+                                  "conditionShow": "base.updateScreenSingle.divno6visible",
+                                  "conditionReadonly": "!base.updateScreenSingle.divno6enabled",
+                                  "dataFormat": "INTEGER_TEXT",
+                                  "sign": "+",
+                                  "digits": 4,
+                                  "size": "XS"
+                                },
+                                {
+                                  "id": 68,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divamount6",
+                                  "label": "global.amount",
+                                  "conditionReadonly": "!base.updateScreenSingle.divamount6enabled",
+                                  "conditionShow": "base.updateScreenSingle.divamount6visible",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "eventChange": "upd.fieldChanged('divamount-6')",
+                                  "size": "SM",
+                                  "modelOptions": {
+                                    "updateOn": "blur"
+                                  },
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 81,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 84,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divno7",
+                                  "label": "global.division.number",
+                                  "conditionShow": "base.updateScreenSingle.divno7visible",
+                                  "conditionReadonly": "!base.updateScreenSingle.divno7enabled",
+                                  "dataFormat": "INTEGER_TEXT",
+                                  "sign": "+",
+                                  "digits": 4,
+                                  "size": "XS"
+                                },
+                                {
+                                  "id": 87,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divamount7",
+                                  "label": "global.amount",
+                                  "conditionReadonly": "!base.updateScreenSingle.divamount7enabled",
+                                  "conditionShow": "base.updateScreenSingle.divamount7visible",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "eventChange": "upd.fieldChanged('divamount-7')",
+                                  "size": "SM",
+                                  "modelOptions": {
+                                    "updateOn": "blur"
+                                  },
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 82,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 85,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divno8",
+                                  "label": "global.division.number",
+                                  "conditionShow": "base.updateScreenSingle.divno8visible",
+                                  "conditionReadonly": "!base.updateScreenSingle.divno8enabled",
+                                  "dataFormat": "INTEGER_TEXT",
+                                  "sign": "+",
+                                  "digits": 4,
+                                  "size": "XS"
+                                },
+                                {
+                                  "id": 88,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divamount8",
+                                  "label": "global.amount",
+                                  "conditionReadonly": "!base.updateScreenSingle.divamount8enabled",
+                                  "conditionShow": "base.updateScreenSingle.divamount8visible",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "eventChange": "upd.fieldChanged('divamount-8')",
+                                  "size": "SM",
+                                  "modelOptions": {
+                                    "updateOn": "blur"
+                                  },
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 83,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 86,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divno9",
+                                  "label": "global.division.number",
+                                  "conditionShow": "base.updateScreenSingle.divno9visible",
+                                  "conditionReadonly": "!base.updateScreenSingle.divno9enabled",
+                                  "dataFormat": "INTEGER_TEXT",
+                                  "sign": "+",
+                                  "digits": 4,
+                                  "size": "XS"
+                                },
+                                {
+                                  "id": 89,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateScreenSingle.divamount9",
+                                  "label": "global.amount",
+                                  "conditionReadonly": "!base.updateScreenSingle.divamount9enabled",
+                                  "conditionShow": "base.updateScreenSingle.divamount9visible",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "eventChange": "upd.fieldChanged('divamount-9')",
+                                  "size": "SM",
+                                  "modelOptions": {
+                                    "updateOn": "blur"
+                                  },
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

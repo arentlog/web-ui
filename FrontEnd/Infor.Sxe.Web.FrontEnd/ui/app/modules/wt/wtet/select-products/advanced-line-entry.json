@@ -1,0 +1,691 @@
+{
+  "viewId": "wt-wtet-advancedlineentry",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "controlRef": "ale.view",
+  "allowCrossContainer": true,
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ale.isLineEntry()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.wtet",
+              "subLabel": "global.advanced.line.entry",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.finish",
+                  "icon": "icon-invoice-released",
+                  "eventClick": "ale.finish()"
+                },
+                {
+                  "id": 175,
+                  "type": "BTN",
+                  "label": "global.add",
+                  "icon": "icon-add",
+                  "conditionShow": "ale.isAddLineMode",
+                  "submitForm": true,
+                  "eventValidated": "ale.addClicked()",
+                  "conditionDisabled": "!ale.wlwhsechgfl"
+                },
+                {
+                  "id": 73,
+                  "type": "BTN",
+                  "label": "global.update",
+                  "icon": "icon-save",
+                  "conditionShow": "!ale.isAddLineMode",
+                  "submitForm": true,
+                  "eventValidated": "ale.updateClicked()",
+                  "conditionDisabled": "!ale.wlwhsechgfl"
+                },
+                {
+                  "id": 157,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "ale.deleteClicked()",
+                  "securityLevel": 5,
+                  "conditionShow": "!ale.isAddLineMode",
+                  "conditionDisabled": "!ale.wlwhsechgfl"
+                },
+                {
+                  "id": 74,
+                  "type": "BTN",
+                  "label": "{{ale.clearCancelButtonText()}}",
+                  "icon": "icon-cancel",
+                  "eventClick": "ale.clearCancel()"
+                },
+                {
+                  "id": 132,
+                  "type": "BTN",
+                  "label": "global.products",
+                  "icon": "icon-cart",
+                  "sidebarPopdownButton": true,
+                  "controls": {
+                    "popdown": {
+                      "id": 133,
+                      "type": "POPDOWN",
+                      "children": [
+                        {
+                          "id": 134,
+                          "type": "CARD",
+                          "label": "{{'global.products' | translate}} ({{base.lineItems.length}})",
+                          "children": [
+                            {
+                              "id": 135,
+                              "type": "SUB_VIEW",
+                              "subType": "HTML",
+                              "viewPath": "wt/wtet/shared/cart.html",
+                              "controller": "WtetCartCtrl as cart"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": 85,
+                  "type": "BTN",
+                  "subType": "",
+                  "label": "global.easy.line.entry",
+                  "eventClick": "ale.easyLineEntry()",
+                  "children": []
+                },
+                {
+                  "id": 130,
+                  "type": "BTN",
+                  "label": "global.transfer.order.settings",
+                  "eventClick": "ale.transferOrderSettings()"
+                },
+                {
+                  "id": 131,
+                  "type": "BTN",
+                  "label": "global.edit.lines",
+                  "eventClick": "ale.detailedGrid()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "controls": {
+                "contentHeader": {
+                  "id": 138,
+                  "type": "MOD_CONTENT_HDR",
+                  "children": [
+                    {
+                      "id": 171,
+                      "type": "WIZARD",
+                      "children": [
+                        {
+                          "id": 172,
+                          "type": "WIZARD_TICK",
+                          "label": "global.initiate",
+                          "conditionSelected": "base.getStage() === 1",
+                          "conditionDisabled": "base.getStage() > 1"
+                        },
+                        {
+                          "id": 174,
+                          "type": "WIZARD_TICK",
+                          "label": "global.select.products",
+                          "conditionSelected": "base.getStage() === 2",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "eventClick": "ale.stageWizardSelectProducts()"
+                        },
+                        {
+                          "id": 173,
+                          "type": "WIZARD_TICK",
+                          "label": "global.review.and.totals",
+                          "conditionSelected": "base.getStage() === 3",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "eventClick": "ale.stageWizardReviewAndTotals()"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 27,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 29,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "ale.wtline.lineno",
+                          "label": "global.line.number",
+                          "readonly": true,
+                          "size": "XS",
+                          "contextEntity": "Wtel",
+                          "contextValues": {
+                            "key1": "base.wthdr.wtno",
+                            "key2": "base.wthdr.wtsuf",
+                            "key3": "ale.wtline.lineno"
+                          }
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "ale.wtline.prod",
+                          "label": "global.product",
+                          "meta": "ProdIcswAndIcspAndXref",
+                          "type3": "STANDARD",
+                          "size": "LG",
+                          "autoFocus": true,
+                          "eventChange": "ale.productSelected()",
+                          "conditionReadonly": "!ale.wtline.prodenabled",
+                          "conditionFocus": "ale.wtline.prodenabled",
+                          "contextOptions": {
+                            "deactivated": "ale.wtline.nonstockty === 'n'"
+                          },
+                          "controls": {
+                            "actionBtn": {
+                              "id": 177,
+                              "type": "BTN",
+                              "subType": "ICON",
+                              "label": "global.inquire",
+                              "icon": "icon-drilldown",
+                              "isLabelTooltip": true,
+                              "conditionDisabled": "!ale.wtline.prod",
+                              "eventClick": "ale.navToProduct()"
+                            }
+                          },
+                          "options": {
+                            "searchParams": {
+                              "whse": {
+                                "type": "REF",
+                                "value": "base.wthdr.shipfmwhse"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 70,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "ale.wtline.proddesc1",
+                          "label": "global.description.1",
+                          "readonly": true,
+                          "conditionShow": "ale.isDescriptionVisible"
+                        },
+                        {
+                          "id": 169,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "ale.wtline.proddesc2",
+                          "label": "global.description.2",
+                          "readonly": true,
+                          "conditionShow": "ale.isDescriptionVisible"
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "ale.wtline.qtyord",
+                          "label": "global.quantity.ordered",
+                          "size": "SM",
+                          "dataFormat": "DECIMAL",
+                          "sign": "+",
+                          "eventChange": "ale.qtyOrdLostFocus()",
+                          "conditionReadonly": "!ale.wtline.qtyordenabled",
+                          "digits": 7,
+                          "decimals": 2,
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          },
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          },
+                          "controls": {
+                            "actionBtn": {
+                              "id": 178,
+                              "type": "BTN",
+                              "subType": "ICON",
+                              "label": "global.inquire",
+                              "icon": "icon-drilldown",
+                              "isLabelTooltip": true,
+                              "conditionDisabled": "!ale.wtline.qtyord",
+                              "eventClick": "ale.navToQuantityOrdered()"
+                            }
+                          }
+                        },
+                        {
+                          "id": 158,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "ale.wtline.qtyship",
+                          "label": "global.quantity.shipped",
+                          "size": "SM",
+                          "dataFormat": "DECIMAL",
+                          "eventChange": "ale.qtyShipLostFocus()",
+                          "conditionReadonly": "!ale.wtline.qtyshipenabled",
+                          "digits": 7,
+                          "decimals": 2,
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          },
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 28,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "ale.wtline.nonstockty",
+                          "label": "global.line.type",
+                          "type3": "SET",
+                          "metaGroup": "WT",
+                          "meta": "LineType",
+                          "eventChange": "ale.lineTypeChanged()",
+                          "blankOption": false
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "ale.wtline.unit",
+                          "label": "global.unit",
+                          "meta": "Units",
+                          "type3": "STANDARD",
+                          "conditionReadonly": "!ale.wtline.unitenabled",
+                          "eventChange": "ale.unitChanged()",
+                          "options": {
+                            "searchParams": {
+                              "prod": {
+                                "type": "REF",
+                                "value": "ale.wtline.prod"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 161,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "ale.wtline.approvety",
+                          "label": "global.approval.type",
+                          "blankOption": false,
+                          "type3": "SET",
+                          "metaGroup": "WT",
+                          "meta": "ApprovalType",
+                          "conditionReadonly": "!ale.wtline.approvetyenabled"
+                        },
+                        {
+                          "id": 20,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.wtline.prodcost",
+                              "label": "global.product.cost",
+                              "conditionShow": "ale.wtline.prodcostenabled && base.sasoo.oepricefl !== 'n'",
+                              "readonly": true,
+                              "size": "SM",
+                              "dataFormat": "DECIMAL",
+                              "digits": 7,
+                              "decimals": 5,
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 159,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.wtline.netamt",
+                              "label": "global.net.amount",
+                              "conditionShow": "ale.wtline.netamtenabled && base.sasoo.oepricefl !== 'n'",
+                              "size": "SM",
+                              "readonly": true,
+                              "dataFormat": "DECIMAL",
+                              "digits": 7,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 160,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.wtline.netavail",
+                              "label": "global.net.available",
+                              "size": "SM",
+                              "readonly": true,
+                              "dataFormat": "DECIMAL",
+                              "digits": 7,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 167,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.wtline.prccostper",
+                              "label": "global.spec.price.cost.unit",
+                              "size": "SM",
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 105,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 106,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 107,
+                          "type": "TOOLBAR",
+                          "label": "global.blank.label.string.for.space",
+                          "conditionShow": "",
+                          "children": [
+                            {
+                              "id": 111,
+                              "type": "BTN",
+                              "label": "global.non.stock",
+                              "conditionDisabled": "ale.wtline.nonstockty.toLowerCase() !== 'n'",
+                              "conditionShow": "ale.wtline.nonstockty.toLowerCase() === 'n'",
+                              "eventClick": "ale.nonStockClicked()"
+                            },
+                            {
+                              "id": 170,
+                              "type": "BTN",
+                              "label": "global.ties",
+                              "eventClick": "ale.tiesClicked()",
+                              "conditionShow": "ale.wtline.prod"
+                            },
+                            {
+                              "id": 108,
+                              "type": "BTN",
+                              "label": "global.serials",
+                              "eventClick": "ale.serialsClicked()",
+                              "conditionShow": "ale.wtline.serlottype.toLowerCase() === 's'",
+                              "conditionDisabled": "ale.wtline.serlottype.toLowerCase() !== 's'"
+                            },
+                            {
+                              "id": 112,
+                              "type": "BTN",
+                              "label": "global.lots",
+                              "conditionDisabled": "ale.wtline.serlottype.toLowerCase() !== 'l'",
+                              "conditionShow": "ale.wtline.serlottype.toLowerCase() === 'l'",
+                              "eventClick": "ale.lotsClicked()"
+                            },
+                            {
+                              "id": 117,
+                              "type": "BTN",
+                              "label": "global.warehouse.manager",
+                              "conditionDisabled": "!ale.wtline.wmflship",
+                              "conditionShow": "ale.wtline.wmflship",
+                              "eventClick": "ale.warehouseManagerClicked()"
+                            },
+                            {
+                              "id": 120,
+                              "type": "BTN",
+                              "label": "global.comments",
+                              "conditionShow": "ale.wtline.prod",
+                              "eventClick": "ale.commentsClicked()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 30,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 31,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "EXP_AREA",
+                          "label": "global.extended.fields",
+                          "children": [
+                            {
+                              "id": 123,
+                              "type": "TOOLBAR",
+                              "label": "global.blank.label.string.for.space",
+                              "extra": true,
+                              "children": []
+                            },
+                            {
+                              "id": 33,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 141,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 58,
+                                      "type": "FIELD",
+                                      "subType": "DATE",
+                                      "model": "ale.wtline.duedt",
+                                      "label": "global.due.date",
+                                      "dataFormat": "DATE",
+                                      "size": "SM"
+                                    },
+                                    {
+                                      "id": 164,
+                                      "type": "FIELD",
+                                      "subType": "LOOKUP",
+                                      "model": "ale.wtline.prodcati",
+                                      "label": "global.product.category",
+                                      "type3": "CODES",
+                                      "meta": "ProdCat",
+                                      "conditionReadonly": "!ale.wtline.prodcatienabled"
+                                    },
+                                    {
+                                      "id": 64,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "ale.wtline.usagefl",
+                                      "label": "global.usage",
+                                      "conditionDisabled": "!ale.wtline.usageflenabled"
+                                    },
+                                    {
+                                      "id": 162,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "ale.wtline.bofl",
+                                      "label": "global.backorder",
+                                      "conditionDisabled": "!ale.wtline.boflenabled"
+                                    },
+                                    {
+                                      "id": 163,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "ale.wtline.delayresrvfl",
+                                      "label": "global.delay.reservation",
+                                      "conditionDisabled": "!ale.wtline.delayresrvflenabled"
+                                    },
+                                    {
+                                      "id": 165,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "ale.wtline.prodinrcvfl",
+                                      "label": "global.prod.in.rcv.whse",
+                                      "conditionDisabled": "true"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 36,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 166,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "ale.wtline.surplus",
+                                      "label": "global.surplus",
+                                      "size": "SM",
+                                      "readonly": true,
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 7,
+                                      "decimals": 2,
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 154,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "ale.wtline.stkqtyord",
+                                      "label": "global.stock.quantity.ordered",
+                                      "size": "SM",
+                                      "readonly": true,
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 7,
+                                      "decimals": 2,
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 168,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "ale.wtline.orderaltno",
+                                      "label": "global.sourced.from.order.number",
+                                      "size": "SM",
+                                      "readonly": true
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 182,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 183,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 185,
+                          "type": "EXP_AREA",
+                          "label": "global.available.fields",
+                          "extra": true,
+                          "children": [
+                            {
+                              "id": 186,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 187,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 181,
+                                      "type": "CUSTOM",
+                                      "subType": "UserFields",
+                                      "options": {
+                                        "tableName": "wtel",
+                                        "objectRef": "ale.wtline"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "sidebar": {
+              "id": 136,
+              "type": "MOD_SIDEBAR",
+              "children": [
+                {
+                  "id": 137,
+                  "type": "SUB_VIEW",
+                  "subType": "HTML",
+                  "viewPath": "wt/wtet/shared/cart.html",
+                  "controller": "WtetCartCtrl as cart"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 109,
+      "type": "VIEW_CNTR",
+      "viewName": "aleChildView"
+    },
+    {
+      "id": 118,
+      "type": "VIEW_CNTR",
+      "viewName": "binAllocation"
+    }
+  ]
+}

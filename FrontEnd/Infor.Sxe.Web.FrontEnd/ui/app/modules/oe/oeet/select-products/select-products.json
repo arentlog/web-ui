@@ -1,0 +1,253 @@
+{
+  "viewId": "oe-oeet-select-products",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER",
+  "controlRef": "sp.view",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isSelectProducts()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.oeet",
+              "subLabel": "global.select.products",
+              "children": [
+                {
+                  "id": 40,
+                  "type": "BTN",
+                  "label": "global.finish",
+                  "icon": "icon-invoice-released",
+                  "eventClick": "base.finishOrder()"
+                },
+                {
+                  "id": 42,
+                  "type": "BTN",
+                  "label": "global.products",
+                  "icon": "icon-cart",
+                  "sidebarPopdownButton": true,
+                  "controls": {
+                    "popdown": {
+                      "id": 43,
+                      "type": "POPDOWN",
+                      "children": [
+                        {
+                          "id": 44,
+                          "type": "CARD",
+                          "label": "{{base.prodSidebarLabel}}",
+                          "children": [
+                            {
+                              "id": 45,
+                              "type": "SUB_VIEW",
+                              "subType": "HTML",
+                              "viewPath": "oe/oeet/shared/cart.html",
+                              "controller": "OeetCartCtrl as cart"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": 35,
+                  "type": "BTN",
+                  "subType": "MENU",
+                  "label": "global.line.entry",
+                  "children": [
+                    {
+                      "id": 51,
+                      "type": "MENU_OPT",
+                      "label": "global.advanced",
+                      "eventClick": "sp.advanced()"
+                    },
+                    {
+                      "id": 36,
+                      "type": "MENU_OPT",
+                      "label": "global.quick",
+                      "eventClick": "sp.quickLineEntry()",
+                      "conditionShow": "base.oehdr.oetype !== 'cr' && base.oehdr.oetype !== 'do' && base.oehdr.oetype !== 'rm'",
+                      "conditionDisabled": "base.oehdr.oetype === 'cr' || base.oehdr.oetype === 'do' || base.oehdr.oetype === 'rm'"
+                    },
+                    {
+                      "id": 37,
+                      "type": "MENU_OPT",
+                      "label": "global.shopping.list",
+                      "eventClick": "sp.shoppingList()",
+                      "conditionDisabled": "base.oehdr.oetype === 'cr' || base.oehdr.oetype === 'rm'",
+                      "conditionShow": "base.oehdr.oetype !== 'cr' && base.oehdr.oetype !== 'rm'"
+                    },
+                    {
+                      "id": 38,
+                      "type": "MENU_OPT",
+                      "label": "global.return.multiple",
+                      "eventClick": "sp.returnMultipleLines()",
+                      "conditionDisabled": "base.oehdr.oetype === 'do'",
+                      "conditionShow": "base.oehdr.oetype !== 'do'"
+                    }
+                  ]
+                },
+                {
+                  "id": 34,
+                  "type": "BTN",
+                  "label": "global.customer.order.settings",
+                  "stateRef": ".customerOrderSettings"
+                },
+                {
+                  "id": 39,
+                  "type": "BTN",
+                  "label": "global.edit.lines",
+                  "stateRef": ".linesGrid"
+                },
+                {
+                  "id": 56,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.suspend",
+                  "eventClick": "base.suspend()",
+                  "conditionDisabled": "base.oehdr.oetype.toLowerCase() !== 'cs' && base.oehdr.oetype.toLowerCase()  !== 'so' && base.oehdr.oetype.toLowerCase()  !== 'do'"
+                },
+                {
+                  "id": 57,
+                  "type": "BTN",
+                  "label": "global.addons",
+                  "eventClick": "sp.addons()",
+                  "extra": true
+                },
+                {
+                  "id": 58,
+                  "type": "BTN",
+                  "label": "global.discounts",
+                  "eventClick": "sp.discounts()",
+                  "extra": true
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "controls": {
+                "contentHeader": {
+                  "id": 49,
+                  "type": "MOD_CONTENT_HDR",
+                  "children": [
+                    {
+                      "id": 50,
+                      "type": "WIZARD",
+                      "children": [
+                        {
+                          "id": 52,
+                          "type": "WIZARD_TICK",
+                          "label": "global.initiate",
+                          "conditionDisabled": "base.getStage() > 1",
+                          "conditionSelected": "base.getStage() === 1"
+                        },
+                        {
+                          "id": 53,
+                          "type": "WIZARD_TICK",
+                          "label": "global.select.products",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "conditionSelected": "base.getStage() === 2",
+                          "eventClick": "base.stageWizardSelectProducts()"
+                        },
+                        {
+                          "id": 54,
+                          "type": "WIZARD_TICK",
+                          "label": "global.taxes.and.totals",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "conditionSelected": "base.getStage() === 3",
+                          "eventClick": "base.stageWizardTaxesAndTotals()"
+                        },
+                        {
+                          "id": 55,
+                          "type": "WIZARD_TICK",
+                          "label": "global.collect.payment",
+                          "conditionSelected": "base.getStage() === 4",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "eventClick": "base.stageWizardCollectPayment()"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 48,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 19,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "sp.productToSearch",
+                      "label": "global.product",
+                      "meta": "ProdAll",
+                      "type3": "STANDARD",
+                      "size": "LG",
+                      "autoFocus": true
+                    },
+                    {
+                      "id": 33,
+                      "type": "BTN",
+                      "subType": "PRI",
+                      "label": "global.search",
+                      "icon": "icon-search",
+                      "submitForm": true,
+                      "eventValidated": "sp.productSearch()"
+                    },
+                    {
+                      "id": 21,
+                      "type": "BTN",
+                      "subType": "SEC",
+                      "label": "global.advanced",
+                      "eventClick": "sp.advanced()"
+                    },
+                    {
+                      "id": 22,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.reset",
+                      "eventClick": "sp.clearSearch()"
+                    }
+                  ]
+                },
+                {
+                  "id": 46,
+                  "type": "SUB_VIEW",
+                  "subType": "HTML",
+                  "viewPath": "oe/oeet/select-products/search-results.html"
+                }
+              ]
+            },
+            "sidebar": {
+              "id": 13,
+              "type": "MOD_SIDEBAR",
+              "children": [
+                {
+                  "id": 41,
+                  "type": "SUB_VIEW",
+                  "subType": "HTML",
+                  "viewPath": "oe/oeet/shared/cart.html",
+                  "controller": "OeetCartCtrl as cart"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "type": "VIEW_CNTR",
+      "viewName": "childView"
+    }
+  ]
+}

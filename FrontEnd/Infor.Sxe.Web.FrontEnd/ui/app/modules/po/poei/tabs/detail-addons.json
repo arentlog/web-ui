@@ -1,0 +1,852 @@
+{
+  "viewId": "po-poei-detail-detailaddon",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 3,
+      "type": "TOOLBAR",
+      "label": "global.blank.label.string.for.space",
+      "children": [
+        {
+          "id": 4,
+          "type": "BTN",
+          "subType": "TER",
+          "icon": "icon-save",
+          "label": "global.save",
+          "submitForm": true,
+          "eventValidated": "dtl.saveAddons()",
+          "securityLevel": 3,
+          "conditionDisabled": "!dtl.isDetailAddonsEnabled"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "EXP_AREA",
+      "label": "global.whole.order.discount",
+      "children": [
+        {
+          "id": 6,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 7,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 12,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 13,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.poeiDetailAddons.wodiscamt",
+                      "label": "global.whole.order.discount",
+                      "dataFormat": "DECIMAL",
+                      "digits": 9,
+                      "decimals": 2,
+                      "conditionReadonly": "!dtl.isDetailAddonsEnabled",
+                      "conditionDisabled": "!dtl.poeiDetailAddons.wodiscamtSensitive",
+                      "size": "SM",
+                      "eventChange": "dtl.addonsFieldChanged('discamt',0)",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 17,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "dtl.poeiDetailAddons.wodisctype",
+                      "label": "global.amount.type",
+                      "type3": "SET",
+                      "metaGroup": "COMMON",
+                      "meta": "AmountPercentageType",
+                      "size": "SM",
+                      "conditionReadonly": "!dtl.isDetailAddonsEnabled",
+                      "eventChange": "dtl.addonsFieldChanged('disctype',0)",
+                      "conditionDisabled": "!dtl.poeiDetailAddons.wodisctypeSensitive",
+                      "blankOption": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 11,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "dtl.poeiDetailAddons.wodiscnet",
+                  "label": "global.net.amount",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "dtl.poeiDetailAddons.wodiscproof",
+                  "label": "global.proof",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "EXP_AREA",
+      "label": "global.add.ons.discount",
+      "children": [
+        {
+          "id": 109,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 110,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 108,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.poeiDetailAddons.freightexpectfl",
+                  "label": "global.freight.expected",
+                  "dataFormat": "LOGICAL",
+                  "conditionDisabled": "!dtl.isDetailAddonsEnabled"
+                }
+              ]
+            },
+            {
+              "id": 111,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 112,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "dtl.poeiDetailAddons.textmsg1",
+                  "label": "global.message",
+                  "labelHidden": true
+                },
+                {
+                  "id": 113,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "dtl.poeiDetailAddons.textmsg2",
+                  "label": "global.message",
+                  "labelHidden": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 47,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 48,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 26,
+                  "type": "FIELD_SET",
+                  "label": "global.addon.1",
+                  "children": [
+                    {
+                      "id": 27,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 28,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.poeiDetailAddons.addonno1",
+                              "label": "global.type",
+                              "conditionDisabled": "!dtl.poeiDetailAddons.addonno1Sensitive",
+                              "type3": "CODES",
+                              "meta": "POAddon",
+                              "conditionRequired": "dtl.poeiDetailAddons.addonamt1 > 0",
+                              "conditionReadonly": "!dtl.isDetailAddonsEnabled"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 30,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.poeiDetailAddons.addonamt1",
+                              "label": "global.amount",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "conditionDisabled": "!dtl.poeiDetailAddons.addonamt1Sensitive",
+                              "decimals": 2,
+                              "size": "SM",
+                              "eventChange": "dtl.addonsFieldChanged('addonamt',1)",
+                              "conditionReadonly": "!dtl.isDetailAddonsEnabled",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 29,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.poeiDetailAddons.addontype1",
+                              "label": "global.amount.type",
+                              "type3": "SET",
+                              "metaGroup": "COMMON",
+                              "meta": "AmountPercentageType",
+                              "size": "SM",
+                              "conditionReadonly": "!dtl.isDetailAddonsEnabled",
+                              "eventChange": "dtl.addonsFieldChanged('addontype',1)",
+                              "conditionDisabled": "!dtl.poeiDetailAddons.addontype1Sensitive",
+                              "blankOption": false
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 35,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 36,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 49,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 34,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.poeiDetailAddons.addoncaptype1",
+                                  "label": "global.expensed.capitalized",
+                                  "type3": "SET",
+                                  "metaGroup": "PO",
+                                  "meta": "CapitalizeExpenseType",
+                                  "size": "SM",
+                                  "conditionReadonly": "!dtl.isDetailAddonsEnabled",
+                                  "eventChange": "dtl.addonsFieldChanged('addoncapty',1)",
+                                  "conditionDisabled": "!dtl.poeiDetailAddons.addoncaptype1Sensitive",
+                                  "blankOption": false
+                                },
+                                {
+                                  "id": 40,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.poeiDetailAddons.addondistty1",
+                                  "label": "global.allocation",
+                                  "type3": "SET",
+                                  "metaGroup": "PO",
+                                  "meta": "AddOnDistType",
+                                  "conditionDisabled": "",
+                                  "conditionShow": "dtl.isAddonCapType1Visible()",
+                                  "size": "SM",
+                                  "conditionReadonly": "!dtl.isDetailAddonsEnabled"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 38,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailAddons.addonnet1",
+                              "label": "global.net.amount",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 43,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailAddons.addonproof1",
+                              "label": "global.proof",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 50,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 51,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 52,
+                  "type": "FIELD_SET",
+                  "label": "global.addon.2",
+                  "children": [
+                    {
+                      "id": 53,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 54,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 57,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.poeiDetailAddons.addonno2",
+                              "label": "global.type",
+                              "conditionDisabled": "!dtl.poeiDetailAddons.addonno2Sensitive",
+                              "type3": "CODES",
+                              "meta": "POAddon",
+                              "conditionRequired": "dtl.poeiDetailAddons.addonamt2 > 0",
+                              "conditionReadonly": "!dtl.isDetailAddonsEnabled"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 59,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 60,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.poeiDetailAddons.addonamt2",
+                              "label": "global.amount",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "conditionDisabled": "!dtl.poeiDetailAddons.addonamt2Sensitive",
+                              "decimals": 2,
+                              "size": "SM",
+                              "eventChange": "dtl.addonsFieldChanged('addonamt',2)",
+                              "conditionReadonly": "!dtl.isDetailAddonsEnabled",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 58,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 61,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.poeiDetailAddons.addontype2",
+                              "label": "global.amount.type",
+                              "type3": "SET",
+                              "metaGroup": "COMMON",
+                              "meta": "AmountPercentageType",
+                              "size": "SM",
+                              "conditionReadonly": "!dtl.isDetailAddonsEnabled",
+                              "eventChange": "dtl.addonsFieldChanged('addontype',2)",
+                              "conditionDisabled": "!dtl.poeiDetailAddons.addontype2Sensitive",
+                              "blankOption": false
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 55,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 56,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 64,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 65,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.poeiDetailAddons.addoncaptype2",
+                                  "label": "global.expensed.capitalized",
+                                  "type3": "SET",
+                                  "metaGroup": "PO",
+                                  "meta": "CapitalizeExpenseType",
+                                  "size": "SM",
+                                  "conditionReadonly": "!dtl.isDetailAddonsEnabled",
+                                  "eventChange": "dtl.addonsFieldChanged('addoncapty',2)",
+                                  "conditionDisabled": "!dtl.poeiDetailAddons.addoncaptype2Sensitive",
+                                  "blankOption": false
+                                },
+                                {
+                                  "id": 66,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.poeiDetailAddons.addondistty2",
+                                  "label": "global.allocation",
+                                  "type3": "SET",
+                                  "metaGroup": "PO",
+                                  "meta": "AddOnDistType",
+                                  "conditionDisabled": "",
+                                  "conditionShow": "dtl.isAddonCapType2Visible()",
+                                  "size": "SM",
+                                  "conditionReadonly": "!dtl.isDetailAddonsEnabled"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 62,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 67,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailAddons.addonnet2",
+                              "label": "global.net.amount",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 68,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailAddons.addonproof2",
+                              "label": "global.proof",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 69,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 70,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 74,
+                  "type": "FIELD_SET",
+                  "label": "global.addon.3",
+                  "children": [
+                    {
+                      "id": 75,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 76,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 81,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.poeiDetailAddons.addonno3",
+                              "label": "global.type",
+                              "conditionDisabled": "!dtl.poeiDetailAddons.addonno3Sensitive",
+                              "type3": "CODES",
+                              "meta": "POAddon",
+                              "conditionRequired": "dtl.poeiDetailAddons.addonamt3 > 0",
+                              "conditionReadonly": "!dtl.isDetailAddonsEnabled"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 80,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 82,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.poeiDetailAddons.addonamt3",
+                              "label": "global.amount",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "conditionDisabled": "!dtl.poeiDetailAddons.addonamt3Sensitive",
+                              "decimals": 2,
+                              "size": "SM",
+                              "eventChange": "dtl.addonsFieldChanged('addonamt',3)",
+                              "conditionReadonly": "!dtl.isDetailAddonsEnabled",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 79,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 83,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.poeiDetailAddons.addontype3",
+                              "label": "global.amount.type",
+                              "type3": "SET",
+                              "metaGroup": "COMMON",
+                              "meta": "AmountPercentageType",
+                              "size": "SM",
+                              "conditionReadonly": "!dtl.isDetailAddonsEnabled",
+                              "eventChange": "dtl.addonsFieldChanged('addontype',3)",
+                              "conditionDisabled": "!dtl.poeiDetailAddons.addontype3Sensitive",
+                              "blankOption": false
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 77,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 78,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 85,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 86,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.poeiDetailAddons.addoncaptype3",
+                                  "label": "global.expensed.capitalized",
+                                  "type3": "SET",
+                                  "metaGroup": "PO",
+                                  "meta": "CapitalizeExpenseType",
+                                  "size": "SM",
+                                  "conditionReadonly": "!dtl.isDetailAddonsEnabled",
+                                  "eventChange": "dtl.addonsFieldChanged('addoncapty',3)",
+                                  "conditionDisabled": "!dtl.poeiDetailAddons.addoncaptype3Sensitive",
+                                  "blankOption": false
+                                },
+                                {
+                                  "id": 87,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.poeiDetailAddons.addondistty3",
+                                  "label": "global.allocation",
+                                  "type3": "SET",
+                                  "metaGroup": "PO",
+                                  "meta": "AddOnDistType",
+                                  "conditionDisabled": "",
+                                  "conditionShow": "dtl.isAddonCapType3Visible()",
+                                  "size": "SM",
+                                  "conditionReadonly": "!dtl.isDetailAddonsEnabled"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 84,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 88,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailAddons.addonnet3",
+                              "label": "global.net.amount",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 89,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailAddons.addonproof3",
+                              "label": "global.proof",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 90,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 91,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 92,
+                  "type": "FIELD_SET",
+                  "label": "global.addon.4",
+                  "children": [
+                    {
+                      "id": 93,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 94,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 99,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.poeiDetailAddons.addonno4",
+                              "label": "global.type",
+                              "conditionDisabled": "!dtl.poeiDetailAddons.addonno4Sensitive",
+                              "type3": "CODES",
+                              "meta": "POAddon",
+                              "conditionRequired": "dtl.poeiDetailAddons.addonamt4 > 0",
+                              "conditionReadonly": "!dtl.isDetailAddonsEnabled"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 98,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 100,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.poeiDetailAddons.addonamt4",
+                              "label": "global.amount",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "conditionDisabled": "!dtl.poeiDetailAddons.addonamt4Sensitive",
+                              "decimals": 2,
+                              "size": "SM",
+                              "eventChange": "dtl.addonsFieldChanged('addonamt',4)",
+                              "conditionReadonly": "!dtl.isDetailAddonsEnabled",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 97,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 101,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.poeiDetailAddons.addontype4",
+                              "label": "global.amount.type",
+                              "type3": "SET",
+                              "metaGroup": "COMMON",
+                              "meta": "AmountPercentageType",
+                              "size": "SM",
+                              "conditionReadonly": "!dtl.isDetailAddonsEnabled",
+                              "eventChange": "dtl.addonsFieldChanged('addontype',4)",
+                              "conditionDisabled": "!dtl.poeiDetailAddons.addontype4Sensitive",
+                              "blankOption": false
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 95,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 96,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 103,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 104,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.poeiDetailAddons.addoncaptype4",
+                                  "label": "global.expensed.capitalized",
+                                  "type3": "SET",
+                                  "metaGroup": "PO",
+                                  "meta": "CapitalizeExpenseType",
+                                  "size": "SM",
+                                  "conditionReadonly": "!dtl.isDetailAddonsEnabled",
+                                  "eventChange": "dtl.addonsFieldChanged('addoncapty',4)",
+                                  "conditionDisabled": "!dtl.poeiDetailAddons.addoncaptype4Sensitive",
+                                  "blankOption": false
+                                },
+                                {
+                                  "id": 105,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.poeiDetailAddons.addondistty4",
+                                  "label": "global.allocation",
+                                  "type3": "SET",
+                                  "metaGroup": "PO",
+                                  "meta": "AddOnDistType",
+                                  "conditionDisabled": "",
+                                  "conditionShow": "dtl.isAddonCapType4Visible()",
+                                  "size": "SM",
+                                  "conditionReadonly": "!dtl.isDetailAddonsEnabled"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 102,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 106,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailAddons.addonnet4",
+                              "label": "global.net.amount",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 107,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.poeiDetailAddons.addonproof4",
+                              "label": "global.proof",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

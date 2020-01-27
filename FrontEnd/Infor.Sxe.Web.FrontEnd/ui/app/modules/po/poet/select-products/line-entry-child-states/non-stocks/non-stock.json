@@ -1,0 +1,276 @@
+{
+  "viewId": "po-poet-selectproducts-lineentrychildstates-nonstock",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ale.isNonStock()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "{{aleNs.getTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "aleNs.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.submit",
+                  "icon": "icon-save",
+                  "submitForm": true,
+                  "eventValidated": "aleNs.submit()"
+                },
+                {
+                  "id": 15,
+                  "type": "BTN",
+                  "label": "global.default.fields",
+                  "conditionDisabled": "!aleNs.polineNonStock.defaultbuttonenabled",
+                  "conditionShow": "!aleNs.polineNonStock.defaultbuttonhidden",
+                  "eventClick": "aleNs.defaultFields()"
+                },
+                {
+                  "id": 16,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "aleNs.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.polineNonStock.prod",
+                          "label": "global.product",
+                          "meta": "ProdAllNonStock",
+                          "maxLength": 50,
+                          "size": "LG",
+                          "autoFocus": true,
+                          "eventChange": "aleNs.fieldChangedWithProductCheck()",
+                          "contextOptions": {
+                            "deactivated": true
+                          },
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleNs.polineNonStock.proddesc1",
+                          "label": "global.description",
+                          "maxLength": 24
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleNs.polineNonStock.proddesc2",
+                          "label": "global.description",
+                          "maxLength": 24,
+                          "labelHidden": true,
+                          "attachUp": true
+                        },
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleNs.polineNonStock.calcprice",
+                          "label": "global.price",
+                          "dataFormat": "CURRENCY",
+                          "digits": 7,
+                          "decimals": 5,
+                          "conditionShow": "!aleNs.polineNonStock.calcpricehidden",
+                          "eventChange": "aleNs.fieldChanged(aleNs.NONSTOCK_FIELDNAME_PRICE)",
+                          "conditionReadonly": "!aleNs.polineNonStock.calcpriceenabled"
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.polineNonStock.prodcat",
+                          "label": "global.category",
+                          "meta": "ProdCat",
+                          "conditionShow": "!aleNs.polineNonStock.prodcathidden",
+                          "eventChange": "aleNs.fieldChanged(aleNs.NONSTOCK_FIELDNAME_PRODUCTCATEGORY)",
+                          "conditionReadonly": "!aleNs.polineNonStock.prodcatenabled"
+                        },
+                        {
+                          "id": 57,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleNs.polineNonStock.upcid",
+                          "label": "global.upc.number",
+                          "maxLength": 24
+                        },
+                        {
+                          "id": 41,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "aleNs.polineNonStock.ncnr",
+                          "label": "global.ncnr",
+                          "dataFormat": "LOGICAL",
+                          "subFormat": "YBlank"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 54,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleNs.polineNonStock.weight",
+                          "label": "global.weight",
+                          "dataFormat": "DECIMAL",
+                          "digits": 7,
+                          "decimals": 5
+                        },
+                        {
+                          "id": 55,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleNs.polineNonStock.cubes",
+                          "label": "global.cubes",
+                          "dataFormat": "DECIMAL",
+                          "digits": 7,
+                          "decimals": 5
+                        },
+                        {
+                          "id": 33,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "aleNs.polineNonStock.countryoforigin",
+                          "label": "global.country.of.origin",
+                          "type3": "CODES",
+                          "meta": "Country",
+                          "eventChange": "aleNs.fieldChanged(aleNs.NONSTOCK_FIELDNAME_COUNTRYOFORIGIN)"
+                        },
+                        {
+                          "id": 34,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.polineNonStock.tariffcd",
+                          "label": "global.hs.code",
+                          "meta": "Tariff",
+                          "eventChange": "aleNs.fieldChanged(aleNs.NONSTOCK_FIELDNAME_TARIFFCD)"
+                        },
+                        {
+                          "id": 56,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleNs.polineNonStock.dutyrate",
+                          "label": "global.duty.rate",
+                          "dataFormat": "DECIMAL",
+                          "digits": 7,
+                          "decimals": 5,
+                          "readonly": true
+                        },
+                        {
+                          "id": 47,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleNs.polineNonStock.foreigncost",
+                          "label": "global.vendor.foreign.cost",
+                          "dataFormat": "CURRENCY",
+                          "conditionShow": "!aleNs.polineNonStock.foreigncosthidden"
+                        },
+                        {
+                          "id": 50,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleNs.polineNonStock.exchangerate",
+                          "label": "global.exchange.rate",
+                          "conditionShow": "!aleNs.polineNonStock.exchangeratehidden"
+                        },
+                        {
+                          "id": 49,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleNs.polineNonStock.currencyty",
+                          "label": "global.currency.code",
+                          "conditionShow": "!aleNs.polineNonStock.currencytyhidden",
+                          "dataDesc": "{{aleNs.polineNonStock.currencytyshort}}"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 12,
+                  "type": "EXP_AREA",
+                  "label": "global.cost.calculator",
+                  "collapsed": true,
+                  "conditionShow": "!aleNs.polineNonStock.calculatebuttonhidden",
+                  "children": [
+                    {
+                      "id": 52,
+                      "type": "CUSTOM",
+                      "subType": "NonStockCostCalculator",
+                      "options": {
+                        "calcCostCallback": "aleNs.costCalculatorCostChangedCallback()",
+                        "calcCostModel": "aleNs.polineNonStock.foreigncost",
+                        "vendorNumberModel": "aleNs.polineNonStock.vendno",
+                        "vendorNameModel": "aleNs.polineNonStock.vendname",
+                        "productCostModel": "aleNs.polineNonStock.calcprice",
+                        "exchangeRateModel": "aleNs.polineNonStock.exchangerate",
+                        "currencyCodeModel": "aleNs.polineNonStock.currencyty",
+                        "calcModeModel": "global.purchase.order"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "type": "VIEW_CNTR",
+      "viewName": "nonStockChildView"
+    }
+  ]
+}

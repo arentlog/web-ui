@@ -1,0 +1,213 @@
+{
+  "viewId": "wt-wtia-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isMaster()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "global.approve.transfer.inquiry",
+          "children": [
+            {
+              "id": 34,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.print",
+              "icon": "icon-print",
+              "eventClick": "mst.print()"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 6,
+              "type": "GRID",
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "selectable": "multiple",
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 5,
+                  "type": "TOOLBAR",
+                  "label": "global.transfer.approvals",
+                  "children": [
+                    {
+                      "id": 33,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.quick.view",
+                      "eventClick": "mst.quickView()",
+                      "conditionDisabled": "!base.grid.isOneRowSelected()"
+                    },
+                    {
+                      "id": 30,
+                      "type": "BTN",
+                      "subType": "MENU",
+                      "label": "global.actions",
+                      "conditionDisabled": "!base.grid.isAnyRowSelected()",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "MENU_OPT",
+                          "label": "{{mst.getApproveLabel()}}",
+                          "eventClick": "mst.approveLines()",
+                          "conditionDisabled": "!base.grid.isAnyRowSelected()"
+                        },
+                        {
+                          "id": 32,
+                          "type": "MENU_OPT",
+                          "label": "global.deny.all.lines.cancel",
+                          "eventClick": "mst.denyLines()",
+                          "conditionDisabled": "!base.grid.isAnyRowSelected()"
+                        },
+                        {
+                          "id": 36,
+                          "type": "MENU_OPT",
+                          "label": "global.print",
+                          "conditionDisabled": "!base.grid.isOneRowSelected()",
+                          "eventClick": "mst.printSingleTransfer()"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "wtno",
+                  "label": "global.transfer.number",
+                  "width": null,
+                  "dataFormat": "INTEGER_TEXT",
+                  "eventClick": "mst.inquireOrder()"
+                },
+                {
+                  "id": 9,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "wtsuf",
+                  "label": "global.suffix",
+                  "dataFormat": "Suffix"
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "notesfl",
+                  "label": "global.notes"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "transtype",
+                  "label": "global.type",
+                  "type3": "SET",
+                  "metaGroup": "WT",
+                  "meta": "TransferTransactionType"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "stagecdx",
+                  "label": "global.stage",
+                  "type3": "SET",
+                  "metaGroup": "WT",
+                  "meta": "StageTypeFromCode"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "enterdt",
+                  "label": "global.entered.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "duedt",
+                  "label": "global.due.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipfmwhse",
+                  "label": "global.from.whse"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipfmname",
+                  "label": "global.from.name"
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shiptowhse",
+                  "label": "global.to.whse"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shiptoname",
+                  "label": "global.to.name"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "nounappr",
+                  "label": "symbol.pound.lns.unappr",
+                  "dataFormat": "INTEGER"
+                },
+                {
+                  "id": 29,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "amounti",
+                  "label": "global.amount",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 35,
+      "type": "VIEW_CNTR",
+      "viewName": "print"
+    }
+  ]
+}

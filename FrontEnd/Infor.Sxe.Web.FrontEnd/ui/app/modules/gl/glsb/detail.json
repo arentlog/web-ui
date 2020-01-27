@@ -1,0 +1,369 @@
+{
+  "viewId": "gl-glsb-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.budget.amounts",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.glsb.budgettype",
+                              "label": "global.entry.type",
+                              "type3": "SET",
+                              "metaGroup": "COMMON",
+                              "meta": "AmountPercentageType",
+                              "blankOption": false,
+                              "size": "SM",
+                              "eventChange": "dtl.entryTypeChanged()"
+                            },
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.glsb.annbud",
+                              "label": "global.annual.budget",
+                              "dataFormat": "DECIMAL",
+                              "decimals": 2,
+                              "digits": 11,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 38,
+                              "type": "BTN",
+                              "subType": "",
+                              "label": "global.create.division.s",
+                              "eventClick": "dtl.createDivisions()",
+                              "securityLevel": 4,
+                              "conditionDisabled": "base.isDetail()"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.calcmethod",
+                              "label": "global.calculation.methods",
+                              "type3": "SET",
+                              "metaGroup": "GL",
+                              "meta": "CalcMethods",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 41,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 35,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.pctchg",
+                                  "label": "global.pct.change",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 3,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 40,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.glsb.frozenfl",
+                                  "label": "global.frozen.budget",
+                                  "dataFormat": "LOGICAL",
+                                  "subFormat": "YesNo",
+                                  "size": "SM",
+                                  "disabled": true
+                                }
+                              ]
+                            },
+                            {
+                              "id": 37,
+                              "type": "BTN",
+                              "subType": "",
+                              "label": "global.calculate",
+                              "eventClick": "dtl.recalculateBudget()",
+                              "conditionDisabled": "base.isDetail()"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 27,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 28,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 24,
+                              "type": "GRID",
+                              "model": "dtl.budgetAmounts",
+                              "controlRef": "dtl.grid",
+                              "options": {
+                                "paging": false,
+                                "showRowCount": false,
+                                "editable": true
+                              },
+                              "controls": {
+                                "toolbar": {
+                                  "id": 25,
+                                  "type": "TOOLBAR",
+                                  "label": "global.budget.amounts"
+                                }
+                              },
+                              "children": [
+                                {
+                                  "id": 26,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "period",
+                                  "label": "global.period"
+                                },
+                                {
+                                  "id": 29,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "peramt",
+                                  "label": "global.period.amount",
+                                  "editable": true,
+                                  "cellEditable": "dtl.isAmountEditable()",
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 30,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "budpct",
+                                  "label": "global.budget.percent",
+                                  "editable": true,
+                                  "digits": 3,
+                                  "decimals": 2,
+                                  "cellEditable": "dtl.isPercentEditable()",
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 31,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "budytd",
+                                  "label": "global.budget.ytd",
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 32,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "pctytd",
+                                  "label": "global.percentage.ytd",
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 33,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "actual",
+                                  "label": "global.actual",
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "glsb",
+                        "objectRef": "dtl.glsb",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Glsb",
+      "contextValues": {
+        "key1": "dtl.glsb.yr",
+        "key2": "dtl.glsb.gldivno",
+        "key3": "dtl.glsb.gldeptno",
+        "key4": "dtl.glsb.glacctno",
+        "key5": "dtl.glsb.glsubno",
+        "key6": "dtl.glsb.revno"
+      }
+    },
+    {
+      "id": 43,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Glsa",
+      "contextValues": {
+        "key1": "base.glno"
+      }
+    }
+  ]
+}

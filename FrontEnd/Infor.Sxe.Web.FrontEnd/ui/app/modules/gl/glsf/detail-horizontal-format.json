@@ -1,0 +1,529 @@
+{
+  "viewId": "gl-glsf-detailhorizontalformat",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.financial.statement.details",
+              "subLabel": "{{base.getSubTitleForDetail(dtlf.glsfDesignSummary)}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtlf.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtlf.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtlf.back()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "EXP_AREA",
+                  "label": "global.companies",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "COL",
+                          "subType": "1/4",
+                          "children": [
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "RADIO_SET",
+                              "model": "dtlf.glsfSetupF.conoType",
+                              "label": "global.selection",
+                              "type3": "SET",
+                              "meta": "RangeListAllTypes",
+                              "metaGroup": "COMMON",
+                              "autoFocus": true
+                            }
+                          ]
+                        },
+                        {
+                          "id": 22,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "RADIO_SET",
+                              "model": "dtlf.glsfSetupF.conoSumm",
+                              "label": "global.detail.type",
+                              "type3": "SET",
+                              "metaGroup": "COMMON",
+                              "meta": "DetailsType"
+                            },
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "RADIO_SET",
+                              "model": "dtlf.glsfSetupF.conoHV",
+                              "label": "global.layout",
+                              "type3": "SET",
+                              "metaGroup": "GL",
+                              "meta": "FinancialStatementLayoutType",
+                              "conditionShow": "dtlf.glsfSetupF.conoType === 'l'"
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtlf.glsfSetupF.conoFrom",
+                              "label": "global.from.company",
+                              "conditionShow": "dtlf.glsfSetupF.conoType === 'r'",
+                              "type3": "MANUAL",
+                              "optionsModel": "dtlf.companiesList"
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtlf.glsfSetupF.conoTo",
+                              "label": "global.to.company",
+                              "conditionShow": "dtlf.glsfSetupF.conoType === 'r'",
+                              "type3": "MANUAL",
+                              "optionsModel": "dtlf.companiesList"
+                            },
+                            {
+                              "id": 27,
+                              "type": "GRID",
+                              "model": "dtlf.glsfSetupfConoFiltered",
+                              "controlRef": "dtlf.companiesGrid",
+                              "conditionShow": "dtlf.glsfSetupF.conoType === 'l'",
+                              "options": {
+                                "editable": true,
+                                "showCheckboxes": false,
+                                "paging": false,
+                                "showRowCount": false
+                              },
+                              "controls": {
+                                "toolbar": {
+                                  "id": 28,
+                                  "type": "TOOLBAR",
+                                  "label": "global.companies",
+                                  "conditionShow": "",
+                                  "subLabel": "global.up.to.fifteen.maximum",
+                                  "children": []
+                                }
+                              },
+                              "children": [
+                                {
+                                  "id": 29,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "itemno",
+                                  "label": "global.column",
+                                  "editable": false,
+                                  "maxLength": 0,
+                                  "digits": 4,
+                                  "dataFormat": "INTEGER"
+                                },
+                                {
+                                  "id": 68,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "cono",
+                                  "label": "global.company",
+                                  "editable": true,
+                                  "maxLength": 0,
+                                  "digits": 4,
+                                  "dataFormat": "INTEGER_TEXT"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 13,
+                  "type": "EXP_AREA",
+                  "label": "global.divisions",
+                  "children": [
+                    {
+                      "id": 14,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 15,
+                          "type": "COL",
+                          "subType": "1/4",
+                          "children": [
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "RADIO_SET",
+                              "model": "dtlf.glsfSetupF.divnoType",
+                              "label": "global.selection",
+                              "type3": "SET",
+                              "meta": "RangeListAllTypes",
+                              "metaGroup": "COMMON"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 36,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "RADIO_SET",
+                              "model": "dtlf.glsfSetupF.divnoSumm",
+                              "label": "global.detail.type",
+                              "type3": "SET",
+                              "metaGroup": "COMMON",
+                              "meta": "DetailsType"
+                            },
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "RADIO_SET",
+                              "model": "dtlf.glsfSetupF.divnoHV",
+                              "label": "global.layout",
+                              "type3": "SET",
+                              "metaGroup": "GL",
+                              "meta": "FinancialStatementLayoutType",
+                              "conditionShow": "dtlf.glsfSetupF.divnoType === 'l'"
+                            },
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtlf.glsfSetupF.divnoFrom",
+                              "label": "global.from.division",
+                              "conditionShow": "dtlf.glsfSetupF.divnoType === 'r'",
+                              "type3": "MANUAL",
+                              "optionsModel": "dtlf.divisionsList"
+                            },
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtlf.glsfSetupF.divnoTo",
+                              "label": "global.to.division",
+                              "conditionShow": "dtlf.glsfSetupF.divnoType === 'r'",
+                              "type3": "MANUAL",
+                              "optionsModel": "dtlf.divisionsList"
+                            },
+                            {
+                              "id": 43,
+                              "type": "GRID",
+                              "model": "dtlf.glsfSetupfDivNoFiltered",
+                              "controlRef": "dtlf.divisionsGrid",
+                              "conditionShow": "dtlf.glsfSetupF.divnoType === 'l'",
+                              "options": {
+                                "showCheckboxes": false,
+                                "editable": true,
+                                "paging": false,
+                                "showRowCount": false
+                              },
+                              "controls": {
+                                "toolbar": {
+                                  "id": 44,
+                                  "type": "TOOLBAR",
+                                  "label": "global.divisions",
+                                  "subLabel": "global.up.to.fifteen.maximum",
+                                  "children": []
+                                }
+                              },
+                              "children": [
+                                {
+                                  "id": 45,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "itemno",
+                                  "label": "global.column",
+                                  "editable": false,
+                                  "dataFormat": "INTEGER"
+                                },
+                                {
+                                  "id": 69,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "divno",
+                                  "label": "global.division",
+                                  "editable": true,
+                                  "dataFormat": "INTEGER_TEXT"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 16,
+                  "type": "EXP_AREA",
+                  "label": "global.departments",
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/4",
+                          "children": [
+                            {
+                              "id": 48,
+                              "type": "FIELD",
+                              "subType": "RADIO_SET",
+                              "model": "dtlf.glsfSetupF.deptnoType",
+                              "label": "global.selection",
+                              "type3": "SET",
+                              "meta": "RangeListAllTypes",
+                              "metaGroup": "COMMON"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 49,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 50,
+                              "type": "FIELD",
+                              "subType": "RADIO_SET",
+                              "model": "dtlf.glsfSetupF.deptnoSumm",
+                              "label": "global.detail.type",
+                              "type3": "SET",
+                              "metaGroup": "COMMON",
+                              "meta": "DetailsType"
+                            },
+                            {
+                              "id": 51,
+                              "type": "FIELD",
+                              "subType": "RADIO_SET",
+                              "model": "dtlf.glsfSetupF.deptnoHV",
+                              "label": "global.layout",
+                              "type3": "SET",
+                              "metaGroup": "GL",
+                              "meta": "FinancialStatementLayoutType",
+                              "conditionShow": "dtlf.glsfSetupF.deptnoType === 'l'"
+                            },
+                            {
+                              "id": 53,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtlf.glsfSetupF.deptnoFrom",
+                              "label": "global.from.department",
+                              "conditionShow": "dtlf.glsfSetupF.deptnoType === 'r'",
+                              "type3": "MANUAL",
+                              "optionsModel": "dtlf.departmentsList"
+                            },
+                            {
+                              "id": 52,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtlf.glsfSetupF.deptnoTo",
+                              "label": "global.to.department",
+                              "conditionShow": "dtlf.glsfSetupF.deptnoType === 'r'",
+                              "type3": "MANUAL",
+                              "optionsModel": "dtlf.departmentsList"
+                            },
+                            {
+                              "id": 54,
+                              "type": "GRID",
+                              "model": "dtlf.glsfSetupfDeptNoFiltered",
+                              "controlRef": "dtlf.departmentsGrid",
+                              "conditionShow": "dtlf.glsfSetupF.deptnoType === 'l'",
+                              "options": {
+                                "showCheckboxes": false,
+                                "editable": true,
+                                "showDrilldown": false,
+                                "paging": false,
+                                "showRowCount": false
+                              },
+                              "controls": {
+                                "toolbar": {
+                                  "id": 55,
+                                  "type": "TOOLBAR",
+                                  "label": "global.departments",
+                                  "subLabel": "global.up.to.fifteen.maximum",
+                                  "children": []
+                                }
+                              },
+                              "children": [
+                                {
+                                  "id": 56,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "itemno",
+                                  "label": "global.column",
+                                  "editable": false,
+                                  "digits": 0,
+                                  "dataFormat": "INTEGER"
+                                },
+                                {
+                                  "id": 70,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "deptno",
+                                  "label": "global.department",
+                                  "editable": true,
+                                  "digits": 0,
+                                  "dataFormat": "INTEGER_TEXT"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.budgets",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 21,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 59,
+                              "type": "GRID",
+                              "model": "dtlf.glsfSetupfBudgetNoFiltered",
+                              "controlRef": "dtlf.budgetsGrid",
+                              "options": {
+                                "showCheckboxes": false,
+                                "editable": true,
+                                "paging": false,
+                                "showRowCount": false
+                              },
+                              "controls": {
+                                "toolbar": {
+                                  "id": 60,
+                                  "type": "TOOLBAR",
+                                  "label": "global.budgets",
+                                  "subLabel": "global.up.to.fifteen.maximum",
+                                  "conditionShow": "",
+                                  "children": []
+                                }
+                              },
+                              "children": [
+                                {
+                                  "id": 61,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "itemno",
+                                  "label": "global.column",
+                                  "editable": false,
+                                  "dataFormat": "INTEGER"
+                                },
+                                {
+                                  "id": 71,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "budgetno",
+                                  "label": "global.budget",
+                                  "editable": true,
+                                  "dataFormat": "INTEGER_TEXT"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 64,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 65,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 66,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 67,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtlf.glsfSetupF.comment",
+                              "label": "global.comment",
+                              "maxLength": 60,
+                              "size": "LG"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

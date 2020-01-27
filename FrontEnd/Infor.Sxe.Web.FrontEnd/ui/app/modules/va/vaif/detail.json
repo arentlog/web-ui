@@ -1,0 +1,617 @@
+{
+  "viewId": "va-vaif-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isDetail()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "global.value.add.details",
+          "subLabel": "{{dtl.subTitle}}",
+          "controls": {
+            "navBtns": {
+              "id": 4,
+              "type": "BTN_SET",
+              "subType": "TBAR_NAV",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "BTN",
+                  "subType": "ICON",
+                  "label": "special.button.back",
+                  "icon": "icon-left-arrow",
+                  "stateRef": "^.master"
+                }
+              ]
+            }
+          }
+        },
+        "content": {
+          "id": 6,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 7,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "COL",
+                  "subType": "1/3",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "dtl.vaeh.transtype",
+                      "label": "global.type",
+                      "dataFormat": "VaOrderTransactionType"
+                    },
+                    {
+                      "id": 10,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "dtl.vaeh.shipprod",
+                      "label": "global.product",
+                      "dataDesc": "dtl.vaehRow.cProdDesc"
+                    },
+                    {
+                      "id": 11,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "dtl.vaeh.verno",
+                      "label": "global.version"
+                    }
+                  ]
+                },
+                {
+                  "id": 12,
+                  "type": "COL",
+                  "subType": "1/3",
+                  "children": [
+                    {
+                      "id": 13,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "dtl.vaeh.whse",
+                      "label": "global.warehouse"
+                    },
+                    {
+                      "id": 14,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "dtl.vaeh.stagecd",
+                      "label": "global.stage",
+                      "dataFormat": "VaStageCodeType"
+                    },
+                    {
+                      "id": 15,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "dtl.vaeh.unit",
+                      "label": "global.unit",
+                      "dataFormat": "UnitType"
+                    }
+                  ]
+                },
+                {
+                  "id": 16,
+                  "type": "COL",
+                  "subType": "1/3",
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "dtl.vaeh.nonstockty",
+                      "label": "global.line.type",
+                      "dataFormat": "VaFinishedProductLineType"
+                    },
+                    {
+                      "id": 18,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "dtl.vaeh.qtyord",
+                      "label": "global.ordered",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 19,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "dtl.vaeh.qtyship",
+                      "label": "global.ship",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "TAB_SET",
+              "id": 20,
+              "children": [
+                {
+                  "id": 21,
+                  "type": "TAB",
+                  "label": "global.header",
+                  "eventActivated": "dtl.activate('header')",
+                  "tabId": "header",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "va/vaif/tabs/header.json",
+                      "controller": "VaifDetailHeaderCtrl as hdr"
+                    }
+                  ]
+                },
+                {
+                  "id": 23,
+                  "type": "TAB",
+                  "label": "global.sections",
+                  "eventActivated": "dtl.activate('sections')",
+                  "tabId": "sections",
+                  "children": [
+                    {
+                      "id": 24,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "va/vaif/tabs/sections.json",
+                      "controller": "VaifDetailSectionCtrl as sctn"
+                    }
+                  ]
+                },
+                {
+                  "type": "TAB",
+                  "id": 25,
+                  "label": "global.line.detail",
+                  "conditionShow": "dtl.workingSection && dtl.workingSectionType.toLowerCase() !== 'sp'",
+                  "tabId": "line-detail",
+                  "children": [
+                    {
+                      "id": 37,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "controller": "VaifDetailLinesCtrl as lines",
+                      "viewPath": "va/vaif/tabs/lines.json"
+                    }
+                  ]
+                },
+                {
+                  "type": "TAB",
+                  "id": 36,
+                  "label": "global.labor.detail.inquiry",
+                  "tabId": "labor-detail-inquiry",
+                  "children": [
+                    {
+                      "id": 130,
+                      "type": "GRID",
+                      "controlRef": "dtl.gridLabor",
+                      "model": "dtl.laborlist",
+                      "controls": {
+                        "toolbar": {
+                          "id": 131,
+                          "type": "TOOLBAR",
+                          "label": "global.labor"
+                        }
+                      },
+                      "children": [
+                        {
+                          "id": 98,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "vano",
+                          "label": "global.value.add.order.number",
+                          "dataFormat": "INTEGER_TEXT"
+                        },
+                        {
+                          "id": 99,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "vasuf",
+                          "label": "global.suffix",
+                          "dataFormat": "Suffix"
+                        },
+                        {
+                          "id": 100,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "whse",
+                          "label": "global.warehouse"
+                        },
+                        {
+                          "id": 101,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "seqno",
+                          "label": "global.sequence.number.poundsign",
+                          "dataFormat": "INTEGER"
+                        },
+                        {
+                          "id": 102,
+                          "type": "GRID_COL",
+                          "subType": "DROP_DOWN",
+                          "model": "sctntype",
+                          "label": "global.section.type",
+                          "type3": "SET",
+                          "metaGroup": "VA",
+                          "meta": "SectionType",
+                          "blankOption": false
+                        },
+                        {
+                          "id": 103,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "sctncode",
+                          "label": "global.code"
+                        },
+                        {
+                          "id": 104,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "sctncodedesc",
+                          "label": "global.code.description"
+                        },
+                        {
+                          "id": 105,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "shipprod",
+                          "label": "global.product"
+                        },
+                        {
+                          "id": 106,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "prodDesc",
+                          "label": "global.product.description"
+                        },
+                        {
+                          "id": 107,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "totestamt",
+                          "label": "global.total.estimated.amount",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 108,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "totestsecs",
+                          "label": "global.total.estimated.time.seconds",
+                          "extra": true,
+                          "dataFormat": "INTEGER"
+                        },
+                        {
+                          "id": 109,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "totesthrs",
+                          "label": "global.total.estimated.time"
+                        },
+                        {
+                          "id": 110,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "totactamt",
+                          "label": "global.total.actual.amount",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 111,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "totactsecs",
+                          "label": "global.total.actual.time.seconds",
+                          "extra": true,
+                          "dataFormat": "INTEGER"
+                        },
+                        {
+                          "id": 112,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "totacthrs",
+                          "label": "global.total.actual.time"
+                        },
+                        {
+                          "id": 113,
+                          "type": "GRID_COL",
+                          "subType": "DATE",
+                          "model": "timeworkdt",
+                          "label": "global.date",
+                          "dataFormat": "DATE"
+                        },
+                        {
+                          "id": 114,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "timecomment",
+                          "label": "global.comment"
+                        },
+                        {
+                          "id": 115,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "estcost",
+                          "label": "global.estimated.cost",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 116,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "estamt",
+                          "label": "global.extended.estimated.amount",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 117,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "estsecs",
+                          "label": "global.estimated.seconds",
+                          "extra": true,
+                          "dataFormat": "INTEGER"
+                        },
+                        {
+                          "id": 118,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "esthrs",
+                          "label": "global.estimated.time"
+                        },
+                        {
+                          "id": 119,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "actcost",
+                          "label": "global.actual.cost",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 123,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "timeslsrep",
+                          "label": "global.builder"
+                        },
+                        {
+                          "id": 124,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "timeslsrepname",
+                          "label": "global.builder.name"
+                        },
+                        {
+                          "id": 120,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "actamt",
+                          "label": "global.extended.actual.amount",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 121,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "acthrs",
+                          "label": "global.actual.time"
+                        },
+                        {
+                          "id": 122,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "actsecs",
+                          "label": "global.actual.seconds",
+                          "extra": true,
+                          "dataFormat": "INTEGER"
+                        },
+                        {
+                          "id": 125,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "lineno",
+                          "label": "global.line.number",
+                          "extra": true,
+                          "dataFormat": "INTEGER"
+                        },
+                        {
+                          "id": 126,
+                          "type": "GRID_COL",
+                          "subType": "DROP_DOWN",
+                          "model": "timeactty",
+                          "label": "global.time.actual.type",
+                          "extra": true,
+                          "type3": "SET",
+                          "metaGroup": "VA",
+                          "meta": "TimeTypeNoVar",
+                          "blankOption": false
+                        },
+                        {
+                          "id": 127,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "tuserfield",
+                          "label": "global.user.field",
+                          "extra": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 34,
+                  "type": "TAB",
+                  "label": "global.warehouse.logistics.inquiry",
+                  "conditionShow": "dtl.wlTabVisible && dtl.workingSection",
+                  "eventActivated": "dtl.refreshWLData()",
+                  "tabId": "warehouse-logistics-inquiry",
+                  "children": [
+                    {
+                      "id": 35,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "controller": "VaifDetailWarehouseLogisticsCtrl as wl",
+                      "viewPath": "va/vaif/tabs/wl-inquiry.json"
+                    }
+                  ]
+                },
+                {
+                  "type": "TAB",
+                  "id": 26,
+                  "label": "global.late.charges",
+                  "conditionShow": "dtl.vaecresults.length",
+                  "tabId": "late-charges",
+                  "children": [
+                    {
+                      "id": 27,
+                      "type": "GRID",
+                      "model": "dtl.vaecresults",
+                      "controlRef": "dtl.vaecresultsGrid",
+                      "controls": {
+                        "toolbar": {
+                          "id": 28,
+                          "type": "TOOLBAR",
+                          "label": "global.late.charges",
+                          "children": []
+                        }
+                      },
+                      "children": [
+                        {
+                          "id": 29,
+                          "type": "GRID_COL",
+                          "subType": "DATE",
+                          "model": "enterdt",
+                          "label": "global.entered",
+                          "dataFormat": "DATE"
+                        },
+                        {
+                          "id": 30,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "amount",
+                          "label": "global.late.charges",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 31,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "jrnlno",
+                          "label": "global.journal",
+                          "dataFormat": "INTEGER"
+                        },
+                        {
+                          "id": 32,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "comment",
+                          "label": "global.comment"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 135,
+                  "type": "TAB",
+                  "label": "global.custom",
+                  "subFunction": "Custom",
+                  "tabId": "custom",
+                  "children": [
+                    {
+                      "id": 136,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "va/vaif/tabs/custom.json"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 128,
+      "type": "VIEW_CNTR",
+      "viewName": "extendedDetail"
+    },
+    {
+      "id": 129,
+      "type": "VIEW_CNTR",
+      "viewName": "lineDetail"
+    },
+    {
+      "id": 137,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Vaeh",
+      "contextValues": {
+        "key1": "dtl.vaeh.vano",
+        "key2": "dtl.vaeh.vasuf"
+      }
+    },
+    {
+      "id": 138,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsd",
+      "contextValues": {
+        "key1": "dtl.vaeh.whse"
+      }
+    },
+    {
+      "id": 139,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsp",
+      "contextValues": {
+        "key1": "dtl.vaeh.shipprod"
+      }
+    }
+  ]
+}

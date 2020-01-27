@@ -1,0 +1,294 @@
+{
+  "viewId": "ar-arsb-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.billing.type",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.arsb.billingtype",
+                              "label": "global.billing.type",
+                              "required": true,
+                              "type3": "SET",
+                              "metaGroup": "AR",
+                              "meta": "BillingType",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "",
+                              "eventChange": "dtl.setResetBillingDefaults()",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.arsb.billingprimarykey",
+                              "label": "global.customer.number",
+                              "meta": "Customer",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.arsb.billingtype === 'custno' || dtl.arsb.billingtype === 'shipto'",
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 32,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "conditionDisabled": "!dtl.arsb.billingprimarykey",
+                                  "stateRef": "aric.detail({pk: dtl.arsb.billingprimarykey})"
+                                }
+                              }
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.arsb.billingsecondarykey",
+                              "label": "global.ship.to",
+                              "meta": "ShipTo",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.arsb.billingtype === 'shipto'",
+                              "options": {
+                                "searchParams": {
+                                  "custno": {
+                                    "type": "REF",
+                                    "value": "dtl.arsb.billingprimarykey"
+                                  }
+                                }
+                              },
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 33,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "conditionDisabled": "!dtl.arsb.billingsecondarykey",
+                                  "stateRef": "aric.detail({pk: dtl.arsb.billingprimarykey, pk2: dtl.arsb.billingsecondarykey})"
+                                }
+                              }
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.arsb.billingprimarykey",
+                              "label": "global.customer.type",
+                              "meta": "CustType",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.arsb.billingtype === 'custtype'"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.arsb.billingprimarykey",
+                              "label": "global.ship.via",
+                              "meta": "ShipVia",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.arsb.billingtype === 'shipvia'"
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.arsb.billingprimarykey",
+                              "label": "global.warehouse",
+                              "meta": "Warehouse",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.arsb.billingtype === 'whse'"
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.arsb.billingprimarykey",
+                              "label": "global.carrier",
+                              "meta": "Carrier",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.arsb.billingtype === 'carrier'"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.arsb.chargefrght",
+                              "label": "global.charge.freight",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.arsb.chargebofl",
+                              "label": "global.charge.freight.on.back.orders",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.arsb.flatordamt",
+                              "label": "global.flat.rate.per.order",
+                              "dataFormat": "DECIMAL",
+                              "digits": 5,
+                              "decimals": 2,
+                              "sign": "+"
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.arsb.flatpkgamt",
+                              "label": "global.flat.rate.per.package",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 5,
+                              "decimals": 2
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.arsb.freightpct",
+                              "label": "global.percent.of.total.freight",
+                              "dataFormat": "DECIMAL",
+                              "digits": 3,
+                              "decimals": 2,
+                              "sign": "+"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

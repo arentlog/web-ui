@@ -1,0 +1,282 @@
+{
+  "viewId": "ic-icsv-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.upc.numbers",
+              "subLabel": "{{dtl.icsv.prod}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsv.vendno",
+                              "label": "global.vendor.number",
+                              "required": true,
+                              "meta": "Vendor",
+                              "readonly": false,
+                              "conditionReadonly": "!base.isCreate()",
+                              "autoFocus": true
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsv.prod",
+                              "label": "global.product",
+                              "meta": "ProdAll",
+                              "required": true,
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.UPC()",
+                              "label": "global.upc.number",
+                              "dataDesc": "base.upcprompt",
+                              "readonly": true
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsv.section1",
+                              "label": "{{base.UPCformat.upclabel1}}",
+                              "eventChange": "dtl.fieldLeave('Section1')",
+                              "mask": "{{base.mask(base.UPCformat.upclength1)}}",
+                              "dataFormat": "INTEGER_TEXT",
+                              "digits": 0,
+                              "conditionShow": "!base.UPCformat.upclabel1hidden",
+                              "conditionDisabled": "base.UPCformat.upclabel1hidden",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsv.section2",
+                              "label": "{{base.UPCformat.upclabel2}}",
+                              "dataFormat": "INTEGER_TEXT",
+                              "digits": 0,
+                              "eventChange": "dtl.fieldLeave('Section2')",
+                              "mask": "{{base.mask(base.UPCformat.upclength2)}}",
+                              "conditionShow": "!base.UPCformat.upclabel2hidden",
+                              "conditionDisabled": "base.UPCformat.upclabel2hidden",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsv.section3",
+                              "label": "{{base.UPCformat.upclabel3}}",
+                              "dataFormat": "INTEGER_TEXT",
+                              "digits": 0,
+                              "eventChange": "dtl.fieldLeave('Section3')",
+                              "mask": "{{base.mask(base.UPCformat.upclength3)}}",
+                              "conditionShow": "!base.UPCformat.upclabel3hidden",
+                              "conditionDisabled": "base.UPCformat.upclabel3hidden",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsv.section4",
+                              "label": "{{base.UPCformat.upclabel4}}",
+                              "dataFormat": "INTEGER_TEXT",
+                              "digits": 0,
+                              "eventChange": "dtl.fieldLeave('Section4')",
+                              "mask": "{{base.mask(base.UPCformat.upclength4)}}",
+                              "conditionShow": "!base.UPCformat.upclabel4hidden",
+                              "conditionDisabled": "base.UPCformat.upclabel4hidden",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsv.section5",
+                              "label": "{{base.UPCformat.upclabel5}}",
+                              "dataFormat": "INTEGER_TEXT",
+                              "digits": 0,
+                              "eventChange": "dtl.fieldLeave('Section5')",
+                              "mask": "{{base.mask(base.UPCformat.upclength5)}}",
+                              "conditionShow": "!base.UPCformat.upclabel5hidden",
+                              "conditionDisabled": "base.UPCformat.upclabel5hidden",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsv.section6",
+                              "label": "{{base.UPCformat.upclabel6}}",
+                              "dataFormat": "INTEGER_TEXT",
+                              "digits": 0,
+                              "eventChange": "dtl.fieldLeave('Section6')",
+                              "mask": "{{base.mask(base.UPCformat.upclength6)}}",
+                              "conditionShow": "!base.UPCformat.upclabel6hidden",
+                              "conditionDisabled": "base.UPCformat.upclabel6hidden",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "icsv",
+                        "objectRef": "dtl.icsv",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

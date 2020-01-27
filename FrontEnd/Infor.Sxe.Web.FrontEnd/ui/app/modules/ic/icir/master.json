@@ -1,0 +1,233 @@
+{
+  "viewId": "ic-icir-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.icir",
+          "subLabel": "",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 34,
+              "type": "COMP_FLD",
+              "children": [
+                {
+                  "id": 30,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "mst.icir.product",
+                  "label": "global.product",
+                  "meta": "ProdAll",
+                  "options": {
+                    "searchParams": {
+                      "whse": {
+                        "type": "REF",
+                        "value": "mst.icir.warehouse"
+                      }
+                    }
+                  },
+                  "controls": {
+                    "actionBtn": {
+                      "id": 36,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "global.inquire",
+                      "icon": "icon-drilldown",
+                      "isLabelTooltip": true,
+                      "conditionDisabled": "!mst.icir.product",
+                      "stateRef": "icip.detail({pk: mst.icir.product, pk2: mst.icir.warehouse})"
+                    }
+                  }
+                },
+                {
+                  "id": 31,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "mst.icir.warehouse",
+                  "label": "global.warehouse",
+                  "meta": "Warehouse"
+                },
+                {
+                  "id": 32,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.filter",
+                  "eventClick": "mst.filter()"
+                }
+              ]
+            },
+            {
+              "id": 7,
+              "type": "GRID",
+              "controlRef": "base.grid",
+              "model": "base.icirresults",
+              "options": {
+                "showDrilldown": false,
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                },
+                "showCheckboxes": true
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 8,
+                  "type": "TOOLBAR",
+                  "label": "global.storeroom.recoveries",
+                  "children": [
+                    {
+                      "id": 35,
+                      "type": "BTN",
+                      "subType": "PRI",
+                      "label": "global.create.orders",
+                      "eventClick": "mst.createOrders()",
+                      "icon": "icon-new-document",
+                      "securityLevel": 4,
+                      "conditionDisabled": "!base.isCreateOrdersButtonEnabled"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 10,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whse",
+                  "label": "global.warehouse"
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "prod",
+                  "label": "global.product",
+                  "eventClick": "mst.onProdInquiry()"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prodnotesfl",
+                  "label": "global.product.notes",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "custprod",
+                  "label": "global.customer.product"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "qty",
+                  "label": "global.quantity",
+                  "eventClick": "mst.onQuantityInquiry()",
+                  "dataFormat": "CURRENCY",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "unit",
+                  "label": "global.unit"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "price",
+                  "label": "global.price",
+                  "eventClick": "mst.onPriceInquiry()",
+                  "dataFormat": "CURRENCY",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5,
+                    "maximumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "extprice",
+                  "label": "global.extended.price",
+                  "dataFormat": "CURRENCY",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "orderpt",
+                  "label": "global.order.point",
+                  "dataFormat": "INTEGER"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "linept",
+                  "label": "global.line.point",
+                  "dataFormat": "INTEGER"
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "lastrcptdt",
+                  "label": "global.last.receipt.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 26,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "lastinvdt",
+                  "label": "global.last.invoice.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "criticalfl",
+                  "label": "global.critical.item.flag",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 28,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "leadtm",
+                  "label": "global.lead.time",
+                  "dataFormat": "INTEGER"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,291 @@
+{
+  "viewId": "pd-pdsp-nationalaccountcreate",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.national.program",
+              "subLabel": "{{nadtl.subtitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 8,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "",
+                      "eventClick": "nadtl.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "nadtl.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "SEC",
+                  "label": "global.cancel",
+                  "eventClick": "nadtl.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 43,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "nadtl.pdsn.clevelcd",
+                          "label": "global.level",
+                          "type3": "MANUAL",
+                          "optionsModel": "base.levelCodeDetailPDSN",
+                          "blankOption": false,
+                          "required": true,
+                          "conditionReadonly": "base.callType === 'copy'",
+                          "eventChange": "nadtl.changeLevelCode()"
+                        },
+                        {
+                          "id": 39,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "nadtl.pdsn.vendno",
+                          "label": "global.vendor.number",
+                          "meta": "Vendor",
+                          "required": true,
+                          "controls": {
+                            "actionBtn": {
+                              "id": 41,
+                              "type": "BTN",
+                              "subType": "ICON",
+                              "label": "global.inquire",
+                              "icon": "icon-drilldown",
+                              "isLabelTooltip": true,
+                              "conditionDisabled": "!nadtl.pdsn.vendno",
+                              "stateRef": "apiv.detail ({pk: nadtl.pdsn.vendno})",
+                              "conditionShow": "base.srchVendNoFl"
+                            }
+                          }
+                        },
+                        {
+                          "id": 44,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "nadtl.pdsn.custno",
+                          "label": "global.customer",
+                          "meta": "Customer",
+                          "conditionShow": "base.srchCustNoFl"
+                        },
+                        {
+                          "id": 45,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "nadtl.pdsn.shipto",
+                          "label": "global.ship.to.job",
+                          "meta": "ShipTo",
+                          "conditionShow": "base.srchShipToFl",
+                          "options": {
+                            "searchParams": {
+                              "custno": {
+                                "type": "REF",
+                                "value": "nadtl.pdsn.custno"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 53,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "nadtl.pdsn.custgroup",
+                          "label": "global.customer.group",
+                          "meta": "Group",
+                          "conditionShow": "base.srchCustGroupFl"
+                        },
+                        {
+                          "id": 55,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "nadtl.pdsn.custpricety",
+                          "label": "global.customer.price.type",
+                          "meta": "CustomerPriceType",
+                          "conditionShow": "base.srchCustPriceTypeFl"
+                        },
+                        {
+                          "id": 37,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "nadtl.pdsn.prod",
+                          "label": "global.product",
+                          "meta": "ProdAll",
+                          "conditionShow": "base.srchProdFl",
+                          "options": {
+                            "allowEntry": true
+                          },
+                          "controls": {
+                            "actionBtn": {
+                              "id": 42,
+                              "type": "BTN",
+                              "subType": "ICON",
+                              "label": "global.inquire",
+                              "icon": "icon-drilldown",
+                              "isLabelTooltip": true,
+                              "conditionDisabled": "!nadtl.pdsn.prod",
+                              "conditionShow": "base.srchProdFl",
+                              "stateRef": "icip.detail ({pk: nadtl.pdsn.prod, pk2: nadtl.pdsn.whse})"
+                            }
+                          }
+                        },
+                        {
+                          "id": 46,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "nadtl.pdsn.modelcode",
+                          "label": "global.model",
+                          "meta": "ProductModel",
+                          "conditionShow": "base.srchModelFl",
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 47,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "nadtl.pdsn.brandcode",
+                          "label": "global.brand.code",
+                          "meta": "BrandCode",
+                          "conditionShow": "base.srchBrandFl",
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 49,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "nadtl.pdsn.prodline",
+                          "label": "global.product.line",
+                          "meta": "ProdLine",
+                          "conditionShow": "base.srchProdLineFl",
+                          "options": {
+                            "allowEntry": true,
+                            "searchParams": {
+                              "vendno": {
+                                "type": "REF",
+                                "value": "nadtl.pdsn.vendno"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 48,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "nadtl.pdsn.prodcat",
+                          "label": "global.product.category",
+                          "meta": "ProdCat",
+                          "conditionShow": "base.srchProdCatFl",
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 50,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "nadtl.pdsn.prodpricety",
+                          "label": "global.product.price.type",
+                          "meta": "ProdPriceTy",
+                          "conditionShow": "base.srchProdPriceTypeFl",
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 51,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "nadtl.pdsn.rebtype",
+                          "label": "global.rebate.type",
+                          "meta": "ProductRebateType",
+                          "conditionShow": "base.srchRebTypeFl",
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 52,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "nadtl.pdsn.rebsubty",
+                          "label": "global.rebate.sub.type",
+                          "meta": "ProductRebateSubType",
+                          "conditionShow": "base.srchRebTypeFl",
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 25,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "nadtl.pdsn.startdt",
+                          "label": "global.start.date",
+                          "dataFormat": "DATE",
+                          "required": true
+                        }
+                      ]
+                    },
+                    {
+                      "id": 18,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

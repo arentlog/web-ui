@@ -1,0 +1,188 @@
+{
+  "viewId": "ic-icsc-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.catalog.product",
+              "subLabel": "{{dtl.icsc.catalog + ' | ' + dtl.icsc.descrip1 + ' ' + dtl.icsc.descrip2}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "TAB",
+                      "label": "global.general",
+                      "subFunction": "General",
+                      "tabId": "general",
+                      "children": [
+                        {
+                          "id": 23,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ic/icsc/tabs/general.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 24,
+                      "type": "TAB",
+                      "label": "global.pricing",
+                      "subFunction": "Pricing",
+                      "tabId": "pricing",
+                      "children": [
+                        {
+                          "id": 25,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ic/icsc/tabs/pricing.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 26,
+                      "type": "TAB",
+                      "label": "global.intrastat",
+                      "subFunction": "Intrastat",
+                      "tabId": "intrastat",
+                      "children": [
+                        {
+                          "id": 27,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ic/icsc/tabs/intrastat.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 28,
+                      "type": "TAB",
+                      "label": "global.custom",
+                      "subFunction": "Custom",
+                      "tabId": "custom",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "CUSTOM",
+                          "subType": "UserFields",
+                          "options": {
+                            "tableName": "icsc",
+                            "objectRef": "dtl.icsc",
+                            "conditionReadonly": "base.isDetail() || dtl.isCustomTabReadonly"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsc",
+      "contextValues": {
+        "key1": "dtl.icsc.catalog"
+      }
+    }
+  ]
+}

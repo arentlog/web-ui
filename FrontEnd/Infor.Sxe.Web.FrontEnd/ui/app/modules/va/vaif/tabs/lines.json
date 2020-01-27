@@ -1,0 +1,467 @@
+{
+  "viewId": "va-vaif-lines-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "TAB",
+  "children": [
+    {
+      "id": 59,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 51,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 52,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 53,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "dtl.workingSection",
+                  "label": "global.section.sequence.number"
+                }
+              ]
+            },
+            {
+              "id": 57,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 54,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "dtl.workingSectionType",
+                  "label": "global.section.type",
+                  "dataFormat": "VaSectionType"
+                }
+              ]
+            },
+            {
+              "id": 56,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 55,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "dtl.workingSectionDescrip",
+                  "label": "global.section.description"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "GRID",
+      "model": "dtl.valinelistresults",
+      "controlRef": "lines.grid",
+      "options": {
+        "showDrilldown": true,
+        "events": {
+          "drilldown": "lines.drilldown()",
+          "selected": "lines.selected()"
+        },
+        "showCheckboxes": true,
+        "selectable": "single"
+      },
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "global.lines",
+          "children": [
+            {
+              "id": 58,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.line.history",
+              "eventClick": "lines.lineHistory()",
+              "conditionDisabled": "!lines.grid.isOneRowSelected()",
+              "conditionShow": "dtl.workingSectionType.toLowerCase() === 'in'"
+            },
+            {
+              "id": 60,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.comments",
+              "eventClick": "lines.lineComment()",
+              "conditionDisabled": "!lines.grid.isOneRowSelected() || dtl.workingSectionType.toLowerCase() === 'sp'"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 7,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "lineno",
+          "label": "global.line.number"
+        },
+        {
+          "id": 6,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "commentfl",
+          "label": "global.comment",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 9,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "nonstockty",
+          "label": "global.line.type",
+          "type3": "SET",
+          "metaGroup": "VA",
+          "meta": "FinishedProductLineType"
+        },
+        {
+          "id": 10,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "shipprod",
+          "label": "global.product",
+          "eventClick": "lines.productInquiryHyperlink()"
+        },
+        {
+          "id": 11,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "notesfl",
+          "label": "global.notes",
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 12,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "proddesc",
+          "label": "global.description"
+        },
+        {
+          "id": 13,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "qtybasetotfl",
+          "label": "global.quantity.based.on.total",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 16,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "qtyneeded",
+          "label": "global.quantity.needed",
+          "dataFormat": "DECIMAL",
+          "eventClick": "lines.productAvailabilityHyperlink()",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 14,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "unit",
+          "label": "global.units"
+        },
+        {
+          "id": 15,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "qtyord",
+          "label": "global.quantity.ordered",
+          "dataFormat": "DECIMAL",
+          "conditionInclude": "lines.dataset.dispqtyordfl",
+          "eventClick": "lines.productAvailabilityHyperlink()",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 17,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "qtyship",
+          "label": "global.quantity.shipped",
+          "dataFormat": "DECIMAL",
+          "eventClick": "lines.productAvailabilityHyperlink()",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 18,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "prodcost",
+          "label": "global.cost",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 19,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "netamt",
+          "label": "global.net.amount",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 20,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "statustype",
+          "label": "global.status",
+          "dataFormat": "BooleanToString",
+          "formatOptions": {
+            "trueString": "global.active",
+            "falseString": "global.inactive"
+          }
+        },
+        {
+          "id": 21,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qtyshort",
+          "label": "global.quantity.short",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 22,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "netavail",
+          "label": "global.net.available",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 23,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qtyonorder",
+          "label": "global.on.order",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 24,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "leadtm",
+          "label": "global.lead.time",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 25,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "rushfl",
+          "label": "global.rush",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 26,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "orderalttype",
+          "label": "global.source.type",
+          "dataFormat": "OrderType"
+        },
+        {
+          "id": 27,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "orderaltno",
+          "label": "global.related.order.number",
+          "dataFormat": "INTEGER_TEXT",
+          "eventClick": "lines.tiedorderInquiryHyperlink()"
+        },
+        {
+          "id": 45,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "vaverno",
+          "label": "global.version.number",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 28,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "orderduedt",
+          "label": "global.due.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 38,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "wipsetfl",
+          "label": "global.checked.for.wip",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 29,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "labordata",
+          "label": "global.labor.data"
+        },
+        {
+          "id": 30,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "builderdspl",
+          "label": "global.builder"
+        },
+        {
+          "id": 31,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "timeelapseddspl",
+          "label": "global.elapsed.time"
+        },
+        {
+          "id": 32,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "scrapfctr",
+          "label": "global.scrap",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 33,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cutoffty",
+          "label": "global.cutoff.type"
+        },
+        {
+          "id": 34,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cutofflength",
+          "label": "global.cutoff.length",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 41,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qtyunavail",
+          "label": "global.quantity.unavailable",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 42,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "reasunavty",
+          "label": "global.unavailable.reason",
+          "type3": "CODES",
+          "meta": "ReasonUnavailable"
+        },
+        {
+          "id": 43,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "powtorderalttype",
+          "label": "global.back.tie.type",
+          "type3": "SET",
+          "metaGroup": "VA",
+          "meta": "VASourceBackTieTypes"
+        },
+        {
+          "id": 44,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "powtorderaltno",
+          "label": "global.back.tie.order.number",
+          "dataFormat": "INTEGER_TEXT",
+          "eventClick": "lines.backtiedorderInquiryHyperlink()"
+        },
+        {
+          "id": 49,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "lgthcompfl",
+          "label": "global.variable.length.component",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 35,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "brandcode",
+          "label": "global.brand"
+        },
+        {
+          "id": 36,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "mfgprod",
+          "label": "global.manufacturer.product"
+        },
+        {
+          "id": 37,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "vendprod",
+          "label": "global.vendor.product"
+        },
+        {
+          "id": 39,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "msdsfl",
+          "label": "global.hazardous",
+          "dataFormat": "LOGICAL"
+        }
+      ]
+    }
+  ]
+}

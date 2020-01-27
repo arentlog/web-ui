@@ -1,0 +1,228 @@
+{
+  "viewId": "twl-twlecc-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isMaster()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.twlecc",
+          "subLabel": "{{base.getSubTitle()}}",
+          "children": [
+            {
+              "id": 24,
+              "type": "BTN",
+              "subType": "PRI",
+              "label": "global.build",
+              "conditionDisabled": "(base.criteriaUsed.selectionType === 'I' && !base.itemGrid.isAnyRowSelected()) || (base.criteriaUsed.selectionType === 'L' && !base.locationGrid.isAnyRowSelected())",
+              "eventClick": "mst.build()"
+            },
+            {
+              "id": 36,
+              "type": "BTN",
+              "subType": "PRI",
+              "label": "global.generate.daily.cycle.count",
+              "eventClick": "base.generateDailyCycleCount()",
+              "conditionDisabled": "(!base.criteriaUsed.coNum) || (!base.criteriaUsed.whNum)"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 28,
+              "type": "EXP_AREA",
+              "label": "global.manual.selection",
+              "collapsed": true,
+              "conditionShow": "base.manualSelectionAvailable",
+              "children": [
+                {
+                  "id": 29,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 30,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "FIELD",
+                          "subType": "TEXT_AREA",
+                          "model": "base.manualEntries",
+                          "label": "{{base.manualEntryTypeLabel}}"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 35,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 33,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "label": "global.select.in.grid",
+                          "eventClick": "mst.selectManualEntries()"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "type": "GRID",
+              "controlRef": "base.itemGrid",
+              "conditionShow": "base.criteriaUsed.selectionType === 'I'",
+              "model": "base.itemsDataset",
+              "options": {
+                "showCheckboxes": true,
+                "events": {
+                  "drilldown": ""
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.items",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "absNum",
+                  "label": "global.item"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "itemDesc",
+                  "label": "global.description"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prodGrp",
+                  "label": "global.category"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "abc",
+                  "label": "global.abc"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "lastCount",
+                  "label": "global.last.count.date",
+                  "dataFormat": "TwlCharDateConversion"
+                }
+              ]
+            },
+            {
+              "id": 8,
+              "type": "GRID",
+              "controlRef": "base.locationGrid",
+              "conditionShow": "base.criteriaUsed.selectionType === 'L'",
+              "model": "base.locationsDataset",
+              "options": {
+                "showCheckboxes": true
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 9,
+                  "type": "TOOLBAR",
+                  "label": "global.locations",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whZone",
+                  "label": "global.warehouse.zone"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "aisle",
+                  "label": "global.aisle"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "binNum",
+                  "label": "global.location"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "binHits",
+                  "label": "global.bin.hits",
+                  "dataFormat": "INTEGER"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "abc",
+                  "label": "global.abc"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "isEmptyBin",
+                  "label": "global.empty",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "lastCount",
+                  "label": "global.last.count.date"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 26,
+      "type": "VIEW_CNTR",
+      "viewName": "lotsContainer"
+    },
+    {
+      "id": 27,
+      "type": "VIEW_CNTR",
+      "viewName": "employeesContainer"
+    }
+  ]
+}

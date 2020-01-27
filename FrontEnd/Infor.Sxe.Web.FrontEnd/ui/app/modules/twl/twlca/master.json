@@ -1,0 +1,120 @@
+{
+  "viewId": "twl-twlca-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isMaster()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.twlca",
+          "subLabel": "{{base.getSubTitle()}}",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "type": "GRID",
+              "id": 5,
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "selectable": "multiple",
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.adjustment.codes",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-new-document",
+                      "label": "global.new",
+                      "eventClick": "mst.create()",
+                      "conditionDisabled": "base.grid.isAnyRowSelected() || ((!base.criteria.whNum) && (!base.criteriaUsed.whNum))",
+                      "securityLevel": 4
+                    },
+                    {
+                      "id": 8,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-edit",
+                      "label": "global.edit",
+                      "eventClick": "mst.edit()",
+                      "conditionDisabled": "!base.grid.isOneRowSelected()",
+                      "securityLevel": 3
+                    },
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-delete",
+                      "label": "global.delete",
+                      "eventClick": "mst.delete()",
+                      "conditionDisabled": "base.grid.isNoRowSelected()",
+                      "securityLevel": 5
+                    },
+                    {
+                      "id": 16,
+                      "type": "BTN",
+                      "subType": "",
+                      "label": "global.transaction.types",
+                      "icon": null,
+                      "eventClick": "mst.showTransTypeList()",
+                      "conditionDisabled": "base.grid.isAnyRowSelected()",
+                      "securityLevel": 1
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "adjCode",
+                  "label": "global.adjustment.code"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "adjDesc",
+                  "label": "global.description"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "enterLoc",
+                  "label": "global.memo.required",
+                  "dataFormat": "LOGICAL"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 17,
+      "type": "VIEW_CNTR",
+      "viewName": "masterExtendView"
+    }
+  ]
+}

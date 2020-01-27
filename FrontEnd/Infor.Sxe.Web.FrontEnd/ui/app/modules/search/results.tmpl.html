@@ -1,0 +1,30 @@
+<div id="section-{{base.results.id}}" class="expandable-area">
+   <div class="expandable-header">
+      <a class="title">
+         <span class="title">{{base.results.title}}</span>
+         <span class="info badge">{{base.formatBadge(base.results.hits.length)}}</span>
+      </a>
+   </div>
+   <div class="expandable-visible-pane" ng-style="base.results.hits.length < base.maxRepoResults && {'padding-bottom':'26px'}">
+      <div class="content" style="margin-top: 10px;">
+         <div id="wrapper" data-ng-repeat="hit in base.results.hits" style="padding-top: 8px; margin-right: 20px;">
+            <div id="second">
+               <div class="searchResultTitle" data-markdown="hit.title">
+                  <p>{{hit.label}}</p>
+               </div>
+               <div class="searchResultSummary" data-markdown="hit.summary"></div>
+               <div class="searchResultLink" style="padding: 4px 10px 8px 6px;">
+                  <span ng-repeat="link in hit.links" style="padding-left: 11px;">
+                     <a class="hyperlink" ng-click="base.navigate(link)">{{link.label}}</a>
+                  </span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="expandable-footer" ng-if="!base.activeRepository && base.results.hits.length == base.maxRepoResults">
+      <a href="#" ng-click="base.searchRepository(base.results.id)" class="expandable-expander hyperlink hide-focus">
+         <span translate>special.search.find.more</span>
+      </a>
+   </div>
+</div>

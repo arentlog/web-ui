@@ -1,0 +1,134 @@
+{
+  "viewId": "ic-icseg-create",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "gl.distribution",
+              "controls": {
+                "navBtns": {
+                  "id": 11,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 12,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 13,
+                  "type": "BTN",
+                  "subType": "",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()"
+                },
+                {
+                  "id": 15,
+                  "type": "BTN",
+                  "subType": "",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "dtl.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "dtl.accttypedisplay",
+                  "label": "global.account.type"
+                },
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsegprodcat",
+                  "label": "global.product.category",
+                  "conditionShow": "base.prodcathiddenfl === false",
+                  "conditionRequired": "base.prodcathiddenfl === false",
+                  "meta": "ProdCat",
+                  "conditionFocus": "base.prodcathiddenfl === false"
+                },
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsegwhse",
+                  "label": "global.warehouse",
+                  "conditionRequired": "base.whsehiddenfl === false",
+                  "conditionShow": "base.whsehiddenfl === false",
+                  "meta": "Warehouse",
+                  "conditionFocus": "base.prodcathiddenfl === true && base.whsehiddenfl === false"
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsegcusttype",
+                  "label": "global.customer.type",
+                  "conditionRequired": "base.custtypehiddenfl === false",
+                  "conditionShow": "base.custtypehiddenfl === false",
+                  "meta": "CustType",
+                  "conditionFocus": "base.prodcathiddenfl === true && base.custtypehiddenfl === false"
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsegsalesrep",
+                  "label": "global.sales.rep",
+                  "conditionRequired": "dtl.isSalesRepRequired",
+                  "conditionShow": "base.salesrephiddenfl === false",
+                  "meta": "SalesRep",
+                  "conditionFocus": "base.prodcathiddenfl === true && base.salesrephiddenfl === false",
+                  "conditionDisabled": "dtl.isSalesRepReadonly"
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsegcogsadj",
+                  "label": "global.cogs.adjust",
+                  "conditionShow": "base.cogsadjhiddenfl === false",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "COGSAdjType",
+                  "blankOption": true,
+                  "conditionDisabled": "base.salesrepenabledfl === false",
+                  "eventChange": "dtl.onCogsAdjustChange()"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

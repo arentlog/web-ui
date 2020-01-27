@@ -1,0 +1,373 @@
+{
+  "viewId": "wt-wtet-review-and-totals",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isReviewAndTotals()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.wtet",
+              "subLabel": "global.review.and.totals",
+              "controls": {
+                "navBtns": {
+                  "id": 90,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 19,
+                  "type": "BTN",
+                  "label": "global.finish",
+                  "icon": "icon-invoice-released",
+                  "eventClick": "base.finish()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 20,
+                  "type": "BTN",
+                  "label": "global.recalculate",
+                  "icon": "icon-load",
+                  "eventClick": "rat.recalculate()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "controls": {
+                "contentHeader": {
+                  "id": 149,
+                  "type": "MOD_CONTENT_HDR",
+                  "children": [
+                    {
+                      "id": 249,
+                      "type": "WIZARD",
+                      "children": [
+                        {
+                          "id": 250,
+                          "type": "WIZARD_TICK",
+                          "label": "global.initiate",
+                          "conditionSelected": "base.getStage() === 1",
+                          "conditionDisabled": "base.getStage() > 1"
+                        },
+                        {
+                          "id": 252,
+                          "type": "WIZARD_TICK",
+                          "label": "global.select.products",
+                          "conditionSelected": "base.getStage() === 2",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "eventClick": "base.stageWizardSelectProducts()"
+                        },
+                        {
+                          "id": 251,
+                          "type": "WIZARD_TICK",
+                          "label": "global.review.and.totals",
+                          "conditionSelected": "base.getStage() === 3",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "eventClick": "base.stageWizardReviewAndTotals()"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 215,
+                  "type": "EXP_AREA",
+                  "label": "global.totals",
+                  "children": [
+                    {
+                      "id": 216,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 217,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 220,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.wthdr.totqtyord",
+                              "label": "global.quantity.ordered",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 235,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.wthdr.totqtyshp",
+                              "label": "global.quantity.shipped",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 223,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.wthdr.totweight",
+                              "label": "global.weight",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "maximumFractionDigits": 5,
+                                "minimumFractionDigits": 5
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 218,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 221,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.wthdr.totordamt",
+                              "label": "global.order.amount",
+                              "dataFormat": "CURRENCY"
+                            },
+                            {
+                              "id": 236,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.wthdr.totshipamt",
+                              "label": "global.shipped.amount",
+                              "dataFormat": "CURRENCY"
+                            },
+                            {
+                              "id": 224,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.wthdr.totcubes",
+                              "label": "global.cubes",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "maximumFractionDigits": 5,
+                                "minimumFractionDigits": 5
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 22,
+                  "type": "EXP_AREA",
+                  "label": "global.addons",
+                  "children": [
+                    {
+                      "id": 166,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 167,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 247,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 160,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.wthdr.addonamt1",
+                                  "label": "global.capitalize",
+                                  "dataFormat": "CURRENCY",
+                                  "digits": 5,
+                                  "decimals": 2,
+                                  "size": "SM",
+                                  "eventChange": "rat.capitalAddonChange()",
+                                  "conditionReadonly": "!rat.isIncludeAddonsWhenPostingGL"
+                                },
+                                {
+                                  "id": 158,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "base.wthdr.addontype1",
+                                  "label": "global.type",
+                                  "type3": "SET",
+                                  "eventChange": "rat.capitalAddonChange()",
+                                  "conditionReadonly": "!rat.isIncludeAddonsWhenPostingGL",
+                                  "metaGroup": "IC",
+                                  "meta": "AddOnType",
+                                  "blankOption": false,
+                                  "size": "SM"
+                                },
+                                {
+                                  "id": 253,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "base.wthdr.markupaddonfl",
+                                  "label": "global.line.markup.addons",
+                                  "dataFormat": "LOGICAL",
+                                  "conditionShow": "base.wthdr.markupaddonfl",
+                                  "disabled": true
+                                },
+                                {
+                                  "id": 211,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.wthdr.addonnet1",
+                                  "label": "global.net.amount",
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 248,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 240,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.wthdr.addonamt2",
+                                  "label": "global.expense",
+                                  "dataFormat": "CURRENCY",
+                                  "digits": 5,
+                                  "decimals": 2,
+                                  "size": "SM",
+                                  "eventChange": "rat.expenseAddonChange()"
+                                },
+                                {
+                                  "id": 242,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "base.wthdr.addontype2",
+                                  "label": "global.type",
+                                  "type3": "SET",
+                                  "eventChange": "rat.expenseAddonChange()",
+                                  "metaGroup": "IC",
+                                  "meta": "AddOnType",
+                                  "blankOption": false,
+                                  "size": "SM"
+                                },
+                                {
+                                  "id": 243,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.wthdr.addonnet2",
+                                  "label": "global.net.amount",
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 51,
+                  "type": "EXP_AREA",
+                  "label": "global.settings",
+                  "children": [
+                    {
+                      "id": 226,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 227,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 244,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.wthdr.stagearea",
+                              "label": "global.staging.area",
+                              "maxLength": 10
+                            },
+                            {
+                              "id": 245,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.wthdr.shipinstr",
+                              "label": "global.shipping.instructions",
+                              "maxLength": 30
+                            }
+                          ]
+                        },
+                        {
+                          "id": 228,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 246,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.wthdr.refer",
+                              "label": "global.reference",
+                              "maxLength": 24
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "sidebar": {
+              "id": 13,
+              "type": "MOD_SIDEBAR",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "SUB_VIEW",
+                  "subType": "HTML",
+                  "viewPath": "wt/wtet/shared/cart.html",
+                  "controller": "WtetCartCtrl as cart"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 148,
+      "type": "VIEW_CNTR",
+      "viewName": "childView"
+    }
+  ]
+}

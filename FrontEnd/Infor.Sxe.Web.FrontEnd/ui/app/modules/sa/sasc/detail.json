@@ -1,0 +1,193 @@
+{
+  "viewId": "sa-sasc-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "sa.setup.company.maintenance",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtl.customReturnToMasterState()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail() || !dtl.canModifyCompany()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 39,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-copy",
+                  "label": "global.copy",
+                  "stateRef": "",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4,
+                  "eventClick": "dtl.copy()"
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.customCancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 38,
+                  "type": "MESSAGE",
+                  "text": "message.only.login.company.can.be.modified",
+                  "conditionShow": "!dtl.canModifyCompany()",
+                  "icon": "icon-alert"
+                },
+                {
+                  "id": 27,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 28,
+                      "type": "TAB",
+                      "label": "global.required",
+                      "tabId": "required",
+                      "subFunction": "Required",
+                      "children": [
+                        {
+                          "id": 29,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "sa/sasc/tabs/required.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 32,
+                      "type": "TAB",
+                      "label": "global.taxes",
+                      "tabId": "taxes",
+                      "subFunction": "Taxes",
+                      "children": [
+                        {
+                          "id": 36,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "sa/sasc/tabs/taxes.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 33,
+                      "type": "TAB",
+                      "label": "global.faxing",
+                      "tabId": "faxing",
+                      "subFunction": "Faxing",
+                      "children": [
+                        {
+                          "id": 37,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "sa/sasc/tabs/faxing.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 34,
+                      "type": "TAB",
+                      "label": "global.custom",
+                      "tabId": "custom",
+                      "subFunction": "Custom",
+                      "children": [
+                        {
+                          "id": 35,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "sa/sasc/tabs/custom.json",
+                          "lazyLoad": false
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Sasc",
+      "contextValues": {
+        "key1": "dtl.sasc.cono"
+      }
+    }
+  ]
+}

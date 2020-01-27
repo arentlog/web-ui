@@ -1,0 +1,1611 @@
+{
+  "viewId": "oe-oeet-advancedlineentry",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "controlRef": "ale.view",
+  "allowCrossContainer": true,
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ale.isLineEntry()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.order.entry",
+              "subLabel": "global.advanced.line.entry",
+              "children": [
+                {
+                  "id": 184,
+                  "type": "BTN",
+                  "label": "global.finish",
+                  "icon": "icon-invoice-released",
+                  "eventClick": "ale.finish()"
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "{{ale.addUpdateButtonText()}}",
+                  "icon": "icon-save",
+                  "eventClick": "",
+                  "submitForm": true,
+                  "eventValidated": "ale.addUpdate()",
+                  "conditionDisabled": "(!ale.wlwhsechgfl) && ale.isAddLineMode"
+                },
+                {
+                  "id": 74,
+                  "type": "BTN",
+                  "label": "{{ale.clearCancelButtonText()}}",
+                  "icon": "icon-cancel",
+                  "eventClick": "ale.clearCancel()"
+                },
+                {
+                  "id": 132,
+                  "type": "BTN",
+                  "label": "global.products",
+                  "icon": "icon-cart",
+                  "sidebarPopdownButton": true,
+                  "controls": {
+                    "popdown": {
+                      "id": 133,
+                      "type": "POPDOWN",
+                      "children": [
+                        {
+                          "id": 134,
+                          "type": "CARD",
+                          "label": "{{base.prodSidebarLabel}}",
+                          "children": [
+                            {
+                              "id": 135,
+                              "type": "SUB_VIEW",
+                              "subType": "HTML",
+                              "viewPath": "oe/oeet/shared/cart.html",
+                              "controller": "OeetCartCtrl as cart"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": 85,
+                  "type": "BTN",
+                  "subType": "MENU",
+                  "label": "global.line.entry",
+                  "conditionShow": "!base.isCreditRebillOrder && base.oehdr.oetype !== 'cr'",
+                  "conditionDisabled": "base.isCreditRebillOrder",
+                  "children": [
+                    {
+                      "id": 126,
+                      "type": "MENU_OPT",
+                      "label": "global.easy",
+                      "eventClick": "ale.easyLineEntry()",
+                      "conditionShow": "base.oehdr.oetype !== 'cr' && base.oehdr.oetype !== 'do' && base.oehdr.oetype !== 'rm'",
+                      "conditionDisabled": "base.oehdr.oetype === 'cr' || base.oehdr.oetype === 'do' || base.oehdr.oetype === 'rm'"
+                    },
+                    {
+                      "id": 127,
+                      "type": "MENU_OPT",
+                      "label": "global.quick",
+                      "eventClick": "ale.quickLineEntry()",
+                      "conditionShow": "base.oehdr.oetype !== 'cr' && base.oehdr.oetype !== 'do' && base.oehdr.oetype !== 'rm'",
+                      "conditionDisabled": "base.oehdr.oetype === 'cr' || base.oehdr.oetype === 'do' || base.oehdr.oetype === 'rm'"
+                    },
+                    {
+                      "id": 128,
+                      "type": "MENU_OPT",
+                      "label": "global.shopping.list",
+                      "eventClick": "ale.shoppingList()",
+                      "conditionShow": "base.oehdr.oetype !== 'cr' && base.oehdr.oetype !== 'rm'",
+                      "conditionDisabled": "base.oehdr.oetype === 'cr' || base.oehdr.oetype === 'rm'"
+                    },
+                    {
+                      "id": 129,
+                      "type": "MENU_OPT",
+                      "label": "global.return.multiple",
+                      "eventClick": "ale.returnMultipleLines()",
+                      "conditionShow": "base.oehdr.oetype !== 'do'",
+                      "conditionDisabled": "base.oehdr.oetype === 'do'"
+                    }
+                  ]
+                },
+                {
+                  "id": 130,
+                  "type": "BTN",
+                  "label": "global.customer.order.settings",
+                  "eventClick": "ale.customerOrderSettings()"
+                },
+                {
+                  "id": 131,
+                  "type": "BTN",
+                  "label": "global.edit.lines",
+                  "eventClick": "ale.linesGrid()"
+                },
+                {
+                  "id": 186,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.suspend",
+                  "eventClick": "base.suspend()",
+                  "conditionDisabled": "base.oehdr.oetype.toLowerCase() !== 'cs' && base.oehdr.oetype.toLowerCase() !== 'so' && base.oehdr.oetype.toLowerCase()  !== 'do'"
+                },
+                {
+                  "id": 203,
+                  "type": "BTN",
+                  "label": "global.addons",
+                  "eventClick": "ale.addons()",
+                  "extra": true
+                },
+                {
+                  "id": 204,
+                  "type": "BTN",
+                  "label": "global.discounts",
+                  "eventClick": "ale.discounts()",
+                  "extra": true
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "controls": {
+                "contentHeader": {
+                  "id": 138,
+                  "type": "MOD_CONTENT_HDR",
+                  "children": [
+                    {
+                      "id": 140,
+                      "type": "WIZARD",
+                      "children": [
+                        {
+                          "id": 143,
+                          "type": "WIZARD_TICK",
+                          "label": "global.initiate",
+                          "conditionDisabled": "base.getStage() > 1",
+                          "conditionSelected": "base.getStage() === 1"
+                        },
+                        {
+                          "id": 144,
+                          "type": "WIZARD_TICK",
+                          "label": "global.select.products",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "conditionSelected": "base.getStage() === 2",
+                          "eventClick": "ale.stageWizardSelectProducts()"
+                        },
+                        {
+                          "id": 177,
+                          "type": "WIZARD_TICK",
+                          "label": "global.taxes.and.totals",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "conditionSelected": "base.getStage() === 3",
+                          "eventClick": "ale.stageWizardTaxesAndTotals()"
+                        },
+                        {
+                          "id": 180,
+                          "type": "WIZARD_TICK",
+                          "label": "global.collect.payment",
+                          "conditionSelected": "base.getStage() === 4",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "eventClick": "ale.stageWizardCollectPayment()"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 27,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 29,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "ale.oeline.lineno",
+                          "label": "global.line.number",
+                          "size": "XS",
+                          "readonly": true
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "ale.oeline.prod",
+                          "label": "global.product",
+                          "meta": "ProdAll",
+                          "type3": "STANDARD",
+                          "size": "LG",
+                          "autoFocus": true,
+                          "eventChange": "ale.productSelected()",
+                          "conditionReadonly": "!ale.oeline.prodenabled",
+                          "contextOptions": {
+                            "deactivated": "ale.oeline.specnstype === 'n'"
+                          },
+                          "options": {
+                            "searchParams": {
+                              "whse": {
+                                "type": "REF",
+                                "value": "base.oehdr.whse"
+                              },
+                              "custno": {
+                                "type": "REF",
+                                "value": "base.oehdr.custno"
+                              },
+                              "shipto": {
+                                "type": "REF",
+                                "value": "base.oehdr.shipto"
+                              }
+                            }
+                          },
+                          "controls": {
+                            "actionBtn": {
+                              "id": 142,
+                              "type": "BTN",
+                              "subType": "ICON",
+                              "label": "global.inquire",
+                              "icon": "icon-drilldown",
+                              "isLabelTooltip": true,
+                              "eventClick": "ale.navToProduct()",
+                              "conditionDisabled": "!ale.oeline.prod"
+                            }
+                          }
+                        },
+                        {
+                          "id": 70,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "ale.getProductDescription()",
+                          "label": "global.description",
+                          "conditionShow": "ale.oeline.specnstype === 'n'",
+                          "readonly": true
+                        },
+                        {
+                          "id": 81,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "label": "global.configure",
+                          "conditionShow": "ale.oeline.cfgkitfl",
+                          "eventClick": "ale.configureProductClicked()"
+                        },
+                        {
+                          "id": 17,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.qtyord",
+                              "label": "global.quantity",
+                              "size": "SM",
+                              "dataFormat": "DECIMAL",
+                              "eventChange": "ale.qtyOrdLostFocus()",
+                              "digits": 7,
+                              "decimals": 2,
+                              "conditionReadonly": "!ale.oeline.qtyordenabled",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              },
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              },
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 141,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "eventClick": "ale.navToQuantity()",
+                                  "conditionDisabled": "!ale.oeline.qtyord"
+                                }
+                              }
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "ale.oeline.returnfl",
+                              "label": "global.return",
+                              "conditionShow": "base.oehdr.oetype.toLowerCase() !== 'cr'",
+                              "conditionDisabled": "!ale.oeline.lcanchangesign || ale.oeline.autoaltwhsefl || (base.oehdr.oetype.toLowerCase() !== 'cr' && base.oehdr.oetype.toLowerCase() !== 'so' && base.oehdr.oetype.toLowerCase() !== 'cs')"
+                            },
+                            {
+                              "id": 77,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "ale.oeline.returnfl",
+                              "label": "global.blank.label.string.for.space",
+                              "type3": "MANUAL",
+                              "conditionShow": "base.oehdr.oetype === 'cr'",
+                              "size": "SM",
+                              "blankOption": false,
+                              "optionsModel": "ale.creditDebitTypes",
+                              "optionLabelField": "label",
+                              "optionValueField": "value",
+                              "conditionDisabled": "base.isCreditRebillOrder || (!ale.isAddLineMode && base.oehdr.oetype.toLowerCase() === 'cr')"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 190,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 51,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.netavail",
+                              "label": "global.net.available",
+                              "dataFormat": "DECIMAL",
+                              "size": "SM",
+                              "readonly": true,
+                              "conditionShow": "!ale.oeline.custreserveactivecd",
+                              "digits": 9,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 99,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.netavail",
+                              "label": "global.net.available.cr.star",
+                              "dataFormat": "DECIMAL",
+                              "size": "SM",
+                              "readonly": true,
+                              "conditionShow": "ale.oeline.custreserveactivecd",
+                              "digits": 9,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 28,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "ale.oeline.specnstype",
+                          "label": "global.line.type",
+                          "type3": "SET",
+                          "metaGroup": "OE",
+                          "meta": "OrderLineType",
+                          "eventChange": "ale.lineTypeChanged()",
+                          "blankOption": false,
+                          "conditionDisabled": "base.isCreditRebillOrder && !ale.oeline.returnfl && !base.isAddLineMode"
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "ale.oeline.unit",
+                          "label": "global.unit",
+                          "meta": "Units",
+                          "type3": "STANDARD",
+                          "eventChange": "ale.unitChanged()",
+                          "conditionReadonly": "!ale.oeline.unitenabled",
+                          "options": {
+                            "searchParams": {
+                              "prod": {
+                                "type": "REF",
+                                "value": "ale.oeline.prod"
+                              }
+                            }
+                          },
+                          "controls": {}
+                        },
+                        {
+                          "id": 20,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.price",
+                              "label": "global.price",
+                              "size": "SM",
+                              "dataFormat": "CURRENCY",
+                              "conditionReadonly": "base.sasoo.oepricefl === 'v' || !ale.oeline.priceenabled",
+                              "conditionShow": "base.sasoo.oepricefl !== 'n'",
+                              "eventChange": "ale.validateLine()",
+                              "digits": 7,
+                              "decimals": 5,
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              },
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 206,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "conditionShow": "ale.oeline.price",
+                                  "eventClick": "ale.navToPriceDiscount()"
+                                }
+                              }
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.netamt",
+                              "label": "global.net.amount",
+                              "conditionShow": "base.sasoo.oepricefl !== 'n'",
+                              "dataFormat": "CURRENCY",
+                              "readonly": true,
+                              "digits": 7,
+                              "decimals": 5,
+                              "size": "SM"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 207,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "",
+                          "label": "global.qty.break",
+                          "conditionShow": "!ale.oeline.prcqtybreakhidden",
+                          "hyperlinks": {
+                            "label": {
+                              "eventClick": "ale.navToQuantityBreak()"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 107,
+                  "type": "TOOLBAR",
+                  "label": "global.blank.label.string.for.space",
+                  "conditionShow": "",
+                  "children": [
+                    {
+                      "id": 113,
+                      "type": "BTN",
+                      "label": "global.sourcing",
+                      "eventClick": "ale.sourcingClicked()",
+                      "conditionShow": "ale.oeline.lineno && ale.oeline.prod"
+                    },
+                    {
+                      "id": 121,
+                      "type": "BTN",
+                      "label": "global.pricing",
+                      "eventClick": "ale.pricingClicked()",
+                      "conditionShow": "ale.oeline.prod",
+                      "conditionDisabled": "ale.isCreditFlEnabled || ale.oeline.npfl"
+                    },
+                    {
+                      "id": 111,
+                      "type": "BTN",
+                      "label": "global.non.stock",
+                      "conditionDisabled": "ale.oeline.specnstype.toLowerCase() !== 'n'",
+                      "conditionShow": "ale.oeline.specnstype.toLowerCase() === 'n'",
+                      "eventClick": "ale.nonStockClicked()"
+                    },
+                    {
+                      "id": 114,
+                      "type": "BTN",
+                      "label": "global.returns",
+                      "eventClick": "ale.returnsClicked()",
+                      "conditionDisabled": "!ale.oeline.returnfl",
+                      "conditionShow": "ale.oeline.prod && ale.oeline.returnfl && base.oehdr.oetype !== 'cr'"
+                    },
+                    {
+                      "id": 115,
+                      "type": "BTN",
+                      "label": "global.warehouse.availability",
+                      "conditionShow": "ale.whseAvailsCollection.length > 0",
+                      "eventClick": "ale.warehouseAvailabilityClicked()"
+                    },
+                    {
+                      "id": 116,
+                      "type": "BTN",
+                      "label": "global.cross.reference",
+                      "eventClick": "ale.crossReferenceClicked()",
+                      "conditionShow": "ale.subsUpgradesCollection.length > 0 || ale.xRefsCollection.length > 0"
+                    },
+                    {
+                      "id": 122,
+                      "type": "BTN",
+                      "label": "global.kits",
+                      "eventClick": "ale.kitsClicked()",
+                      "conditionDisabled": "!ale.oeline.kitfl",
+                      "conditionShow": "ale.oeline.kitfl"
+                    },
+                    {
+                      "id": 202,
+                      "type": "BTN",
+                      "label": "global.fabricated.kit.information",
+                      "eventClick": "ale.fabKitInfoClicked()",
+                      "conditionDisabled": "ale.oeline.bodtransferty.toLowerCase() !== 't'",
+                      "conditionShow": "ale.oeline.bodtransferty.toLowerCase() === 't'"
+                    },
+                    {
+                      "id": 108,
+                      "type": "BTN",
+                      "label": "global.serials",
+                      "eventClick": "ale.serialsClicked()",
+                      "conditionShow": "(base.oehdr.oetype !== 'cr' && ale.oeline.serlottype.toLowerCase() === 's') || (ale.oeline.serlottype.toLowerCase() === 's' && base.isCreditRebillOrder && base.includeSerialsFl && base.aoSerialFlag)",
+                      "conditionDisabled": "ale.oeline.serlottype.toLowerCase() !== 's'"
+                    },
+                    {
+                      "id": 112,
+                      "type": "BTN",
+                      "label": "global.lots",
+                      "conditionDisabled": "ale.oeline.serlottype.toLowerCase() !== 'l'",
+                      "conditionShow": "ale.oeline.serlottype.toLowerCase() === 'l'",
+                      "eventClick": "ale.lotsClicked()"
+                    },
+                    {
+                      "id": 124,
+                      "type": "BTN",
+                      "label": "global.tallies",
+                      "eventClick": "ale.talliesClicked()",
+                      "conditionShow": "!ale.oeline.reqbundleidfl && (ale.oeline.tallyfl || ale.oeline.memomixfl)",
+                      "conditionDisabled": "ale.oeline.reqbundleidfl && (!ale.oeline.tallyfl || !ale.oeline.memomixfl)"
+                    },
+                    {
+                      "id": 125,
+                      "type": "BTN",
+                      "label": "global.bundles",
+                      "eventClick": "ale.bundlesClicked()",
+                      "conditionShow": "ale.oeline.reqbundleidfl && (ale.oeline.tallyfl || ale.oeline.memomixfl)",
+                      "conditionDisabled": "!ale.oeline.reqbundleidfl && (!ale.oeline.tallyfl || !ale.oeline.memomixfl)"
+                    },
+                    {
+                      "id": 119,
+                      "type": "BTN",
+                      "label": "global.tax.jurisdiction",
+                      "eventClick": "ale.taxJurisdictionClicked()",
+                      "conditionShow": "base.oehdr.oetype === 'cr' && (ale.taxInterfaceType === 'e' || ale.taxInterfaceType === 't' || ale.taxInterfaceType === 'a')",
+                      "conditionDisabled": "base.oehdr.oetype !== 'cr' || (ale.taxInterfaceType !== 'e' && ale.taxInterfaceType !== 't' && ale.taxInterfaceType !== 'a')"
+                    },
+                    {
+                      "id": 117,
+                      "type": "BTN",
+                      "label": "global.warehouse.manager",
+                      "conditionDisabled": "!ale.oeline.wmfl",
+                      "conditionShow": "ale.oeline.wmfl",
+                      "eventClick": "ale.warehouseManagerClicked()"
+                    },
+                    {
+                      "id": 110,
+                      "type": "BTN",
+                      "label": "global.edi.errors.and.exceptions",
+                      "conditionShow": "!ale.isAddLineMode && ale.ediErrorCollection.length > 0 && ale.oeline.prod",
+                      "eventClick": "ale.ediErrExcClicked()"
+                    },
+                    {
+                      "id": 120,
+                      "type": "BTN",
+                      "label": "global.comments",
+                      "conditionShow": "ale.oeline.prod",
+                      "eventClick": "ale.commentsClicked()"
+                    },
+                    {
+                      "id": 185,
+                      "type": "BTN",
+                      "label": "global.manual.rebate",
+                      "eventClick": "ale.manualRebateClicked()",
+                      "conditionShow": "ale.oeline.prod && ale.oeline.price > 0",
+                      "conditionDisabled": "!ale.oeline.manrebenabled"
+                    },
+                    {
+                      "id": 181,
+                      "type": "BTN",
+                      "subType": "",
+                      "label": "global.rebate",
+                      "stateRef": "",
+                      "eventClick": "ale.rebateClicked()",
+                      "conditionShow": "ale.oeline.lineno && ale.oeline.prod"
+                    },
+                    {
+                      "id": 182,
+                      "type": "BTN",
+                      "subType": "",
+                      "label": "global.correction",
+                      "eventClick": "ale.correctionClicked()",
+                      "conditionShow": "base.oehdr.oetype === 'cr'"
+                    },
+                    {
+                      "id": 188,
+                      "type": "BTN",
+                      "label": "global.supersedes",
+                      "conditionShow": "ale.oeline.lineno && ale.oeline.prod && ale.oeline.superwhsefirstfl && ale.supersedesCollection.length > 0",
+                      "eventClick": "ale.supersedesClicked()"
+                    },
+                    {
+                      "id": 189,
+                      "type": "BTN",
+                      "label": "global.substitutes",
+                      "conditionShow": "ale.oeline.lineno && ale.oeline.prod && base.substitutesCount > 0",
+                      "eventClick": "ale.substitutesClicked()"
+                    },
+                    {
+                      "id": 199,
+                      "type": "BTN",
+                      "subType": "",
+                      "label": "global.customer.product",
+                      "conditionShow": "ale.isCustomerProductTabVisible",
+                      "eventClick": "ale.customerProductClicked()"
+                    }
+                  ]
+                },
+                {
+                  "id": 32,
+                  "type": "EXP_AREA",
+                  "label": "global.extended.fields",
+                  "collapsed": true,
+                  "children": [
+                    {
+                      "id": 33,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 36,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.qtyship",
+                              "label": "global.quantity.shipped",
+                              "dataFormat": "DECIMAL",
+                              "size": "SM",
+                              "conditionReadonly": "!ale.oeline.qtyshipenabled",
+                              "eventChange": "ale.validateLine()",
+                              "digits": 7,
+                              "decimals": 5,
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              },
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 5
+                              },
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 148,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "eventClick": "ale.navToQuantity()",
+                                  "conditionDisabled": "!ale.oeline.qtyship"
+                                }
+                              }
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.scrnprodcost",
+                              "label": "global.cost",
+                              "dataFormat": "CURRENCY",
+                              "size": "SM",
+                              "conditionShow": "!ale.oeline.scrnprodcosthidden",
+                              "conditionReadonly": "!ale.oeline.scrnprodcostenabled",
+                              "eventChange": "ale.validateLine()",
+                              "digits": 7,
+                              "decimals": 5,
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.marginpct",
+                              "label": "global.margin.percent",
+                              "size": "SM",
+                              "dataFormat": "PERCENT",
+                              "conditionShow": "base.sasoo.seecostfl && base.sasoo.oepricefl !== 'n'",
+                              "conditionReadonly": "base.sasoo.oepricefl === 'v' && !ale.oeline.marginpctenabled",
+                              "eventChange": "ale.marginPercentLostFocus()",
+                              "digits": 4,
+                              "decimals": 2,
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              },
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.marginamt",
+                              "label": "global.margin.amount",
+                              "dataFormat": "CURRENCY",
+                              "size": "SM",
+                              "conditionShow": "base.sasoo.seecostfl && base.sasoo.oepricefl !== 'n'",
+                              "readonly": true,
+                              "digits": 6,
+                              "decimals": 5,
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.termspct",
+                              "label": "global.terms.percent",
+                              "size": "SM",
+                              "dataFormat": "PERCENT",
+                              "digits": 4,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 88,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 43,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "ale.oeline.scrndiscamt",
+                                  "label": "global.discount",
+                                  "dataFormat": "CURRENCY",
+                                  "size": "SM",
+                                  "conditionReadonly": "!ale.oeline.discamtenabled",
+                                  "conditionShow": "base.sasoo.oepricefl !== 'n'",
+                                  "eventChange": "ale.validateLine()",
+                                  "digits": 7,
+                                  "decimals": 5,
+                                  "sign": "+",
+                                  "modelOptions": {
+                                    "updateOn": "blur"
+                                  },
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 5,
+                                    "maximumFractionDigits": 5
+                                  },
+                                  "controls": {
+                                    "actionBtn": {
+                                      "id": 149,
+                                      "type": "BTN",
+                                      "subType": "ICON",
+                                      "label": "global.inquire",
+                                      "icon": "icon-drilldown",
+                                      "isLabelTooltip": true,
+                                      "eventClick": "ale.navToPriceDiscount()",
+                                      "conditionDisabled": "!ale.oeline.scrndiscamt"
+                                    }
+                                  }
+                                },
+                                {
+                                  "id": 89,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "ale.oeline.disctype",
+                                  "label": "global.discount.type",
+                                  "size": "SM",
+                                  "type3": "SET",
+                                  "conditionShow": "base.sasoo.oepricefl !== 'n'",
+                                  "eventChange": "ale.validateLine()",
+                                  "optionsModel": "base.symbelSource",
+                                  "conditionReadonly": "!ale.oeline.disctypeenabled",
+                                  "metaGroup": "COMMON",
+                                  "meta": "AmountPercentType",
+                                  "blankOption": false
+                                }
+                              ]
+                            },
+                            {
+                              "id": 44,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.corecharge",
+                              "label": "global.core.charge",
+                              "dataFormat": "CURRENCY",
+                              "size": "SM",
+                              "conditionShow": "base.sasoo.oepricefl !== 'n'",
+                              "digits": 6,
+                              "decimals": 2
+                            },
+                            {
+                              "id": 45,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 46,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "ale.oeline.taxablefl",
+                                  "label": "global.taxable",
+                                  "size": "XS",
+                                  "conditionDisabled": "!ale.oeline.taxableflenabled",
+                                  "eventChange": "ale.taxableFlagChanged()"
+                                },
+                                {
+                                  "id": 47,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "ale.oeline.nontaxtype",
+                                  "label": "global.blank.label.string.for.space",
+                                  "size": "SM",
+                                  "meta": "NonTaxReason",
+                                  "conditionDisabled": "!ale.oeline.nontaxtypeenabled",
+                                  "type3": "CODES",
+                                  "metaGroup": ""
+                                }
+                              ]
+                            },
+                            {
+                              "id": 48,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "ale.oeline.taxgroup",
+                              "label": "global.tax.group",
+                              "type3": "CODES",
+                              "size": "SM",
+                              "meta": "TaxGroup"
+                            },
+                            {
+                              "id": 201,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.taxweight",
+                              "label": "global.taxation.weight",
+                              "dataFormat": "DECIMAL",
+                              "size": "SM",
+                              "digits": 7,
+                              "decimals": 5,
+                              "sign": "+",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 35,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 52,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "ale.oeline.slsrepin",
+                              "label": "global.sales.rep.in",
+                              "type3": "STANDARD",
+                              "size": "SM",
+                              "meta": "SalesRep",
+                              "conditionReadonly": "!ale.oeline.slsrepinenabled"
+                            },
+                            {
+                              "id": 53,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "ale.oeline.slsrepout",
+                              "label": "global.sales.rep.out",
+                              "type3": "STANDARD",
+                              "size": "SM",
+                              "meta": "SalesRep",
+                              "conditionReadonly": "!ale.oeline.slsrepoutenabled"
+                            },
+                            {
+                              "id": 54,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "ale.oeline.prodcat",
+                              "label": "global.category",
+                              "meta": "ProdCat",
+                              "type3": "STANDARD",
+                              "size": "SM"
+                            },
+                            {
+                              "id": 55,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "ale.oeline.eccnclasscd",
+                              "label": "global.eccn",
+                              "type3": "STANDARD",
+                              "size": "SM",
+                              "meta": "ECCNClass"
+                            },
+                            {
+                              "id": 62,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "ale.oeline.tarrifcd",
+                              "label": "global.hs.code",
+                              "type3": "STANDARD",
+                              "size": "SM",
+                              "meta": "Tariff"
+                            },
+                            {
+                              "id": 57,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "ale.oeline.reqshipdt",
+                              "label": "global.requested.date",
+                              "dataFormat": "DATE",
+                              "size": "SM",
+                              "conditionReadonly": "!ale.oeline.reqshipdtenabled"
+                            },
+                            {
+                              "id": 58,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "ale.oeline.promisedt",
+                              "label": "global.promise.date",
+                              "dataFormat": "DATE",
+                              "size": "SM",
+                              "conditionReadonly": "!ale.oeline.promisedtenabled"
+                            },
+                            {
+                              "id": 98,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "ale.oeline.origpromisedt",
+                              "label": "global.original.promise.date",
+                              "dataFormat": "DATE",
+                              "size": "SM",
+                              "conditionReadonly": "!ale.oeline.origpromisedtenabled",
+                              "eventChange": "ale.originalPromiseDateChanged()"
+                            },
+                            {
+                              "id": 90,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.scrndatccost",
+                              "label": "{{ale.oelineSettings.cICDATCLabel}}",
+                              "dataFormat": "CURRENCY",
+                              "size": "SM",
+                              "eventChange": "ale.datcCostChanged()",
+                              "digits": 7,
+                              "decimals": 5,
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 102,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 100,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "ale.oeline.restrictovrfl",
+                                  "label": "global.allow.restriction.override",
+                                  "conditionDisabled": "!ale.oeline.lAllowRestrictOvrFl",
+                                  "eventChange": "ale.overrideRestrictionChanged()"
+                                },
+                                {
+                                  "id": 101,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "ale.oeline.restrictovrcom",
+                                  "label": "global.override.comment",
+                                  "conditionDisabled": "!ale.oeline.restrictovrfl",
+                                  "size": "SM"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 34,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 174,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.orderaltno",
+                              "label": "global.order.alt.number",
+                              "size": "SM",
+                              "readonly": true,
+                              "hyperlinks": {
+                                "data": {
+                                  "eventClick": ""
+                                }
+                              },
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 183,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "eventClick": "ale.navToOrderAltNo()",
+                                  "conditionDisabled": "!ale.oeline.orderaltno"
+                                }
+                              }
+                            },
+                            {
+                              "id": 59,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.leadtm",
+                              "label": "global.lead.time",
+                              "size": "SM",
+                              "dataFormat": "INTEGER_TEXT",
+                              "maxLength": 4,
+                              "digits": 4
+                            },
+                            {
+                              "id": 94,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.jobno",
+                              "label": "global.job.number",
+                              "size": "SM",
+                              "maxLength": 8
+                            },
+                            {
+                              "id": 56,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "ale.oeline.frzrebty",
+                              "label": "global.freeze.rebate",
+                              "type3": "INLINE",
+                              "size": "SM",
+                              "meta": null,
+                              "metaGroup": "OE",
+                              "children": [
+                                {
+                                  "id": 95,
+                                  "type": "OPT",
+                                  "label": "global.enter",
+                                  "value": "e"
+                                },
+                                {
+                                  "id": 96,
+                                  "type": "OPT",
+                                  "label": "global.order",
+                                  "value": "o"
+                                },
+                                {
+                                  "id": 97,
+                                  "type": "OPT",
+                                  "label": "global.invoice",
+                                  "value": "i"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 63,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "oeline.country",
+                              "label": "global.country",
+                              "type3": "CODES",
+                              "meta": "Country",
+                              "size": "SM"
+                            },
+                            {
+                              "id": 64,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "ale.oeline.rushfl",
+                              "label": "global.rush",
+                              "conditionDisabled": "!ale.oeline.rushflenabled"
+                            },
+                            {
+                              "id": 65,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "ale.oeline.tgbotype",
+                              "label": "global.back.order",
+                              "conditionDisabled": "!ale.oeline.tgbotypeenabled"
+                            },
+                            {
+                              "id": 208,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "ale.oeline.shipcompfl",
+                              "label": "global.line.ship.complete",
+                              "conditionDisabled": "!ale.oeline.shipcompflenabled"
+                            },
+                            {
+                              "id": 66,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "ale.oeline.usagefl",
+                              "label": "global.usage",
+                              "conditionDisabled": "!ale.oeline.usageflenabled"
+                            },
+                            {
+                              "id": 67,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "ale.oeline.printpricefl",
+                              "label": "global.print.price"
+                            },
+                            {
+                              "id": 68,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "ale.oeline.subtotalfl",
+                              "label": "global.sub.total.price"
+                            },
+                            {
+                              "id": 69,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "ale.oeline.ncnr",
+                              "label": "global.ncnr",
+                              "conditionDisabled": "!ale.oeline.ncnrenabled",
+                              "dataFormat": "LOGICAL",
+                              "subFormat": "YBlank"
+                            },
+                            {
+                              "id": 198,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 197,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "ale.oeline.npfl",
+                                  "label": "global.national.program",
+                                  "conditionDisabled": "!ale.oeline.npenabledfl",
+                                  "eventChange": "ale.validateLine()",
+                                  "conditionShow": "base.isNationalProgramsOn"
+                                },
+                                {
+                                  "id": 194,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "ale.oeline.npcd",
+                                  "label": "global.national.program.code",
+                                  "size": "SM",
+                                  "maxLength": 15,
+                                  "readonly": true,
+                                  "conditionShow": "base.isNationalProgramsOn"
+                                },
+                                {
+                                  "id": 195,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "ale.oeline.pdsnrecno",
+                                  "label": "global.national.program.record.number",
+                                  "size": "SM",
+                                  "readonly": true,
+                                  "dataFormat": "INTEGER_TEXT",
+                                  "sign": "+",
+                                  "digits": 8,
+                                  "conditionShow": "base.isNationalProgramsOn"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 123,
+                      "type": "TOOLBAR",
+                      "label": "global.blank.label.string.for.space",
+                      "children": [
+                        {
+                          "id": 50,
+                          "type": "BTN",
+                          "subType": "SEC",
+                          "label": "global.customer.reservations",
+                          "eventClick": "ale.customerReservationsClicked()",
+                          "conditionShow": "ale.oeline.custreserveactivecd"
+                        },
+                        {
+                          "id": 103,
+                          "type": "BTN",
+                          "subType": "SEC",
+                          "label": "global.one.time.cost",
+                          "eventClick": "ale.oneTimeCostClicked()"
+                        },
+                        {
+                          "id": 104,
+                          "type": "BTN",
+                          "subType": "SEC",
+                          "label": "global.one.time.rebate",
+                          "eventClick": "ale.oneTimeRebateClicked()"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 150,
+                  "type": "EXP_AREA",
+                  "label": "global.available.fields",
+                  "extra": true,
+                  "children": [
+                    {
+                      "id": 151,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 153,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 160,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.edilineno",
+                              "label": "edi.line.number",
+                              "dataFormat": "INTEGER_TEXT",
+                              "sign": "+",
+                              "digits": 8,
+                              "conditionReadonly": "!ale.oeline.edilinenoenabled",
+                              "conditionShow": "!ale.oeline.edilinenohidden",
+                              "size": "SM"
+                            },
+                            {
+                              "id": 161,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "ale.oeline.wlpicktype",
+                              "label": "wl.pick.type",
+                              "size": "SM",
+                              "conditionReadonly": "!ale.oeline.wlpicktypeenabled",
+                              "type3": "SET",
+                              "metaGroup": "OE",
+                              "meta": "WLPickType"
+                            },
+                            {
+                              "id": 166,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "ale.oeline.delayresrvfl",
+                              "label": "global.delayed.reserved",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 168,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "ale.oeline.countryoforigin",
+                              "label": "global.country.of.origin",
+                              "size": "SM",
+                              "eventChange": "ale.countryOfOriginChanged()",
+                              "type3": "CODES",
+                              "meta": "Country"
+                            },
+                            {
+                              "id": 169,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "ale.oeline.tariffcd",
+                              "label": "global.tariff.code",
+                              "size": "SM",
+                              "meta": "Tariff",
+                              "eventChange": "ale.tariffCodeChanged()"
+                            },
+                            {
+                              "id": 171,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "ale.oeline.taxadjfl",
+                              "label": "global.tax.adjustment",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!ale.oeline.taxadjflenabled"
+                            },
+                            {
+                              "id": 178,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.ehfamt",
+                              "label": "global.ehf.amount",
+                              "size": "SM",
+                              "dataFormat": "CURRENCY",
+                              "decimals": 5,
+                              "digits": 7,
+                              "conditionShow": "ale.oeline.specnstype === 'n'"
+                            },
+                            {
+                              "id": 179,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "ale.oeline.ehfaddonno",
+                              "label": "global.ehf.addon.number",
+                              "size": "SM",
+                              "conditionShow": "ale.oeline.specnstype === 'n'",
+                              "type3": "MANUAL",
+                              "optionsModel": "ale.ehfAddonCollection",
+                              "optionLabelField": "codeval",
+                              "optionValueField": "descrip"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 176,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 154,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.scrncost",
+                              "label": "global.net.cost",
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "readonly": true,
+                              "dataFormat": "CURRENCY",
+                              "size": "SM",
+                              "digits": 7,
+                              "decimals": 5
+                            },
+                            {
+                              "id": 156,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.netamtreb",
+                              "label": "global.net.amount.r",
+                              "conditionShow": "base.sasoo.oepricefl !== 'n'",
+                              "size": "SM",
+                              "dataFormat": "CURRENCY",
+                              "readonly": true,
+                              "digits": 9,
+                              "decimals": 2
+                            },
+                            {
+                              "id": 157,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.salesexrate",
+                              "label": "global.exchange.rate",
+                              "size": "SM",
+                              "dataFormat": "PERCENT",
+                              "readonly": true,
+                              "digits": 6,
+                              "decimals": 7
+                            },
+                            {
+                              "id": 158,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.onorder",
+                              "label": "global.qty.on.order",
+                              "dataFormat": "DECIMAL",
+                              "size": "SM",
+                              "readonly": true,
+                              "digits": 9,
+                              "decimals": 2
+                            },
+                            {
+                              "id": 159,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.domnetamt",
+                              "label": "global.domestic.net.amount",
+                              "conditionShow": "!ale.oeline.domnetamthidden && base.sasoo.oepricefl !== 'n'",
+                              "dataFormat": "CURRENCY",
+                              "size": "SM",
+                              "readonly": true,
+                              "digits": 9,
+                              "decimals": 2
+                            },
+                            {
+                              "id": 162,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.altwhse",
+                              "label": "global.alternate.warehouse",
+                              "size": "SM",
+                              "readonly": true
+                            },
+                            {
+                              "id": 155,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.backorder",
+                              "label": "global.qty.bo.demand",
+                              "size": "SM",
+                              "readonly": true,
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2
+                            }
+                          ]
+                        },
+                        {
+                          "id": 152,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 164,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.unitstnd",
+                              "label": "global.standard.pack",
+                              "size": "SM",
+                              "readonly": true
+                            },
+                            {
+                              "id": 165,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.priceorigcd",
+                              "label": "global.price.origin.code",
+                              "size": "SM",
+                              "readonly": true
+                            },
+                            {
+                              "id": 167,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.weight",
+                              "label": "global.weight",
+                              "dataFormat": "DECIMAL",
+                              "size": "SM",
+                              "readonly": true,
+                              "digits": 7,
+                              "decimals": 5
+                            },
+                            {
+                              "id": 170,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.cubes",
+                              "label": "global.cubes",
+                              "dataFormat": "DECIMAL",
+                              "size": "SM",
+                              "readonly": true,
+                              "digits": 7,
+                              "decimals": 5
+                            },
+                            {
+                              "id": 172,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.custprod",
+                              "label": "global.customer.product",
+                              "size": "SM",
+                              "readonly": true
+                            },
+                            {
+                              "id": 163,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.foreigncost",
+                              "label": "global.foreign.cost",
+                              "conditionShow": "base.sasoo.seecostfl && !ale.oeline.foreigncosthidden",
+                              "dataFormat": "CURRENCY",
+                              "size": "SM",
+                              "readonly": true,
+                              "digits": 7,
+                              "decimals": 5
+                            },
+                            {
+                              "id": 175,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "ale.oeline.specprcst",
+                              "label": "global.spec.h",
+                              "size": "SM",
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 192,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 193,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 191,
+                              "type": "CUSTOM",
+                              "subType": "UserFields",
+                              "options": {
+                                "tableName": "oeel",
+                                "objectRef": "ale.oeline"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "sidebar": {
+              "id": 136,
+              "type": "MOD_SIDEBAR",
+              "children": [
+                {
+                  "id": 137,
+                  "type": "SUB_VIEW",
+                  "subType": "HTML",
+                  "viewPath": "oe/oeet/shared/cart.html",
+                  "controller": "OeetCartCtrl as cart"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 109,
+      "type": "VIEW_CNTR",
+      "viewName": "aleChildView"
+    },
+    {
+      "id": 118,
+      "type": "VIEW_CNTR",
+      "viewName": "binAllocation"
+    },
+    {
+      "id": 187,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Oeel",
+      "contextValues": {
+        "key1": "ale.oeline.orderno",
+        "key2": "ale.oeline.ordersuf",
+        "key3": "ale.oeline.lineno"
+      }
+    },
+    {
+      "id": 200,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Pdsc",
+      "contextValues": {
+        "key1": "ale.oeline.pdrecno"
+      }
+    }
+  ]
+}

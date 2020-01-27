@@ -1,0 +1,250 @@
+{
+  "viewId": "twl-shared-crossref",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "xr.isTWLCrossRefMaster()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "conditionShow": "xr.isTWLCrossRefMaster()",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.product.cross.reference",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "xr.back()"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "xr.criteria.coNum",
+                          "label": "global.company"
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "xr.criteria.vendorId",
+                          "label": "global.vendor",
+                          "conditionShow": "xr.criteria.calledFrom === 'twliv'"
+                        },
+                        {
+                          "id": 44,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "xr.criteria.absNum",
+                          "label": "global.product",
+                          "conditionShow": "xr.criteria.calledFrom !== 'twliv'"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "xr.criteria.whNum",
+                          "label": "global.warehouse"
+                        },
+                        {
+                          "id": 45,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "xr.criteria.vendName",
+                          "label": "global.vendor.name",
+                          "conditionShow": "xr.criteria.calledFrom === 'twliv'"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "GRID",
+                  "model": "xr.dataset",
+                  "controlRef": "xr.grid",
+                  "options": {
+                    "showDrilldown": true,
+                    "showExpander": false,
+                    "showCheckboxes": true,
+                    "events": {
+                      "drilldown": "xr.drilldown()"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 20,
+                      "type": "TOOLBAR",
+                      "label": "global.cross.references",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-new-document",
+                          "label": "global.new",
+                          "stateRef": ".create",
+                          "securityLevel": 4,
+                          "conditionDisabled": "xr.grid.isAnyRowSelected()"
+                        },
+                        {
+                          "id": 31,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-edit",
+                          "label": "global.edit",
+                          "stateRef": "",
+                          "securityLevel": 3,
+                          "eventClick": "xr.edit()",
+                          "conditionDisabled": "!xr.grid.isOneRowSelected()"
+                        },
+                        {
+                          "id": 32,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "eventClick": "xr.delete()",
+                          "securityLevel": 5,
+                          "conditionDisabled": "xr.grid.isNoRowSelected()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.vendor",
+                      "model": "vendorId"
+                    },
+                    {
+                      "id": 34,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.cross.reference",
+                      "model": "vendItem"
+                    },
+                    {
+                      "id": 35,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.unit.of.measure",
+                      "model": "uom"
+                    },
+                    {
+                      "id": 37,
+                      "type": "GRID_COL",
+                      "subType": "DROP_DOWN",
+                      "label": "global.type",
+                      "model": "refType",
+                      "type3": "SET",
+                      "metaGroup": "TWL",
+                      "meta": "CrossReferenceType",
+                      "blankOption": true
+                    },
+                    {
+                      "id": 46,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.product",
+                      "model": "absNum"
+                    },
+                    {
+                      "id": 38,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.box.quantity",
+                      "model": "boxQty",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 39,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.case.quantity",
+                      "model": "caseQuantity",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 4,
+                        "maximumFractionDigits": 4
+                      }
+                    },
+                    {
+                      "id": 40,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.pallet.quantity",
+                      "model": "palletQuantity",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 4,
+                        "maximumFractionDigits": 4
+                      }
+                    },
+                    {
+                      "id": 43,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.stacking.height",
+                      "model": "stackHeight",
+                      "dataFormat": "INTEGER"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "type": "VIEW_CNTR",
+      "viewName": "xrDetail"
+    }
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "viewId": "va-vasp-tabs-lineitems-internal-labor",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SUB_DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.includesLineItemsIntLabor()",
+      "conditionReadonly": "dtl.isLineItemsTabReadonly",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.labor.product.estimated.actual",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "int.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 30,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "eventClick": "int.submit()",
+                  "conditionDisabled": "dtl.isLineItemsTabReadonly"
+                },
+                {
+                  "id": 31,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "int.cancel()",
+                  "conditionDisabled": "dtl.isLineItemsTabReadonly"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 46,
+                  "type": "FIELD_SET",
+                  "label": "global.labor.info",
+                  "children": [
+                    {
+                      "id": 47,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 48,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 50,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "int.vaspLineChange.shipprod",
+                              "label": "global.labor.product",
+                              "meta": "ProdIcspOnly"
+                            },
+                            {
+                              "id": 53,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "int.vaspLineChange.prodcost",
+                              "label": "global.charge",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 7,
+                              "decimals": 5,
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 56,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "int.vaspLineChange.maxlaborcalcqty",
+                              "label": "global.max.qty.to.calculate.labor",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 4,
+                              "conditionReadonly": "int.vaspLineChange.timeactty.toLowerCase() !== 'v'",
+                              "conditionShow": "base.selectedLineitemsRecord.vafabfl"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 49,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 54,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 541,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "int.vaspLineChange.hours",
+                                  "label": "global.estimated.hours",
+                                  "dataFormat": "INTEGER",
+                                  "sign": "+",
+                                  "digits": 3,
+                                  "size": "XS",
+                                  "maxLength": 3
+                                },
+                                {
+                                  "id": 542,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "int.vaspLineChange.minutes",
+                                  "label": "global.minutes",
+                                  "dataFormat": "INTEGER",
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "maxLength": 2,
+                                  "size": "XS"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 55,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "int.vaspLineChange.timeactty",
+                              "label": "global.time.type",
+                              "type3": "SET",
+                              "metaGroup": "VA",
+                              "meta": "TimeType",
+                              "blankOption": false,
+                              "conditionShow": "base.selectedLineitemsRecord.vafabfl"
+                            },
+                            {
+                              "id": 543,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "int.vaspLineChange.timeactty",
+                              "label": "global.time.type",
+                              "type3": "SET",
+                              "metaGroup": "VA",
+                              "meta": "TimeTypeNoVar",
+                              "blankOption": false,
+                              "conditionShow": "!base.selectedLineitemsRecord.vafabfl"
+                            },
+                            {
+                              "id": 57,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "int.vaspLineChange.timecomment",
+                              "label": "global.comment",
+                              "maxLength": 30
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 58,
+                  "type": "FIELD_SET",
+                  "label": "global.extended.labor.info",
+                  "children": [
+                    {
+                      "id": 59,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "int.vaspLineChange.qtybasetotfl",
+                      "label": "global.is.estimated.time.based.on.units.produced",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "int.vaspLineChange.timeactty.toLowerCase() === 'v' || dtl.isLineItemsTabReadonly"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

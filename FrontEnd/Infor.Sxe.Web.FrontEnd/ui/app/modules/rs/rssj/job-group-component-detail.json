@@ -1,0 +1,182 @@
+{
+  "viewId": "rs-rssj-jobgroupcomponentdetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isJgcdDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.job.component.detail",
+              "subLabel": "{{jgcd.jobComponent.groupnm + ' | ' + jgcd.jobComponent.componentnm }}",
+              "controls": {
+                "navBtns": {
+                  "id": 15,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.jobgroupcomponents",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 17,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "submitForm": true,
+                  "conditionDisabled": "base.isJgcdDetail()",
+                  "eventValidated": "jgcd.submit()"
+                },
+                {
+                  "id": 20,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.edit",
+                  "icon": "icon-edit",
+                  "stateRef": ".edit",
+                  "securityLevel": 3,
+                  "eventClick": "jgcd.edit()",
+                  "conditionDisabled": "!base.isJgcdDetail()"
+                },
+                {
+                  "id": 18,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "icon": "icon-reset",
+                  "eventClick": "jgcd.reset()",
+                  "conditionDisabled": "base.isJgcdDetail()"
+                },
+                {
+                  "id": 19,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "conditionDisabled": "base.isJgcdDetail()",
+                  "eventClick": "jgcd.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 7,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 8,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 6,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "jgcd.jobComponent.posno",
+                          "label": "global.position",
+                          "dataFormat": "INTEGER",
+                          "digits": 4,
+                          "sign": "+",
+                          "required": true,
+                          "autoFocus": true
+                        },
+                        {
+                          "id": 10,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "jgcd.jobComponent.priority",
+                          "label": "global.priority",
+                          "dataFormat": "INTEGER",
+                          "sign": "+",
+                          "digits": 2,
+                          "required": true
+                        },
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "jgcd.jobComponent.cono",
+                          "label": "global.company.number",
+                          "dataFormat": "INTEGER_TEXT"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 22,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "jgcd.jobComponent.reportfl",
+                          "label": "global.type",
+                          "meta": "JobComponentType",
+                          "type3": "SET",
+                          "metaGroup": "RS",
+                          "required": true,
+                          "eventChange": "jgcd.isReport()"
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "jgcd.jobComponent.jobtmp",
+                          "label": "global.report",
+                          "conditionShow": "jgcd.jobComponent.reportfl",
+                          "meta": "ReportName",
+                          "required": false,
+                          "eventChange": "jgcd.onReportChange()"
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "jgcd.jobComponent.grouptmp",
+                          "label": "global.job.component",
+                          "meta": "JobGroup",
+                          "conditionShow": "!jgcd.jobComponent.reportfl"
+                        },
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "jgcd.jobComponent.inusetydesc",
+                          "label": "global.status"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

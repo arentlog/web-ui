@@ -1,0 +1,276 @@
+{
+  "viewId": "pd-pder-master",
+  "id": 1,
+  "type": "VIEW",
+  "conditionShow": "!base.isJournalState()",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isMaster()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.pder",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 26,
+              "type": "FIELD",
+              "subType": "RADIO_SET",
+              "model": "mst.isShowVendorRcpts",
+              "label": "global.detail.update.default",
+              "type3": "INLINE",
+              "eventChange": "mst.onDefaultUpdateSelection()",
+              "children": [
+                {
+                  "id": 27,
+                  "type": "OPT",
+                  "label": "global.vendor.reconciliation",
+                  "value": "true"
+                },
+                {
+                  "id": 28,
+                  "type": "OPT",
+                  "label": "global.line.reconciliation",
+                  "value": "false"
+                }
+              ]
+            },
+            {
+              "id": 6,
+              "type": "GRID",
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showDrilldown": true,
+                "showCheckboxes": true,
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 5,
+                  "type": "TOOLBAR",
+                  "label": "global.rebate.reconciliations",
+                  "children": [
+                    {
+                      "id": 8,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-new-document",
+                      "label": "global.new",
+                      "eventClick": "mst.create()",
+                      "securityLevel": 4,
+                      "conditionDisabled": "mst.disableNewButton()"
+                    },
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-edit",
+                      "label": "global.edit",
+                      "eventClick": "mst.edit()",
+                      "securityLevel": 3,
+                      "conditionDisabled": "!(base.grid.isOneRowSelected() && !base.isVendorReceipt)"
+                    },
+                    {
+                      "id": 36,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-delete",
+                      "label": "global.delete",
+                      "eventClick": "mst.deleteRecords()",
+                      "securityLevel": 5,
+                      "conditionDisabled": "!(base.grid.isAnyRowSelected() && !base.isVendorReceipt)"
+                    },
+                    {
+                      "id": 11,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.submit",
+                      "icon": "icon-save",
+                      "securityLevel": 3,
+                      "conditionDisabled": "!base.grid.isAnyRowSelected()",
+                      "eventClick": "mst.finalUpdate()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "statustype",
+                  "label": "global.status",
+                  "dataFormat": "PdStatusTypeToName"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "claimno",
+                  "label": "global.claim.number"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "vendno",
+                  "label": "global.vendor.number"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "vendnotesfl",
+                  "label": "global.vendor.notes",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "vendname",
+                  "label": "global.vendor.name"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "receiptamt",
+                  "label": "global.receipt.amount",
+                  "dataFormat": "CURRENCY"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "receiptdt",
+                  "label": "global.receipt.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "reconamt",
+                  "label": "global.reconcile.amt",
+                  "dataFormat": "CURRENCY"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "rebatecd",
+                  "label": "global.rebate.for",
+                  "dataFormat": "PdRebateTypeToName"
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "apinvno",
+                  "label": "ap.invoice.number"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "currencytydesc",
+                  "label": "global.currency",
+                  "conditionInclude": "!base.allowForeignRebates"
+                },
+                {
+                  "id": 37,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "currencyty",
+                  "label": "global.currency",
+                  "type3": "CODES",
+                  "meta": "Currency",
+                  "conditionInclude": "base.allowForeignRebates"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "refer",
+                  "label": "global.reference"
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "claimseqno",
+                  "label": "global.sequence.number",
+                  "dataFormat": "INTEGER"
+                },
+                {
+                  "id": 31,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "recordtype",
+                  "label": "global.record.type",
+                  "extra": true
+                },
+                {
+                  "id": 32,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "action",
+                  "label": "global.action",
+                  "extra": true
+                },
+                {
+                  "id": 33,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "divno",
+                  "label": "global.division.number",
+                  "extra": true,
+                  "type3": "CODES",
+                  "meta": "Division"
+                },
+                {
+                  "id": 34,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "sourcepros",
+                  "label": "global.source.proc",
+                  "extra": true
+                },
+                {
+                  "id": 35,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "srcupdtty",
+                  "label": "global.source.type",
+                  "extra": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 29,
+      "type": "VIEW_CNTR",
+      "viewName": "finalUpdate"
+    },
+    {
+      "id": 30,
+      "type": "VIEW_CNTR",
+      "viewName": "glDistributionView"
+    }
+  ]
+}

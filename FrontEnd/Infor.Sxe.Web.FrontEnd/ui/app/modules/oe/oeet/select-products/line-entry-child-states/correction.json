@@ -1,0 +1,167 @@
+{
+  "viewId": "oe-oeet-selectproducts-lineentrychildstates-correction",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ale.isCorrection()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.correction",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "aleCorr.back()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 19,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.submit",
+                  "eventClick": "aleCorr.submit()",
+                  "icon": "icon-save"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleCorr.oeline.reason",
+                          "label": "global.correction.reason",
+                          "meta": "ReturnReason",
+                          "readonly": true,
+                          "controls": {}
+                        },
+                        {
+                          "id": 28,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "aleCorr.correctionInvoiceDate",
+                          "label": "global.invoice.date",
+                          "dataFormat": "DATE",
+                          "size": "SM",
+                          "readonly": true
+                        }
+                      ]
+                    },
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "2/3",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 14,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "aleCorr.oeline.invno",
+                              "label": "global.corrected.invoice.number",
+                              "size": "SM",
+                              "eventChange": "aleCorr.correctionInvoiceChanged()",
+                              "dataFormat": "INTEGER_TEXT",
+                              "sign": "+",
+                              "digits": 8,
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              },
+                              "controls": {}
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "aleCorr.oeline.invsuf",
+                              "label": "global.invoice.suffix",
+                              "size": "XS",
+                              "labelHidden": true,
+                              "maxLength": 2,
+                              "dataFormat": "INTEGER",
+                              "digits": 2,
+                              "sign": "+",
+                              "eventChange": "aleCorr.correctionInvoiceChanged()",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "aleCorr.oeline.crlineno",
+                              "label": "global.line.number",
+                              "size": "SM",
+                              "dataFormat": "INTEGER_TEXT",
+                              "sign": "+",
+                              "digits": 3,
+                              "eventChange": "aleCorr.correctionInvoiceChanged()",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              },
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 27,
+                                  "type": "BTN",
+                                  "subType": "SEC",
+                                  "label": "global.find.invoice",
+                                  "eventClick": "aleCorr.findInvoiceClicked()"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "type": "VIEW_CNTR",
+      "viewName": "aleCorrectionsChildView"
+    }
+  ]
+}

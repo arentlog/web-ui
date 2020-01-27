@@ -1,0 +1,148 @@
+{
+  "viewId": "twl-twlci-detail-itemkit",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "dtlkit.isItemKit()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.kit",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtlkit.returnToDetail()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 20,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "securityLevel": 3,
+                  "eventClick": "dtlkit.customKitSubmit()"
+                },
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.cancel",
+                  "eventClick": "dtlkit.returnToDetail()",
+                  "icon": "icon-cancel"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "dtl.twlci.itemDesc",
+                  "label": "global.description",
+                  "size": "LG",
+                  "readonly": true
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD_SET",
+                  "label": "global.kit.options",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "FIELD",
+                      "subType": "RADIO_SET",
+                      "model": "dtlkit.preBuilt",
+                      "label": "global.kit.type",
+                      "type3": "SET",
+                      "metaGroup": "TWL",
+                      "meta": "KitType"
+                    },
+                    {
+                      "id": 22,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "dtlkit.assemblyRequired",
+                      "label": "global.assembly",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!dtlkit.preBuilt"
+                    },
+                    {
+                      "id": 11,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "dtlkit.deptNum",
+                      "label": "global.department",
+                      "meta": "TWLDepartment",
+                      "size": "SM",
+                      "conditionReadonly": "!dtlkit.preBuilt",
+                      "options": {
+                        "searchParams": {
+                          "coNum": {
+                            "type": "REF",
+                            "value": "dtl.twlci.coNum"
+                          },
+                          "whNum": {
+                            "type": "REF",
+                            "value": "dtl.twlci.whNum"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "id": 23,
+                      "type": "FIELD",
+                      "subType": "TEXT_AREA",
+                      "model": "dtlkit.assemblyInstructions",
+                      "label": "global.instructions",
+                      "meta": null,
+                      "maxLength": 100,
+                      "conditionDisabled": "!dtlkit.preBuilt",
+                      "options": {
+                        "searchParams": {
+                          "coNum": {
+                            "type": "REF",
+                            "value": "dtl.twlci.coNum"
+                          },
+                          "whNum": {
+                            "type": "REF",
+                            "value": "dtl.twlci.whNum"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

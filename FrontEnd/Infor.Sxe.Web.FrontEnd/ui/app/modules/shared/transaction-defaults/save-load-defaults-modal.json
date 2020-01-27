@@ -1,0 +1,123 @@
+{
+  "viewId": "shared-transaction-defaults-saveloaddefaultsmodal",
+  "id": 1,
+  "type": "MODAL",
+  "subType": "MODAL",
+  "label": "{{sldmCtrl.title}}",
+  "controls": {
+    "body": {
+      "id": 2,
+      "type": "MODAL_BODY",
+      "children": [
+        {
+          "id": 6,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "sldmCtrl.saveTo",
+          "label": "global.save.to",
+          "blankOption": false,
+          "type3": "INLINE",
+          "autoFocus": true,
+          "children": [
+            {
+              "id": 19,
+              "type": "OPT",
+              "label": "global.user",
+              "value": "u"
+            },
+            {
+              "id": 20,
+              "type": "OPT",
+              "label": "global.profile",
+              "value": "p"
+            },
+            {
+              "id": 21,
+              "type": "OPT",
+              "label": "global.company",
+              "value": "c"
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "sldmCtrl.saveType",
+          "label": "global.type",
+          "blankOption": false,
+          "type3": "INLINE",
+          "conditionShow": "sldmCtrl.saveTo !== 'c'",
+          "children": [
+            {
+              "id": 22,
+              "type": "OPT",
+              "label": "global.current",
+              "value": "c"
+            },
+            {
+              "id": 23,
+              "type": "OPT",
+              "label": "global.other",
+              "value": "o"
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "sldmCtrl.user",
+          "label": "global.user",
+          "meta": "Operator",
+          "conditionReadonly": "sldmCtrl.saveType === 'c'",
+          "conditionShow": "sldmCtrl.saveTo === 'u'"
+        },
+        {
+          "id": 16,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "sldmCtrl.profile",
+          "label": "global.profile",
+          "meta": "ProfileName",
+          "conditionReadonly": "sldmCtrl.saveType === 'c'",
+          "conditionShow": "sldmCtrl.saveTo === 'p'"
+        },
+        {
+          "id": 18,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "sldmCtrl.company",
+          "label": "global.company.number",
+          "dataFormat": "INTEGER_TEXT",
+          "digits": 4,
+          "sign": "+",
+          "conditionShow": "sldmCtrl.saveTo === 'c'",
+          "readonly": true
+        }
+      ]
+    },
+    "btnSet": {
+      "id": 3,
+      "type": "BTN_SET",
+      "subType": "MODAL",
+      "children": [
+        {
+          "id": 4,
+          "type": "BTN",
+          "subType": "MODAL_SEC",
+          "label": "global.cancel",
+          "eventClick": "sldmCtrl.cancel()"
+        },
+        {
+          "id": 5,
+          "type": "BTN",
+          "subType": "MODAL_PRI",
+          "label": "global.ok",
+          "submitForm": true,
+          "eventValidated": "sldmCtrl.submit()"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,295 @@
+{
+  "viewId": "wt-wtet-maintain",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "mp.isMaintain()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.wtet",
+              "subLabel": "global.maintain",
+              "children": [
+                {
+                  "id": 13,
+                  "type": "BTN",
+                  "label": "global.next",
+                  "icon": "icon-right-arrow",
+                  "submitForm": true,
+                  "eventValidated": "mp.continue()"
+                },
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "label": "global.create",
+                  "icon": "icon-new-document",
+                  "eventClick": "mp.create()",
+                  "conditionShow": "!mp.isWarehouseTransferVerified",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 23,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-delete",
+                  "eventClick": "mp.delete()",
+                  "conditionDisabled": "",
+                  "securityLevel": 5,
+                  "conditionShow": "!mp.isWarehouseTransferVerified"
+                },
+                {
+                  "id": 14,
+                  "type": "BTN",
+                  "label": "global.copy",
+                  "icon": "icon-copy",
+                  "conditionDisabled": "",
+                  "conditionShow": "!mp.isWarehouseTransferVerified",
+                  "securityLevel": 4,
+                  "eventClick": "mp.copy()"
+                },
+                {
+                  "id": 15,
+                  "type": "BTN",
+                  "label": "global.print",
+                  "icon": "icon-print",
+                  "conditionShow": "!mp.isWarehouseTransferVerified",
+                  "eventClick": "mp.print()"
+                },
+                {
+                  "id": 42,
+                  "type": "BTN",
+                  "label": "global.entry.defaults",
+                  "icon": "icon-genealogy",
+                  "conditionShow": "!mp.isWarehouseTransferVerified",
+                  "eventClick": "mp.entryDefaultsClicked()",
+                  "subType": "TER"
+                },
+                {
+                  "id": 40,
+                  "type": "BTN",
+                  "label": "global.import.from.excel",
+                  "icon": "icon-import",
+                  "conditionShow": "!mp.isWarehouseTransferVerified",
+                  "eventClick": "mp.importFromExcel()"
+                },
+                {
+                  "id": 25,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "conditionShow": "mp.isWarehouseTransferVerified",
+                  "eventClick": "mp.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 8,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 24,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "mp.transferOrderNumber",
+                          "label": "global.transfer.order.number",
+                          "meta": "WTOrders",
+                          "type3": "STANDARD",
+                          "required": true,
+                          "autoFocus": true,
+                          "conditionReadonly": "mp.isWarehouseTransferVerified",
+                          "eventChange": "mp.warehouseOrderChanged()"
+                        },
+                        {
+                          "id": 27,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.wthdr.shipfmwhse",
+                          "label": "global.ship.from.warehouse",
+                          "meta": "Warehouse",
+                          "type3": "STANDARD",
+                          "required": false,
+                          "readonly": true,
+                          "options": {
+                            "searchParams": {}
+                          }
+                        },
+                        {
+                          "id": 32,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.wthdr.shiptowhse",
+                          "label": "global.ship.to.warehouse",
+                          "meta": "Warehouse",
+                          "type3": "STANDARD",
+                          "required": false,
+                          "readonly": true,
+                          "options": {
+                            "searchParams": {}
+                          }
+                        },
+                        {
+                          "id": 31,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.wthdr.shipviaty",
+                          "label": "global.ship.via.type",
+                          "meta": "ShipVia",
+                          "conditionReadonly": "!mp.isWarehouseTransferVerified"
+                        },
+                        {
+                          "id": 75,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.wthdr.reasoncode",
+                          "label": "global.reason.code",
+                          "meta": "WTReasonCode",
+                          "conditionReadonly": "!mp.isWarehouseTransferVerified"
+                        },
+                        {
+                          "id": 33,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.wthdr.shipinstr",
+                          "label": "global.shipping.instructions",
+                          "maxLength": 30,
+                          "conditionReadonly": "!mp.isWarehouseTransferVerified"
+                        },
+                        {
+                          "id": 34,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.wthdr.refer",
+                          "label": "global.reference",
+                          "maxLength": 24,
+                          "conditionReadonly": "!mp.isWarehouseTransferVerified"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 7,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.wthdr.wttype",
+                          "label": "global.order.type",
+                          "type3": "SET",
+                          "blankOption": false,
+                          "readonly": true,
+                          "metaGroup": "WT",
+                          "meta": "TransferType"
+                        },
+                        {
+                          "id": 41,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.wthdr.cono2",
+                          "label": "global.to.company",
+                          "type3": "SET",
+                          "blankOption": false,
+                          "readonly": true,
+                          "metaGroup": "WT",
+                          "meta": "Company"
+                        },
+                        {
+                          "id": 28,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.wthdr.duedt",
+                          "label": "global.due.date",
+                          "dataFormat": "DATE",
+                          "conditionReadonly": "!mp.isWarehouseTransferVerified"
+                        },
+                        {
+                          "id": 36,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.wthdr.reqshipdt",
+                          "label": "global.requested.ship.date",
+                          "dataFormat": "DATE",
+                          "conditionReadonly": "!mp.isWarehouseTransferVerified"
+                        },
+                        {
+                          "id": 37,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.wthdr.orderdt",
+                          "label": "global.order.date",
+                          "dataFormat": "DATE",
+                          "conditionReadonly": "!mp.isWarehouseTransferVerified"
+                        },
+                        {
+                          "id": 38,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.wthdr.ignoreltfl",
+                          "label": "global.ignore.lead.time",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!mp.isWarehouseTransferVerified"
+                        },
+                        {
+                          "id": 39,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.wthdr.rushfl",
+                          "label": "global.rush",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!mp.isWarehouseTransferVerified"
+                        },
+                        {
+                          "id": 35,
+                          "type": "FIELD",
+                          "subType": "TEXT_AREA",
+                          "model": "base.wthdr.extshipinstr",
+                          "label": "global.extended.shipping.instructions",
+                          "conditionReadonly": "!mp.isWarehouseTransferVerified",
+                          "maxLength": 256
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 74,
+                  "type": "CUSTOM",
+                  "subType": "UserFields",
+                  "extra": true,
+                  "options": {
+                    "tableName": "wteh",
+                    "objectRef": "base.wthdr"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "type": "VIEW_CNTR",
+      "viewName": "orderStatus"
+    }
+  ]
+}

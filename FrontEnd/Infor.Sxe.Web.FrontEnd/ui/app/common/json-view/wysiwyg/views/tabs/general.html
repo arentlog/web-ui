@@ -1,0 +1,506 @@
+<div class="row" initialize>
+   <div class="one-third column">
+      <fieldset>
+         <legend>Type</legend>
+
+         <!-- View Container name (for ui-view directive) -->
+         <div class="field" ng-if="isType(['VIEW_CNTR'])" title="The name to use in the ui-view directive (for inserting views via state change). If left blank, it will be an unnamed ui-view.">
+            <label for="view-container-name" translate>View Name</label>
+            <input type="text" id="view-container-name" ng-model="activeControl.viewName" ng-change="deleteIfBlank('viewName')" />
+         </div>
+
+         <!-- Directive element name -->
+         <div class="field" ng-if="isType(['DIRECTIVE'])" title="Element name that maps to directive name (i.e. report-wizard-ranges for the reportWizardRanges directive).">
+            <label class="inline required">
+               <span class="label-text">Element Name</span>
+               <input type="text" ng-model="activeControl.elementName" ng-change="deleteIfBlank('elementName')" />
+            </label>
+         </div>
+
+         <!-- Image Source -->
+         <div class="field" ng-if="isType(['IMAGE'])" title="Source of the image, which uses ng-src to point to a static location (i.e. ui/app/assets/my-image.png) or dynamic via the double curly brace syntax (i.e. {(dtl.productImageUrl)}).">
+            <label class="inline required">
+               <span class="label-text">Source</span>
+               <input type="text" ng-model="activeControl.source" />
+            </label>
+         </div>
+
+         <!-- Option (drop-down, radio set) options -->
+         <div ng-if="activeControl.type === 'OPT'">
+            <!-- Label -->
+            <div class="field">
+               <label for="option-label" class="required" translate>Label</label>
+               <input type="text" id="option-label" ng-model="activeControl.label" i18n-autocomplete data-validate="required" />
+            </div>
+
+            <!-- Value -->
+            <div class="field">
+               <label for="option-value" class="required" translate>Value</label>
+               <input type="text" id="option-value" ng-model="activeControl.value" data-validate="required" />
+            </div>
+         </div>
+
+         <!-- Column Span / Sub-type -->
+         <div class="field" ng-if="activeControl.type === 'COL'" title="The column widths of a row should add up to 100%. A maximum of 12 columns is allowed.">
+            <label for="column-sub-type" class="label required" translate>Width</label>
+            <select dropdown id="column-sub-type" class="dropdown dropdown-sm" ng-model="activeControl.subType" data-validate="required">
+               <option value="1">Full</option>
+               <option value="1/12">1/12</option>
+               <option value="1/6">1/6</option>
+               <option value="1/4">1/4</option>
+               <option value="1/3">1/3</option>
+               <option value="5/12">5/12</option>
+               <option value="1/2">1/2</option>
+               <option value="7/12">7/12</option>
+               <option value="2/3">2/3</option>
+               <option value="3/4">3/4</option>
+               <option value="5/6">5/6</option>
+               <option value="11/12">11/12</option>
+            </select>
+         </div>
+
+         <!-- Button Sub-type -->
+         <div class="field" ng-if="activeControl.type === 'BTN'">
+            <label for="buttonType" class="label" translate>Button Type</label>
+            <select dropdown id="buttonType" class="dropdown" ng-model="activeControl.subType">
+               <option value="">Default (based on context)</option>
+               <!-- TODO: determine if we want to allow actions buttons for controls other than cards -->
+               <option value="ACT" disabled>Actions</option>
+               <option value="ICON">Icon</option>
+               <option value="MENU">Menu</option>
+               <option value="PRI">Primary</option>
+               <option value="SEC">Secondary</option>
+               <option value="TER">Tertiary</option>
+               <option value="MODAL_PRI">Modal Primary</option>
+               <option value="MODAL_SEC">Modal Secondary</option>
+            </select>
+         </div>
+
+         <!-- Menu Option Sub-type -->
+         <div class="field" ng-if="isType(['MENU_OPT'])">
+            <label for="menu-opt-type" class="label" translate>Menu Option Type</label>
+            <select dropdown id="menu-opt-type" class="dropdown" ng-model="activeControl.subType" ng-change="deleteIfBlank('subType')">
+               <option value="">Standard</option>
+               <option value="SUB_MENU">Sub Menu</option>
+            </select>
+         </div>
+
+         <!-- Chart Sub-type -->
+         <div class="field" ng-if="isType(['CHART'])">
+            <label for="chart-type" class="label required" translate>Chart Type</label>
+            <select dropdown id="chart-type" class="dropdown" ng-model="activeControl.subType" data-validate="required">
+               <option value="AREA">Area</option>
+               <option value="BAR">Bar</option>
+               <option value="BAR_GROUPED">Bar Grouped</option>
+               <option value="BAR_NORMALIZED">Bar Normalized</option>
+               <option value="BAR_STACKED">Bar Stacked</option>
+               <option value="BUBBLE">Bubble</option>
+               <option value="BULLET">Bullet</option>
+               <option value="COLUMN">Column</option>
+               <option value="COLUMN_GROUPED">Column Grouped</option>
+               <option value="COLUMN_POSITIVE_NEGATIVE">Column Positive Negative</option>
+               <option value="COLUMN_STACKED">Column Stacked</option>
+               <option value="COMPLETION">Completion</option>
+               <option value="COMPLETION_TARGET">Completion Target</option>
+               <option value="DONUT">Donut</option>
+               <option value="LINE">Line</option>
+               <option value="PIE">Pie</option>
+               <option value="SPARKLINE">Sparkline</option>
+            </select>
+         </div>
+
+         <!-- Icon -->
+         <div class="compound-field" ng-show="isType(['BTN', 'MENU_OPT', 'MESSAGE']) && activeControl.subType !== 'ACT'">
+            <div class="field">
+               <label for="control-icon" class="label">Icon</label>
+               <select dropdown id="control-icon" class="dropdown dropdown-sm" ng-model="activeControl.icon" ng-change="iconChanged(); deleteIfBlank('icon');">
+                  <option value=""></option>
+                  <option ng-repeat="opt in ::buttonIconOptions" ng-value="opt.value">{{opt.label}}</option>
+               </select>
+            </div>
+
+            <!-- Icon Picker -->
+            <button class="btn-secondary" type="button" ng-click="editIcon()">Show All</button>
+         </div>
+
+         <!-- Grid Column Specific Options -->
+         <div ng-if="activeControl.type === 'GRID_COL'">
+            <!-- Column Type -->
+            <div class="field">
+               <label for="grid-column-type" class="label" translate>Column Type</label>
+               <select dropdown id="grid-column-type" class="dropdown" ng-model="activeControl.subType" ng-options="opt.value as opt.label for opt in ::gridColumnTypeList" ng-change="gridColumnTypeChanged()">
+               </select>
+            </div>
+
+            <!-- Custom formatter -->
+            <div class="field">
+               <label for="grid-column-custom-formatter" translate>Custom Formatter</label>
+               <input type="text" id="grid-column-custom-formatter" ng-model="activeControl.customFormatter" title="Only use this for custom, non-shared formatters. Enter the controller-based reference to your formatter function (i.e. mst.productInfoFormatter). SoHo will pass these arguments to your function: row, cell, value, column, item." />
+            </div>
+
+            <!-- Editable -->
+            <div class="field" title="Only allowed for editable grids">
+               <input type="checkbox" id="control-editable" class="checkbox" ng-model="activeControl.editable" ng-change="gridColumnEditableChanged()" ng-disabled="::!isParentGridEditable(activeControl.id)" />
+               <label class="checkbox-label" for="control-editable" translate>Editable</label>
+            </div>
+         </div>
+
+         <!-- Field & Grid Column type options -->
+         <div ng-if="isType(['FIELD', 'GRID_COL'])">
+            <!-- Field Type -->
+            <div class="field" ng-if="isType(['FIELD'])">
+               <label for="fieldType" class="label required" translate>Field Type</label>
+               <select dropdown id="fieldType" class="dropdown" ng-model="activeControl.subType" ng-change="fieldTypeChanged()" data-validate="required">
+                  <option value=""></option>
+                  <option value="CHECKBOX">Checkbox</option>
+                  <option value="DATE">Date</option>
+                  <option value="DROP_DOWN">Drop Down</option>
+                  <option value="FILE">File</option>
+                  <option value="INFO">Info</option>
+                  <option value="LOOKUP">Lookup</option>
+                  <option value="MULTI_SELECT">Multi Select</option>
+                  <option value="PASSWORD">Password</option>
+                  <option value="RADIO_SET">Radio Set</option>
+                  <!-- TODO: finish switch if we want to use it -->
+                  <!--<option value="SWITCH">Switch</option>-->
+                  <option value="TEXT_AREA">Text Area</option>
+                  <option value="TEXT_BOX">Text Box</option>
+                  <option value="TIME">Time</option>
+               </select>
+            </div>
+
+            <!-- Selection Type (single / multiple files) -->
+            <div class="field" ng-show="isFieldType(['FILE'])" title="Allow single or multiple to be selected">
+               <label for="control-selection-type" class="label" translate>Selection Type</label>
+               <select dropdown id="control-selection-type" class="dropdown dropdown-sm" ng-model="activeControl.multiple" ng-options="opt.value as opt.label for opt in singleMultipleOptions">
+               </select>
+            </div>
+
+            <!-- Drop Down & Radio Options -->
+            <div ng-show="isFieldType(['DROP_DOWN', 'MULTI_SELECT', 'RADIO_SET']) || isGridColumnType(['DROP_DOWN'])">
+
+               <div class="compound-field">
+                  <!-- Options Type -->
+                  <div class="field">
+                     <label for="field-option-set-type" class="label required" translate>Options Type</label>
+                     <select dropdown id="field-option-set-type" class="dropdown dropdown-sm" ng-model="activeControl.type3" ng-change="optionsTypeChanged()" data-validate="required">
+                        <option value=""></option>
+                        <option value="INLINE">Inline</option>
+                        <option value="SET">Option Set (metadata)</option>
+                        <option value="CODES">Dynamic Codes (database)</option>
+                        <option value="MANUAL">Custom (manually coded)</option>
+                     </select>
+                  </div>
+
+                  <!-- Edit Inline Options -->
+                  <button class="btn-secondary" type="button" ng-click="editInlineOptions()" ng-show="activeControl.type3 === 'INLINE'" translate>global.options</button>
+               </div>
+
+               <div class="compound-field" ng-show="activeControl.type3 === 'SET'">
+                  <!-- Static Options Group/Module -->
+                  <div class="field">
+                     <label for="field-static-option-group" class="label required" translate>Option Module</label>
+                     <select dropdown id="field-static-option-group" class="dropdown dropdown-sm" ng-model="activeControl.metaGroup" ng-change="optionGroupChanged(); deleteIfBlank('metaGroup');" data-validate="required">
+                        <option value=""></option>
+                        <option value="COMMON">Common</option>
+                        <option value="AO">AO</option>
+                        <option value="AP">AP</option>
+                        <option value="AR">AR</option>
+                        <option value="BI">BI</option>
+                        <option value="BP">BP</option>
+                        <option value="CM">CM</option>
+                        <option value="CR">CR</option>
+                        <option value="DC">DC</option>
+                        <option value="EDI">EDI</option>
+                        <option value="ETX">ETX</option>
+                        <option value="GL">GL</option>
+                        <option value="IC">IC</option>
+                        <option value="JM">JM</option>
+                        <option value="KP">KP</option>
+                        <option value="OE">OE</option>
+                        <option value="OT">OT</option>
+                        <option value="PD">PD</option>
+                        <option value="PI">PI</option>
+                        <option value="PO">PO</option>
+                        <option value="PV">PV</option>
+                        <option value="RS">RS</option>
+                        <option value="SA">SA</option>
+                        <option value="SL">SL</option>
+                        <option value="SM">SM</option>
+                        <option value="SW">SW</option>
+                        <option value="TI">TI</option>
+                        <option value="TWL">TWL</option>
+                        <option value="VA">VA</option>
+                        <option value="WL">WL</option>
+                        <option value="WM">WM</option>
+                        <option value="WT">WT</option>
+                     </select>
+                  </div>
+
+                  <!-- Static Options Set -->
+                  <div class="field">
+                     <label for="field-static-option-set" class="label required" translate>Option Set</label>
+                     <select dropdown id="field-static-option-set" class="dropdown dropdown-sm" ng-model="activeControl.meta" ng-change="deleteIfBlank('meta')" data-validate="required">
+                        <option value=""></option>
+                        <option ng-repeat="opt in staticOptionSets" ng-value="opt.value">{{opt.label}}</option>
+                     </select>
+                  </div>
+               </div>
+
+               <!-- Option Codes -->
+               <div class="field" ng-show="activeControl.type3 === 'CODES'">
+                  <label for="field-drop-down-codes" class="label" ng-class="activeControl.type3 === 'CODES' ? 'required' : ''" translate>Options Set</label>
+                  <select dropdown id="field-drop-down-codes" class="dropdown dropdown-sm" ng-model="activeControl.meta" ng-change="deleteIfBlank('meta')">
+                     <option value=""></option>
+                     <option ng-repeat="opt in ::codeOptionSets" ng-value="opt.value">{{opt.label}}</option>
+                  </select>
+               </div>
+
+               <!-- Custom: Options Model -->
+               <div class="field" ng-show="activeControl.type3 === 'MANUAL'" title="Reference to the array of options to use in the custom drop down / radio set">
+                  <label for="field-options-model" translate>Options Model</label>
+                  <input type="text" id="field-options-model" ng-model="activeControl.optionsModel" required-if="activeControl.type3 === 'MANUAL'" ng-change="deleteIfBlank('optionsModel')" />
+               </div>
+
+               <!-- Custom: Label Field, Value Field -->
+               <div class="compound-field" ng-show="activeControl.type3 === 'MANUAL'">
+                  <div class="field" title="The property name on the objects in the options array that has the label to display.">
+                     <label for="control-option-label-field" translate>Label Field</label>
+                     <input type="text" id="control-option-label-field" class="input-sm" ng-model="activeControl.optionLabelField" ng-change="deleteIfBlank('optionLabelField')" required-if="activeControl.type3 === 'MANUAL'" />
+                  </div>
+
+                  <div class="field" title="The property name on the objects in the options array that has the value to use.">
+                     <label for="control-option-value-field" translate>Value Field</label>
+                     <input type="text" id="control-option-value-field" class="input-sm" ng-model="activeControl.optionValueField" ng-change="deleteIfBlank('optionValueField')" required-if="activeControl.type3 === 'MANUAL'" />
+                  </div>
+               </div>
+
+               <!-- Blank Option -->
+               <div class="compound-field" ng-show="isFieldType(['DROP_DOWN']) || isGridColumnType(['DROP_DOWN'])">
+                  <div class="field" title="Add a blank/empty option as the first option in the list. It's value is empty string.">
+                     <label for="control-blank-option" class="label" translate>Blank Option</label>
+                     <select dropdown id="control-blank-option" class="dropdown dropdown-sm" ng-model="activeControl.blankOption" ng-options="opt.value as opt.label for opt in addBlankOptions">
+                     </select>
+                  </div>
+
+                  <div class="field" title="The default display for the blank option is an empty option. You could also specify a custom label if desired (i.e. global.all).">
+                     <label for="control-blank-option-label" translate>Blank Label</label>
+                     <input type="text" id="control-blank-option-label" class="input-sm" ng-model="activeControl.blankOptionLabel" i18n-autocomplete ng-change="deleteIfBlank('blankOptionLabel')" />
+                  </div>
+               </div>
+            </div>
+
+            <!-- Lookup Type -->
+            <div class="compound-field" ng-show="activeControl.subType === 'LOOKUP'">
+               <div class="field">
+                  <label for="field-lookup-meta" class="label required">Lookup</label>
+                  <select dropdown id="field-lookup-meta" class="dropdown dropdown-sm" ng-model="activeControl.meta" ng-change="lookupTypeChanged(); deleteIfBlank('meta');" data-validate="required">
+                     <option value=""></option>
+                     <option ng-repeat="opt in ::lookupMetaList" ng-value="opt.value">{{opt.label}}</option>
+                  </select>
+               </div>
+
+               <!-- Lookup Custom Options -->
+               <button class="btn-secondary" type="button" ng-click="editLookupOptions()">Options</button>
+            </div>
+         </div>
+      </fieldset>
+   </div>
+
+   <div class="one-third column" ng-if="isType(['FIELD', 'GRID_COL', 'LIST_VIEW', 'SWAP_LIST_LIST', 'CHART'])">
+      <fieldset>
+         <legend>Data</legend>
+
+         <!-- Data Model -->
+         <div class="field" ng-if="isType(['FIELD', 'GRID_COL', 'LIST_VIEW', 'SWAP_LIST_LIST'])">
+            <label for="field-model" class="required" translate>Data Model</label>
+            <input type="text" id="field-model" ng-model="activeControl.model" data-validate="required">
+
+            <!-- Data hyperlink -->
+            <span class="hyperlink-trigger" ng-click="editHyperlink('data')" ng-class="activeControl.hyperlinks.data ? 'has-link' : ''" title="Hyperlink" ng-show="activeControl.type === 'FIELD' && activeControl.subType === 'INFO'">
+               <svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-link"></use></svg>
+            </span>
+         </div>
+
+         <!-- Data Format - Fields -->
+         <div class="compound-field" ng-show="activeControl.type === 'FIELD'">
+            <div class="field">
+               <label for="field-data-format" class="label" translate>Data Format</label>
+               <select dropdown id="field-data-format" class="dropdown dropdown-sm" ng-model="activeControl.dataFormat" ng-options="opt.value as opt.label group by opt.group for opt in dataFormatList" ng-change="dataFormatChanged(); deleteIfBlank('dataFormat');" data-is-readonly="!isFieldType(['TEXT_BOX', 'LOOKUP', 'CHECKBOX', 'INFO'])">
+                  <option value="">-- None --</option>
+               </select>
+            </div>
+
+            <!-- Max Length for form fields (only for non-numeric, non-formatted fields) -->
+            <div class="field" title="The max number of characters the user is allowed to type in. This should only be used for fields without a mask (Text Areas, Password fields, and non-numeric Text Boxes). Lookup fields should only have this if they are set to Allow Entry.">
+               <label for="control-max-length" translate>Max Length</label>
+               <input type="text" id="control-max-length" class="input-xs" ng-model="activeControl.maxLength" ng-change="convertToNumber('maxLength')" required-if="isFieldType(['TEXT_BOX', 'TEXT_AREA', 'PASSWORD']) && (!activeControl.dataFormat || activeControl.dataFormat === 'EMAIL')" />
+            </div>
+         </div>
+
+         <!-- Data Format - Grid Columns -->
+         <div class="compound-field" ng-show="activeControl.type === 'GRID_COL'">
+            <div class="field">
+               <label for="grid-column-data-format" class="label" translate>Data Format</label>
+               <select dropdown id="grid-column-data-format" class="dropdown dropdown-sm" ng-model="activeControl.dataFormat" ng-options="opt.value as opt.label group by opt.group for opt in gridColumnFormatList" ng-change="dataFormatChanged(); deleteIfBlank('dataFormat');" data-is-readonly="!isGridColumnType(['TEXT', 'LOOKUP', 'CHECKBOX', 'HYPERLINK'])">
+                  <option value="">-- None --</option>
+               </select>
+            </div>
+
+            <!-- Max Length for editable grid columns -->
+            <div class="field" title="This should only be used for editable columns without a mask (Text Areas, non-numeric Text Cells).">
+               <label for="grid-column-max-length" translate>Max Length</label>
+               <input type="text" id="grid-column-max-length" class="input-xs" ng-model="activeControl.maxLength" ng-change="convertToNumber('maxLength')" required-if="activeControl.editable && isGridColumnType(['TEXT', 'TEXT_AREA', 'PASSWORD']) && (!activeControl.dataFormat || activeControl.dataFormat === 'EMAIL')" data-mask data-options='{"pattern": "####", "mode": "number"}' ng-readonly="!activeControl.editable" />
+            </div>
+         </div>
+
+         <!-- Data Sub-Format (Fields & Grid Columns) -->
+         <div class="field" ng-show="formatMeta.subFormats.length > 0">
+            <label for="field-data-sub-format" class="label" translate>Sub Format</label>
+            <select dropdown id="field-data-sub-format" class="dropdown dropdown-sm" ng-model="activeControl.subFormat" required-if="formatMeta.subFormatRequired" ng-change="deleteIfBlank('subFormat')">
+               <option value=""></option>
+               <option ng-repeat="opt in formatMeta.subFormats" ng-value="opt.key">{{opt.displayName}}</option>
+            </select>
+         </div>
+
+         <!-- Number Format -->
+         <div class="compound-field" ng-show="isNumericFormField() || (isNumericGridColumn() && activeControl.editable)">
+            <div class="field" title="The ability to enter negative numbers">
+               <label for="field-number-format-sign" class="label" translate>Sign</label>
+               <select dropdown id="field-number-format-sign" class="dropdown dropdown-xs" ng-model="activeControl.sign" required-if="(isNumericFormField() && !activeControl.readonly) || (isNumericGridColumn() && activeControl.editable)" ng-change="deleteIfBlank('sign')">
+                  <option value="">+/-</option>
+                  <option value="+">+</option>
+                  <!-- Note: There's no "-" option because Soho does not support forcing the negative in a numeric mask (this use case is awkward anyway) -->
+               </select>
+            </div>
+
+            <div class="field" title="The maximum number of significant digits the user can enter">
+               <label for="field-number-format-digits" translate>Digits</label>
+               <input type="text" id="field-number-format-digits" class="input-xs" ng-model="activeControl.digits" ng-change="convertToNumber('digits')" required-if="(isNumericFormField() && !activeControl.readonly) || (isNumericGridColumn() && activeControl.editable)" data-mask data-options='{"pattern": "####", "mode": "number"}' />
+            </div>
+
+            <div class="field" ng-show="(isType(['FIELD']) && activeControl.dataFormat !== 'INTEGER' && activeControl.dataFormat !== 'INTEGER_TEXT') || (isType(['GRID_COL']) && activeControl.dataFormat !== 'INTEGER' && activeControl.dataFormat !== 'INTEGER_TEXT')" title="The maximum number of decimals the user can enter">
+               <label for="field-number-format-decimals" class="label">Decimals</label>
+               <select dropdown id="field-number-format-decimals" class="dropdown dropdown-xs" ng-model="activeControl.decimals" ng-options="opt.value as opt.label for opt in decimalPlacesOptions" required-if="(isNumericFormField() && !activeControl.readonly && activeControl.dataFormat !== 'INTEGER' && activeControl.dataFormat !== 'INTEGER_TEXT') || (isNumericGridColumn() && activeControl.editable && activeControl.dataFormat !== 'INTEGER' && activeControl.dataFormat !== 'INTEGER_TEXT')">
+               </select>
+            </div>
+
+            <!-- Sample number for current format settings -->
+            <div style="clear: both; text-align: right; padding-right: 90px; margin-top: -10px; margin-bottom: 12px; font-size: 14px; font-style: italic; color: #aaaaaa;">
+               <span>{{getSampleFormattedNumber()}}</span>
+            </div>
+         </div>
+
+         <!-- Data Format Options (Fields & Grid Columns) -->
+         <format-options data-options-list="formatMeta.formatOptions" />
+
+         <!-- Data Description -->
+         <div class="field" ng-if="activeControl.type === 'FIELD'" title="Binding additional data to be displayed beside the field (i.e. dtl.arsc.name)">
+            <label for="field-data-desc" translate>Data Description</label>
+            <input type="text" id="field-data-desc" ng-model="activeControl.dataDesc" ng-change="deleteIfBlank('dataDesc')">
+         </div>
+
+         <!-- Swap List: Label Field, Value Field -->
+         <div class="compound-field" ng-if="activeControl.type === 'SWAP_LIST_LIST'">
+            <div class="field" title="The property name on the objects in the options array that has the label to display (i.e. label). If the model is an array of primitive values (string, number, etc.) instead of objects, then leave this blank.">
+               <label class="inline">
+                  <span class="label-text">Label Field</span>
+                  <input type="text" class="input-sm" ng-model="activeControl.labelField" ng-change="deleteIfBlank('labelField')" />
+               </label>
+            </div>
+
+            <div class="field" title="The property name on the objects in the options array that has the value to use (i.e. value). If the model is an array of primitive values (string, number, etc.) instead of objects, then leave this blank.">
+               <label class="inline">
+                  <span class="label-text">Value Field</span>
+                  <input type="text" class="input-sm" ng-model="activeControl.valueField" ng-change="deleteIfBlank('valueField')" />
+               </label>
+            </div>
+         </div>
+
+         <!-- Chart Options -->
+         <div class="field" ng-if="isType(['CHART'])" title="Reference to the options to use for this chart (i.e. dtl.salesChartOptions). See SoHo chart examples for how to structure the options.">
+            <label for="chart-options" class="required" translate>Chart Options</label>
+            <input type="text" id="chart-options" ng-model="activeControl.chartOptions" data-validate="required" />
+         </div>
+      </fieldset>
+   </div>
+
+   <div class="one-third column">
+      <fieldset>
+         <legend>Appearance</legend>
+
+         <!-- Message text -->
+         <div class="field" ng-if="isType(['MESSAGE'])">
+            <label for="message-text" class="required" translate>Text</label>
+            <input type="text" id="message-text" ng-model="activeControl.text" i18n-autocomplete data-validate="required" />
+         </div>
+
+         <!-- Label -->
+         <div class="field" ng-if="isType(['MODAL', 'FIELD', 'BTN', 'MENU_OPT', 'TOOLBAR', 'EXP_AREA', 'FIELD_SET', 'TAB', 'CARD', 'MOD_CONTENT', 'MOD_SIDEBAR', 'GRID_COL', 'SWAP_LIST_LIST', 'WIZARD_TICK', 'CHART', 'IMAGE'])">
+            <label for="fieldLabel" translate>Label</label>
+            <input type="text" id="fieldLabel" ng-model="activeControl.label" i18n-autocomplete required-if="isType(['FIELD', 'BTN', 'CHART', 'IMAGE', 'MENU_OPT', 'SWAP_LIST_LIST', 'WIZARD_TICK']) && activeControl.subType !== 'ACT'" ng-readonly="activeControl.subType === 'ACT'" />
+
+            <!-- Label hyperlink -->
+            <span class="hyperlink-trigger" ng-click="editHyperlink('label')" ng-class="activeControl.hyperlinks.label ? 'has-link' : ''" title="Hyperlink" ng-show="activeControl.type === 'FIELD' && activeControl.subType === 'INFO'">
+               <svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-link"></use></svg>
+            </span>
+         </div>
+
+         <!-- Hidden/Audible Label -->
+         <div class="field" ng-show="isType(['FIELD'])" title="All fields require a label (for audible-only users and personalization), but it can be hidden from sight">
+            <input type="checkbox" id="control-label-hidden" class="checkbox" ng-model="activeControl.labelHidden" ng-change="deleteIfFalse('labelHidden')" />
+            <label class="checkbox-label" for="control-label-hidden" translate>Hidden Label</label>
+         </div>
+
+         <!-- Attach Field Up -->
+         <div class="field" ng-show="isType(['FIELD']) && !isFieldType(['INFO'])" title="Position this field up close to the above field (i.e. address line fields)">
+            <input type="checkbox" id="field-attach-up" class="checkbox" ng-model="activeControl.attachUp" ng-disabled="!activeControl.labelHidden" ng-change="deleteIfFalse('attachUp')" />
+            <label class="checkbox-label" for="field-attach-up" translate>Attach Up to Above Field</label>
+         </div>
+
+         <!-- Sub Label -->
+         <div class="field" ng-if="activeControl.type === 'TOOLBAR'">
+            <label for="toolbarSubLabel" translate>Sub Title</label>
+            <input type="text" id="toolbarSubLabel" ng-model="activeControl.subLabel" i18n-autocomplete />
+         </div>
+
+         <!-- Show Label As Tooltip -->
+         <div class="field" ng-show="isType(['BTN']) && activeControl.subType === 'ICON'">
+            <input type="checkbox" id="control-is-label-tooltip" class="checkbox" ng-model="activeControl.isLabelTooltip" ng-change="deleteIfFalse('isLabelTooltip')" />
+            <label class="checkbox-label" for="control-is-label-tooltip" translate>Show Label As Tooltip</label>
+         </div>
+
+         <div class="compound-field" ng-if="isType(['FIELD'])">
+            <!-- Input Size -->
+            <div class="field" ng-show="activeControl.subType !== 'INFO'">
+               <label for="field-input-size" class="label" translate>Size</label>
+               <select dropdown id="field-input-size" class="dropdown dropdown-sm" ng-model="activeControl.size" ng-change="deleteIfBlank('size')">
+                  <option value="XS">Extra Small</option>
+                  <option value="SM">Small</option>
+                  <option value="">Med (default)</option>
+                  <option value="LG">Large</option>
+                  <option value="FULL" ng-if="isFieldType(['TEXT_AREA'])">Full Width (special cases)</option>
+               </select>
+            </div>
+
+            <!-- Height (textarea) -->
+            <div class="field" ng-show="isFieldType(['TEXT_AREA'])" title="For special cases, you can change the height of a Text Area.">
+               <label class="inline">
+                  <span class="label-text">Height</span>
+                  <select dropdown class="dropdown dropdown-sm" ng-model="activeControl.height" ng-change="deleteIfBlank('height')">
+                     <option value="">Default</option>
+                     <option value="LG">Large</option>
+                     <option value="XL">Extra Large</option>
+                  </select>
+               </label>
+            </div>
+         </div>
+
+         <!-- Grid column width -->
+         <div class="field" ng-if="isType(['GRID_COL'])" title="Only use this if you truly need to override the default width. Grids display better when the columns have auto-width, and specifying a width can cause side effects.">
+            <label for="grid-column-width" translate>Width (use with caution)</label>
+            <input type="text" id="grid-column-width" class="input-xs" ng-model="activeControl.width" ng-change="convertToNumber('width')" data-mask data-options='{"pattern": "####", "mode": "number"}' />
+         </div>
+      </fieldset>
+   </div>
+</div>

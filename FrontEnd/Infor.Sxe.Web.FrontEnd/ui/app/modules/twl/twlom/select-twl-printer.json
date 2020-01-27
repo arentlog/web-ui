@@ -1,0 +1,116 @@
+{
+  "viewId": "twl-twlom-select-twl-printer",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "dtlp.isSelectTwlPrinter()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.select.printer",
+              "subLabel": "{{base.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 40,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtlp.returnToMaster()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.next",
+                  "icon": "icon-next-page",
+                  "stateRef": "",
+                  "eventClick": "base.drop()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 28,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.selectedTwlPrinterId",
+                          "label": "global.printer.label",
+                          "meta": "TWLLabelPrinters",
+                          "required": false,
+                          "conditionShow": "base.ominfo.isLabelPrinting",
+                          "options": {
+                            "searchParams": {
+                              "coNum": {
+                                "type": "REF",
+                                "value": "base.criteriaUsed.coNum"
+                              },
+                              "whNum": {
+                                "type": "REF",
+                                "value": "base.criteriaUsed.whNum"
+                              },
+                              "printerId": {
+                                "type": "REF",
+                                "value": "base.selectedTwlPrinterId"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 38,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.selectedTwlPrinterId",
+                          "label": "global.printer.report",
+                          "meta": "Printer",
+                          "required": false,
+                          "conditionShow": "!base.ominfo.isLabelPrinting",
+                          "options": {
+                            "searchParams": {
+                              "ptype": "p",
+                              "recordcountlimit": 500
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

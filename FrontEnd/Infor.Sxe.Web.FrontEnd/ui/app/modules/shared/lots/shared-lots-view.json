@@ -1,0 +1,565 @@
+{
+  "viewId": "shared-lots-sharedlotsview",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 10,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 11,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 14,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "lot.criteria.prod",
+              "label": "global.product"
+            },
+            {
+              "id": 21,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "lot.criteria.linenochar",
+              "label": "global.line.number"
+            },
+            {
+              "id": 23,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "lot.criteria.seqnochar",
+              "label": "global.sequence.number.poundsign",
+              "conditionShow": "lot.criteria.seqno !== 0"
+            },
+            {
+              "id": 24,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "lot.criteria.proddesc",
+              "label": "global.description"
+            },
+            {
+              "id": 118,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "lot.criteria.wonosuf",
+              "label": "global.work.order.number",
+              "conditionShow": "lot.criteria.currproc === 'kpew'"
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 15,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "lot.criteria.ordqty",
+              "label": "global.ordered",
+              "dataFormat": "DECIMAL",
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            },
+            {
+              "id": 18,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "lot.criteria.origqty",
+              "label": "{{lot.stringTranslate(lot.criteria.origqtylabel)}}",
+              "dataFormat": "DECIMAL",
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            },
+            {
+              "id": 17,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "lot.criteria.proofqty",
+              "label": "global.quantity.to.allocate",
+              "dataFormat": "DECIMAL",
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            },
+            {
+              "id": 97,
+              "type": "MESSAGE",
+              "text": "{{lot.stringTranslate(lot.criteria.rettext)}}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "type": "GRID",
+      "controlRef": "lot.lotGrid",
+      "model": "lot.lotCollection",
+      "conditionEditable": "!lot.isReadOnly",
+      "options": {
+        "showCheckboxes": true,
+        "editable": true,
+        "events": {
+          "selected": ""
+        },
+        "selectable": "single"
+      },
+      "controls": {
+        "toolbar": {
+          "id": 30,
+          "type": "TOOLBAR",
+          "label": "global.lot.entry",
+          "subLabel": "",
+          "children": [
+            {
+              "id": 95,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-columns",
+              "label": "global.cuts",
+              "securityLevel": 4,
+              "eventClick": "lot.launchDimensions()",
+              "conditionShow": "lot.isPoLotDimensionsVisible",
+              "conditionDisabled": "!lot.lotGrid.isOneRowSelected() || lot.isReadOnly"
+            },
+            {
+              "id": 47,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-new-document",
+              "label": "global.new",
+              "securityLevel": 4,
+              "eventClick": "lot.newLot()",
+              "conditionDisabled": "!lot.criteria.btncreateenabled || lot.isReadOnly",
+              "conditionShow": "lot.criteria.btncreateenabled"
+            },
+            {
+              "id": 38,
+              "type": "BTN",
+              "label": "global.lookup",
+              "icon": "icon-search",
+              "eventClick": "lot.lookupLot()",
+              "conditionDisabled": "lot.isReadOnly"
+            },
+            {
+              "id": 32,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-save",
+              "label": "global.save",
+              "submitForm": false,
+              "eventValidated": "",
+              "securityLevel": 3,
+              "eventClick": "lot.save()",
+              "conditionDisabled": "lot.isReadOnly"
+            },
+            {
+              "id": 34,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-cancel",
+              "label": "global.cancel",
+              "eventClick": "lot.cancel()",
+              "conditionDisabled": "lot.isReadOnly"
+            },
+            {
+              "id": 117,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-send",
+              "label": "global.auto.assign",
+              "securityLevel": 4,
+              "eventClick": "lot.launchAutoAssign()",
+              "conditionDisabled": "!lot.criteria.btnautoassignenabled || lot.isReadOnly",
+              "conditionShow": "!lot.criteria.btnautoassignhidden"
+            },
+            {
+              "id": 35,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.requery",
+              "eventClick": "lot.requeryLotEntry()",
+              "conditionDisabled": "lot.isReadOnly"
+            },
+            {
+              "id": 36,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.oldest",
+              "eventClick": "lot.oldest()",
+              "conditionDisabled": "!lot.criteria.btnoldestenabled || lot.isReadOnly",
+              "conditionShow": "!lot.criteria.btnoldesthidden"
+            },
+            {
+              "id": 48,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 49,
+                  "type": "COL",
+                  "subType": "1"
+                }
+              ]
+            },
+            {
+              "id": 50,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 51,
+                  "type": "COL",
+                  "subType": "1"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 20,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "label": "{{lot.columnLabel1}}",
+          "model": "lSelected",
+          "editable": true,
+          "eventChange": "lot.selected()",
+          "dataFormat": "LOGICAL",
+          "cellEditable": "lot.editColumnEnabled()",
+          "contentVisible": "",
+          "conditionInclude": "!lot.editColumnHidden('1')"
+        },
+        {
+          "id": 25,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "{{lot.columnLabel2}}",
+          "model": "cLotNo",
+          "editable": true,
+          "cellEditable": "lot.editColumnEnabled()",
+          "contentVisible": "",
+          "conditionInclude": "!lot.editColumnHidden('2')"
+        },
+        {
+          "id": 29,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "{{lot.columnLabel3}}",
+          "model": "dQuantity",
+          "editable": true,
+          "digits": 7,
+          "decimals": 2,
+          "dataFormat": "DECIMAL",
+          "cellEditable": "lot.editColumnEnabled()",
+          "contentVisible": "",
+          "conditionInclude": "!lot.editColumnHidden('3')",
+          "eventChange": "lot.quantityChanged()",
+          "eventEnterEditMode": "lot.quantityEnterEditMode()",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 98,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dQtyUnavail",
+          "label": "{{lot.columnLabel4}}",
+          "editable": true,
+          "dataFormat": "DECIMAL",
+          "digits": 9,
+          "decimals": 2,
+          "cellEditable": "lot.editColumnEnabled()",
+          "contentVisible": "",
+          "conditionInclude": "!lot.editColumnHidden('4')",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 39,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dQtyAvail",
+          "label": "{{lot.columnLabel6}}",
+          "editable": true,
+          "digits": 7,
+          "decimals": 2,
+          "dataFormat": "DECIMAL",
+          "cellEditable": "lot.editColumnEnabled()",
+          "contentVisible": "",
+          "conditionInclude": "!lot.editColumnHidden('6')",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 28,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "label": "{{lot.columnLabel5}}",
+          "model": "dtOpen",
+          "editable": true,
+          "dataFormat": "DATE",
+          "cellEditable": "lot.editColumnEnabled()",
+          "contentVisible": "",
+          "conditionInclude": "!lot.editColumnHidden('5')"
+        },
+        {
+          "id": 26,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dCost",
+          "label": "{{lot.columnLabel7}}",
+          "dataFormat": "CURRENCY",
+          "editable": true,
+          "digits": 9,
+          "decimals": 5,
+          "cellEditable": "lot.editColumnEnabled()",
+          "contentVisible": "",
+          "conditionInclude": "!lot.editColumnHidden('7')"
+        },
+        {
+          "id": 40,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "dtExpire",
+          "label": "{{lot.columnLabel8}}",
+          "editable": true,
+          "dataFormat": "DATE",
+          "cellEditable": "lot.editColumnEnabled()",
+          "contentVisible": "",
+          "conditionInclude": "!lot.editColumnHidden('8')"
+        },
+        {
+          "id": 99,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cComment",
+          "label": "{{lot.columnLabel9}}",
+          "editable": true,
+          "cellEditable": "lot.editColumnEnabled()",
+          "contentVisible": "",
+          "conditionInclude": "!lot.editColumnHidden('9')"
+        },
+        {
+          "id": 44,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "cReasUnavTy",
+          "label": "{{lot.columnLabel10}}",
+          "editable": true,
+          "type3": "CODES",
+          "meta": "ReasonUnavailable",
+          "cellEditable": "lot.editColumnEnabled()",
+          "contentVisible": "",
+          "conditionInclude": "!lot.editColumnHidden('10')"
+        },
+        {
+          "id": 46,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cBinLoc1",
+          "label": "{{lot.columnLabel11}}",
+          "editable": true,
+          "dataFormat": "BinLoc",
+          "cellEditable": "lot.editColumnEnabled()",
+          "contentVisible": "",
+          "conditionInclude": "!lot.editColumnHidden('11')"
+        },
+        {
+          "id": 45,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cBinLoc2",
+          "label": "{{lot.columnLabel12}}",
+          "editable": true,
+          "dataFormat": "BinLoc",
+          "cellEditable": "lot.editColumnEnabled()",
+          "contentVisible": "",
+          "conditionInclude": "!lot.editColumnHidden('12')"
+        }
+      ]
+    },
+    {
+      "id": 100,
+      "type": "GRID",
+      "model": "lot.cutCollection",
+      "controlRef": "lot.cutGrid",
+      "conditionShow": "lot.lotCutEntryGridVisible",
+      "conditionEditable": "lot.isReadOnly",
+      "options": {
+        "selectable": "multiple",
+        "editable": true
+      },
+      "controls": {
+        "toolbar": {
+          "id": 101,
+          "type": "TOOLBAR",
+          "label": "global.dimensional.cuts"
+        }
+      },
+      "children": [
+        {
+          "id": 103,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "selectedfl",
+          "label": "global.assigned",
+          "dataFormat": "LOGICAL",
+          "editable": true
+        },
+        {
+          "id": 104,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "lotno",
+          "label": "global.lot.number"
+        },
+        {
+          "id": 105,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "seqno",
+          "label": "global.sequence.number",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 108,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "quantity",
+          "label": "global.quantity",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 112,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "lengthunit",
+          "label": "global.length.unit"
+        },
+        {
+          "id": 109,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "length1",
+          "label": "global.length.1",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 110,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "length2",
+          "label": "global.length.2",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 111,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "length3",
+          "label": "global.length.3",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 116,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "widthunit",
+          "label": "global.width.unit"
+        },
+        {
+          "id": 113,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "width1",
+          "label": "global.width.1",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 114,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "width2",
+          "label": "global.width.2",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 115,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "width3",
+          "label": "global.width.3",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 107,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "conditioncd",
+          "label": "global.condition.code"
+        },
+        {
+          "id": 106,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "unavailfl",
+          "label": "global.unavailable",
+          "dataFormat": "LOGICAL"
+        }
+      ]
+    },
+    {
+      "id": 96,
+      "type": "SUB_VIEW",
+      "subType": "JSON",
+      "viewPath": "shared/lots/poei-lot-dimensions.json",
+      "controller": "PoeiLotDimensionsCtrl as poeild"
+    }
+  ]
+}

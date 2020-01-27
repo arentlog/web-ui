@@ -1,0 +1,290 @@
+{
+  "viewId": "ar-arsoc-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "ar.setup.credit.cards",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail() || base.isCreditCardToolBarEnable === 'yes'",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3,
+                  "eventClick": "dtl.launchCenPosEditWindow"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 39,
+                  "type": "BTN",
+                  "label": "global.modify.tokenized.card",
+                  "icon": "icon-edit",
+                  "securityLevel": 3,
+                  "conditionDisabled": "!base.isDetail() || base.isCreditCardToolBarEnable === 'yes'",
+                  "eventClick": "dtl.modifyTokenizedCard()"
+                },
+                {
+                  "id": 40,
+                  "type": "BTN",
+                  "label": "global.delete.tokenized.card",
+                  "icon": "icon-delete",
+                  "securityLevel": 5,
+                  "conditionDisabled": "!base.isDetail() || base.isCreditCardToolBarEnable === 'yes'",
+                  "eventClick": "dtl.deleteTokenizedCard()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.arsoc.mediacd",
+                              "label": "global.card.type",
+                              "conditionShow": "base.isCreate()",
+                              "conditionRequired": "base.isCreate()",
+                              "type3": "MANUAL",
+                              "optionsModel": "base.cardTypes",
+                              "optionLabelField": "descrip",
+                              "optionValueField": "codeval",
+                              "autoFocus": true
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.arsoc.mediacd",
+                              "label": "global.card.type",
+                              "conditionShow": "!base.isCreate()",
+                              "type3": "MANUAL",
+                              "optionsModel": "base.cardTypes",
+                              "optionLabelField": "descrip",
+                              "optionValueField": "codeval",
+                              "readonly": true
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.arsoc.cardno",
+                              "label": "global.credit.card.number",
+                              "conditionShow": "!base.isCreate()",
+                              "readonly": true
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "dtl.arsoc.createdt",
+                              "label": "global.create.date",
+                              "dataFormat": "DATE",
+                              "conditionShow": "!base.isCreate()",
+                              "conditionDisabled": "base.isDetail()"
+                            },
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.arsd.maxamount",
+                              "label": "global.maximum",
+                              "dataFormat": "INTEGER",
+                              "digits": 8,
+                              "conditionShow": "!base.isCreate()",
+                              "sign": "+"
+                            },
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.arsoc.custno",
+                              "label": "global.customer.number",
+                              "conditionShow": "base.isCreate()",
+                              "conditionRequired": "base.isCreate()",
+                              "meta": "Customer"
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.arsoc.shipto",
+                              "label": "global.ship.to",
+                              "meta": "ShipTo",
+                              "conditionShow": "base.isCreate()",
+                              "options": {
+                                "searchParams": {
+                                  "custno": {
+                                    "type": "REF",
+                                    "value": "dtl.arsoc.custno"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.arsoc.name",
+                              "label": "global.card.name",
+                              "conditionShow": "!base.isCreate()",
+                              "readonly": true
+                            },
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.arsoc.seqno",
+                              "label": "global.sequence.number.poundsign",
+                              "dataFormat": "INTEGER",
+                              "digits": 3,
+                              "conditionShow": "!base.isCreate()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 28,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 29,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 31,
+                              "type": "CUSTOM",
+                              "subType": "UserFields",
+                              "options": {
+                                "tableName": "arsd",
+                                "objectRef": "dtl.arsd",
+                                "conditionReadonly": "base.isDetail()"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

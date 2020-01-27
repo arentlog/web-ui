@@ -1,0 +1,432 @@
+{
+  "viewId": "twl-twlae-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "conditionShow": "base.isDetailOrEdit()",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "menu.twlae",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail() || ((!base.criteria.whNum) && (!base.criteriaUsed.whNum))",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail() || base.isGdprRestricted",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 101,
+                  "type": "BTN",
+                  "subType": "MENU",
+                  "label": "global.inquiries",
+                  "children": [
+                    {
+                      "id": 102,
+                      "type": "MENU_OPT",
+                      "label": "global.transaction.detail",
+                      "eventClick": "dtl.showEmpInqTransDtl()"
+                    },
+                    {
+                      "id": 103,
+                      "type": "MENU_OPT",
+                      "label": "global.transaction.summary",
+                      "eventClick": "dtl.showEmpInqTransSum()"
+                    }
+                  ]
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.rowStatus",
+                              "label": "global.active"
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlae.empName",
+                              "label": "global.name"
+                            },
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.twlae.empTitle",
+                              "label": "global.title"
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.pwchangefl",
+                              "label": "message.user.must.change.password.at.next.login"
+                            },
+                            {
+                              "id": 55,
+                              "type": "FIELD",
+                              "subType": "PASSWORD",
+                              "model": "dtl.twlae.password",
+                              "label": "global.password",
+                              "maxLength": 16
+                            }
+                          ]
+                        },
+                        {
+                          "id": 54,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.twlae.deptNum",
+                              "label": "global.department",
+                              "required": true,
+                              "meta": "TWLDepartment",
+                              "size": "SM",
+                              "options": {
+                                "searchParams": {
+                                  "coNum": {
+                                    "type": "REF",
+                                    "value": "base.criteriaUsed.coNum"
+                                  },
+                                  "whNum": {
+                                    "type": "REF",
+                                    "value": "base.criteriaUsed.whNum"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.twlae.shfNum",
+                              "label": "global.shift",
+                              "required": true,
+                              "meta": "TWLShift",
+                              "size": "SM",
+                              "options": {
+                                "searchParams": {
+                                  "coNum": {
+                                    "type": "REF",
+                                    "value": "base.criteriaUsed.coNum"
+                                  },
+                                  "whNum": {
+                                    "type": "REF",
+                                    "value": "base.criteriaUsed.whNum"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 104,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 106,
+                                  "type": "FIELD",
+                                  "subType": "MULTI_SELECT",
+                                  "model": "dtl.rushWhZoneArray",
+                                  "label": "global.rush.check.warehouse.zones",
+                                  "type3": "MANUAL",
+                                  "optionsModel": "dtl.whZones",
+                                  "conditionDisabled": "dtl.allWhseZones",
+                                  "autoFocus": true,
+                                  "eventChange": "dtl.changeRushWhZoneArray()"
+                                },
+                                {
+                                  "id": 105,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.allWhseZones",
+                                  "label": "global.all",
+                                  "dataFormat": "LOGICAL",
+                                  "eventChange": "dtl.changeAllWhseZones()"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 24,
+                  "type": "EXP_AREA",
+                  "label": "global.twl.rf.security",
+                  "collapsed": true,
+                  "children": [
+                    {
+                      "id": 34,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "dtl.twlae.rfAdminfl",
+                      "label": "global.twl.rf.admin",
+                      "eventChange": "dtl.setRFAdmin()"
+                    },
+                    {
+                      "id": 43,
+                      "type": "FIELD",
+                      "model": "dtl.twlae.rfLoginCnt",
+                      "label": "global.twl.rf.numlogins",
+                      "subType": "TEXT_BOX",
+                      "dataFormat": "INTEGER",
+                      "maxLength": 1,
+                      "sign": "+",
+                      "digits": 1,
+                      "size": "XS",
+                      "eventChange": "dtl.validateRfLogins()"
+                    },
+                    {
+                      "id": 50,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 51,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.rfInventory",
+                              "label": "global.twl.rf.ccphys"
+                            },
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.rfdelorddtlfl",
+                              "label": "global.twl.rf.delorddtl"
+                            },
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.inventoryControl",
+                              "label": "global.inventory.control"
+                            },
+                            {
+                              "id": 45,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.rfLogon",
+                              "label": "global.login"
+                            },
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.rfMove",
+                              "label": "global.twl.rf.movemnt"
+                            },
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.rfnotesfl",
+                              "label": "global.twl.rf.notecrt"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 53,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 44,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.rfPack",
+                              "label": "global.twl.rf.ordpack"
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.rfPick",
+                              "label": "global.twl.rf.ordpick"
+                            },
+                            {
+                              "id": 46,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.rfPicksort",
+                              "label": "global.twl.rf.picksort"
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.rfPutaway",
+                              "label": "global.twl.rf.putaway"
+                            },
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.rfReceipt",
+                              "label": "global.receipt"
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.rfStkMove",
+                              "label": "global.replenishments"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 52,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.rfShip",
+                              "label": "global.shipping"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.zonePickFl",
+                              "label": "global.twl.rf.zonepick"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.twlae.rfStkAdj",
+                              "label": "global.stock.adjustments"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": 100,
+          "type": "VIEW_CNTR",
+          "viewName": "detailExtendView"
+        }
+      ]
+    }
+  ]
+}

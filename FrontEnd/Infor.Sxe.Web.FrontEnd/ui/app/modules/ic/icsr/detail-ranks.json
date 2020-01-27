@@ -1,0 +1,469 @@
+{
+  "viewId": "ic-icsr-detailranks",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "dr.isDetailRanksMaster()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.detail.rank.records",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dr.back()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 52,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "submitForm": true,
+                  "eventValidated": "dr.submit()"
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dr.back()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 41,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 47,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 49,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dr.criteria.ranks",
+                          "label": "global.default.ranks",
+                          "dataFormat": "INTEGER",
+                          "maxLength": 2
+                        },
+                        {
+                          "id": 56,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dr.criteria.searchwhse",
+                          "label": "global.warehouse",
+                          "meta": "Replenishment",
+                          "conditionShow": "dr.criteria.recordtype === 'v'",
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 57,
+                          "type": "BTN",
+                          "subType": "PRI",
+                          "label": "global.search",
+                          "conditionShow": "dr.criteria.recordtype === 'v'",
+                          "eventClick": "dr.search()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 54,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 51,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dr.criteria.rankpct",
+                          "label": "global.percentage",
+                          "dataFormat": "PERCENT",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 8,
+                  "type": "GRID",
+                  "model": "dr.dataset",
+                  "controlRef": "dr.grid",
+                  "options": {
+                    "showCheckboxes": true,
+                    "showDrilldown": true,
+                    "events": {
+                      "drilldown": "dr.drilldown()"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 9,
+                      "type": "TOOLBAR",
+                      "label": "global.ranks",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-new-document",
+                          "label": "global.new",
+                          "stateRef": ".create",
+                          "securityLevel": 4,
+                          "conditionDisabled": "dr.grid.isAnyRowSelected()",
+                          "conditionShow": "dtl.isCompanyRecord"
+                        },
+                        {
+                          "id": 13,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-edit",
+                          "label": "global.edit",
+                          "stateRef": "",
+                          "securityLevel": 3,
+                          "conditionDisabled": "!dr.grid.isOneRowSelected()",
+                          "eventClick": "dr.edit()"
+                        },
+                        {
+                          "id": 12,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "eventClick": "dr.delete()",
+                          "securityLevel": 5,
+                          "conditionDisabled": "dr.grid.isNoRowSelected()",
+                          "conditionShow": "dtl.isCompanyRecord"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "ranklevel",
+                      "label": "global.level"
+                    },
+                    {
+                      "id": 15,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "rankpctlev",
+                      "label": "global.rank.percent",
+                      "customFormatter": "dr.rankPctFormatter",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 16,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "minhitslev",
+                      "label": "global.minimum.hits",
+                      "customFormatter": "dr.minHitsFormatter",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "usgmthslev",
+                      "label": "global.usage.months",
+                      "customFormatter": "dr.usgMthsFormatter",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 18,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "minleadlev",
+                      "label": "global.minimum.vendor.lead.time",
+                      "customFormatter": "dr.minLeadFormatter",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 19,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "minvendtylev",
+                      "label": "global.min.vend.ty",
+                      "type3": "SET",
+                      "metaGroup": "IC",
+                      "meta": "SafeType",
+                      "blankOption": false,
+                      "customFormatter": "dr.minVendTyFormatter"
+                    },
+                    {
+                      "id": 46,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "vendpctlev",
+                      "label": "global.minimum.vendor.safety",
+                      "customFormatter": "dr.vendPctFormatter",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 20,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "maxleadlev",
+                      "label": "global.maximum.vendor.lead.time",
+                      "customFormatter": "dr.maxLeadFormatter",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 21,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "maxvendtylev",
+                      "label": "global.max.vend.ty",
+                      "type3": "SET",
+                      "metaGroup": "IC",
+                      "meta": "SafeType",
+                      "blankOption": false,
+                      "customFormatter": "dr.maxVendTyFormatter"
+                    },
+                    {
+                      "id": 43,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "safevendmaxlev",
+                      "label": "global.maximum.vendor.safety",
+                      "customFormatter": "dr.safeVendMaxFormatter",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 23,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "midvendtylev",
+                      "label": "global.mid.vend.ty",
+                      "type3": "SET",
+                      "metaGroup": "IC",
+                      "meta": "SafeType",
+                      "blankOption": false,
+                      "customFormatter": "dr.midVendTyFormatter"
+                    },
+                    {
+                      "id": 45,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "venddayslev",
+                      "label": "global.mid.vend.safety",
+                      "customFormatter": "dr.vendDaysFormatter",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 25,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "minleadtimewhselev",
+                      "label": "global.min.whse.lt",
+                      "customFormatter": "dr.minLeadTimeWhseFormatter",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "minwhsetylev",
+                      "label": "global.min.whse.ty",
+                      "type3": "SET",
+                      "metaGroup": "IC",
+                      "meta": "SafeType",
+                      "blankOption": false,
+                      "customFormatter": "dr.minWhseTyFormatter"
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "whsepctlev",
+                      "label": "global.min.whse.safety",
+                      "customFormatter": "dr.whsePctFormatter",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "maxleadtimewhselev",
+                      "label": "global.maximum.warehouse.lead.time",
+                      "customFormatter": "dr.maxLeadTimeWhseFormatter",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 29,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "maxwhsetylev",
+                      "label": "global.max.whse.ty",
+                      "type3": "SET",
+                      "metaGroup": "IC",
+                      "meta": "SafeType",
+                      "blankOption": false,
+                      "customFormatter": "dr.maxWhseTyFormatter"
+                    },
+                    {
+                      "id": 30,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "safewhsemaxlev",
+                      "label": "global.maximum.warehouse.safety",
+                      "customFormatter": "dr.safeWhseMaxFormatter",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 31,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "midwhsetylev",
+                      "label": "global.mid.whse.ty",
+                      "type3": "SET",
+                      "metaGroup": "IC",
+                      "meta": "SafeType",
+                      "blankOption": false,
+                      "customFormatter": "dr.midWhseTyFormatter"
+                    },
+                    {
+                      "id": 32,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "whsedayslev",
+                      "label": "global.mid.whse.safety",
+                      "customFormatter": "dr.whseDaysFormatter",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 34,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "rcptslev",
+                      "label": "po.receipts",
+                      "customFormatter": "dr.rcptsFormatter",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 36,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "safemthslev",
+                      "label": "global.safety.months",
+                      "customFormatter": "dr.safeMthsFormatter",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 37,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "safemajorlev",
+                      "label": "global.safety.majority",
+                      "customFormatter": "dr.safeMajorFormatter",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 38,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "minsafelev",
+                      "label": "global.minimum.safety.percent",
+                      "customFormatter": "dr.minSafeFormatter",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 39,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "maxsafelev",
+                      "label": "global.maximum.safety.percent",
+                      "customFormatter": "dr.maxSafeFormatter",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "type": "VIEW_CNTR",
+      "viewName": "drDetail"
+    }
+  ]
+}

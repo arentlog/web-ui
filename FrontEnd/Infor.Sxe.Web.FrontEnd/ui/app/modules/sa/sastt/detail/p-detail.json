@@ -1,0 +1,320 @@
+{
+  "viewId": "sa-sastt-detail-pdetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isDetail()",
+  "children": [
+    {
+      "id": 13,
+      "type": "EXP_AREA",
+      "label": "global.required",
+      "conditionShow": "!base.isCreate()",
+      "children": [
+        {
+          "id": 14,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 15,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 50,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.extend.refundtype",
+                  "label": "global.overpayment.refund.type",
+                  "type3": "MANUAL",
+                  "optionLabelField": "descrip",
+                  "optionValueField": "codeval",
+                  "optionsModel": "dtl.refundPaymentTypes",
+                  "conditionShow": "!dtl.extend.ehffl"
+                },
+                {
+                  "id": 26,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.extend.bankno",
+                  "label": "global.bank",
+                  "type3": "MANUAL",
+                  "optionsModel": "dtl.banknoDropDownOptions"
+                }
+              ]
+            },
+            {
+              "id": 29,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 27,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.extend.addtaxfl",
+                  "label": "message.payment.type.is.a.credit.card",
+                  "dataFormat": "LOGICAL",
+                  "conditionDisabled": "dtl.extend.ehffl  || base.isDetail()",
+                  "eventChange": "dtl.paymentTypeCCChanged()",
+                  "subFormat": "YesNo"
+                },
+                {
+                  "id": 28,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.extend.chkauth",
+                  "label": "global.payment.type.is.ach",
+                  "dataFormat": "LOGICAL",
+                  "conditionDisabled": "dtl.extend.ehffl  || base.isDetail()",
+                  "eventChange": "dtl.paymentTypeACHChanged()",
+                  "subFormat": "YesNo"
+                },
+                {
+                  "id": 51,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.extend.ehffl",
+                  "label": "global.payment.type.is.credit.ach",
+                  "dataFormat": "LOGICAL",
+                  "conditionShow": "base.allowAPCreditACH",
+                  "eventChange": "dtl.paymentTypeCreditACHChanged()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "type": "EXP_AREA",
+      "label": "global.credit.card",
+      "conditionShow": "!base.isCreate() && (dtl.extend.ehffl || dtl.extend.addtaxfl.toLowerCase() === 'yes' || dtl.extend.chkauth.toLowerCase() === 'yes')",
+      "children": [
+        {
+          "id": 17,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 18,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 30,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.extend.processno",
+                  "label": "global.processor",
+                  "type3": "CODES",
+                  "meta": "Processor"
+                }
+              ]
+            },
+            {
+              "id": 32,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 31,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.extend.ccedit",
+                  "label": "global.edit.type",
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "EditType",
+                  "conditionShow": "!dtl.extend.ehffl && dtl.extend.addtaxfl.toLowerCase() === 'yes'"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "type": "EXP_AREA",
+      "label": "global.prompts",
+      "conditionShow": "!base.isCreate() && !dtl.extend.ehffl && dtl.extend.addtaxfl.toLowerCase() === 'yes'",
+      "children": [
+        {
+          "id": 20,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 21,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 33,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.extend.preauthppt",
+                  "label": "global.pre.authorization",
+                  "dataFormat": "LOGICAL",
+                  "subFormat": "YesNo",
+                  "conditionShow": "!dtl.isPaymentTypeCreditACH"
+                },
+                {
+                  "id": 34,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.extend.catppt",
+                  "label": "global.product.category",
+                  "dataFormat": "LOGICAL",
+                  "subFormat": "YesNo"
+                },
+                {
+                  "id": 35,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.extend.ccidppt",
+                  "label": "global.card.id",
+                  "dataFormat": "LOGICAL",
+                  "subFormat": "YesNo"
+                },
+                {
+                  "id": 36,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.extend.addveri",
+                  "label": "global.address.verification",
+                  "dataFormat": "LOGICAL",
+                  "subFormat": "YesNo"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "type": "EXP_AREA",
+      "label": "global.additional.information",
+      "conditionShow": "!base.isCreate() && !dtl.extend.ehffl && (dtl.extend.addtaxfl.toLowerCase() === 'yes' || dtl.extend.chkauth.toLowerCase() === 'yes')",
+      "children": [
+        {
+          "id": 23,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 24,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 37,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.extend.acct1",
+                  "label": "global.tendering.g.l.account",
+                  "meta": "GlAccount",
+                  "options": {
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 38,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.extend.chgcat",
+                  "label": "global.default.product.category",
+                  "meta": "ProdCat"
+                },
+                {
+                  "id": 44,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.extend.cccust",
+                  "label": "global.credit.card.a.r.account.number",
+                  "meta": "Customer"
+                },
+                {
+                  "id": 48,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.extend.merchantid",
+                  "label": "global.merchant.id",
+                  "type3": "CODES",
+                  "meta": "MerchantID"
+                }
+              ]
+            },
+            {
+              "id": 43,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 40,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 39,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.extend.ccaddon",
+                      "label": "global.addon",
+                      "dataFormat": "CURRENCY",
+                      "digits": 2,
+                      "decimals": 2,
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 42,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "dtl.extend.arpost",
+                      "label": "global.post.to.a.r.at.invoicing",
+                      "dataFormat": "LOGICAL",
+                      "subFormat": "YesNo"
+                    },
+                    {
+                      "id": 49,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "dtl.extend.ccaddontype",
+                      "label": "global.addon.type",
+                      "size": "SM",
+                      "maxLength": 1,
+                      "type3": "SET",
+                      "metaGroup": "SA",
+                      "meta": "AmountPercentType"
+                    }
+                  ]
+                },
+                {
+                  "id": 45,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.extend.addonmin",
+                  "label": "global.minimum.amount",
+                  "dataFormat": "INTEGER_TEXT",
+                  "digits": 5
+                },
+                {
+                  "id": 47,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.extend.boappdays",
+                  "label": "global.days.allowed.for.b.o.auth",
+                  "dataFormat": "INTEGER_TEXT",
+                  "digits": 2,
+                  "size": "XS"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

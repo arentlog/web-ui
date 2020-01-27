@@ -1,0 +1,396 @@
+{
+  "viewId": "kp-kpew-quickworkorderentry",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "!qwo.includesKitsState()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.quick.work.order.entry",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "label": "special.button.back",
+                      "eventClick": "qwo.back()"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "EXP_AREA",
+                  "label": "global.blank.label.string.for.space",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 10,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "qwo.Kpqentrycriteria.whse",
+                              "label": "global.warehouse",
+                              "meta": "Warehouse",
+                              "required": true,
+                              "conditionReadonly": "qwo.isContinueClicked2()"
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "qwo.Kpqentrycriteria.kitverno",
+                              "label": "global.version.number",
+                              "meta": "KitProductionVersion",
+                              "conditionReadonly": "qwo.isContinueClicked2()",
+                              "dataFormat": "INTEGER",
+                              "digits": 15,
+                              "sign": "+",
+                              "options": {
+                                "searchParams": {
+                                  "prod": {
+                                    "type": "REF",
+                                    "value": "qwo.Kpqentrycriteria.prod"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 17,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "qwo.Kpqentrycriteria.prod",
+                              "label": "global.kit",
+                              "meta": "ProdAll",
+                              "required": true,
+                              "conditionReadonly": "qwo.isContinueClicked2()",
+                              "eventChange": "qwo.kitProductChange()"
+                            },
+                            {
+                              "id": 23,
+                              "type": "BTN",
+                              "subType": "PRI",
+                              "label": "global.continue",
+                              "eventClick": "qwo.continueCreate()",
+                              "conditionDisabled": "qwo.isContinueClicked2()"
+                            },
+                            {
+                              "id": 24,
+                              "type": "BTN",
+                              "subType": "SEC",
+                              "label": "global.component.availability",
+                              "eventClick": "qwo.compAvailability()",
+                              "conditionDisabled": "qwo.isContinueClicked2()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 11,
+                  "type": "EXP_AREA",
+                  "label": "global.blank.label.string.for.space",
+                  "children": [
+                    {
+                      "id": 12,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "qwo.kpworkorder.qtyord",
+                              "label": "global.quantity.ordered",
+                              "conditionReadonly": "qwo.isContinueClicked()",
+                              "eventChange": "qwo.quantityOrderedChanged()",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "qwo.kpworkorder.unit",
+                              "label": "global.unit",
+                              "meta": "Units",
+                              "conditionReadonly": "qwo.isContinueClicked()",
+                              "eventChange": "qwo.unitChanged()",
+                              "options": {
+                                "searchParams": {
+                                  "prod": {
+                                    "type": "REF",
+                                    "value": "qwo.Kpqentrycriteria.prod"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "TEXT_AREA",
+                              "model": "qwo.kplist",
+                              "label": "global.last.work.order.number",
+                              "readonly": true
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "qwo.kpworkorder.refer",
+                              "label": "global.reference",
+                              "conditionReadonly": "qwo.isContinueClicked()"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "qwo.kpworkorder.bofl",
+                              "label": "global.b.o",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "qwo.isContinueClicked()"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "qwo.kpworkorder.wonoC",
+                              "label": "global.current.work.order.number",
+                              "contextEntity": "Kpet",
+                              "contextValues": {
+                                "key1": "qwo.kpworkorder.wono",
+                                "key2": "qwo.kpworkorder.wosuf"
+                              }
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "qwo.kpworkorder.qtyship",
+                              "label": "global.quantity.shipped",
+                              "conditionReadonly": "qwo.isContinueClicked()",
+                              "eventChange": "qwo.quantityShippedChanged()",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "qwo.kpworkorder.enterdt",
+                              "label": "global.enter.date",
+                              "dataFormat": "DATE",
+                              "conditionReadonly": "qwo.isContinueClicked()"
+                            },
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "qwo.workordertie",
+                              "label": "global.work.order.tie",
+                              "meta": "KPWorkOrder",
+                              "conditionReadonly": "qwo.isContinueClicked()",
+                              "eventChange": "qwo.woTieChanged()"
+                            },
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "qwo.kpworkorder.orderaltseqno",
+                              "label": "global.sequence.number",
+                              "conditionReadonly": "qwo.isContinueClicked()"
+                            },
+                            {
+                              "id": 36,
+                              "type": "BTN",
+                              "subType": "PRI",
+                              "label": "global.save",
+                              "eventClick": "qwo.save()",
+                              "conditionDisabled": "qwo.isContinueClicked()"
+                            },
+                            {
+                              "id": 37,
+                              "type": "BTN",
+                              "subType": "TER",
+                              "label": "global.cancel",
+                              "eventClick": "qwo.cancel()",
+                              "conditionDisabled": "qwo.isContinueClicked()"
+                            },
+                            {
+                              "id": 38,
+                              "type": "BTN",
+                              "subType": "TER",
+                              "label": "global.components",
+                              "eventClick": "qwo.components()",
+                              "conditionDisabled": "!qwo.isComponentsEnabled"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.blank.label.string.for.space",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "qwo.kpewavail.availtobuild",
+                              "label": "global.available.to.build",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 43,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "qwo.kpewavail.qtyonorder",
+                              "label": "global.on.order",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "qwo.kpewavail.qtybo",
+                              "label": "global.back.order.demand",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 19,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "qwo.kpewavail.netavail",
+                              "label": "global.net.available",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "qwo.kpewavail.qtyshipk",
+                              "label": "global.quantity.shipped",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "type": "VIEW_CNTR",
+      "viewName": "components"
+    },
+    {
+      "id": 45,
+      "type": "VIEW_CNTR",
+      "viewName": "kitcomp"
+    }
+  ]
+}

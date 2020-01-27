@@ -1,0 +1,272 @@
+{
+  "viewId": "po-poera-drilldown",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isDrillDown()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "{{base.drillDownLabel}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "drldwn.exitDetail()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "conditionDisabled": "!drldwn.isSaveButtonEnabled()",
+                  "eventClick": "drldwn.saveHeaderData()",
+                  "submitForm": true,
+                  "eventValidated": "drldwn.headerSave('')"
+                },
+                {
+                  "id": 34,
+                  "type": "BTN",
+                  "subType": "MENU",
+                  "label": "global.actions",
+                  "conditionDisabled": "!drldwn.isSaveButtonEnabled()",
+                  "children": [
+                    {
+                      "id": 35,
+                      "type": "MENU_OPT",
+                      "label": "global.accept.all.lines",
+                      "icon": "icon-check",
+                      "eventClick": "drldwn.headerAcceptAllLines()"
+                    },
+                    {
+                      "id": 36,
+                      "type": "MENU_OPT",
+                      "label": "global.deny.all.lines",
+                      "icon": "icon-close",
+                      "eventClick": "drldwn.headerDenyAllLines()"
+                    },
+                    {
+                      "id": 37,
+                      "type": "MENU_OPT",
+                      "label": "global.increase.decrease",
+                      "eventClick": "drldwn.headerIncreaseDecrease()",
+                      "icon": "icon-maximize"
+                    }
+                  ]
+                },
+                {
+                  "id": 51,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.product.exception.center",
+                  "eventClick": "drldwn.productExceptionCenter()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 40,
+                  "type": "EXP_AREA",
+                  "label": "global.detail",
+                  "children": [
+                    {
+                      "id": 41,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 42,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 43,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.headerData.vendno",
+                              "label": "global.vendor.number",
+                              "dataDesc": "drldwn.headerData.vendorname",
+                              "contextEntity": "Apsv"
+                            },
+                            {
+                              "id": 45,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.headerData.prodline",
+                              "label": "global.product.line"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 44,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 46,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.headerData.shipfmno",
+                              "label": "global.ship.from.number",
+                              "dataFormat": "INTEGER_TEXT",
+                              "contextEntity": "Apss",
+                              "contextValues": {
+                                "key1": "drldwn.headerData.vendno",
+                                "key2": "drldwn.headerData.shipfmno"
+                              }
+                            },
+                            {
+                              "id": 47,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.headerData.whse",
+                              "label": "global.warehouse",
+                              "contextEntity": "Icsd"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 50,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 48,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.headerData.billtowhse",
+                              "label": "global.bill.to.warehouse"
+                            },
+                            {
+                              "id": 49,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "drldwn.headerData.buyer",
+                              "label": "global.buyer"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 9,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "TAB",
+                      "label": "global.header",
+                      "eventActivated": "drldwn.activate('header')",
+                      "conditionSelected": "drldwn.headerTabSelected",
+                      "tabId": "header",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "po/poera/tabs/header.json",
+                          "controller": "PoeraDrillDownHeaderCtrl as hdr"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 25,
+                      "type": "TAB",
+                      "label": "global.line.items",
+                      "eventActivated": "drldwn.activate('lines')",
+                      "conditionSelected": "drldwn.lineItemTabSelected",
+                      "tabId": "line-items",
+                      "children": [
+                        {
+                          "id": 26,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "po/poera/tabs/lineitems.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 31,
+                      "type": "TAB",
+                      "label": "global.shopping.list",
+                      "eventActivated": "drldwn.activate('shopping')",
+                      "tabId": "shopping-list",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "po/poera/tabs/shopping-list.json",
+                          "controller": "PoeraDrillDownShoppingListCtrl as shplst"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 38,
+                      "type": "TAB",
+                      "label": "global.messages",
+                      "eventActivated": "drldwn.activate('messages')",
+                      "tabId": "messages",
+                      "children": [
+                        {
+                          "id": 39,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "po/poera/tabs/error-messages.json"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "type": "VIEW_CNTR",
+      "viewName": "linedetail"
+    },
+    {
+      "id": 52,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Poerah",
+      "contextValues": {
+        "key1": "base.drillDownRecord.reportno"
+      }
+    },
+    {
+      "id": 53,
+      "type": "VIEW_CNTR",
+      "viewName": "usage"
+    }
+  ]
+}

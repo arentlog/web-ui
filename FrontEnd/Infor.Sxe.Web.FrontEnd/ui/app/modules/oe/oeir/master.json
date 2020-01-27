@@ -1,0 +1,283 @@
+{
+  "viewId": "oe-oeir-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isMaster()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.oeir",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 5,
+              "type": "GRID",
+              "controlRef": "base.grid",
+              "model": "base.oeirorderlistresults",
+              "conditionEditable": "base.securityLevelOEIO > 2",
+              "options": {
+                "editable": true,
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "selectable": "multiple",
+                "events": {
+                  "cellchange": "mst.orderGridCellChange()",
+                  "drilldown": "mst.drilldown()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.orders",
+                  "children": [
+                    {
+                      "id": 8,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-quick-access",
+                      "label": "global.quick.approval",
+                      "eventClick": "mst.quickApproval()",
+                      "securityLevel": 3
+                    },
+                    {
+                      "id": 28,
+                      "type": "BTN",
+                      "subType": "MENU",
+                      "label": "global.actions",
+                      "children": [
+                        {
+                          "id": 34,
+                          "type": "MENU_OPT",
+                          "label": "global.approve",
+                          "conditionDisabled": "!mst.isApproveEnabled()",
+                          "icon": "icon-confirm",
+                          "eventClick": "mst.approve()",
+                          "securityLevel": 3
+                        },
+                        {
+                          "id": 29,
+                          "type": "MENU_OPT",
+                          "label": "global.international.approve",
+                          "conditionDisabled": "!mst.isInternationalApproveEnabled()",
+                          "icon": "icon-confirm",
+                          "eventClick": "mst.internationalApprove()",
+                          "securityLevel": 3
+                        },
+                        {
+                          "id": 30,
+                          "type": "MENU_OPT",
+                          "label": "global.convert.quote.to.stock.order",
+                          "conditionDisabled": "!mst.isCovertQuoteToStockOrder()",
+                          "eventClick": "mst.covertQuoteToStockOrder()",
+                          "securityLevel": 3
+                        },
+                        {
+                          "id": 31,
+                          "type": "MENU_OPT",
+                          "label": "global.hold.release",
+                          "icon": "icon-pending",
+                          "eventClick": "mst.onHoldRelase()",
+                          "securityLevel": 3,
+                          "conditionDisabled": "!base.grid.isOneRowSelected()"
+                        },
+                        {
+                          "id": 32,
+                          "type": "MENU_OPT",
+                          "label": "global.print",
+                          "icon": "icon-print",
+                          "conditionDisabled": "!base.grid.isOneRowSelected()",
+                          "eventClick": "mst.onPrint()"
+                        },
+                        {
+                          "id": 36,
+                          "type": "MENU_OPT",
+                          "label": "global.header.fields",
+                          "conditionDisabled": "!base.grid.isOneRowSelected()",
+                          "eventClick": "mst.onHeaderFields()",
+                          "securityLevel": 3
+                        },
+                        {
+                          "id": 37,
+                          "type": "MENU_OPT",
+                          "label": "global.credit.card.history",
+                          "icon": "icon-history",
+                          "conditionDisabled": "!mst.isCreditCardHistoryEnabled()",
+                          "eventClick": "mst.creditCardHistory()",
+                          "securityLevel": 3
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 9,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "ordernox",
+                  "label": "global.order.number",
+                  "eventClick": "mst.orderHyperlink()"
+                },
+                {
+                  "id": 10,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "ordernotes",
+                  "label": "global.notes",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "approvty",
+                  "label": "global.approve.type",
+                  "editable": true,
+                  "maxLength": 1
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "approvintlty",
+                  "label": "global.international.approve.type"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "transtype",
+                  "label": "global.type",
+                  "dataFormat": "OeOrderType"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "stagecd",
+                  "label": "global.stage",
+                  "dataFormat": "OeStage"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "promisedt",
+                  "label": "global.promise.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "createdt",
+                  "label": "global.create.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "invamount",
+                  "label": "global.invoice.amount",
+                  "dataFormat": "CURRENCY",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "takenby",
+                  "label": "global.taken.by"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whse",
+                  "label": "global.warehouse"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "creditmgr",
+                  "label": "global.credit.manager"
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "custno",
+                  "label": "global.customer.number",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "eventClick": "mst.custHyperlink()"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "custnotes",
+                  "label": "global.customer.notes",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "name",
+                  "label": "global.customer.name"
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "priority",
+                  "label": "global.priority",
+                  "dataFormat": "INTEGER"
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipviaty",
+                  "label": "global.ship.via"
+                },
+                {
+                  "id": 26,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "statuscd",
+                  "label": "global.suspended.floor.plan"
+                },
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "custnox",
+                  "label": "global.customer",
+                  "extra": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

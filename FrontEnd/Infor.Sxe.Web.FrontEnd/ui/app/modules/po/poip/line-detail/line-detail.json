@@ -1,0 +1,313 @@
+{
+  "viewId": "po-poip-linedetail-linedetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.line.details",
+              "subLabel": "{{pldc.subTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "pldc.back()"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "TAB",
+                      "label": "global.extended",
+                      "tabId": "extended",
+                      "children": [
+                        {
+                          "id": 20,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "po/poip/line-detail/tabs/extended.json",
+                          "controller": "PoipLineDetailExtendedCtrl as pldec"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "type": "TAB",
+                      "label": "global.non.stock",
+                      "conditionShow": "pldc.selectedLine.mnonstock",
+                      "tabId": "non-stock",
+                      "children": [
+                        {
+                          "id": 21,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "controller": "PoipLineDetailNonStockCtrl as pldnc",
+                          "viewPath": "po/poip/line-detail/tabs/nonstock.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 11,
+                      "type": "TAB",
+                      "label": "global.ties",
+                      "conditionShow": "pldc.selectedLine.mties",
+                      "tabId": "ties",
+                      "children": [
+                        {
+                          "id": 28,
+                          "type": "CUSTOM",
+                          "subType": "Ties",
+                          "options": {
+                            "modeModel": "Inquiry Only",
+                            "tieTypeModel": "Purchase Order",
+                            "orderNumberModel": "pldc.pono",
+                            "orderSuffixModel": "pldc.posuf",
+                            "lineNumberModel": "pldc.selectedLine.lineno"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "type": "TAB",
+                      "label": "global.serial",
+                      "conditionShow": "pldc.isSerialVisible",
+                      "tabId": "serial",
+                      "children": [
+                        {
+                          "id": 24,
+                          "type": "CUSTOM",
+                          "subType": "SerialsInquiry",
+                          "options": {
+                            "ordertypeModel": "p",
+                            "ordernoModel": "pldc.pono",
+                            "ordersufModel": "pldc.posuf",
+                            "linenoModel": "pldc.selectedLine.lineno"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 23,
+                      "type": "TAB",
+                      "label": "global.lot",
+                      "conditionShow": "pldc.isLotVisible",
+                      "tabId": "lot",
+                      "children": [
+                        {
+                          "id": 25,
+                          "type": "CUSTOM",
+                          "subType": "LotsInquiry",
+                          "options": {
+                            "ordertypeModel": "p",
+                            "linenoModel": "pldc.selectedLine.lineno",
+                            "ordernoModel": "pldc.pono",
+                            "ordersufModel": "pldc.posuf"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 13,
+                      "type": "TAB",
+                      "label": "global.tally",
+                      "conditionShow": "pldc.isTallyVisible",
+                      "tabId": "tally",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "CUSTOM",
+                          "subType": "PurchaseOrderTally",
+                          "options": {
+                            "functionNameModel": "poip",
+                            "purchaseOrderNumberModel": "pldc.poel.pono",
+                            "purchaseOrderSuffixModel": "pldc.poel.posuf",
+                            "lineNumberModel": "pldc.poel.lineno",
+                            "productModel": "pldc.poel.shipprod",
+                            "warehouseModel": "pldc.poel.whse",
+                            "unitModel": "pldc.poel.unit",
+                            "quantityReceivedModel": "pldc.poel.qtyord",
+                            "priceModel": "pldc.poel.price",
+                            "menuSecurityModel": "pldc.poipsecurityLevel"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 29,
+                      "type": "TAB",
+                      "label": "global.bundles",
+                      "conditionShow": "pldc.isBundleVisible",
+                      "tabId": "bundles",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "CUSTOM",
+                          "subType": "PurchaseOrderBundles",
+                          "options": {
+                            "functionNameModel": "poip",
+                            "purchaseOrderNumberModel": "pldc.poel.pono",
+                            "priceModel": "pldc.poel.price",
+                            "purchaseOrderSuffixModel": "pldc.poel.posuf",
+                            "lineNumberModel": "pldc.poel.lineno",
+                            "productModel": "pldc.poel.shipprod",
+                            "warehouseModel": "pldc.poel.whse",
+                            "unitModel": "pldc.poel.unit",
+                            "quantityReceivedModel": "pldc.poel.qtyord",
+                            "menuSecurityModel": "pldc.poipsecurityLevel"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 14,
+                      "type": "TAB",
+                      "label": "global.line.history",
+                      "tabId": "line-history",
+                      "children": [
+                        {
+                          "id": 34,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "po/poip/line-detail/tabs/line-history.json",
+                          "controller": "PoipLineDetailLineHistoryCtrl as pdlhc"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 15,
+                      "type": "TAB",
+                      "label": "global.addons",
+                      "conditionShow": "pldc.selectedLine.maddons",
+                      "tabId": "addons",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "CUSTOM",
+                          "subType": "PurchaseOrderAddons",
+                          "options": {
+                            "purchaseOrderNumberModel": "pldc.pono",
+                            "purchaseOrderSuffixModel": "pldc.posuf",
+                            "lineNumberModel": "pldc.selectedLine.lineno"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 16,
+                      "type": "TAB",
+                      "label": "global.costing.activity",
+                      "conditionShow": "pldc.selectedLine.mcostingactivity",
+                      "tabId": "costing-activity",
+                      "children": [
+                        {
+                          "id": 26,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "po/poip/line-detail/tabs/costing-activity.json",
+                          "controller": "PoipLineDetailCostingActivityCtrl as plcac"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 17,
+                      "type": "TAB",
+                      "label": "global.return.allocation",
+                      "conditionShow": "pldc.selectedLine.mreturnallocation",
+                      "tabId": "return-allocation",
+                      "children": [
+                        {
+                          "id": 27,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "po/poip/line-detail/tabs/return-allocation.json",
+                          "controller": "PoipLineDetailReturnAllocationCtrl as plrac"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 18,
+                      "type": "TAB",
+                      "label": "global.custom",
+                      "tabId": "custom",
+                      "children": [
+                        {
+                          "id": 22,
+                          "type": "CUSTOM",
+                          "subType": "UserFields",
+                          "options": {
+                            "tableName": "poel",
+                            "conditionReadonly": "true",
+                            "objectRef": "pldc.poel"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 19,
+                      "type": "TAB",
+                      "label": "global.comments",
+                      "tabId": "comments",
+                      "children": [
+                        {
+                          "id": 33,
+                          "type": "CUSTOM",
+                          "subType": "LineComments",
+                          "options": {
+                            "commentTypeModel": "po",
+                            "tableNameModel": "poel",
+                            "orderNumberModel": "pldc.pono",
+                            "orderSuffixModel": "pldc.posuf",
+                            "lineNumberModel": "pldc.selectedLine.lineno",
+                            "isAutoFocus": true
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsp",
+      "contextValues": {
+        "key1": "pldc.selectedLine.shipprod"
+      }
+    }
+  ]
+}

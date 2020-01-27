@@ -1,0 +1,886 @@
+{
+  "viewId": "va-vaet-detail-header",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isHeaderTabReadonly",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.header.data",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.vaet.reqshipdt",
+                  "label": "global.req.ship.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.vaet.promisedt",
+                  "label": "global.promised.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.vaet.estcompdt",
+                  "label": "global.estimated.completion.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.vaet.receiptdt",
+                  "label": "global.receipt.date",
+                  "dataFormat": "DATE",
+                  "readonly": true,
+                  "conditionShow": "dtl.vaet.receiptdt"
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.vaet.approvty",
+                  "label": "global.approval.type",
+                  "maxLength": 1,
+                  "size": "XS"
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.vaet.writeofffl",
+                  "label": "global.write.off",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 17,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.vaet.edi867compfl",
+                  "label": "edi.867",
+                  "dataFormat": "LOGICAL"
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.vaet.revno",
+                  "label": "global.revision.number",
+                  "maxLength": 10
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.vaet.prevvano",
+                  "label": "global.previous.value.add.order.number",
+                  "meta": "VAOrders"
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.vaet.refer",
+                  "label": "global.reference",
+                  "meta": "Reference",
+                  "eventChange": "hdr.referenceLookupChanged()",
+                  "options": {
+                    "allowEntry": true,
+                    "autoSelect": false
+                  }
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.vaet.custprod",
+                  "label": "global.customer.product",
+                  "maxLength": 24
+                },
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.vaet.estcost",
+                  "label": "global.estimated.cost",
+                  "dataFormat": "DECIMAL",
+                  "sign": "+",
+                  "digits": 7,
+                  "decimals": 5,
+                  "size": "SM",
+                  "conditionShow": "base.sasoo.seecostfl",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5,
+                    "maximumFractionDigits": 5
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "type": "EXP_AREA",
+      "label": "global.order.information",
+      "children": [
+        {
+          "id": 57,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 58,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 18,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 19,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 21,
+                          "type": "FIELD_SET",
+                          "label": "global.pending",
+                          "children": [
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.vaet.pndinvamt",
+                              "label": "global.inventory.amount",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.vaet.pndextrnamt",
+                              "label": "global.external.charges",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.pndintval",
+                              "label": "global.internal.charges",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "dataDesc": "dtl.pndinttype",
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.vaet.pndaddons",
+                              "label": "global.addons",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.vaet.pndinvinamt",
+                              "label": "global.inventory.in",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.totpending",
+                              "label": "global.total",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 20,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 22,
+                          "type": "FIELD_SET",
+                          "label": "global.work.in.progress",
+                          "children": [
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.vaet.wipinvamt",
+                              "label": "global.inventory.amount",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.vaet.wipextrnamt",
+                              "label": "global.external.charges",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.vaet.wipintrnamt",
+                              "label": "global.internal.charges",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.vaet.wipaddons",
+                              "label": "global.addons",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.vaet.wipinvinamt",
+                              "label": "global.inventory.in",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.totwip",
+                              "label": "global.total",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 59,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 60,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 23,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 24,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 28,
+                          "type": "FIELD_SET",
+                          "label": "global.labor",
+                          "children": [
+                            {
+                              "id": 49,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.laborResults.pndintrnesthrs",
+                              "label": "global.estimated.internal.labor.hours",
+                              "readonly": true,
+                              "size": "XS"
+                            },
+                            {
+                              "id": 51,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.laborResults.pndintrnacthrs",
+                              "label": "global.actual.internal.labor.hours",
+                              "readonly": true,
+                              "size": "XS"
+                            },
+                            {
+                              "id": 50,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.laborResults.pndintrnestamt",
+                              "label": "global.estimated.internal.labor.charges",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "decimals": 2,
+                              "readonly": true,
+                              "digits": 9,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 52,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.laborResults.pndintrnactamt",
+                              "label": "global.actual.internal.labor.charges",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "decimals": 2,
+                              "readonly": true,
+                              "digits": 9,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 27,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 29,
+                          "type": "FIELD_SET",
+                          "label": "global.taken.by",
+                          "children": [
+                            {
+                              "id": 43,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.vaet.takenby",
+                              "label": "global.taken.by",
+                              "readonly": true,
+                              "size": "SM"
+                            },
+                            {
+                              "id": 44,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.vaet.createdby",
+                              "label": "global.created.by",
+                              "readonly": true,
+                              "size": "SM"
+                            },
+                            {
+                              "id": 45,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.vaet.jrnlno",
+                              "label": "global.receiving.journal",
+                              "dataFormat": "INTEGER_TEXT",
+                              "readonly": true,
+                              "size": "SM",
+                              "digits": 8
+                            },
+                            {
+                              "id": 46,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.vaet.prodcost",
+                              "label": "global.cost",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 7,
+                              "decimals": 5,
+                              "readonly": true,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 47,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.hdrExtra.availtobuild",
+                              "label": "global.available.to.build",
+                              "dataFormat": "DECIMAL",
+                              "digits": 7,
+                              "decimals": 2,
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 48,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.hdrExtra.alreadybuilt",
+                              "label": "global.already.built",
+                              "dataFormat": "DECIMAL",
+                              "digits": 7,
+                              "decimals": 2,
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "type": "EXP_AREA",
+      "label": "global.all.components",
+      "children": [
+        {
+          "id": 54,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 55,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 68,
+                  "type": "GRID",
+                  "model": "dtl.compData",
+                  "controlRef": "hdr.compGrid",
+                  "controls": {
+                    "toolbar": {
+                      "id": 69,
+                      "type": "TOOLBAR",
+                      "label": "global.components"
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 70,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "seqno",
+                      "label": "global.section.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 71,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "sctntype",
+                      "label": "global.section.type",
+                      "customFormatter": "hdr.sectionFormatter"
+                    },
+                    {
+                      "id": 72,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "sctncode",
+                      "label": "global.section.code"
+                    },
+                    {
+                      "id": 73,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "sctndesc",
+                      "label": "global.section.description"
+                    },
+                    {
+                      "id": 74,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "notesfl",
+                      "label": "global.notes",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 75,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "whse",
+                      "label": "global.warehouse"
+                    },
+                    {
+                      "id": 76,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "lineno",
+                      "label": "global.line.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 77,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "nonstockty",
+                      "label": "global.non.stock.type",
+                      "dataFormat": "NonstockType"
+                    },
+                    {
+                      "id": 78,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "shipprod",
+                      "label": "global.product"
+                    },
+                    {
+                      "id": 79,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "proddesc",
+                      "label": "global.description.1"
+                    },
+                    {
+                      "id": 80,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "proddesc2",
+                      "label": "global.description.2"
+                    },
+                    {
+                      "id": 81,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyord",
+                      "label": "global.quantity.ordered",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 82,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyneeded",
+                      "label": "global.quantity.needed",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 83,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "qtybasetotfl",
+                      "label": "global.quantity.based.on.total",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 84,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "unit",
+                      "label": "global.unit"
+                    },
+                    {
+                      "id": 85,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prodcost",
+                      "label": "global.product.cost",
+                      "conditionInclude": "base.sasoo.seecostfl",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 86,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "netamt",
+                      "label": "global.net.amount",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 88,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyshort",
+                      "label": "global.quantity.short",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 89,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "leadtm",
+                      "label": "global.lead.time",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 90,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "icspstatus",
+                      "label": "global.product.status",
+                      "dataFormat": "IcProductStatusType"
+                    },
+                    {
+                      "id": 91,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "labordata",
+                      "label": "global.labor.data"
+                    },
+                    {
+                      "id": 92,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "orderalttype",
+                      "label": "global.source.type",
+                      "dataFormat": "OrderType"
+                    },
+                    {
+                      "id": 93,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "orderaltno",
+                      "label": "global.related.order.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 94,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "scrapfctr",
+                      "label": "global.scrap.factor.percent",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 95,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "cutoffty",
+                      "label": "global.cut.off.ty"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "type": "EXP_AREA",
+      "label": "global.header.ties",
+      "conditionCollapsed": "base.vaet.orderaltno === 0",
+      "children": [
+        {
+          "id": 62,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 63,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 96,
+                  "type": "CUSTOM",
+                  "subType": "Ties",
+                  "options": {
+                    "modeModel": "Inquiry, Edit, and Add",
+                    "tieTypeModel": "Value Add",
+                    "orderNumberModel": "base.vaet.vano",
+                    "orderSuffixModel": "base.vaet.vasuf",
+                    "lineNumberModel": "hdr.zero",
+                    "companyNumberModel": "hdr.zero",
+                    "sequenceNumberModel": "hdr.zero",
+                    "prodModel": "base.vaet.shipprod",
+                    "nonStockTypeModel": "base.vaet.nonstockty",
+                    "conditionReadonly": "base.isHeaderTabReadonly"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 64,
+      "type": "EXP_AREA",
+      "label": "global.user.fields",
+      "children": [
+        {
+          "id": 65,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 66,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 67,
+                  "type": "CUSTOM",
+                  "subType": "UserFields",
+                  "options": {
+                    "tableName": "vaeh",
+                    "objectRef": "dtl.vaet",
+                    "conditionReadonly": "base.isHeaderTabReadonly"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

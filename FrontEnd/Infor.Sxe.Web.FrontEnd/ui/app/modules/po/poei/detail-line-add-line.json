@@ -1,0 +1,277 @@
+{
+  "viewId": "po-poei-detaillineaddline",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.add.line.item",
+              "subLabel": "{{dla.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dla.back()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dla.addLine()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dla.back()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "dla.poeiLineAdd.nonstockty",
+                          "label": "global.line.type",
+                          "type3": "MANUAL",
+                          "blankOption": false,
+                          "optionsModel": "dla.nonstockTypeList",
+                          "conditionReadonly": "",
+                          "required": true,
+                          "eventChange": "dla.leaveField('nonstockty')",
+                          "size": "SM",
+                          "conditionDisabled": "!dla.poeiLineAdd.cbNonStockTySensitive",
+                          "autoFocus": true
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dla.poeiLineAdd.prod",
+                          "label": "global.product",
+                          "meta": "ProdAll",
+                          "required": true,
+                          "eventChange": "dla.leaveField('product')",
+                          "options": {
+                            "allowEntry": "dla.poeiLineAdd.nonstockty==='n'"
+                          }
+                        },
+                        {
+                          "id": 25,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dla.poeiLineAdd.descrip",
+                          "label": "global.description",
+                          "conditionShow": "dla.poeiLineAdd.nonstockty !== 's'"
+                        },
+                        {
+                          "id": 26,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dla.poeiLineAdd.descrip2",
+                          "label": "global.description.2",
+                          "conditionShow": "dla.poeiLineAdd.nonstockty !== 's'",
+                          "labelHidden": true,
+                          "attachUp": true
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dla.poeiLineAdd.prodcat",
+                          "label": "global.product.category",
+                          "meta": "ProdCat",
+                          "required": false,
+                          "conditionReadonly": "dla.poeiLineAdd.nonstockty !== 'n'",
+                          "conditionDisabled": ""
+                        },
+                        {
+                          "id": 34,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dla.poeiLineAdd.upcid",
+                          "label": "global.upc.number",
+                          "conditionShow": "dla.poeiLineAdd.nonstockty !== 's'"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dla.poeiLineAdd.qtyord",
+                          "label": "global.quantity",
+                          "dataFormat": "DECIMAL",
+                          "required": true,
+                          "eventChange": "dla.quantityLeave()",
+                          "size": "SM",
+                          "digits": 7,
+                          "decimals": 2,
+                          "sign": "+",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "dla.poeiLineAdd.unit",
+                          "label": "global.unit",
+                          "meta": "Units",
+                          "required": true,
+                          "size": "SM",
+                          "eventChange": "dla.leaveField('unit')",
+                          "options": {
+                            "searchParams": {
+                              "prod": {
+                                "type": "REF",
+                                "value": "dla.poeiLineAdd.prod"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dla.poeiLineAdd.price",
+                          "label": "global.price",
+                          "dataFormat": "CURRENCY",
+                          "required": false,
+                          "eventChange": "dla.priceLeave()",
+                          "digits": 7,
+                          "decimals": 5,
+                          "size": "SM",
+                          "sign": "+",
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD_SET",
+                          "label": "global.blank.label.string.for.space",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dla.poeiLineAdd.foreigncost",
+                              "label": "global.vendor.domestic.price",
+                              "dataFormat": "DECIMAL",
+                              "conditionShow": "!dla.poeiLineAdd.fiForeignCostHidden",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dla.poeiLineAdd.exchgrate",
+                              "label": "global.exchange.rate",
+                              "dataFormat": "DECIMAL",
+                              "conditionShow": "!dla.poeiLineAdd.fiExchgRateHidden",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 7
+                              }
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dla.poeiLineAdd.currencyty",
+                              "label": "global.currency.code",
+                              "dataDesc": "dla.poeiLineAdd.shortdesc",
+                              "conditionShow": "!dla.poeiLineAdd.fiCurrencyTyHidden"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 30,
+                  "type": "EXP_AREA",
+                  "label": "global.price.calculator",
+                  "conditionShow": "dla.poeiLineAdd.btnCostCalculatorSensitive",
+                  "collapsed": true,
+                  "children": [
+                    {
+                      "id": 33,
+                      "type": "CUSTOM",
+                      "subType": "NonStockCostCalculator",
+                      "conditionShow": "dla.poeiLineAdd.btnCostCalculatorSensitive",
+                      "options": {
+                        "calcCostCallback": "dla.costCalculatorCostChangedCallback()",
+                        "currencyCodeModel": "dla.poeiLineAdd.currencyty",
+                        "exchangeRateModel": "dla.poeiLineAdd.exchgrate",
+                        "productCostModel": "dla.poeiLineAdd.price",
+                        "vendorNumberModel": "dla.poeiLineAdd.vendno",
+                        "calcCostModel": "dla.poeiLineAdd.foreigncost",
+                        "calcModeModel": "global.purchase.order",
+                        "vendorNameModel": "dla.poeiLineAdd.vendname"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

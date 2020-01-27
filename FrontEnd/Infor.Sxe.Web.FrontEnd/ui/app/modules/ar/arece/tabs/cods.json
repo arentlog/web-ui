@@ -1,0 +1,257 @@
+{
+  "viewId": "ar-arece-detail-cods",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "TAB",
+  "children": [
+    {
+      "id": 175,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 176,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 179,
+              "type": "COMP_FLD",
+              "children": [
+                {
+                  "id": 178,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.newCodData.invno",
+                  "label": "global.invoice.number",
+                  "dataFormat": "INTEGER_TEXT",
+                  "sign": "+",
+                  "digits": 8,
+                  "size": "SM",
+                  "required": true,
+                  "autoFocus": true,
+                  "eventChange": "dtl.onCodFieldChange('invno')",
+                  "modelOptions": {
+                    "updateOn": "blur"
+                  }
+                },
+                {
+                  "id": 180,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.newCodData.invsuf",
+                  "label": "global.suffix",
+                  "size": "XS",
+                  "dataFormat": "SuffixInput",
+                  "eventChange": "dtl.onCodFieldChange('invsuf')",
+                  "maxLength": 2,
+                  "modelOptions": {
+                    "updateOn": "blur"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 181,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "base.newCodData.applyamt",
+              "label": "global.apply.amount",
+              "dataFormat": "DECIMAL",
+              "digits": 9,
+              "decimals": 2,
+              "size": "SM",
+              "sign": "+",
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            },
+            {
+              "id": 184,
+              "type": "FIELD",
+              "subType": "DROP_DOWN",
+              "model": "base.newCodData.dispcd",
+              "label": "global.type",
+              "type3": "SET",
+              "metaGroup": "AR",
+              "meta": "CashReceiptsCodDisplayCode",
+              "blankOption": false
+            }
+          ]
+        },
+        {
+          "id": 177,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 186,
+              "type": "FIELD",
+              "subType": "LOOKUP",
+              "model": "base.newCodData.custno",
+              "label": "global.customer.number",
+              "meta": "Customer",
+              "readonly": true
+            },
+            {
+              "id": 192,
+              "type": "FIELD",
+              "subType": "LOOKUP",
+              "model": "base.newCodData.shipto",
+              "label": "global.ship.to",
+              "meta": "ShipTo",
+              "readonly": true
+            },
+            {
+              "id": 190,
+              "type": "FIELD",
+              "subType": "DATE",
+              "model": "base.newCodData.invdt",
+              "label": "global.invoice.date",
+              "dataFormat": "DATE",
+              "readonly": true
+            },
+            {
+              "id": 193,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "base.newCodData.amount",
+              "label": "global.amount",
+              "dataFormat": "DECIMAL",
+              "digits": 9,
+              "decimals": 2,
+              "size": "SM",
+              "sign": "+",
+              "readonly": true,
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 145,
+      "type": "GRID",
+      "model": "base.codsList",
+      "controlRef": "base.grid4",
+      "options": {
+        "showCheckboxes": true,
+        "showDrilldown": false,
+        "selectable": "multiple",
+        "editable": true,
+        "events": {
+          "cellchange": "dtl.onCodCellChange()"
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 146,
+          "type": "TOOLBAR",
+          "label": "global.cods",
+          "children": [
+            {
+              "id": 173,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.add",
+              "icon": "icon-add",
+              "eventClick": "dtl.onCodDataAdd()"
+            },
+            {
+              "id": 174,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.delete",
+              "icon": "icon-delete",
+              "conditionDisabled": "!base.grid4.isAnyRowSelected()",
+              "eventClick": "dtl.onCodGridDelete()"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 148,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "invno",
+          "label": "global.invoice.number",
+          "dataFormat": "INTEGER_TEXT"
+        },
+        {
+          "id": 188,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "invsuf",
+          "label": "global.suffix",
+          "dataFormat": "Suffix"
+        },
+        {
+          "id": 162,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "custno",
+          "label": "global.customer.number",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 194,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "shipto",
+          "label": "global.ship.to"
+        },
+        {
+          "id": 158,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "invdt",
+          "label": "global.invoice.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 153,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "amount",
+          "label": "global.invoice.amount",
+          "dataFormat": "CURRENCY",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 195,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "applyamt",
+          "label": "global.apply.amount",
+          "editable": true,
+          "digits": 9,
+          "decimals": 2,
+          "dataFormat": "CURRENCY",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 161,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "dispcd",
+          "label": "global.apply.write.off",
+          "editable": true,
+          "type3": "SET",
+          "metaGroup": "AR",
+          "meta": "CashReceiptsCodDisplayCode",
+          "blankOption": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1181 @@
+{
+  "viewId": "pd-pdem-step2",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.includesStep2()",
+      "children": [
+        {
+          "id": 14,
+          "type": "MESSAGE",
+          "text": "{{create.header}}"
+        },
+        {
+          "id": 134,
+          "type": "FIELD",
+          "subType": "INFO",
+          "model": "create.recordTypeLabel",
+          "label": "{{create.recordTypeText}}"
+        },
+        {
+          "id": 11,
+          "type": "EXP_AREA",
+          "label": "global.pricing",
+          "conditionShow": "create.isNewCustomerTemplate",
+          "children": [
+            {
+              "id": 12,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 13,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 38,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begcustno",
+                      "label": "global.customer.number",
+                      "meta": "Customer",
+                      "conditionShow": "!base.pdemNewSet.custnohidden",
+                      "controls": {
+                        "actionBtn": {
+                          "id": 87,
+                          "type": "BTN",
+                          "subType": "ICON",
+                          "label": "global.inquire",
+                          "icon": "icon-drilldown",
+                          "isLabelTooltip": true,
+                          "conditionDisabled": "!base.pdemNewSet.begcustno",
+                          "stateRef": "aric.detail({pk: base.pdemNewSet.begcustno})"
+                        }
+                      }
+                    },
+                    {
+                      "id": 40,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begshipto",
+                      "label": "global.ship.to",
+                      "meta": "ShipTo",
+                      "conditionShow": "!base.pdemNewSet.shiptohidden",
+                      "controls": {
+                        "actionBtn": {
+                          "id": 88,
+                          "type": "BTN",
+                          "subType": "ICON",
+                          "label": "global.inquire",
+                          "icon": "icon-drilldown",
+                          "isLabelTooltip": true,
+                          "conditionDisabled": "!base.pdemNewSet.begcustno || !base.pdemNewSet.begshipto",
+                          "stateRef": "aric.detail({pk: base.pdemNewSet.begcustno, pk2: base.pdemNewSet.begshipto})"
+                        }
+                      }
+                    },
+                    {
+                      "id": 98,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begprod",
+                      "label": "global.starting.product",
+                      "meta": "ProdAll",
+                      "conditionShow": "!base.pdemNewSet.begprodhidden"
+                    },
+                    {
+                      "id": 99,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begwhse",
+                      "label": "global.warehouse",
+                      "meta": "Warehouse",
+                      "conditionShow": "!base.pdemNewSet.whsehidden"
+                    },
+                    {
+                      "id": 101,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "base.pdemNewSet.begregion",
+                      "label": "global.region",
+                      "type3": "CODES",
+                      "meta": "PriceRebateRegion",
+                      "conditionShow": "base.isPDRegion"
+                    },
+                    {
+                      "id": 42,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "base.pdemNewSet.startfrom",
+                      "label": "global.start.from",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 44,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "base.pdemNewSet.endfrom",
+                      "label": "global.end.from",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 142,
+                      "type": "FIELD",
+                      "subType": "RADIO_SET",
+                      "model": "base.pdemNewSet.manual",
+                      "label": "global.status",
+                      "type3": "SET",
+                      "metaGroup": "PD",
+                      "meta": "PDEMSearchStatusTypes"
+                    }
+                  ]
+                },
+                {
+                  "id": 37,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 39,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endcustno",
+                      "label": "global.customer.number",
+                      "meta": "Customer",
+                      "conditionShow": "!base.pdemNewSet.custnohidden",
+                      "options": {
+                        "searchParams": {
+                          "custno": {
+                            "type": "REF",
+                            "value": "base.pdemNewSet.custno"
+                          }
+                        }
+                      },
+                      "controls": {
+                        "actionBtn": {
+                          "id": 89,
+                          "type": "BTN",
+                          "subType": "ICON",
+                          "label": "global.inquire",
+                          "icon": "icon-drilldown",
+                          "isLabelTooltip": true,
+                          "conditionDisabled": "!base.pdemNewSet.endcustno",
+                          "stateRef": "aric.detail({pk: base.pdemNewSet.endcustno})"
+                        }
+                      }
+                    },
+                    {
+                      "id": 97,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endshipto",
+                      "label": "global.ship.to",
+                      "meta": "ShipTo",
+                      "conditionShow": "!base.pdemNewSet.shiptohidden",
+                      "options": {
+                        "searchParams": {
+                          "custno": {
+                            "type": "REF",
+                            "value": "base.pdemNewSet.custno"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "id": 41,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endprod",
+                      "label": "global.ending.product",
+                      "meta": "ProdAll",
+                      "conditionShow": "!base.pdemNewSet.endprodhidden",
+                      "controls": {
+                        "actionBtn": {
+                          "id": 90,
+                          "type": "BTN",
+                          "subType": "ICON",
+                          "label": "global.inquire",
+                          "icon": "icon-drilldown",
+                          "isLabelTooltip": true,
+                          "conditionDisabled": "!base.pdemNewSet.endprod",
+                          "stateRef": "icip.detail({pk: base.pdemNewSet.endprod})"
+                        }
+                      }
+                    },
+                    {
+                      "id": 100,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endwhse",
+                      "label": "global.warehouse",
+                      "meta": "Warehouse",
+                      "conditionShow": "!base.pdemNewSet.whsehidden"
+                    },
+                    {
+                      "id": 102,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "base.pdemNewSet.endregion",
+                      "label": "global.region",
+                      "type3": "CODES",
+                      "meta": "PriceRebateRegion",
+                      "conditionShow": "base.isPDRegion"
+                    },
+                    {
+                      "id": 43,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "base.pdemNewSet.startto",
+                      "label": "global.start.to",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 45,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "base.pdemNewSet.endto",
+                      "label": "global.end.to",
+                      "dataFormat": "DATE"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "type": "EXP_AREA",
+          "label": "{{create.priceTypeLabel}}",
+          "conditionShow": "create.isNewCustomerTemplate && !base.pdemNewSet.leveltyhidden",
+          "children": [
+            {
+              "id": 17,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 18,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 47,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begvendno",
+                      "label": "global.vendor.number",
+                      "meta": "Vendor",
+                      "conditionShow": "!base.pdemNewSet.vendnohidden",
+                      "controls": {
+                        "actionBtn": {
+                          "id": 91,
+                          "type": "BTN",
+                          "subType": "ICON",
+                          "label": "global.inquire",
+                          "icon": "icon-drilldown",
+                          "isLabelTooltip": true,
+                          "conditionDisabled": "!base.pdemNewSet.begvendno",
+                          "stateRef": "apiv.detail({pk: base.pdemNewSet.begvendno})"
+                        }
+                      }
+                    },
+                    {
+                      "id": 49,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begprodprcty",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProdPriceTy",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_BY_PRICE_TYPE",
+                      "eventChange": "create.loadFieldValue()"
+                    },
+                    {
+                      "id": 51,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begprodprcty",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProdPriceTy",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_PRODUCT_PRICE_TYPE",
+                      "eventChange": "create.loadFieldValue()"
+                    },
+                    {
+                      "id": 52,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begprodcat",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProdCat",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_BY_PRODUCT_CATEGORY",
+                      "eventChange": "create.loadFieldValue()"
+                    },
+                    {
+                      "id": 53,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begrebatety",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProductRebateType",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_BY_PRODUCT_REBATETYPE",
+                      "eventChange": "create.loadFieldValue()"
+                    },
+                    {
+                      "id": 137,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begrebsubty",
+                      "label": "global.rebate.sub.type",
+                      "meta": "ProductRebateSubType",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_BY_PRODUCT_REBATETYPE && base.pdscRebSubTyAOData",
+                      "eventChange": "create.loadFieldValue()"
+                    },
+                    {
+                      "id": 54,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begprodline",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProdLine",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_BY_PRODUCT_LINE",
+                      "eventChange": "create.loadFieldValue()",
+                      "options": {
+                        "searchParams": {
+                          "vendno": {
+                            "value": "base.pdemNewSet.vendno",
+                            "type": "REF"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 46,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 48,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endvendno",
+                      "label": "global.vendor.number",
+                      "meta": "Vendor",
+                      "conditionShow": "!base.pdemNewSet.vendnohidden"
+                    },
+                    {
+                      "id": 118,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endprodprcty",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProdPriceTy",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_BY_PRICE_TYPE"
+                    },
+                    {
+                      "id": 119,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endprodprcty",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProdPriceTy",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_PRODUCT_PRICE_TYPE"
+                    },
+                    {
+                      "id": 120,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endprodcat",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProdCat",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_BY_PRODUCT_CATEGORY"
+                    },
+                    {
+                      "id": 121,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endrebatety",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProductRebateType",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_BY_PRODUCT_REBATETYPE"
+                    },
+                    {
+                      "id": 138,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endrebsubty",
+                      "label": "global.rebate.sub.type",
+                      "meta": "ProductRebateSubType",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_BY_PRODUCT_REBATETYPE && base.pdscRebSubTyAOData"
+                    },
+                    {
+                      "id": 122,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endprodline",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProdLine",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_BY_PRODUCT_LINE"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 19,
+          "type": "EXP_AREA",
+          "label": "global.pricing",
+          "conditionShow": "create.isNewCustomerTypeTemplate",
+          "children": [
+            {
+              "id": 20,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 56,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begcusttype",
+                      "label": "global.customer.price.type",
+                      "meta": "CustomerPriceType"
+                    },
+                    {
+                      "id": 124,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begprod",
+                      "label": "global.starting.product",
+                      "meta": "ProdAll",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_PRICE_TYPE_BY_PRODUCT"
+                    },
+                    {
+                      "id": 126,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begwhse",
+                      "label": "global.warehouse",
+                      "meta": "Warehouse",
+                      "conditionShow": "!base.pdemNewSet.whsehidden"
+                    },
+                    {
+                      "id": 128,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "base.pdemNewSet.begregion",
+                      "label": "global.region",
+                      "type3": "CODES",
+                      "meta": "PriceRebateRegion",
+                      "conditionShow": "base.isPDRegion"
+                    },
+                    {
+                      "id": 57,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "base.pdemNewSet.startfrom",
+                      "label": "global.start.from",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 60,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "base.pdemNewSet.endfrom",
+                      "label": "global.end.from",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 103,
+                      "type": "FIELD",
+                      "subType": "RADIO_SET",
+                      "model": "base.pdemNewSet.manual",
+                      "label": "global.status",
+                      "type3": "SET",
+                      "metaGroup": "PD",
+                      "meta": "PDEMSearchStatusTypes"
+                    }
+                  ]
+                },
+                {
+                  "id": 55,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 58,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endcusttype",
+                      "label": "global.customer.price.type",
+                      "meta": "CustomerPriceType"
+                    },
+                    {
+                      "id": 125,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endprod",
+                      "label": "global.ending.product",
+                      "meta": "ProdAll",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_PRICE_TYPE_BY_PRODUCT"
+                    },
+                    {
+                      "id": 127,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endwhse",
+                      "label": "global.warehouse",
+                      "meta": "Warehouse",
+                      "conditionShow": "!base.pdemNewSet.whsehidden"
+                    },
+                    {
+                      "id": 129,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "base.pdemNewSet.endregion",
+                      "label": "global.region",
+                      "type3": "CODES",
+                      "meta": "PriceRebateRegion",
+                      "conditionShow": "base.isPDRegion"
+                    },
+                    {
+                      "id": 123,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "base.pdemNewSet.startto",
+                      "label": "global.start.to",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 61,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "base.pdemNewSet.endto",
+                      "label": "global.end.to",
+                      "dataFormat": "DATE"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 22,
+          "type": "EXP_AREA",
+          "label": "{{create.priceTypeLabel}}",
+          "conditionShow": "create.isNewCustomerTypeTemplate && !base.pdemNewSet.leveltyhidden",
+          "children": [
+            {
+              "id": 23,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 24,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 62,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begprodprcty",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProdPriceTy",
+                      "eventChange": "create.loadFieldValue()",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_PRICE_TYPE_BY_PRODUCT_PRICE_TYPE"
+                    },
+                    {
+                      "id": 63,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begrebatety",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProductRebateType",
+                      "eventChange": "create.loadFieldValue()",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_PRICE_TYPE_BY_REBATE_TYPE"
+                    },
+                    {
+                      "id": 139,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begrebsubty",
+                      "label": "global.rebate.sub.type",
+                      "meta": "ProductRebateSubType",
+                      "eventChange": "create.loadFieldValue()",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_PRICE_TYPE_BY_REBATE_TYPE && base.pdscRebSubTyAOData"
+                    }
+                  ]
+                },
+                {
+                  "id": 130,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 131,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endprodprcty",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProdPriceTy",
+                      "eventChange": "create.loadFieldValue()",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_PRICE_TYPE_BY_PRODUCT_PRICE_TYPE"
+                    },
+                    {
+                      "id": 132,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endrebatety",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProductRebateType",
+                      "eventChange": "create.loadFieldValue()",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_PRICE_TYPE_BY_REBATE_TYPE"
+                    },
+                    {
+                      "id": 140,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endrebsubty",
+                      "label": "global.rebate.sub.type",
+                      "meta": "ProductRebateSubType",
+                      "eventChange": "create.loadFieldValue()",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSC_CUSTOMER_PRICE_TYPE_BY_REBATE_TYPE && base.pdscRebSubTyAOData"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 25,
+          "type": "EXP_AREA",
+          "label": "global.rebate",
+          "conditionShow": "create.isNewRebateTemplate",
+          "children": [
+            {
+              "id": 26,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 27,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 65,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begcustno",
+                      "label": "global.customer.number",
+                      "meta": "Customer",
+                      "conditionShow": "!base.pdemNewSet.custnohidden",
+                      "controls": {
+                        "actionBtn": {
+                          "id": 92,
+                          "type": "BTN",
+                          "subType": "ICON",
+                          "label": "global.inquire",
+                          "icon": "icon-drilldown",
+                          "isLabelTooltip": true,
+                          "conditionDisabled": "!base.pdemNewSet.begcustno",
+                          "stateRef": "aric.detail({pk: base.pdemNewSet.begcustno})"
+                        }
+                      }
+                    },
+                    {
+                      "id": 105,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begshipto",
+                      "label": "global.ship.to",
+                      "meta": "ShipTo",
+                      "conditionShow": "!base.pdemNewSet.shiptohidden"
+                    },
+                    {
+                      "id": 67,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begcustrebty",
+                      "label": "global.customer.rebate.type",
+                      "meta": "CustomerRebateType",
+                      "conditionShow": "!base.pdemNewSet.custrebtyhidden"
+                    },
+                    {
+                      "id": 107,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begvendno",
+                      "label": "global.vendor.number",
+                      "meta": "Vendor",
+                      "conditionShow": "!base.pdemNewSet.vendnohidden"
+                    },
+                    {
+                      "id": 69,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.pdemNewSet.begcontractno",
+                      "label": "global.contract.number",
+                      "maxLength": 30,
+                      "conditionShow": "!base.pdemNewSet.contracthidden"
+                    },
+                    {
+                      "id": 109,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begwhse",
+                      "label": "global.warehouse",
+                      "meta": "Warehouse",
+                      "conditionShow": "!base.pdemNewSet.whsehidden"
+                    },
+                    {
+                      "id": 110,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "base.pdemNewSet.begregion",
+                      "label": "global.region",
+                      "type3": "CODES",
+                      "meta": "PriceRebateRegion",
+                      "conditionShow": "base.isRebateRegion"
+                    }
+                  ]
+                },
+                {
+                  "id": 64,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 66,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endcustno",
+                      "label": "global.customer.number",
+                      "meta": "Customer",
+                      "conditionShow": "!base.pdemNewSet.custnohidden",
+                      "options": {
+                        "searchParams": {
+                          "custno": {
+                            "type": "REF",
+                            "value": "base.pdemNewSet.custno"
+                          }
+                        }
+                      },
+                      "controls": {
+                        "actionBtn": {
+                          "id": 93,
+                          "type": "BTN",
+                          "subType": "ICON",
+                          "label": "global.inquire",
+                          "icon": "icon-drilldown",
+                          "isLabelTooltip": true,
+                          "conditionDisabled": "!base.pdemNewSet.endcustno",
+                          "stateRef": "aric.detail({pk: base.pdemNewSet.endcustno})"
+                        }
+                      }
+                    },
+                    {
+                      "id": 104,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endshipto",
+                      "label": "global.ship.to",
+                      "meta": "ShipTo",
+                      "conditionShow": "!base.pdemNewSet.shiptohidden",
+                      "options": {
+                        "searchParams": {
+                          "custno": {
+                            "type": "REF",
+                            "value": "base.pdemNewSet.custno"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "id": 106,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endcustrebty",
+                      "label": "global.customer.rebate.type",
+                      "meta": "CustomerRebateType",
+                      "conditionShow": "!base.pdemNewSet.custrebtyhidden",
+                      "options": {
+                        "searchParams": {
+                          "custno": {
+                            "type": "REF",
+                            "value": "base.pdemNewSet.custno"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "id": 68,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endvendno",
+                      "label": "global.vendor.number",
+                      "meta": "Vendor",
+                      "conditionShow": "!base.pdemNewSet.vendnohidden",
+                      "controls": {
+                        "actionBtn": {
+                          "id": 94,
+                          "type": "BTN",
+                          "subType": "ICON",
+                          "label": "global.inquire",
+                          "icon": "icon-drilldown",
+                          "isLabelTooltip": true,
+                          "conditionDisabled": "!base.pdemNewSet.endvendno",
+                          "stateRef": "apiv.detail({pk: base.pdemNewSet.endvendno})"
+                        }
+                      }
+                    },
+                    {
+                      "id": 108,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.pdemNewSet.endcontractno",
+                      "label": "global.contract.number",
+                      "meta": "Vendor",
+                      "conditionShow": "!base.pdemNewSet.contracthidden",
+                      "maxLength": 30
+                    },
+                    {
+                      "id": 70,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endwhse",
+                      "label": "global.warehouse",
+                      "meta": "Warehouse",
+                      "conditionShow": "!base.pdemNewSet.whsehidden"
+                    },
+                    {
+                      "id": 111,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "base.pdemNewSet.endregion",
+                      "label": "global.region",
+                      "type3": "CODES",
+                      "meta": "PriceRebateRegion",
+                      "conditionShow": "base.isRebateRegion"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 28,
+          "type": "EXP_AREA",
+          "label": "global.product.range",
+          "conditionShow": "create.isNewRebateTemplate && !base.pdemNewSet.begprodhidden",
+          "children": [
+            {
+              "id": 29,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 30,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 72,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begprod",
+                      "label": "global.starting.product",
+                      "meta": "ProdAll",
+                      "conditionShow": "!base.pdemNewSet.begprodhidden",
+                      "controls": {
+                        "actionBtn": {
+                          "id": 95,
+                          "type": "BTN",
+                          "subType": "ICON",
+                          "label": "global.inquire",
+                          "icon": "icon-drilldown",
+                          "isLabelTooltip": true,
+                          "conditionDisabled": "!base.pdemNewSet.begprod",
+                          "stateRef": "icip.detail({pk: base.pdemNewSet.begprod})"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 71,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 73,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endprod",
+                      "label": "global.ending.product",
+                      "meta": "ProdAll",
+                      "conditionShow": "!base.pdemNewSet.endprodhidden",
+                      "controls": {
+                        "actionBtn": {
+                          "id": 96,
+                          "type": "BTN",
+                          "subType": "ICON",
+                          "label": "global.inquire",
+                          "icon": "icon-drilldown",
+                          "isLabelTooltip": true,
+                          "conditionDisabled": "!base.pdemNewSet.endprod",
+                          "stateRef": "icip.detail({pk: base.pdemNewSet.endprod})"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 31,
+          "type": "EXP_AREA",
+          "label": "{{create.priceTypeLabel}}",
+          "conditionShow": "create.isNewRebateTemplate && !base.pdemNewSet.leveltyhidden",
+          "children": [
+            {
+              "id": 32,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 33,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 112,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begprodprcty",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProdPriceTy",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSR_REBATE_ON_PRODUCT_PRICE",
+                      "eventChange": "create.loadFieldValue()"
+                    },
+                    {
+                      "id": 84,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begrebatety",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProductRebateType",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSR_REBATE_ON_REBATE_TYPE",
+                      "eventChange": "create.loadFieldValue()"
+                    },
+                    {
+                      "id": 115,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begprodline",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProdLine",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSR_REBATE_ON_PRODUCT_LINE",
+                      "eventChange": "create.loadFieldValue()",
+                      "options": {
+                        "searchParams": {
+                          "vendno": {
+                            "value": "base.pdemNewSet.vendno",
+                            "type": "REF"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "id": 85,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begprodcat",
+                      "label": "{{create.priceTypeLabel}}",
+                      "meta": "ProdCat",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSR_REBATE_ON_PRODUCT_CATEGORY",
+                      "eventChange": "create.loadFieldValue()"
+                    },
+                    {
+                      "id": 81,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.begrebsubty",
+                      "label": "global.rebate.sub.type",
+                      "meta": "ProductRebateSubType",
+                      "conditionShow": "!base.pdemNewSet.rebsubtyhidden",
+                      "eventChange": "create.loadFieldValue()"
+                    }
+                  ]
+                },
+                {
+                  "id": 83,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 113,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endprodprcty",
+                      "label": "{{create.priceTypeLabel}}",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSR_REBATE_ON_PRODUCT_PRICE",
+                      "meta": "ProdPriceTy"
+                    },
+                    {
+                      "id": 114,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endrebatety",
+                      "label": "{{create.priceTypeLabel}}",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSR_REBATE_ON_REBATE_TYPE",
+                      "meta": "ProductRebateType"
+                    },
+                    {
+                      "id": 116,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endprodline",
+                      "label": "{{create.priceTypeLabel}}",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSR_REBATE_ON_PRODUCT_LINE",
+                      "meta": "ProdLine"
+                    },
+                    {
+                      "id": 117,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endprodcat",
+                      "label": "{{create.priceTypeLabel}}",
+                      "conditionShow": "base.pdemNewSet.destination.toLowerCase() === base.PDSR_REBATE_ON_PRODUCT_CATEGORY",
+                      "meta": "ProdCat"
+                    },
+                    {
+                      "id": 86,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemNewSet.endrebsubty",
+                      "label": "global.rebate.sub.type",
+                      "conditionShow": "!base.pdemNewSet.rebsubtyhidden",
+                      "meta": "ProductRebateSubType"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 34,
+          "type": "EXP_AREA",
+          "label": "global.date.range",
+          "conditionShow": "create.isNewRebateTemplate",
+          "children": [
+            {
+              "id": 35,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 36,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 75,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "base.pdemNewSet.startfrom",
+                      "label": "global.start.from",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 77,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "base.pdemNewSet.endfrom",
+                      "label": "global.end.from",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 79,
+                      "type": "FIELD",
+                      "subType": "RADIO_SET",
+                      "model": "base.pdemNewSet.dropshipty",
+                      "label": "global.rebates.for",
+                      "type3": "SET",
+                      "metaGroup": "PD",
+                      "meta": "RebatesForTypes"
+                    },
+                    {
+                      "id": 141,
+                      "type": "FIELD",
+                      "subType": "RADIO_SET",
+                      "model": "base.pdemNewSet.manual",
+                      "label": "global.manual.rebate",
+                      "type3": "SET",
+                      "metaGroup": "PD",
+                      "meta": "ManualRebateOptions",
+                      "conditionShow": "base.pdemNewSet.rebatecd.toLowerCase() === 's'"
+                    }
+                  ]
+                },
+                {
+                  "id": 74,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 143,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "base.pdemNewSet.startto",
+                      "label": "global.start.to",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 78,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "base.pdemNewSet.endto",
+                      "label": "global.end.to",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 80,
+                      "type": "FIELD",
+                      "subType": "RADIO_SET",
+                      "model": "base.pdemNewSet.rebatecd",
+                      "label": "global.rebate.code",
+                      "type3": "SET",
+                      "metaGroup": "PD",
+                      "meta": "RebateCodeTypes"
+                    },
+                    {
+                      "id": 144,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "base.pdemNewSet.pricerebfl",
+                      "label": "global.rebate.by.price",
+                      "dataFormat": "LOGICAL",
+                      "conditionShow": "!base.pdemNewSet.pricerebflhidden && base.pdemNewSet.rebatecd.toLowerCase() === 's' && (base.pdemNewSet.destination.toLowerCase() === base.PDSR_REBATE_ON_PRODUCT  || base.pdemNewSet.destination.toLowerCase() === base.PDSR_REBATE_ON_PRODUCT_PRICE)"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "viewId": "oe-oeet-initiate-editcustomershipto",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "controlRef": "oeecst.view",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.order.entry",
+              "subLabel": "global.reassign.customer.slash.ship.to",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "ecst.exitView()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 25,
+                  "type": "BTN",
+                  "label": "global.submit",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "submitForm": true,
+                  "eventValidated": "ecst.submit()",
+                  "conditionDisabled": "!ecst.orderNumber || (!ecst.newCustNo && !ecst.newShipTo)"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "ecst.orderNumber",
+                          "label": "global.order.number",
+                          "meta": "OEOrders",
+                          "autoFocus": true,
+                          "eventChange": "ecst.orderNumberChanged()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "ecst.oehdr.oetype",
+                          "label": "global.type",
+                          "dataFormat": "OeOrderType"
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "ecst.oehdr.stagecd",
+                          "label": "global.stage",
+                          "dataFormat": "OeStage"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 28,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 29,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 27,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "ecst.oehdr.custno",
+                              "label": "global.current.customer",
+                              "meta": "Customer",
+                              "readonly": true
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "ecst.newCustNo",
+                              "label": "global.new.customer",
+                              "meta": "Customer"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 30,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "ecst.oehdr.shipto",
+                              "label": "global.current.ship.to",
+                              "meta": "ShipTo",
+                              "readonly": true
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "ecst.newShipTo",
+                              "label": "global.new.ship.to",
+                              "meta": "ShipTo",
+                              "options": {
+                                "searchParams": {
+                                  "custno": {
+                                    "type": "REF",
+                                    "value": "ecst.newCustNo"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 26,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "ecst.reprice",
+                          "label": "global.reprice",
+                          "dataFormat": "LOGICAL"
+                        },
+                        {
+                          "id": 31,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "ecst.custpo",
+                          "label": "global.customer.po.number",
+                          "maxLength": 22
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

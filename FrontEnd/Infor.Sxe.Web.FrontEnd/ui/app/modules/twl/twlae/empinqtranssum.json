@@ -1,0 +1,120 @@
+{
+  "viewId": "twl-twlae-empinqtranssum",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "dtlinqtranssum.isItemInqEmpSum()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.transaction.summary",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtlinqtranssum.returnToDetail()"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtlinqtranssum.rangeType",
+                  "label": "global.type",
+                  "type3": "SET",
+                  "metaGroup": "TWL",
+                  "meta": "DateRangeType",
+                  "eventChange": "dtlinqtranssum.empInqTransSumApiCall()",
+                  "blankOption": false,
+                  "size": "SM"
+                },
+                {
+                  "id": 30,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "dtlinqtranssum.totalTransactions",
+                  "label": "global.total.number.of.transactions",
+                  "type3": "",
+                  "blankOption": false,
+                  "size": "SM",
+                  "dataFormat": "INTEGER"
+                },
+                {
+                  "type": "GRID",
+                  "id": 10,
+                  "controlRef": "dtlinqtranssum.grid",
+                  "model": "dtlinqtranssum.dataset",
+                  "controls": {
+                    "toolbar": {
+                      "id": 31,
+                      "type": "TOOLBAR",
+                      "label": "global.transactions"
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "dateTime",
+                      "label": "global.date.time",
+                      "dataFormat": "TwlCharDateConversion"
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "transType",
+                      "label": "global.transaction.type"
+                    },
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "transName",
+                      "label": "global.transaction.type.description"
+                    },
+                    {
+                      "id": 29,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "numTrans",
+                      "label": "global.count",
+                      "dataFormat": "DECIMAL"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

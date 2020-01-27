@@ -1,0 +1,81 @@
+'use strict';
+
+/**
+ * Standard controller for the modal content of all simple lookups.
+ *
+ * Alias: lkupmdl
+ */
+app.controller('VendorContractLookupModalCtrl', function ($scope, DataService, Utils) {
+   var self = this;
+   var lkup = $scope.lkup;
+
+   self.priceType = '';
+   self.product = '';
+
+   // Initialize modal criteria
+   self.initializeCriteria = function (isClear) {
+      // Single search field for the standard lookup modal
+      self.searchTerm = '';
+
+      // Get current search criteria/params defined on the lookup field
+      self.criteria = lkup.getSearchCriteria();
+
+      if (!isClear) {
+         var searchParamValueField = lkup.options.searchParamValueField;
+         var value = lkup.getInitialSearchValue();
+
+         // Populate search field with initial value (from user typing into lookup field)
+         if (searchParamValueField && (value || value === 0)) {
+            Utils.setNestedValue(self.criteria, searchParamValueField, value);
+         }
+      }
+   };
+
+   // Perform reset/clear
+   self.clear = function () {
+      self.initializeCriteria(true);
+   };
+
+   // Perform search
+   self.search = function () {
+      self.criteria.prod = '';
+      // Price Type
+      if (self.criteria.levelcd === '2') {
+         self.criteria.prod = self.priceType;
+      }
+      // Product
+      if (self.criteria.levelcd === '1') {
+         self.criteria.prod = self.product;
+      }
+
+      lkup.search(self.criteria, self.searchTerm, function (results) {
+         self.dataset = results;
+      });
+   };
+
+   self.isPriceTypeVisible = function () {
+      var retn = false;
+      if (self.criteria.levelcd === '2') {
+         retn = true;
+      }
+
+      return retn;
+   };
+
+   self.isProductVisible = function () {
+      var retn = false;
+      if (self.criteria.levelcd === '1') {
+         retn = true;
+      }
+
+      return retn;
+   };
+
+   self.levelCodeChanged = function () {
+      self.isPriceTypeVisible();
+      self.isProductVisible();
+   };
+
+   // Initialize
+   self.initializeCriteria(false);
+});

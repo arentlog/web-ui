@@ -1,0 +1,460 @@
+{
+  "viewId": "gl-glsf-detailaccount",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "dtla.isDetailAccount()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.financial.statement.details",
+              "subLabel": "{{base.getSubTitleForDetail(dtla.glsfDesignSummary)}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtla.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 66,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtla.submit()",
+                  "securityLevel": 3,
+                  "eventClick": ""
+                },
+                {
+                  "id": 67,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtla.back()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 10,
+                          "type": "EXP_AREA",
+                          "label": "global.account.slash.sub.list",
+                          "children": [
+                            {
+                              "id": 11,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 12,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 35,
+                                      "type": "FIELD",
+                                      "subType": "RADIO_SET",
+                                      "model": "dtla.glsfSetupA.selectionType",
+                                      "label": "global.selection",
+                                      "meta": "RangeListTypes",
+                                      "type3": "SET",
+                                      "metaGroup": "COMMON",
+                                      "autoFocus": true
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 34,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 36,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "dtla.glsfSetupA.summarize",
+                                      "label": "global.summarize",
+                                      "dataFormat": "LOGICAL"
+                                    },
+                                    {
+                                      "id": 81,
+                                      "type": "FIELD",
+                                      "subType": "LOOKUP",
+                                      "model": "dtla.beginAccountSubAccount",
+                                      "label": "global.begin.account.number.slash.sub.number",
+                                      "meta": "GlAccountSub",
+                                      "conditionRequired": "dtla.glsfSetupA.selectionType === 'r'",
+                                      "conditionShow": "dtla.glsfSetupA.selectionType === 'r'",
+                                      "eventChange": "dtla.buildBeginAccountSubNo()",
+                                      "options": {
+                                        "allowEntry": true
+                                      }
+                                    },
+                                    {
+                                      "id": 82,
+                                      "type": "FIELD",
+                                      "subType": "LOOKUP",
+                                      "model": "dtla.endAccountSubAccount",
+                                      "label": "global.end.account.number.slash.sub.number",
+                                      "meta": "GlAccountSub",
+                                      "conditionRequired": "dtla.glsfSetupA.selectionType === 'r'",
+                                      "conditionShow": "dtla.glsfSetupA.selectionType === 'r'",
+                                      "eventChange": "dtla.buildEndAccountSubNo()",
+                                      "options": {
+                                        "allowEntry": true
+                                      }
+                                    },
+                                    {
+                                      "id": 50,
+                                      "type": "GRID",
+                                      "model": "dtla.glsfSetupaAcctListFiltered",
+                                      "controlRef": "dtla.accountsGrid",
+                                      "conditionShow": "dtla.glsfSetupA.selectionType === 'l'",
+                                      "options": {
+                                        "showCheckboxes": true,
+                                        "paging": false
+                                      },
+                                      "controls": {
+                                        "toolbar": {
+                                          "id": 52,
+                                          "type": "TOOLBAR",
+                                          "label": "global.accounts",
+                                          "conditionShow": "dtla.glsfSetupA.selectionType === 'l'",
+                                          "subLabel": "global.up.to.eleven.maximum",
+                                          "children": [
+                                            {
+                                              "id": 53,
+                                              "type": "BTN",
+                                              "subType": "TER",
+                                              "label": "global.add",
+                                              "icon": "icon-add",
+                                              "conditionShow": "",
+                                              "eventClick": "dtla.addAccountToList()",
+                                              "conditionDisabled": "dtla.isNumberOfAccountsLimit"
+                                            },
+                                            {
+                                              "id": 54,
+                                              "type": "BTN",
+                                              "subType": "TER",
+                                              "label": "global.delete",
+                                              "icon": "icon-delete",
+                                              "securityLevel": 5,
+                                              "eventClick": "dtla.deleteAccountFromList()",
+                                              "conditionDisabled": "!dtla.accountsGrid.isAnyRowSelected()"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "children": [
+                                        {
+                                          "id": 51,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "acctno",
+                                          "label": "global.account.number"
+                                        },
+                                        {
+                                          "id": 55,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "subno",
+                                          "label": "global.sub.account.number"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 13,
+                          "type": "EXP_AREA",
+                          "label": "global.general",
+                          "children": [
+                            {
+                              "id": 14,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 15,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 19,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dtla.glsfSetupA.printType",
+                                      "label": "global.print",
+                                      "meta": "FinancialStatementPrintType",
+                                      "type3": "SET",
+                                      "metaGroup": "GL",
+                                      "blankOption": false,
+                                      "size": "SM"
+                                    },
+                                    {
+                                      "id": 20,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dtla.glsfSetupA.zeroType",
+                                      "label": "global.zero.balances",
+                                      "meta": "FinancialStatementZeroBalancesType",
+                                      "type3": "SET",
+                                      "metaGroup": "GL",
+                                      "blankOption": false,
+                                      "size": "SM"
+                                    },
+                                    {
+                                      "id": 25,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "dtla.glsfSetupA.dollarFl",
+                                      "label": "global.currency.symbol",
+                                      "dataFormat": "LOGICAL"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 16,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 22,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dtla.glsfSetupA.advanceTo",
+                                      "label": "global.adv.to.line.number",
+                                      "dataFormat": "INTEGER_TEXT",
+                                      "size": "XS",
+                                      "digits": 2
+                                    },
+                                    {
+                                      "id": 23,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dtla.glsfSetupA.skipLines",
+                                      "label": "global.skip.forward.by.lines",
+                                      "dataFormat": "INTEGER_TEXT",
+                                      "size": "XS",
+                                      "digits": 2
+                                    },
+                                    {
+                                      "id": 24,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dtla.glsfSetupA.underlineType",
+                                      "label": "global.style",
+                                      "meta": "StyleType",
+                                      "type3": "SET",
+                                      "metaGroup": "GL",
+                                      "blankOption": false
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 26,
+                          "type": "EXP_AREA",
+                          "label": "global.totaling",
+                          "children": [
+                            {
+                              "id": 27,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 29,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 30,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dtla.glsfSetupA.addType",
+                                      "label": "global.totaling",
+                                      "meta": "FinancialStatementTotalingType",
+                                      "type3": "SET",
+                                      "metaGroup": "GL",
+                                      "blankOption": false,
+                                      "size": "SM"
+                                    },
+                                    {
+                                      "id": 31,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dtla.glsfSetupA.titleText",
+                                      "label": "global.title",
+                                      "maxLength": 32,
+                                      "size": "LG"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 28,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 32,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dtla.glsfSetupA.lookupName",
+                                      "label": "global.lookup.name",
+                                      "maxLength": 15
+                                    },
+                                    {
+                                      "id": 33,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dtla.glsfSetupA.comment",
+                                      "label": "global.comment",
+                                      "size": "LG",
+                                      "maxLength": 60
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 68,
+                          "type": "EXP_AREA",
+                          "label": "global.storage.area",
+                          "children": [
+                            {
+                              "id": 72,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 73,
+                                  "type": "COL",
+                                  "subType": "2/3",
+                                  "children": [
+                                    {
+                                      "id": 74,
+                                      "type": "GRID",
+                                      "model": "dtla.glsfSetupaColList",
+                                      "controlRef": "dtla.columnsGrid",
+                                      "options": {
+                                        "editable": true,
+                                        "paging": false
+                                      },
+                                      "controls": {
+                                        "toolbar": {
+                                          "id": 75,
+                                          "type": "TOOLBAR",
+                                          "label": "global.storage.areas"
+                                        }
+                                      },
+                                      "children": [
+                                        {
+                                          "id": 76,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "columnNo",
+                                          "label": "global.column",
+                                          "dataFormat": "INTEGER_TEXT"
+                                        },
+                                        {
+                                          "id": 77,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "printArea",
+                                          "label": "global.print.area",
+                                          "editable": true,
+                                          "digits": 2,
+                                          "dataFormat": "INTEGER_TEXT"
+                                        },
+                                        {
+                                          "id": 78,
+                                          "type": "GRID_COL",
+                                          "subType": "TEXT",
+                                          "model": "storeArea",
+                                          "label": "global.store.area",
+                                          "editable": true,
+                                          "digits": 2,
+                                          "dataFormat": "INTEGER_TEXT"
+                                        },
+                                        {
+                                          "id": 79,
+                                          "type": "GRID_COL",
+                                          "subType": "CHECKBOX",
+                                          "model": "printFl",
+                                          "label": "global.print",
+                                          "dataFormat": "LOGICAL"
+                                        },
+                                        {
+                                          "id": 80,
+                                          "type": "GRID_COL",
+                                          "subType": "CHECKBOX",
+                                          "model": "reverseFl",
+                                          "label": "global.reverse",
+                                          "dataFormat": "LOGICAL",
+                                          "editable": true
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 65,
+      "type": "VIEW_CNTR",
+      "viewName": "addAccount"
+    }
+  ]
+}

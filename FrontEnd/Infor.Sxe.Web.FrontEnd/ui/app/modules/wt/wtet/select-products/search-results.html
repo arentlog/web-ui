@@ -1,0 +1,82 @@
+<div ng-show="sp.searchResults.length > 0" initialize>
+   <div class="toolbar" role="toolbar">
+      <div class="title">
+         <span translate>global.products</span>
+         <span>({{sp.searchResults.length}})</span>
+      </div>
+      <div class="buttonset"></div>
+   </div>
+   <div list-view data-model="sp.searchResults">
+      <div class="listview tableview paginated" data-init="false" style="overflow-y: hidden;">
+         <table role="grid" class="listview-table show-headers">
+            <thead ng-show="sp.searchResults.length > 0">
+               <tr>
+                  <th scope="col" role="columnheader" translate>global.image</th>
+                  <th scope="col" role="columnheader" style="max-width: 250px" translate>global.description</th>
+                  <th scope="col" role="columnheader" translate>global.unit</th>
+                  <th scope="col" role="columnheader" translate>global.quantity</th>
+                  <th scope="col" role="columnheader" translate>global.action</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr ng-repeat="item in sp.searchResults | limitTo:list.pageSize:list.startIndex track by $index">
+                  <td>
+                     <div class="image-sm" ng-if="item.image">
+                        <img ng-src="{{item.image}}" />
+                     </div>
+                     <div class="image-sm placeholder" ng-if="!item.image">
+                        <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                           <use xlink:href="#icon-insert-image"></use>
+                        </svg>
+                        <span class="audible">Placeholder Image</span>
+                     </div>
+                  </td>
+                  <td style="max-width: 250px">
+                     <p>
+                        <a ng-click="sp.navigateToProduct(item.value)" class="hyperlink">{{item.Description || item.value}}</a>
+                     </p>
+                     <ul class="info">
+                        <li><span translate>global.product.number</span>: <strong>{{item.value}}</strong></li>
+                        <li><span translate>global.description</span>: <strong style="text-overflow: ellipsis; max-width: 200px; overflow: hidden">{{item.ExtendedDescription}}</strong></li>
+                        <li><span translate>global.in.stock</span>: <strong>{{item.calc_qtyavail}}</strong></li>
+                     </ul>
+                  </td>
+                  <td>
+                     <div class="field" style="margin-top: 20px">
+                        <input type="text"
+                               class="lookup input-sm"
+                               data-model="item.calc_uom"
+                               lookup="Units"
+                               style="text-align: left"
+                               ng-readonly="item.rectype !== 'icsw' || !sp.wlwhsechgfl"
+                               data-lookup-options='{"autoFetchMetadata":false,"searchParams":{"prod":{"type":"REF","value":"item.value"}}}'
+                               autocomplete="off" />
+                     </div>
+                  </td>
+                  <td>
+                     <div class="field" initialize>
+                        <input type="text"
+                               class="input-xs"
+                               placeholder="{{base.easyDefaultQuantity}}"
+                               field-format="DECIMAL"
+                               style="text-align: right"
+                               data-digits="7"
+                               data-decimals="2"
+                               data-format-options='{"minimumFractionDigits":2}'
+                               autocomplete="off"
+                               data-sign="+"
+                               ng-readonly="item.rectype !== 'icsw' || !sp.wlwhsechgfl"
+                               ng-hide="!item.QuantityOrdered && item.rectype !== 'icsw'"
+                               ng-model="item.QuantityOrdered" />
+                     </div>
+                  </td>
+                  <td class="l-right-text">
+                     <button class="btn-primary" type="button" ng-show="item.rectype === 'icsw'" ng-click="sp.addProduct(item)" style="margin-top: 5px" ng-disabled="!sp.wlwhsechgfl" translate>global.add.item</button>
+                     <button class="btn-secondary" type="button" ng-click="sp.details(item)" style="margin-top: 5px" translate>global.details</button>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+</div>

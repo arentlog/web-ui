@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <title></title>
+   <meta charset="UTF-8">
+
+   <!-- Turn off caching -->
+   <meta http-equiv="cache-control" content="no-cache" />
+   <meta http-equiv="pragma" content="no-cache" />
+</head>
+<body>
+   <!-- Send message to parent window to pass along the cen pos response info -->
+   <script type="text/javascript">
+      var message = {
+         type: 'SxeCenPosResponse',
+         data: {}
+      };
+
+      // Add url params as key/value pairs to message data
+      var paramString = window.location.search || '';
+
+      // Remove the initial '?'
+      if (paramString.indexOf('?') === 0) {
+         paramString = paramString.replace('?', '');
+      }
+
+      // Important! Because of bad code by CenPOS they are appending a '?' and params to a url that already has params,
+      //            so it's an invalid url, and we have to work around it by replacing that '?' with a proper '&'
+      paramString = paramString.replace('?', '&');
+
+      var params = paramString.split('&');
+      for (var i = 0; i < params.length; i++) {
+         var param = params[i];
+
+         if (param.indexOf('=') > 0) {
+            var pieces = param.split('=');
+
+            // Add param to data
+            message.data[pieces[0]] = pieces[1];
+         }
+      }
+
+      window.parent.postMessage(message, window.location.origin);
+   </script>
+</body>
+</html>

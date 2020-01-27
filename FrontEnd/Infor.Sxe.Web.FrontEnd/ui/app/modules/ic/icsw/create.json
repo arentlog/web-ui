@@ -1,0 +1,293 @@
+{
+  "viewId": "ic-icsw-create",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isCreate()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.warehouse.product",
+              "subLabel": "global.new",
+              "controls": {
+                "navBtns": {
+                  "id": 15,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 13,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()"
+                },
+                {
+                  "id": 14,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "icon": "icon-cancel"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 26,
+                  "type": "EXP_AREA",
+                  "label": "global.required",
+                  "children": [
+                    {
+                      "id": 27,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 28,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 9,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsw.prod",
+                              "label": "global.product",
+                              "meta": "ProdAll",
+                              "required": true
+                            },
+                            {
+                              "id": 10,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsw.whse",
+                              "label": "global.warehouse",
+                              "meta": "Warehouse",
+                              "required": true
+                            }
+                          ]
+                        },
+                        {
+                          "id": 37,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 11,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsw.arpvendno",
+                              "label": "global.vendor.number",
+                              "meta": "Vendor",
+                              "conditionRequired": "base.icRequireVendProdLine === base.VENDOR || base.icRequireVendProdLine === base.VENDORPRODUCTLINE"
+                            },
+                            {
+                              "id": 12,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsw.prodline",
+                              "label": "global.product.line",
+                              "meta": "ProdLine",
+                              "conditionRequired": "base.icRequireVendProdLine === base.VENDORPRODUCTLINE",
+                              "options": {
+                                "searchParams": {
+                                  "whse": {
+                                    "type": "REF",
+                                    "value": "dtl.icsw.whse"
+                                  },
+                                  "vendno": {
+                                    "type": "REF",
+                                    "value": "dtl.icsw.arpvendno"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 29,
+                  "type": "EXP_AREA",
+                  "label": "global.additional",
+                  "children": [
+                    {
+                      "id": 30,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsw.avgcost",
+                              "label": "global.average.cost",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 7,
+                              "decimals": 5,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "conditionReadonly": "!base.AOAvgFl",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsw.lastcost",
+                              "label": "global.last.cost",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 7,
+                              "decimals": 5,
+                              "conditionShow": "base.sasoo.seecostfl",
+                              "conditionReadonly": "base.AOLastFl && !base.chgGLCost",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 36,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 20,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 23,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsw.replcost",
+                                  "label": "global.replacement.cost",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 7,
+                                  "decimals": 5,
+                                  "conditionShow": "base.sasoo.seecostfl",
+                                  "conditionReadonly": "base.AOReplFl && !base.chgGLCost",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 5,
+                                    "maximumFractionDigits": 5
+                                  }
+                                },
+                                {
+                                  "id": 21,
+                                  "type": "FIELD",
+                                  "subType": "DATE",
+                                  "model": "dtl.icsw.replcostdt",
+                                  "label": "global.replacement.cost.date",
+                                  "dataFormat": "DATE",
+                                  "conditionShow": "base.sasoo.seecostfl",
+                                  "conditionReadonly": "base.AOReplFl && !base.chgGLCost"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 22,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 19,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsw.stndcost",
+                                  "label": "global.standard.cost",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 7,
+                                  "decimals": 5,
+                                  "conditionShow": "base.sasoo.seecostfl",
+                                  "conditionReadonly": "base.AOStndFl && !base.chgGLCost",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 5,
+                                    "maximumFractionDigits": 5
+                                  }
+                                },
+                                {
+                                  "id": 24,
+                                  "type": "FIELD",
+                                  "subType": "DATE",
+                                  "model": "dtl.icsw.stndcostdt",
+                                  "label": "global.standard.cost.date",
+                                  "dataFormat": "DATE",
+                                  "conditionShow": "base.sasoo.seecostfl",
+                                  "conditionReadonly": "base.AOStndFl && !base.chgGLCost"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 32,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 35,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "icsw",
+                        "objectRef": "dtl.icsw"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "type": "VIEW_CNTR",
+      "viewName": "detail"
+    }
+  ]
+}

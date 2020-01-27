@@ -1,0 +1,581 @@
+{
+  "viewId": "ap-apsv-detail-ecommerce",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isDetail() || dtl.isEcommerceTabReadonly",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.document.send.types",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.apsv.epotype",
+                  "label": "edi.850.outbound.type",
+                  "type3": "SET",
+                  "metaGroup": "AP",
+                  "meta": "PurchaseOrder",
+                  "eventChange": "dtl.ediPurchaseOrdersSendByDocument()",
+                  "controls": {
+                    "actionBtn": {
+                      "id": 49,
+                      "type": "BTN",
+                      "subType": "ACT",
+                      "label": "global.inquire",
+                      "conditionShow": "dtl.apsv.epotype.toUpperCase() === 'M'",
+                      "eventClick": "dtl.ediPurchaseOrdersSendByDocument()",
+                      "conditionDisabled": "!base.isEdit() || dtl.isEcommerceTabReadonly"
+                    }
+                  }
+                },
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.apsv.erebtype",
+                  "label": "edi.844.outbound.type",
+                  "type3": "SET",
+                  "metaGroup": "AP",
+                  "meta": "Rebate"
+                },
+                {
+                  "id": 82,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.apsv.edi867ty",
+                  "label": "edi.867.outbound.type",
+                  "type3": "SET",
+                  "metaGroup": "AP",
+                  "meta": "EDIOptions"
+                }
+              ]
+            },
+            {
+              "id": 17,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.apsv.equotetype",
+                  "label": "global.quotes",
+                  "type3": "SET",
+                  "metaGroup": "AP",
+                  "meta": "Quote",
+                  "eventChange": "dtl.ediQuotesSendByDocument()",
+                  "controls": {
+                    "actionBtn": {
+                      "id": 51,
+                      "type": "BTN",
+                      "subType": "ACT",
+                      "label": "global.inquire",
+                      "conditionDisabled": "!base.isEdit() || dtl.isEcommerceTabReadonly",
+                      "conditionShow": "dtl.apsv.equotetype.toUpperCase() === 'M'",
+                      "eventClick": "dtl.ediQuotesSendByDocument()"
+                    }
+                  }
+                },
+                {
+                  "id": 21,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.apsv.epmttype",
+                  "label": "edi.820.outbound.type",
+                  "type3": "MANUAL",
+                  "optionsModel": "ecomm.paymentOptions",
+                  "optionLabelField": "label",
+                  "optionValueField": "value",
+                  "eventChange": "self.getAccountTypes()",
+                  "blankOption": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "EXP_AREA",
+      "label": "global.web.pages",
+      "children": [
+        {
+          "id": 6,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 7,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 22,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.webpage",
+                  "label": "global.internal",
+                  "maxLength": 50
+                },
+                {
+                  "id": 23,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.webpageext",
+                  "label": "global.external",
+                  "maxLength": 40
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "EXP_AREA",
+      "label": "global.ecommerce.settings",
+      "children": [
+        {
+          "id": 9,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 10,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 25,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.edipartner",
+                  "label": "global.trading.partner",
+                  "maxLength": 30
+                },
+                {
+                  "id": 27,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.edi846ver",
+                  "label": "global.inv.adv.version",
+                  "maxLength": 12
+                },
+                {
+                  "id": 29,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.edipartaddr",
+                  "label": "edi.user.2",
+                  "maxLength": 30
+                }
+              ]
+            },
+            {
+              "id": 24,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 26,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.edipover",
+                  "label": "global.purchase.order.version",
+                  "maxLength": 12
+                },
+                {
+                  "id": 28,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.edinetwork",
+                  "label": "edi.user.1",
+                  "maxLength": 30
+                },
+                {
+                  "id": 30,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.ediyouraddr",
+                  "label": "edi.user.3",
+                  "maxLength": 30
+                },
+                {
+                  "id": 83,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.apsv.edi852usestatusfl",
+                  "label": "global.use.852.status",
+                  "dataFormat": "LOGICAL"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "type": "EXP_AREA",
+      "label": "global.ion.process.invoice.settings",
+      "conditionShow": "dtl.isIonEdi810InLive === 'yes'",
+      "children": [
+        {
+          "id": 53,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 54,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 68,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.apsv.esbgroupnm",
+                  "label": "global.group.name",
+                  "meta": "Batch",
+                  "conditionShow": "dtl.isIonEdi810InLive === 'yes'",
+                  "options": {
+                    "searchParams": {
+                      "Application": "ap"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": 59,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 64,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.apsv.esbtermshierarchyfl",
+                  "label": "global.use.edi.po.apsv.terms.hierarchy",
+                  "dataFormat": "LOGICAL",
+                  "conditionShow": "dtl.isIonEdi810InLive === 'yes'"
+                },
+                {
+                  "id": 65,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.apsv.esballowinvnopofl",
+                  "label": "global.allow.invoices.without.purchase.orders",
+                  "dataFormat": "LOGICAL",
+                  "conditionShow": "dtl.isIonEdi810InLive === 'yes'"
+                },
+                {
+                  "id": 66,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.apsv.esbapplyovrrcptfl",
+                  "label": "global.apply.over.receipt.to.last.suffix",
+                  "dataFormat": "LOGICAL",
+                  "conditionShow": "dtl.isIonEdi810InLive === 'yes'"
+                },
+                {
+                  "id": 67,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.apsv.esbsetnotesprintfl",
+                  "label": "global.set.print.flag.for.notes",
+                  "dataFormat": "LOGICAL",
+                  "conditionShow": "dtl.isIonEdi810InLive === 'yes'"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 72,
+      "type": "EXP_AREA",
+      "label": "global.process.purchase.order.acknowledgement.settings",
+      "conditionShow": "dtl.isIonEdi855InLive === 'yes'",
+      "children": [
+        {
+          "id": 73,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 74,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 80,
+                  "type": "FIELD_SET",
+                  "label": "global.ion.processing",
+                  "children": [
+                    {
+                      "id": 76,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "dtl.apsv.esb855isetnotesprintfl",
+                      "label": "global.set.print.status.for.notes.comments",
+                      "dataFormat": "LOGICAL",
+                      "conditionShow": "dtl.isIonEdi810InLive === 'yes'"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 77,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 81,
+                  "type": "FIELD_SET",
+                  "label": "global.edi.ion.processing",
+                  "children": [
+                    {
+                      "id": 78,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "dtl.apsv.esb855ivmipotypefl",
+                      "label": "global.create.vmi.orders.as.purchase.orders",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 48,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "dtl.apsv.updtprice",
+                      "label": "global.update.price",
+                      "type3": "SET",
+                      "metaGroup": "AP",
+                      "meta": "UpdatePrice",
+                      "blankOption": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "type": "EXP_AREA",
+      "label": "edi.payment.and.bank",
+      "children": [
+        {
+          "id": 12,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 13,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 32,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.paymentty",
+                  "label": "global.type",
+                  "maxLength": 50
+                },
+                {
+                  "id": 34,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.vendbankacct",
+                  "label": "global.account.number",
+                  "maxLength": 20,
+                  "conditionReadonly": "ecomm.vendorHasToken || base.isDetail() || dtl.isEcommerceTabReadonly"
+                },
+                {
+                  "id": 36,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.vendbankacctname",
+                  "label": "global.bank.account.name",
+                  "maxLength": 40
+                },
+                {
+                  "id": 37,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.vendbanksortcode",
+                  "label": "{{ecomm.getSortCodeLabel()}}",
+                  "maxLength": 30,
+                  "conditionReadonly": "ecomm.vendorHasToken || base.isDetail() || dtl.isEcommerceTabReadonly"
+                },
+                {
+                  "id": 40,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.apsv.vendbankaccttype",
+                  "label": "global.account.type",
+                  "type3": "MANUAL",
+                  "optionLabelField": "label",
+                  "optionValueField": "value",
+                  "optionsModel": "ecomm.accountTypes",
+                  "blankOption": true,
+                  "conditionShow": "!ecomm.vendorHasToken"
+                },
+                {
+                  "id": 41,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.bacsref",
+                  "label": "bacs.reference",
+                  "type3": "",
+                  "maxLength": 30
+                }
+              ]
+            },
+            {
+              "id": 31,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 33,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.vendbanktrno",
+                  "label": "global.transit.routing.number",
+                  "maxLength": 30,
+                  "conditionShow": "!ecomm.vendorHasToken"
+                },
+                {
+                  "id": 38,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.edi846no",
+                  "label": "global.adv.ctrl.number",
+                  "maxLength": 30
+                },
+                {
+                  "id": 39,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.apsv.ecommercety",
+                  "label": "global.ecommerce.type",
+                  "type3": "SET",
+                  "metaGroup": "AP",
+                  "meta": "ECommerceType"
+                },
+                {
+                  "id": 43,
+                  "type": "BTN",
+                  "subType": "SEC",
+                  "label": "global.update.ship.from.s",
+                  "eventClick": "dtl.vendorSaveUpateShipFroms()",
+                  "conditionDisabled": "base.isDetail() || dtl.isEcommerceTabReadonly"
+                },
+                {
+                  "id": 70,
+                  "type": "BTN",
+                  "subType": "SEC",
+                  "label": "global.create.ach.token",
+                  "eventClick": "ecomm.addCard()",
+                  "icon": "icon-add",
+                  "conditionShow": "!ecomm.vendorHasToken && ecomm.isallowAPCreditACHOn && dtl.apsv.epmttype.toLowerCase() === 'a'",
+                  "conditionDisabled": "base.isDetail() || dtl.isEcommerceTabReadonly"
+                },
+                {
+                  "id": 71,
+                  "type": "BTN",
+                  "subType": "SEC",
+                  "label": "global.delete.ach.token",
+                  "eventClick": "ecomm.deleteCard()",
+                  "icon": "icon-add",
+                  "conditionShow": "ecomm.vendorHasToken",
+                  "conditionDisabled": "base.isDetail() || dtl.isEcommerceTabReadonly"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "type": "EXP_AREA",
+      "label": "edi.845.defaults",
+      "children": [
+        {
+          "id": 15,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 16,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 45,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.apsv.edi845netfmty",
+                  "label": "global.net.rebate.based.from",
+                  "type3": "MANUAL",
+                  "optionsModel": "dtl.rebateBasedFromList",
+                  "optionLabelField": "value",
+                  "optionValueField": "key",
+                  "blankOption": false
+                },
+                {
+                  "id": 47,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.apsv.edi845netdwnto",
+                  "label": "global.net.rebate.down.to",
+                  "type3": "MANUAL",
+                  "optionLabelField": "value",
+                  "optionValueField": "key",
+                  "optionsModel": "dtl.netRebateDowntoList",
+                  "blankOption": false
+                }
+              ]
+            },
+            {
+              "id": 44,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 46,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.apsv.edi845pcttoty",
+                  "label": "global.pct.percent.rebate.based.on",
+                  "type3": "MANUAL",
+                  "optionLabelField": "value",
+                  "optionValueField": "key",
+                  "optionsModel": "dtl.pctRebateBasedonList",
+                  "blankOption": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,249 @@
+{
+  "viewId": "ic-icsp-detail-tabs-cores",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionShow": "",
+  "conditionReadonly": "base.isDetail() || dtl.isCoresTabReadonly",
+  "children": [
+    {
+      "id": 2,
+      "type": "FIELD",
+      "subType": "DROP_DOWN",
+      "model": "dtl.icsp.prodtype",
+      "label": "global.product.type",
+      "type3": "SET",
+      "metaGroup": "IC",
+      "meta": "ProductType",
+      "blankOption": false,
+      "eventChange": "dtl.setResetCoreDefaults()",
+      "conditionReadonly": "base.isDetail() || dtl.icsp.noupdtfl || dtl.isCoresTabReadonly"
+    },
+    {
+      "id": 3,
+      "type": "EXP_AREA",
+      "label": "global.core.product",
+      "collapsed": false,
+      "conditionShow": "dtl.icsp.prodtype.toUpperCase() == 'R'",
+      "children": [
+        {
+          "id": 4,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 5,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsp.impliedcoreprod",
+                  "label": "global.implied.core.product",
+                  "meta": "ProdAll",
+                  "conditionReadonly": "base.isDetail() || dtl.icsp.prodtype.toUpperCase() !== 'R' || dtl.isCoresTabReadonly"
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsp.dirtycoreprod",
+                  "label": "global.dirty.core.product",
+                  "meta": "ProdAll",
+                  "conditionReadonly": "base.isDetail() || dtl.icsp.prodtype.toUpperCase() !== 'R' || dtl.isCoresTabReadonly"
+                }
+              ]
+            },
+            {
+              "id": 6,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.implyqty",
+                  "label": "global.implied.quantity",
+                  "dataFormat": "INTEGER",
+                  "sign": "+",
+                  "digits": 7,
+                  "conditionReadonly": "base.isDetail() || dtl.icsp.prodtype.toUpperCase() !== 'R' || dtl.isCoresTabReadonly"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "type": "EXP_AREA",
+      "label": "global.grace.periods",
+      "conditionShow": "dtl.icsp.prodtype.toUpperCase() === 'R'",
+      "children": [
+        {
+          "id": 11,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 12,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 35,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 14,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.icsp.vendgraceper",
+                      "label": "global.vendor",
+                      "dataFormat": "INTEGER",
+                      "digits": 3,
+                      "sign": "+",
+                      "size": "SM",
+                      "conditionReadonly": "base.isDetail() || dtl.icsp.prodtype.toUpperCase() !== 'R' || dtl.isCoresTabReadonly"
+                    },
+                    {
+                      "id": 16,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "dtl.icsp.vendcoregrcfl",
+                      "label": "global.grace.period",
+                      "type3": "SET",
+                      "metaGroup": "IC",
+                      "meta": "MonthsDays",
+                      "size": "SM",
+                      "conditionDisabled": "base.isDetail() || dtl.icsp.prodtype.toUpperCase() !== 'R' || dtl.isCoresTabReadonly",
+                      "blankOption": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 13,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 36,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.icsp.custgraceper",
+                      "label": "global.customer",
+                      "dataFormat": "INTEGER",
+                      "digits": 3,
+                      "sign": "+",
+                      "size": "SM",
+                      "conditionShow": "",
+                      "conditionReadonly": "base.isDetail() || dtl.icsp.prodtype.toUpperCase() !== 'R' || dtl.isCoresTabReadonly"
+                    },
+                    {
+                      "id": 17,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "dtl.icsp.custcoregrcfl",
+                      "label": "menu.icsoc",
+                      "type3": "SET",
+                      "metaGroup": "IC",
+                      "meta": "MonthsDays",
+                      "conditionDisabled": "base.isDetail() || dtl.icsp.prodtype.toUpperCase() !== 'R' || dtl.isCoresTabReadonly",
+                      "size": "SM",
+                      "blankOption": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "type": "EXP_AREA",
+      "label": "global.kits",
+      "conditionShow": "dtl.icsp.kittype.toUpperCase() === 'B' || dtl.icsp.vaassemblyty.toUpperCase() === 'F'",
+      "children": [
+        {
+          "id": 21,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 22,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 27,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsp.cfgkitfl",
+                  "label": "global.configure.kit",
+                  "dataFormat": "LOGICAL",
+                  "conditionDisabled": "base.isDetail() || (dtl.icsp.kittype.toUpperCase() !== 'B' && dtl.icsp.vaassemblyty.toUpperCase() !== 'F') || dtl.isCoresTabReadonly"
+                }
+              ]
+            },
+            {
+              "id": 26,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 28,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.cfgruleset",
+                  "label": "global.rule.set",
+                  "maxLength": 24,
+                  "conditionReadonly": "base.isDetail() || (dtl.icsp.kittype.toUpperCase() !== 'B' && dtl.icsp.vaassemblyty.toUpperCase() !== 'F') || dtl.isCoresTabReadonly"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "type": "EXP_AREA",
+      "label": "global.optional.ao.overrides",
+      "conditionShow": "dtl.icsp.kittype.toUpperCase() === 'B' || dtl.icsp.vaassemblyty.toUpperCase() === 'F'",
+      "children": [
+        {
+          "id": 24,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 25,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 32,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.cfgnamespace",
+                  "label": "global.namespace",
+                  "maxLength": 50,
+                  "size": "LG",
+                  "conditionReadonly": "base.isDetail() || (dtl.icsp.kittype.toUpperCase() !== 'B' && dtl.icsp.vaassemblyty.toUpperCase() !== 'F') || dtl.isCoresTabReadonly"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

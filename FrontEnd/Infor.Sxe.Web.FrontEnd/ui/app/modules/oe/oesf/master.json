@@ -1,0 +1,224 @@
+{
+  "viewId": "oe-oesf-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.oesf",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "controls": {},
+          "children": [
+            {
+              "id": 8,
+              "type": "GRID",
+              "controlRef": "base.grid",
+              "conditionShow": "",
+              "model": "base.dataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                },
+                "selectable": "multiple"
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 9,
+                  "type": "TOOLBAR",
+                  "label": "{{base.getGridLabel()}}",
+                  "children": [
+                    {
+                      "id": 43,
+                      "type": "BTN",
+                      "subType": "",
+                      "label": "global.new",
+                      "icon": "icon-new-document",
+                      "securityLevel": 4,
+                      "conditionDisabled": "base.grid.isAnyRowSelected()",
+                      "eventClick": "mst.create()"
+                    },
+                    {
+                      "id": 44,
+                      "type": "BTN",
+                      "subType": "",
+                      "label": "global.edit",
+                      "icon": "icon-edit",
+                      "securityLevel": 3,
+                      "conditionDisabled": "!base.grid.isOneRowSelected()",
+                      "eventClick": "mst.edit()"
+                    },
+                    {
+                      "id": 45,
+                      "type": "BTN",
+                      "subType": "",
+                      "label": "global.delete",
+                      "icon": "icon-delete",
+                      "securityLevel": 5,
+                      "conditionDisabled": "base.grid.isNoRowSelected()",
+                      "eventClick": "mst.delete()"
+                    },
+                    {
+                      "id": 42,
+                      "type": "BTN",
+                      "subType": "",
+                      "label": "global.copy",
+                      "icon": "icon-copy",
+                      "securityLevel": 4,
+                      "conditionDisabled": "!base.grid.isOneRowSelected()",
+                      "conditionShow": "base.criteria.recordtype.toLowerCase() !== 'fr'",
+                      "eventClick": "mst.setCopy()"
+                    },
+                    {
+                      "id": 56,
+                      "type": "BTN",
+                      "label": "global.rules",
+                      "conditionDisabled": "base.grid.isNoRowSelected()",
+                      "conditionShow": "base.criteria.recordtype.toLowerCase() === 'cl'",
+                      "icon": "icon-check",
+                      "eventClick": "mst.setRules()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 46,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "mainwhse",
+                  "label": "global.banner.warehouse",
+                  "conditionInclude": "base.criteria.recordtype.toLowerCase() === 'wl'"
+                },
+                {
+                  "id": 47,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "srcwhse",
+                  "label": "global.sourcing.warehouse",
+                  "conditionInclude": "base.criteria.recordtype.toLowerCase() === 'wl'"
+                },
+                {
+                  "id": 48,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.sourcing.priority",
+                  "model": "priority",
+                  "dataFormat": "INTEGER_TEXT",
+                  "conditionInclude": "base.criteria.recordtype.toLowerCase() === 'wl'"
+                },
+                {
+                  "id": 49,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "region",
+                  "label": "global.region",
+                  "conditionInclude": "base.criteria.recordtype.toLowerCase() === 'wl'"
+                },
+                {
+                  "id": 50,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "whsegroup",
+                  "label": "global.warehouse.group",
+                  "type3": "CODES",
+                  "meta": "WarehouseGroups",
+                  "conditionInclude": "base.criteria.recordtype.toLowerCase() === 'wl'"
+                },
+                {
+                  "id": 10,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "label": "global.customer.number",
+                  "model": "custno",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "conditionInclude": "base.criteria.recordtype.toLowerCase() === 'cl'",
+                  "eventClick": "mst.customerHyperlink()"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "shipto",
+                  "label": "global.ship.to",
+                  "conditionInclude": "base.criteria.recordtype.toLowerCase() === 'cl'",
+                  "eventClick": "mst.shiptoHyperlink()"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "whselistfl",
+                  "label": "global.preferred.warehouse.list",
+                  "dataFormat": "LOGICAL",
+                  "conditionInclude": "base.criteria.recordtype.toLowerCase() !== 'wl'"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "mostavailinvfl",
+                  "label": "global.most.available.inventory",
+                  "dataFormat": "LOGICAL",
+                  "conditionInclude": "base.criteria.recordtype.toLowerCase() !== 'wl'"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "quickdeliveryfl",
+                  "label": "global.quickest.delivery.date",
+                  "dataFormat": "LOGICAL",
+                  "conditionInclude": "base.criteria.recordtype.toLowerCase() !== 'wl'"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "byregionfl",
+                  "label": "global.group.by.region",
+                  "dataFormat": "LOGICAL",
+                  "conditionInclude": "base.criteria.recordtype.toLowerCase() !== 'wl'"
+                },
+                {
+                  "id": 51,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "billingcd",
+                  "label": "global.billing.code",
+                  "type3": "SET",
+                  "metaGroup": "OE",
+                  "meta": "FulfillmentBillingCode",
+                  "conditionInclude": "base.criteria.recordtype.toLowerCase() === 'fr' && base.isFulfillmentBillingOn"
+                },
+                {
+                  "id": 52,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "autosubmitcd",
+                  "label": "global.auto.submit.ecommerce.fulfillment.orders",
+                  "type3": "SET",
+                  "metaGroup": "OE",
+                  "meta": "FulfillmenteCommerceSubmit",
+                  "conditionInclude": "base.criteria.recordtype.toLowerCase() === 'fr'",
+                  "blankOption": false
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

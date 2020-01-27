@@ -1,0 +1,79 @@
+<div class="page-container two-column fixed">
+   <!-- Side bar (Note: the initialize directive is purposefully on specific sections only in order to avoid double initialize problems) -->
+   <section initialize class="sidebar" ng-hide="base.sidebarCollapsed || base.hideSidebar" style="height: 100%;" role="complementary">
+      <div class="content scrollable-y" style="height: calc(100% - 36px);">
+
+         <!-- Wizard Steps -->
+         <div class="accordion panel" data-options="{ rerouteOnLinkClick: true }" ng-controller="ReportWizardStepCtrl as step">
+            <div class="accordion-header" ng-class="step.getStepClass(1)">
+               <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                  <use xlink:href="{{step.getStepIcon(1)}}"></use>
+               </svg>
+               <a href="#" ng-click="base.cancel()"><span translate>global.reports.main</span></a>
+            </div>
+            <div class="accordion-header" ng-class="step.getStepClass(2)">
+               <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                  <use xlink:href="{{step.getStepIcon(2)}}"></use>
+               </svg>
+               <a href="#" ui-sref=".info"><span translate>global.information</span></a>
+            </div>
+            <div class="accordion-header" ng-class="step.getStepClass(3)">
+               <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                  <use xlink:href="{{step.getStepIcon(3)}}"></use>
+               </svg>
+               <a href="#" ui-sref=".ranges"><span translate>global.ranges</span></a>
+            </div>
+            <div class="accordion-header" ng-class="step.getStepClass(4)">
+               <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                  <use xlink:href="{{step.getStepIcon(4)}}"></use>
+               </svg>
+               <a href="#" ui-sref=".options"><span translate>global.options</span></a>
+            </div>
+            <div class="accordion-header" ng-class="step.getStepClass(5)">
+               <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+                  <use xlink:href="{{step.getStepIcon(5)}}"></use>
+               </svg>
+               <a href="#" ui-sref=".run"><span translate>global.run</span></a>
+            </div>
+         </div>
+
+      </div>
+
+      <!-- Collapse button -->
+      <div style="height: 36px; text-align: right;">
+         <button class="btn-icon" title="{{'global.collapse' | translate}}" ng-click="base.sidebarCollapsed = true">
+            <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-collapse-app-tray"></use>
+            </svg>
+         </button>
+      </div>
+   </section>
+
+   <!-- Collapsed sidebar with expand button -->
+   <section initialize class="sidebar collapsed-bar" ng-show="base.sidebarCollapsed" style="width: 36px; height: 100%;">
+      <div style="height: calc(100% - 36px);"></div>
+
+      <div style="height: 36px; text-align: right;">
+         <button class="btn-icon" style="" title="{{'global.expand' | translate}}" ng-click="base.sidebarCollapsed = false">
+            <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-expand-app-tray"></use>
+            </svg>
+         </button>
+      </div>
+   </section>
+
+   <!-- Content -->
+   <section class="main scrollable-y busy" data-options="{blockUI: true, displayDelay: 500}" ng-class="base.hideSidebar ? 'full-width' : (base.sidebarCollapsed ? 'expanded-width' : '')" style="height: 100%;" role="main">
+      <div class="content" style="height: 100%;">
+         <!-- Master view -->
+         <div ng-hide="!base.includesMaster()" style="height: 100%;">
+            <div ui-view="master" style="height: 100%;"></div>
+         </div>
+
+         <!-- Detail view -->
+         <div ng-hide="base.includesMaster()" style="height: 100%;">
+            <div ui-view="detail" style="height: 100%;"></div>
+         </div>
+      </div>
+   </section>
+</div>

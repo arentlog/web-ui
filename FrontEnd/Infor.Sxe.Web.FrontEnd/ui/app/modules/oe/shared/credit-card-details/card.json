@@ -1,0 +1,436 @@
+{
+  "viewId": "oe-shared-credit-card-details-card",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "global.credit.card.details",
+          "subLabel": "{{card.subTitle}}",
+          "controls": {
+            "navBtns": {
+              "id": 4,
+              "type": "BTN_SET",
+              "subType": "TBAR_NAV",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "BTN",
+                  "subType": "ICON",
+                  "icon": "icon-left-arrow",
+                  "label": "special.button.back",
+                  "eventClick": "card.back()"
+                }
+              ]
+            }
+          }
+        },
+        "content": {
+          "id": 6,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 26,
+              "type": "EXP_AREA",
+              "label": "global.authorize",
+              "children": [
+                {
+                  "id": 27,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 28,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 34,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "card.description",
+                          "label": "global.media.code",
+                          "readonly": true
+                        },
+                        {
+                          "id": 40,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "card.cardNumber",
+                          "label": "global.credit.card.number",
+                          "conditionReadonly": "!card.isEnabled",
+                          "meta": "CreditCards",
+                          "autoFocus": true,
+                          "options": {
+                            "searchParams": {
+                              "custno": {
+                                "type": "REF",
+                                "value": "card.custno"
+                              },
+                              "shipto": {
+                                "type": "REF",
+                                "value": "card.shipto"
+                              },
+                              "mediacd": {
+                                "type": "REF",
+                                "value": "card.mediacd"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 71,
+                          "type": "BTN",
+                          "subType": "SEC",
+                          "label": "global.add.card.to.processor",
+                          "icon": "icon-add",
+                          "eventClick": "card.addNewCard()",
+                          "conditionDisabled": "!card.isEnabled"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 30,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 35,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "card.selectedCard.exp",
+                          "label": "global.expire.date",
+                          "readonly": true,
+                          "size": "XS"
+                        },
+                        {
+                          "id": 36,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "card.selectedCard.amount",
+                          "label": "global.amount",
+                          "dataDesc": "card.selectedCard.transcd",
+                          "dataFormat": "CURRENCY",
+                          "digits": 9,
+                          "decimals": 2,
+                          "readonly": true,
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 39,
+                          "type": "BTN",
+                          "subType": "SEC",
+                          "label": "global.send.authorization.request",
+                          "icon": "icon-send",
+                          "conditionDisabled": "!card.canSendAuthorization",
+                          "eventClick": "card.doAuthorize()"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 29,
+              "type": "EXP_AREA",
+              "label": "global.authorization.details",
+              "children": [
+                {
+                  "id": 31,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 32,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 41,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.cardname",
+                          "label": "global.card.type"
+                        },
+                        {
+                          "id": 43,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.cardno",
+                          "label": "global.credit.card.number"
+                        },
+                        {
+                          "id": 45,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.exp",
+                          "label": "global.expire.date"
+                        },
+                        {
+                          "id": 47,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.seqno",
+                          "label": "global.sequence.number",
+                          "dataFormat": "INTEGER_TEXT"
+                        },
+                        {
+                          "id": 49,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.statustype",
+                          "label": "global.status",
+                          "dataFormat": "BooleanToString",
+                          "formatOptions": {
+                            "trueString": "global.active",
+                            "falseString": "global.inactive"
+                          }
+                        },
+                        {
+                          "id": 51,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.token",
+                          "label": "global.token"
+                        },
+                        {
+                          "id": 56,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.transcd",
+                          "label": "global.transaction.code"
+                        },
+                        {
+                          "id": 52,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.currproc",
+                          "label": "global.procedure"
+                        },
+                        {
+                          "id": 58,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.createdt",
+                          "label": "global.create.date",
+                          "dataFormat": "DATE"
+                        },
+                        {
+                          "id": 59,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.createtm",
+                          "label": "global.create.time",
+                          "dataFormat": "TIME",
+                          "subFormat": "hhmm"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 33,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 61,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.submitdt",
+                          "label": "global.submit.date",
+                          "dataFormat": "DATE"
+                        },
+                        {
+                          "id": 62,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.submittm",
+                          "label": "global.submit.time",
+                          "dataFormat": "TIME",
+                          "subFormat": "hhmm"
+                        },
+                        {
+                          "id": 64,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.charmediaauth",
+                          "label": "global.authorization"
+                        },
+                        {
+                          "id": 66,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.category",
+                          "label": "global.category"
+                        },
+                        {
+                          "id": 68,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.charpreauth",
+                          "label": "global.pre.authorization"
+                        },
+                        {
+                          "id": 70,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.avadd",
+                          "label": "global.address.verification",
+                          "dataDesc": "card.details.avzip"
+                        },
+                        {
+                          "id": 42,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.amount",
+                          "label": "global.amount",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 44,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.authamt",
+                          "label": "global.authorized.amount",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 46,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.saleamt",
+                          "label": "global.to.be.invoiced",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 48,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.origamt",
+                          "label": "global.original.amount",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 73,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 50,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.taxamt",
+                          "label": "global.tax",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 54,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.respdt",
+                          "label": "global.response.date",
+                          "dataFormat": "DATE"
+                        },
+                        {
+                          "id": 55,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.resptm",
+                          "label": "global.response.time",
+                          "dataFormat": "TIME",
+                          "subFormat": "hhmm"
+                        },
+                        {
+                          "id": 57,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.response",
+                          "label": "global.response"
+                        },
+                        {
+                          "id": 60,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.processcd",
+                          "label": "global.process.status",
+                          "dataFormat": "INTEGER_TEXT",
+                          "dataDesc": "card.processcddesc"
+                        },
+                        {
+                          "id": 63,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.commcd",
+                          "label": "global.response.code",
+                          "dataFormat": "INTEGER_TEXT",
+                          "dataDesc": "card.commcddesc"
+                        },
+                        {
+                          "id": 65,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.merchid",
+                          "label": "global.merchant.id",
+                          "dataDesc": "card.details.merchiddesc"
+                        },
+                        {
+                          "id": 67,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.ccholdbofl",
+                          "label": "global.hold.credit.card",
+                          "dataFormat": "BooleanToYesNo"
+                        },
+                        {
+                          "id": 69,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "card.details.destzip",
+                          "label": "global.destination"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 72,
+      "type": "VIEW_CNTR",
+      "viewName": "addCardView"
+    }
+  ]
+}

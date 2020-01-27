@@ -1,0 +1,369 @@
+{
+  "viewId": "va-vasp-tabs-assembly-rule",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.includesAssemblyRule()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "{{rule.title}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "rule.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.ok",
+                  "icon": "icon-confirm",
+                  "securityLevel": 3,
+                  "eventClick": "rule.update()"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.delete",
+                  "icon": "icon-delete",
+                  "eventClick": "rule.delete()",
+                  "securityLevel": 5,
+                  "conditionDisabled": "!rule.isDeleteEnabled()"
+                },
+                {
+                  "id": 38,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "rule.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "rule.asmblRule.sequence",
+                  "label": "global.rule.sequence.number",
+                  "meta": "ValueAddRule",
+                  "eventChange": "rule.onRuleSeqChanged()",
+                  "conditionReadonly": "rule.areFieldsEditable",
+                  "options": {
+                    "searchParams": {
+                      "segment": {
+                        "type": "REF",
+                        "value": "rule.asmblRule.segment"
+                      },
+                      "shipprod": {
+                        "type": "REF",
+                        "value": "rule.asmblRule.shipprod"
+                      },
+                      "whse": {
+                        "type": "REF",
+                        "value": "rule.asmblRule.whse"
+                      }
+                    },
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 47,
+                  "type": "FIELD_SET",
+                  "label": "global.details",
+                  "children": [
+                    {
+                      "id": 14,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 15,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 18,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "rule.asmblRule.rulesegment1",
+                                  "label": "message.if.segment",
+                                  "size": "XS",
+                                  "dataFormat": "INTEGER",
+                                  "sign": "+",
+                                  "digits": 3,
+                                  "maxLength": 3,
+                                  "conditionReadonly": "!rule.areFieldsEditable"
+                                },
+                                {
+                                  "id": 19,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "rule.asmblRule.ruleequality1",
+                                  "label": "global.blank.label.string.for.space",
+                                  "type3": "SET",
+                                  "metaGroup": "VA",
+                                  "meta": "RuleEqualityType",
+                                  "conditionReadonly": "!rule.areFieldsEditable"
+                                },
+                                {
+                                  "id": 20,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "rule.asmblRule.rule1",
+                                  "label": "global.blank.label.string.for.space",
+                                  "size": "LG",
+                                  "maxLength": 32,
+                                  "conditionReadonly": "!rule.areFieldsEditable"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 21,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 49,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "rule.asmblRule.ruleunion1",
+                                  "label": "global.rule.union",
+                                  "labelHidden": true,
+                                  "attachUp": true,
+                                  "size": "XS",
+                                  "type3": "SET",
+                                  "metaGroup": "VA",
+                                  "meta": "RuleUnion",
+                                  "blankOption": false,
+                                  "conditionReadonly": "!rule.areFieldsEditable",
+                                  "eventChange": "rule.onRuleUnionChanged()"
+                                },
+                                {
+                                  "id": 23,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "rule.asmblRule.rulesegment2",
+                                  "label": "message.if.segment",
+                                  "labelHidden": true,
+                                  "attachUp": true,
+                                  "size": "XS",
+                                  "dataFormat": "INTEGER",
+                                  "maxLength": 3,
+                                  "sign": "+",
+                                  "digits": 3,
+                                  "conditionReadonly": "!rule.areFieldsEditable"
+                                },
+                                {
+                                  "id": 24,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "rule.asmblRule.ruleequality2",
+                                  "label": "global.rule.equality",
+                                  "type3": "SET",
+                                  "metaGroup": "VA",
+                                  "meta": "RuleEqualityType",
+                                  "labelHidden": true,
+                                  "attachUp": true,
+                                  "conditionReadonly": "!rule.areFieldsEditable"
+                                },
+                                {
+                                  "id": 25,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "rule.asmblRule.rule2",
+                                  "label": "global.rule",
+                                  "size": "LG",
+                                  "maxLength": 32,
+                                  "conditionReadonly": "!rule.areFieldsEditable",
+                                  "labelHidden": true,
+                                  "attachUp": true
+                                }
+                              ]
+                            },
+                            {
+                              "id": 27,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 50,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "rule.asmblRule.ruleunion2",
+                                  "label": "global.rule.union",
+                                  "labelHidden": true,
+                                  "attachUp": true,
+                                  "size": "XS",
+                                  "type3": "SET",
+                                  "metaGroup": "VA",
+                                  "meta": "RuleUnion",
+                                  "blankOption": false,
+                                  "readonly": true
+                                },
+                                {
+                                  "id": 28,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "rule.asmblRule.rulesegment3",
+                                  "label": "message.if.segment",
+                                  "labelHidden": true,
+                                  "attachUp": true,
+                                  "size": "XS",
+                                  "dataFormat": "INTEGER",
+                                  "maxLength": 3,
+                                  "digits": 3,
+                                  "sign": "+",
+                                  "conditionReadonly": "!rule.areFieldsEditable"
+                                },
+                                {
+                                  "id": 29,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "rule.asmblRule.ruleequality3",
+                                  "label": "global.rule.equality",
+                                  "type3": "SET",
+                                  "metaGroup": "VA",
+                                  "meta": "RuleEqualityType",
+                                  "labelHidden": true,
+                                  "attachUp": true,
+                                  "conditionReadonly": "!rule.areFieldsEditable"
+                                },
+                                {
+                                  "id": 31,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "rule.asmblRule.rule3",
+                                  "label": "global.rule",
+                                  "size": "LG",
+                                  "maxLength": 32,
+                                  "conditionReadonly": "!rule.areFieldsEditable",
+                                  "labelHidden": true,
+                                  "attachUp": true
+                                }
+                              ]
+                            },
+                            {
+                              "id": 32,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 51,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "rule.asmblRule.ruleunion3",
+                                  "label": "global.rule.union",
+                                  "labelHidden": true,
+                                  "attachUp": true,
+                                  "size": "XS",
+                                  "type3": "SET",
+                                  "metaGroup": "VA",
+                                  "meta": "RuleUnion",
+                                  "blankOption": false,
+                                  "readonly": true
+                                },
+                                {
+                                  "id": 33,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "rule.asmblRule.rulesegment4",
+                                  "label": "message.if.segment",
+                                  "labelHidden": true,
+                                  "attachUp": true,
+                                  "size": "XS",
+                                  "dataFormat": "INTEGER",
+                                  "maxLength": 3,
+                                  "digits": 3,
+                                  "sign": "+",
+                                  "conditionReadonly": "!rule.areFieldsEditable"
+                                },
+                                {
+                                  "id": 34,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "rule.asmblRule.ruleequality4",
+                                  "label": "global.rule.equality",
+                                  "type3": "SET",
+                                  "metaGroup": "VA",
+                                  "meta": "RuleEqualityType",
+                                  "labelHidden": true,
+                                  "attachUp": true,
+                                  "conditionReadonly": "!rule.areFieldsEditable"
+                                },
+                                {
+                                  "id": 35,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "rule.asmblRule.rule4",
+                                  "label": "global.rule",
+                                  "size": "LG",
+                                  "maxLength": 32,
+                                  "conditionReadonly": "!rule.areFieldsEditable",
+                                  "labelHidden": true,
+                                  "attachUp": true
+                                }
+                              ]
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "rule.asmblRule.rulevaliddata",
+                              "label": "message.then.this.segment.must.equal.one.of.the.values",
+                              "size": "LG",
+                              "maxLength": 32,
+                              "conditionReadonly": "!rule.areFieldsEditable"
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "rule.asmblRule.ruleerrormsg",
+                              "label": "question.if.the.rule.fails.what.message.should.be.displayed",
+                              "size": "LG",
+                              "maxLength": 32,
+                              "conditionReadonly": "!rule.areFieldsEditable"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

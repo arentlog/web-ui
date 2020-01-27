@@ -1,0 +1,393 @@
+{
+  "viewId": "sa-sastc-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.currency",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sastc.currencyty",
+                              "label": "global.currency.code",
+                              "required": true,
+                              "maxLength": 2,
+                              "size": "XS",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionDisabled": ""
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sastc.shortdesc",
+                              "label": "global.short.description",
+                              "required": false,
+                              "maxLength": 4,
+                              "size": "XS"
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sastc.descrip",
+                              "label": "global.description",
+                              "required": false,
+                              "maxLength": 24
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.sastc.bankno",
+                              "label": "global.bank.name",
+                              "required": true,
+                              "maxLength": 24,
+                              "type3": "MANUAL",
+                              "eventChange": "dtl.bankChanged()",
+                              "optionsModel": "base.banknoDropDownOptions"
+                            },
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.sastc.glno",
+                              "label": "global.gain.loss.gl.number",
+                              "required": false,
+                              "meta": "GlAccount",
+                              "eventChange": "dtl.glNoChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.sastc.rvglno",
+                              "label": "global.reval.gain.loss",
+                              "required": false,
+                              "meta": "GlAccount",
+                              "eventChange": "dtl.rvGlNoChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 38,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 25,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.sastc.currsymbol",
+                                  "label": "global.currency.symbol",
+                                  "required": false,
+                                  "maxLength": 1,
+                                  "size": "XS"
+                                },
+                                {
+                                  "id": 26,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.sastc.stndcurrcd",
+                                  "label": "global.standard.currency.code",
+                                  "required": false,
+                                  "maxLength": 3,
+                                  "size": "XS"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.sastc.draftfl",
+                              "label": "global.currency.acct.purchase.draft",
+                              "required": false,
+                              "maxLength": 4,
+                              "type3": "SET",
+                              "metaGroup": "SA",
+                              "meta": "CurrencyType",
+                              "blankOption": false,
+                              "eventChange": "dtl.draftFlChanged ()"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sastc.vouchexrate",
+                              "label": "global.voucher.exchange.rate",
+                              "required": true,
+                              "type3": "SET",
+                              "metaGroup": "SA",
+                              "meta": "CurrencyType",
+                              "blankOption": false,
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 6,
+                              "decimals": 7,
+                              "formatOptions": {
+                                "minimumFractionDigits": 7,
+                                "maximumFractionDigits": 7
+                              }
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sastc.purchexrate",
+                              "label": "global.purchase.exchange.rate",
+                              "required": true,
+                              "type3": "SET",
+                              "metaGroup": "SA",
+                              "meta": "CurrencyType",
+                              "blankOption": false,
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 6,
+                              "decimals": 7,
+                              "formatOptions": {
+                                "minimumFractionDigits": 7,
+                                "maximumFractionDigits": 7
+                              }
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sastc.salesexrate",
+                              "label": "global.sales.exchange.rate",
+                              "required": true,
+                              "type3": "SET",
+                              "metaGroup": "SA",
+                              "meta": "CurrencyType",
+                              "blankOption": false,
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 6,
+                              "decimals": 7,
+                              "formatOptions": {
+                                "minimumFractionDigits": 7,
+                                "maximumFractionDigits": 7
+                              }
+                            },
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sastc.arexrate",
+                              "label": "ar.exchange.rate",
+                              "required": true,
+                              "type3": "SET",
+                              "metaGroup": "SA",
+                              "meta": "CurrencyType",
+                              "blankOption": false,
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 6,
+                              "decimals": 7,
+                              "formatOptions": {
+                                "minimumFractionDigits": 7,
+                                "maximumFractionDigits": 7
+                              }
+                            },
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sastc.rvglexchrate",
+                              "label": "global.reval.exchange.rate",
+                              "required": true,
+                              "type3": "SET",
+                              "metaGroup": "SA",
+                              "meta": "CurrencyType",
+                              "blankOption": false,
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 6,
+                              "decimals": 7,
+                              "formatOptions": {
+                                "minimumFractionDigits": 7,
+                                "maximumFractionDigits": 7
+                              }
+                            },
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sastc.ratesource",
+                              "label": "global.rate.source",
+                              "required": false,
+                              "type3": "SET",
+                              "metaGroup": "SA",
+                              "meta": "CurrencyType",
+                              "blankOption": false,
+                              "maxLength": 30,
+                              "conditionRequired": "dtl.rateSourceAllowed()",
+                              "conditionReadonly": "!dtl.rateSourceAllowed()",
+                              "eventChange": "dtl.rateSourceChanged()",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sastc.edicurrency",
+                              "label": "edi.currency.code",
+                              "required": false,
+                              "maxLength": 3,
+                              "size": "XS"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "sastc",
+                        "objectRef": "dtl.sastc",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

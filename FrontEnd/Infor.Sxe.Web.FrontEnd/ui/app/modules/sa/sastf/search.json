@@ -1,0 +1,109 @@
+{
+  "viewId": "sa-sastf-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.billlevelcd",
+                  "label": "global.type",
+                  "autoFocus": true,
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "BillingType",
+                  "eventChange": "base.setBillingType()"
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.carrierid",
+                  "label": "global.freight.carrier",
+                  "autoFocus": true,
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "BillingType",
+                  "maxLength": 3
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.whse",
+                  "label": "global.warehouse",
+                  "autoFocus": true,
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "Warehouse",
+                  "conditionReadonly": "base.criteria.billlevelcd.toLowerCase() === ' ' || base.criteria.billlevelcd.toLowerCase() === 'a' || base.criteria.billlevelcd.toLowerCase() === 'c' || base.criteria.billlevelcd.toLowerCase() === 's'"
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.custno",
+                  "label": "global.customer",
+                  "autoFocus": true,
+                  "meta": "Customer",
+                  "conditionReadonly": "base.criteria.billlevelcd.toLowerCase() === ' ' || base.criteria.billlevelcd.toLowerCase() === 'a' || base.criteria.billlevelcd.toLowerCase() === 'w'"
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.shipto",
+                  "label": "global.ship.to",
+                  "meta": "ShipTo",
+                  "conditionReadonly": "base.criteria.billlevelcd.toLowerCase() === ' ' || base.criteria.billlevelcd.toLowerCase() === 'a' || base.criteria.billlevelcd.toLowerCase() === 'w' || base.criteria.billlevelcd.toLowerCase() === 'c'",
+                  "contextValues": {
+                    "key1": "base.criteria.custno",
+                    "key2": "base.criteria.shipto"
+                  },
+                  "options": {
+                    "searchParams": {
+                      "custno": {
+                        "type": "REF",
+                        "value": "base.criteria.custno"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

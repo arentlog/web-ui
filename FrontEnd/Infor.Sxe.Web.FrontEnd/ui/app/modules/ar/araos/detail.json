@@ -1,0 +1,454 @@
+{
+  "viewId": "ar-araos-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.araos",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "dtl.araos.recty",
+                      "label": "global.type",
+                      "required": true,
+                      "type3": "SET",
+                      "metaGroup": "AR",
+                      "meta": "AdministratorServiceChargeType",
+                      "conditionReadonly": "!base.isCreate()",
+                      "blankOption": false,
+                      "conditionFocus": "base.isCreate()"
+                    },
+                    {
+                      "id": 21,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.araos.state",
+                      "label": "global.state",
+                      "maxLength": 2,
+                      "conditionShow": "dtl.araos.recty.toLowerCase() === 's'",
+                      "size": "XS",
+                      "conditionReadonly": "!base.isCreate()",
+                      "conditionRequired": "dtl.araos.recty.toLowerCase() === 's'"
+                    },
+                    {
+                      "id": 22,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "dtl.araos.groupid",
+                      "label": "global.group",
+                      "meta": "Group",
+                      "conditionShow": "dtl.araos.recty.toLowerCase() === 'g'",
+                      "conditionDisabled": "!base.isCreate()",
+                      "conditionRequired": "dtl.araos.recty.toLowerCase() === 'g'"
+                    },
+                    {
+                      "id": 23,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "dtl.araos.custno",
+                      "label": "global.customer",
+                      "meta": "Customer",
+                      "conditionShow": "dtl.araos.recty.toLowerCase() === 'c' || dtl.araos.recty.toLowerCase() === 'j'",
+                      "conditionReadonly": "!base.isCreate()",
+                      "conditionRequired": "dtl.araos.recty.toLowerCase() === 'c' || dtl.araos.recty.toLowerCase() === 'j'",
+                      "controls": {
+                        "actionBtn": {
+                          "id": 77,
+                          "type": "BTN",
+                          "subType": "ICON",
+                          "label": "global.inquire",
+                          "icon": "icon-drilldown",
+                          "isLabelTooltip": true,
+                          "eventClick": "dtl.customerInquiryHyperlink()",
+                          "conditionDisabled": "!dtl.araos.custno"
+                        }
+                      }
+                    },
+                    {
+                      "id": 24,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "dtl.araos.shipto",
+                      "label": "global.ship.to",
+                      "meta": "ShipTo",
+                      "conditionShow": "dtl.araos.recty.toLowerCase() === 'j'",
+                      "conditionReadonly": "!base.isCreate()",
+                      "conditionRequired": "dtl.araos.recty.toLowerCase() === 'j'",
+                      "options": {
+                        "searchParams": {
+                          "custno": {
+                            "type": "REF",
+                            "value": "dtl.araos.custno"
+                          }
+                        }
+                      },
+                      "controls": {
+                        "actionBtn": {
+                          "id": 78,
+                          "type": "BTN",
+                          "subType": "ICON",
+                          "label": "global.inquire",
+                          "icon": "icon-drilldown",
+                          "isLabelTooltip": true,
+                          "eventClick": "dtl.shiptoInquiryHyperlink()",
+                          "conditionDisabled": "!dtl.araos.shipto"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 26,
+                  "type": "EXP_AREA",
+                  "label": "global.service.charges",
+                  "children": [
+                    {
+                      "id": 75,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "base.serviceChargeRateType",
+                      "label": "global.rate.type",
+                      "type3": "SET",
+                      "metaGroup": "AR",
+                      "meta": "ServiceChargeEntryType",
+                      "blankOption": false,
+                      "eventChange": "dtl.serviceChargeRateTypeChange()",
+                      "conditionFocus": "base.isEdit()"
+                    },
+                    {
+                      "id": 47,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.araos.arscpct1",
+                      "label": "global.period.2.service.charge",
+                      "dataFormat": "PERCENT",
+                      "maxLength": 6,
+                      "digits": 3,
+                      "decimals": 2,
+                      "size": "XS",
+                      "conditionShow": "base.serviceChargeRateType === 'p'",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 34,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.araos.arscpct2",
+                      "label": "global.period.3.service.charge",
+                      "dataFormat": "PERCENT",
+                      "decimals": 2,
+                      "digits": 3,
+                      "maxLength": 6,
+                      "size": "XS",
+                      "conditionShow": "base.serviceChargeRateType === 'p'",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 59,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.araos.arscpct3",
+                      "label": "global.period.4.service.charge",
+                      "dataFormat": "PERCENT",
+                      "decimals": 2,
+                      "digits": 3,
+                      "maxLength": 6,
+                      "size": "XS",
+                      "conditionShow": "base.serviceChargeRateType === 'p'",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 69,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.araos.arscpct4",
+                      "label": "global.period.5.service.charge",
+                      "dataFormat": "PERCENT",
+                      "decimals": 2,
+                      "digits": 3,
+                      "maxLength": 6,
+                      "size": "XS",
+                      "conditionShow": "base.serviceChargeRateType === 'p'",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 46,
+                      "type": "COMP_FLD",
+                      "children": [
+                        {
+                          "id": 49,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.araos.arscpc21",
+                          "label": "global.rate",
+                          "dataFormat": "PERCENT",
+                          "maxLength": 6,
+                          "digits": 3,
+                          "decimals": 2,
+                          "size": "XS",
+                          "conditionShow": "base.serviceChargeRateType === 'b'",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 39,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.araos.arscbal1",
+                          "label": "global.up.to.balance.amt",
+                          "dataFormat": "DECIMAL",
+                          "digits": 9,
+                          "decimals": 2,
+                          "maxLength": 12,
+                          "conditionShow": "base.serviceChargeRateType === 'b'",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 76,
+                      "type": "COMP_FLD",
+                      "children": [
+                        {
+                          "id": 38,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.araos.arscpc22",
+                          "label": "global.rate",
+                          "dataFormat": "PERCENT",
+                          "digits": 3,
+                          "decimals": 2,
+                          "size": "XS",
+                          "maxLength": 6,
+                          "conditionShow": "base.serviceChargeRateType === 'b'",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 50,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.araos.arscbal2",
+                          "label": "global.up.to.balance.amt",
+                          "dataFormat": "DECIMAL",
+                          "maxLength": 12,
+                          "digits": 9,
+                          "decimals": 2,
+                          "conditionShow": "base.serviceChargeRateType === 'b'",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 63,
+                      "type": "COMP_FLD",
+                      "children": [
+                        {
+                          "id": 64,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.araos.arscpc23",
+                          "label": "global.rate",
+                          "dataFormat": "PERCENT",
+                          "digits": 3,
+                          "decimals": 2,
+                          "size": "XS",
+                          "maxLength": 6,
+                          "conditionShow": "base.serviceChargeRateType === 'b'",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 65,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.araos.arscbal3",
+                          "label": "global.up.to.balance.amt",
+                          "dataFormat": "DECIMAL",
+                          "digits": 9,
+                          "decimals": 2,
+                          "maxLength": 12,
+                          "conditionShow": "base.serviceChargeRateType === 'b'",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 73,
+                      "type": "COMP_FLD",
+                      "children": [
+                        {
+                          "id": 74,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.araos.arscpc24",
+                          "label": "global.rate",
+                          "dataFormat": "PERCENT",
+                          "digits": 3,
+                          "decimals": 2,
+                          "size": "XS",
+                          "maxLength": 6,
+                          "conditionShow": "base.serviceChargeRateType === 'b'",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "araos",
+                        "objectRef": "dtl.araos",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

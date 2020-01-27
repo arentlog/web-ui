@@ -1,0 +1,894 @@
+{
+  "viewId": "ap-apece-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "{{dtl.detailTitle}}",
+              "subLabel": "{{dtl.detailSubTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtl.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 34,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "dtl.cancel()"
+                },
+                {
+                  "id": 40,
+                  "type": "BTN",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 41,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 44,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 46,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.invoiceTotals.glproofstring",
+                          "label": "{{base.invoiceproofTitle}}"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 43,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 47,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.invoiceTotals.poproofstring",
+                          "label": "po.costing"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 8,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.updateRecord.vendno",
+                          "label": "global.vendor.number",
+                          "meta": "Vendor",
+                          "eventChange": "dtl.vendnoChanged()",
+                          "conditionReadonly": "!base.updateRecord.vendnoenabled"
+                        },
+                        {
+                          "id": 9,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.updateRecord.transcd",
+                          "label": "global.transaction.type",
+                          "type3": "MANUAL",
+                          "blankOption": false,
+                          "optionsModel": "base.transactionTypes",
+                          "eventChange": "dtl.transTypeChanged()",
+                          "conditionReadonly": "!base.updateRecord.transcdenabled"
+                        },
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.updateRecord.proctype",
+                          "label": "global.process.type",
+                          "type3": "MANUAL",
+                          "blankOption": false,
+                          "optionsModel": "base.processingTypes",
+                          "eventChange": "dtl.procTypeChanged()",
+                          "conditionShow": "!base.updateRecord.proctypehidden",
+                          "conditionReadonly": "!base.updateRecord.proctypeenabled"
+                        },
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.updateRecord.reversetype",
+                          "label": "global.reversal.type",
+                          "type3": "MANUAL",
+                          "blankOption": false,
+                          "optionsModel": "base.reversalTypes",
+                          "eventChange": "",
+                          "conditionShow": "!base.updateRecord.reversetypehidden",
+                          "conditionReadonly": "!base.updateRecord.reversetypeenabled"
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.updateRecord.appinvno",
+                          "label": "global.apply.to.invoice.number",
+                          "meta": "ApInvoices",
+                          "conditionShow": "!base.updateRecord.appinvnohidden",
+                          "eventChange": "dtl.apInvoiceNumberChanged()",
+                          "conditionRequired": "!base.updateRecord.appinvnohidden && base.updateRecord.appinvnoenabled",
+                          "conditionReadonly": "!base.updateRecord.appinvnoenabled",
+                          "contextOptions": {
+                            "deactivated": true
+                          },
+                          "contextValues": {
+                            "key1": "base.updateRecord.jrnlno",
+                            "key2": "base.updateRecord.setno"
+                          },
+                          "options": {
+                            "searchParams": {
+                              "vendno": {
+                                "type": "REF",
+                                "value": "base.updateRecord.vendno"
+                              },
+                              "transcd": {
+                                "type": "REF",
+                                "value": "base.updateRecord.reversetype"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.updateRecord.apinvno",
+                          "label": "global.invoice.number",
+                          "maxLength": 15,
+                          "eventChange": "dtl.invoiceNumberChanged()",
+                          "conditionReadonly": "!base.updateRecord.apinvnoenabled",
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          }
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.updateRecord.amount",
+                          "label": "global.amount",
+                          "dataFormat": "CURRENCY",
+                          "digits": 9,
+                          "decimals": 2,
+                          "eventChange": "dtl.amountChanged()",
+                          "conditionReadonly": "!base.updateRecord.amountenabled",
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          }
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.updateRecord.invdt",
+                          "label": "global.invoice.date",
+                          "dataFormat": "DATE",
+                          "conditionReadonly": "!base.updateRecord.invdtenabled"
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.updateRecord.termstype",
+                          "label": "global.terms",
+                          "meta": "Terms",
+                          "eventChange": "dtl.termsTypeChanged()",
+                          "conditionReadonly": "!base.updateRecord.termstypeenabled"
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.updateRecord.divno",
+                          "label": "global.division",
+                          "conditionReadonly": "!base.updateRecord.divnoenabled",
+                          "type3": "MANUAL",
+                          "optionsModel": "dtl.divnoDropDownOptions"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 21,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 22,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.updateRecord.immedpyfl",
+                          "label": "global.immediate.pay",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!base.updateRecord.immedpyflenabled"
+                        },
+                        {
+                          "id": 23,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.updateRecord.disputefl",
+                          "label": "global.dispute",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!base.updateRecord.disputeflenabled"
+                        },
+                        {
+                          "id": 24,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.updateRecord.suspfl",
+                          "label": "global.suspend",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!base.updateRecord.suspflenabled"
+                        },
+                        {
+                          "id": 25,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.updateRecord.invtype",
+                          "label": "global.invoice.type",
+                          "maxLength": 3,
+                          "conditionReadonly": "!base.updateRecord.invtypeenabled"
+                        },
+                        {
+                          "id": 26,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.updateRecord.refer",
+                          "label": "global.reference",
+                          "maxLength": 24,
+                          "conditionReadonly": "!base.updateRecord.referenabled"
+                        },
+                        {
+                          "id": 28,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "base.updateRecord.reconty",
+                              "label": "global.recon.method",
+                              "type3": "SET",
+                              "metaGroup": "AP",
+                              "meta": "ReconciliationMethod",
+                              "blankOption": false,
+                              "conditionReadonly": "!base.updateRecord.recontyenabled"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "base.updateRecord.reconoverfl",
+                              "label": "global.override",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!base.updateRecord.reconoverflenabled"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 31,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.updateRecord.maxpost",
+                              "label": "global.max.posts",
+                              "dataFormat": "INTEGER_TEXT",
+                              "maxLength": 2,
+                              "conditionShow": "!base.updateRecord.maxposthidden",
+                              "size": "SM",
+                              "digits": 2,
+                              "conditionReadonly": "!base.updateRecord.maxpostenabled"
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.updateRecord.nopost",
+                              "label": "global.number",
+                              "dataFormat": "INTEGER_TEXT",
+                              "maxLength": 2,
+                              "conditionShow": "!base.updateRecord.noposthidden",
+                              "size": "SM",
+                              "digits": 2,
+                              "conditionReadonly": "!base.updateRecord.nopostenabled"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 33,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.updateRecord.currencyty",
+                          "label": "global.currency",
+                          "dataDesc": "base.updateRecord.currencytydesc",
+                          "conditionShow": "!base.updateRecord.currencytyhidden"
+                        },
+                        {
+                          "id": 36,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.updateRecord.dSvFRate",
+                              "label": "global.exchange.rate",
+                              "conditionShow": "!base.updateRecord.currencytyhidden",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 6,
+                              "decimals": 7,
+                              "size": "SM",
+                              "conditionReadonly": "!base.updateRecord.currencytyenabled",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 7
+                              }
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "base.updateRecord.dsvFrateUpdateFl",
+                              "label": "global.update.currency.rate.table",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!base.updateRecord.dsvFrateEnabledFl",
+                              "conditionShow": "!base.updateRecord.currencytyhidden"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 39,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.updateRecord.newinvfl",
+                          "label": "global.new.invoice",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!base.updateRecord.newinvflenabled",
+                          "conditionShow": "!base.updateRecord.newinvflhidden"
+                        },
+                        {
+                          "id": 92,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 91,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.updateRecord.npclaimno",
+                              "label": "global.national.program.vendor.claim.number",
+                              "meta": "NAPClaims",
+                              "conditionShow": "base.updateRecord.npclaimnovisible",
+                              "conditionReadonly": "!base.updateRecord.npclaimnoenabled",
+                              "options": {
+                                "searchParams": {
+                                  "VendorNumber": {
+                                    "type": "REF",
+                                    "value": "base.updateRecord.vendno"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 93,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "base.updateRecord.nppaidinfullfl",
+                              "label": "global.paid.in.full",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!base.updateRecord.nppaidinfullflenabled",
+                              "conditionShow": "base.updateRecord.nppaidinfullflvisible"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 48,
+                  "type": "EXP_AREA",
+                  "label": "global.taxing",
+                  "conditionShow": "base.updateRecord.entertaxfl && (base.taxMethodType.toLowerCase() !== 'v' || base.taxInterfaceType.toLowerCase() !== 's')",
+                  "children": [
+                    {
+                      "id": 49,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 50,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 52,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.updateRecord.gsttaxamt",
+                              "label": "{{base.updateRecord.gsttaxlabel}}",
+                              "dataFormat": "CURRENCY",
+                              "sign": "+",
+                              "digits": 7,
+                              "decimals": 2,
+                              "conditionReadonly": "!base.updateRecord.gstenabled"
+                            },
+                            {
+                              "id": 55,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.updateRecord.psttaxamt",
+                              "label": "{{base.updateRecord.psttaxlabel}}",
+                              "dataFormat": "CURRENCY",
+                              "sign": "+",
+                              "decimals": 2,
+                              "digits": 7,
+                              "conditionReadonly": "!base.updateRecord.pstenabled"
+                            },
+                            {
+                              "id": 57,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "base.updateRecord.selfassessfl",
+                              "label": "global.self.assessed.taxes",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!base.updateRecord.selfassessenabled"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 53,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 54,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.updateRecord.gsttaxrate",
+                              "label": "{{base.updateRecord.gstratelabel}}",
+                              "dataFormat": "CURRENCY",
+                              "sign": "+",
+                              "digits": 7,
+                              "decimals": 2,
+                              "conditionReadonly": "true"
+                            },
+                            {
+                              "id": 56,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.updateRecord.psttaxrate",
+                              "label": "{{base.updateRecord.pstratelabel}}",
+                              "dataFormat": "CURRENCY",
+                              "sign": "+",
+                              "digits": 7,
+                              "decimals": 2,
+                              "conditionReadonly": "true"
+                            },
+                            {
+                              "id": 58,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "base.updateRecord.taxablefl",
+                              "label": "global.taxable",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!base.updateRecord.taxableenabled"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 59,
+                  "type": "EXP_AREA",
+                  "label": "global.value.added.tax.vat",
+                  "conditionShow": "base.updateRecord.entertaxfl && base.taxMethodType === 'v' && base.taxInterfaceType === 's'",
+                  "children": [
+                    {
+                      "id": 60,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 61,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 74,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 66,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "base.updateRecord.vat1groupno",
+                                  "label": "global.tax.group",
+                                  "type3": "CODES",
+                                  "meta": "TaxGroup",
+                                  "blankOption": false,
+                                  "readonly": true,
+                                  "conditionShow": "!base.updateRecord.vat1hidden",
+                                  "size": "SM"
+                                },
+                                {
+                                  "id": 67,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateRecord.vat1goodsamt",
+                                  "label": "global.tax.basis",
+                                  "dataFormat": "DECIMAL",
+                                  "decimals": 2,
+                                  "digits": 9,
+                                  "conditionShow": "!base.updateRecord.vat1hidden",
+                                  "size": "SM",
+                                  "eventChange": "dtl.updateVATProof()",
+                                  "conditionReadonly": "!base.updateRecord.vat1enabled",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 68,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateRecord.vat1taxamt",
+                                  "label": "vat.amount",
+                                  "conditionShow": "!base.updateRecord.vat1hidden",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "size": "SM",
+                                  "eventChange": "dtl.updateVATProof()",
+                                  "conditionReadonly": "!base.updateRecord.vat1enabled",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 70,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 71,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "base.updateRecord.vat2groupno",
+                                  "label": "global.tax.group",
+                                  "type3": "CODES",
+                                  "meta": "TaxGroup",
+                                  "blankOption": false,
+                                  "readonly": true,
+                                  "conditionShow": "!base.updateRecord.vat2hidden",
+                                  "size": "SM"
+                                },
+                                {
+                                  "id": 72,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateRecord.vat2goodsamt",
+                                  "label": "global.tax.basis",
+                                  "dataFormat": "DECIMAL",
+                                  "decimals": 2,
+                                  "digits": 9,
+                                  "conditionShow": "!base.updateRecord.vat2hidden",
+                                  "size": "SM",
+                                  "eventChange": "dtl.updateVATProof()",
+                                  "conditionReadonly": "!base.updateRecord.vat2enabled",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 73,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateRecord.vat2taxamt",
+                                  "label": "vat.amount",
+                                  "conditionShow": "!base.updateRecord.vat2hidden",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "size": "SM",
+                                  "eventChange": "dtl.updateVATProof()",
+                                  "conditionReadonly": "!base.updateRecord.vat2enabled",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 75,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 76,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "base.updateRecord.vat3groupno",
+                                  "label": "global.tax.group",
+                                  "type3": "CODES",
+                                  "meta": "TaxGroup",
+                                  "blankOption": false,
+                                  "readonly": true,
+                                  "conditionShow": "!base.updateRecord.vat3hidden",
+                                  "size": "SM"
+                                },
+                                {
+                                  "id": 77,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateRecord.vat3goodsamt",
+                                  "label": "global.tax.basis",
+                                  "dataFormat": "DECIMAL",
+                                  "decimals": 2,
+                                  "digits": 9,
+                                  "conditionShow": "!base.updateRecord.vat3hidden",
+                                  "size": "SM",
+                                  "eventChange": "dtl.updateVATProof()",
+                                  "conditionReadonly": "!base.updateRecord.vat3enabled",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 78,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateRecord.vat3taxamt",
+                                  "label": "vat.amount",
+                                  "conditionShow": "!base.updateRecord.vat3hidden",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "size": "SM",
+                                  "eventChange": "dtl.updateVATProof()",
+                                  "conditionReadonly": "!base.updateRecord.vat3enabled",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 79,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 80,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "base.updateRecord.vat4groupno",
+                                  "label": "global.tax.group",
+                                  "type3": "CODES",
+                                  "meta": "TaxGroup",
+                                  "blankOption": false,
+                                  "readonly": true,
+                                  "conditionShow": "!base.updateRecord.vat4hidden",
+                                  "size": "SM"
+                                },
+                                {
+                                  "id": 81,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateRecord.vat4goodsamt",
+                                  "label": "global.tax.basis",
+                                  "dataFormat": "DECIMAL",
+                                  "decimals": 2,
+                                  "digits": 9,
+                                  "conditionShow": "!base.updateRecord.vat4hidden",
+                                  "size": "SM",
+                                  "eventChange": "dtl.updateVATProof()",
+                                  "conditionReadonly": "!base.updateRecord.vat4enabled",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 82,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateRecord.vat4taxamt",
+                                  "label": "vat.amount",
+                                  "conditionShow": "!base.updateRecord.vat4hidden",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "size": "SM",
+                                  "eventChange": "dtl.updateVATProof()",
+                                  "conditionReadonly": "!base.updateRecord.vat4enabled",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 83,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 84,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "base.updateRecord.vat5groupno",
+                                  "label": "global.tax.group",
+                                  "type3": "CODES",
+                                  "meta": "TaxGroup",
+                                  "blankOption": false,
+                                  "readonly": true,
+                                  "conditionShow": "!base.updateRecord.vat5hidden",
+                                  "size": "SM"
+                                },
+                                {
+                                  "id": 85,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateRecord.vat5goodsamt",
+                                  "label": "global.tax.basis",
+                                  "dataFormat": "DECIMAL",
+                                  "decimals": 2,
+                                  "digits": 9,
+                                  "conditionShow": "!base.updateRecord.vat5hidden",
+                                  "size": "SM",
+                                  "eventChange": "dtl.updateVATProof()",
+                                  "conditionReadonly": "!base.updateRecord.vat5enabled",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 86,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.updateRecord.vat5taxamt",
+                                  "label": "vat.amount",
+                                  "conditionShow": "!base.updateRecord.vat5hidden",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "size": "SM",
+                                  "eventChange": "dtl.updateVATProof()",
+                                  "conditionReadonly": "!base.updateRecord.vat5enabled",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 64,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 87,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.updateRecord.taxstate",
+                              "label": "global.taxing.state",
+                              "readonly": true
+                            },
+                            {
+                              "id": 88,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.updateRecord.settamt",
+                              "label": "global.settlement.amount",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "!base.updateRecord.settamthidden",
+                              "conditionReadonly": "!base.updateRecord.settamtenabled",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 89,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.updateRecord.vatproof",
+                              "label": "global.proof",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionShow": "!base.updateRecord.vatproofhidden",
+                              "readonly": true,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 90,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Apet",
+      "contextValues": {
+        "key1": "base.journal.gJrnlno",
+        "key2": "base.journal.gSetno"
+      }
+    }
+  ]
+}

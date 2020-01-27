@@ -1,0 +1,255 @@
+{
+  "viewId": "sa-sasgs-create",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.sales.use.taxes",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 8,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "stateRef": "^.master"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 23,
+                  "type": "EXP_AREA",
+                  "label": "global.required",
+                  "children": [
+                    {
+                      "id": 24,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 25,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 12,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.sasgs.recty",
+                              "label": "global.type",
+                              "type3": "SET",
+                              "metaGroup": "SA",
+                              "meta": "RecType",
+                              "readonly": false,
+                              "required": true,
+                              "autoFocus": true
+                            },
+                            {
+                              "id": 13,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.sasgs.taxgroup",
+                              "label": "global.group",
+                              "type3": "CODES",
+                              "meta": "TaxGroup",
+                              "blankOption": false,
+                              "required": true
+                            }
+                          ]
+                        },
+                        {
+                          "id": 30,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sasgs.statecd",
+                              "label": "global.state",
+                              "maxLength": 2,
+                              "conditionShow": "dtl.sasgs.recty === 2",
+                              "conditionRequired": "dtl.sasgs.recty === 2",
+                              "eventChange": "dtl.getDescription()",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.sasgs.statecd",
+                              "label": "global.state",
+                              "conditionShow": "dtl.sasgs.recty >= 3",
+                              "conditionRequired": "dtl.sasgs.recty >= 3",
+                              "meta": "TaxMasterState",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sasgs.countycd",
+                              "label": "global.county",
+                              "maxLength": 12,
+                              "conditionShow": "dtl.sasgs.recty === 3",
+                              "conditionRequired": "dtl.sasgs.recty === 3",
+                              "eventChange": "dtl.getDescription()",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.sasgs.countycd",
+                              "label": "global.county",
+                              "conditionShow": "dtl.sasgs.recty >= 4",
+                              "conditionRequired": "dtl.sasgs.recty >= 4",
+                              "meta": "TaxMasterCounty",
+                              "options": {
+                                "allowEntry": true,
+                                "searchParams": {
+                                  "statecd": {
+                                    "type": "REF",
+                                    "value": "dtl.sasgs.statecd"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sasgs.citycd",
+                              "label": "global.city",
+                              "maxLength": 12,
+                              "conditionShow": "dtl.sasgs.recty === 4",
+                              "conditionRequired": "dtl.sasgs.recty === 4",
+                              "eventChange": "dtl.getDescription()",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.sasgs.citycd",
+                              "label": "global.city",
+                              "conditionShow": "dtl.sasgs.recty >= 5",
+                              "conditionRequired": "dtl.sasgs.recty >= 5",
+                              "meta": "TaxMasterCity",
+                              "options": {
+                                "searchParams": {
+                                  "statecd": {
+                                    "type": "REF",
+                                    "value": "dtl.sasgs.statecd"
+                                  },
+                                  "countycd": {
+                                    "type": "REF",
+                                    "value": "dtl.sasgs.countycd"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sasgs.othercd",
+                              "label": "global.other",
+                              "maxLength": 12,
+                              "conditionShow": "dtl.sasgs.recty === 5",
+                              "conditionRequired": "dtl.sasgs.recty === 5",
+                              "eventChange": "dtl.getDescription()",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sasgs.descrip",
+                              "label": "global.description",
+                              "maxLength": 24,
+                              "required": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 26,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 29,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "sasgm",
+                        "objectRef": "dtl.sasgs"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

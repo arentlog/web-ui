@@ -1,0 +1,405 @@
+{
+  "viewId": "pd-pdsp-rebatemaster",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.pdsp",
+          "subLabel": "global.rebate.records",
+          "children": [
+            {
+              "id": 24,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.price.records",
+              "stateRef": "^.customerMaster",
+              "conditionShow": "base.securityLevelPDSC >= 2"
+            },
+            {
+              "id": 25,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.vendor.records",
+              "stateRef": "^.vendorMaster",
+              "conditionShow": "base.securityLevelPDSV >= 2"
+            },
+            {
+              "id": 26,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.vendor.contract.records",
+              "stateRef": "^.contractMaster",
+              "conditionShow": "base.securityLevelPDSVC >= 2"
+            },
+            {
+              "id": 46,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.national.program",
+              "stateRef": "^.nationalaccountMaster",
+              "conditionShow": "base.isNationalAccountTabEnabled()"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 38,
+              "type": "EXP_AREA",
+              "label": "global.advanced.search",
+              "collapsed": true,
+              "children": [
+                {
+                  "id": 41,
+                  "type": "CUSTOM",
+                  "subType": "AdvancedSearch",
+                  "options": {
+                    "criteria": "rmst.advCriteria",
+                    "criteriaList": "rmst.criteriaList",
+                    "criteriaView": "pd/pdsp/rebate/rebate-advanced-criteria.json",
+                    "defaultSelectedCriteria": "rmst.defaultSelectedCriteria",
+                    "searchFunction": "rmst.search",
+                    "clearFunction": "rmst.clear"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "GRID",
+              "id": 5,
+              "controlRef": "base.rgrid",
+              "model": "base.rdataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "selectable": "multiple",
+                "events": {
+                  "drilldown": "rmst.drilldown()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.rebate.information",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-new-document",
+                      "label": "global.new",
+                      "eventClick": "rmst.create()",
+                      "conditionDisabled": "base.rgrid.isAnyRowSelected()",
+                      "securityLevel": 4,
+                      "conditionShow": "base.securityLevelPDSR >= 4"
+                    },
+                    {
+                      "id": 8,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-edit",
+                      "label": "global.edit",
+                      "eventClick": "rmst.edit()",
+                      "conditionDisabled": "!base.rgrid.isOneRowSelected()",
+                      "securityLevel": 3,
+                      "conditionShow": "base.securityLevelPDSR >= 3"
+                    },
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-delete",
+                      "label": "global.delete",
+                      "eventClick": "rmst.delete()",
+                      "conditionDisabled": "base.rgrid.isNoRowSelected()",
+                      "securityLevel": 5,
+                      "conditionShow": "base.securityLevelPDSR >= 5"
+                    },
+                    {
+                      "id": 43,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-copy",
+                      "label": "global.copy",
+                      "eventClick": "rmst.copy()",
+                      "securityLevel": 4,
+                      "conditionDisabled": "!base.rgrid.isOneRowSelected()",
+                      "conditionShow": "base.securityLevelPDSR >= 4"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "rebrecno",
+                  "label": "global.record.number",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 28,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "levelcd",
+                  "label": "global.level",
+                  "dataFormat": "PdPricingRecordTypeForPDSRToName"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "prod",
+                  "label": "global.product",
+                  "conditionInclude": "base.srchProdFl",
+                  "eventClick": "rmst.productHyperlink()"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prodnotesfl",
+                  "label": "global.product.notes",
+                  "conditionInclude": "base.srchProdFl",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prodprcty",
+                  "label": "global.product.price.type",
+                  "type3": "",
+                  "blankOption": true,
+                  "conditionInclude": "base.srchProdPriceTypeFl"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "rebatety",
+                  "label": "global.rebate.type",
+                  "conditionInclude": "base.srchRebTypeFl"
+                },
+                {
+                  "id": 29,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prodline",
+                  "label": "global.product.line",
+                  "conditionInclude": "base.srchProdLineFl"
+                },
+                {
+                  "id": 30,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prodcat",
+                  "label": "global.product.category",
+                  "conditionInclude": "base.srchProdCatFl"
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.customer.rebate.type",
+                  "model": "custrebty",
+                  "conditionInclude": "base.srchCustRebTypeFl"
+                },
+                {
+                  "id": 31,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "vendno",
+                  "label": "global.vendor.number",
+                  "conditionInclude": "base.srchVendNoFl",
+                  "eventClick": "rmst.vendorHyperlink()",
+                  "dataFormat": "DECIMAL_TEXT"
+                },
+                {
+                  "id": 32,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.vendor.notes",
+                  "model": "vendnotesfl",
+                  "conditionInclude": "base.srchVendNoFl",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 44,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "label": "global.vendor.currency",
+                  "model": "vendcurrency",
+                  "conditionInclude": "base.srchVendNoFl",
+                  "type3": "CODES",
+                  "meta": "Currency"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "custno",
+                  "label": "global.customer.number",
+                  "conditionInclude": "base.srchCustNoFl",
+                  "eventClick": "rmst.customerHyperlink()",
+                  "dataFormat": "DECIMAL_TEXT"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "custnotesfl",
+                  "label": "global.customer.notes",
+                  "conditionInclude": "base.srchCustNoFl",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 45,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "custcurrency",
+                  "label": "global.customer.currency",
+                  "conditionInclude": "base.srchCustNoFl",
+                  "type3": "CODES",
+                  "meta": "Currency"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "custtype",
+                  "label": "global.ship.to.job",
+                  "conditionInclude": "base.srchShipToFl",
+                  "eventClick": "rmst.shiptoHyperlink()"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shiptonotesfl",
+                  "label": "global.ship.to.notes",
+                  "conditionInclude": "base.srchShipToFl",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 33,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whse",
+                  "label": "global.whse.regn",
+                  "conditionInclude": "base.srchWhseFl || base.srchRegnFl"
+                },
+                {
+                  "id": 34,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "startdt",
+                  "label": "global.start.date",
+                  "conditionInclude": "base.srchStartDtFl",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 35,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "enddt",
+                  "label": "global.end.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 36,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "refer",
+                  "label": "global.reference"
+                },
+                {
+                  "id": 37,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "contractno",
+                  "label": "global.contract.number",
+                  "conditionInclude": "base.srchContractNoFl || base.srchUsePriceVFl"
+                },
+                {
+                  "id": 42,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "contractlineno",
+                  "label": "global.contract.line.number",
+                  "conditionInclude": "base.srchUseContractsFl",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "manualfl",
+                  "label": "global.manual.rebate",
+                  "conditionInclude": "base.manualFlagVisibility",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "rebatecd",
+                  "label": "global.rebate.description",
+                  "type3": "SET",
+                  "metaGroup": "PD",
+                  "meta": "RebateCodeTypes",
+                  "blankOption": false
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "dropshipty",
+                  "label": "global.drop.ship.type",
+                  "conditionInclude": "base.srchShipTypeFl",
+                  "type3": "SET",
+                  "metaGroup": "PD",
+                  "meta": "RebatesDropShipTypes",
+                  "blankOption": false
+                },
+                {
+                  "id": 47,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "price",
+                  "label": "global.rebate.price",
+                  "conditionInclude": "base.srchPriceRebFl",
+                  "type3": "CODES",
+                  "blankOption": false,
+                  "dataFormat": "DECIMAL_TEXT"
+                },
+                {
+                  "id": 48,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "prccurrencyty",
+                  "label": "global.rebate.price.currency",
+                  "conditionInclude": "base.srchPriceRebFl",
+                  "type3": "CODES",
+                  "blankOption": false,
+                  "meta": "Currency"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

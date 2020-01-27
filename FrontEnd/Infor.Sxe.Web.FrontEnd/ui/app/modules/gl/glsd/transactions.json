@@ -1,0 +1,232 @@
+{
+  "viewId": "gl-glsd-transactions",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isTransactions()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.transactions",
+              "subLabel": "{{trans.subtitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 16,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 34,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 18,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 19,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 33,
+                          "type": "MESSAGE",
+                          "text": "{{trans.infomsg}}"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 20,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 25,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "trans.proofdr",
+                          "label": "global.proof.debit",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 24,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 26,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "trans.proofcr",
+                          "label": "global.proof.credit",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 6,
+                  "type": "GRID",
+                  "model": "trans.transactions",
+                  "controlRef": "trans.grid",
+                  "options": {
+                    "showCheckboxes": true,
+                    "showExpander": true,
+                    "rowDetailOptions": {
+                      "template": "gl/glsd/transaction-row-edit.json",
+                      "controller": "GlsdTransactionEdit as row",
+                      "paramsReference": "trans.rowInfo"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 7,
+                      "type": "TOOLBAR",
+                      "label": "global.transactions",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-new-document",
+                          "label": "global.new",
+                          "stateRef": ".add",
+                          "securityLevel": 4
+                        },
+                        {
+                          "id": 35,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "eventClick": "trans.delete()",
+                          "securityLevel": 5
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 8,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.transaction.number",
+                      "model": "transno",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 9,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "glno",
+                      "label": "gl.number"
+                    },
+                    {
+                      "id": 10,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "glnm",
+                      "label": "global.account.name",
+                      "customFormatter": "trans.divName"
+                    },
+                    {
+                      "id": 11,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "baltype",
+                      "label": "global.type"
+                    },
+                    {
+                      "id": 12,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "oppositefl",
+                      "label": "global.opposite",
+                      "dataFormat": "BooleanToString",
+                      "formatOptions": {
+                        "trueString": "global.yes",
+                        "falseString": "global.no"
+                      }
+                    },
+                    {
+                      "id": 13,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "percent",
+                      "label": "symbol.percent.of.master.balance",
+                      "decimals": 2,
+                      "digits": 3,
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 14,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "refer",
+                      "label": "global.reference"
+                    },
+                    {
+                      "id": 15,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "reversefl",
+                      "label": "global.reverse",
+                      "customFormatter": "",
+                      "dataFormat": "BooleanToString",
+                      "formatOptions": {
+                        "trueString": "global.reverse",
+                        "falseString": "global.offset"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "type": "VIEW_CNTR",
+      "viewName": "addtran"
+    }
+  ]
+}

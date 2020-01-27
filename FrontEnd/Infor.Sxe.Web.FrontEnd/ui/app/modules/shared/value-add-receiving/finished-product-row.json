@@ -1,0 +1,181 @@
+{
+  "viewId": "shared-value-add-receiving-finishedproductrow",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "ROW_DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "type": "ROW",
+          "id": 3,
+          "children": [
+            {
+              "type": "COL",
+              "subType": "1/3",
+              "id": 4,
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "varfpr.rowDetail.nonstockty",
+                  "label": "global.type",
+                  "autoFocus": true,
+                  "type3": "SET",
+                  "metaGroup": "VA",
+                  "meta": "FinishedProductLineType",
+                  "blankOption": false,
+                  "size": "SM"
+                }
+              ]
+            },
+            {
+              "id": 10,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "varfpr.rowDetail.qtyneeded",
+                  "label": "global.quantity.needed",
+                  "dataFormat": "DECIMAL",
+                  "digits": 9,
+                  "decimals": 2
+                }
+              ]
+            },
+            {
+              "type": "COL",
+              "subType": "1/3",
+              "id": 6,
+              "children": [
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "varfpr.rowDetail.qtybasetotfl",
+                  "label": "global.quantity.base.total",
+                  "dataFormat": "LOGICAL"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 13,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "varfpr.rowDetail.shipprod",
+                  "label": "global.product",
+                  "meta": "ProdAll",
+                  "conditionShow": "!(varfpr.isNonstockVisible())"
+                }
+              ]
+            },
+            {
+              "id": 14,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "varfpr.rowDetail.unit",
+                  "label": "global.unit",
+                  "meta": "Units",
+                  "options": {
+                    "searchParams": {
+                      "prod": {
+                        "type": "REF",
+                        "value": "varfpr.rowDetail.shipprod"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": 17,
+              "type": "COL",
+              "subType": "1/3"
+            }
+          ]
+        },
+        {
+          "id": 18,
+          "type": "EXP_AREA",
+          "label": "global.non.stock",
+          "conditionShow": "varfpr.isNonstockVisible()",
+          "children": [
+            {
+              "id": 19,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 20,
+                  "type": "COL",
+                  "subType": "1",
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "CUSTOM",
+                      "subType": "NonStockDetailsValueAdd",
+                      "options": {
+                        "vaLineModel": "varfpr.rowDetail",
+                        "controlRef": "varfpr.nonstockDetailsValueAddControl",
+                        "eventReady": "varfpr.nonstockDetailsValueAddControlReady()",
+                        "doneCallback": "varfpr.nonstockDetailsValueAddControlDoneCallback()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 22,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 23,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.ok",
+                  "eventClick": "varfpr.save()"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.cancel",
+                  "eventClick": "varfpr.cancel()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

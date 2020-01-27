@@ -1,0 +1,373 @@
+{
+  "viewId": "ot-otet-detail-header",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "TAB",
+  "conditionReadonly": "dtlc.isHeaderTabReadonly",
+  "children": [
+    {
+      "id": 55,
+      "type": "TOOLBAR",
+      "label": "global.blank.label.string.for.space",
+      "children": [
+        {
+          "id": 54,
+          "type": "BTN",
+          "subType": "PRI",
+          "label": "global.save",
+          "eventClick": "dtlc.updateHeader()",
+          "icon": "icon-save",
+          "securityLevel": 3
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.vendor",
+      "children": [
+        {
+          "id": 57,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 58,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtlc.otet.otettrackdetail.vendno",
+                  "label": "global.broker.vendor.number",
+                  "meta": "Vendor",
+                  "type3": "STANDARD",
+                  "eventChange": "dtlc.vendorChanged()",
+                  "conditionReadonly": "dtlc.otet.otettrackdetail.afterrcvstg === true || dtlc.isHeaderTabReadonly"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 26,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtlc.otet.otettrackdetail.vendname",
+                  "label": "global.name",
+                  "maxLength": 30
+                },
+                {
+                  "id": 56,
+                  "type": "CUSTOM",
+                  "subType": "AddressForm",
+                  "options": {
+                    "countryCdVisible": true,
+                    "addr2Visible": true,
+                    "addr3Visible": true,
+                    "addr1Model": "dtlc.otet.otettrackdetail.vendoraddr1",
+                    "addr2Model": "dtlc.otet.otettrackdetail.vendoraddr2",
+                    "addr3Model": "dtlc.otet.otettrackdetail.vendoraddr3",
+                    "cityModel": "dtlc.otet.otettrackdetail.vendorcity",
+                    "stateModel": "dtlc.otet.otettrackdetail.vendorst",
+                    "zipCodeModel": "dtlc.otet.otettrackdetail.vendorzip",
+                    "countryCodeModel": "dtlc.otet.otettrackdetail.vendcountry",
+                    "addressLabel": "global.address",
+                    "conditionReadonly": "dtlc.isHeaderTabReadonly"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 33,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtlc.otet.otettrackdetail.vendphone",
+                  "label": "global.phone.number",
+                  "dataFormat": "PHONE"
+                },
+                {
+                  "id": 35,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtlc.otet.otettrackdetail.contact",
+                  "label": "global.contact.name",
+                  "maxLength": 30
+                },
+                {
+                  "id": 36,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtlc.otet.otettrackdetail.countryorg",
+                  "label": "global.country.of.origin",
+                  "meta": "Country",
+                  "type3": "CODES"
+                },
+                {
+                  "id": 37,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtlc.otet.otettrackdetail.countrydest",
+                  "label": "global.destination",
+                  "meta": "Country",
+                  "type3": "CODES"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "EXP_AREA",
+      "label": "global.ship",
+      "collapsed": false,
+      "children": [
+        {
+          "id": 59,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 60,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 38,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtlc.otet.otettrackdetail.shipfmno",
+                  "label": "global.ship.from.number",
+                  "meta": "ShipFrom",
+                  "type3": "STANDARD",
+                  "eventChange": "dtlc.shipFromChanged()",
+                  "conditionReadonly": "dtlc.otet.otettrackdetail.afterrcvstg === true || dtlc.isHeaderTabReadonly",
+                  "options": {
+                    "searchParams": {
+                      "vendno": {
+                        "type": "REF",
+                        "value": "dtlc.otet.otettrackdetail.vendno"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 10,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 39,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "dtlc.otet.otettrackdetail.shipfm",
+                  "label": "global.ship.from"
+                },
+                {
+                  "id": 61,
+                  "type": "CUSTOM",
+                  "subType": "AddressInfo",
+                  "options": {
+                    "countryCdVisible": true,
+                    "addr1Model": "dtlc.otet.otettrackdetail.fromaddr1",
+                    "addressLabel": "global.address",
+                    "addr2Model": "dtlc.otet.otettrackdetail.fromaddr2",
+                    "addr3Model": "dtlc.otet.otettrackdetail.fromaddr3",
+                    "cityModel": "dtlc.otet.otettrackdetail.fromcity",
+                    "stateModel": "dtlc.otet.otettrackdetail.fromst",
+                    "zipCodeModel": "dtlc.otet.otettrackdetail.fromzip",
+                    "countryCodeModel": "dtlc.otet.otettrackdetail.fromcountry"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 11,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 42,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "dtlc.otet.otettrackdetail.fromphone",
+                  "label": "global.phone.number",
+                  "dataFormat": "PHONE"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "type": "EXP_AREA",
+      "label": "global.container",
+      "collapsed": false,
+      "children": [
+        {
+          "id": 15,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 16,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 43,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtlc.otet.otettrackdetail.contno",
+                  "label": "global.container.number",
+                  "maxLength": 30
+                },
+                {
+                  "id": 45,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtlc.otet.otettrackdetail.bofl",
+                  "label": "global.bill.of.lading.number",
+                  "maxLength": 30
+                },
+                {
+                  "id": 46,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtlc.otet.otettrackdetail.portno",
+                  "label": "global.port.number",
+                  "dataFormat": "INTEGER_TEXT",
+                  "digits": 7,
+                  "sign": "+"
+                }
+              ]
+            },
+            {
+              "id": 17,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 44,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtlc.otet.otettrackdetail.contsize",
+                  "label": "global.size",
+                  "dataFormat": "INTEGER",
+                  "digits": 2,
+                  "sign": "+"
+                },
+                {
+                  "id": 47,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtlc.otet.otettrackdetail.lettofcr",
+                  "label": "global.letter.of.credit.number",
+                  "maxLength": 20
+                },
+                {
+                  "id": 48,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtlc.otet.otettrackdetail.portnm",
+                  "label": "global.port.name",
+                  "maxLength": 30
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "type": "EXP_AREA",
+      "label": "global.ship",
+      "collapsed": false,
+      "children": [
+        {
+          "id": 21,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 22,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 49,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtlc.otet.otettrackdetail.shipco",
+                  "label": "global.ship.company",
+                  "maxLength": 30
+                },
+                {
+                  "id": 51,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "dtlc.otet.otettrackdetail.vessnm",
+                  "label": "global.vessel.name"
+                },
+                {
+                  "id": 52,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "dtlc.otet.otettrackdetail.whse",
+                  "label": "global.receiving.warehouse"
+                }
+              ]
+            },
+            {
+              "id": 23,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 50,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtlc.otet.otettrackdetail.shipid",
+                  "label": "global.shipment.id",
+                  "maxLength": 30
+                },
+                {
+                  "id": 53,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "dtlc.otet.otettrackdetail.voyno",
+                  "label": "global.voyage.number"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

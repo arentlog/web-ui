@@ -1,0 +1,243 @@
+{
+  "viewId": "sa-saag-compliancemaster",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "menu.saag",
+          "subLabel": "global.compliance",
+          "children": [
+            {
+              "id": 8,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.expiration",
+              "conditionShow": "base.securityLevelEXPR >= 2",
+              "stateRef": "^.expirationMaster"
+            },
+            {
+              "id": 9,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.history",
+              "conditionShow": "base.securityLevelHIST >= 2",
+              "stateRef": "^.historyMaster"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 32,
+              "type": "EXP_AREA",
+              "label": "global.facet.search",
+              "collapsed": true,
+              "children": [
+                {
+                  "id": 33,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 34,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "CUSTOM",
+                          "subType": "AdvancedSearch",
+                          "options": {
+                            "criteria": "cmst.advCriteria",
+                            "criteriaList": "cmst.criteriaList",
+                            "criteriaView": "sa/saag/compliance/advanced-criteria.json",
+                            "defaultSelectedCriteria": "cmst.defaultSelectedCriteria",
+                            "searchFunction": "cmst.search",
+                            "controlRef": ""
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "type": "GRID",
+              "controlRef": "base.cgrid",
+              "model": "base.cdataset",
+              "options": {
+                "showCheckboxes": true,
+                "selectable": "multiple"
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.compliance",
+                  "subLabel": "",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.print",
+                      "icon": "icon-print",
+                      "conditionDisabled": "base.cgrid.isNoRowSelected()",
+                      "eventClick": "cmst.print()"
+                    },
+                    {
+                      "id": 28,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.disable",
+                      "icon": "icon-filter-is-empty",
+                      "conditionDisabled": "base.cgrid.isNoRowSelected()",
+                      "eventClick": "cmst.disable()"
+                    },
+                    {
+                      "id": 29,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.forget",
+                      "icon": "icon-delete",
+                      "conditionDisabled": "base.cgrid.isNoRowSelected()",
+                      "eventClick": "cmst.forget()",
+                      "securityLevel": 5
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "cono",
+                  "label": "global.company",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "rectype",
+                  "label": "global.function",
+                  "customFormatter": "base.recordFormatter"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "fieldcd",
+                  "label": "global.field",
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "GdprFieldList",
+                  "blankOption": false
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "value",
+                  "label": "global.value"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "phoneno",
+                  "label": "global.phone.number",
+                  "dataFormat": "PHONE"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "addr1",
+                  "label": "global.address.1"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "addr2",
+                  "label": "global.address.2"
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "addr3",
+                  "label": "global.address.3"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "city",
+                  "label": "global.city"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "state",
+                  "label": "global.state"
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "zipcd",
+                  "label": "global.zip.code"
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "type3": "CODES",
+                  "label": "global.country",
+                  "meta": "Country",
+                  "blankOption": false,
+                  "model": "countrycd"
+                },
+                {
+                  "id": 26,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "email",
+                  "label": "global.email"
+                },
+                {
+                  "id": 35,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "key1",
+                  "label": "global.primary.key"
+                },
+                {
+                  "id": 36,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "key2",
+                  "label": "global.secondary.key"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

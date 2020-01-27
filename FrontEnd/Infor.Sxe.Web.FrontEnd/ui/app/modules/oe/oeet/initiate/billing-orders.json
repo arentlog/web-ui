@@ -1,0 +1,337 @@
+{
+  "viewId": "oe-oeet-billingorders",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.order.entry",
+              "subLabel": "global.warehouse.transfer.billing.orders",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.initiate"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.search",
+                  "icon": "icon-search",
+                  "eventClick": "",
+                  "submitForm": true,
+                  "eventValidated": "wtbo.search()"
+                },
+                {
+                  "id": 43,
+                  "type": "BTN",
+                  "label": "global.clear",
+                  "icon": "icon-cancel",
+                  "eventClick": "wtbo.clear()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "wtbo.billingCriteria.whse",
+                          "label": "global.warehouse",
+                          "meta": "Warehouse",
+                          "autoFocus": true
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "wtbo.billingCriteria.autoaltwhsecd",
+                          "label": "global.billed.status",
+                          "eventChange": "wtbo.statusChanged()",
+                          "type3": "SET",
+                          "metaGroup": "OE",
+                          "meta": "BillingOrderStatusType",
+                          "blankOption": false
+                        },
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "wtbo.billingCriteria.oestagecd",
+                          "label": "global.order.stage",
+                          "type3": "SET",
+                          "metaGroup": "OE",
+                          "meta": "OrderStage",
+                          "blankOptionLabel": "global.all"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 14,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "wtbo.billingCriteria.fromrcptdt",
+                          "label": "global.from.receipt.date",
+                          "dataFormat": "DATE",
+                          "eventChange": "wtbo.receiptDateChanged()"
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "wtbo.billingCriteria.torcptdt",
+                          "label": "global.to.receipt.date",
+                          "dataFormat": "DATE",
+                          "eventChange": "wtbo.receiptDateChanged()"
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "wtbo.billingCriteria.recordlimit",
+                          "label": "global.record.limit",
+                          "size": "SM",
+                          "digits": 4,
+                          "dataFormat": "INTEGER"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 11,
+                  "type": "GRID",
+                  "model": "wtbo.billingOrdersCollection",
+                  "controlRef": "wtbo.grid",
+                  "options": {
+                    "showCheckboxes": true,
+                    "selectable": "multiple"
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 12,
+                      "type": "TOOLBAR",
+                      "label": "global.orders",
+                      "children": [
+                        {
+                          "id": 21,
+                          "type": "BTN",
+                          "label": "global.set.to.billed",
+                          "eventClick": "wtbo.wtBillingUpdate('b')"
+                        },
+                        {
+                          "id": 22,
+                          "type": "BTN",
+                          "label": "global.correct.short.quantity",
+                          "eventClick": "wtbo.wtBillingUpdate('c')"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 13,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.warehouse.transfer.number",
+                      "model": "wtno"
+                    },
+                    {
+                      "id": 23,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.suffix",
+                      "model": "wtsuf"
+                    },
+                    {
+                      "id": 30,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.notes",
+                      "model": "wtnotesfl",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 24,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "label": "global.receipt.date",
+                      "model": "receiptdt",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 25,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.ship.from.warehouse",
+                      "model": "shipfmwhse"
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.ship.to.warehouse",
+                      "model": "shiptowhse"
+                    },
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.billed.status",
+                      "model": "billstat"
+                    },
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.billed.oe.number",
+                      "model": "autoaltordno"
+                    },
+                    {
+                      "id": 29,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.billed.oe.suffix",
+                      "model": "autoaltordsuf"
+                    },
+                    {
+                      "id": 42,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "oenotesfl",
+                      "label": "global.order.notes",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 31,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.order.stage",
+                      "model": "oestage",
+                      "dataFormat": "OeStage"
+                    },
+                    {
+                      "id": 33,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.quantity.received",
+                      "model": "totqtyrcv",
+                      "dataFormat": "DECIMAL"
+                    },
+                    {
+                      "id": 32,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.customer",
+                      "model": "custno"
+                    },
+                    {
+                      "id": 37,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.customer.name",
+                      "model": "custname"
+                    },
+                    {
+                      "id": 34,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.customer.notes",
+                      "model": "custnotesfl",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 35,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.ship.to",
+                      "model": "shipto"
+                    },
+                    {
+                      "id": 36,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.ship.to.notes",
+                      "model": "shiptonotesfl",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 38,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.quantity.shipped",
+                      "model": "totqtyshp",
+                      "dataFormat": "DECIMAL"
+                    },
+                    {
+                      "id": 39,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "label": "global.invoice.date",
+                      "model": "invoicedt",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 40,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.reference",
+                      "model": "refer"
+                    },
+                    {
+                      "id": 41,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.quantity.unavailable",
+                      "model": "qtyunavail",
+                      "dataFormat": "DECIMAL"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

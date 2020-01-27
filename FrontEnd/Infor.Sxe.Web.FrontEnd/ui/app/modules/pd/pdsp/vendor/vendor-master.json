@@ -1,0 +1,225 @@
+{
+  "viewId": "pd-pdsp-vendormaster",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.pdsp",
+          "subLabel": "global.vendor.records",
+          "children": [
+            {
+              "id": 24,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.price.records",
+              "stateRef": "^.customerMaster",
+              "conditionShow": "base.securityLevelPDSC >= 2"
+            },
+            {
+              "id": 25,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.rebate.records",
+              "stateRef": "^.rebateMaster",
+              "conditionShow": "base.securityLevelPDSR >= 2"
+            },
+            {
+              "id": 26,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.vendor.contract.records",
+              "stateRef": "^.contractMaster",
+              "conditionShow": "base.securityLevelPDSVC >= 2"
+            },
+            {
+              "id": 33,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.national.program",
+              "stateRef": "^.nationalaccountMaster",
+              "conditionShow": "base.isNationalAccountTabEnabled()"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 27,
+              "type": "EXP_AREA",
+              "label": "global.advanced.search",
+              "collapsed": true,
+              "children": [
+                {
+                  "id": 28,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 29,
+                      "type": "COL",
+                      "subType": "1"
+                    }
+                  ]
+                },
+                {
+                  "id": 30,
+                  "type": "CUSTOM",
+                  "subType": "AdvancedSearch",
+                  "options": {
+                    "criteria": "vmst.advCriteria",
+                    "criteriaList": "vmst.criteriaList",
+                    "criteriaView": "pd/pdsp/vendor/vendor-advanced-criteria.json",
+                    "defaultSelectedCriteria": "vmst.defaultSelectedCriteria",
+                    "searchFunction": "vmst.search"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "GRID",
+              "id": 5,
+              "controlRef": "base.vgrid",
+              "model": "base.vdataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "selectable": "multiple",
+                "events": {
+                  "drilldown": "vmst.drilldown()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.vendor.information",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-new-document",
+                      "label": "global.new",
+                      "eventClick": "vmst.create()",
+                      "conditionDisabled": "base.vgrid.isAnyRowSelected()",
+                      "securityLevel": 4,
+                      "conditionShow": "base.securityLevelPDSV >= 4"
+                    },
+                    {
+                      "id": 8,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-edit",
+                      "label": "global.edit",
+                      "eventClick": "vmst.edit()",
+                      "conditionDisabled": "!base.vgrid.isOneRowSelected()",
+                      "securityLevel": 3,
+                      "conditionShow": "base.securityLevelPDSV >= 3"
+                    },
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-delete",
+                      "label": "global.delete",
+                      "eventClick": "vmst.delete()",
+                      "conditionDisabled": "base.vgrid.isNoRowSelected()",
+                      "securityLevel": 5,
+                      "conditionShow": "base.securityLevelPDSV >= 5"
+                    },
+                    {
+                      "id": 32,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-copy",
+                      "label": "global.copy",
+                      "eventClick": "vmst.copy()",
+                      "securityLevel": 4,
+                      "conditionDisabled": "!base.vgrid.isOneRowSelected()",
+                      "conditionShow": "base.securityLevelPDSV >= 4"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "vendno",
+                  "label": "global.vendor.number",
+                  "eventClick": "vmst.vendorHyperlink()",
+                  "dataFormat": "DECIMAL_TEXT"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "vendnotesfl",
+                  "label": "global.vendor.notes",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "prod",
+                  "label": "global.product",
+                  "eventClick": "vmst.productHyperlink()"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prodnotesfl",
+                  "label": "global.product.notes",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "statustype",
+                  "label": "global.status",
+                  "type3": "",
+                  "blankOption": true
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "refer",
+                  "label": "global.reference"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "startdt",
+                  "label": "global.start.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 31,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "enddt",
+                  "label": "global.end.date",
+                  "dataFormat": "DATE"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

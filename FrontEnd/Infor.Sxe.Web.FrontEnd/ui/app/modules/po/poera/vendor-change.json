@@ -1,0 +1,403 @@
+{
+  "viewId": "po-poera-vendorchange",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.vendor.change",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "submitForm": true,
+                  "eventValidated": "vndchg.submit()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 10,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.vendorChangeRecord.vendno",
+                          "label": "global.vendor.number",
+                          "meta": "Vendor"
+                        },
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.vendorChangeRecord.prodline",
+                          "label": "global.product.line",
+                          "meta": "ProdLine",
+                          "options": {
+                            "searchParams": {
+                              "vendno": {
+                                "type": "REF",
+                                "value": "base.vendorChangeRecord.vendno"
+                              },
+                              "whse": {
+                                "type": "REF",
+                                "value": "base.vendorChangeRecord.whse"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.vendorChangeRecord.shipfmno",
+                          "label": "global.ship.from.number",
+                          "meta": "ShipFrom",
+                          "options": {
+                            "searchParams": {
+                              "vendno": {
+                                "type": "REF",
+                                "value": "base.vendorChangeRecord.vendno"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.vendorChangeRecord.repricefl",
+                          "label": "global.reprice.line.items",
+                          "dataFormat": "LOGICAL"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 15,
+                  "type": "EXP_AREA",
+                  "label": "global.chain.discount",
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 17,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "base.vendorChangeRecord.usechaindiscfl",
+                              "label": "global.use.chain.discount",
+                              "dataFormat": "LOGICAL"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 25,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 26,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "RADIO_SET",
+                              "model": "base.vendorChangeRecord.multiplierdisctype",
+                              "label": "global.type",
+                              "meta": "PORRARVendorChangeType",
+                              "type3": "SET",
+                              "metaGroup": "PO",
+                              "size": "SM"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 27,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "RADIO_SET",
+                              "model": "base.vendorChangeRecord.baselisttype",
+                              "label": "global.price",
+                              "meta": "PORRARVendorChangeCost",
+                              "size": "SM",
+                              "type3": "SET",
+                              "metaGroup": "PO"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 28,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 29,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.multiplier",
+                              "label": "number.1",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 3,
+                              "decimals": 6
+                            },
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc1",
+                              "label": "number.2",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc2",
+                              "label": "number.3",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            },
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc3",
+                              "label": "number.4",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            },
+                            {
+                              "id": 44,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc4",
+                              "label": "number.5",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            },
+                            {
+                              "id": 47,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc5",
+                              "label": "number.6",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            },
+                            {
+                              "id": 50,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc6",
+                              "label": "number.7",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            }
+                          ]
+                        },
+                        {
+                          "id": 31,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc7",
+                              "label": "number.8",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc8",
+                              "label": "number.9",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            },
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc9",
+                              "label": "number.10",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            },
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc10",
+                              "label": "number.11",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            },
+                            {
+                              "id": 45,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc11",
+                              "label": "number.12",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            },
+                            {
+                              "id": 48,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc12",
+                              "label": "number.13",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            },
+                            {
+                              "id": 51,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc13",
+                              "label": "number.14",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            }
+                          ]
+                        },
+                        {
+                          "id": 30,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc14",
+                              "label": "number.15",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc15",
+                              "label": "number.16",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            },
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc16",
+                              "label": "number.17",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            },
+                            {
+                              "id": 43,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc17",
+                              "label": "number.18",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            },
+                            {
+                              "id": 46,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc18",
+                              "label": "number.19",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            },
+                            {
+                              "id": 49,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.vendorChangeRecord.disc19",
+                              "label": "number.20",
+                              "dataFormat": "INTEGER",
+                              "digits": 2
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

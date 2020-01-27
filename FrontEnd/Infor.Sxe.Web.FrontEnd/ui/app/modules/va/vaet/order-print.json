@@ -1,0 +1,245 @@
+{
+  "viewId": "va-vaet-orderprint",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.vaet",
+              "subLabel": "global.print",
+              "controls": {
+                "navBtns": {
+                  "id": 46,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 47,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.submit",
+                  "icon": "icon-confirm",
+                  "submitForm": true,
+                  "eventValidated": "ordprt.submit()"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "stateRef": "^.master"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "ordprt.printRecord.vanox",
+                          "label": "global.order.number",
+                          "meta": "VAOrders",
+                          "eventChange": "prtord.orderSelected()",
+                          "options": {
+                            "allowEntry": true
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "FIELD_SET",
+                          "label": "global.print.options",
+                          "children": [
+                            {
+                              "id": 13,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "ordprt.printInternal",
+                              "label": "global.internal.va.print",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!ordprt.isPrintInternalEnabled"
+                            },
+                            {
+                              "id": 14,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "ordprt.printPick",
+                              "label": "global.pick.ticket",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!ordprt.isPrintPickEnabled"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 15,
+                  "type": "EXP_AREA",
+                  "label": "global.print.internal.va.print",
+                  "conditionShow": "ordprt.printInternal",
+                  "children": [
+                    {
+                      "id": 43,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "ordprt.printInternalSeqno",
+                      "label": "global.sequence.number.poundsign",
+                      "size": "SM",
+                      "meta": "VASections",
+                      "dataFormat": "INTEGER",
+                      "sign": "+",
+                      "digits": 3,
+                      "options": {
+                        "searchParams": {
+                          "vano": {
+                            "type": "REF",
+                            "value": "ordprt.vano"
+                          },
+                          "vasuf": {
+                            "type": "REF",
+                            "value": "ordprt.vasuf"
+                          },
+                          "activeonly": true
+                        }
+                      }
+                    },
+                    {
+                      "id": 16,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 17,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 21,
+                              "type": "CUSTOM",
+                              "subType": "Printer",
+                              "options": {
+                                "functionName": "vaet",
+                                "subFunctionName": "Internal VA Print",
+                                "printerSettingsModel": "ordprt.internalVaSettings",
+                                "controlRef": "ordprt.internalVaControl",
+                                "eventReady": "ordprt.internalVaReady()",
+                                "defaultPrintType": "p",
+                                "reportName": ""
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 18,
+                  "type": "EXP_AREA",
+                  "label": "global.print.pick.ticket",
+                  "conditionShow": "ordprt.printPick",
+                  "children": [
+                    {
+                      "id": 45,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "ordprt.printPickSeqno",
+                      "label": "global.sequence.number.poundsign",
+                      "size": "SM",
+                      "meta": "VASections",
+                      "dataFormat": "INTEGER",
+                      "sign": "+",
+                      "digits": 3,
+                      "options": {
+                        "searchParams": {
+                          "vano": {
+                            "type": "REF",
+                            "value": "ordprt.vano"
+                          },
+                          "vasuf": {
+                            "type": "REF",
+                            "value": "ordprt.vasuf"
+                          },
+                          "activeonly": true
+                        }
+                      }
+                    },
+                    {
+                      "id": 19,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 20,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "CUSTOM",
+                              "subType": "Printer",
+                              "options": {
+                                "functionName": "vaet",
+                                "subFunctionName": "Pick Ticket",
+                                "printerSettingsModel": "ordprt.pickTicketSettings",
+                                "controlRef": "ordprt.pickTicketControl",
+                                "eventReady": "ordprt.pickTicketReady()",
+                                "defaultPrintType": "p",
+                                "reportName": ""
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

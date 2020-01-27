@@ -1,0 +1,175 @@
+{
+  "viewId": "wt-wtee-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.exception.receipts.details",
+              "subLabel": "{{dtl.subTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "label": "special.button.back",
+                      "eventClick": "dtl.navigateBack()"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 22,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 23,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 58,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.wteh.cono",
+                          "label": "global.from.cono"
+                        },
+                        {
+                          "id": 59,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.wteh.cono2",
+                          "label": "global.to.cono"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 154,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 62,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.wteh.shipfmwhse",
+                          "label": "global.from.warehouse",
+                          "contextEntity": "Icsd"
+                        },
+                        {
+                          "id": 63,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.wteh.shiptowhse",
+                          "label": "global.to.warehouse",
+                          "contextEntity": "Icsd"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 24,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 60,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.wteh.shiptonm",
+                          "label": "global.warehouse.name"
+                        },
+                        {
+                          "id": 155,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.stageName",
+                          "label": "global.stage"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 27,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 28,
+                      "type": "TAB",
+                      "label": "global.header",
+                      "tabId": "header",
+                      "subFunction": "Header",
+                      "children": [
+                        {
+                          "id": 161,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "wt/wtee/tabs/header.json",
+                          "controller": "WteeHeaderCtrl as header"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 68,
+                      "type": "TAB",
+                      "label": "global.line.items",
+                      "tabId": "line-items",
+                      "conditionSelected": "base.isDetailSelectedDefaultTabLine",
+                      "subFunction": "Line Items",
+                      "children": [
+                        {
+                          "id": 162,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "wt/wtee/tabs/lineitems.json",
+                          "controller": "WteeLineitemsCtrl as line"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 163,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Wteh",
+      "contextValues": {
+        "key1": "base.wteh.wtno",
+        "key2": "base.wteh.wtsuf"
+      }
+    },
+    {
+      "id": 164,
+      "type": "VIEW_CNTR",
+      "viewName": "binAllocation"
+    }
+  ]
+}

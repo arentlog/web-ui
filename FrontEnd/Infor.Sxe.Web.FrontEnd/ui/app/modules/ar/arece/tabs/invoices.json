@@ -1,0 +1,338 @@
+{
+  "viewId": "ar-arece-detail-invoices",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "TAB",
+  "children": [
+    {
+      "id": 133,
+      "type": "EXP_AREA",
+      "label": "global.auto.apply",
+      "collapsed": true,
+      "children": [
+        {
+          "id": 171,
+          "type": "TOOLBAR",
+          "label": "global.blank.label.string.for.space",
+          "children": [
+            {
+              "id": 172,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.apply",
+              "eventClick": "dtl.onInvoiceDetailAutoApply()",
+              "icon": "icon-send"
+            }
+          ]
+        },
+        {
+          "id": 134,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 135,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 136,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.selectedAutoApplyInvoiceType",
+                  "label": "global.invoices",
+                  "type3": "SET",
+                  "metaGroup": "AR",
+                  "meta": "CashReceiptsAutoApplyInvoiceType",
+                  "blankOption": false
+                },
+                {
+                  "id": 137,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.selectedAutoApplyDiscountType",
+                  "label": "global.discounts",
+                  "type3": "SET",
+                  "metaGroup": "AR",
+                  "meta": "CashReceiptsAutoApplyDiscountType",
+                  "blankOption": false
+                }
+              ]
+            },
+            {
+              "id": 138,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 139,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "base.isIncludeCredits",
+                  "label": "global.include.all.credits",
+                  "dataFormat": "LOGICAL",
+                  "conditionShow": "base.mainData.showall"
+                },
+                {
+                  "id": 140,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "base.isIncludeDisputes",
+                  "label": "global.include.disputed.invoices",
+                  "dataFormat": "LOGICAL"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 145,
+      "type": "GRID",
+      "model": "base.invoicesListInv",
+      "controlRef": "base.grid1",
+      "options": {
+        "showCheckboxes": true,
+        "showDrilldown": true,
+        "selectable": "multiple",
+        "editable": true,
+        "events": {
+          "cellchange": "dtl.onInvoiceCellChange()",
+          "drilldown": "dtl.drilldown()",
+          "selected": "dtl.onGridRowSelected()"
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 146,
+          "type": "TOOLBAR",
+          "label": "global.invoices",
+          "children": [
+            {
+              "id": 165,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.paid.in.full",
+              "conditionDisabled": "!base.grid1.isAnyRowSelected()",
+              "eventClick": "dtl.onInvoiceDetailPaidInFull()"
+            },
+            {
+              "id": 166,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.addons",
+              "conditionDisabled": "!dtl.showInvoiceDetailGridAddonsButton()",
+              "eventClick": "dtl.onInvoiceDetailAddons()"
+            },
+            {
+              "id": 167,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.original.discount",
+              "conditionDisabled": "!dtl.showInvoiceDetailGridDiscountButton()",
+              "eventClick": "dtl.onInvoiceDetailOriginalDiscount()"
+            },
+            {
+              "id": 168,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.write.off",
+              "conditionDisabled": "!dtl.showInvoiceDetailGridWriteoffButton()",
+              "eventClick": "dtl.onInvoiceDetailWriteoff()"
+            },
+            {
+              "id": 169,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.reset",
+              "conditionDisabled": "!base.grid1.isAnyRowSelected()",
+              "eventClick": "dtl.onInvoiceDetailReset()"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 148,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "invoice",
+          "label": "global.invoice.number",
+          "eventClick": "dtl.oeInquiryHyperlink()"
+        },
+        {
+          "id": 149,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "notesfl",
+          "label": "global.notes",
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 150,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "seqno",
+          "label": "global.sequence.number",
+          "dataFormat": "Sequence"
+        },
+        {
+          "id": 151,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "transtype",
+          "label": "global.type"
+        },
+        {
+          "id": 152,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "duedt",
+          "label": "global.due.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 153,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "amount",
+          "label": "global.invoice.amount",
+          "dataFormat": "CURRENCY",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 154,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "piffl",
+          "label": "global.paid.in.full",
+          "editable": true,
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 155,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "applyamt",
+          "label": "global.apply.amount",
+          "editable": true,
+          "digits": 9,
+          "decimals": 2,
+          "cellEditable": "dtl.isInvoiceApplyAmtEditable()",
+          "dataFormat": "CURRENCY",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 156,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "discamt",
+          "label": "global.discount.amount",
+          "editable": true,
+          "decimals": 2,
+          "digits": 8,
+          "dataFormat": "CURRENCY",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 157,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "discdt",
+          "label": "global.discount.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 158,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "invdt",
+          "label": "global.invoice.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 162,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "custno",
+          "label": "global.customer.number",
+          "eventClick": "dtl.custInquiryHyperlink()",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 159,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "shipto",
+          "label": "global.ship.to",
+          "eventClick": "dtl.custInquiryHyperlink()"
+        },
+        {
+          "id": 160,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "custpo",
+          "label": "global.customer.purchase.order.number"
+        },
+        {
+          "id": 161,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "refer",
+          "label": "global.reference",
+          "editable": true,
+          "maxLength": 24,
+          "cellEditable": "dtl.isInvoiceReferEditable()"
+        },
+        {
+          "id": 163,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "totaddon",
+          "label": "global.total.addons",
+          "dataFormat": "CURRENCY",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 164,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "tottaxes",
+          "label": "global.total.taxes",
+          "dataFormat": "CURRENCY",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 173,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "npclaimno",
+          "label": "global.national.program.claim.number",
+          "conditionInclude": "base.isNationalProgramsOn"
+        },
+        {
+          "id": 174,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "relateddocument",
+          "label": "global.related.document"
+        }
+      ]
+    }
+  ]
+}

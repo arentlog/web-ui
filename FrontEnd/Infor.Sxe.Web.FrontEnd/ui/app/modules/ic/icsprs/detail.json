@@ -1,0 +1,350 @@
+{
+  "viewId": "ic-icsprs-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.sourcing.restrictions",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.icsprs.restricttype",
+                              "label": "global.restriction.type",
+                              "required": true,
+                              "type3": "SET",
+                              "metaGroup": "IC",
+                              "meta": "SourcingRestictionType",
+                              "blankOption": false,
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsprs.product",
+                              "label": "global.product",
+                              "meta": "ProdAll",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.icsprs.restricttype === 'PR'",
+                              "conditionRequired": "dtl.icsprs.restricttype === 'PR'",
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 41,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "conditionDisabled": "!dtl.icsprs.product",
+                                  "stateRef": "icip.detail({pk: dtl.icsprs.product, pk2: dtl.icsprs.whse})"
+                                }
+                              }
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsprs.prodlinevendno",
+                              "label": "global.vendor.number",
+                              "meta": "Vendor",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.icsprs.restricttype === 'PL'",
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 23,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "conditionDisabled": "!dtl.icsprs.prodlinevendno",
+                                  "stateRef": "apiv.detail ({pk: dtl.icsprs.prodlinevendno})"
+                                }
+                              }
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsprs.prodline",
+                              "label": "global.product.line",
+                              "meta": "ProdLine",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.icsprs.restricttype === 'PL'",
+                              "conditionRequired": "dtl.icsprs.restricttype === 'PL'",
+                              "options": {
+                                "searchParams": {
+                                  "prodline": {
+                                    "type": "REF",
+                                    "value": "dtl.icsprs.prodline"
+                                  },
+                                  "vendno": {
+                                    "type": "REF",
+                                    "value": "dtl.icsprs.prodlinevendno"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsprs.prodcat",
+                              "label": "global.product.category",
+                              "meta": "ProdCat",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.icsprs.restricttype === 'PC'",
+                              "conditionRequired": "dtl.icsprs.restricttype === 'PC'"
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "dtl.icsprs.startdt",
+                              "label": "global.start.date",
+                              "dataFormat": "DATE",
+                              "conditionReadonly": "!base.isCreate()",
+                              "required": true
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsprs.whse",
+                              "label": "global.warehouse",
+                              "meta": "Warehouse",
+                              "conditionReadonly": "!base.isCreate()"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "dtl.icsprs.expiredt",
+                              "label": "global.expire.date",
+                              "dataFormat": "DATE"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsprs.descrip",
+                              "label": "global.description",
+                              "maxLength": 48,
+                              "size": "LG"
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.icsprs.module",
+                              "label": "global.document.type",
+                              "blankOption": false,
+                              "type3": "SET",
+                              "meta": "SourcingRestrictionDocType",
+                              "metaGroup": "IC",
+                              "eventChange": "dtl.chgDocumentType(dtl.icsprs.module)"
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsprs.vendno",
+                              "label": "global.restriction.for.vendor.number",
+                              "meta": "Vendor",
+                              "conditionDisabled": "dtl.icsprs.module === 'T'",
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 40,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "conditionDisabled": "!dtl.icsprs.vendno",
+                                  "stateRef": "apiv.detail ({pk: dtl.icsprs.vendno})"
+                                }
+                              }
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsprs.shiptowhse",
+                              "label": "global.ship.to.warehouse",
+                              "meta": "Warehouse",
+                              "conditionDisabled": "dtl.icsprs.module === 'P'"
+                            },
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.icsprs.activefl",
+                              "label": "global.active",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.icsprs.restrictovrfl",
+                              "label": "global.allow.override",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsprs.icsprRowid",
+                              "label": "global.row.id",
+                              "labelHidden": true,
+                              "conditionShow": "AlwaysHidden"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 36,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 39,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "icsprs",
+                        "objectRef": "dtl.icsprs",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

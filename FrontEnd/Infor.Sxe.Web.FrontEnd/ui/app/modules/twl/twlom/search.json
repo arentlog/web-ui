@@ -1,0 +1,188 @@
+{
+  "viewId": "twl-twlom-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.criteria.coNum",
+                  "label": "global.company.number",
+                  "readonly": true,
+                  "extra": true
+                },
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.whNum",
+                  "label": "global.warehouse",
+                  "readonly": false,
+                  "meta": "TWLWarehouse",
+                  "conditionReadonly": "base.restrictTWLWarehouse",
+                  "required": true,
+                  "eventChange": "base.changeSearchWarehouse()"
+                },
+                {
+                  "id": 138,
+                  "type": "FIELD",
+                  "subType": "MULTI_SELECT",
+                  "model": "self.ominfo.altWhNumList",
+                  "label": "global.alternate.warehouse",
+                  "conditionShow": "self.ominfo.altWhNum",
+                  "readonly": true
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.viewtype",
+                  "label": "global.view",
+                  "type3": "MANUAL",
+                  "optionsModel": "base.viewTypes",
+                  "blankOption": false,
+                  "eventChange": "base.changeViewType()",
+                  "conditionShow": "!base.inExceptionsMaster"
+                },
+                {
+                  "id": 137,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.exceptionType",
+                  "label": "global.exception.type",
+                  "type3": "SET",
+                  "optionsModel": "base.viewTypes",
+                  "blankOption": false,
+                  "eventChange": "base.changeViewType()",
+                  "conditionShow": "base.inExceptionsMaster",
+                  "metaGroup": "TWL",
+                  "meta": "ExceptionType"
+                },
+                {
+                  "id": 16,
+                  "type": "COMP_FLD",
+                  "extra": true,
+                  "children": [
+                    {
+                      "id": 13,
+                      "type": "FIELD",
+                      "subType": "MULTI_SELECT",
+                      "model": "base.criteria.order_status_list",
+                      "label": "global.status",
+                      "readonly": true,
+                      "size": "SM",
+                      "type3": "CODES",
+                      "meta": "TWLOrderStatus",
+                      "conditionShow": "!base.inExceptionsMaster"
+                    },
+                    {
+                      "id": 14,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "base.criteria.isAssigned",
+                      "label": "global.assigned",
+                      "dataFormat": "LOGICAL",
+                      "size": "XS",
+                      "disabled": true,
+                      "conditionShow": "!base.inExceptionsMaster"
+                    },
+                    {
+                      "id": 15,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "base.criteria.isUnassigned",
+                      "label": "global.unassigned",
+                      "dataFormat": "LOGICAL",
+                      "size": "XS",
+                      "disabled": true,
+                      "conditionShow": "!base.inExceptionsMaster"
+                    }
+                  ]
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.batch",
+                  "label": "global.wave",
+                  "meta": "TWLWave",
+                  "conditionShow": "!base.inExceptionsMaster",
+                  "options": {
+                    "searchParams": {
+                      "coNum": {
+                        "type": "REF",
+                        "value": "base.criteria.coNum"
+                      },
+                      "whNum": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      }
+                    },
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 134,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "base.criteria.includeOnHold",
+                  "label": "global.include.on.hold",
+                  "dataFormat": "LOGICAL",
+                  "conditionShow": "!base.inExceptionsMaster"
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.recordcountlimit",
+                  "label": "global.record.limit",
+                  "digits": 4,
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()",
+                  "conditionShow": "!base.inExceptionsMaster"
+                },
+                {
+                  "id": 135,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "conditionShow": "base.inExceptionsMaster",
+                  "eventClick": "srch.submitExceptions()"
+                },
+                {
+                  "id": 136,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+{
+  "viewId": "va-vasp-detail-tabs-lineitems",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 31,
+      "type": "MESSAGE",
+      "text": "{{base.selectedSectionData}}"
+    },
+    {
+      "id": 8,
+      "type": "GRID",
+      "controlRef": "line.lineitemsGrid",
+      "model": "base.vasplinelistresults",
+      "options": {
+        "showDrilldown": false,
+        "showCheckboxes": true,
+        "events": {
+          "selected": "line.onRowSelected()"
+        },
+        "selectable": "multiple",
+        "showExpander": false,
+        "rowDetailOptions": {
+          "controller": "",
+          "template": "",
+          "paramsReference": ""
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 9,
+          "type": "TOOLBAR",
+          "label": "global.line.items",
+          "children": [
+            {
+              "id": 27,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.new",
+              "icon": "icon-new-document",
+              "securityLevel": 4,
+              "eventClick": "line.create()",
+              "conditionDisabled": "line.lineitemsGrid.isAnyRowSelected()"
+            },
+            {
+              "id": 32,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.edit",
+              "icon": "icon-edit",
+              "securityLevel": 3,
+              "eventClick": "line.edit()",
+              "conditionDisabled": "!line.lineitemsGrid.isOneRowSelected()"
+            },
+            {
+              "id": 29,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.extend",
+              "eventClick": "line.extend()",
+              "conditionDisabled": "!line.lineitemsGrid.isOneRowSelected()",
+              "icon": "icon-compose"
+            },
+            {
+              "id": 30,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.labor.product.info",
+              "eventClick": "line.laborInfo()",
+              "conditionDisabled": "!line.lineitemsGrid.isOneRowSelected() || base.selectedLineitemsRecord.icspstatus.toLowerCase() !== 'l'",
+              "icon": "icon-inventory"
+            },
+            {
+              "id": 33,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-delete",
+              "label": "global.delete",
+              "eventClick": "line.deleteLine()",
+              "securityLevel": 5,
+              "conditionDisabled": "!line.lineitemsGrid.isOneRowSelected()"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 10,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "lineno",
+          "label": "global.line.number",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 11,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "nonstockty",
+          "label": "global.product.type",
+          "dataFormat": "NonstockType"
+        },
+        {
+          "id": 12,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "shipprod",
+          "label": "global.product",
+          "eventClick": "line.navigateToIcip()"
+        },
+        {
+          "id": 13,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "notesfl",
+          "label": "global.notes",
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 14,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dspldesc",
+          "label": "global.description"
+        },
+        {
+          "id": 15,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "qtybasetotfl",
+          "label": "global.quantity.based.on.total",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 16,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "qtyneeded",
+          "label": "global.quantity.needed",
+          "dataFormat": "DECIMAL",
+          "eventClick": "line.navigateToIcia()",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 17,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "unit",
+          "label": "global.unit"
+        },
+        {
+          "id": 18,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "prodcostdspl",
+          "label": "global.cost",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 20,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "availqtydspl",
+          "label": "global.quantity.available",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 21,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "lgthcompfl",
+          "label": "global.variable.length.component",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 19,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "labordata",
+          "label": "global.labor.data"
+        },
+        {
+          "id": 22,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "scrapfctr",
+          "label": "global.scrap",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 23,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "cutoffty",
+          "label": "global.cut.off.ty",
+          "type3": "SET",
+          "metaGroup": "VA",
+          "meta": "CutOffType",
+          "blankOption": false
+        },
+        {
+          "id": 24,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cutofflength",
+          "label": "global.cutoff.length",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 26,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "msdsfl",
+          "label": "global.hazardous",
+          "dataFormat": "LOGICAL"
+        }
+      ]
+    }
+  ]
+}

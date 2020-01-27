@@ -1,0 +1,167 @@
+{
+  "viewId": "oe-oeet-selectproducts-lineentrychildstates-taxjurisdiction",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ale.isTaxJurisdiction()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.tax.jurisdiction",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "aleTj.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.submit",
+                  "icon": "icon-save",
+                  "eventClick": "aleTj.submit()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "aleTj.type",
+                          "label": "global.type",
+                          "type3": "INLINE",
+                          "blankOption": true,
+                          "eventChange": "aleTj.typeChanged()",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "OPT",
+                              "label": "global.purchase.order",
+                              "value": "p"
+                            },
+                            {
+                              "id": 18,
+                              "type": "OPT",
+                              "label": "global.warehouse.transfer",
+                              "value": "t"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleTj.purchaseOrderNumber",
+                          "label": "global.purchase.order.number",
+                          "meta": "POOrders",
+                          "conditionShow": "aleTj.type === 'p'",
+                          "conditionDisabled": "aleTj.type !== 'p'",
+                          "eventChange": "aleTj.orderChanged()"
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleTj.warehouseTransferNumber",
+                          "label": "global.warehouse.transfer.number",
+                          "meta": "WTOrders",
+                          "conditionShow": "aleTj.type === 't'",
+                          "conditionDisabled": "aleTj.type !== 't'",
+                          "eventChange": "aleTj.orderChanged()"
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleTj.crJurisdiction.vendno",
+                          "label": "global.vendor",
+                          "conditionDisabled": "aleTj.type !== 'p'",
+                          "conditionShow": "aleTj.type === 'p'"
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleTj.crJurisdiction.shipfmno",
+                          "label": "global.ship.from",
+                          "conditionDisabled": "aleTj.type !== 'p'",
+                          "conditionShow": "aleTj.type === 'p'"
+                        },
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleTj.crJurisdiction.whse",
+                          "label": "global.warehouse",
+                          "conditionDisabled": "aleTj.type !== 't'",
+                          "conditionShow": "aleTj.type === 't'"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "CUSTOM",
+                          "subType": "AddressInfo",
+                          "options": {
+                            "countryCdVisible": true,
+                            "addr1Model": "aleTj.crJurisdiction.addr1",
+                            "addr2Model": "aleTj.crJurisdiction.addr2",
+                            "addr3Model": "aleTj.crJurisdiction.addr3",
+                            "cityModel": "aleTj.crJurisdiction.city",
+                            "stateModel": "aleTj.crJurisdiction.state",
+                            "zipCodeModel": "aleTj.crJurisdiction.zipcd",
+                            "geoCodeVisible": true,
+                            "addressLabel": "global.address"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

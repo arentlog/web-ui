@@ -1,0 +1,148 @@
+{
+  "viewId": "sa-saamm-export",
+  "id": 1,
+  "type": "VIEW",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.export",
+              "subLabel": "{{base.subTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 7,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 8,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "submitForm": true,
+                  "eventValidated": "exp.submit()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 12,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "exp.criteria.allrowsfl",
+                          "label": "global.row.selection",
+                          "type3": "SET",
+                          "metaGroup": "SA",
+                          "meta": "MassMaintenanceRowSelection",
+                          "blankOption": false
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "exp.criteria.begseqno",
+                          "label": "global.beginning.seqno",
+                          "dataFormat": "INTEGER_TEXT",
+                          "sign": "+",
+                          "digits": 6,
+                          "conditionDisabled": "exp.criteria.allrowsfl"
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "exp.criteria.endseqno",
+                          "label": "global.ending.seqno",
+                          "dataFormat": "INTEGER_TEXT",
+                          "sign": "+",
+                          "digits": 6,
+                          "conditionDisabled": "exp.criteria.allrowsfl"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "exp.criteria.outputty",
+                          "label": "global.create.tab.delimited.file",
+                          "type3": "MANUAL",
+                          "optionsModel": "exp.outputFileOptions",
+                          "blankOption": false,
+                          "conditionShow": "base.isDropboxEnabled()"
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "exp.criteria.emailaddr",
+                          "label": "global.email.address"
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "exp.criteria.createfl",
+                          "label": "global.export.create.records",
+                          "dataFormat": "LOGICAL"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 9,
+                  "type": "CUSTOM",
+                  "subType": "Printer",
+                  "options": {
+                    "controlRef": "base.exportPrinterControl",
+                    "functionName": "saamm",
+                    "subFunctionName": "export"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

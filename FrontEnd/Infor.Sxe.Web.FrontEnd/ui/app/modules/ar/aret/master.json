@@ -1,0 +1,386 @@
+{
+  "viewId": "ar-aret-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isMaster()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.aret",
+              "subLabel": "",
+              "children": [
+                {
+                  "id": 30,
+                  "type": "BTN",
+                  "label": "global.next",
+                  "icon": "icon-right-arrow",
+                  "eventClick": "",
+                  "submitForm": true,
+                  "eventValidated": "mst.continue()",
+                  "conditionDisabled": "mst.isJournalOpen()"
+                },
+                {
+                  "id": 31,
+                  "type": "BTN",
+                  "label": "global.clear",
+                  "icon": "icon-cancel",
+                  "eventClick": "mst.clearStepOne()",
+                  "conditionDisabled": "mst.isJournalOpen()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 11,
+                  "type": "EXP_AREA",
+                  "label": "global.create",
+                  "children": [
+                    {
+                      "id": 12,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.aret.custno",
+                              "label": "global.customer",
+                              "type3": "STANDARD",
+                              "meta": "Customer",
+                              "required": true,
+                              "conditionReadonly": "!base.aret.custnoenabled",
+                              "conditionFocus": "base.aret.custnoenabled"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 35,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "type3": "MANUAL",
+                              "model": "base.aret.transcd",
+                              "label": "global.type",
+                              "optionLabelField": "transcddesc",
+                              "optionValueField": "transcd",
+                              "optionsModel": "mst.transCdTypes",
+                              "conditionReadonly": "!base.aret.transcdenabled",
+                              "eventChange": "mst.transcdChanged()",
+                              "blankOption": false
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 32,
+                  "type": "EXP_AREA",
+                  "label": "global.for.invoice",
+                  "conditionShow": "mst.isForSectionVisible()",
+                  "children": [
+                    {
+                      "id": 33,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 34,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "base.aret.fortranscd",
+                              "label": "global.type",
+                              "conditionReadonly": "!base.aret.fortranscdenabled",
+                              "conditionShow": "!base.aret.fortranscdhidden",
+                              "eventChange": "mst.forTranscdChanged()",
+                              "type3": "MANUAL",
+                              "optionLabelField": "transcddesc",
+                              "optionValueField": "transcd",
+                              "optionsModel": "mst.forTransCdTypes",
+                              "blankOption": false
+                            }
+                          ]
+                        },
+                        {
+                          "id": 37,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.aret.forinvno",
+                              "label": "global.invoice",
+                              "type3": "STANDARD",
+                              "metaGroup": "IC",
+                              "meta": "Invoices",
+                              "conditionDisabled": "",
+                              "conditionShow": "!base.aret.forinvnohidden",
+                              "conditionReadonly": "!base.aret.forinvnoenabled",
+                              "eventChange": "mst.invoiceSelected()",
+                              "contextOptions": {
+                                "deactivated": true
+                              },
+                              "contextValues": {
+                                "key1": "",
+                                "key2": "",
+                                "key3": ""
+                              },
+                              "options": {
+                                "searchParams": {
+                                  "custno": {
+                                    "type": "REF",
+                                    "value": "base.aret.custno"
+                                  },
+                                  "transcd": {
+                                    "type": "REF",
+                                    "value": "base.forTransCode"
+                                  },
+                                  "statustype": {
+                                    "type": "REF",
+                                    "value": "base.activeStatus"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 36,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.aret.forseqno",
+                              "label": "global.sequence.number",
+                              "required": false,
+                              "conditionReadonly": "!base.aret.forseqnoenabled",
+                              "conditionShow": "!base.aret.forseqnohidden",
+                              "meta": "InvoiceSequence",
+                              "size": "SM",
+                              "options": {
+                                "searchParams": {
+                                  "invno": {
+                                    "type": "REF",
+                                    "value": "base.forInvoiceNumber"
+                                  },
+                                  "invsuf": {
+                                    "type": "REF",
+                                    "value": "base.forInvoiceSuffix"
+                                  },
+                                  "custno": {
+                                    "type": "REF",
+                                    "value": "base.aret.custno"
+                                  },
+                                  "transcd": {
+                                    "type": "REF",
+                                    "value": "base.forTransCode"
+                                  },
+                                  "statustype": {
+                                    "type": "REF",
+                                    "value": "base.activeStatus"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 38,
+                  "type": "GRID",
+                  "model": "base.aretListCollection",
+                  "controlRef": "base.grid",
+                  "options": {
+                    "showCheckboxes": true,
+                    "selectable": "single",
+                    "events": {
+                      "selected": "mst.transactionRowSelected()"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 6,
+                      "type": "TOOLBAR",
+                      "label": "global.customer.transactions",
+                      "children": []
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 40,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "custno",
+                      "label": "global.customer",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 52,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "custnotesfl",
+                      "label": "global.customer.notes",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 54,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "transcddesc",
+                      "label": "global.transaction.type"
+                    },
+                    {
+                      "id": 41,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "invno",
+                      "label": "global.invoice.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 57,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "invsuf",
+                      "label": "global.suffix",
+                      "dataFormat": "Suffix"
+                    },
+                    {
+                      "id": 53,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "notesfl",
+                      "label": "global.invoice.notes",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 44,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "amount",
+                      "label": "global.amount",
+                      "dataFormat": "CURRENCY"
+                    },
+                    {
+                      "id": 45,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "shipto",
+                      "label": "global.ship.to",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 46,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "divno",
+                      "label": "global.division.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 47,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "model": "invdt",
+                      "label": "global.invoice.date",
+                      "dataFormat": "DATE",
+                      "width": 170
+                    },
+                    {
+                      "id": 48,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "termstype",
+                      "label": "global.terms"
+                    },
+                    {
+                      "id": 49,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "refer",
+                      "label": "global.reference"
+                    },
+                    {
+                      "id": 50,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "slsytdfl",
+                      "label": "global.sales.year.to.date",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 55,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "transcd",
+                      "label": "global.transaction.code",
+                      "extra": true
+                    },
+                    {
+                      "id": 56,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "userfield",
+                      "label": "global.user.field",
+                      "extra": true
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Aret",
+      "contextValues": {
+        "key1": "base.aretForNotes.journalno",
+        "key2": "base.aretForNotes.setno",
+        "key3": "base.aretForNotes.invno"
+      }
+    },
+    {
+      "id": 58,
+      "type": "VIEW_CNTR",
+      "viewName": "subMaster"
+    }
+  ]
+}

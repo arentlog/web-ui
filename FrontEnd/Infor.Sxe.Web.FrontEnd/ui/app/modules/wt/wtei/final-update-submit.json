@@ -1,0 +1,174 @@
+{
+  "viewId": "wt-wtei-finalupdatesubmit",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.receipt.of.inventory.update",
+              "subLabel": "{{fupd.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "fupd.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "eventClick": "fupd.validateFinalSubmit()"
+                },
+                {
+                  "id": 44,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "securityLevel": 3,
+                  "eventClick": "fupd.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "fupd.wteiUpdate.whse",
+                  "label": "global.processing.whse"
+                },
+                {
+                  "id": 41,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "fupd.wteiUpdate.receiptstype",
+                      "label": "global.printer.for.allocation.and.receipt.report",
+                      "meta": "ReceiptOfInventoryPrintType",
+                      "type3": "SET",
+                      "metaGroup": "WT",
+                      "blankOption": false
+                    },
+                    {
+                      "id": 21,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "fupd.wteiUpdate.receiptsprinter",
+                      "label": "global.printer.name",
+                      "meta": "Printer",
+                      "conditionShow": "fupd.wteiUpdate.receiptstype !== 'F'",
+                      "labelHidden": true
+                    },
+                    {
+                      "id": 23,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "fupd.wteiUpdate.receiptsprinter",
+                      "label": "global.blank.label.string.for.space",
+                      "conditionShow": "fupd.wteiUpdate.receiptstype === 'F'"
+                    }
+                  ]
+                },
+                {
+                  "id": 42,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 24,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "fupd.wteiUpdate.picktype",
+                      "label": "global.printer.for.pick.tickets",
+                      "meta": "ReceiptOfInventoryPrintType",
+                      "type3": "SET",
+                      "metaGroup": "WT",
+                      "blankOption": false,
+                      "conditionDisabled": "!fupd.wteiUpdate.allowpickfl"
+                    },
+                    {
+                      "id": 43,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "fupd.wteiUpdate.pickprinter",
+                      "label": "global.printer.name",
+                      "meta": "Printer",
+                      "conditionShow": "fupd.wteiUpdate.picktype !== 'F'",
+                      "labelHidden": true,
+                      "conditionDisabled": "!fupd.wteiUpdate.allowpickfl"
+                    },
+                    {
+                      "id": 28,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "fupd.wteiUpdate.pickprinter",
+                      "label": "global.blank.label.string.for.space",
+                      "conditionShow": "fupd.wteiUpdate.picktype === 'F'",
+                      "conditionDisabled": "!fupd.wteiUpdate.allowpickfl"
+                    }
+                  ]
+                },
+                {
+                  "id": 30,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "fupd.wteiUpdate.printorder",
+                  "label": "global.pick.ticket.print.order",
+                  "meta": "ReceiptOfInventoryPrintType",
+                  "type3": "INLINE",
+                  "metaGroup": "WT",
+                  "children": [
+                    {
+                      "id": 31,
+                      "type": "OPT",
+                      "label": "global.route",
+                      "value": "R"
+                    },
+                    {
+                      "id": 32,
+                      "type": "OPT",
+                      "label": "global.order",
+                      "value": "O"
+                    }
+                  ],
+                  "conditionDisabled": "!fupd.wteiUpdate.allowpickfl"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

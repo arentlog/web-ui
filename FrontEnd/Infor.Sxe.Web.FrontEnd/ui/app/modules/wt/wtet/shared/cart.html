@@ -1,0 +1,29 @@
+<div style="height: 100%;" initialize>
+   <div class="builder-sidebar-header">
+      <h3><span translate>global.products</span> ({{base.lineItems.length}})</h3>
+   </div>
+   <div class="builder-sidebar-content scrollable" style="height: calc(100% - 205px);">
+      <div class="listview tableview">
+         <ul>
+            <li ng-repeat="item in base.lineItems track by $index" ng-click="cart.goToLine(item)">
+               <p class="listview-heading">{{item.shipprod}} - {{item.proddesc}}</p>
+               <p class="listview-subheading">
+                  <span translate>global.line.number</span>: {{item.lineno}}<br>
+                  <span translate>global.quantity</span>: <span class="data" formatter="DECIMAL" data-model="item.qtyord" data-format-options='{"minimumFractionDigits":2}'></span><br>
+                  <span translate>global.unit</span>: {{item.unit}}
+               </p>
+               <p class="l-pull-right" style="top: -65px; right: 50px;" ng-show="item.image">
+                  <img class="img-cart" ng-src="{{item.image}}" />
+               </p>
+            </li>
+         </ul>
+      </div>
+   </div>
+   <div class="builder-sidebar-footer">
+      <div class="cart-totals">
+         <p class="totals"><span class="bold" translate>global.net.amount</span> <span class="l-pull-right bold">{{cart.getNetAmount()}}</span></p>
+      </div>
+      <button type="button" class="btn-secondary" ng-click="cart.goToDetailedGrid()" style="width: 100%; margin-bottom: 10px;" translate>global.edit.lines</button>
+      <button type="button" class="btn-primary" ng-click="base.stageWizardReviewAndTotals()" style="width: 100%;" translate>global.review.and.totals</button>
+   </div>
+</div>

@@ -1,0 +1,287 @@
+{
+  "viewId": "ic-icsp-detail-tabs-pricing",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isDetail() || dtl.isPricingTabReadonly",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.pricing",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsp.priceonty",
+                  "label": "global.multiplier",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "MultiplierType",
+                  "blankOption": false
+                },
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsp.slgroup",
+                  "label": "global.supplier.group",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "SupplierGroup",
+                  "blankOption": false
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.pbseqno",
+                  "label": "global.price.book.sequence.number",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "SupplierGroup",
+                  "blankOption": false,
+                  "dataFormat": "INTEGER",
+                  "digits": 8,
+                  "sign": "+"
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.altprodprccd",
+                  "label": "global.alternate.product.price.code",
+                  "maxLength": 4
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.sellmult",
+                  "label": "global.round.by",
+                  "maxLength": 4,
+                  "dataFormat": "INTEGER",
+                  "digits": 4,
+                  "sign": "+"
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsp.termsdiscfl",
+                  "label": "global.terms.discount",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.termspct",
+                  "label": "global.terms.discount.percent",
+                  "dataFormat": "PERCENT",
+                  "digits": 2,
+                  "sign": "+",
+                  "decimals": 2,
+                  "size": "SM"
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.icsp.slchgdt",
+                  "label": "pi.date",
+                  "dataFormat": "DATE"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "type": "EXP_AREA",
+      "label": "global.special.price",
+      "children": [
+        {
+          "id": 16,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 17,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsp.speccostty",
+                  "label": "global.special.price.cost",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "SpecialPriceCostType",
+                  "blankOption": true,
+                  "conditionReadonly": "base.isDetail() || dtl.icsp.noupdtfl || dtl.isPricingTabReadonly",
+                  "eventChange": "dtl.specialPriceChange()"
+                }
+              ]
+            },
+            {
+              "id": 18,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 29,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "dtl.icsp.csunperstk",
+                      "label": "global.price.cost.per.stock",
+                      "type3": "SET",
+                      "metaGroup": "IC",
+                      "meta": "ICSpecPrcCostPerStk",
+                      "blankOption": false,
+                      "size": "SM",
+                      "dataFormat": "DECIMAL",
+                      "digits": 6,
+                      "decimals": 6,
+                      "sign": "+",
+                      "conditionReadonly": "base.isDetail() || dtl.icsp.noupdtfl || dtl.isPricingTabReadonly",
+                      "eventChange": "dtl.priceCostPerChange()",
+                      "formatOptions": {
+                        "minimumFractionDigits": 6,
+                        "maximumFractionDigits": 6
+                      },
+                      "options": {
+                        "allowEntry": true,
+                        "searchParams": {
+                          "prod": {
+                            "value": "dtl.icsp.prod",
+                            "type": "REF"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "id": 21,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.icsp.prccostper",
+                      "label": "global.special.price.cost.unit",
+                      "type3": "SET",
+                      "metaGroup": "IC",
+                      "meta": "SpecialPriceCostType",
+                      "blankOption": false,
+                      "maxLength": 4,
+                      "size": "SM",
+                      "conditionReadonly": "base.isDetail() || dtl.icsp.noupdtfl || dtl.isPricingTabReadonly",
+                      "eventChange": "dtl.specPriceStkUnitChange()",
+                      "modelOptions": {
+                        "updateOn": "blur"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "type": "EXP_AREA",
+      "label": "global.extended",
+      "children": [
+        {
+          "id": 23,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 24,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 26,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsp.corecharge",
+                  "label": "global.core.charge",
+                  "dataFormat": "DECIMAL",
+                  "sign": "+",
+                  "digits": 6,
+                  "decimals": 2,
+                  "conditionReadonly": "base.isDetail() || dtl.icsp.prodtype !== 'S' || dtl.isPricingTabReadonly",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                }
+              ]
+            },
+            {
+              "id": 25,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 30,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 28,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.icsp.warrlength",
+                      "label": "global.length.of.warranty",
+                      "dataFormat": "INTEGER",
+                      "sign": "+",
+                      "digits": 4,
+                      "maxLength": 0,
+                      "size": "XS"
+                    },
+                    {
+                      "id": 27,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "dtl.icsp.warrtype",
+                      "label": "global.warranty",
+                      "type3": "SET",
+                      "metaGroup": "IC",
+                      "meta": "WarrantyPeriod",
+                      "labelHidden": true,
+                      "size": "SM"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

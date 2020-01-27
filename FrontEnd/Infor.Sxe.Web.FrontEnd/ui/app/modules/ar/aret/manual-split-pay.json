@@ -1,0 +1,210 @@
+{
+  "viewId": "ar-aret-manualsplitpay",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "conditionShow": "base.isStepTwoManualSplitPay()",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "menu.aret",
+              "subLabel": "global.manual.split.payments",
+              "controls": {
+                "navBtns": {
+                  "id": 32,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 33,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "label": "global.ok",
+                  "icon": "icon-check",
+                  "submitForm": true,
+                  "eventValidated": "msp.submit()"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "msp.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 24,
+                          "type": "GRID",
+                          "model": "base.splitPayCollection",
+                          "controlRef": "msp.grid",
+                          "options": {
+                            "editable": true,
+                            "events": {
+                              "cellchange": "msp.gridCellChange()"
+                            }
+                          },
+                          "controls": {
+                            "toolbar": {
+                              "id": 8,
+                              "type": "TOOLBAR",
+                              "label": "global.split.payment.records"
+                            }
+                          },
+                          "children": [
+                            {
+                              "id": 26,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "paymtno",
+                              "label": "global.payment",
+                              "dataFormat": "INTEGER"
+                            },
+                            {
+                              "id": 27,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "amount",
+                              "label": "global.amount",
+                              "editable": true,
+                              "dataFormat": "CURRENCY",
+                              "decimals": 2,
+                              "digits": 9
+                            },
+                            {
+                              "id": 28,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "discamt",
+                              "label": "global.discount",
+                              "editable": true,
+                              "dataFormat": "CURRENCY",
+                              "digits": 8,
+                              "decimals": 2
+                            },
+                            {
+                              "id": 29,
+                              "type": "GRID_COL",
+                              "subType": "CHECKBOX",
+                              "model": "disputefl",
+                              "label": "global.disputed",
+                              "editable": true,
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 30,
+                              "type": "GRID_COL",
+                              "subType": "DATE",
+                              "model": "duedt",
+                              "label": "global.due.date",
+                              "editable": true,
+                              "dataFormat": "DATE"
+                            },
+                            {
+                              "id": 31,
+                              "type": "GRID_COL",
+                              "subType": "DATE",
+                              "model": "discdt",
+                              "label": "global.discount.date",
+                              "editable": true,
+                              "dataFormat": "DATE"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 12,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 13,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "$scope.base.aret.amount",
+                          "label": "global.amount",
+                          "dataFormat": "CURRENCY"
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "$scope.base.aret.xtDiscamt",
+                          "label": "global.discount",
+                          "dataFormat": "DECIMAL"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 21,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 22,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "msp.amountProof",
+                          "label": "global.amount.proof",
+                          "dataFormat": "DECIMAL"
+                        },
+                        {
+                          "id": 23,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "msp.discountProof",
+                          "label": "global.discount.proof",
+                          "dataFormat": "DECIMAL"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "viewId": "oe-shared-onetimerebate-onetimerebate",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.one.time.rebate",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 23,
+                  "type": "BTN",
+                  "label": "global.ok",
+                  "icon": "icon-confirm",
+                  "submitForm": true,
+                  "eventValidated": "oeOtr.okClicked()"
+                },
+                {
+                  "id": 24,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "oeOtr.cancelClicked()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 7,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 8,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 10,
+                          "type": "FIELD_SET",
+                          "label": "global.current.information",
+                          "children": [
+                            {
+                              "id": 12,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "oeOtr.oneTimeRebate.prodcost",
+                              "label": "global.cost",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 13,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "oeOtr.oneTimeRebate.venrebno",
+                              "label": "global.rebate.record.number"
+                            },
+                            {
+                              "id": 14,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "oeOtr.oneTimeRebate.unit",
+                              "label": "global.special.price.cost.unit"
+                            },
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "oeOtr.oneTimeRebate.currebamt",
+                              "label": "global.rebate.amount",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "oeOtr.oneTimeRebate.curcontract",
+                              "label": "global.rebate.contract"
+                            },
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "oeOtr.oneTimeRebate.currebcst",
+                              "label": "global.net.rebate.cost",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 5
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "FIELD_SET",
+                          "label": "global.create.new.contract",
+                          "children": [
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "oeOtr.oneTimeRebate.costtype",
+                              "label": "global.cost.type",
+                              "type3": "SET",
+                              "metaGroup": "OE",
+                              "meta": "OneTimeRebateCostType",
+                              "conditionReadonly": "!oeOtr.oneTimeRebate.costtypeenabled",
+                              "blankOption": false,
+                              "eventChange": "oeOtr.costTypeChanged()"
+                            },
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "oeOtr.oneTimeRebate.newrebcst",
+                              "label": "global.new.rebate.cost",
+                              "conditionReadonly": "oeOtr.isInquiry",
+                              "dataFormat": "CURRENCY",
+                              "digits": 7,
+                              "decimals": 5,
+                              "eventChange": "oeOtr.newRebateCostChanged()",
+                              "sign": "+",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              },
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "oeOtr.oneTimeRebate.vendno",
+                              "label": "global.vendor.number",
+                              "meta": "Vendor",
+                              "conditionReadonly": "oeOtr.isInquiry",
+                              "eventChange": "oeOtr.vendorChanged()"
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "oeOtr.oneTimeRebate.contractno",
+                              "label": "global.new.contract",
+                              "conditionReadonly": "oeOtr.isInquiry",
+                              "maxLength": 30
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "oeOtr.oneTimeRebate.newrebamt",
+                              "label": "global.new.rebate.amount",
+                              "readonly": true,
+                              "dataFormat": "CURRENCY",
+                              "digits": 7,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 25,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "oeOtr.oneTimeRebate.currencyty",
+                          "label": "global.currency",
+                          "type3": "CODES",
+                          "meta": "Currency",
+                          "conditionShow": "oeOtr.oneTimeRebate.currencyty",
+                          "readonly": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

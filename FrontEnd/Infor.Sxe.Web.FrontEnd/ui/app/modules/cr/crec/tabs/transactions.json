@@ -1,0 +1,278 @@
+{
+  "viewId": "cr-crec-master-transactions",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 3,
+      "type": "FIELD_SET",
+      "label": "global.filter.by",
+      "children": [
+        {
+          "id": 44,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 46,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 47,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.crecTransactionCriteria.rsStarting",
+                  "label": "global.starting",
+                  "type3": "SET",
+                  "metaGroup": "CR",
+                  "meta": "TransactionStartingType",
+                  "blankOption": false,
+                  "eventChange": "mst.onTransactionStartChange()"
+                },
+                {
+                  "id": 48,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.crecTransactionCriteria.fiCheckno",
+                  "label": "global.check.number",
+                  "labelHidden": true,
+                  "dataFormat": "INTEGER_TEXT",
+                  "sign": "+",
+                  "digits": 8,
+                  "conditionShow": "base.crecTransactionCriteria.rsStarting===1"
+                },
+                {
+                  "id": 50,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "base.crecTransactionCriteria.fiStartingDt",
+                  "label": "global.date",
+                  "dataFormat": "DATE",
+                  "labelHidden": true,
+                  "maxLength": 20,
+                  "conditionShow": "base.crecTransactionCriteria.rsStarting===2"
+                },
+                {
+                  "id": 22,
+                  "type": "FIELD",
+                  "subType": "MULTI_SELECT",
+                  "model": "mst.selectedCRTransTypes",
+                  "label": "global.transaction.types",
+                  "type3": "SET",
+                  "metaGroup": "CR",
+                  "meta": "TransactionTypeAll"
+                }
+              ]
+            },
+            {
+              "id": 45,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.crecTransactionCriteria.rsCleared",
+                  "label": "global.cleared",
+                  "size": "SM",
+                  "type3": "SET",
+                  "metaGroup": "CR",
+                  "meta": "CheckStatus",
+                  "blankOption": false
+                },
+                {
+                  "id": 21,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.crecTransactionCriteria.rsBalanced",
+                  "label": "global.balanced",
+                  "size": "SM",
+                  "type3": "SET",
+                  "metaGroup": "CR",
+                  "meta": "Balance",
+                  "blankOption": false
+                },
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.crecTransactionCriteria.rsActive",
+                  "label": "global.status",
+                  "size": "SM",
+                  "type3": "SET",
+                  "metaGroup": "CR",
+                  "meta": "BankStatus",
+                  "blankOption": false
+                }
+              ]
+            },
+            {
+              "id": 52,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 51,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.crecTransactionCriteria.recordLimit",
+                  "label": "global.record.limit",
+                  "dataFormat": "INTEGER",
+                  "size": "SM",
+                  "digits": 4
+                },
+                {
+                  "id": 41,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "eventClick": "mst.getTransactions()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "type": "GRID",
+      "controlRef": "mst.transDataGrid",
+      "model": "mst.transDataset",
+      "options": {
+        "showCheckboxes": true,
+        "selectable": "single",
+        "events": {
+          "selected": "mst.checkEnableToolBarButtons()"
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 24,
+          "type": "TOOLBAR",
+          "label": "global.transactions",
+          "children": [
+            {
+              "id": 42,
+              "type": "BTN",
+              "subType": "SEC",
+              "label": "gl.distribution",
+              "eventClick": "mst.glDistribution()",
+              "conditionDisabled": "!mst.isEnableGLDistribution"
+            },
+            {
+              "id": 43,
+              "type": "BTN",
+              "subType": "SEC",
+              "label": "global.sub.transactions",
+              "eventClick": "mst.glSubTransactions()",
+              "conditionDisabled": "!mst.isEnableSubTransactions"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 26,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "checkno",
+          "label": "global.check.number"
+        },
+        {
+          "id": 27,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "statustype",
+          "label": "global.status",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 28,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cType",
+          "label": "global.type"
+        },
+        {
+          "id": 29,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cSource",
+          "label": "global.source"
+        },
+        {
+          "id": 31,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "enterdt",
+          "label": "global.post.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 32,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "amount",
+          "label": "global.amount",
+          "dataFormat": "CURRENCY"
+        },
+        {
+          "id": 33,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "refer",
+          "label": "global.reference"
+        },
+        {
+          "id": 34,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "clearfl",
+          "label": "global.cleared",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 35,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "cleardt",
+          "label": "global.cleared.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 36,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "balancedfl",
+          "label": "global.balanced",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 37,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "voidfl",
+          "label": "global.void",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 40,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "bacsref",
+          "label": "bacs.reference"
+        },
+        {
+          "id": 53,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "pospaydttm",
+          "label": "global.positive.pay"
+        }
+      ]
+    }
+  ]
+}

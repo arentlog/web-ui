@@ -1,0 +1,130 @@
+﻿<!-- New Function/View Generation -->
+<div id="dev-tools-code-gen-form" style="width: 800px;" initialize>
+   <div class="row">
+      <div class="one-half column">
+         <div class="field" ng-show="type === 'module'">
+            <label for="dev-tools-pattern" class="label required" translate>Pattern</label>
+            <select id="dev-tools-pattern" class="dropdown" ng-model="options.pattern">
+               <option value=""></option>
+               <option value="inquiry">Inquiry</option>
+               <option value="setup">Setup</option>
+               <option value="simpleentry">Simple Entry w/ Journal</option>
+               <option value="transaction">Transaction (Custom)</option>
+            </select>
+         </div>
+
+         <div class="field" ng-show="type === 'view'">
+            <label for="dev-tools-view-type" class="label required" translate>Type</label>
+            <select id="dev-tools-view-type" class="dropdown" ng-model="options.viewType" ng-change="viewTypeChanged()">
+               <option value="BLANK">Blank View (sub view, tab, etc.)</option>
+               <option value="CAP">Contextual Action Panel</option>
+               <option value="ROW_DETAIL">Expandable Row Detail</option>
+               <option value="LOOKUP_MODAL_IES">Lookup Modal - IES</option>
+               <option value="LOOKUP_MODAL">Lookup Modal - Other</option>
+               <option value="MODAL">Modal</option>
+               <option value="STANDARD">Module Container (standard)</option>
+            </select>
+         </div>
+
+         <div class="field">
+            <label for="dev-tools-module-group" class="label required" translate>Module</label>
+            <select dropdown id="dev-tools-module-group" class="dropdown" ng-model="options.module">
+               <option value=""></option>
+               <option value="ao">AO</option>
+               <option value="ap">AP</option>
+               <option value="ar">AR</option>
+               <option value="bi">BI</option>
+               <option value="bp">BP</option>
+               <option value="cm">CM</option>
+               <option value="cr">CR</option>
+               <option value="dc">DC</option>
+               <option value="edi">EDI</option>
+               <option value="etx">ETX</option>
+               <option value="gl">GL</option>
+               <option value="ic">IC</option>
+               <option value="jm">JM</option>
+               <option value="kp">KP</option>
+               <option value="oe">OE</option>
+               <option value="ot">OT</option>
+               <option value="pd">PD</option>
+               <option value="pi">PI</option>
+               <option value="po">PO</option>
+               <option value="pv">PV</option>
+               <option value="rs">RS</option>
+               <option value="sa">SA</option>
+               <option value="shared">Shared</option>
+               <option value="sm">SM</option>
+               <option value="sw">SW</option>
+               <option value="ti">TI</option>
+               <option value="twl">TWL</option>
+               <option value="va">VA</option>
+               <option value="wl">WL</option>
+               <option value="wm">WM</option>
+               <option value="wt">WT</option>
+            </select>
+         </div>
+
+         <!-- Menu function with custom mask (i.e. arsc, apa-reports) -->
+         <div class="field" title="The menu function name (i.e. arsc, apiv, etc.)">
+            <label class="required" for="dev-tools-menu-fn">Menu Function / Sub Directory</label>
+            <input type="text" id="dev-tools-menu-fn" ng-model="options.menuFn" custom-mask="[a-z-]" maxlength="35" />
+         </div>
+
+         <!-- Key Field -->
+         <div class="field" ng-show="type === 'module' && options.pattern === 'setup'">
+            <label class="required" for="dev-tools-key-field" translate>Key Field</label>
+            <input type="text" id="dev-tools-key-field" ng-model="options.keyField" placeholder="custno"/>
+         </div>
+
+         <!-- Record Name -->
+         <div class="field" ng-show="type === 'module' && options.pattern === 'inquiry'" title="Name to use for the detail record. It is usually the table name (i.e. for OEIO it's oeeh; for ARIC it's arsc).">
+            <label class="required" for="dev-tools-record-name">Record Name</label>
+            <input type="text" id="dev-tools-record-name" ng-model="options.recordName" placeholder="oeeh" />
+         </div>
+
+         <!-- Parent view id with custom mask (i.e. ar-arsc-detail) -->
+         <div class="field" ng-show="type === 'view' && options.viewType === 'BLANK'">
+            <label class="required" for="dev-tools-parent-view-id" translate>Parent View ID</label>
+            <input type="text" id="dev-tools-parent-view-id" ng-model="options.parentViewId" custom-mask="[a-z0-9-]" maxlength="70" placeholder="From 'viewId' property in parent's json file"/>
+         </div>
+
+         <!-- View file with custom mask (i.e. tabs/my-view.json) -->
+         <div class="field" ng-show="type === 'view'">
+            <label class="required" for="dev-tools-view-file" translate>File Name</label>
+            <input type="text" id="dev-tools-view-file" ng-model="options.viewFile" custom-mask="[a-z0-9/\.-]" maxlength="70" placeholder="line-detail.json" />
+         </div>
+      </div>
+
+      <div class="one-half column" ng-show="options.pattern === 'setup'">
+         <div class="field">
+            <label for="dev-tools-search-method" class="label required" translate>Search API Method</label>
+            <select id="dev-tools-search-method" class="dropdown" ng-model="options.searchMethod">
+               <option value=""></option>
+               <option value="GET">GET</option>
+               <option value="POST">POST</option>
+               <option value="PUT">PUT</option>
+            </select>
+         </div>
+
+         <div class="field">
+            <label for="dev-tools-search-path" class="required" translate>Search API Path</label>
+            <input type="text" id="dev-tools-search-path" ng-model="options.searchPath" placeholder="api/ic/icswb/listbywhse" />
+         </div>
+
+         <div class="field">
+            <label for="dev-tools-search-results-field" class="" translate>Search Results Field (if results in response are nested)</label>
+            <input type="text" id="dev-tools-search-results-field" ng-model="options.searchResultsField" placeholder="" />
+         </div>
+
+         <div class="field">
+            <label for="dev-tools-results-row-id-field" class="required" translate>Search Results Row Id Field</label>
+            <input type="text" id="dev-tools-results-row-id-field" ng-model="options.resultsRowIdField" placeholder="rowID or arslrowid" />
+         </div>
+
+         <div class="field">
+            <label for="dev-tools-master-columns-input" class="required">Master Grid Columns JSON Input</label>
+            <textarea id="dev-tools-master-columns-input" ng-model="options.masterGridColumns" rows="4" cols="10" placeholder='{ "custno": 2.0, "name": "sample string 3" }'></textarea>
+         </div>
+      </div>
+   </div>
+</div>

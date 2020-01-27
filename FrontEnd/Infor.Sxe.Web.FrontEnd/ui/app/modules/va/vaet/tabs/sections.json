@@ -1,0 +1,231 @@
+{
+  "viewId": "va-vaet-detail-sections",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 8,
+      "type": "GRID",
+      "model": "base.sectionResults",
+      "controlRef": "base.sctnGrid",
+      "options": {
+        "showCheckboxes": true,
+        "showDrilldown": true,
+        "events": {
+          "selected": "sctn.setCurrentSection()",
+          "drilldown": "sctn.drillDown()"
+        },
+        "selectable": "single",
+        "showExpander": true,
+        "rowDetailOptions": {
+          "template": "va/vaet/tabs/sections/custom.json",
+          "controller": "VaetSectionCustomCtrl as sctncust",
+          "paramsReference": "cust.rowParams"
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 9,
+          "type": "TOOLBAR",
+          "label": "global.sections",
+          "children": [
+            {
+              "id": 21,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-new-document",
+              "label": "global.new",
+              "stateRef": "",
+              "securityLevel": 4,
+              "conditionDisabled": "base.sctnGrid.isOneRowSelected() || base.isSectionsTabReadonly",
+              "eventClick": "sctn.sectionAdd()"
+            },
+            {
+              "id": 22,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-edit",
+              "label": "global.edit",
+              "stateRef": "",
+              "securityLevel": 3,
+              "conditionDisabled": "!base.sctnGrid.isOneRowSelected() || base.isSectionsTabReadonly",
+              "eventClick": "sctn.sectionEdit()"
+            },
+            {
+              "id": 23,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.extend",
+              "icon": "icon-compose",
+              "conditionDisabled": "!base.sctnGrid.isOneRowSelected() || base.sectionSelectedRecord.completefl || base.sectionSelectedRecord.sctntype.toLowerCase() === 'sp' || base.sectionSelectedRecord.sctntype.toLowerCase() === 'ii'",
+              "eventClick": "sctn.sectionExtend()"
+            },
+            {
+              "id": 24,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.specifications",
+              "icon": "icon-inventory",
+              "eventClick": "sctn.sectionSpecs()",
+              "conditionDisabled": "!base.sctnGrid.isOneRowSelected() || base.isSectionsTabReadonly"
+            },
+            {
+              "id": 25,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.addons",
+              "conditionDisabled": "!base.sctnGrid.isOneRowSelected() || base.sectionSelectedRecord.completefl || base.sectionSelectedRecord.sctntype.toLowerCase() === 'sp' || !sctn.sasc.icincaddgl || base.isSectionsTabReadonly",
+              "icon": "icon-expand-all",
+              "eventClick": "sctn.sectionAddons()"
+            },
+            {
+              "id": 33,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.create.po",
+              "icon": "icon-new-document",
+              "conditionDisabled": "!base.sctnGrid.isOneRowSelected() || base.sectionSelectedRecord.completefl || base.sectionSelectedRecord.sctntype.toLowerCase() !== 'ex' || base.isSectionsTabReadonly",
+              "eventClick": "sctn.sectionCreatePO()",
+              "securityLevel": 3
+            },
+            {
+              "id": 34,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.complete.section",
+              "icon": "icon-save",
+              "securityLevel": 3,
+              "conditionDisabled": "!base.sctnGrid.isOneRowSelected() || base.sectionSelectedRecord.completefl || base.sectionSelectedRecord.sctntype.toLowerCase() === 'in' || base.sectionSelectedRecord.sctntype.toLowerCase() === 'ex' || base.sectionSelectedRecord.sctntype.toLowerCase() === 'sp' || base.isSectionsTabReadonly",
+              "eventClick": "sctn.sectionCompleteSection()"
+            },
+            {
+              "id": 35,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.move.to.wip",
+              "icon": "icon-right-arrow",
+              "conditionDisabled": "!base.sctnGrid.isOneRowSelected() || base.sectionSelectedRecord.completefl || !base.lineWipList || base.sectionSelectedRecord.sctntype.toLowerCase() === 'ii' || base.sectionSelectedRecord.sctntype.toLowerCase() === 'in' || base.sectionSelectedRecord.sctntype.toLowerCase() === 'ex' || base.sectionSelectedRecord.sctntype.toLowerCase() === 'sp' || base.isSectionsTabReadonly",
+              "eventClick": "sctn.sectionMoveToWip()"
+            },
+            {
+              "id": 36,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.cancel.reopen.section",
+              "icon": "icon-cancel",
+              "conditionDisabled": "!base.sctnGrid.isOneRowSelected() || sctn.securityLevelFunc < 3 || !base.sectionSelectedRecord.allowcancel || base.isSectionsTabReadonly",
+              "eventClick": "sctn.sectionCancelReopen()"
+            },
+            {
+              "id": 37,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.delete.section",
+              "icon": "icon-delete",
+              "securityLevel": 3,
+              "conditionDisabled": "!base.sctnGrid.isOneRowSelected() || sctn.securityLevelFunc < 3 || !base.sectionSelectedRecord.allowdelete || base.isSectionsTabReadonly",
+              "eventClick": "sctn.sectionDelete()"
+            },
+            {
+              "id": 38,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.sourcing",
+              "icon": "icon-cart",
+              "conditionDisabled": "!base.sctnGrid.isOneRowSelected() || base.sectionSelectedRecord.completefl || base.sectionSelectedRecord.sctntype.toLowerCase() === 'is' || base.sectionSelectedRecord.sctntype.toLowerCase() === 'it' || base.sectionSelectedRecord.sctntype.toLowerCase() === 'sp' || base.isSectionsTabReadonly",
+              "eventClick": "sctn.sectionSourcing()"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 10,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "seqno",
+          "label": "global.sequence.number",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 11,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "notesfl",
+          "label": "global.notes",
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 12,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "sctntype",
+          "label": "global.section.type",
+          "customFormatter": "sctn.sectionFormatter"
+        },
+        {
+          "id": 13,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "stagecd",
+          "label": "global.stage",
+          "customFormatter": "sctn.stageFormatter"
+        },
+        {
+          "id": 14,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "sctncode",
+          "label": "global.section.code"
+        },
+        {
+          "id": 15,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "codedesc",
+          "label": "global.description"
+        },
+        {
+          "id": 16,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "orderaltno",
+          "label": "global.tied.order.number",
+          "dataFormat": "INTEGER_TEXT",
+          "eventClick": "sctn.poInquiryHyperlink()"
+        },
+        {
+          "id": 17,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "orderaltty",
+          "label": "global.tied.order.type",
+          "customFormatter": "sctn.altTypeFormatter"
+        },
+        {
+          "id": 18,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "orderaltstg",
+          "label": "global.tied.order.stage",
+          "customFormatter": "sctn.altStageFormatter"
+        },
+        {
+          "id": 19,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "destdesc",
+          "label": "global.destination"
+        },
+        {
+          "id": 20,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "botext",
+          "label": "global.back.order"
+        }
+      ]
+    }
+  ]
+}

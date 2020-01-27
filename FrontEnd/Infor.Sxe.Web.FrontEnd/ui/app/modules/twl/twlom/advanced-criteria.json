@@ -1,0 +1,298 @@
+{
+  "viewId": "twl-twlom--master-advancedcriteria",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 2,
+      "type": "COMP_FLD",
+      "children": [
+        {
+          "id": 147,
+          "type": "FIELD",
+          "subType": "INFO",
+          "model": "mst.advCriteria.coNum",
+          "label": "global.company",
+          "extra": true
+        },
+        {
+          "id": 148,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.whNum",
+          "label": "global.warehouse",
+          "readonly": false,
+          "meta": "TWLWarehouse",
+          "conditionReadonly": "base.restrictTWLWarehouse",
+          "conditionShow": "advsrch.isSelected('warehouse')",
+          "required": true,
+          "eventChange": "mst.advCriteriaWhseChange()"
+        },
+        {
+          "id": 108,
+          "type": "FIELD",
+          "subType": "MULTI_SELECT",
+          "model": "mst.advCriteria.orderStatusArray",
+          "label": "global.order.status",
+          "conditionShow": "advsrch.isSelected('orderstatus')",
+          "maxLength": 30,
+          "type3": "CODES",
+          "meta": "TWLOrderStatus",
+          "size": "SM"
+        },
+        {
+          "id": 99,
+          "type": "FIELD",
+          "subType": "MULTI_SELECT",
+          "model": "mst.advCriteria.carrierArray",
+          "label": "global.carrier",
+          "conditionShow": "advsrch.isSelected('carrier')",
+          "eventChange": "mst.setCarrier()",
+          "maxLength": 24,
+          "type3": "MANUAL",
+          "optionLabelField": "carrierId",
+          "optionValueField": "carrierId",
+          "optionsModel": "mst.carrierOptions",
+          "size": "SM"
+        },
+        {
+          "id": 142,
+          "type": "FIELD",
+          "subType": "CHECKBOX",
+          "model": "mst.advCriteria.onlyBlankCarriers",
+          "label": "global.only.blank.carriers",
+          "dataFormat": "LOGICAL",
+          "conditionShow": "advsrch.isSelected('carrier')",
+          "eventChange": "mst.setOnlyBlankCarrier()"
+        },
+        {
+          "id": 117,
+          "type": "FIELD",
+          "subType": "CHECKBOX",
+          "model": "mst.advCriteria.isAssigned",
+          "label": "global.assigned",
+          "dataFormat": "LOGICAL",
+          "conditionShow": "advsrch.isSelected('assigned')"
+        },
+        {
+          "id": 141,
+          "type": "FIELD",
+          "subType": "CHECKBOX",
+          "model": "mst.advCriteria.isUnassigned",
+          "label": "global.unassigned",
+          "dataFormat": "LOGICAL",
+          "conditionShow": "advsrch.isSelected('assigned')"
+        },
+        {
+          "id": 72,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.customerList",
+          "label": "global.customer.number",
+          "meta": "Customer",
+          "conditionShow": "advsrch.isSelected('customer') || advsrch.isSelected('shipto')"
+        },
+        {
+          "id": 144,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.customerName",
+          "label": "global.customer.name",
+          "meta": "Customer",
+          "conditionShow": "advsrch.isSelected('customer')"
+        },
+        {
+          "id": 90,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.customerShipTo",
+          "label": "global.ship.to",
+          "meta": "ShipTo",
+          "conditionShow": "advsrch.isSelected('shipto')"
+        },
+        {
+          "id": 74,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.branchIdList",
+          "label": "global.branch",
+          "meta": "Warehouse",
+          "conditionShow": "advsrch.isSelected('branchid')"
+        },
+        {
+          "id": 91,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.batch",
+          "label": "global.wave",
+          "conditionShow": "advsrch.isSelected('wave')",
+          "meta": "TWLWave",
+          "digits": 6,
+          "dataFormat": "INTEGER",
+          "sign": "+",
+          "options": {
+            "searchParams": {
+              "coNum": {
+                "type": "REF",
+                "value": "mst.advCriteria.coNum"
+              },
+              "whNum": {
+                "type": "REF",
+                "value": "mst.advCriteria.whNum"
+              }
+            },
+            "allowEntry": true
+          }
+        },
+        {
+          "id": 113,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.latestExpShipDate",
+          "label": "global.expected.ship.date",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('expshipdate')"
+        },
+        {
+          "id": 125,
+          "type": "FIELD",
+          "subType": "MULTI_SELECT",
+          "model": "mst.advCriteria.orderClassArray",
+          "label": "global.order.class",
+          "type3": "CODES",
+          "conditionShow": "advsrch.isSelected('orderclass')",
+          "blankOption": false,
+          "meta": "TWLOrderClass"
+        },
+        {
+          "id": 135,
+          "type": "FIELD",
+          "subType": "MULTI_SELECT",
+          "model": "mst.advCriteria.orderTypeArray",
+          "label": "global.order.type",
+          "type3": "CODES",
+          "conditionShow": "advsrch.isSelected('ordertype')",
+          "blankOption": false,
+          "meta": "TWLOrderType"
+        },
+        {
+          "id": 145,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.priorityList",
+          "label": "global.priority",
+          "type3": "SET",
+          "metaGroup": "TWL",
+          "conditionShow": "advsrch.isSelected('priority')",
+          "blankOption": false,
+          "maxLength": 3,
+          "size": "XS",
+          "dataFormat": "TwlPriorityInput"
+        },
+        {
+          "id": 138,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.routeList",
+          "label": "global.route",
+          "conditionShow": "advsrch.isSelected('route')",
+          "maxLength": 7,
+          "size": "SM"
+        },
+        {
+          "id": 106,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.singlesList",
+          "label": "global.single.line.orders.product",
+          "meta": "ProdAll",
+          "conditionShow": "advsrch.isSelected('singles')"
+        },
+        {
+          "id": 139,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.warehouseZoneList",
+          "label": "global.warehouse.zone",
+          "conditionShow": "advsrch.isSelected('whzone')",
+          "blankOption": false,
+          "meta": "TWLWhZone",
+          "options": {
+            "searchParams": {
+              "coNum": {
+                "type": "REF",
+                "value": "mst.advCriteria.coNum"
+              },
+              "whNum": {
+                "type": "REF",
+                "value": "mst.advCriteria.whNum"
+              }
+            }
+          }
+        },
+        {
+          "id": 140,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.workOrderDeptList",
+          "label": "global.work.order.department",
+          "type3": "CODES",
+          "conditionShow": "advsrch.isSelected('wodept')",
+          "blankOption": false,
+          "meta": "TWLDepartment",
+          "options": {
+            "searchParams": {
+              "coNum": {
+                "type": "REF",
+                "value": "base.criteriaUsed.coNum"
+              },
+              "whNum": {
+                "type": "REF",
+                "value": "base.criteriaUsed.whNum"
+              },
+              "deptType": "WO"
+            }
+          }
+        },
+        {
+          "id": 143,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.orderList",
+          "label": "global.order.number",
+          "conditionShow": "advsrch.isSelected('orderno')",
+          "meta": "TWLOrder",
+          "required": false,
+          "readonly": false,
+          "size": "SM",
+          "options": {
+            "searchParams": {
+              "coNum": {
+                "type": "REF",
+                "value": "mst.advCriteria.coNum"
+              },
+              "whNum": {
+                "type": "REF",
+                "value": "mst.advCriteria.whNum"
+              }
+            },
+            "allowEntry": true
+          }
+        },
+        {
+          "id": 146,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.recordcountlimit",
+          "label": "global.record.limit",
+          "dataFormat": "INTEGER",
+          "digits": 4,
+          "sign": "+",
+          "conditionShow": "advsrch.isSelected('recordlimit')",
+          "size": "XS"
+        }
+      ]
+    }
+  ]
+}

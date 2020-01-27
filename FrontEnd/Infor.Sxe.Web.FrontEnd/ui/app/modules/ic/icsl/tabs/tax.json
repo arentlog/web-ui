@@ -1,0 +1,94 @@
+{
+  "viewId": "ic-icsl-detail-tabs-tax",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isDetail() || dtl.isTaxTabReadonly",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.taxes",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsl.taxtype",
+                  "label": "global.tax.exempt.type",
+                  "maxLength": 8
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsl.taxgroup",
+                  "label": "global.tax.group",
+                  "type3": "CODES",
+                  "meta": "TaxGroup",
+                  "eventChange": "dtl.taxGroupChanged()"
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "RADIO_SET",
+                  "model": "dtl.icsl.taxablety",
+                  "label": "global.taxable",
+                  "type3": "SET",
+                  "metaGroup": "COMMON",
+                  "labelHidden": true,
+                  "meta": "TaxableSettings",
+                  "conditionDisabled": "dtl.taxMethodType === 'G' || base.isDetail() || dtl.isTaxTabReadonly"
+                }
+              ]
+            },
+            {
+              "id": 11,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsl.nontaxtype",
+                  "label": "global.non.tax.reason",
+                  "meta": "NonTaxReason",
+                  "type3": "CODES",
+                  "metaGroup": "COMMON",
+                  "conditionRequired": "dtl.icsl.taxablety === 'n'"
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsl.tariffcd",
+                  "label": "global.hs.code",
+                  "meta": "Tariff"
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsl.countryoforigin",
+                  "label": "global.country.of.origin",
+                  "meta": "Country",
+                  "type3": "CODES"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "viewId": "twl-twlom-assign-unavailable-picks",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "conditionShow": "dtlup.isAssignUnavailablePicks()",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.return.to.vendor.unavailable.allocation",
+              "subLabel": "{{dtlup.subTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 57,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtlup.returnFromHere()"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlup.pickdetailsummary.absNum",
+                          "label": "global.item"
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlup.pickdetailsummary.itemDesc",
+                          "label": "global.item.description"
+                        },
+                        {
+                          "id": 46,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlup.pickdetailsummary.requestedStockStatus",
+                          "label": "global.stock.status",
+                          "size": "XS",
+                          "dataFormat": "TwlStockStatus"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 40,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 41,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlup.pickdetailsummary.reqQty",
+                          "label": "global.original",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 42,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlup.pickdetailsummary.allocatedQty",
+                          "label": "global.allocated",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 43,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlup.pickdetailsummary.remainingQty",
+                          "label": "global.remaining",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 23,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 44,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlup.pickdetailsummary.itemCaseQuantity",
+                          "label": "global.case.quantity",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 45,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlup.pickdetailsummary.itemPalletQuantity",
+                          "label": "global.pallet.quantity",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "GRID",
+                  "id": 10,
+                  "controlRef": "dtlup.grid",
+                  "model": "dtlup.pickdetail",
+                  "options": {
+                    "showCheckboxes": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 52,
+                      "type": "TOOLBAR",
+                      "label": "global.pending.picks",
+                      "children": [
+                        {
+                          "id": 54,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "label": "global.allocate",
+                          "stateRef": "",
+                          "securityLevel": 4,
+                          "conditionDisabled": "!dtlup.pickdetailsummary.remainingQty",
+                          "eventClick": "dtlup.assignInventoryToCreatePicks()"
+                        },
+                        {
+                          "id": 53,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "eventClick": "dtlup.delete()",
+                          "securityLevel": 5,
+                          "conditionDisabled": "!dtlup.grid.isAnyRowSelected()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 47,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "whZone",
+                      "label": "global.zone"
+                    },
+                    {
+                      "id": 48,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "aisle",
+                      "label": "global.aisle",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 49,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "binNum",
+                      "label": "global.location"
+                    },
+                    {
+                      "id": 50,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qty",
+                      "label": "global.quantity",
+                      "dataFormat": "DECIMAL"
+                    },
+                    {
+                      "id": 51,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "stockStat",
+                      "label": "global.stock.status",
+                      "dataFormat": "TwlStockStatusToName"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": 56,
+          "type": "VIEW_CNTR",
+          "viewName": "viewContainerAssignUnavailablePicks"
+        }
+      ]
+    }
+  ]
+}

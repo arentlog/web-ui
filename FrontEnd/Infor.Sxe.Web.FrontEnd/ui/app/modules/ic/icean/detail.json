@@ -1,0 +1,389 @@
+{
+  "viewId": "ic-icean-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.adjust.non-stock.direct.order.detail",
+              "subLabel": "{{dtl.iceanRecord.prod + ' | ' + dtl.iceanRecord.whse + dtl.iceanRecord.binloc1}}",
+              "controls": {
+                "navBtns": {
+                  "id": 46,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 47,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 22,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "conditionDisabled": "base.isEdit()",
+                  "eventClick": "",
+                  "securityLevel": 3,
+                  "stateRef": ".edit",
+                  "conditionShow": "dtl.isBinEditAllowed"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.submit",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "!base.isEdit()",
+                  "securityLevel": 3,
+                  "conditionShow": "dtl.isBinEditAllowed"
+                },
+                {
+                  "id": 45,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "stateRef": "^.master",
+                  "conditionDisabled": "!base.isEdit()",
+                  "conditionShow": "dtl.isBinEditAllowed"
+                },
+                {
+                  "id": 44,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "!base.isEdit()",
+                  "conditionShow": "dtl.isBinEditAllowed"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 17,
+                  "type": "EXP_AREA",
+                  "label": "global.blank.label.string.for.space",
+                  "children": [
+                    {
+                      "id": 69,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 70,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.binloc1",
+                              "label": "global.bin.location.number1",
+                              "conditionReadonly": "!base.isEdit() || !dtl.isBinEditAllowed",
+                              "dataFormat": "BinLoc",
+                              "conditionFocus": "base.isEdit() && dtl.isBinEditAllowed"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 43,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.brokentiefl",
+                  "label": "global.broken.ties.only",
+                  "conditionDisabled": "dtl.isbrokentieEnable",
+                  "eventChange": "dtl.selectBrokenTies()",
+                  "autoFocus": true
+                },
+                {
+                  "id": 10,
+                  "type": "GRID",
+                  "model": "dtl.iceanTransList",
+                  "options": {
+                    "editable": false,
+                    "showCheckboxes": false
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 9,
+                      "type": "TOOLBAR",
+                      "label": "global.adjust.non-stock.direct.order.detail.transactions",
+                      "children": []
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "cOrder",
+                      "label": "global.order.number"
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "cLineNo",
+                      "label": "global.line.number"
+                    },
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "cOrdTypel",
+                      "label": "global.type"
+                    },
+                    {
+                      "id": 24,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "jrnlno",
+                      "label": "global.journal.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 29,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "dQuantity",
+                      "label": "global.quantity",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 30,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "unit",
+                      "label": "global.unit"
+                    },
+                    {
+                      "id": 31,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "dAmount",
+                      "label": "global.amount",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 32,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "dTotal",
+                      "label": "global.total",
+                      "dataFormat": "CURRENCY",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 33,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "model": "postdt",
+                      "label": "global.post.date",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 34,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "binloc",
+                      "label": "global.bin.location",
+                      "dataFormat": "BinLoc"
+                    },
+                    {
+                      "id": 35,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "cOrderStg",
+                      "label": "global.order.stage"
+                    },
+                    {
+                      "id": 36,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "cTiedType",
+                      "label": "global.tied.type"
+                    },
+                    {
+                      "id": 37,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "cQtyStatus",
+                      "label": "global.qty.status"
+                    }
+                  ]
+                },
+                {
+                  "id": 50,
+                  "type": "EXP_AREA",
+                  "label": "global.current.levels",
+                  "children": [
+                    {
+                      "id": 63,
+                      "type": "GRID",
+                      "model": "dtl.currentLevels",
+                      "controls": {
+                        "toolbar": {
+                          "id": 65,
+                          "type": "TOOLBAR",
+                          "label": "global.current.levels"
+                        }
+                      },
+                      "children": [
+                        {
+                          "id": 64,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "qty",
+                          "label": "global.quantity",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 66,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "unit",
+                          "label": "global.unit"
+                        },
+                        {
+                          "id": 67,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "amount",
+                          "label": "global.amount",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 68,
+                          "type": "GRID_COL",
+                          "subType": "TEXT",
+                          "model": "total",
+                          "label": "global.total",
+                          "dataFormat": "CURRENCY",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 62,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.iceanTransSingle.balancetotal",
+                      "label": "global.balance.total",
+                      "dataFormat": "CURRENCY",
+                      "decimals": 2,
+                      "readonly": true,
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 71,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsp",
+      "contextValues": {
+        "key1": "dtl.iceanRecord.prod"
+      }
+    },
+    {
+      "id": 72,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Apsv",
+      "contextValues": {
+        "key1": "dtl.iceanRecord.vendno"
+      }
+    },
+    {
+      "id": 73,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsd",
+      "contextValues": {
+        "key1": "dtl.iceanRecord.whse"
+      }
+    },
+    {
+      "id": 74,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Poeh",
+      "contextOptions": {
+        "deactivated": "dtl.iceanRecord.module.toUpperCase() !== 'PO'"
+      },
+      "contextValues": {
+        "key1": "dtl.orderno",
+        "key2": "dtl.ordersuf"
+      }
+    },
+    {
+      "id": 75,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Wteh",
+      "contextOptions": {
+        "deactivated": "dtl.iceanRecord.module.toUpperCase() !== 'WT'"
+      },
+      "contextValues": {
+        "key1": "dtl.orderno",
+        "key2": "dtl.ordersuf"
+      }
+    }
+  ]
+}

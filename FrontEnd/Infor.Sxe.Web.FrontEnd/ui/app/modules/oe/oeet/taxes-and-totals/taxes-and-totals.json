@@ -1,0 +1,837 @@
+{
+  "viewId": "oe-oeet-taxes-and-totals",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isTaxesAndTotals()",
+      "conditionReadonly": "!base.isTaxesandTotalsEnabled",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.oeet",
+              "subLabel": "global.taxes.and.totals",
+              "controls": {
+                "navBtns": {
+                  "id": 90,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 91,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "tat.back()",
+                      "conditionShow": "false",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 19,
+                  "type": "BTN",
+                  "label": "global.finish",
+                  "icon": "icon-invoice-released",
+                  "eventClick": "tat.completeTaxTotals('finish')"
+                },
+                {
+                  "id": 87,
+                  "type": "BTN",
+                  "label": "global.addons",
+                  "stateRef": ".addons",
+                  "conditionDisabled": "!base.isTaxesandTotalsEnabled"
+                },
+                {
+                  "id": 88,
+                  "type": "BTN",
+                  "label": "global.discounts",
+                  "stateRef": ".discounts",
+                  "conditionDisabled": "!base.isTaxesandTotalsEnabled"
+                },
+                {
+                  "id": 89,
+                  "type": "BTN",
+                  "label": "global.freight.rate.shop",
+                  "stateRef": ".freightRateShop",
+                  "conditionDisabled": "!base.isTaxesandTotalsEnabled"
+                },
+                {
+                  "id": 20,
+                  "type": "BTN",
+                  "label": "global.recalculate",
+                  "icon": "icon-load",
+                  "eventClick": "tat.recalculate()",
+                  "conditionDisabled": "!base.isTaxesandTotalsEnabled"
+                },
+                {
+                  "id": 161,
+                  "type": "BTN",
+                  "label": "global.suspend",
+                  "conditionDisabled": "base.oehdr.oetype.toLowerCase() !== 'cs' && base.oehdr.oetype.toLowerCase() !== 'so' && base.oehdr.oetype.toLowerCase() !== 'do'",
+                  "eventClick": "tat.completeTaxTotals('suspend')"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "controls": {
+                "contentHeader": {
+                  "id": 149,
+                  "type": "MOD_CONTENT_HDR",
+                  "children": [
+                    {
+                      "id": 150,
+                      "type": "WIZARD",
+                      "children": [
+                        {
+                          "id": 157,
+                          "type": "WIZARD_TICK",
+                          "label": "global.initiate",
+                          "conditionDisabled": "base.getStage() > 1",
+                          "conditionSelected": "base.getStage() === 1"
+                        },
+                        {
+                          "id": 158,
+                          "type": "WIZARD_TICK",
+                          "label": "global.select.products",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "conditionSelected": "base.getStage() === 2",
+                          "eventClick": "tat.stageWizardNavigation(false)"
+                        },
+                        {
+                          "id": 159,
+                          "type": "WIZARD_TICK",
+                          "label": "global.taxes.and.totals",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "conditionSelected": "base.getStage() === 3",
+                          "eventClick": "base.stageWizardTaxesAndTotals()"
+                        },
+                        {
+                          "id": 160,
+                          "type": "WIZARD_TICK",
+                          "label": "global.collect.payment",
+                          "conditionSelected": "base.getStage() === 4",
+                          "conditionDisabled": "base.getStage() === 1",
+                          "eventClick": "tat.stageWizardNavigation(true)"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 22,
+                  "type": "EXP_AREA",
+                  "label": "{{tat.taxSettings.methodtype}}",
+                  "children": [
+                    {
+                      "id": 23,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 25,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "tat.taxSettings.statecd",
+                              "label": "{{tat.taxSettings.statecdlabel}}",
+                              "type3": "MANUAL",
+                              "optionsModel": "tat.taxStateTypes",
+                              "conditionDisabled": "!tat.taxSettings.statecdenabled",
+                              "eventChange": "tat.taxStateChanged()",
+                              "conditionShow": "!tat.taxSettings.statecdhidden"
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "tat.taxSettings.countycd",
+                              "label": "global.county",
+                              "type3": "MANUAL",
+                              "optionsModel": "tat.taxCountyTypes",
+                              "conditionDisabled": "!(tat.taxSettings.countycdenabled && tat.taxSettings.statecd)",
+                              "eventChange": "tat.taxCountyChanged()",
+                              "conditionShow": "!tat.taxSettings.countycdhidden"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "tat.taxSettings.citycd",
+                              "label": "global.city",
+                              "type3": "MANUAL",
+                              "optionsModel": "tat.taxCityTypes",
+                              "conditionDisabled": "!(tat.taxSettings.citycdenabled && tat.taxSettings.statecd && tat.taxSettings.countycd)",
+                              "eventChange": "tat.taxCityChanged()",
+                              "conditionShow": "!tat.taxSettings.citycdhidden"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "tat.taxSettings.other1cd",
+                              "label": "global.other.1",
+                              "type3": "MANUAL",
+                              "optionsModel": "tat.taxOther1Types",
+                              "eventChange": "",
+                              "conditionDisabled": "!(tat.taxSettings.other1cdenabled && tat.taxSettings.statecd && tat.taxSettings.countycd && tat.taxSettings.citycd)",
+                              "conditionShow": "!tat.taxSettings.other1cdhidden",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "tat.taxSettings.other2cd",
+                              "label": "global.other.2",
+                              "type3": "MANUAL",
+                              "optionsModel": "tat.taxOther2Types",
+                              "conditionDisabled": "!(tat.taxSettings.other2cdenabled && tat.taxSettings.statecd && tat.taxSettings.countycd && tat.taxSettings.citycd)",
+                              "conditionShow": "!tat.taxSettings.other2cdhidden",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 92,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "tat.taxSettings.spectaxcd",
+                              "label": "global.special.tax.code",
+                              "meta": "SpecialTaxCodeTypes",
+                              "conditionDisabled": "!tat.taxSettings.spectaxcdenabled",
+                              "conditionShow": "!tat.taxSettings.spectaxcdhidden",
+                              "type3": "SET",
+                              "metaGroup": "OE"
+                            },
+                            {
+                              "id": 93,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "tat.taxSettings.taxauth",
+                              "label": "global.authority",
+                              "type3": "MANUAL",
+                              "optionsModel": "tat.taxAuthTypes",
+                              "conditionDisabled": "!tat.taxSettings.taxauthenabled",
+                              "conditionShow": "!tat.taxSettings.taxauthhidden",
+                              "eventChange": "tat.editGSTTaxableChange()"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 24,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 33,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 34,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "tat.taxSettings.taxablefl",
+                                  "label": "{{tat.taxSettings.taxablefllabel}}",
+                                  "conditionDisabled": "!base.isTaxesandTotalsEnabled || !tat.taxSettings.taxableflenabled",
+                                  "conditionShow": "!tat.taxSettings.taxableflhidden",
+                                  "eventChange": "tat.taxableChanged()"
+                                },
+                                {
+                                  "id": 35,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "tat.taxSettings.nontaxtype",
+                                  "label": "global.reason",
+                                  "meta": "NonTaxReason",
+                                  "type3": "CODES",
+                                  "metaGroup": "OE",
+                                  "conditionDisabled": "!tat.taxSettings.nontaxtypeenabled",
+                                  "conditionShow": "!tat.taxSettings.nontaxtypehidden",
+                                  "eventChange": "tat.nonTaxTypeChanged()"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 36,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 37,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "tat.taxSettings.taxoverfl",
+                                  "label": "global.tax.override",
+                                  "conditionShow": "tat.taxSettings.taxoverflhidden",
+                                  "disabled": true
+                                },
+                                {
+                                  "id": 38,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "tat.taxOverrideReason",
+                                  "label": "global.reason",
+                                  "conditionShow": "!tat.taxSettings.overridetypehidden"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 94,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "tat.taxSettings.pstlicenseno",
+                              "label": "pst.license.number",
+                              "conditionShow": "!tat.taxSettings.pstlicensenohidden",
+                              "conditionDisabled": "!tat.taxSettings.pstlicensenoenabled",
+                              "eventChange": "tat.editGSTTaxableChange()",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 39,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 40,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 41,
+                              "type": "EXP_AREA",
+                              "label": "global.tax.detail",
+                              "collapsed": true,
+                              "conditionShow": "!tat.taxSettings.btntaxdetailhidden",
+                              "conditionCollapsed": "",
+                              "eventExpand": "tat.recalculate()",
+                              "children": [
+                                {
+                                  "id": 96,
+                                  "type": "GRID",
+                                  "model": "tat.taxDetailCollection",
+                                  "controlRef": "tat.taxDetailGrid",
+                                  "options": {
+                                    "showDrilldown": true,
+                                    "showCheckboxes": true,
+                                    "selectable": "multiple",
+                                    "events": {
+                                      "drilldown": "tat.taxDetailDrilldownClicked()"
+                                    }
+                                  },
+                                  "controls": {
+                                    "toolbar": {
+                                      "id": 112,
+                                      "type": "TOOLBAR",
+                                      "label": "global.blank.label.string.for.space",
+                                      "children": [
+                                        {
+                                          "id": 111,
+                                          "type": "BTN",
+                                          "label": "global.new",
+                                          "icon": "icon-new-document",
+                                          "securityLevel": 4,
+                                          "conditionDisabled": "!base.isTaxesandTotalsEnabled || !tat.taxSettings.canoverridefl",
+                                          "conditionShow": "",
+                                          "eventClick": "tat.newTaxDetailClicked()"
+                                        },
+                                        {
+                                          "id": 147,
+                                          "type": "BTN",
+                                          "label": "global.delete",
+                                          "icon": "icon-delete",
+                                          "securityLevel": 5,
+                                          "eventClick": "tat.taxDetailDeleteClicked()",
+                                          "conditionDisabled": "!base.isTaxesandTotalsEnabled || !tat.taxSettings.canoverridefl"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "children": [
+                                    {
+                                      "id": 97,
+                                      "type": "GRID_COL",
+                                      "subType": "TEXT",
+                                      "model": "rectydesc",
+                                      "label": "global.type"
+                                    },
+                                    {
+                                      "id": 98,
+                                      "type": "GRID_COL",
+                                      "subType": "TEXT",
+                                      "model": "statedesc",
+                                      "label": "global.state"
+                                    },
+                                    {
+                                      "id": 99,
+                                      "type": "GRID_COL",
+                                      "subType": "TEXT",
+                                      "model": "countydesc",
+                                      "label": "global.county"
+                                    },
+                                    {
+                                      "id": 100,
+                                      "type": "GRID_COL",
+                                      "subType": "TEXT",
+                                      "model": "citydesc",
+                                      "label": "global.city"
+                                    },
+                                    {
+                                      "id": 101,
+                                      "type": "GRID_COL",
+                                      "subType": "TEXT",
+                                      "model": "otherdesc",
+                                      "label": "global.other"
+                                    },
+                                    {
+                                      "id": 102,
+                                      "type": "GRID_COL",
+                                      "subType": "TEXT",
+                                      "model": "taxsalebase",
+                                      "label": "global.sale.base"
+                                    },
+                                    {
+                                      "id": 103,
+                                      "type": "GRID_COL",
+                                      "subType": "TEXT",
+                                      "model": "taxsaleamt",
+                                      "label": "global.sale.amount",
+                                      "dataFormat": "CURRENCY"
+                                    },
+                                    {
+                                      "id": 104,
+                                      "type": "GRID_COL",
+                                      "subType": "TEXT",
+                                      "model": "taxuseamt",
+                                      "label": "global.use.amount",
+                                      "dataFormat": "CURRENCY"
+                                    },
+                                    {
+                                      "id": 105,
+                                      "type": "GRID_COL",
+                                      "subType": "TEXT",
+                                      "model": "taxtransamt",
+                                      "label": "global.transit.amount",
+                                      "dataFormat": "CURRENCY"
+                                    },
+                                    {
+                                      "id": 106,
+                                      "type": "GRID_COL",
+                                      "subType": "TEXT",
+                                      "model": "taxexcamt",
+                                      "label": "global.excise.amount",
+                                      "dataFormat": "CURRENCY"
+                                    },
+                                    {
+                                      "id": 107,
+                                      "type": "GRID_COL",
+                                      "subType": "TEXT",
+                                      "model": "taxsalert",
+                                      "label": "global.sale.rate",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 5,
+                                        "maximumFractionDigits": 5
+                                      }
+                                    },
+                                    {
+                                      "id": 108,
+                                      "type": "GRID_COL",
+                                      "subType": "TEXT",
+                                      "model": "taxusert",
+                                      "label": "global.use.rate",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 5,
+                                        "maximumFractionDigits": 5
+                                      }
+                                    },
+                                    {
+                                      "id": 109,
+                                      "type": "GRID_COL",
+                                      "subType": "TEXT",
+                                      "model": "taxtransrt",
+                                      "label": "global.transit.rate",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 5,
+                                        "maximumFractionDigits": 5
+                                      }
+                                    },
+                                    {
+                                      "id": 110,
+                                      "type": "GRID_COL",
+                                      "subType": "TEXT",
+                                      "model": "taxexcrt",
+                                      "label": "global.excise.rate",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 5,
+                                        "maximumFractionDigits": 5
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 51,
+                  "type": "EXP_AREA",
+                  "label": "global.totals",
+                  "children": [
+                    {
+                      "id": 52,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 54,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 151,
+                              "type": "FIELD_SET",
+                              "label": "global.ordered.line.items",
+                              "children": [
+                                {
+                                  "id": 61,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.orderTotals.ordlineamt",
+                                  "label": "global.line.items",
+                                  "dataFormat": "CURRENCY"
+                                },
+                                {
+                                  "id": 62,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.orderTotals.orddiscamt",
+                                  "label": "global.discount",
+                                  "dataFormat": "CURRENCY"
+                                },
+                                {
+                                  "id": 63,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.orderTotals.ordaddonamt",
+                                  "label": "global.addons",
+                                  "dataFormat": "CURRENCY"
+                                },
+                                {
+                                  "id": 64,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.orderTotals.ordtaxamt",
+                                  "label": "global.tax",
+                                  "dataFormat": "CURRENCY",
+                                  "conditionShow": "!base.orderTotals.taxordhidden"
+                                },
+                                {
+                                  "id": 142,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.orderTotals.ordgstdspl",
+                                  "label": "{{base.orderTotals.gstordlabel}}",
+                                  "dataFormat": "CURRENCY",
+                                  "conditionShow": "!base.orderTotals.gstordhidden"
+                                },
+                                {
+                                  "id": 143,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.orderTotals.ordpsttaxamt",
+                                  "label": "global.pst",
+                                  "conditionShow": "!base.orderTotals.pstordhidden",
+                                  "dataFormat": "CURRENCY"
+                                },
+                                {
+                                  "id": 144,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "",
+                                  "label": "global.includes.backorders",
+                                  "conditionShow": "base.orderTotals.ordboexist"
+                                },
+                                {
+                                  "id": 69,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.orderTotals.ordtotalamt",
+                                  "label": "global.total",
+                                  "dataFormat": "CURRENCY"
+                                },
+                                {
+                                  "id": 71,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.orderTotals.ordtottendamt",
+                                  "label": "global.paid",
+                                  "dataFormat": "CURRENCY"
+                                },
+                                {
+                                  "id": 70,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.orderTotals.orddue",
+                                  "label": "global.due",
+                                  "dataFormat": "CURRENCY"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 53,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 152,
+                              "type": "FIELD_SET",
+                              "label": "global.shipped.line.items",
+                              "children": [
+                                {
+                                  "id": 65,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.orderTotals.shplineamt",
+                                  "label": "global.line.items",
+                                  "dataFormat": "CURRENCY"
+                                },
+                                {
+                                  "id": 66,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.orderTotals.shpdiscamt",
+                                  "label": "global.discount",
+                                  "dataFormat": "CURRENCY"
+                                },
+                                {
+                                  "id": 67,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.orderTotals.shpaddonamt",
+                                  "label": "global.addons",
+                                  "dataFormat": "CURRENCY"
+                                },
+                                {
+                                  "id": 68,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.orderTotals.shptaxamt",
+                                  "label": "global.tax",
+                                  "dataFormat": "CURRENCY"
+                                },
+                                {
+                                  "id": 145,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "",
+                                  "label": "global.includes.backorders",
+                                  "conditionShow": "base.orderTotals.ordboexist"
+                                },
+                                {
+                                  "id": 72,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.orderTotals.shptotalamt",
+                                  "label": "global.total",
+                                  "dataFormat": "CURRENCY"
+                                },
+                                {
+                                  "id": 73,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.orderTotals.shptottendamt",
+                                  "label": "global.paid",
+                                  "dataFormat": "CURRENCY"
+                                },
+                                {
+                                  "id": 74,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.orderTotals.shpdue",
+                                  "label": "global.due",
+                                  "dataFormat": "CURRENCY"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 55,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 57,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 153,
+                              "type": "FIELD_SET",
+                              "label": "global.other",
+                              "children": [
+                                {
+                                  "id": 154,
+                                  "type": "ROW",
+                                  "children": [
+                                    {
+                                      "id": 155,
+                                      "type": "COL",
+                                      "subType": "1/2",
+                                      "children": [
+                                        {
+                                          "id": 78,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "base.oehdr.totqtyord",
+                                          "label": "global.quantity.ordered",
+                                          "dataFormat": "INTEGER"
+                                        },
+                                        {
+                                          "id": 79,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "base.oehdr.totqtyshp",
+                                          "label": "global.quantity.shipped",
+                                          "dataFormat": "INTEGER"
+                                        },
+                                        {
+                                          "id": 80,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "base.oehdr.nolineitem",
+                                          "label": "global.lines",
+                                          "dataFormat": "INTEGER"
+                                        },
+                                        {
+                                          "id": 81,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "base.oehdr.totweight",
+                                          "label": "global.weight",
+                                          "dataFormat": "DECIMAL"
+                                        },
+                                        {
+                                          "id": 82,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "base.oehdr.totcubes",
+                                          "label": "global.cubes",
+                                          "dataFormat": "DECIMAL"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": 156,
+                                      "type": "COL",
+                                      "subType": "1/2",
+                                      "children": [
+                                        {
+                                          "id": 83,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "base.oehdr.margin",
+                                          "label": "{{base.orderTotals.marginlabel}}",
+                                          "conditionShow": "base.sasoo.seecostfl",
+                                          "dataFormat": "CURRENCY"
+                                        },
+                                        {
+                                          "id": 84,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "base.oehdr.totcorechg",
+                                          "label": "global.core",
+                                          "dataFormat": "CURRENCY"
+                                        },
+                                        {
+                                          "id": 85,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "base.oehdr.totrestkamt",
+                                          "label": "global.restock",
+                                          "dataFormat": "CURRENCY"
+                                        },
+                                        {
+                                          "id": 86,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "base.oehdr.totdatccost",
+                                          "label": "global.datc",
+                                          "dataFormat": "CURRENCY"
+                                        },
+                                        {
+                                          "id": 146,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "base.oehdr.totdomsale",
+                                          "label": "{{base.orderTotals.totdomsalelabel}}",
+                                          "dataFormat": "CURRENCY",
+                                          "conditionShow": "!base.orderTotals.totdomsalehidden"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "sidebar": {
+              "id": 13,
+              "type": "MOD_SIDEBAR",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "SUB_VIEW",
+                  "subType": "HTML",
+                  "viewPath": "oe/oeet/shared/cart.html",
+                  "controller": "OeetCartCtrl as cart"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 148,
+      "type": "VIEW_CNTR",
+      "viewName": "childView"
+    }
+  ]
+}

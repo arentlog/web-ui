@@ -1,0 +1,315 @@
+{
+  "viewId": "twl-twlir-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.twlir",
+          "subLabel": "{{base.getSubTitle()}}",
+          "children": [
+            {
+              "id": 33,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-new-document",
+              "label": "global.create.packing.list",
+              "securityLevel": 4,
+              "eventClick": "mst.launchCreatePackingList()",
+              "conditionDisabled": "base.detailGrid.isAnyRowSelected() || ((!base.criteria.whNum) && (!base.criteriaUsed.whNum))",
+              "conditionShow": "!base.isSearch_RI"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 5,
+              "type": "GRID",
+              "controlRef": "base.detailGrid",
+              "model": "base.detailDataSet",
+              "conditionShow": "base.isSearch_PO",
+              "options": {
+                "showDrilldown": true,
+                "events": {
+                  "drilldown": "mst.drillDownFromDetail()",
+                  "selected": ""
+                },
+                "showCheckboxes": true
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.purchase.orders",
+                  "children": [
+                    {
+                      "id": 28,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.packing.list",
+                      "securityLevel": 3,
+                      "icon": "icon-edit",
+                      "eventClick": "mst.viewPackingListFromDetail()",
+                      "conditionDisabled": "!base.detailGrid.isOneRowSelected()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "poNumber",
+                  "label": "global.purchase.order.number"
+                },
+                {
+                  "id": 9,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "poSuffix",
+                  "label": "global.purchase.order.suffix",
+                  "dataFormat": "Suffix"
+                },
+                {
+                  "id": 10,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "poLine",
+                  "label": "global.line.count",
+                  "dataFormat": "INTEGER"
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "rtNum",
+                  "label": "global.receipt.transaction.number"
+                },
+                {
+                  "id": 7,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "packingListMst",
+                  "label": "global.packing.list"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "absNum",
+                  "label": "global.item"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "actQuantity",
+                  "label": "global.quantity.received",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "expQuantity",
+                  "label": "global.expected.quantity",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "rowStatusMst",
+                  "label": "global.status",
+                  "dataFormat": "TwlReceiptStatusToName"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "vendorId",
+                  "label": "global.vendor.number"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "vendItem",
+                  "label": "global.vendor.product"
+                }
+              ]
+            },
+            {
+              "id": 38,
+              "type": "FORM",
+              "conditionShow": "base.isSearch_RI",
+              "children": [
+                {
+                  "id": 39,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 36,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "mst.enteredRT",
+                      "label": "global.receipt.transaction.number",
+                      "autoFocus": true,
+                      "conditionShow": "base.isSearch_RI",
+                      "conditionFocus": "mst.focusAtEnteredRT"
+                    },
+                    {
+                      "id": 37,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-confirm",
+                      "label": "global.select",
+                      "eventClick": "mst.selectRTProcessing()",
+                      "conditionShow": "base.isSearch_RI"
+                    },
+                    {
+                      "id": 29,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-edit",
+                      "label": "global.o.s.d.report",
+                      "securityLevel": 3,
+                      "eventClick": "mst.runOverShortDamaged()",
+                      "conditionDisabled": "!base.masterGrid.isAnyRowSelected() || base.osdReportSecurity < 3",
+                      "conditionShow": "base.isSearch_RI"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 18,
+              "type": "GRID",
+              "model": "base.masterDataSet",
+              "controlRef": "base.masterGrid",
+              "conditionShow": "base.isSearch_RT || base.isSearch_MI || base.isSearch_RI",
+              "options": {
+                "showDrilldown": true,
+                "events": {
+                  "drilldown": "mst.drillDownFromMaster()"
+                },
+                "showCheckboxes": true
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 19,
+                  "type": "TOOLBAR",
+                  "label": "global.receipt.transactions",
+                  "children": [
+                    {
+                      "id": 34,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-edit",
+                      "label": "global.packing.list",
+                      "securityLevel": 3,
+                      "eventClick": "mst.viewPackingListFromMaster()",
+                      "conditionDisabled": "!base.masterGrid.isOneRowSelected()",
+                      "conditionShow": "!base.isSearch_RI"
+                    },
+                    {
+                      "id": 31,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-delete",
+                      "label": "global.delete",
+                      "eventClick": "mst.deleteFromMaster()",
+                      "securityLevel": 5,
+                      "conditionDisabled": "!base.masterGrid.isOneRowSelected()",
+                      "conditionShow": "!base.isSearch_RI"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "rtNum",
+                  "label": "global.receipt.transaction.number"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "packingList",
+                  "label": "global.packing.list",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "carrier",
+                  "label": "global.carrier"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "delivery",
+                  "label": "global.delivery",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "cargoControl",
+                  "label": "global.cargo.control"
+                },
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "truckId",
+                  "label": "global.truck.number"
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "rowStatus",
+                  "label": "global.status",
+                  "dataFormat": "TwlReceiptStatusToName"
+                },
+                {
+                  "id": 26,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "type",
+                  "label": "global.type",
+                  "dataFormat": "TwlReceiptTypeToName"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "viewId": "ot-otet-polines",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.add.po.lines",
+              "subLabel": "{{plc.trackDetailsHeader}}",
+              "controls": {
+                "navBtns": {
+                  "id": 40,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 41,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.detail"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "submitForm": true,
+                  "eventValidated": "plc.submit()"
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "stateRef": "^.detail"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 43,
+                          "type": "FIELD",
+                          "subType": "RADIO_SET",
+                          "model": "plc.otetaddpoheader.loadtype",
+                          "label": "global.load.type",
+                          "type3": "INLINE",
+                          "labelHidden": true,
+                          "attachUp": true,
+                          "eventChange": "plc.loadTypeChanged()",
+                          "children": [
+                            {
+                              "id": 44,
+                              "type": "OPT",
+                              "label": "global.select.entire.po",
+                              "value": "all"
+                            },
+                            {
+                              "id": 45,
+                              "type": "OPT",
+                              "label": "global.select.lines.of.po",
+                              "value": "noqty"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 42,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "plc.fullPono",
+                          "label": "global.purchase.order.number",
+                          "meta": "POOrders",
+                          "type3": "STANDARD",
+                          "eventChange": "plc.poLineInit()"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 46,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 47,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "plc.otetaddpoheader.vendno",
+                          "label": "global.vendor.number"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 49,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "plc.otetaddpoheader.whse",
+                          "label": "global.warehouse"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 48,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 22,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "plc.otetaddpoheader.stagecdname",
+                          "label": "global.stage"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 10,
+                  "type": "GRID",
+                  "model": "base.datasetPoLines",
+                  "controlRef": "base.poLinesGrid",
+                  "options": {
+                    "showCheckboxes": false,
+                    "selectable": "multiple",
+                    "editable": true
+                  },
+                  "children": [
+                    {
+                      "id": 29,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "selectfl",
+                      "label": "global.line.selected",
+                      "dataFormat": "LOGICAL",
+                      "editable": true
+                    },
+                    {
+                      "id": 35,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "trackno",
+                      "label": "global.track.number",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 25,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "polineno",
+                      "label": "global.purchase.order.line.number",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prod",
+                      "label": "global.product"
+                    },
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "poqtyord",
+                      "label": "global.purchase.order.quantity.ordered",
+                      "dataFormat": "DECIMAL",
+                      "editable": true,
+                      "sign": "+",
+                      "digits": 7,
+                      "decimals": 2,
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "unit",
+                      "label": "global.unit"
+                    },
+                    {
+                      "id": 30,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "stkqtyord",
+                      "label": "global.stock.quantity.ordered",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 32,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "cubes",
+                      "label": "global.cubes",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 33,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "weight",
+                      "label": "global.weight",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 36,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "whse",
+                      "label": "global.warehouse"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,830 @@
+{
+  "viewId": "sa-sasc-detail-tabs-taxes",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly",
+  "children": [
+    {
+      "id": 49,
+      "type": "EXP_AREA",
+      "label": "global.tax.settings",
+      "children": [
+        {
+          "id": 134,
+          "type": "MESSAGE",
+          "text": "message.tax.settings.must.be.setup.logged.in.to.the.new.company",
+          "icon": "icon-alert",
+          "conditionShow": "base.isNewCompany()"
+        },
+        {
+          "id": 50,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 51,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 67,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.sacompany.vCTaxMethod",
+                  "label": "global.tax.method",
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "TaxMethodCodeType",
+                  "eventChange": "dtl.taxMethodChanged()",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly",
+                  "autoFocus": true
+                },
+                {
+                  "id": 69,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "base.sacompany.geotxrgfl",
+                  "label": "global.tax.register",
+                  "dataFormat": "LOGICAL",
+                  "conditionDisabled": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                },
+                {
+                  "id": 142,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "base.sacompany.exttaxgroupfl",
+                  "label": "global.allow.expanded.tax.groups",
+                  "dataFormat": "LOGICAL",
+                  "conditionDisabled": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly",
+                  "conditionShow": "base.sacompany.vCTaxMethod.toLowerCase() === 's' && base.sacompany.vCTaxInterfaceTy.toLowerCase() === 's'"
+                }
+              ]
+            },
+            {
+              "id": 71,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 68,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.sacompany.vCTaxInterfaceTy",
+                  "label": "global.tax.interface",
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "TaxInterfaceCodeType",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly",
+                  "eventChange": "dtl.taxInterfaceChanged()"
+                },
+                {
+                  "id": 70,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.sacompany.smtaxtype",
+                  "label": "global.tax.analysis",
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "TaxAnalysis",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly",
+                  "blankOption": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 79,
+      "type": "EXP_AREA",
+      "label": "global.taxware",
+      "children": [
+        {
+          "id": 80,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 81,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 72,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.sacompany.usestep",
+                  "label": "global.step.interface",
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "GeoUseStep",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                },
+                {
+                  "id": 75,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "base.sacompany.geocdfl",
+                  "label": "global.geo.interface",
+                  "dataFormat": "LOGICAL",
+                  "conditionDisabled": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                },
+                {
+                  "id": 76,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "base.sacompany.tgtaxap",
+                  "label": "global.apply.ap.taxing",
+                  "dataFormat": "LOGICAL",
+                  "conditionShow": "!base.sacompany.tgtaxapHidden",
+                  "conditionDisabled": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                }
+              ]
+            },
+            {
+              "id": 82,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 73,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.sacompany.poataxty",
+                  "label": "poa.tax.type",
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "POTaxCodeType",
+                  "blankOption": false,
+                  "conditionShow": "(base.sacompany.vCTaxInterfaceTy !== 'e')",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                },
+                {
+                  "id": 132,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.sacompany.poataxty",
+                  "label": "loa.tax.type",
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "POTaxCodeType",
+                  "blankOption": false,
+                  "conditionShow": "(base.sacompany.vCTaxInterfaceTy === 'e')",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                },
+                {
+                  "id": 74,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.sacompany.pootaxty",
+                  "label": "poo.tax.type",
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "POTaxCodeType",
+                  "blankOption": false,
+                  "conditionShow": "(base.sacompany.vCTaxInterfaceTy !== 'e')",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                },
+                {
+                  "id": 133,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.sacompany.pootaxty",
+                  "label": "lor.tax.type",
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "POTaxCodeType",
+                  "blankOption": false,
+                  "conditionShow": "(base.sacompany.vCTaxInterfaceTy === 'e')",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 135,
+      "type": "EXP_AREA",
+      "label": "global.avatax",
+      "children": [
+        {
+          "id": 136,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 137,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 140,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.sacompany.fiAvaPooTaxTy",
+                  "label": "global.point.of.origin",
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "AvaPOODefault",
+                  "blankOption": false,
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                },
+                {
+                  "id": 141,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "base.sacompany.tgAvaTaxAp",
+                  "label": "global.apply.ap.taxing",
+                  "dataFormat": "LOGICAL",
+                  "conditionDisabled": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                }
+              ]
+            },
+            {
+              "id": 138,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 139,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.sacompany.fiAvaPoaTaxTy",
+                  "label": "global.point.of.acceptance",
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "AvaPOADefault",
+                  "blankOption": false,
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "type": "EXP_AREA",
+      "label": "global.tax.group.names",
+      "children": [
+        {
+          "id": 53,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 54,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 123,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 91,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.sacompany.taxgroupnm1",
+                      "label": "number.1",
+                      "labelHidden": true,
+                      "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                    },
+                    {
+                      "id": 122,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "base.sacompany.tgtaxexempt1",
+                      "label": "vat.exempt",
+                      "dataFormat": "LOGICAL",
+                      "conditionShow": "!base.sacompany.tgtaxexempt1Hidden",
+                      "conditionDisabled": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                    }
+                  ]
+                },
+                {
+                  "id": 124,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 92,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.sacompany.taxgroupnm2",
+                      "label": "number.2",
+                      "attachUp": true,
+                      "labelHidden": true,
+                      "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                    },
+                    {
+                      "id": 125,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "base.sacompany.tgtaxexempt2",
+                      "label": "vat.exempt",
+                      "dataFormat": "LOGICAL",
+                      "conditionShow": "!base.sacompany.tgtaxexempt2Hidden",
+                      "conditionDisabled": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                    }
+                  ]
+                },
+                {
+                  "id": 126,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 93,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.sacompany.taxgroupnm3",
+                      "label": "number.3",
+                      "labelHidden": true,
+                      "attachUp": true,
+                      "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                    },
+                    {
+                      "id": 127,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "base.sacompany.tgtaxexempt3",
+                      "label": "vat.exempt",
+                      "dataFormat": "LOGICAL",
+                      "conditionShow": "!base.sacompany.tgtaxexempt3Hidden",
+                      "conditionDisabled": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                    }
+                  ]
+                },
+                {
+                  "id": 128,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 94,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.sacompany.taxgroupnm4",
+                      "label": "number.4",
+                      "labelHidden": true,
+                      "attachUp": true,
+                      "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                    },
+                    {
+                      "id": 129,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "base.sacompany.tgtaxexempt4",
+                      "label": "vat.exempt",
+                      "dataFormat": "LOGICAL",
+                      "conditionShow": "!base.sacompany.tgtaxexempt4Hidden",
+                      "conditionDisabled": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                    }
+                  ]
+                },
+                {
+                  "id": 130,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 95,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.sacompany.taxgroupnm5",
+                      "label": "number.5",
+                      "labelHidden": true,
+                      "attachUp": true,
+                      "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                    },
+                    {
+                      "id": 131,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "base.sacompany.tgtaxexempt5",
+                      "label": "vat.exempt",
+                      "dataFormat": "LOGICAL",
+                      "conditionShow": "!base.sacompany.tgtaxexempt5Hidden",
+                      "conditionDisabled": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "type": "EXP_AREA",
+      "label": "global.vertex",
+      "children": [
+        {
+          "id": 56,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 57,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 96,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.sacompany.geoindxty",
+                  "label": "global.geo.index.type",
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "GeoIndexType",
+                  "blankOption": false,
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 88,
+      "type": "EXP_AREA",
+      "label": "global.sales.use.settings",
+      "conditionShow": "base.sacompany.vCTaxMethod === 's'",
+      "children": [
+        {
+          "id": 89,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 90,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 97,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.sacompany.name",
+                  "label": "global.1099.name",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly",
+                  "maxLength": 40,
+                  "conditionShow": "base.sacompany.vCTaxMethod === 's' && base.sacompany.nameSensitive",
+                  "conditionRequired": "base.sacompany.vCTaxMethod === 's' && base.sacompany.nameSensitive"
+                },
+                {
+                  "id": 99,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.sacompany.fiSUTFedTaxID",
+                  "label": "global.federal.tax.id.number",
+                  "required": false,
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly",
+                  "conditionShow": "base.sacompany.vCTaxMethod === 's' && base.sacompany.fiSUTFedTaxIDSensitive"
+                }
+              ]
+            },
+            {
+              "id": 98,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 100,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.sacompany.fiAPAccrual",
+                  "label": "ap.tax",
+                  "required": false,
+                  "meta": "GlAccount",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly",
+                  "conditionShow": "base.sacompany.vCTaxMethod === 's' && base.sacompany.fiAPAccrualSensitive",
+                  "options": {
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 101,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.sacompany.fiAPCash",
+                  "label": "ap.tax...cash",
+                  "required": false,
+                  "meta": "GlAccount",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly",
+                  "conditionShow": "base.sacompany.vCTaxMethod === 's' && base.sacompany.fiAPCashSensitive",
+                  "options": {
+                    "allowEntry": true
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 58,
+      "type": "EXP_AREA",
+      "label": "gst.pst.settings",
+      "conditionShow": "base.sacompany.vCTaxMethod === 'g'",
+      "children": [
+        {
+          "id": 59,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 60,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 106,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.sacompany.fiGSTFedTaxID",
+                  "label": "gst.registration.number",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly",
+                  "conditionShow": "base.sacompany.vCTaxMethod === 'g' && base.sacompany.fiGSTFedTaxIDSensitive"
+                },
+                {
+                  "id": 103,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.sacompany.fiGSTRate",
+                  "label": "gst.rate",
+                  "dataFormat": "DECIMAL",
+                  "sign": "+",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly",
+                  "conditionShow": "base.sacompany.vCTaxMethod === 'g' && base.sacompany.fiGSTRateSensitive",
+                  "decimals": 3,
+                  "digits": 3
+                },
+                {
+                  "id": 107,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.sacompany.fiGSTAccount",
+                  "label": "gst.account",
+                  "meta": "GlAccount",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly",
+                  "conditionShow": "base.sacompany.vCTaxMethod === 'g' && base.sacompany.fiGSTAccountSensitive",
+                  "options": {
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 108,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.sacompany.fiGSTCashAccount",
+                  "label": "gst.account.cash",
+                  "meta": "GlAccount",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly || !base.sacompany.fiGSTCashAccountSensitive",
+                  "conditionShow": "base.sacompany.vCTaxMethod === 'g' && !base.sacompany.fiGSTCashAccountHidden",
+                  "options": {
+                    "allowEntry": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": 105,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 111,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.sacompany.fiPSTAccount",
+                  "label": "pst.account",
+                  "meta": "GlAccount",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly",
+                  "conditionShow": "base.sacompany.vCTaxMethod === 'g' && base.sacompany.fiPSTAccountSensitive",
+                  "options": {
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 112,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.sacompany.fiPSTCashAccount",
+                  "label": "pst.account.cash",
+                  "meta": "GlAccount",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly || !base.sacompany.fiPSTCashAccountSensitive",
+                  "conditionShow": "base.sacompany.vCTaxMethod === 'g' && !base.sacompany.fiPSTCashAccountHidden",
+                  "options": {
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 109,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.sacompany.fiITCAccount",
+                  "label": "global.itc.account",
+                  "meta": "GlAccount",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly",
+                  "conditionShow": "base.sacompany.vCTaxMethod === 'g' && base.sacompany.fiITCAccountSensitive",
+                  "options": {
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 110,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.sacompany.fiITCCashAccount",
+                  "label": "global.itc.account.cash",
+                  "meta": "GlAccount",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly || !base.sacompany.fiITCCashAccountSensitive",
+                  "conditionShow": "base.sacompany.vCTaxMethod === 'g' && !base.sacompany.fiITCCashAccountHidden",
+                  "options": {
+                    "allowEntry": true
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "type": "EXP_AREA",
+      "label": "vat.settings",
+      "conditionShow": "base.sacompany.vCTaxMethod === 'v'",
+      "children": [
+        {
+          "id": 62,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 63,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 113,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.sacompany.fiVATFedTaxID",
+                  "label": "vat.registration.number",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly || !base.sacompany.fiVATFedTaxIDSensitive",
+                  "conditionShow": "base.sacompany.vCTaxMethod === 'v'"
+                },
+                {
+                  "id": 114,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.sacompany.vCSettDiscType",
+                  "label": "global.settlement.discount.tax",
+                  "type3": "SET",
+                  "metaGroup": "SA",
+                  "meta": "SettleDiscTaxCodeType",
+                  "conditionReadonly": "base.isDetail() || !base.sacompany.cbSettDiscTaxSensitive",
+                  "conditionShow": "base.sacompany.vCTaxMethod === 'v'"
+                },
+                {
+                  "id": 116,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.sacompany.fiAPVATAccrual",
+                  "label": "ap.vat",
+                  "meta": "GlAccount",
+                  "conditionReadonly": "base.isDetail() || !base.sacompany.fiAPVATAccrualSensitive",
+                  "conditionShow": "base.sacompany.vCTaxMethod === 'v'",
+                  "options": {
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 117,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.sacompany.fiAPVATCash",
+                  "label": "ap.vat.cash",
+                  "meta": "GlAccount",
+                  "conditionReadonly": "base.isDetail() || !base.sacompany.fiAPVATCashSensitive",
+                  "conditionShow": "base.sacompany.vCTaxMethod === 'v' && !base.sacompany.fiAPVATCashHidden",
+                  "options": {
+                    "allowEntry": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": 115,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 143,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "base.sacompany.vATMtdRptFl",
+                  "label": "global.use.hmrc.digital.reporting",
+                  "dataFormat": "LOGICAL",
+                  "conditionDisabled": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly || !base.sacompany.vATMtdRptFlSensitive",
+                  "conditionShow": "base.sacompany.vCTaxMethod === 'v'"
+                },
+                {
+                  "id": 146,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 144,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.sacompany.vATHmrcUrl",
+                      "label": "global.hmrc.api.url",
+                      "conditionReadonly": "base.isDetail() || !base.sacompany.vATHmrcUrlSensitive",
+                      "conditionShow": "base.sacompany.vCTaxMethod === 'v'"
+                    },
+                    {
+                      "id": 145,
+                      "type": "BTN",
+                      "subType": "PRI",
+                      "label": "global.test.connection",
+                      "conditionShow": "base.sacompany.vCTaxMethod === 'v'",
+                      "conditionDisabled": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly || !base.sacompany.vATUrlTestSensitive",
+                      "eventClick": "dtl.testHmrcUrl()"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 64,
+      "type": "EXP_AREA",
+      "label": "global.additional.settings",
+      "conditionShow": "base.sacompany.vCTaxInterfaceTy === 'e' || base.sacompany.vCTaxInterfaceTy === 'a' || base.sacompany.vCTaxMethod === 'v'",
+      "children": [
+        {
+          "id": 65,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 66,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 118,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.sacompany.fiAPSelfAssess",
+                  "label": "ap.tax...self.assess",
+                  "meta": "GlAccount",
+                  "conditionReadonly": "base.isDetail() || !base.sacompany.fiAPSelfAssessSensitive",
+                  "conditionShow": "base.sacompany.vCTaxInterfaceTy === 'e' || base.sacompany.vCTaxInterfaceTy === 'a'",
+                  "options": {
+                    "allowEntry": true
+                  }
+                },
+                {
+                  "id": 119,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.sacompany.fiAPExpense",
+                  "label": "ap.tax...expense",
+                  "meta": "GlAccount",
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly || !base.sacompany.fiAPExpenseSensitive",
+                  "conditionShow": "base.sacompany.vCTaxInterfaceTy === 'e' || base.sacompany.vCTaxInterfaceTy === 'a'",
+                  "options": {
+                    "allowEntry": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": 120,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 121,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.sacompany.fiAPTaxTol",
+                  "label": "ap.tax...tolerance.percent",
+                  "dataFormat": "DECIMAL",
+                  "sign": "+",
+                  "decimals": 2,
+                  "digits": 3,
+                  "conditionReadonly": "base.isLoginCompanyOnly() || dtl.isTaxesTabReadonly || (!base.sacompany.fiAPTaxTolSensitive && !base.sacompany.vCTaxMethod === 'v')",
+                  "conditionShow": "base.sacompany.vCTaxInterfaceTy === 'e' || base.sacompany.vCTaxInterfaceTy === 'a' || base.sacompany.vCTaxMethod === 'v'"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

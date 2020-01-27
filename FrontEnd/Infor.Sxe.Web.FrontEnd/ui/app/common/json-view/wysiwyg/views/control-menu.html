@@ -1,0 +1,222 @@
+<ul id="control-menu" class="popupmenu has-icons">
+   <!-- Add Control -->
+   <li class="submenu" ng-show="control.type !== 'SUB_VIEW' && control.type !== 'VIEW_CNTR' && control.type !== 'MOD_CNTR' && control.type !== 'MODAL' && control.type !== 'ACTION_PANEL' && control.type !== 'TAB_SET' && control.type !== 'ROW' && control.type !== 'FIELD' && control.type !== 'BTN' && control.type !== 'GRID' && control.type !== 'GRID_COL' && control.type !== 'OPT' && control.type !== 'MESSAGE' && control.type !== 'SWAP_LIST' && control.type !== 'SWAP_LIST_LIST' && control.type !== 'WIZARD' && control.type !== 'WIZARD_TICK' && control.type !== 'CUSTOM' && control.type !== 'DIRECTIVE' && control.type !== 'HTML_CONTROL' && control.type !== 'CONTEXT_FIELD' && control.type !== 'CHART' && control.type !== 'IMAGE'">
+      <a><svg class="icon"><use xlink:href="#icon-new-document"></use></svg><span>Add</span></a>
+      <ul class="popupmenu">
+
+         <!-- Buttons -->
+         <li class="submenu"><a>Button</a>
+            <ul class="popupmenu">
+               <li><a ng-click="addControl('BTN', 'MENU', control.id)">Menu</a></li>
+               <!-- Toolbar Back Button -->
+               <li ng-show="control.type === 'TOOLBAR'"><a ng-click="addBackButton(control.id)"><svg class="icon"><use xlink:href="#icon-left-arrow"></use></svg><span>Nav Back</span></a></li>
+               <li><a ng-click="addControl('BTN', 'PRI', control.id)">Primary</a></li>
+               <li><a ng-click="addControl('BTN', 'SEC', control.id)">Secondary</a></li>
+               <li><a ng-click="addControl('BTN', 'TER', control.id)">Tertiary</a></li>
+               <li><a ng-click="newControl('BTN', '', control.id)">More...</a></li>
+            </ul>
+         </li>
+
+         <!-- Containers -->
+         <li class="submenu"><a>Container</a>
+            <ul class="popupmenu">
+               <li><a ng-click="addControl('CARD', '', control.id)">Card</a></li>
+               <li><a ng-click="addControl('COMP_FLD', '', control.id)">Compound Field</a></li>
+               <li><a ng-click="addControl('EXP_AREA', '', control.id)">Expandable Area</a></li>
+               <li ng-show="control.type === 'EXP_AREA'"><a ng-click="addNamedControl('EXP_VIS_PANE', '', control.id, 'visiblePane')">Expandable Area Visible Pane</a></li>
+               <li><a ng-click="addControl('FIELD_SET', '', control.id)">Field Set</a></li>
+               <li><a ng-click="addControl('FORM', '', control.id)">Form</a></li>
+               <li ng-show="control.type === 'VIEW' || control.type === 'FORM'"><a ng-click="addControl('MOD_CNTR', '', control.id)">Module Container</a></li>
+               <li ng-show="control.type === 'MOD_CONTENT'"><a ng-click="addNamedControl('MOD_CONTENT_HDR', '', control.id, 'contentHeader')">Module Content Header</a></li>
+               <li><a ng-click="addRow(control.id)">Row</a></li>
+               <li ng-show="control.type === 'MOD_SIDEBAR'"><a ng-click="addNamedControl('MOD_SIDEBAR_CONTENT', '', control.id, 'content')">Sidebar Content</a></li>
+               <li ng-show="control.type === 'MOD_SIDEBAR'"><a ng-click="addNamedControl('MOD_SIDEBAR_FOOTER', '', control.id, 'footer')">Sidebar Footer</a></li>
+               <li><a ng-click="addControl('TAB_SET', '', control.id)">Tab Set</a></li>
+            </ul>
+         </li>
+
+         <!-- Fields -->
+         <li class="submenu"><a>Field</a>
+            <ul class="popupmenu">
+               <li><a ng-click="addControl('FIELD', 'CHECKBOX', control.id)">Checkbox</a></li>
+               <li><a ng-click="addControl('FIELD', 'DATE', control.id)">Date</a></li>
+               <li><a ng-click="addControl('FIELD', 'DROP_DOWN', control.id)">Drop Down</a></li>
+               <li><a ng-click="addControl('FIELD', 'INFO', control.id)">Info</a></li>
+               <li><a ng-click="addControl('FIELD', 'LOOKUP', control.id)">Lookup</a></li>
+               <li><a ng-click="addControl('FIELD', 'RADIO_SET', control.id)">Radio Set</a></li>
+               <li><a ng-click="addControl('FIELD', 'TEXT_BOX', control.id)">Text Box</a></li>
+               <li><a ng-click="newControl('FIELD', '', control.id)">More...</a></li>
+            </ul>
+         </li>
+
+         <!-- Special Controls -->
+         <li class="submenu"><a>Special</a>
+            <ul class="popupmenu">
+               <li><a ng-click="newControl('CHART', '', control.id)">Chart</a></li>
+               <li><a ng-click="addControl('GRID', '', control.id)">Grid</a></li>
+               <li><a ng-click="addControl('IMAGE', '', control.id)">Image</a></li>
+               <li><a ng-click="addControl('MESSAGE', '', control.id)">Message</a></li>
+               <!--TODO: Finish implementation-->
+               <!--<li><a ng-click="addControl('LIST_VIEW', '', control.id)">List View</a></li>-->
+               <li><a ng-click="addControl('SWAP_LIST', '', control.id)">Swap List</a></li>
+               <li><a ng-click="addControl('TOOLBAR', '', control.id)">Toolbar</a></li>
+               <li><a ng-click="addControl('WIZARD', '', control.id)">Wizard</a></li>
+            </ul>
+         </li>
+
+         <!-- Views -->
+         <li class="submenu"><a>View</a>
+            <ul class="popupmenu">
+               <li><a ng-click="newControl('SUB_VIEW', 'JSON', control.id)">Sub View</a></li>
+               <li><a ng-click="newControl('VIEW_CNTR', '', control.id)">View Container</a></li>
+            </ul>
+         </li>
+
+         <!-- Custom Controls -->
+         <li class="submenu"><a>Custom</a>
+            <ul class="popupmenu">
+               <li ng-repeat="item in ::customControls">
+                  <a ng-click="newControl('CUSTOM', item.key, control.id)">{{::item.displayName}}</a>
+               </li>
+            </ul>
+         </li>
+
+         <!-- Advanced Controls -->
+         <li class="submenu"><a>Advanced</a>
+            <ul class="popupmenu">
+               <li><a ng-click="newControl('DIRECTIVE', '', control.id)">Directive</a></li>
+               <li ng-hide="isDevMode"><a ng-click="newControl('HTML_CONTROL', '', control.id)">HTML Control</a></li>
+            </ul>
+         </li>
+      </ul>
+   </li>
+
+   <!-- Add menu for controls with limited child control options -->
+   <li class="submenu" ng-show="control.type === 'MOD_CNTR' || control.type === 'MODAL' || control.type === 'ACTION_PANEL' || control.type === 'BTN' || control.type === 'TAB_SET' || control.type === 'GRID' || control.type === 'SWAP_LIST' || control.type === 'WIZARD'">
+      <a><svg class="icon"><use xlink:href="#icon-new-document"></use></svg><span>Add</span></a>
+
+      <ul class="popupmenu">
+         <li ng-show="control.type === 'MOD_CNTR'"><a ng-click="addNamedControl('MOD_SIDEBAR', '', control.id, 'sidebar')">Sidebar</a></li>
+         <li ng-show="control.type === 'MODAL'"><a ng-click="addNamedControl('BTN_SET', 'MODAL', control.id, 'btnSet')">Button Set</a></li>
+         <li ng-show="control.type === 'ACTION_PANEL'"><a ng-click="addNamedControl('TOOLBAR', '', control.id, 'toolbar')">Toolbar</a></li>
+         <li ng-show="control.type === 'BTN'"><a ng-click="addNamedControl('POPDOWN', '', control.id, 'popdown')">Popdown</a></li>
+         <li ng-show="control.type === 'GRID'"><a ng-click="addControl('GRID_COL', 'TEXT', control.id)">Column</a></li>
+         <li ng-show="control.type === 'GRID'"><a ng-click="addNamedControl('TOOLBAR', '', control.id, 'toolbar')">Toolbar</a></li>
+         <li ng-show="control.type === 'SWAP_LIST'"><a ng-click="addControl('SWAP_LIST_LIST', '', control.id)">List</a></li>
+         <li ng-show="control.type === 'TAB_SET'"><a ng-click="addControl('TAB', '', control.id)">Tab</a></li>
+         <li ng-show="control.type === 'WIZARD'"><a ng-click="addControl('WIZARD_TICK', '', control.id)">Wizard Tick</a></li>
+      </ul>
+   </li>
+
+   <!-- Add menu for form fields -->
+   <li class="submenu" ng-show="control.type === 'FIELD' && control.subType !== 'INFO'">
+      <a><svg class="icon"><use xlink:href="#icon-new-document"></use></svg><span>Add</span></a>
+      <ul class="popupmenu">
+
+         <!-- Field Buttons -->
+         <li class="submenu" ng-show="control.subType !== 'RADIO_SET'"><a>Button</a>
+            <ul class="popupmenu">
+               <li><a ng-click="addNamedControl('BTN', 'ACT', control.id, 'actionBtn')"><svg class="icon"><use xlink:href="#icon-more"></use></svg><span>Actions</span></a></li>
+               <li><a ng-click="addFieldDrilldownButton(control.id)"><svg class="icon"><use xlink:href="#icon-drilldown"></use></svg><span>Drilldown</span></a></li>
+               <li><a ng-click="addNamedControl('BTN', 'ICON', control.id, 'actionBtn')"><svg class="icon"><use xlink:href="#icon-insert-image"></use></svg><span>Icon</span></a></li>
+            </ul>
+         </li>
+
+         <!-- Drop Down / Radio Option -->
+         <li ng-show="(control.subType === 'DROP_DOWN' || control.subType === 'MULTI_SELECT' || control.subType === 'RADIO_SET') && control.type3 === 'INLINE'">
+            <a ng-click="newControl('OPT', '', control.id)">Option</a>
+         </li>
+      </ul>
+   </li>
+
+   <!-- Add menu for grid columns -->
+   <li class="submenu" ng-show="control.type === 'GRID_COL' && (control.subType === 'DROP_DOWN' || control.subType === 'MULTI_SELECT') && control.type3 === 'INLINE'">
+      <a><svg class="icon"><use xlink:href="#icon-new-document"></use></svg><span>Add</span></a>
+      <ul class="popupmenu">
+         <!-- Drop Down Option -->
+         <li><a ng-click="newControl('OPT', '', control.id)">Option</a></li>
+      </ul>
+   </li>
+
+   <!-- Add Card Actions Button -->
+   <!-- TODO: figure out how to do this best in light of Cards having button sets which actions button should be inside of -->
+   <!--<li ng-show="control.type === 'CARD'">-->
+      <!--<a ng-click="addNamedControl('BTN', 'ACT', control.id, 'actions')"><svg class="icon"><use xlink:href="#icon-more"></use></svg><span>Add Actions Button</span></a>-->
+   <!--</li>-->
+
+   <!-- Edit -->
+   <li ng-show="control.type !== 'ROW'">
+      <a ng-click="editControl(control.id)"><svg class="icon"><use xlink:href="#icon-edit"></use></svg><span>Edit</span></a>
+   </li>
+
+   <!-- Preview (HTML Control) -->
+   <li ng-show="control.type === 'HTML_CONTROL'">
+      <a ng-click="previewControl(control.id)"><svg class="icon"><use xlink:href="#icon-update-preview"></use></svg><span>Preview</span></a>
+   </li>
+
+   <!-- Row Insert -->
+   <li ng-show="control.type === 'ROW'">
+      <a ng-click="insertRow(control.id, true)"><svg class="icon"><use xlink:href="#icon-up-arrow"></use></svg><span>Add Row Before</span></a>
+   </li>
+   <li ng-show="control.type === 'ROW'">
+      <a ng-click="insertRow(control.id, false)"><svg class="icon"><use xlink:href="#icon-down-arrow"></use></svg><span>Add Row After</span></a>
+   </li>
+
+   <!-- Separator -->
+   <li class="separator"></li>
+
+   <!-- Move Control (alternative to drag & drop) -->
+   <li class="submenu">
+      <a><svg class="icon"><use xlink:href="#icon-maximize"></use></svg><span>Move</span></a>
+
+      <ul class="popupmenu has-icons">
+         <li><a ng-click="moveControl(control.id, true)"><svg class="icon"><use xlink:href="#icon-left-arrow"></use></svg><span>Back</span></a></li>
+         <li><a ng-click="moveControl(control.id, false)"><svg class="icon"><use xlink:href="#icon-right-arrow"></use></svg><span>Forward</span></a></li>
+      </ul>
+   </li>
+
+   <!-- Column Width -->
+   <li class="submenu" ng-show="control.type === 'COL'">
+      <a><svg class="icon"><use xlink:href="#icon-columns"></use></svg><span>Width</span></a>
+
+      <ul class="popupmenu has-icons">
+         <li ng-class="control.subType === '1' ? 'is-checked' : ''"><a ng-click="changeColumnWidth(control.id, '1')">Full</a></li>
+         <li ng-class="control.subType === '1/3' ? 'is-checked' : ''"><a ng-click="changeColumnWidth(control.id, '1/3')">1/3</a></li>
+         <li ng-class="control.subType === '1/2' ? 'is-checked' : ''"><a ng-click="changeColumnWidth(control.id, '1/2')">1/2</a></li>
+         <li ng-class="control.subType === '2/3' ? 'is-checked' : ''"><a ng-click="changeColumnWidth(control.id, '2/3')">2/3</a></li>
+         <li><a ng-click="editControl(control.id)">More...</a></li>
+      </ul>
+   </li>
+
+   <!-- Column Insert -->
+   <li ng-show="control.type === 'COL'">
+      <a ng-click="insertColumn(control.id, true)"><svg class="icon"><use xlink:href="#icon-left-arrow"></use></svg><span>Add Column Before</span></a>
+   </li>
+   <li ng-show="control.type === 'COL'">
+      <a ng-click="insertColumn(control.id, false)"><svg class="icon"><use xlink:href="#icon-right-arrow"></use></svg><span>Add Column After</span></a>
+   </li>
+
+   <!-- Import Grid Columns -->
+   <li class="separator" ng-show="control.type === 'GRID'"></li>
+   <li ng-show="control.type === 'GRID'">
+      <a ng-click="importColumns(control.id)"><svg class="icon"><use xlink:href="#icon-import"></use></svg><span>Import Columns</span></a>
+   </li>
+
+   <!-- Import Fields -->
+   <li class="separator" ng-show="control.type === 'COL' || control.type === 'EXP_AREA' || control.type === 'FIELD_SET'"></li>
+   <li ng-show="control.type === 'COL' || control.type === 'EXP_AREA' || control.type === 'FIELD_SET'">
+      <a ng-click="importFields(control.id)"><svg class="icon"><use xlink:href="#icon-import"></use></svg><span>Import Fields From API</span></a>
+   </li>
+
+   <li ng-show="control.type !== 'VIEW'" class="separator"></li>
+
+   <!-- Copy -->
+   <li ng-show="control.type !== 'VIEW' && control.type !== 'MODAL' && control.type !== 'ACTION_PANEL' && control.type !== 'ROW' && control.type !== 'COL'">
+      <a ng-click="copyControl(control.id)"><svg class="icon"><use xlink:href="#icon-copy"></use></svg><span>Copy</span></a>
+   </li>
+
+   <!-- Delete -->
+   <li ng-show="control.type !== 'VIEW'">
+      <a ng-click="deleteControl(control.id)"><svg class="icon"><use xlink:href="#icon-delete"></use></svg><span>Delete</span></a>
+   </li>
+</ul>

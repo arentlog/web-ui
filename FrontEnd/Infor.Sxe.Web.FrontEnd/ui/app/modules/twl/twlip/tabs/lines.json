@@ -1,0 +1,134 @@
+{
+  "viewId": "twl-twlip-detail-lines",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "TAB",
+  "children": [
+    {
+      "id": 5,
+      "type": "GRID",
+      "model": "dtl.dataset",
+      "controlRef": "dtl.grid",
+      "options": {
+        "showCheckboxes": true,
+        "showDrilldown": true,
+        "events": {
+          "drilldown": "dtl.drilldown()"
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 6,
+          "type": "TOOLBAR",
+          "label": "global.purchase.orders",
+          "children": [
+            {
+              "id": 15,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-new-document",
+              "label": "global.new",
+              "securityLevel": 4,
+              "eventClick": "dtl.newPOClick()",
+              "conditionDisabled": "!dtl.rtmst.isUpdateAllowed || dtl.rtmst.unplanned"
+            },
+            {
+              "id": 16,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-delete",
+              "label": "global.delete",
+              "eventClick": "dtl.deletePO()",
+              "securityLevel": 5,
+              "conditionDisabled": "!dtl.rtmst.isUpdateAllowed || dtl.rtmst.unplanned || !dtl.grid.isOneRowSelected()"
+            },
+            {
+              "id": 17,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.print.packing.list",
+              "conditionDisabled": "!dtl.isPOAssigned",
+              "eventClick": "dtl.packListPrint()",
+              "icon": "icon-print"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 7,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "poNumber",
+          "label": "global.purchase.order"
+        },
+        {
+          "id": 8,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "poSuffix",
+          "label": "global.suffix",
+          "dataFormat": "Suffix"
+        },
+        {
+          "id": 9,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "rowStatus",
+          "label": "global.status",
+          "type3": "SET",
+          "metaGroup": "TWL",
+          "meta": "ReceiptMasterStatus"
+        },
+        {
+          "id": 10,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "delivery",
+          "label": "global.expected.delivery",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 11,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "expLines",
+          "label": "global.lines",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 12,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "actLines",
+          "label": "global.lines.received",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 13,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "expQuantity",
+          "label": "global.units",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 14,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "actQuantity",
+          "label": "global.units.received",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        }
+      ]
+    }
+  ]
+}

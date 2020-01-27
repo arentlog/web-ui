@@ -1,0 +1,331 @@
+{
+  "viewId": "shared-kits-kit",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "kit.isKit()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.kits",
+              "subLabel": "{{kit.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "kit.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 15,
+                  "type": "BTN",
+                  "label": "global.cross.reference",
+                  "eventClick": "kit.crossReferenceClicked()"
+                },
+                {
+                  "id": 14,
+                  "type": "BTN",
+                  "label": "global.delete.lines",
+                  "icon": "icon-delete",
+                  "securityLevel": 5,
+                  "conditionDisabled": "!kit.kitSingle.mdeleteaproductenabled && kit.kitGrid.isNoRowSelected()",
+                  "conditionShow": "kit.kitSingle.mdeleteaproductenabled",
+                  "eventClick": "kit.deleteComponentClicked()"
+                }
+              ]
+            },
+            "content": {
+              "id": 8,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "GRID",
+                  "model": "kit.kitResultsCollection",
+                  "controlRef": "kit.kitGrid",
+                  "options": {
+                    "showCheckboxes": true,
+                    "showDrilldown": true,
+                    "selectable": "multiple",
+                    "events": {
+                      "drilldown": "kit.drilldownClicked()",
+                      "selected": "kit.rowSelected()"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 10,
+                      "type": "TOOLBAR",
+                      "label": "global.kit.components",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "BTN",
+                          "label": "global.add.group",
+                          "icon": "icon-add",
+                          "eventClick": "kit.addGroupClicked()"
+                        },
+                        {
+                          "id": 13,
+                          "type": "BTN",
+                          "label": "global.add.component",
+                          "icon": "icon-add",
+                          "conditionDisabled": "!kit.kitSingle.maddaproductenabled",
+                          "conditionShow": "kit.kitSingle.maddaproductenabled",
+                          "eventClick": "kit.addComponentClicked()"
+                        },
+                        {
+                          "id": 16,
+                          "type": "BTN",
+                          "label": "global.multi.comp.sourcing",
+                          "eventClick": "kit.sourcingClicked()",
+                          "conditionShow": "kit.baseState === 'oeet' || kit.baseState === 'kpew'",
+                          "conditionDisabled": "kit.kitGrid.isNoRowSelected() || kit.sourcingCollection.length === 0"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prodname",
+                      "label": "global.product"
+                    },
+                    {
+                      "id": 29,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "proddesc",
+                      "label": "global.description"
+                    },
+                    {
+                      "id": 20,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "reqfl",
+                      "label": "global.required",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 18,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyneeded",
+                      "label": "global.quantity.needed",
+                      "dataFormat": "DECIMAL"
+                    },
+                    {
+                      "id": 19,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prodnotes",
+                      "label": "global.notes",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 22,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "totneeded",
+                      "label": "global.total.needed",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 21,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "unit",
+                      "label": "global.unit"
+                    },
+                    {
+                      "id": 23,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyavail",
+                      "label": "global.available",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "specnstype",
+                      "label": "global.type",
+                      "dataFormat": "ComponentType"
+                    },
+                    {
+                      "id": 24,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "brandcode",
+                      "label": "global.brand"
+                    },
+                    {
+                      "id": 25,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "mfgprod",
+                      "label": "global.manufacturing.product"
+                    },
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "vendprod",
+                      "label": "global.vendor.product"
+                    },
+                    {
+                      "id": 30,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "orderalttype",
+                      "label": "global.source.type",
+                      "dataFormat": "OrderType"
+                    },
+                    {
+                      "id": 31,
+                      "type": "GRID_COL",
+                      "subType": "HYPERLINK",
+                      "model": "orderaltno",
+                      "label": "global.related.order.number",
+                      "eventClick": "kit.orderAltNoHyperlinkClicked()"
+                    },
+                    {
+                      "id": 32,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "linealtno",
+                      "label": "global.related.line.number",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 35,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "serlottypedesc",
+                      "label": "global.serial.lot.type"
+                    },
+                    {
+                      "id": 36,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "groupname",
+                      "label": "global.group.name"
+                    },
+                    {
+                      "id": 37,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "refer",
+                      "label": "global.reference"
+                    },
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "xreffl",
+                      "label": "global.cross.reference",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 33,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "variablefl",
+                      "label": "global.variable.quantity",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 38,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "cfgcompfl",
+                      "label": "global.configurable",
+                      "subFormat": "YesNo",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 34,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "subfl",
+                      "label": "global.subs",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 41,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "msdsfl",
+                      "label": "global.msds",
+                      "subFormat": "YesNo",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 39,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "countryoforigin",
+                      "label": "global.country.of.origin"
+                    },
+                    {
+                      "id": 40,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "tariffcd",
+                      "label": "global.tariff.code"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "type": "VIEW_CNTR",
+      "viewName": "kitsChildView"
+    },
+    {
+      "id": 43,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsp",
+      "contextOptions": {
+        "deactivated": "kit.componentForNotes.specnstype.toLowerCase() === 'n'"
+      },
+      "contextValues": {
+        "key1": "kit.componentForNotes.shipprod"
+      }
+    }
+  ]
+}

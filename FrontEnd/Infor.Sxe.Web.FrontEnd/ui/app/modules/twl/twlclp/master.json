@@ -1,0 +1,559 @@
+{
+  "viewId": "twl-twlclp-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.twlclp",
+          "subLabel": "{{base.getSubTitle()}}",
+          "children": [
+            {
+              "id": 48,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-confirm",
+              "label": "global.print.labels",
+              "eventClick": "mst.printLabels()",
+              "conditionDisabled": "!base.criteriaUsed.whNum",
+              "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_CARTON || base.criteria.containerType === base.CONTAINERTYPE_PALLET || base.criteria.containerType === base.CONTAINERTYPE_TOTE"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 8,
+              "type": "FIELD_SET",
+              "label": "",
+              "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_CARTON || base.criteria.containerType === base.CONTAINERTYPE_PALLET || base.criteria.containerType === base.CONTAINERTYPE_TOTE",
+              "children": [
+                {
+                  "id": 37,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 38,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 9,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.labelPrintQuantity",
+                          "label": "global.quantity",
+                          "type3": "SET",
+                          "blankOption": false,
+                          "metaGroup": "TWL",
+                          "meta": "LabelPrintQuantity",
+                          "size": "SM"
+                        },
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.cartonStartValue",
+                          "label": "global.start.at",
+                          "readonly": true,
+                          "digits": 10,
+                          "size": "SM",
+                          "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_CARTON && base.labelPrintQuantity === base.QUANTITYTYPE_NEWLABELS",
+                          "dataFormat": "INTEGER"
+                        },
+                        {
+                          "id": 61,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.palletStartValue",
+                          "label": "global.start.at",
+                          "readonly": true,
+                          "digits": 10,
+                          "size": "SM",
+                          "conditionShow": "(base.criteria.containerType === base.CONTAINERTYPE_PALLET || base.criteria.containerType === base.CONTAINERTYPE_TOTE) && base.labelPrintQuantity === base.QUANTITYTYPE_NEWLABELS",
+                          "dataFormat": "INTEGER"
+                        },
+                        {
+                          "id": 10,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.numberOfLabels",
+                          "label": "global.number.of.labels",
+                          "dataFormat": "INTEGER",
+                          "digits": 9,
+                          "size": "SM",
+                          "conditionShow": "base.labelPrintQuantity === base.QUANTITYTYPE_NEWLABELS",
+                          "conditionFocus": "base.labelPrintQuantity === base.QUANTITYTYPE_NEWLABELS"
+                        },
+                        {
+                          "id": 55,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.labelNumber",
+                          "label": "global.label.number",
+                          "dataFormat": "INTEGER",
+                          "digits": 9,
+                          "size": "SM",
+                          "conditionShow": "base.labelPrintQuantity === base.QUANTITYTYPE_SPECIFIC",
+                          "conditionFocus": "base.labelPrintQuantity === base.QUANTITYTYPE_SPECIFIC"
+                        },
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.cartonValue",
+                          "label": "global.current.value",
+                          "readonly": true,
+                          "size": "SM",
+                          "digits": 10,
+                          "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_CARTON",
+                          "dataFormat": "INTEGER"
+                        },
+                        {
+                          "id": 60,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.palletValue",
+                          "label": "global.current.value",
+                          "readonly": true,
+                          "size": "SM",
+                          "digits": 10,
+                          "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_PALLET || base.criteria.containerType === base.CONTAINERTYPE_TOTE",
+                          "dataFormat": "INTEGER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 39,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 40,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.cartonSize",
+                          "label": "global.size",
+                          "blankOption": false,
+                          "type3": "SET",
+                          "metaGroup": "TWL",
+                          "meta": "LabelPrintSize",
+                          "size": "SM"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 41,
+              "type": "FIELD_SET",
+              "label": "",
+              "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_LOCATION",
+              "children": [
+                {
+                  "id": 42,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.locationSize",
+                  "label": "global.size",
+                  "blankOption": false,
+                  "type3": "SET",
+                  "metaGroup": "TWL",
+                  "meta": "LabelPrintLocationSize",
+                  "size": "SM",
+                  "conditionFocus": "base.criteria.containerType === base.CONTAINERTYPE_LOCATION"
+                },
+                {
+                  "id": 43,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.locationArrow",
+                  "label": "global.arrow",
+                  "blankOption": false,
+                  "type3": "SET",
+                  "metaGroup": "TWL",
+                  "meta": "LabelPrintLocationArrow",
+                  "size": "SM",
+                  "conditionShow": "base.locationSize === base.LOCATIONSIZE_2x4STANDARD || base.locationSize === base.LOCATIONSIZE_4x6STANDARD"
+                },
+                {
+                  "id": 50,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.locationFormat",
+                  "label": "global.format"
+                }
+              ]
+            },
+            {
+              "id": 44,
+              "type": "FIELD_SET",
+              "label": "",
+              "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_INVENTORY",
+              "children": [
+                {
+                  "id": 45,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.inventorySize",
+                  "label": "global.size",
+                  "blankOption": false,
+                  "type3": "SET",
+                  "metaGroup": "TWL",
+                  "meta": "LabelPrintInventorySize",
+                  "size": "SM",
+                  "conditionFocus": "base.criteria.containerType === base.CONTAINERTYPE_INVENTORY"
+                },
+                {
+                  "id": 49,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.inventoryQuantity",
+                  "label": "global.quantity",
+                  "dataFormat": "INTEGER",
+                  "digits": 9,
+                  "size": "SM"
+                }
+              ]
+            },
+            {
+              "id": 51,
+              "type": "FIELD_SET",
+              "label": "",
+              "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_PRIMARYPICK",
+              "children": [
+                {
+                  "id": 53,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.primaryPickFormat",
+                  "label": "global.format",
+                  "conditionFocus": "base.criteria.containerType === base.CONTAINERTYPE_PRIMARYPICK"
+                }
+              ]
+            },
+            {
+              "id": 46,
+              "type": "FIELD_SET",
+              "label": "",
+              "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_ITEM",
+              "children": [
+                {
+                  "id": 47,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.itemSize",
+                  "label": "global.size",
+                  "blankOption": false,
+                  "type3": "SET",
+                  "metaGroup": "TWL",
+                  "meta": "LabelPrintItemSize",
+                  "size": "SM",
+                  "conditionFocus": "base.criteria.containerType === base.CONTAINERTYPE_ITEM"
+                },
+                {
+                  "id": 54,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.itemQuantity",
+                  "label": "global.quantity",
+                  "dataFormat": "INTEGER",
+                  "digits": 9,
+                  "size": "SM"
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "type": "GRID",
+              "controlRef": "base.locationGrid",
+              "model": "base.locationDataset",
+              "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_LOCATION",
+              "options": {
+                "showCheckboxes": true
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.locations",
+                  "subLabel": "",
+                  "children": [
+                    {
+                      "id": 56,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-print",
+                      "label": "global.print.labels",
+                      "securityLevel": 3,
+                      "eventClick": "mst.printLocationLabels()",
+                      "conditionDisabled": "!base.criteriaUsed.whNum"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whZone",
+                  "label": "global.zone"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "aisle",
+                  "label": "global.aisle",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "binNum",
+                  "label": "global.bin.location"
+                }
+              ]
+            },
+            {
+              "id": 15,
+              "type": "GRID",
+              "model": "base.inventoryDataset",
+              "controlRef": "base.inventoryGrid",
+              "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_INVENTORY",
+              "options": {
+                "showCheckboxes": true,
+                "selectable": "single"
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 16,
+                  "type": "TOOLBAR",
+                  "label": "global.inventory",
+                  "subLabel": "",
+                  "children": [
+                    {
+                      "id": 57,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-print",
+                      "label": "global.print.labels",
+                      "securityLevel": 3,
+                      "eventClick": "mst.printInventoryLabels()",
+                      "conditionDisabled": "!base.criteriaUsed.whNum || !base.inventoryGrid.isOneRowSelected()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "absNum",
+                  "label": "global.product"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "binNum",
+                  "label": "global.bin.location"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "palletId",
+                  "label": "global.pallet"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "lot",
+                  "label": "global.lot"
+                }
+              ]
+            },
+            {
+              "id": 21,
+              "type": "GRID",
+              "model": "base.primaryPickDataset",
+              "controlRef": "base.primaryPickGrid",
+              "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_PRIMARYPICK",
+              "options": {
+                "showCheckboxes": true,
+                "selectable": "multiple"
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 22,
+                  "type": "TOOLBAR",
+                  "label": "global.primary.pick.locations",
+                  "subLabel": "",
+                  "children": [
+                    {
+                      "id": 58,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-print",
+                      "label": "global.print.labels",
+                      "securityLevel": 3,
+                      "eventClick": "mst.printPrimaryPickLabels()",
+                      "conditionDisabled": "!base.criteriaUsed.whNum"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whZone",
+                  "label": "global.zone"
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "aisle",
+                  "label": "global.aisle",
+                  "dataFormat": "INTEGER"
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "binNum",
+                  "label": "global.bin.location"
+                },
+                {
+                  "id": 26,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "locType",
+                  "label": "global.bin.type",
+                  "dataFormat": "TwlLocationTypeToName"
+                },
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "primPickType",
+                  "label": "global.primary.pick.type",
+                  "dataFormat": "TwlPrimaryPickTypeToName"
+                },
+                {
+                  "id": 28,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "absNum",
+                  "label": "global.product"
+                },
+                {
+                  "id": 31,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "itemDescr",
+                  "label": "global.description"
+                },
+                {
+                  "id": 29,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "maxLvl",
+                  "label": "global.maximum.level",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 30,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "minLvl",
+                  "label": "global.minimum.level",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                }
+              ]
+            },
+            {
+              "id": 32,
+              "type": "GRID",
+              "model": "base.itemDataset",
+              "controlRef": "base.itemGrid",
+              "conditionShow": "base.criteria.containerType === base.CONTAINERTYPE_ITEM",
+              "options": {
+                "showCheckboxes": true,
+                "selectable": "multiple"
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 33,
+                  "type": "TOOLBAR",
+                  "label": "global.products",
+                  "subLabel": "",
+                  "children": [
+                    {
+                      "id": 59,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-print",
+                      "label": "global.print.labels",
+                      "securityLevel": 3,
+                      "eventClick": "mst.printItemLabels()",
+                      "conditionDisabled": "!base.criteriaUsed.whNum"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 34,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "absNum",
+                  "label": "global.product"
+                },
+                {
+                  "id": 35,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prodGrp",
+                  "label": "global.product.category"
+                },
+                {
+                  "id": 36,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "itemDesc",
+                  "label": "global.description"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "viewId": "oe-oedc-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.typecd",
+                  "label": "global.type",
+                  "autoFocus": true,
+                  "type3": "SET",
+                  "metaGroup": "OE",
+                  "meta": "DirectRouteRecordType",
+                  "required": false,
+                  "eventChange": "base.setResetTypeDefaults()"
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.key1",
+                  "label": "global.customer",
+                  "meta": "Customer",
+                  "conditionShow": "base.criteria.typecd === 'S' || base.criteria.typecd === 'C'"
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.key2",
+                  "label": "global.ship.to",
+                  "meta": "ShipTo",
+                  "conditionShow": "base.criteria.typecd === 'S'",
+                  "options": {
+                    "searchParams": {
+                      "custno": {
+                        "type": "REF",
+                        "value": "base.criteria.key1"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.key1",
+                  "label": "global.vendor.number",
+                  "meta": "Vendor",
+                  "conditionShow": "base.criteria.typecd === 'V' || base.criteria.typecd === 'F'"
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.key2",
+                  "label": "global.ship.from",
+                  "meta": "ShipFrom",
+                  "conditionShow": "base.criteria.typecd === 'F'",
+                  "options": {
+                    "searchParams": {
+                      "vendno": {
+                        "type": "REF",
+                        "value": "base.criteria.key1"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.key1",
+                  "label": "global.warehouse\t",
+                  "meta": "Warehouse",
+                  "conditionShow": "base.criteria.typecd === 'W'"
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.searchOrder",
+                  "label": "global.order.number",
+                  "meta": "OEOrders",
+                  "conditionShow": "base.criteria.typecd === 'O'",
+                  "eventChange": "base.orderEntered()"
+                },
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.searchOrder",
+                  "label": "global.purchase.order.number",
+                  "meta": "POOrders",
+                  "conditionShow": "base.criteria.typecd === 'P'",
+                  "eventChange": "base.orderEntered()"
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.searchOrder",
+                  "label": "wt.number",
+                  "meta": "WTOrders",
+                  "conditionShow": "base.criteria.typecd === 'T'",
+                  "eventChange": "base.orderEntered()"
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

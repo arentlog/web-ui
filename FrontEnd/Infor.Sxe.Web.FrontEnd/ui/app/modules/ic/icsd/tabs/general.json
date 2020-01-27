@@ -1,0 +1,508 @@
+{
+  "viewId": "ic-icsd-detail-general",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isDetail() || dtl.isGeneralTabReadonly",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.general",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.name",
+                  "label": "global.name",
+                  "maxLength": "{{base.whseMaxLength}}",
+                  "required": true
+                },
+                {
+                  "id": 7,
+                  "type": "CUSTOM",
+                  "subType": "AddressForm",
+                  "options": {
+                    "addr1Model": "dtl.icsd.addr1",
+                    "addr2Model": "dtl.icsd.addr2",
+                    "addr3Model": "dtl.icsd.addr3",
+                    "cityModel": "dtl.icsd.city",
+                    "stateModel": "dtl.icsd.state",
+                    "zipCodeModel": "dtl.icsd.zipcd",
+                    "countryCodeModel": "",
+                    "geoCodeModel": "dtl.icsd.geocd",
+                    "outOfCityFlagModel": "dtl.icsd.outofcityfl",
+                    "addressLabel": "global.address",
+                    "conditionReadonly": "base.isDetail() || dtl.isGeneralTabReadonly",
+                    "countryCdVisible": false,
+                    "geoCodeVisible": true,
+                    "outOfCityVisible": true,
+                    "eventReady": "",
+                    "geoCodeLookupCriteriaFunction": "dtl.getGeoCodeLookupCriteria",
+                    "controlRef": "dtl.addressControl",
+                    "addr2Visible": true,
+                    "addr3Visible": true,
+                    "useExpandedAddr": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.phoneno",
+                  "label": "global.phone.number.label",
+                  "dataFormat": "PHONE"
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.faxphoneno",
+                  "label": "global.fax.phone",
+                  "dataFormat": "PHONE"
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.modphoneno",
+                  "label": "global.modem.phone",
+                  "dataFormat": "PHONE"
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsd.langcd",
+                  "label": "global.language",
+                  "type3": "CODES",
+                  "meta": "Language"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "type": "EXP_AREA",
+      "label": "global.settings",
+      "children": [
+        {
+          "id": 13,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 15,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsd.divno",
+                  "label": "global.division",
+                  "type3": "MANUAL",
+                  "required": false,
+                  "conditionRequired": "dtl.divisional",
+                  "optionsModel": "dtl.divnoDropDownOptions"
+                },
+                {
+                  "id": 17,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsd.shipviaty",
+                  "label": "global.ship.via",
+                  "type3": "CODES",
+                  "meta": "ShipVia"
+                },
+                {
+                  "id": 28,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.shipinstr",
+                  "label": "global.shipping.instructions",
+                  "maxLength": 30
+                },
+                {
+                  "id": 21,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.resaleno",
+                  "label": "global.resale.number",
+                  "maxLength": 18
+                },
+                {
+                  "id": 31,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.buygroup",
+                  "label": "global.buy.group",
+                  "maxLength": 4
+                },
+                {
+                  "id": 23,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsd.billtowhse",
+                  "label": "global.bill.to.warehouse",
+                  "meta": "Warehouse",
+                  "required": true
+                },
+                {
+                  "id": 37,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsd.custno",
+                  "label": "global.customer",
+                  "meta": "Customer"
+                },
+                {
+                  "id": 38,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsd.shipto",
+                  "label": "global.ship.to",
+                  "meta": "ShipTo",
+                  "options": {
+                    "searchParams": {
+                      "custno": {
+                        "type": "REF",
+                        "value": "dtl.icsd.custno"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsd.bankno",
+                  "label": "global.bank",
+                  "type3": "MANUAL",
+                  "optionsModel": "dtl.banknoDropDownOptions"
+                },
+                {
+                  "id": 36,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsd.countryoforigin",
+                  "label": "global.country.of.origin",
+                  "type3": "CODES",
+                  "meta": "Country"
+                }
+              ]
+            },
+            {
+              "id": 14,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 27,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.zone",
+                  "label": "global.zone"
+                },
+                {
+                  "id": 54,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.region",
+                  "label": "global.region",
+                  "maxLength": 4
+                },
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsd.priceregion",
+                  "label": "global.price.rebate.region",
+                  "type3": "CODES",
+                  "meta": "PriceRebateRegion"
+                },
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.dunsno",
+                  "label": "global.duns.number",
+                  "maxLength": 13
+                },
+                {
+                  "id": 22,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsd.wllivecd",
+                  "label": "wl.live",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "WLLiveType"
+                },
+                {
+                  "id": 24,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icsd.wlloc",
+                  "label": "wl.location",
+                  "type3": "SET",
+                  "meta": "WLLocation"
+                },
+                {
+                  "id": 29,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsd.salesfl",
+                  "label": "global.allow.sales",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 30,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsd.holdforintlrvwfl",
+                  "label": "global.review.international.sales",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 32,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsd.bondedfl",
+                  "label": "global.bonded",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 33,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsd.automrgfl",
+                  "label": "global.auto.merge",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 56,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsd.autorcvfabwtfl",
+                  "label": "global.auto.receive.of.warehouse.transfers",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 34,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsd.fabwhsecd",
+                  "label": "global.authorized.replenishment.path.lookup",
+                  "dataFormat": "LOGICAL",
+                  "subFormat": "PBlank"
+                },
+                {
+                  "id": 35,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsd.vabacktiefl",
+                  "label": "global.back.ties",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 55,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icsd.rentalfl",
+                  "label": "global.rental.warehouse",
+                  "dataFormat": "LOGICAL",
+                  "conditionShow": "dtl.allowRental.toLowerCase() === 'yes'"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "type": "EXP_AREA",
+      "label": "global.purchasing.parameters",
+      "children": [
+        {
+          "id": 40,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 42,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 43,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.ickcost",
+                  "label": "global.vendor.carrying.cost",
+                  "dataFormat": "DECIMAL",
+                  "sign": "+",
+                  "digits": 3,
+                  "decimals": 2,
+                  "size": "SM",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 44,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.icrcost",
+                  "label": "global.replenish.cost",
+                  "dataFormat": "DECIMAL",
+                  "sign": "+",
+                  "digits": 4,
+                  "decimals": 2,
+                  "size": "SM",
+                  "formatOptions": {
+                    "maximumFractionDigits": 2,
+                    "minimumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 45,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.vminwks",
+                  "label": "global.minimum.weeks.supply",
+                  "dataFormat": "INTEGER",
+                  "maxLength": 2,
+                  "sign": "+",
+                  "digits": 2,
+                  "size": "SM"
+                },
+                {
+                  "id": 46,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.vmaxwks",
+                  "label": "global.maximum.weeks.supply",
+                  "dataFormat": "INTEGER",
+                  "maxLength": 2,
+                  "digits": 2,
+                  "sign": "+",
+                  "size": "SM"
+                }
+              ]
+            },
+            {
+              "id": 41,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 47,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.wtkcost",
+                  "label": "global.transfer.carrying.cost",
+                  "dataFormat": "DECIMAL",
+                  "sign": "+",
+                  "digits": 3,
+                  "decimals": 2,
+                  "size": "SM",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 48,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.wtrcost",
+                  "label": "global.replenish.cost",
+                  "dataFormat": "DECIMAL",
+                  "sign": "+",
+                  "digits": 4,
+                  "decimals": 2,
+                  "size": "SM",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 49,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.tminwks",
+                  "label": "global.minimum.weeks.supply",
+                  "dataFormat": "INTEGER",
+                  "sign": "+",
+                  "digits": 2,
+                  "size": "SM"
+                },
+                {
+                  "id": 50,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.tmaxwks",
+                  "label": "global.maximum.weeks.supply",
+                  "dataFormat": "INTEGER",
+                  "sign": "+",
+                  "digits": 2,
+                  "size": "SM"
+                }
+              ]
+            },
+            {
+              "id": 53,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 52,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.revcycldays",
+                  "label": "global.replenish.cycle",
+                  "size": "SM",
+                  "dataFormat": "INTEGER",
+                  "digits": 3,
+                  "sign": "+"
+                },
+                {
+                  "id": 51,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.icsd.lastmergedt",
+                  "label": "global.last.merge",
+                  "size": "SM",
+                  "dataFormat": "DATE"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

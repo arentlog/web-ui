@@ -1,0 +1,506 @@
+{
+  "viewId": "ic-icip-detail-tabs-pricing",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.additional.search",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "idpc.criteria.qty",
+                  "label": "global.quantity",
+                  "dataFormat": "DECIMAL",
+                  "digits": 7,
+                  "decimals": 2,
+                  "sign": "+",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2
+                  }
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "idpc.criteria.unit",
+                  "label": "global.unit",
+                  "meta": "Units",
+                  "options": {
+                    "searchParams": {
+                      "prod": {
+                        "type": "REF",
+                        "value": "dtl.prod"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "eventClick": "idpc.bindProductPricing()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "type": "FIELD_SET",
+      "label": "global.product.pricing.detail",
+      "children": [
+        {
+          "id": 11,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 12,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.pricingResult.prodstat",
+                  "label": "global.product.status"
+                },
+                {
+                  "id": 17,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.pricingResult.startdt",
+                  "label": "global.begin.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.pricingResult.enddt",
+                  "label": "global.end.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.pricingResult.minqty",
+                  "label": "global.min.qty",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2
+                  }
+                }
+              ]
+            },
+            {
+              "id": 14,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.pricingResult.pdrecno",
+                  "label": "global.record.number",
+                  "hyperlinks": {
+                    "data": {
+                      "eventClick": "",
+                      "stateRef": "pdsp.customerMaster({pk:idpc.pricingResult.pdrecno})"
+                    }
+                  }
+                },
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.pricingResult.commtype",
+                  "label": "global.commission.type"
+                },
+                {
+                  "id": 21,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.pricingResult.pricetype",
+                  "label": "global.price.type"
+                }
+              ]
+            },
+            {
+              "id": 13,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 22,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.pricingResult.listprice",
+                  "label": "global.list.price",
+                  "dataFormat": "CURRENCY",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 23,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.pricingResult.baseprice",
+                  "label": "global.base.price",
+                  "dataFormat": "CURRENCY",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 24,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.pricingResult.pricingcost",
+                  "label": "global.pricing.cost",
+                  "dataFormat": "CURRENCY",
+                  "conditionShow": "idpc.seecostfl",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 27,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.pricingResult.reference",
+                  "label": "global.reference",
+                  "labelHidden": true
+                },
+                {
+                  "id": 30,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.pricingResult.pricemsg",
+                  "label": "global.price",
+                  "labelHidden": true
+                },
+                {
+                  "id": 28,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.pricingResult.rebatemsg",
+                  "label": "global.rebate.type",
+                  "labelHidden": true
+                },
+                {
+                  "id": 25,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.pricingResult.qtybreakmsg",
+                  "label": "global.message",
+                  "labelHidden": true
+                },
+                {
+                  "id": 26,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.pricingResult.costtxt",
+                  "label": "global.cost.type",
+                  "labelHidden": true
+                },
+                {
+                  "id": 29,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.pricingResult.methodmsg",
+                  "label": "global.method",
+                  "labelHidden": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "type": "GRID",
+      "model": "idpc.prices",
+      "options": {
+        "paging": false
+      },
+      "controls": {
+        "toolbar": {
+          "id": 32,
+          "type": "TOOLBAR",
+          "label": "global.prices"
+        }
+      },
+      "children": [
+        {
+          "id": 33,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "line",
+          "label": "global.line.number",
+          "sortable": false
+        },
+        {
+          "id": 34,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "pct",
+          "label": "{{idpc.pricingResult.col1label}}",
+          "dataFormat": "DECIMAL",
+          "conditionInclude": "idpc.pricingResult.col1label",
+          "sortable": false,
+          "formatOptions": {
+            "minimumFractionDigits": 2
+          }
+        },
+        {
+          "id": 35,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "amt",
+          "label": "{{idpc.pricingResult.col2label}}",
+          "dataFormat": "CURRENCY",
+          "conditionInclude": "idpc.pricingResult.col2label",
+          "sortable": false,
+          "formatOptions": {
+            "minimumFractionDigits": 5
+          }
+        },
+        {
+          "id": 36,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "disc",
+          "label": "{{idpc.pricingResult.col3label}}",
+          "dataFormat": "DECIMAL",
+          "conditionInclude": "idpc.pricingResult.col3label",
+          "sortable": false,
+          "formatOptions": {
+            "minimumFractionDigits": 3
+          }
+        },
+        {
+          "id": 37,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "net",
+          "label": "{{idpc.pricingResult.col4label}}",
+          "dataFormat": "CURRENCY",
+          "conditionInclude": "idpc.pricingResult.col4label",
+          "sortable": false,
+          "formatOptions": {
+            "minimumFractionDigits": 2
+          }
+        },
+        {
+          "id": 38,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qty",
+          "label": "{{idpc.pricingResult.col5label}}",
+          "dataFormat": "DECIMAL",
+          "conditionInclude": "idpc.pricingResult.col5label",
+          "sortable": false,
+          "formatOptions": {
+            "minimumFractionDigits": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "type": "EXP_AREA",
+      "label": "global.sheet.prices",
+      "conditionShow": "!idpc.pricingResult.btnpricesheethidden",
+      "collapsed": true,
+      "children": [
+        {
+          "id": 40,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 41,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 44,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.priceSheetResults.pricesheet",
+                  "label": "global.price.sheet"
+                },
+                {
+                  "id": 47,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.priceSheetResults.baseprice",
+                  "label": "global.base.price",
+                  "dataFormat": "DECIMAL",
+                  "conditionShow": "idpc.visibleFields",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 50,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.priceSheetResults.stndcost",
+                  "label": "global.standard.cost",
+                  "dataFormat": "DECIMAL",
+                  "conditionShow": "idpc.visibleFields",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5
+                  }
+                }
+              ]
+            },
+            {
+              "id": 43,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 45,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.priceSheetResults.effectivedt",
+                  "label": "global.sheet.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 48,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.priceSheetResults.rebatecost",
+                  "label": "global.rebate.cost",
+                  "conditionShow": "idpc.visibleFields",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 51,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.priceSheetResults.msg",
+                  "label": "global.message"
+                }
+              ]
+            },
+            {
+              "id": 42,
+              "type": "COL",
+              "subType": "1/3",
+              "children": [
+                {
+                  "id": 46,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.priceSheetResults.replcost",
+                  "label": "global.replenish.cost",
+                  "dataFormat": "DECIMAL",
+                  "conditionShow": "idpc.visibleFields",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 49,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "idpc.priceSheetResults.listprice",
+                  "label": "global.list.price",
+                  "dataFormat": "DECIMAL",
+                  "conditionShow": "idpc.visibleFields",
+                  "formatOptions": {
+                    "minimumFractionDigits": 5
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 52,
+          "type": "GRID",
+          "model": "idpc.sheetprices",
+          "conditionShow": "idpc.visibleFields",
+          "options": {
+            "showRowCount": false,
+            "paging": false
+          },
+          "controls": {
+            "toolbar": {
+              "id": 53,
+              "type": "TOOLBAR",
+              "label": "global.matrices",
+              "conditionShow": "idpc.visibleFields"
+            }
+          },
+          "children": [
+            {
+              "id": 54,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "matrixno",
+              "label": "global.matrix.number"
+            },
+            {
+              "id": 55,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "custmatrix",
+              "label": "global.customer.matrix",
+              "dataFormat": "DECIMAL",
+              "formatOptions": {
+                "minimumFractionDigits": 5
+              }
+            },
+            {
+              "id": 56,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "vendmatrix",
+              "label": "global.vendor.matrix",
+              "dataFormat": "DECIMAL",
+              "formatOptions": {
+                "minimumFractionDigits": 5
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

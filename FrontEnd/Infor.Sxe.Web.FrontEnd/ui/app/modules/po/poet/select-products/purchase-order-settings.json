@@ -1,0 +1,527 @@
+{
+  "viewId": "po-poet-purchaseordersettings",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "allowCrossContainer": true,
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "sp.isPurchaseOrderSettings()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.poet",
+              "subLabel": "global.purchase.order.settings",
+              "controls": {
+                "navBtns": {
+                  "id": 49,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 50,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "pos.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 86,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.contract.amount",
+                  "conditionShow": "base.isVendorContractClaimsAvailable",
+                  "eventClick": "pos.launchVendorClaims()"
+                },
+                {
+                  "id": 47,
+                  "type": "BTN",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "eventClick": "pos.save()"
+                },
+                {
+                  "id": 48,
+                  "type": "BTN",
+                  "label": "global.reset",
+                  "icon": "icon-reset",
+                  "eventClick": "pos.reset()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 91,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.pohdr.manname",
+                          "label": "global.manual.name",
+                          "conditionShow": "base.isManualAddressVisible",
+                          "maxLength": 30,
+                          "conditionFocus": "base.isManualAddressVisible"
+                        },
+                        {
+                          "id": 92,
+                          "type": "CUSTOM",
+                          "subType": "AddressForm",
+                          "conditionShow": "base.isManualAddressVisible",
+                          "options": {
+                            "countryCdVisible": false,
+                            "addr2Visible": true,
+                            "addr3Visible": true,
+                            "addr1Model": "base.pohdr.manaddr1",
+                            "addr2Model": "base.pohdr.manaddr2",
+                            "addr3Model": "base.pohdr.manaddr3",
+                            "cityModel": "base.pohdr.mancity",
+                            "stateModel": "base.pohdr.manstate",
+                            "zipCodeModel": "base.pohdr.manzipcd",
+                            "controlRef": "pos.addressControl",
+                            "addressLabel": "global.manual.address"
+                          }
+                        },
+                        {
+                          "id": 10,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.pohdr.shipinstr",
+                          "label": "global.instructions",
+                          "maxLength": 30,
+                          "autoFocus": true
+                        },
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "TEXT_AREA",
+                          "model": "base.pohdr.extshipinstr",
+                          "label": "global.extended.shipping.instructions",
+                          "maxLength": 256
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.pohdr.orderdt",
+                          "label": "global.order.date",
+                          "dataFormat": "DATE",
+                          "eventChange": "pos.promiseDateChanged()",
+                          "conditionDisabled": "pos.isPromiseDateEnabled()"
+                        },
+                        {
+                          "id": 74,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.pohdr.duedt",
+                          "label": "global.due.date",
+                          "dataFormat": "DATE"
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.pohdr.expshipdt",
+                          "label": "global.expected.ship.date",
+                          "dataFormat": "DATE"
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.pohdr.reqshipdt",
+                          "label": "global.requested.ship.date",
+                          "dataFormat": "DATE",
+                          "size": ""
+                        },
+                        {
+                          "id": 80,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.pohdr.ackdt",
+                          "label": "global.acknowledge.date",
+                          "dataFormat": "DATE",
+                          "size": ""
+                        },
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.pohdr.ackrsn",
+                          "label": "global.ack.reason",
+                          "maxLength": 8,
+                          "size": "SM"
+                        },
+                        {
+                          "id": 81,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.pohdr.ackoper",
+                          "label": "global.ack.user",
+                          "maxLength": 4,
+                          "size": "XS"
+                        },
+                        {
+                          "id": 94,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.pohdr.vendretauth",
+                          "label": "global.vendor.return.authorization.no",
+                          "maxLength": 30
+                        }
+                      ]
+                    },
+                    {
+                      "id": 8,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 27,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.pohdr.termstype",
+                          "label": "global.terms",
+                          "type3": "STANDARD",
+                          "meta": "Terms",
+                          "conditionDisabled": "!base.sasoo.termsoverfl",
+                          "eventChange": "pos.termsTypeChanged()"
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.pohdr.shipviaty",
+                          "label": "global.ship.via",
+                          "type3": "STANDARD",
+                          "meta": "ShipVia",
+                          "eventChange": "pos.shipViaLostFocus()",
+                          "conditionShow": "!base.isShipViaLimited",
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          }
+                        },
+                        {
+                          "id": 87,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.pohdr.shipviaty",
+                          "label": "global.ship.via.apsd.limited",
+                          "type3": "STANDARD",
+                          "meta": "ShipViaApsdLimited",
+                          "eventChange": "pos.shipViaLostFocus()",
+                          "conditionShow": "base.isShipViaLimited",
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          },
+                          "options": {
+                            "searchParams": {
+                              "vendno": {
+                                "type": "REF",
+                                "value": "base.pohdr.vendno"
+                              },
+                              "shipfmno": {
+                                "type": "REF",
+                                "value": "base.pohdr.shipfmno"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 28,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.pohdr.resaleno",
+                          "label": "global.resale.number",
+                          "type3": "STANDARD",
+                          "maxLength": 18
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.pohdr.orderdisp",
+                          "label": "global.disposition",
+                          "type3": "SET",
+                          "metaGroup": "PO",
+                          "meta": "Disposition",
+                          "eventChange": "pos.orderDispositionChanged()",
+                          "blankOption": false
+                        },
+                        {
+                          "id": 26,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.pohdr.approvty",
+                          "label": "global.approval",
+                          "size": "XS",
+                          "conditionReadonly": "!base.sasoo.holdoverfl"
+                        },
+                        {
+                          "id": 25,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.pohdr.createdby",
+                          "label": "global.created.by",
+                          "size": "SM",
+                          "conditionReadonly": "!base.sasoo.limittakenbyfl"
+                        },
+                        {
+                          "id": 85,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.pohdr.contractno",
+                          "label": "global.contract.number",
+                          "type3": "STANDARD",
+                          "maxLength": 24
+                        },
+                        {
+                          "id": 83,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.pohdr.refer",
+                          "label": "global.reference",
+                          "type3": "STANDARD",
+                          "meta": "Reference",
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 31,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.pohdr.frttermscd",
+                          "label": "global.freight.terms",
+                          "type3": "STANDARD",
+                          "meta": "FreightTerms",
+                          "eventChange": "pos.freightTermsLostFocus()",
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          }
+                        },
+                        {
+                          "id": 44,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.pohdr.frtbillacct",
+                          "label": "global.freight.billing.account",
+                          "maxLength": 24
+                        },
+                        {
+                          "id": 93,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.pohdr.countrycd",
+                          "label": "global.country",
+                          "type3": "CODES",
+                          "meta": "Country"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 7,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 45,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.pohdr.fobfl",
+                          "label": "global.fob.destination"
+                        },
+                        {
+                          "id": 95,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.pohdr.confirmfl",
+                          "label": "global.confirming"
+                        },
+                        {
+                          "id": 53,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.pohdr.ignoreltfl",
+                          "label": "global.ignore.lead.time"
+                        },
+                        {
+                          "id": 22,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.pohdr.rushfl",
+                          "label": "global.rush"
+                        },
+                        {
+                          "id": 23,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.pohdr.subfl",
+                          "label": "global.allow.substitutes"
+                        },
+                        {
+                          "id": 24,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.pohdr.bofl",
+                          "label": "global.allow.back.orders"
+                        },
+                        {
+                          "id": 52,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.pohdr.resalefl",
+                          "label": "global.resale.po"
+                        },
+                        {
+                          "id": 84,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.pohdr.apholdfl",
+                          "label": "global.ap.hold"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 56,
+                  "type": "EXP_AREA",
+                  "label": "global.available.fields",
+                  "collapsed": true,
+                  "extra": true,
+                  "children": [
+                    {
+                      "id": 57,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 58,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 62,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.pohdr.contactid",
+                              "label": "global.contact",
+                              "meta": "Contacts",
+                              "options": {
+                                "searchParams": {
+                                  "MustNot": {
+                                    "rectype": [
+                                      "arsc",
+                                      "arss"
+                                    ]
+                                  },
+                                  "primarykey": {
+                                    "type": "REF",
+                                    "value": "base.getVendorNumberForContact()"
+                                  },
+                                  "secondarykey": {
+                                    "type": "REF",
+                                    "value": "base.getShipFmNoForContact()"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 60,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 72,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.pohdr.vendordno",
+                              "label": "global.suppliers.order.number",
+                              "maxLength": 20
+                            },
+                            {
+                              "id": 90,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.pohdr.transferloc",
+                              "label": "global.transfer.location",
+                              "maxLength": 24
+                            }
+                          ]
+                        },
+                        {
+                          "id": 59,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 64,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 66,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "pos.tiePurchaseOrderNumberSuffix()",
+                                  "label": "global.tied.oe.va.number"
+                                },
+                                {
+                                  "id": 89,
+                                  "type": "FIELD",
+                                  "subType": "INFO",
+                                  "model": "base.pohdr.currencyty",
+                                  "label": "global.currency"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 76,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "objectRef": "base.pohdr",
+                        "tableName": "poeh"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 78,
+      "type": "VIEW_CNTR",
+      "viewName": "posChildView"
+    }
+  ]
+}

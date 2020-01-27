@@ -1,0 +1,148 @@
+{
+  "viewId": "ap-apsv-detail-taxing",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isDetail() || dtl.isTaxingTabReadonly",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.taxing.information",
+      "children": [
+        {
+          "id": 14,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 15,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.apsv.fed1099no",
+                  "label": "global.1099.style",
+                  "type3": "SET",
+                  "metaGroup": "AP",
+                  "meta": "Tax1099Style",
+                  "blankOption": false,
+                  "conditionShow": "dtl.taxMethodType === 's'"
+                },
+                {
+                  "id": 23,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.fedtaxid",
+                  "label": "{{dtl.getCanadianTaxRegLabel()}}",
+                  "maxLength": 15
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.ap1099nm",
+                  "label": "global.1099.name",
+                  "type3": "SET",
+                  "metaGroup": "AP",
+                  "meta": "Tax1099Style",
+                  "conditionShow": "dtl.taxMethodType === 's'",
+                  "maxLength": 30
+                },
+                {
+                  "id": 17,
+                  "type": "FIELD",
+                  "subType": "RADIO_SET",
+                  "model": "dtl.apsv.gststatus",
+                  "label": "global.taxable",
+                  "type3": "SET",
+                  "metaGroup": "AP",
+                  "conditionDisabled": "base.isDetail() || dtl.isTaxingTabReadonly",
+                  "meta": "TaxApply",
+                  "labelHidden": true
+                },
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.apsv.statecd",
+                  "label": "global.state",
+                  "type3": "CODES",
+                  "meta": "Province",
+                  "conditionShow": "dtl.taxMethodType === 'v'",
+                  "conditionRequired": "dtl.taxMethodType === 'v'"
+                },
+                {
+                  "id": 24,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.apsv.taxgroupno",
+                  "label": "global.tax.group",
+                  "type3": "CODES",
+                  "meta": "TaxGroup",
+                  "conditionShow": "dtl.taxMethodType === 'v' && dtl.taxInterfaceType === 's'",
+                  "conditionRequired": "dtl.taxMethodType === 'v' && dtl.taxInterfaceType === 's'"
+                },
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.apsv.addvatsettfl",
+                  "label": "global.include.terms.in.settlement.tax",
+                  "dataFormat": "LOGICAL",
+                  "conditionShow": "dtl.taxMethodType === 'v'"
+                }
+              ]
+            },
+            {
+              "id": 16,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.apsv.fed1099box",
+                  "label": "global.box",
+                  "type3": "SET",
+                  "metaGroup": "AP",
+                  "meta": "TaxingBox",
+                  "blankOption": false,
+                  "conditionShow": "dtl.taxMethodType === 's'"
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.apsv.ap1099nmctrl",
+                  "label": "global.1099.name.control",
+                  "type3": "SET",
+                  "metaGroup": "AP",
+                  "meta": "Tax1099Style",
+                  "maxLength": 4,
+                  "conditionShow": "dtl.taxMethodType === 's'"
+                },
+                {
+                  "id": 21,
+                  "type": "FIELD",
+                  "subType": "RADIO_SET",
+                  "model": "dtl.apsv.gsttype",
+                  "label": "global.type",
+                  "type3": "SET",
+                  "metaGroup": "AP",
+                  "conditionDisabled": "base.isDetail() || dtl.isTaxingTabReadonly",
+                  "meta": "TaxCARegStatus",
+                  "labelHidden": true,
+                  "conditionShow": "dtl.taxMethodType === 'g' || dtl.taxMethodType === 'v'"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

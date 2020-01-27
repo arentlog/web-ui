@@ -1,0 +1,344 @@
+{
+  "viewId": "wt-wtera-lineitems",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 44,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 45,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 33,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "drldwn.lineItemTotals.totlineamountstring",
+              "label": "global.amount"
+            },
+            {
+              "id": 35,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "drldwn.lineItemTotals.totqtyorderedstring",
+              "label": "global.qty.ordered"
+            }
+          ]
+        },
+        {
+          "id": 46,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 34,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "drldwn.lineItemTotals.totweightstring",
+              "label": "global.weight"
+            },
+            {
+              "id": 36,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "drldwn.lineItemTotals.totcubesstring",
+              "label": "global.cubes"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "GRID",
+      "controlRef": "drldwn.grid",
+      "model": "drldwn.lineItemsList",
+      "options": {
+        "showCheckboxes": true,
+        "showExpander": true,
+        "rowDetailOptions": {
+          "template": "wt/wtera/tabs/line-extend.json",
+          "controller": "WteraDrillDownLineCtrl as line",
+          "paramsReference": "dtl.rowParams"
+        },
+        "editable": true
+      },
+      "controls": {
+        "toolbar": {
+          "id": 24,
+          "type": "TOOLBAR",
+          "label": "global.line.item.detail",
+          "children": [
+            {
+              "id": 37,
+              "type": "BTN",
+              "label": "global.new",
+              "icon": "icon-new-document",
+              "securityLevel": 4,
+              "eventClick": "drldwn.create()",
+              "conditionDisabled": "drldwn.grid.isAnyRowSelected()"
+            },
+            {
+              "id": 38,
+              "type": "BTN",
+              "label": "global.edit",
+              "icon": "icon-edit",
+              "securityLevel": 3,
+              "eventClick": "drldwn.edit()",
+              "conditionDisabled": "!drldwn.grid.isOneRowSelected()"
+            },
+            {
+              "id": 25,
+              "type": "BTN",
+              "subType": "MENU",
+              "label": "global.actions",
+              "conditionDisabled": "!drldwn.grid.isAnyRowSelected()",
+              "children": [
+                {
+                  "id": 26,
+                  "type": "MENU_OPT",
+                  "label": "global.set.accepttype.on",
+                  "icon": "icon-check",
+                  "eventClick": "drldwn.updateAcceptType(true)"
+                },
+                {
+                  "id": 27,
+                  "type": "MENU_OPT",
+                  "label": "global.set.accepttype.off",
+                  "icon": "icon-close",
+                  "eventClick": "drldwn.updateAcceptType(false)"
+                },
+                {
+                  "id": 41,
+                  "type": "MENU_OPT",
+                  "label": "global.supersede.availability",
+                  "icon": "icon-check",
+                  "eventClick": "drldwn.supersedeAvail()"
+                },
+                {
+                  "id": 42,
+                  "type": "MENU_OPT",
+                  "label": "global.customer.reservations",
+                  "eventClick": "drldwn.customerReservation()",
+                  "icon": "icon-star-filled",
+                  "conditionDisabled": "!drldwn.isCustomerReservationEnabled()"
+                },
+                {
+                  "id": 49,
+                  "type": "MENU_OPT",
+                  "label": "global.customer.forecast",
+                  "icon": "icon-new",
+                  "eventClick": "drldwn.customerForecast()",
+                  "conditionDisabled": "!drldwn.isCustomerForecastEnabled()"
+                },
+                {
+                  "id": 43,
+                  "type": "MENU_OPT",
+                  "label": "global.recalculate.ordering.controls",
+                  "icon": "icon-checkbox",
+                  "eventClick": "drldwn.recalcOrderingControls()"
+                },
+                {
+                  "id": 50,
+                  "type": "MENU_OPT",
+                  "label": "global.maintain.warehouse.product",
+                  "icon": "icon-launch",
+                  "conditionDisabled": "!drldwn.isMaintainWhseProdEnabled()",
+                  "eventClick": "drldwn.maintainWhseProduct()"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 4,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.accept.type",
+          "model": "accepttype",
+          "editable": true,
+          "eventChange": "drldwn.onCellChange()",
+          "type3": "SET",
+          "metaGroup": "WT",
+          "meta": "WTRRARAcceptTypeWithNoBlank",
+          "blankOption": false
+        },
+        {
+          "id": 47,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "label": "global.surplus",
+          "model": "surplus",
+          "eventClick": "drldwn.surplusHyperlinkClicked()",
+          "customFormatter": "drldwn.surplusConverter()"
+        },
+        {
+          "id": 6,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.non.stock",
+          "model": "specnstype"
+        },
+        {
+          "id": 7,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "commentfl",
+          "label": "global.comment",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 8,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "shipprod",
+          "label": "global.product",
+          "eventClick": "drldwn.productHyperlinkClicked()"
+        },
+        {
+          "id": 10,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.note",
+          "model": "notesfl",
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 9,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.description",
+          "model": "descrip"
+        },
+        {
+          "id": 11,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.quantity",
+          "model": "qtyord",
+          "dataFormat": "DECIMAL",
+          "editable": true,
+          "sign": "+",
+          "digits": 7,
+          "decimals": 2,
+          "eventChange": "drldwn.onCellChange()",
+          "eventExitEditMode": "drldwn.onCellChange()",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 12,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "unit",
+          "label": "global.unit"
+        },
+        {
+          "id": 13,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "custreserveqty",
+          "label": "global.reservation.qty",
+          "dataFormat": "DECIMAL"
+        },
+        {
+          "id": 48,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "custforecastqty",
+          "label": "global.forecast.quantity",
+          "dataFormat": "DECIMAL"
+        },
+        {
+          "id": 14,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "prodcost",
+          "label": "global.cost",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 15,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "label": "global.rush",
+          "model": "rushfl",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 16,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "lineno",
+          "label": "global.line.number",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 17,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "seqno",
+          "label": "global.seq.number",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 18,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "criticalfl",
+          "label": "global.critical",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 19,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "superfl",
+          "label": "global.supersede",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 20,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "msdsfl",
+          "label": "global.hazardous",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 21,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "brandcode",
+          "label": "global.brand.code"
+        },
+        {
+          "id": 22,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "mfgprod",
+          "label": "global.mfg.prod"
+        },
+        {
+          "id": 23,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "vendprod",
+          "label": "global.vendor.product"
+        }
+      ]
+    }
+  ]
+}

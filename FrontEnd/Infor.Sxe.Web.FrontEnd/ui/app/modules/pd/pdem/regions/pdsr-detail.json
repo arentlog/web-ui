@@ -1,0 +1,353 @@
+{
+  "viewId": "pd-pdem-detail-pdsrdetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 49,
+          "type": "EXP_AREA",
+          "label": "global.general",
+          "children": [
+            {
+              "id": 50,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 51,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 53,
+                      "type": "COMP_FLD",
+                      "children": [
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.pdemGridUpdatePdsr.enddt",
+                          "label": "global.end.date",
+                          "dataFormat": "DATE",
+                          "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('enddt')"
+                        },
+                        {
+                          "id": 6,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.pdemGridUpdatePdsr.updttype",
+                          "label": "global.update",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "base.isDetail() || base.pdemInDisabledColumnList('updttype')"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 14,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "base.pdemGridUpdatePdsr.rebcalcty",
+                      "label": "global.rebate.calculation.type",
+                      "size": "SM",
+                      "maxLength": 8,
+                      "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('rebcalcty') || base.pdemGridUpdatePdsr.usepricerebfl",
+                      "type3": "MANUAL",
+                      "optionsModel": "dtl.rebCalcTyList",
+                      "optionLabelField": "label",
+                      "blankOption": false,
+                      "optionValueField": "value"
+                    },
+                    {
+                      "id": 41,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.pdemGridUpdatePdsr.rebateamt",
+                      "label": "global.rebate.amount",
+                      "dataFormat": "DECIMAL",
+                      "sign": "+",
+                      "digits": 5,
+                      "decimals": 5,
+                      "size": "SM",
+                      "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('rebateamt')",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 42,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.pdemGridUpdatePdsr.rebatepct",
+                      "label": "global.rebate.percent",
+                      "dataFormat": "DECIMAL",
+                      "sign": "+",
+                      "digits": 3,
+                      "decimals": 5,
+                      "size": "SM",
+                      "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('rebatepct') || base.pdemGridUpdatePdsr.usepricerebfl",
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 15,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "base.pdemGridUpdatePdsr.rebdowntoty",
+                      "label": "global.rebate.down.to.basis",
+                      "maxLength": 10,
+                      "size": "SM",
+                      "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('rebdowntoty') || base.pdemGridUpdatePdsr.usepricerebfl",
+                      "type3": "MANUAL",
+                      "optionsModel": "dtl.rebDownToTyList",
+                      "optionLabelField": "label",
+                      "optionValueField": "value",
+                      "blankOption": false
+                    },
+                    {
+                      "id": 40,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "base.pdemGridUpdatePdsr.rebatecostty",
+                      "label": "global.rebate.from.basis",
+                      "maxLength": 1,
+                      "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('rebatecostty') || base.pdemGridUpdatePdsr.usepricerebfl",
+                      "type3": "MANUAL",
+                      "optionsModel": "dtl.rebateCostTyList",
+                      "optionLabelField": "label",
+                      "optionValueField": "value",
+                      "blankOption": false,
+                      "size": "SM"
+                    },
+                    {
+                      "id": 62,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.pdemGridUpdatePdsr.contractlineno",
+                      "label": "global.contract.line.number",
+                      "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('contractlineno') || base.pdemGridUpdatePdsr.usepricerebfl",
+                      "conditionShow": "base.isContractLineNoVisible === 'yes'",
+                      "conditionDisabled": "!base.pdemGridUpdatePdsr.manualfl"
+                    },
+                    {
+                      "id": 67,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "base.pdemGridUpdatePdsr.manualfl",
+                      "label": "global.manual.rebate",
+                      "size": "XS",
+                      "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('manualfl')",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "base.pdemGridUpdatePdsr.usepricerebfl"
+                    },
+                    {
+                      "id": 68,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "base.pdemGridUpdatePdsr.usepricerebfl",
+                      "label": "global.use.rebate.price",
+                      "size": "XS",
+                      "dataFormat": "LOGICAL",
+                      "disabled": true
+                    }
+                  ]
+                },
+                {
+                  "id": 52,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "base.pdemGridUpdatePdsr.margincostty",
+                      "label": "global.margin.basis",
+                      "maxLength": 10,
+                      "size": "SM",
+                      "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('margincostty') || base.pdemGridUpdatePdsr.usepricerebfl",
+                      "type3": "MANUAL",
+                      "optionsModel": "dtl.marginCostTyList",
+                      "optionLabelField": "label",
+                      "optionValueField": "value",
+                      "blankOption": false
+                    },
+                    {
+                      "id": 13,
+                      "type": "FIELD",
+                      "subType": "LOOKUP",
+                      "model": "base.pdemGridUpdatePdsr.refer",
+                      "label": "global.reference",
+                      "meta": "Reference",
+                      "maxLength": 24,
+                      "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('refer')",
+                      "options": {
+                        "allowEntry": true
+                      }
+                    },
+                    {
+                      "id": 64,
+                      "type": "COMP_FLD",
+                      "children": [
+                        {
+                          "id": 65,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.pdemGridUpdatePdsr.contractNo",
+                          "label": "global.contract.number",
+                          "maxLength": 30,
+                          "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('contractno') || base.pdemGridUpdatePdsr.usecontractlineno"
+                        },
+                        {
+                          "id": 66,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.pdemGridUpdatePdsr.contractcostfl",
+                          "label": "global.contract.cost",
+                          "dataFormat": "LOGICAL",
+                          "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('contractcostfl')",
+                          "conditionDisabled": "base.pdemGridUpdatePdsr.usepricerebfl"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 47,
+                      "type": "COMP_FLD",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.pdemGridUpdatePdsr.priceSheet",
+                          "label": "global.price.sheet.name",
+                          "meta": "PriceSheet",
+                          "maxLength": 15,
+                          "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('pricesheet') || base.pdemGridUpdatePdsr.usepricerebfl",
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 10,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.pdemGridUpdatePdsr.priceEffectiveDate",
+                          "label": "global.price.sheet.dt",
+                          "dataFormat": "DATE",
+                          "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('priceeffectivedate') || base.pdemGridUpdatePdsr.usepricerebfl"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 48,
+                      "type": "COMP_FLD",
+                      "children": [
+                        {
+                          "id": 43,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.pdemGridUpdatePdsr.priceSheetTo",
+                          "label": "global.price.sheet.name.to",
+                          "meta": "PriceSheet",
+                          "maxLength": 15,
+                          "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('pricesheetto') || base.pdemGridUpdatePdsr.usepricerebfl",
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 44,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.pdemGridUpdatePdsr.priceEffectiveDateTo",
+                          "label": "global.price.sheet.dt.to",
+                          "dataFormat": "DATE",
+                          "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('priceeffectivedateto') || base.pdemGridUpdatePdsr.usepricerebfl"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 54,
+                      "type": "COMP_FLD",
+                      "children": [
+                        {
+                          "id": 56,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.pdemGridUpdatePdsr.sharepct",
+                          "label": "global.share.rebate.percent",
+                          "size": "XS",
+                          "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('sharepct') || base.pdemGridUpdatePdsr.usepricerebfl",
+                          "dataFormat": "DECIMAL",
+                          "sign": "+",
+                          "decimals": 2,
+                          "digits": 3,
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 57,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.pdemGridUpdatePdsr.sharefl",
+                          "label": "global.share.rebate",
+                          "dataFormat": "LOGICAL",
+                          "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('sharefl')",
+                          "conditionDisabled": "base.pdemGridUpdatePdsr.usepricerebfl"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 55,
+                      "type": "COMP_FLD",
+                      "children": [
+                        {
+                          "id": 58,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.pdemGridUpdatePdsr.capselltypefl",
+                          "label": "global.cap.sell.type",
+                          "size": "SM",
+                          "type3": "SET",
+                          "metaGroup": "PD",
+                          "meta": "PriceLevelAmtPct",
+                          "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('capselltypefl') || base.pdemGridUpdatePdsr.usepricerebfl"
+                        },
+                        {
+                          "id": 61,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.pdemGridUpdatePdsr.capsellamount",
+                          "label": "global.cap.sell.amount",
+                          "size": "SM",
+                          "conditionReadonly": "base.isDetail() || base.pdemInDisabledColumnList('capsellamount') || base.pdemGridUpdatePdsr.usepricerebfl",
+                          "dataFormat": "DECIMAL",
+                          "sign": "+",
+                          "digits": 7,
+                          "decimals": 5,
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

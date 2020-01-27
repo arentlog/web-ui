@@ -1,0 +1,267 @@
+{
+  "viewId": "rs-rssq-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.queue",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 48,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.new",
+                  "icon": "icon-new-document",
+                  "securityLevel": 4,
+                  "conditionDisabled": "!base.isDetail()",
+                  "eventClick": "dtl.create()"
+                },
+                {
+                  "id": 27,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 28,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 29,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3,
+                  "eventClick": "dtl.submit()"
+                },
+                {
+                  "id": 30,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 31,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 33,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 34,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 36,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.rssqqueue.queuenm",
+                          "label": "global.queue",
+                          "meta": "GlAccount",
+                          "required": true,
+                          "type3": "STANDARD",
+                          "maxLength": 8,
+                          "conditionReadonly": "!dtl.isCreate()",
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 38,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.rssqqueue.descrip",
+                          "label": "global.description",
+                          "meta": "AccountEntryTransType",
+                          "type3": "SET",
+                          "metaGroup": "GL",
+                          "maxLength": 40,
+                          "conditionReadonly": "base.isDetail()"
+                        },
+                        {
+                          "id": 47,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "dtl.rssqqueue.statustype",
+                          "label": "global.status",
+                          "meta": "QueueStatusType",
+                          "type3": "SET",
+                          "metaGroup": "RS",
+                          "conditionReadonly": "base.isDetail()",
+                          "blankOption": false
+                        },
+                        {
+                          "id": 40,
+                          "type": "FIELD",
+                          "subType": "TIME",
+                          "model": "dtl.rssqqueue.begintm",
+                          "label": "global.begin.active.time",
+                          "dataFormat": "TIME",
+                          "conditionReadonly": "base.isDetail()",
+                          "subFormat": "SecondsSinceMidnight"
+                        },
+                        {
+                          "id": 42,
+                          "type": "FIELD",
+                          "subType": "TIME",
+                          "model": "dtl.rssqqueue.endtm",
+                          "label": "global.end.active.time",
+                          "dataFormat": "TIME",
+                          "conditionReadonly": "base.isDetail()",
+                          "subFormat": "SecondsSinceMidnight"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 35,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 37,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.rssqqueue.queuepri",
+                          "label": "global.priority",
+                          "dataFormat": "INTEGER",
+                          "sign": "+",
+                          "digits": 2,
+                          "conditionReadonly": "base.isDetail()"
+                        },
+                        {
+                          "id": 39,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.rssqqueue.nomaxjobs",
+                          "label": "global.max.concurrent.jobs",
+                          "dataFormat": "INTEGER",
+                          "sign": "+",
+                          "digits": 3,
+                          "conditionReadonly": "base.isDetail()"
+                        },
+                        {
+                          "id": 45,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "dtl.rssqqueue.rngoptfl",
+                          "label": "global.log.ranges.options",
+                          "conditionDisabled": "base.isDetail()"
+                        },
+                        {
+                          "id": 41,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "dtl.rssqqueue.logdir",
+                          "label": "global.log.directory",
+                          "maxLength": 40,
+                          "conditionReadonly": "base.isDetail()",
+                          "conditionDisabled": "dtl.rssqqueue.multitenantfl"
+                        },
+                        {
+                          "id": 49,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 50,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.rssqqueue.transdt",
+                              "label": "global.last.updated",
+                              "dataFormat": "DATE",
+                              "size": "SM",
+                              "conditionShow": "base.isLastChangedByVisible",
+                              "readonly": true
+                            },
+                            {
+                              "id": 51,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.rssqqueue.transtm",
+                              "label": "global.at",
+                              "dataFormat": "TIME",
+                              "subFormat": "hhmm",
+                              "size": "SM",
+                              "readonly": true,
+                              "conditionShow": "base.isLastChangedByVisible"
+                            },
+                            {
+                              "id": 52,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.rssqqueue.operinit",
+                              "label": "global.by",
+                              "size": "XS",
+                              "readonly": true,
+                              "conditionShow": "base.isLastChangedByVisible"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

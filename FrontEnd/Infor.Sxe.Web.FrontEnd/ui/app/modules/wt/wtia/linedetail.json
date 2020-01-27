@@ -1,0 +1,882 @@
+{
+  "viewId": "wt-wtia-linedetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "conditionShow": "base.isLineDetail()",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.line.items",
+              "subLabel": "{{linedtl.subTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "linedtl.returnToMaster()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 113,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.print",
+                  "eventClick": "linedtl.printSingleTransfer()",
+                  "icon": "icon-print"
+                }
+              ]
+            },
+            "content": {
+              "id": 7,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "EXP_AREA",
+                  "label": "global.blank.label.string.for.space",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 10,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 11,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "linedtl.headerdetail.wttype",
+                              "label": "global.type",
+                              "dataFormat": "WtOrderType"
+                            },
+                            {
+                              "id": 12,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "linedtl.headerdetail.wtformatted",
+                              "label": "global.warehouse.transfer"
+                            },
+                            {
+                              "id": 13,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "linedtl.headerdetail.nounappr",
+                              "label": "symbol.pound.lns.unappr"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 14,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "linedtl.headerdetail.shipfmcono",
+                              "label": "global.from.cono"
+                            },
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "linedtl.headerdetail.shipfmwhsefullname",
+                              "label": "global.from.warehouse",
+                              "contextEntity": "Icsd"
+                            },
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "linedtl.headerdetail.stagecdx",
+                              "label": "global.stage",
+                              "type3": "SET",
+                              "metaGroup": "WT",
+                              "meta": "StageTypeFromCode",
+                              "blankOption": false,
+                              "dataFormat": "WtStageTypeToName"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "linedtl.headerdetail.shiptocono",
+                              "label": "global.to.cono"
+                            },
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "linedtl.headerdetail.shiptowhsefullname",
+                              "label": "global.to.warehouse"
+                            },
+                            {
+                              "id": 111,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "linedtl.headerdetail.boIndicator",
+                              "label": "global.back.order",
+                              "labelHidden": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 21,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 75,
+                      "type": "TAB",
+                      "label": "global.line.items",
+                      "tabId": "line-items",
+                      "subFunction": "Line Items",
+                      "children": [
+                        {
+                          "id": 83,
+                          "type": "GRID",
+                          "controlRef": "linedtl.grid",
+                          "model": "linedtl.dataset",
+                          "options": {
+                            "showCheckboxes": true,
+                            "showExpander": false,
+                            "selectable": "multiple",
+                            "showDrilldown": true,
+                            "editable": false,
+                            "events": {
+                              "drilldown": "linedtl.drilldown()"
+                            },
+                            "rowDetailOptions": {
+                              "template": "",
+                              "controller": "",
+                              "paramsReference": ""
+                            }
+                          },
+                          "controls": {
+                            "toolbar": {
+                              "id": 76,
+                              "type": "TOOLBAR",
+                              "label": "global.line.items",
+                              "children": [
+                                {
+                                  "id": 77,
+                                  "type": "BTN",
+                                  "subType": "MENU",
+                                  "label": "global.actions",
+                                  "conditionDisabled": "!linedtl.grid.isAnyRowSelected() || linedtl.isLineItemsTabReadonly",
+                                  "children": [
+                                    {
+                                      "id": 78,
+                                      "type": "MENU_OPT",
+                                      "label": "global.set.requested.approval.to.yes",
+                                      "eventClick": "linedtl.setApproval('y')",
+                                      "conditionDisabled": "!linedtl.grid.isAnyRowSelected()"
+                                    },
+                                    {
+                                      "id": 79,
+                                      "type": "MENU_OPT",
+                                      "label": "global.set.requested.approval.to.no",
+                                      "eventClick": "linedtl.setApproval('n')",
+                                      "conditionDisabled": "!linedtl.grid.isAnyRowSelected()"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "children": [
+                            {
+                              "id": 84,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "lineno",
+                              "label": "global.line.number",
+                              "dataFormat": "INTEGER"
+                            },
+                            {
+                              "id": 85,
+                              "type": "GRID_COL",
+                              "subType": "DROP_DOWN",
+                              "model": "approvety",
+                              "label": "global.approval",
+                              "editable": false,
+                              "type3": "SET",
+                              "metaGroup": "WT",
+                              "meta": "ApprovalType"
+                            },
+                            {
+                              "id": 86,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "nonstockty",
+                              "label": "global.non.stock"
+                            },
+                            {
+                              "id": 87,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "shipprod",
+                              "label": "global.product"
+                            },
+                            {
+                              "id": 88,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "proddesc",
+                              "label": "global.description"
+                            },
+                            {
+                              "id": 89,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "qtyord",
+                              "label": "global.quantity.ordered",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 90,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "qtyship",
+                              "label": "global.quantity.shipped",
+                              "customFormatter": "",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 91,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "unit",
+                              "label": "global.unit"
+                            },
+                            {
+                              "id": 92,
+                              "type": "GRID_COL",
+                              "subType": "CHECKBOX",
+                              "model": "bofl",
+                              "label": "global.back.order",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 93,
+                              "type": "GRID_COL",
+                              "subType": "CHECKBOX",
+                              "model": "msdsfl",
+                              "label": "global.hazardous",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 107,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "netAvailable",
+                              "label": "global.available",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 109,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "surplus",
+                              "label": "global.surplus",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 108,
+                              "type": "GRID_COL",
+                              "subType": "TEXT",
+                              "model": "totalLineAmt",
+                              "label": "global.total.order",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 22,
+                      "type": "TAB",
+                      "label": "global.header",
+                      "tabId": "header",
+                      "subFunction": "Header",
+                      "children": [
+                        {
+                          "id": 23,
+                          "type": "EXP_AREA",
+                          "label": "global.addresses",
+                          "children": [
+                            {
+                              "id": 24,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 25,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 100,
+                                      "type": "FIELD_SET",
+                                      "label": "global.ship.from",
+                                      "children": [
+                                        {
+                                          "id": 26,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "linedtl.wtesHeader.name",
+                                          "label": "global.name"
+                                        },
+                                        {
+                                          "id": 103,
+                                          "type": "CUSTOM",
+                                          "subType": "AddressInfo",
+                                          "options": {
+                                            "countryCdVisible": true,
+                                            "addr1Model": "linedtl.wtesHeader.addr1",
+                                            "addr2Model": "linedtl.wtesHeader.addr2",
+                                            "addr3Model": "linedtl.wtesHeader.addr3",
+                                            "cityModel": "linedtl.wtesHeader.city",
+                                            "stateModel": "linedtl.wtesHeader.state",
+                                            "zipCodeModel": "linedtl.wtesHeader.zipcd",
+                                            "countryCodeModel": "linedtl.wtesHeader.fmcountrycd",
+                                            "addressLabel": "global.address",
+                                            "outOfCityVisible": false,
+                                            "geoCodeVisible": false
+                                          }
+                                        },
+                                        {
+                                          "id": 28,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "linedtl.wtesHeader.shipinstr",
+                                          "label": "global.instructions"
+                                        },
+                                        {
+                                          "id": 29,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "linedtl.wtesHeader.phoneno",
+                                          "label": "global.phone",
+                                          "dataFormat": "PHONE"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 101,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 102,
+                                      "type": "FIELD_SET",
+                                      "label": "global.ship.to",
+                                      "children": [
+                                        {
+                                          "id": 33,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "linedtl.wtesHeader.shiptonm",
+                                          "label": "global.name"
+                                        },
+                                        {
+                                          "id": 104,
+                                          "type": "CUSTOM",
+                                          "subType": "AddressInfo",
+                                          "options": {
+                                            "countryCdVisible": false,
+                                            "addr1Model": "linedtl.wtesHeader.shiptoaddr1",
+                                            "addr2Model": "linedtl.wtesHeader.shiptoaddr2",
+                                            "addr3Model": "linedtl.wtesHeader.shiptoaddr3",
+                                            "cityModel": "linedtl.wtesHeader.shiptocity",
+                                            "stateModel": "linedtl.wtesHeader.state",
+                                            "zipCodeModel": "linedtl.wtesHeader.shiptozip",
+                                            "countryCodeModel": "",
+                                            "addressLabel": "global.address",
+                                            "outOfCityVisible": false,
+                                            "geoCodeVisible": false
+                                          }
+                                        },
+                                        {
+                                          "id": 35,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "linedtl.wtesHeader.refer",
+                                          "label": "global.reference"
+                                        },
+                                        {
+                                          "id": 36,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "linedtl.wtesHeader.shiptophoneno",
+                                          "label": "global.phone",
+                                          "dataFormat": "PHONE"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 37,
+                          "type": "EXP_AREA",
+                          "label": "global.shipping.information",
+                          "children": [
+                            {
+                              "id": 38,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 39,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 40,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.pickedby",
+                                      "label": "global.picker",
+                                      "maxLength": 4
+                                    },
+                                    {
+                                      "id": 41,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.pkgid",
+                                      "label": "global.package.id",
+                                      "maxLength": 18
+                                    },
+                                    {
+                                      "id": 51,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.shipviaty",
+                                      "label": "global.ship.via",
+                                      "meta": "ShipVia",
+                                      "dataDesc": "linedtl.shipViaDescription"
+                                    },
+                                    {
+                                      "id": 119,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.reasoncode",
+                                      "label": "global.reason.code",
+                                      "meta": "WTReasonCode",
+                                      "dataDesc": "linedtl.reasoncodeDesc"
+                                    },
+                                    {
+                                      "id": 52,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.stagearea",
+                                      "label": "global.stage.area",
+                                      "dataFormat": "BinLoc"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 105,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 42,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.orderdt",
+                                      "label": "global.order.date",
+                                      "dataFormat": "DATE"
+                                    },
+                                    {
+                                      "id": 43,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.reqshipdt",
+                                      "label": "global.req.ship.date",
+                                      "dataFormat": "DATE"
+                                    },
+                                    {
+                                      "id": 44,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.duedt",
+                                      "label": "global.due.date",
+                                      "dataFormat": "DATE"
+                                    },
+                                    {
+                                      "id": 45,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.ignoreltfl",
+                                      "label": "global.ignore.lead.time",
+                                      "dataFormat": "BooleanToYesNo"
+                                    },
+                                    {
+                                      "id": 46,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.rushfl",
+                                      "label": "global.rush",
+                                      "dataFormat": "BooleanToYesNo"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 47,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 112,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.orderaltno",
+                                      "label": "oe.va.number"
+                                    },
+                                    {
+                                      "id": 49,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.nopackages",
+                                      "label": "symbol.pound.of.packages",
+                                      "dataFormat": "INTEGER"
+                                    },
+                                    {
+                                      "id": 50,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.receiptdt",
+                                      "label": "global.received.date",
+                                      "dataFormat": "DATE"
+                                    },
+                                    {
+                                      "id": 53,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.wtauth",
+                                      "label": "global.authorize"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 54,
+                          "type": "EXP_AREA",
+                          "label": "global.addons",
+                          "children": [
+                            {
+                              "id": 55,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 56,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 57,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.addonamt1",
+                                      "label": "global.capitalized.addon.amt",
+                                      "dataFormat": "DECIMAL",
+                                      "sign": "+",
+                                      "digits": 5,
+                                      "decimals": 2,
+                                      "eventChange": "linedtl.capitalizedAmtLostFocus()",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 58,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.addonamt2",
+                                      "label": "global.expensed.addon.amt",
+                                      "dataFormat": "DECIMAL",
+                                      "sign": "+",
+                                      "digits": 5,
+                                      "decimals": 2,
+                                      "eventChange": "linedtl.expensedAmtLostFocus()",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 59,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 60,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.addontype1",
+                                      "label": "global.capitalized.addon.type",
+                                      "type3": "SET",
+                                      "metaGroup": "WT",
+                                      "meta": "AddOnType",
+                                      "eventChange": "linedtl.capitalizedAmtLostFocus()",
+                                      "dataFormat": "WtAddOnType"
+                                    },
+                                    {
+                                      "id": 61,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.addontype2",
+                                      "label": "global.expensed.addon.type",
+                                      "type3": "SET",
+                                      "metaGroup": "WT",
+                                      "meta": "AddOnType",
+                                      "eventChange": "linedtl.expensedAmtLostFocus()",
+                                      "dataFormat": "WtAddOnType"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 62,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 63,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.addonnet1",
+                                      "label": "global.capitalized.addons.net",
+                                      "dataFormat": "DECIMAL",
+                                      "sign": "+",
+                                      "decimals": 2,
+                                      "digits": 10,
+                                      "readonly": true,
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 64,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.addonnet2",
+                                      "label": "global.expensed.addons.net",
+                                      "dataFormat": "DECIMAL",
+                                      "sign": "+",
+                                      "decimals": 2,
+                                      "digits": 10,
+                                      "readonly": true,
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 98,
+                          "type": "EXP_AREA",
+                          "label": "global.totals",
+                          "children": [
+                            {
+                              "id": 65,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 66,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 68,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.totqtyord",
+                                      "label": "global.quantity.ordered",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "maximumFractionDigits": 2,
+                                        "minimumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 69,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.totqtyshp",
+                                      "label": "global.quantity.ship",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "maximumFractionDigits": 2,
+                                        "minimumFractionDigits": 2
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 106,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 72,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.totordamt",
+                                      "label": "global.order.amount",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "maximumFractionDigits": 2,
+                                        "minimumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 73,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.totshipamt",
+                                      "label": "global.ship.amount",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "maximumFractionDigits": 2,
+                                        "minimumFractionDigits": 2
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 70,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 67,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.totweight",
+                                      "label": "global.weight",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "maximumFractionDigits": 5,
+                                        "minimumFractionDigits": 5
+                                      }
+                                    },
+                                    {
+                                      "id": 71,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "linedtl.wtesHeader.totcubes",
+                                      "label": "global.cube",
+                                      "dataFormat": "DECIMAL",
+                                      "formatOptions": {
+                                        "maximumFractionDigits": 5,
+                                        "minimumFractionDigits": 5
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": 99,
+          "type": "VIEW_CNTR",
+          "viewName": "lineDetailContainer"
+        },
+        {
+          "id": 118,
+          "type": "VIEW_CNTR",
+          "viewName": "print"
+        }
+      ]
+    },
+    {
+      "id": 110,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Wteh",
+      "contextValues": {
+        "key1": "linedtl.headerdetail.wtno",
+        "key2": "linedtl.headerdetail.wtsuf"
+      }
+    }
+  ]
+}

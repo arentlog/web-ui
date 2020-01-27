@@ -1,0 +1,1465 @@
+{
+  "viewId": "ao-ao-system-system-reportitems",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 2,
+      "type": "FIELD_SET",
+      "label": "global.function",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "reportitem.selectedFunction",
+                  "label": "global.name",
+                  "meta": "ReportItem",
+                  "conditionReadonly": "reportitem.editMode()",
+                  "size": "SM",
+                  "options": {
+                    "searchParams": {
+                      "trmgrlang": {
+                        "value": "reportitem.selectedLanguage",
+                        "type": "REF"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": 6,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "reportitem.selectedLanguage",
+                  "label": "global.language",
+                  "type3": "MANUAL",
+                  "conditionReadonly": "reportitem.editMode() && !reportitem.newRecord",
+                  "optionsModel": "reportitem.languageTypes",
+                  "optionLabelField": "descrip",
+                  "optionValueField": "trmgrlang",
+                  "blankOption": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 9,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "eventClick": "reportitem.reportItemsLoad()"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 12,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 13,
+                  "type": "TOOLBAR",
+                  "label": "global.blank.label.string.for.space",
+                  "children": [
+                    {
+                      "id": 14,
+                      "type": "BTN",
+                      "subType": "PRI",
+                      "label": "global.new",
+                      "icon": "icon-new-document",
+                      "securityLevel": 4,
+                      "eventClick": "reportitem.new()",
+                      "conditionDisabled": "reportitem.editMode()"
+                    },
+                    {
+                      "id": 15,
+                      "type": "BTN",
+                      "subType": "PRI",
+                      "label": "global.copy",
+                      "icon": "icon-copy",
+                      "securityLevel": 4,
+                      "conditionDisabled": "reportitem.editMode() || !reportitem.selectedReportItem",
+                      "eventClick": "reportitem.copy()"
+                    },
+                    {
+                      "id": 16,
+                      "type": "BTN",
+                      "subType": "PRI",
+                      "label": "global.edit",
+                      "icon": "icon-edit",
+                      "securityLevel": 3,
+                      "conditionDisabled": "reportitem.editMode() || !reportitem.selectedReportItem",
+                      "eventClick": "reportitem.edit()"
+                    },
+                    {
+                      "id": 17,
+                      "type": "BTN",
+                      "subType": "PRI",
+                      "label": "global.delete",
+                      "icon": "icon-delete",
+                      "securityLevel": 5,
+                      "conditionDisabled": "reportitem.editMode() || !reportitem.selectedReportItem",
+                      "eventClick": "reportitem.delete()"
+                    },
+                    {
+                      "id": 18,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-cancel",
+                      "label": "global.cancel",
+                      "conditionDisabled": "!reportitem.editMode()",
+                      "eventClick": "reportitem.cancel()"
+                    },
+                    {
+                      "id": 19,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "icon": "icon-save",
+                      "label": "global.save",
+                      "securityLevel": 3,
+                      "eventClick": "reportitem.save()",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 20,
+                      "type": "BTN",
+                      "subType": "PRI",
+                      "label": "global.reset",
+                      "icon": "icon-reset",
+                      "securityLevel": 4,
+                      "conditionDisabled": "!reportitem.editMode()",
+                      "eventClick": "reportitem.reset()"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 21,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 22,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 23,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "reportitem.selectedReportItem.currproc",
+                  "label": "global.name",
+                  "meta": "ReportItem",
+                  "conditionShow": "reportitem.selectedReportItem",
+                  "conditionReadonly": "!reportitem.editMode() || !reportitem.newRecord",
+                  "size": "SM",
+                  "options": {
+                    "searchParams": {
+                      "trmgrlang": {
+                        "value": "reportitem.selectedLanguage",
+                        "type": "REF"
+                      }
+                    },
+                    "allowEntry": "reportitem.newRecord"
+                  }
+                },
+                {
+                  "id": 24,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "reportitem.selectedReportItem.reportid",
+                  "label": "global.procedure",
+                  "maxLength": 20,
+                  "conditionShow": "reportitem.selectedReportItem",
+                  "conditionReadonly": "!reportitem.editMode()",
+                  "required": true,
+                  "size": "SM"
+                },
+                {
+                  "id": 25,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "reportitem.selectedReportItem.standardty",
+                  "label": "global.standard",
+                  "type3": "SET",
+                  "blankOption": false,
+                  "metaGroup": "COMMON",
+                  "meta": "StandardType",
+                  "conditionShow": "reportitem.selectedReportItem",
+                  "conditionReadonly": "!reportitem.editMode()"
+                }
+              ]
+            },
+            {
+              "id": 26,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 27,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "reportitem.selectedReportItem.rpttitle",
+                  "label": "global.report.title",
+                  "maxLength": 100,
+                  "required": true,
+                  "conditionShow": "reportitem.selectedReportItem",
+                  "conditionReadonly": "!reportitem.editMode()"
+                },
+                {
+                  "id": 28,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "reportitem.selectedReportItem.printoptfl",
+                  "label": "global.print.options",
+                  "dataFormat": "LOGICAL",
+                  "conditionShow": "reportitem.selectedReportItem",
+                  "conditionDisabled": "!reportitem.editMode()"
+                },
+                {
+                  "id": 29,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "reportitem.selectedReportItem.lastupdated",
+                  "label": "global.last.updated",
+                  "labelHidden": true,
+                  "conditionShow": "reportitem.selectedReportItem"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "type": "EXP_AREA",
+      "label": "global.printing.parameters",
+      "collapsed": true,
+      "conditionShow": "reportitem.selectedReportItem && !reportitem.newRecord",
+      "children": [
+        {
+          "id": 31,
+          "type": "FIELD_SET",
+          "label": "global.main.output",
+          "children": [
+            {
+              "id": 32,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 33,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 34,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "reportitem.selectedReportItem.wide",
+                      "label": "global.width",
+                      "type3": "MANUAL",
+                      "optionLabelField": "label",
+                      "optionValueField": "value",
+                      "conditionReadonly": "!reportitem.editMode()",
+                      "size": "XS",
+                      "blankOption": false,
+                      "optionsModel": "reportitem.widthOption",
+                      "children": [
+                        {
+                          "id": 35,
+                          "type": "OPT",
+                          "label": "number.80",
+                          "value": false
+                        },
+                        {
+                          "id": 36,
+                          "type": "OPT",
+                          "label": "number.132",
+                          "value": true
+                        }
+                      ]
+                    },
+                    {
+                      "id": 37,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.pagedfl",
+                      "label": "global.paged",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 38,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.optpgfl",
+                      "label": "global.allow.options.page",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 39,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.coldfl",
+                      "label": "global.archive",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    }
+                  ]
+                },
+                {
+                  "id": 40,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 41,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "reportitem.selectedReportItem.pglength",
+                      "label": "global.length",
+                      "conditionReadonly": "!reportitem.editMode()",
+                      "dataFormat": "INTEGER",
+                      "digits": 2,
+                      "size": "XS"
+                    },
+                    {
+                      "id": 42,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.headerprfl",
+                      "label": "global.print.header",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 43,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.titletype",
+                      "label": "global.forced.standard.title",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 44,
+          "type": "FIELD_SET",
+          "label": "global.output.2",
+          "children": [
+            {
+              "id": 45,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 46,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 47,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "reportitem.selectedReportItem.xwide1",
+                      "label": "global.width",
+                      "type3": "MANUAL",
+                      "optionLabelField": "label",
+                      "optionValueField": "value",
+                      "conditionReadonly": "!reportitem.editMode()",
+                      "optionsModel": "reportitem.widthOption",
+                      "blankOption": false,
+                      "size": "XS",
+                      "children": [
+                        {
+                          "id": 48,
+                          "type": "OPT",
+                          "label": "number.80",
+                          "value": false
+                        },
+                        {
+                          "id": 49,
+                          "type": "OPT",
+                          "label": "number.132",
+                          "value": true
+                        }
+                      ]
+                    },
+                    {
+                      "id": 50,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xpagedfl1",
+                      "label": "global.paged",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 51,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xoptpgfl1",
+                      "label": "global.allow.options.page",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 52,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xcoldfl1",
+                      "label": "global.archive",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    }
+                  ]
+                },
+                {
+                  "id": 53,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 54,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "reportitem.selectedReportItem.xpglength1",
+                      "label": "global.length",
+                      "conditionReadonly": "!reportitem.editMode()",
+                      "dataFormat": "INTEGER",
+                      "digits": 2,
+                      "size": "XS"
+                    },
+                    {
+                      "id": 55,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xheaderprfl1",
+                      "label": "global.print.header",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 56,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xtitletype1",
+                      "label": "global.forced.standard.title",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 57,
+          "type": "FIELD_SET",
+          "label": "global.output.3",
+          "children": [
+            {
+              "id": 58,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 59,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 60,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "reportitem.selectedReportItem.xwide2",
+                      "label": "global.width",
+                      "type3": "MANUAL",
+                      "optionLabelField": "label",
+                      "optionValueField": "value",
+                      "conditionReadonly": "!reportitem.editMode()",
+                      "optionsModel": "reportitem.widthOption",
+                      "blankOption": false,
+                      "size": "XS",
+                      "children": [
+                        {
+                          "id": 61,
+                          "type": "OPT",
+                          "label": "number.80",
+                          "value": false
+                        },
+                        {
+                          "id": 62,
+                          "type": "OPT",
+                          "label": "number.132",
+                          "value": true
+                        }
+                      ]
+                    },
+                    {
+                      "id": 63,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xpagedfl2",
+                      "label": "global.paged",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 64,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xoptpgfl2",
+                      "label": "global.allow.options.page",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 65,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xcoldfl2",
+                      "label": "global.archive",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    }
+                  ]
+                },
+                {
+                  "id": 66,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 67,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "reportitem.selectedReportItem.xpglength2",
+                      "label": "global.length",
+                      "conditionReadonly": "!reportitem.editMode()",
+                      "dataFormat": "INTEGER",
+                      "digits": 2,
+                      "size": "XS"
+                    },
+                    {
+                      "id": 68,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xheaderprfl2",
+                      "label": "global.print.header",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 69,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xtitletype2",
+                      "label": "global.forced.standard.title",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 70,
+          "type": "FIELD_SET",
+          "label": "global.output.4",
+          "children": [
+            {
+              "id": 71,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 72,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 73,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "reportitem.selectedReportItem.xwide3",
+                      "label": "global.width",
+                      "type3": "MANUAL",
+                      "optionLabelField": "label",
+                      "optionValueField": "value",
+                      "conditionReadonly": "!reportitem.editMode()",
+                      "optionsModel": "reportitem.widthOption",
+                      "blankOption": false,
+                      "size": "XS",
+                      "children": [
+                        {
+                          "id": 74,
+                          "type": "OPT",
+                          "label": "number.80",
+                          "value": false
+                        },
+                        {
+                          "id": 75,
+                          "type": "OPT",
+                          "label": "number.132",
+                          "value": true
+                        }
+                      ]
+                    },
+                    {
+                      "id": 76,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xpagedfl3",
+                      "label": "global.paged",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 77,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xoptpgfl3",
+                      "label": "global.allow.options.page",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 78,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xcoldfl3",
+                      "label": "global.archive",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    }
+                  ]
+                },
+                {
+                  "id": 79,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 80,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "reportitem.selectedReportItem.xpglength3",
+                      "label": "global.length",
+                      "conditionReadonly": "!reportitem.editMode()",
+                      "dataFormat": "INTEGER",
+                      "digits": 2,
+                      "size": "XS"
+                    },
+                    {
+                      "id": 81,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xheaderprfl3",
+                      "label": "global.print.header",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 82,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xtitletype3",
+                      "label": "global.forced.standard.title",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 83,
+          "type": "FIELD_SET",
+          "label": "global.output.5",
+          "children": [
+            {
+              "id": 84,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 85,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 86,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "reportitem.selectedReportItem.xwide4",
+                      "label": "global.width",
+                      "type3": "MANUAL",
+                      "optionLabelField": "label",
+                      "optionValueField": "value",
+                      "conditionReadonly": "!reportitem.editMode()",
+                      "optionsModel": "reportitem.widthOption",
+                      "blankOption": false,
+                      "size": "XS",
+                      "children": [
+                        {
+                          "id": 87,
+                          "type": "OPT",
+                          "label": "number.80",
+                          "value": false
+                        },
+                        {
+                          "id": 88,
+                          "type": "OPT",
+                          "label": "number.132",
+                          "value": true
+                        }
+                      ]
+                    },
+                    {
+                      "id": 89,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xpagedfl4",
+                      "label": "global.paged",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 90,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xoptpgfl4",
+                      "label": "global.allow.options.page",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 91,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xcoldfl4",
+                      "label": "global.archive",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    }
+                  ]
+                },
+                {
+                  "id": 92,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 93,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "reportitem.selectedReportItem.xpglength4",
+                      "label": "global.length",
+                      "conditionReadonly": "!reportitem.editMode()",
+                      "dataFormat": "INTEGER",
+                      "digits": 2,
+                      "size": "XS"
+                    },
+                    {
+                      "id": 94,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xheaderprfl4",
+                      "label": "global.print.header",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 95,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xtitletype4",
+                      "label": "global.forced.standard.title",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 96,
+          "type": "FIELD_SET",
+          "label": "global.output.6",
+          "children": [
+            {
+              "id": 97,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 98,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 99,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "reportitem.selectedReportItem.xwide5",
+                      "label": "global.width",
+                      "type3": "MANUAL",
+                      "optionLabelField": "label",
+                      "optionValueField": "value",
+                      "conditionReadonly": "!reportitem.editMode()",
+                      "optionsModel": "reportitem.widthOption",
+                      "blankOption": false,
+                      "size": "XS",
+                      "children": [
+                        {
+                          "id": 100,
+                          "type": "OPT",
+                          "label": "number.80",
+                          "value": false
+                        },
+                        {
+                          "id": 101,
+                          "type": "OPT",
+                          "label": "number.132",
+                          "value": true
+                        }
+                      ]
+                    },
+                    {
+                      "id": 102,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xpagedfl5",
+                      "label": "global.paged",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 103,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xoptpgfl5",
+                      "label": "global.allow.options.page",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 104,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xcoldfl5",
+                      "label": "global.archive",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    }
+                  ]
+                },
+                {
+                  "id": 105,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 106,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "reportitem.selectedReportItem.xpglength5",
+                      "label": "global.length",
+                      "conditionReadonly": "!reportitem.editMode()",
+                      "dataFormat": "INTEGER",
+                      "digits": 2,
+                      "size": "XS"
+                    },
+                    {
+                      "id": 107,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xheaderprfl5",
+                      "label": "global.print.header",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    },
+                    {
+                      "id": 108,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.xtitletype5",
+                      "label": "global.forced.standard.title",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 109,
+          "type": "FIELD_SET",
+          "label": "global.print.options",
+          "children": [
+            {
+              "id": 110,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 111,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 112,
+                      "type": "COMP_FLD",
+                      "children": [
+                        {
+                          "id": 113,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "reportitem.selectedReportItem.openprfl",
+                          "label": "global.open.printer.number",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!reportitem.editMode()"
+                        },
+                        {
+                          "id": 114,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "reportitem.selectedReportItem.openprno",
+                          "label": "global.printer.number",
+                          "labelHidden": true,
+                          "dataFormat": "DECIMAL",
+                          "digits": 1,
+                          "decimals": 1,
+                          "conditionReadonly": "reportitem.selectedReportItem.openprfl && !reportitem.editMode()",
+                          "size": "XS"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 115,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 116,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.jrnlfl",
+                      "label": "global.open.journal",
+                      "dataFormat": "LOGICAL",
+                      "conditionDisabled": "!reportitem.editMode()"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 117,
+          "type": "FIELD_SET",
+          "label": "global.list.options",
+          "children": [
+            {
+              "id": 118,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 119,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 120,
+                      "type": "COMP_FLD",
+                      "children": [
+                        {
+                          "id": 121,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "reportitem.selectedReportItem.uselistoption",
+                          "label": "global.use.list.option",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!reportitem.editMode()"
+                        },
+                        {
+                          "id": 122,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "reportitem.selectedReportItem.recaloptno",
+                          "label": "global.list.option.1",
+                          "labelHidden": true,
+                          "conditionReadonly": "!reportitem.selectedReportItem.uselistoption || !reportitem.editMode()",
+                          "dataFormat": "INTEGER",
+                          "size": "XS",
+                          "maxLength": 2,
+                          "digits": 2
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 123,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 124,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "reportitem.selectedReportItem.listproc",
+                      "label": "global.list.process",
+                      "conditionReadonly": "!reportitem.selectedReportItem.uselistoption && !reportitem.editMode()",
+                      "maxLength": 20
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 125,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 126,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 127,
+                      "type": "COMP_FLD",
+                      "children": [
+                        {
+                          "id": 128,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "reportitem.selectedReportItem.uselistoption2",
+                          "label": "global.use.list.option.2",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!reportitem.editMode()"
+                        },
+                        {
+                          "id": 129,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "reportitem.selectedReportItem.recaloptno2",
+                          "label": "global.list.option.2",
+                          "conditionReadonly": "!reportitem.selectedReportItem.uselistoption2 || !reportitem.editMode()",
+                          "labelHidden": true,
+                          "dataFormat": "INTEGER",
+                          "size": "XS",
+                          "maxLength": 2,
+                          "digits": 2
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 130,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 131,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "reportitem.selectedReportItem.listproc2",
+                      "label": "global.list.process.2",
+                      "conditionReadonly": "!reportitem.selectedReportItem.uselistoption2 && !reportitem.editMode()",
+                      "maxLength": 20
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 132,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 133,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 134,
+                      "type": "COMP_FLD",
+                      "children": [
+                        {
+                          "id": 135,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "reportitem.selectedReportItem.uselistoption3",
+                          "label": "global.use.list.option.3",
+                          "conditionDisabled": "!reportitem.editMode()",
+                          "dataFormat": "LOGICAL"
+                        },
+                        {
+                          "id": 136,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "reportitem.selectedReportItem.recaloptno3",
+                          "label": "global.list.option.3",
+                          "conditionReadonly": "!reportitem.selectedReportItem.uselistoption3 || !reportitem.editMode()",
+                          "labelHidden": true,
+                          "dataFormat": "INTEGER",
+                          "size": "XS",
+                          "maxLength": 2,
+                          "digits": 2
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 137,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 138,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "reportitem.selectedReportItem.listproc3",
+                      "label": "global.list.process.3",
+                      "conditionReadonly": "!reportitem.selectedReportItem.uselistoption3 && !reportitem.editMode()",
+                      "maxLength": 20
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 139,
+          "type": "FIELD_SET",
+          "label": "global.warehouse.options",
+          "children": [
+            {
+              "id": 140,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 141,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 142,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "reportitem.selectedReportItem.pausebeg",
+                      "conditionReadonly": "!reportitem.editMode()",
+                      "label": "global.pause.msg"
+                    },
+                    {
+                      "id": 143,
+                      "type": "FIELD",
+                      "subType": "CHECKBOX",
+                      "model": "reportitem.selectedReportItem.backfl",
+                      "label": "global.background.only",
+                      "conditionDisabled": "!reportitem.editMode()",
+                      "dataFormat": "LOGICAL"
+                    }
+                  ]
+                },
+                {
+                  "id": 144,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 145,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "reportitem.selectedReportItem.whseprtno",
+                      "label": "global.warehouse.print.number",
+                      "conditionReadonly": "!reportitem.editMode()",
+                      "dataFormat": "DECIMAL",
+                      "digits": 1,
+                      "decimals": 2,
+                      "size": "XS"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 146,
+      "type": "FIELD",
+      "subType": "DROP_DOWN",
+      "model": "reportitem.printParameter",
+      "label": "global.print.parameter",
+      "labelHidden": true,
+      "type3": "INLINE",
+      "blankOption": false,
+      "conditionShow": "reportitem.selectedReportItem && !reportitem.newRecord",
+      "children": [
+        {
+          "id": 147,
+          "type": "OPT",
+          "label": "global.ranges",
+          "value": "isRangeSelected"
+        },
+        {
+          "id": 148,
+          "type": "OPT",
+          "label": "global.options",
+          "value": "isOptionSelected"
+        }
+      ]
+    },
+    {
+      "id": 149,
+      "type": "GRID",
+      "model": "reportitem.reportItemRangedataset",
+      "controlRef": "reportitem.reportItemRangeGrid",
+      "conditionShow": "reportitem.printParameter==='isRangeSelected' && reportitem.selectedReportItem && !reportitem.newRecord",
+      "conditionEditable": "reportitem.editMode()",
+      "options": {
+        "showCheckboxes": false,
+        "editable": true,
+        "paging": false
+      },
+      "controls": {
+        "toolbar": {
+          "id": 150,
+          "type": "TOOLBAR",
+          "label": "global.ranges"
+        }
+      },
+      "children": [
+        {
+          "id": 151,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "iNumber",
+          "label": "global.blank.label.string.for.space",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 152,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "rangeNm",
+          "label": "global.range.name",
+          "editable": true
+        },
+        {
+          "id": 153,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "editType1",
+          "label": "global.type",
+          "editable": true,
+          "type3": "SET",
+          "metaGroup": "COMMON",
+          "meta": "EditRangeType",
+          "eventChange": "reportitem.onRangeTypeChange()",
+          "blankOption": false
+        },
+        {
+          "id": 154,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "requireFl",
+          "label": "global.required.flag",
+          "dataFormat": "LOGICAL",
+          "editable": true
+        },
+        {
+          "id": 155,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "rfLength",
+          "label": "global.length",
+          "dataFormat": "INTEGER",
+          "editable": true,
+          "eventChange": "reportitem.onRangeLengthChange()",
+          "maxLength": 2,
+          "decimals": 0,
+          "sign": "+",
+          "digits": 2
+        }
+      ]
+    },
+    {
+      "id": 156,
+      "type": "GRID",
+      "model": "reportitem.reportItemOptiondataset",
+      "controlRef": "reportitem.reportItemOptionGrid",
+      "conditionShow": "reportitem.printParameter==='isOptionSelected' && reportitem.selectedReportItem && !reportitem.newRecord",
+      "conditionEditable": "reportitem.editMode()",
+      "options": {
+        "showCheckboxes": false,
+        "editable": true,
+        "paging": false
+      },
+      "controls": {
+        "toolbar": {
+          "id": 157,
+          "type": "TOOLBAR",
+          "label": "global.options"
+        }
+      },
+      "children": [
+        {
+          "id": 158,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "iNumber",
+          "label": "global.blank.label.string.for.space",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 159,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "optionNm",
+          "label": "global.option.name",
+          "editable": true
+        },
+        {
+          "id": 160,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "editType2",
+          "label": "global.type",
+          "editable": true,
+          "type3": "SET",
+          "metaGroup": "COMMON",
+          "meta": "EditType",
+          "eventChange": "reportitem.onOptionsTypeChange()",
+          "blankOption": false
+        },
+        {
+          "id": 161,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "oRequireFl",
+          "label": "global.required.flag",
+          "dataFormat": "LOGICAL",
+          "editable": true
+        },
+        {
+          "id": 162,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "ofLength",
+          "label": "global.length",
+          "dataFormat": "INTEGER",
+          "editable": true,
+          "eventChange": "reportitem.onOptionsLengthChange()",
+          "maxLength": 2,
+          "sign": "+",
+          "decimals": 0,
+          "digits": 2
+        },
+        {
+          "id": 163,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "optdef",
+          "label": "global.default",
+          "editable": true,
+          "eventChange": "reportitem.onDefaultChange()"
+        },
+        {
+          "id": 164,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "optvaluea",
+          "label": "global.value.1",
+          "editable": true
+        },
+        {
+          "id": 165,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "optvalueb",
+          "label": "global.value.2",
+          "editable": true
+        },
+        {
+          "id": 166,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "optvaluec",
+          "label": "global.value.3",
+          "editable": true
+        },
+        {
+          "id": 167,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "optvalued",
+          "label": "global.value.4",
+          "editable": true
+        },
+        {
+          "id": 168,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "optvaluee",
+          "label": "global.value.5",
+          "editable": true
+        }
+      ]
+    }
+  ]
+}

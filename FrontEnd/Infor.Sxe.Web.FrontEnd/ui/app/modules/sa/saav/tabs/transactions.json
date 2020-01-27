@@ -1,0 +1,356 @@
+{
+  "viewId": "sa-saav-transactions",
+  "id": 1,
+  "type": "VIEW",
+  "children": [
+    {
+      "id": 6,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 7,
+          "type": "COL",
+          "subType": "1/3",
+          "children": [
+            {
+              "id": 12,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "dtl.transCriteria.periodID",
+              "label": "global.vat.reporting.period",
+              "size": "SM",
+              "maxLength": 4
+            },
+            {
+              "id": 14,
+              "type": "COMP_FLD",
+              "children": [
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.transCriteria.periodStartDt",
+                  "label": "global.start.date",
+                  "dataFormat": "DATE",
+                  "required": true
+                },
+                {
+                  "id": 16,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.transCriteria.periodEndDt",
+                  "label": "global.end.date",
+                  "dataFormat": "DATE",
+                  "required": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "type": "COL",
+          "subType": "1/3",
+          "children": [
+            {
+              "id": 18,
+              "type": "FIELD",
+              "subType": "DROP_DOWN",
+              "type3": "SET",
+              "model": "dtl.transCriteria.sourceCd",
+              "label": "global.data.source",
+              "metaGroup": "SA",
+              "meta": "VatTaxSource",
+              "blankOption": true,
+              "blankOptionLabel": "global.all"
+            },
+            {
+              "id": 19,
+              "type": "FIELD",
+              "subType": "DROP_DOWN",
+              "type3": "CODES",
+              "model": "dtl.transCriteria.countryCd",
+              "label": "global.country",
+              "meta": "Country",
+              "blankOption": true,
+              "blankOptionLabel": "global.all"
+            },
+            {
+              "id": 20,
+              "type": "FIELD",
+              "subType": "DROP_DOWN",
+              "type3": "CODES",
+              "model": "dtl.transCriteria.taxGroup",
+              "label": "global.tax.group",
+              "meta": "TaxGroup",
+              "blankOption": true,
+              "blankOptionLabel": "global.all"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "type": "COL",
+          "subType": "1/3",
+          "children": [
+            {
+              "id": 21,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "dtl.transCriteria.recordLimit",
+              "label": "global.record.limit",
+              "dataFormat": "INTEGER",
+              "sign": "+",
+              "digits": 9,
+              "size": "SM"
+            },
+            {
+              "id": 17,
+              "type": "BTN",
+              "subType": "PRI",
+              "label": "global.search",
+              "eventClick": "dtl.transactionSearch()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "GRID",
+      "model": "dtl.transDataset",
+      "controls": {
+        "toolbar": {
+          "id": 9,
+          "type": "TOOLBAR",
+          "label": "global.transactions"
+        }
+      },
+      "children": [
+        {
+          "id": 10,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "periodid",
+          "label": "global.vat.reporting.period"
+        },
+        {
+          "id": 22,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "invoicedt",
+          "label": "global.invoice.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 23,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "returndt",
+          "label": "global.return.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 24,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "type3": "CODES",
+          "model": "taxgroupno",
+          "label": "global.tax.group",
+          "meta": "TaxGroup",
+          "blankOption": false
+        },
+        {
+          "id": 25,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "netamt",
+          "label": "global.sale.amount",
+          "dataFormat": "CURRENCY",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 26,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "taxpct",
+          "label": "vat.rates",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 27,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "taxamt",
+          "label": "vat.amount",
+          "dataFormat": "CURRENCY",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 28,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "grossamt",
+          "label": "global.gross.amount",
+          "dataFormat": "CURRENCY",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 29,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "addonnet",
+          "label": "global.addon.amount",
+          "dataFormat": "CURRENCY",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 30,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "addontaxamt",
+          "label": "global.addon.vat",
+          "dataFormat": "CURRENCY",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 31,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "type3": "SET",
+          "model": "sourcecd",
+          "label": "global.source",
+          "metaGroup": "SA",
+          "meta": "VatTaxSource",
+          "blankOption": false
+        },
+        {
+          "id": 32,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "type3": "CODES",
+          "model": "countrycd",
+          "label": "global.country",
+          "meta": "Country",
+          "blankOption": false
+        },
+        {
+          "id": 33,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "type3": "CODES",
+          "model": "currencyty",
+          "label": "global.currency",
+          "meta": "Currency"
+        },
+        {
+          "id": 34,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "orderno",
+          "label": "global.order.number",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 35,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "ordersuf",
+          "label": "global.order.suffix",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 36,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "custno",
+          "label": "global.customer",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 37,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "shipto",
+          "label": "global.ship.to"
+        },
+        {
+          "id": 40,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "transtype",
+          "label": "global.order.type",
+          "dataFormat": "OeOrderType"
+        },
+        {
+          "id": 38,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "apinvno",
+          "label": "global.repository.apet"
+        },
+        {
+          "id": 39,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "vendno",
+          "label": "global.repository.apsv",
+          "dataFormat": "DECIMAL_TEXT"
+        },
+        {
+          "id": 41,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "transcd",
+          "label": "global.invoice.type",
+          "customFormatter": "dtl.transactionCodeFormatter()"
+        },
+        {
+          "id": 42,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "divno",
+          "label": "global.division",
+          "type3": "CODES",
+          "meta": "Division",
+          "blankOption": false
+        },
+        {
+          "id": 43,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "exceedstoln",
+          "label": "global.tax.tolerance.exceeded",
+          "dataFormat": "BooleanToYesNo"
+        },
+        {
+          "id": 44,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "form625fl",
+          "label": "global.form.625.applies",
+          "dataFormat": "BooleanToYesNo"
+        }
+      ]
+    }
+  ]
+}

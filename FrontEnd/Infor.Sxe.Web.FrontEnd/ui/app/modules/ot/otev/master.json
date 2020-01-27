@@ -1,0 +1,130 @@
+{
+  "viewId": "ot-otev-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.otev",
+          "children": [
+            {
+              "id": 15,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-new-document",
+              "label": "global.new",
+              "stateRef": "^.create",
+              "securityLevel": 4,
+              "conditionDisabled": "base.grid.isAnyRowSelected()"
+            },
+            {
+              "id": 14,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-delete",
+              "label": "global.delete",
+              "eventClick": "mst.delete()",
+              "securityLevel": 5,
+              "conditionDisabled": "!mst.isDeleteEnabled()"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 6,
+              "type": "GRID",
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                },
+                "selectable": "single",
+                "editable": true
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 5,
+                  "type": "TOOLBAR",
+                  "label": "global.vessels",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "vesselno",
+                  "label": "global.vessel.number"
+                },
+                {
+                  "id": 8,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "vessnm",
+                  "label": "global.vessel.name"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "voyageno",
+                  "label": "global.voyage.number"
+                },
+                {
+                  "id": 9,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "stagecd",
+                  "label": "global.stage",
+                  "editable": true,
+                  "type3": "SET",
+                  "metaGroup": "OT",
+                  "meta": "OTMoveToVesselStages",
+                  "blankOption": false,
+                  "eventChange": "mst.vesselProcess()"
+                },
+                {
+                  "id": 10,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "departuredt",
+                  "label": "global.departure.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "arrivaldt",
+                  "label": "global.arrival.dt",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "unloaddt",
+                  "label": "global.unloaded.date",
+                  "dataFormat": "DATE"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

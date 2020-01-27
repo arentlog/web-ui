@@ -1,0 +1,179 @@
+{
+  "viewId": "shared-kits-crossreference",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "kit.isCrossReference()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.cross.reference",
+              "subLabel": "{{kit.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "kitCr.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.submit",
+                  "icon": "icon-save",
+                  "submitForm": true,
+                  "eventValidated": "kitCr.submit()",
+                  "conditionDisabled": "kitCr.xRefGrid.isNoRowSelected()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "kitCr.selectedXRefComponent",
+                          "label": "global.product",
+                          "type3": "MANUAL",
+                          "optionLabelField": "label",
+                          "optionValueField": "value",
+                          "eventChange": "kitCr.xRefComponentSelected()",
+                          "optionsModel": "kitCr.xRefComponents"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 11,
+                  "type": "GRID",
+                  "model": "kitCr.crossReferenceCollection",
+                  "controlRef": "kitCr.xRefGrid",
+                  "options": {
+                    "showCheckboxes": true,
+                    "selectable": "single"
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 12,
+                      "type": "TOOLBAR",
+                      "label": "global.cross.references"
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 13,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prod",
+                      "label": "global.product"
+                    },
+                    {
+                      "id": 15,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "descrip",
+                      "label": "global.description"
+                    },
+                    {
+                      "id": 16,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "notesfl",
+                      "label": "global.notes",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 18,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyavail",
+                      "label": "global.quantity.available",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "unit",
+                      "label": "global.unit"
+                    },
+                    {
+                      "id": 19,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "usage",
+                      "label": "global.usage",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 20,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "surpfl",
+                      "label": "global.surplus",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 21,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "rectype",
+                      "label": "global.type"
+                    },
+                    {
+                      "id": 22,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "catfl",
+                      "label": "global.catalog",
+                      "dataFormat": "LOGICAL"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

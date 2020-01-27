@@ -1,0 +1,215 @@
+{
+  "viewId": "twl-twlecc-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.criteria.coNum",
+                  "label": "global.company.number",
+                  "readonly": true,
+                  "extra": true
+                },
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.whNum",
+                  "label": "global.warehouse",
+                  "readonly": false,
+                  "meta": "TWLWarehouse",
+                  "conditionReadonly": "base.restrictTWLWarehouse",
+                  "required": true
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "RADIO_SET",
+                  "model": "base.criteria.selectionType",
+                  "label": "global.search.type",
+                  "type3": "MANUAL",
+                  "optionValueField": "value",
+                  "optionLabelField": "label",
+                  "optionsModel": "srch.selectionTypes"
+                },
+                {
+                  "id": 17,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.absNum",
+                  "label": "global.item",
+                  "autoFocus": true,
+                  "meta": "TWLItem",
+                  "options": {
+                    "searchParams": {
+                      "whse": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 26,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 18,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.criteria.startCategory",
+                      "label": "global.start.category",
+                      "maxLength": 4,
+                      "size": "XS",
+                      "conditionShow": "base.criteria.selectionType === 'I'"
+                    },
+                    {
+                      "id": 20,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.criteria.endCategory",
+                      "label": "global.end.category",
+                      "maxLength": 4,
+                      "size": "XS",
+                      "conditionShow": "base.criteria.selectionType === 'I'"
+                    }
+                  ]
+                },
+                {
+                  "id": 24,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.itemType",
+                  "label": "global.item.type",
+                  "type3": "MANUAL",
+                  "blankOption": false,
+                  "optionsModel": "srch.itemTypes",
+                  "optionLabelField": "label",
+                  "optionValueField": "value",
+                  "conditionShow": "base.criteria.selectionType === 'I'"
+                },
+                {
+                  "id": 29,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.whZone",
+                  "label": "global.warehouse.zone",
+                  "autoFocus": true,
+                  "meta": "TWLWhZone",
+                  "size": "XS",
+                  "options": {
+                    "searchParams": {
+                      "coNum": {
+                        "type": "REF",
+                        "value": "base.criteria.coNum"
+                      },
+                      "whNum": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      },
+                      "searchType": "all",
+                      "keyField": "all"
+                    }
+                  }
+                },
+                {
+                  "id": 30,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.aisle",
+                  "label": "global.aisle",
+                  "dataFormat": "INTEGER",
+                  "sign": "+",
+                  "digits": 4,
+                  "conditionShow": "base.criteria.selectionType === 'L'"
+                },
+                {
+                  "id": 28,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.binNum",
+                  "label": "global.location",
+                  "autoFocus": true,
+                  "meta": "TWLBinLocation",
+                  "options": {
+                    "searchParams": {
+                      "coNum": {
+                        "type": "REF",
+                        "value": "base.criteria.coNum"
+                      },
+                      "whNum": {
+                        "type": "REF",
+                        "value": "base.criteria.whNum"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 31,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.binHits",
+                  "label": "global.bin.hits",
+                  "dataFormat": "INTEGER",
+                  "sign": "+",
+                  "digits": 7,
+                  "conditionShow": "base.criteria.selectionType === 'L'"
+                },
+                {
+                  "id": 16,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 23,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "base.criteria.abc",
+                      "label": "global.abc",
+                      "type3": "MANUAL",
+                      "blankOption": false,
+                      "optionsModel": "srch.abcTypes",
+                      "optionLabelField": "label",
+                      "optionValueField": "value",
+                      "size": "XS"
+                    }
+                  ]
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

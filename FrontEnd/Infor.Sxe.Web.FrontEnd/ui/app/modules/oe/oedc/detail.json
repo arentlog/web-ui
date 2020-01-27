@@ -1,0 +1,428 @@
+{
+  "viewId": "oe-oedc-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.direct.route.setup",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.oedc.typecd",
+                              "label": "global.type",
+                              "required": true,
+                              "type3": "SET",
+                              "metaGroup": "OE",
+                              "meta": "DirectRouteRecordType",
+                              "conditionReadonly": "!base.isCreate()",
+                              "eventChange": "dtl.setResetTypeDefaults()"
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.oedc.key1",
+                              "label": "global.customer.number",
+                              "meta": "Customer",
+                              "conditionShow": "dtl.oedc.typecd === 'S' || dtl.oedc.typecd === 'C'",
+                              "conditionReadonly": "!base.isCreate()",
+                              "required": false
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.oedc.key2",
+                              "label": "global.ship.to",
+                              "meta": "ShipTo",
+                              "conditionShow": "dtl.oedc.typecd === 'S'",
+                              "conditionReadonly": "!base.isCreate()",
+                              "required": false,
+                              "options": {
+                                "searchParams": {
+                                  "custno": {
+                                    "type": "REF",
+                                    "value": "dtl.oedc.key1"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.oedc.key1",
+                              "label": "global.vendor.number",
+                              "meta": "Vendor",
+                              "conditionShow": "dtl.oedc.typecd === 'F' || dtl.oedc.typecd === 'V'",
+                              "conditionReadonly": "!base.isCreate()",
+                              "required": false
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.oedc.key2",
+                              "label": "global.ship.from",
+                              "meta": "ShipFrom",
+                              "conditionShow": "dtl.oedc.typecd === 'F'",
+                              "conditionReadonly": "!base.isCreate()",
+                              "required": false,
+                              "options": {
+                                "searchParams": {
+                                  "vendno": {
+                                    "type": "REF",
+                                    "value": "dtl.oedc.key1"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.oedc.key1",
+                              "label": "global.warehouse",
+                              "meta": "Warehouse",
+                              "conditionShow": "dtl.oedc.typecd === 'W'",
+                              "conditionReadonly": "!base.isCreate()",
+                              "required": false
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.oedc.searchOrder",
+                              "label": "global.order.number",
+                              "meta": "OEOrders",
+                              "conditionShow": "dtl.oedc.typecd === 'O'",
+                              "conditionReadonly": "!base.isCreate()",
+                              "required": false,
+                              "eventChange": "dtl.orderEntered()"
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.oedc.searchOrder",
+                              "label": "global.purchase.order.number",
+                              "meta": "POOrders",
+                              "conditionShow": "dtl.oedc.typecd === 'P'",
+                              "conditionReadonly": "!base.isCreate()",
+                              "required": false,
+                              "eventChange": "dtl.orderEntered()"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.oedc.searchOrder",
+                              "label": "wt.number",
+                              "meta": "WTOrders",
+                              "conditionShow": "dtl.oedc.typecd === 'T'",
+                              "conditionReadonly": "!base.isCreate()",
+                              "required": false,
+                              "eventChange": "dtl.orderEntered()"
+                            },
+                            {
+                              "id": 41,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 30,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.oedc.longitude",
+                                  "label": "global.longitude",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 4,
+                                  "decimals": 4,
+                                  "conditionShow": "",
+                                  "conditionReadonly": "base.isDetail() || (dtl.oedc.typecd === 'O' || dtl.oedc.typecd === 'P' || dtl.oedc.typecd === 'T')\",",
+                                  "size": "SM",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 4,
+                                    "maximumFractionDigits": 4
+                                  }
+                                },
+                                {
+                                  "id": 29,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.oedc.latitude",
+                                  "label": "global.latitude",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 3,
+                                  "decimals": 4,
+                                  "conditionReadonly": "base.isDetail() || (dtl.oedc.typecd === 'O' || dtl.oedc.typecd === 'P' || dtl.oedc.typecd === 'T')",
+                                  "size": "SM",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 4,
+                                    "maximumFractionDigits": 4
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": 42,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 32,
+                                  "type": "FIELD",
+                                  "subType": "TIME",
+                                  "model": "dtl.oedc.dstarttm",
+                                  "label": "global.start.time",
+                                  "size": "SM",
+                                  "dataFormat": "TIME",
+                                  "subFormat": "hhmm",
+                                  "required": true
+                                },
+                                {
+                                  "id": 33,
+                                  "type": "FIELD",
+                                  "subType": "TIME",
+                                  "model": "dtl.oedc.dendtm",
+                                  "label": "global.end.time",
+                                  "size": "SM",
+                                  "dataFormat": "TIME",
+                                  "subFormat": "hhmm",
+                                  "required": true
+                                }
+                              ]
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.oedc.equipcd",
+                              "label": "global.equipment.code",
+                              "maxLength": 25
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.oedc.fixedtm",
+                              "label": "global.fixed.time",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 3
+                            },
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.oedc.unloadrate",
+                              "label": "global.unload.rate",
+                              "maxLength": 10,
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 10,
+                              "decimals": 0,
+                              "formatOptions": {
+                                "minimumFractionDigits": 0,
+                                "maximumFractionDigits": 0
+                              }
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.oedc.symbol",
+                              "label": "global.symbol",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 2,
+                              "conditionReadonly": "base.isDetail() || (dtl.oedc.typecd === 'O' || dtl.oedc.typecd === 'P' || dtl.oedc.typecd === 'T')"
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.oedc.drsize",
+                              "label": "global.size",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 2,
+                              "conditionReadonly": "base.isDetail() || (dtl.oedc.typecd === 'O' || dtl.oedc.typecd === 'P' || dtl.oedc.typecd === 'T')"
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.oedc.drcolor",
+                              "label": "global.color",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 2,
+                              "conditionReadonly": "base.isDetail() || (dtl.oedc.typecd === 'O' || dtl.oedc.typecd === 'P' || dtl.oedc.typecd === 'T')"
+                            },
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.oedc.fixedlocfl",
+                              "label": "global.fixed.location",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": ""
+                            },
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.oedc.routehold",
+                              "label": "global.route.hold",
+                              "dataFormat": "LOGICAL",
+                              "conditionShow": "dtl.oedc.typecd === 'O'",
+                              "conditionDisabled": ""
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "oedc",
+                        "objectRef": "dtl.oedc",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

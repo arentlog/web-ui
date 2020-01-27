@@ -1,0 +1,240 @@
+{
+  "viewId": "ap-apemb-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.apemb",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 16,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 17,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "FIELD",
+                      "subType": "RADIO_SET",
+                      "model": "base.updaterecord.changetype",
+                      "label": "global.change.type",
+                      "meta": "ChangeByType",
+                      "type3": "SET",
+                      "metaGroup": "GL",
+                      "optionsModel": "base.changetype",
+                      "conditionDisabled": "base.grid.isOneRowSelected()",
+                      "eventChange": "base.changeByValueModified()",
+                      "labelHidden": true
+                    },
+                    {
+                      "id": 21,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.decimalValue",
+                      "label": "global.amount",
+                      "conditionDisabled": "base.grid.isOneRowSelected()",
+                      "eventChange": "base.changeNewValue()",
+                      "dataFormat": "DECIMAL",
+                      "conditionShow": "base.isDecimalVisible()",
+                      "digits": 5,
+                      "decimals": 2,
+                      "labelHidden": true,
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 31,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "base.integerValue",
+                      "label": "global.number",
+                      "dataFormat": "INTEGER",
+                      "conditionShow": "base.isIntegerVisible()",
+                      "conditionDisabled": "base.grid.isOneRowSelected()",
+                      "eventChange": "base.changeNewValue()",
+                      "digits": 9
+                    },
+                    {
+                      "id": 35,
+                      "type": "FIELD",
+                      "subType": "DATE",
+                      "model": "base.dateValue",
+                      "label": "global.date",
+                      "dataFormat": "DATE",
+                      "conditionShow": "base.isDateVisible()",
+                      "conditionDisabled": "base.grid.isOneRowSelected()",
+                      "eventChange": "base.changeNewValue()"
+                    }
+                  ]
+                },
+                {
+                  "id": 29,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 25,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "base.updaterecord.oldvalue",
+                      "label": "global.old.value",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 28,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "base.updaterecord.newvalue",
+                      "label": "global.new.value",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 48,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 49,
+                  "type": "COL",
+                  "subType": "1",
+                  "children": [
+                    {
+                      "id": 50,
+                      "type": "COMP_FLD",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "FIELD",
+                          "subType": "TEXT_AREA",
+                          "model": "base.updaterecord.reason",
+                          "label": "global.reason",
+                          "required": true,
+                          "conditionDisabled": "base.grid.isOneRowSelected()"
+                        },
+                        {
+                          "id": 14,
+                          "type": "BTN",
+                          "subType": "PRI",
+                          "label": "global.update",
+                          "icon": "icon-save",
+                          "conditionDisabled": "base.updateButtonDisabled()",
+                          "eventClick": "mst.update()"
+                        },
+                        {
+                          "id": 15,
+                          "type": "BTN",
+                          "subType": "",
+                          "label": "global.cancel",
+                          "icon": "icon-cancel",
+                          "conditionDisabled": "base.grid.isOneRowSelected()",
+                          "eventClick": "mst.cancel()"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 6,
+              "type": "GRID",
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showCheckboxes": false
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 5,
+                  "type": "TOOLBAR",
+                  "label": "global.maintain.balances",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "changefield",
+                  "label": "global.field.changed"
+                },
+                {
+                  "id": 8,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "oldvalue",
+                  "label": "global.old.value"
+                },
+                {
+                  "id": 9,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "newvalue",
+                  "label": "global.new.value"
+                },
+                {
+                  "id": 10,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "changeoper",
+                  "label": "global.operator"
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "changedate",
+                  "label": "global.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "changetime",
+                  "label": "global.time"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "reason",
+                  "label": "global.change.reason.code"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "viewId": "ic-icia-details",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isDetail()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.icia",
+          "subLabel": "{{dtl.subTitle}}",
+          "controls": {
+            "navBtns": {
+              "id": 4,
+              "type": "BTN_SET",
+              "subType": "TBAR_NAV",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "subType": "ICON",
+                  "label": "special.button.back",
+                  "icon": "icon-left-arrow",
+                  "stateRef": "^.master"
+                }
+              ]
+            }
+          },
+          "children": []
+        },
+        "content": {
+          "id": 6,
+          "type": "MOD_CONTENT",
+          "conditionShow": "false",
+          "children": [
+            {
+              "id": 24,
+              "type": "MESSAGE",
+              "text": "{{base.icia.altnote}}",
+              "icon": "icon-info",
+              "conditionShow": "base.icia.altnote"
+            },
+            {
+              "type": "TAB_SET",
+              "id": 7,
+              "children": [
+                {
+                  "type": "TAB",
+                  "id": 8,
+                  "label": "global.product",
+                  "eventActivated": "dtl.activeTab()",
+                  "conditionShow": "base.whse",
+                  "tabId": "product",
+                  "children": [
+                    {
+                      "id": 13,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "ic/icia/tabs/product.json",
+                      "controller": "IciaMasterProductCtrl as pro"
+                    }
+                  ]
+                },
+                {
+                  "id": 9,
+                  "type": "TAB",
+                  "label": "global.warehouse.availability",
+                  "conditionSelected": "base.activateWhseTab",
+                  "eventActivated": "dtl.activeTab()",
+                  "tabId": "warehouse-availability",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "ic/icia/tabs/warehouse-availability.json",
+                      "controller": "IciaMasterWarehouseAvailabilityCtrl as wha"
+                    }
+                  ]
+                },
+                {
+                  "id": 10,
+                  "type": "TAB",
+                  "label": "global.future",
+                  "eventActivated": "dtl.activeTab()",
+                  "conditionShow": "base.whse",
+                  "tabId": "future",
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "controller": "IciaMasterFutureCtrl as fut",
+                      "viewPath": "ic/icia/tabs/future.json"
+                    }
+                  ]
+                },
+                {
+                  "id": 11,
+                  "type": "TAB",
+                  "label": "global.cross.reference",
+                  "eventActivated": "dtl.activeTab()",
+                  "tabId": "xref",
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "ic/shared/cross-reference/cross-reference.json",
+                      "controller": "IcCrossreferenceCtrl as crf"
+                    }
+                  ]
+                },
+                {
+                  "id": 12,
+                  "type": "TAB",
+                  "label": "global.components",
+                  "eventActivated": "dtl.activeTab()",
+                  "tabId": "components",
+                  "children": [
+                    {
+                      "id": 18,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "controller": "IcComponentsCtrl as cmp",
+                      "viewPath": "ic/shared/components/components.json"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 20,
+      "type": "VIEW_CNTR",
+      "viewName": "detail"
+    },
+    {
+      "id": 22,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsp",
+      "contextValues": {
+        "key1": "base.criteria.prod"
+      }
+    },
+    {
+      "id": 23,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsw",
+      "contextValues": {
+        "key1": "base.criteria.prod",
+        "key2": "base.criteria.whse"
+      }
+    }
+  ]
+}

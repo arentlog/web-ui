@@ -1,0 +1,177 @@
+{
+  "viewId": "po-poet-venderclaims",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.vendor.claims",
+              "subLabel": "{{vc.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "vc.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.submit",
+                  "icon": "icon-save",
+                  "submitForm": true,
+                  "eventValidated": "vc.submit()"
+                },
+                {
+                  "id": 37,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "vc.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 27,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "vc.vendorClaimTotal",
+                  "label": "global.total",
+                  "dataFormat": "CURRENCY"
+                },
+                {
+                  "id": 24,
+                  "type": "GRID",
+                  "model": "base.vendorContractClaims",
+                  "controlRef": "vc.vendorClaimsGrid",
+                  "options": {
+                    "showCheckboxes": true,
+                    "editable": true,
+                    "events": {
+                      "cellchange": "vc.onCellChange()"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 25,
+                      "type": "TOOLBAR",
+                      "label": "global.vendor.claims",
+                      "children": [
+                        {
+                          "id": 35,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "label": "global.use.full.amount",
+                          "conditionDisabled": "!vc.vendorClaimsGrid.isAnyRowSelected()",
+                          "eventClick": "vc.applyClearOrFullAmount(false)"
+                        },
+                        {
+                          "id": 36,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "label": "global.clear.amount",
+                          "conditionDisabled": "!vc.vendorClaimsGrid.isAnyRowSelected()",
+                          "eventClick": "vc.applyClearOrFullAmount(true)"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "contractno",
+                      "label": "global.contract.number"
+                    },
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "model": "startdt",
+                      "label": "global.begin.date",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 29,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "model": "enddt",
+                      "label": "global.end.date",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 30,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "maxqty",
+                      "label": "global.maximum.amount",
+                      "dataFormat": "CURRENCY"
+                    },
+                    {
+                      "id": 31,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "actqty",
+                      "label": "global.actual.amt",
+                      "dataFormat": "CURRENCY"
+                    },
+                    {
+                      "id": 32,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "remamt",
+                      "label": "global.remaining",
+                      "dataFormat": "CURRENCY"
+                    },
+                    {
+                      "id": 33,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "usenow",
+                      "label": "global.use.now",
+                      "dataFormat": "CURRENCY",
+                      "editable": true
+                    },
+                    {
+                      "id": 34,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "pdsvcrecno",
+                      "label": "pdsvc.record.number"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

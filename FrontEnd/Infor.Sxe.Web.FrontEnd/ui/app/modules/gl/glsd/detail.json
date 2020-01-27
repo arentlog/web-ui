@@ -1,0 +1,259 @@
+{
+  "viewId": "gl-glsd-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "conditionShow": "!base.includesTransactions()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.glsd",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": "",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3,
+                  "eventClick": "dtl.edit()"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.checkDeletePermission()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glsd.groupnm",
+                              "label": "global.group.name",
+                              "required": true,
+                              "meta": "GlsdGroup",
+                              "conditionReadonly": "!base.isCreate()",
+                              "autoFocus": true,
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glsd.setno",
+                              "label": "global.set.number",
+                              "meta": "GlsdSetno",
+                              "required": false,
+                              "conditionReadonly": "!base.isCreate()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.glsd.refer",
+                              "label": "global.description",
+                              "conditionReadonly": "base.isDetail()",
+                              "maxLength": 24
+                            },
+                            {
+                              "id": 28,
+                              "type": "BTN",
+                              "subType": "SEC",
+                              "label": "global.transactions",
+                              "conditionDisabled": "!base.isDetail()",
+                              "conditionShow": "!base.isCreate()",
+                              "stateRef": "",
+                              "eventClick": "dtl.openTransactions()"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glsd.glno",
+                              "label": "global.master.g.l.acct.number",
+                              "required": true,
+                              "meta": "GlAccount",
+                              "conditionReadonly": "base.isDetail()",
+                              "eventChange": "dtl.glnoChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.glsd.maxamount",
+                              "label": "global.maximum.amount",
+                              "dataFormat": "DECIMAL",
+                              "digits": 5,
+                              "decimals": 2,
+                              "dataDesc": "dtl.glsd.baltype",
+                              "conditionReadonly": "base.isDetail()"
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "RADIO_SET",
+                              "model": "dtl.glsd.reversefl",
+                              "label": "global.offset",
+                              "labelHidden": true,
+                              "type3": "MANUAL",
+                              "attachUp": true,
+                              "optionsModel": "base.reverseOptions",
+                              "children": [
+                                {
+                                  "id": 26,
+                                  "type": "OPT",
+                                  "label": "global.offset",
+                                  "value": "offset"
+                                },
+                                {
+                                  "id": 27,
+                                  "type": "OPT",
+                                  "label": "global.reverse",
+                                  "value": "reverse"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "glsd",
+                        "objectRef": "dtl.glsd",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "type": "VIEW_CNTR",
+      "viewName": "transactions"
+    }
+  ]
+}

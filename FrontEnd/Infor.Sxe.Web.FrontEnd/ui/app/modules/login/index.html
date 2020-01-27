@@ -1,0 +1,62 @@
+<div id="sign-in-view" class="wrapper busy" data-block-ui="true" initialize>
+   <section class="signin" role="main">
+      <form form-control data-validate-on="submit" style="height: auto;">
+         <svg viewBox="0 0 34 34" class="icon icon-logo" focusable="false" aria-hidden="true" aria-label="Infor Logo">
+            <use xlink:href="#icon-logo"></use>
+         </svg>
+
+         <h1 translate>special.login.title</h1>
+
+         <div class="field" ng-show="showSsoDropdown()">
+            <label for="signin-dropdown-conouser" translate>special.login.user.company</label>
+            <select dropdown id="signin-dropdown-conouser" class="dropdown" ng-model="login.ConoUser" ng-options="login.DisplayValue for login in availableLogin" data-validate="required"> </select>
+         </div>
+
+         <div class="field" ng-show="showStandardLogin()">
+            <label for="signin-userid" translate>special.login.user.id</label>
+            <input type="text" id="signin-userid" ng-model="login.Oper" autocomplete="off" auto-focus maxlength="4" data-validate="required" data-disable-validation="{{showChangePassword() || showSsoDropdown()}}">
+         </div>
+
+         <div class="field" ng-show="showTenant()" >
+            <label for="signin-dropdown-tenant" translate>special.login.tenant</label>
+            <select dropdown id="signin-dropdown-tenant" class="dropdown" ng-model="login.Tenant" ng-options="Tenant for Tenant in availableTenants" data-validate="required" > </select>
+         </div>
+
+         <div class="field" ng-show="showStandardLogin()">
+            <label for="signin-password" translate>special.login.password</label>
+            <input type="password" autocomplete="off" id="signin-password" ng-model="login.Password" maxlength="16" data-validate="required" data-disable-validation="{{showChangePassword() || showSsoDropdown()}}" >
+         </div>
+
+         <div class="field" ng-show="showChangePassword()">
+            <label for="signin-oldpassword" translate>special.login.oldpassword</label>
+            <input type="password" autocomplete="off" id="signin-oldpassword" ng-model="changePasswordBody.OldPassword" maxlength="16" data-validate="required" data-disable-validation="{{showStandardLogin() || showSsoDropdown()}}" >
+         </div>
+
+         <div class="field" ng-show="showChangePassword()">
+            <label for="signin-newpassword" translate>special.login.newpassword</label>
+            <input type="password" autocomplete="off" id="signin-newpassword" ng-model="changePasswordBody.NewPassword" maxlength="16" data-validate="required" data-disable-validation="{{showStandardLogin() || showSsoDropdown()}}" >
+         </div>
+
+         <div class="field" ng-show="showChangePassword()">
+            <label for="signin-retypepassword" translate>special.login.retypepassword</label>
+            <input type="password"  autocomplete="off" id="signin-retypepassword" ng-model="changePasswordBody.ConfirmPassword" maxlength="16" data-validate="required" data-disable-validation="{{showStandardLogin() || showSsoDropdown()}}" >
+         </div>
+
+         <div class="field" ng-show="showStandardLogin()">
+            <label for="signin-company" translate>special.login.company</label>
+            <input type="text" id="signin-company" class="align-left" ng-model="login.Company" autocomplete="off" maxlength="4" data-validate="required" data-disable-validation="{{showChangePassword() || showSsoDropdown()}}">
+         </div>
+
+         <!-- Sign In button -->
+         <button ng-if="!showChangePassword()" class="btn-primary" focus-if="doAutoLogin" focus-delay="500" ng-focus="gotFocus()" type="submit" data-on-validated="attemptLogin()" translate>special.login.sign.in</button>
+
+         <!-- Change Password buttons -->
+         <table ng-if="showChangePassword()">
+            <tr>
+               <td><button class="btn-primary" type="submit" data-on-validated="attemptLogin()" translate>global.ok</button></td>
+               <td><button class="btn-secondary" type="button" ng-click="cancelChangePassword()" translate>global.cancel</button></td>
+            </tr>
+         </table>
+      </form>
+   </section>
+</div>

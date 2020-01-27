@@ -1,0 +1,414 @@
+{
+  "viewId": "pd-pdsp-vendor-vendordetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "conditionShow": "base.isDetail() || base.isEdit()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.vendor.records",
+              "subLabel": "{{vdtl.subtitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "vdtl.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "vdtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4,
+                  "conditionShow": "base.securityLevelPDSV >= 4"
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3,
+                  "conditionShow": "base.securityLevelPDSV >= 3"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "vdtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5,
+                  "conditionShow": "base.securityLevelPDSV >= 5"
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "vdtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "vdtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "vdtl.cancel()",
+                  "conditionDisabled": "base.isDetail()",
+                  "stateRef": ""
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.record.info",
+                  "collapsed": true,
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "vdtl.pdsv.clevelcd",
+                              "label": "global.level",
+                              "required": true,
+                              "type3": "MANUAL",
+                              "optionsModel": "base.levelCodeDetailPDSV",
+                              "blankOption": false,
+                              "eventChange": "vdtl.changeLevelCode()",
+                              "dataFormat": "PdPricingRecordTypeForPDSVToName"
+                            },
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "vdtl.pdsv.vendno",
+                              "label": "global.vendor.number",
+                              "meta": "Vendor",
+                              "contextEntity": "Apsv",
+                              "dataDesc": "vdtl.pdsv.vendorName",
+                              "controls": {}
+                            }
+                          ]
+                        },
+                        {
+                          "id": 108,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "vdtl.pdsv.prod",
+                              "label": "global.product",
+                              "meta": "ProdAll",
+                              "contextEntity": "Icsp",
+                              "dataDesc": "vdtl.pdsv.prodDesc",
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 42,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "conditionDisabled": "!vdtl.pdsv.prod",
+                                  "conditionShow": "base.srchProdFl",
+                                  "stateRef": "icip.detail ({pk: vdtl.pdsv.prod})"
+                                }
+                              }
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "vdtl.pdsv.startdt",
+                              "label": "global.start.date",
+                              "required": true,
+                              "dataFormat": "DATE"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 21,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 23,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 112,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 24,
+                                  "type": "FIELD",
+                                  "subType": "DATE",
+                                  "model": "vdtl.pdsv.enddt",
+                                  "label": "global.end.date",
+                                  "dataFormat": "DATE"
+                                },
+                                {
+                                  "id": 50,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "vdtl.pdsv.statusfl",
+                                  "label": "global.active",
+                                  "dataFormat": "LOGICAL"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 49,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "vdtl.pdsv.reference",
+                              "label": "global.reference",
+                              "maxLength": 24,
+                              "meta": "Reference",
+                              "eventChange": "vdtl.referenceLookupChanged()",
+                              "options": {
+                                "allowEntry": true,
+                                "autoSelect": false
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 26,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 64,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "vdtl.pdsv.vendorpr",
+                              "label": "global.vendor.price",
+                              "type3": "",
+                              "optionsModel": "vdtl.qtyBreakTypeList",
+                              "eventChange": "vdtl.qtyBreakChange()",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 7,
+                              "decimals": 2,
+                              "dataDesc": "vdtl.pdsv.currencyty",
+                              "size": "SM",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 63,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "vdtl.pdsv.buytype",
+                              "label": "global.quantity.break.on",
+                              "type3": "MANUAL",
+                              "optionsModel": "vdtl.buyTypeList",
+                              "blankOption": false,
+                              "eventChange": "vdtl.qtyBreakChange()",
+                              "size": "SM"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 27,
+                  "type": "EXP_AREA",
+                  "label": "global.price.detail",
+                  "children": [
+                    {
+                      "id": 81,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 82,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 84,
+                              "type": "GRID",
+                              "controlRef": "vdtl.grid",
+                              "model": "vdtl.pricegrid",
+                              "options": {
+                                "editable": true,
+                                "showRowCount": false,
+                                "paging": false
+                              },
+                              "controls": {
+                                "toolbar": {
+                                  "id": 110,
+                                  "type": "TOOLBAR",
+                                  "label": "global.levels"
+                                }
+                              },
+                              "children": [
+                                {
+                                  "id": 86,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "seqno",
+                                  "label": "global.level",
+                                  "dataFormat": "INTEGER"
+                                },
+                                {
+                                  "id": 87,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "prcmult",
+                                  "label": "global.price",
+                                  "editable": true,
+                                  "sign": "+",
+                                  "digits": 7,
+                                  "decimals": 5,
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "maximumFractionDigits": 5,
+                                    "minimumFractionDigits": 5
+                                  }
+                                },
+                                {
+                                  "id": 88,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "qtybrk",
+                                  "label": "{{vdtl.qtyBreakLabel}}",
+                                  "editable": true,
+                                  "cellEditable": "vdtl.allowQtyBreakChg()",
+                                  "sign": "+",
+                                  "digits": 7,
+                                  "dataFormat": "INTEGER"
+                                },
+                                {
+                                  "id": 89,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "prcdisc",
+                                  "label": "global.discount",
+                                  "editable": true,
+                                  "digits": 3,
+                                  "decimals": 3,
+                                  "sign": "+",
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 3,
+                                    "maximumFractionDigits": 3
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "pdsv",
+                        "objectRef": "vdtl.pdsv",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 113,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Pdsv",
+      "contextValues": {
+        "key1": "vdtl.pdsv.vendno",
+        "key2": "vdtl.pdsv.prod",
+        "key3": "vdtl.pdsv.startdt"
+      }
+    }
+  ]
+}

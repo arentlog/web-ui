@@ -1,0 +1,371 @@
+{
+  "viewId": "oe-oesf-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "{{base.getGridLabel()}}",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 9,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "base.resetBaseFields()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 28,
+                  "type": "BTN",
+                  "label": "global.new",
+                  "icon": "icon-new-document",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 29,
+                  "type": "BTN",
+                  "label": "global.edit",
+                  "icon": "icon-edit",
+                  "securityLevel": 3,
+                  "conditionDisabled": "!base.isDetail()",
+                  "stateRef": ".edit"
+                },
+                {
+                  "id": 30,
+                  "type": "BTN",
+                  "label": "global.delete",
+                  "icon": "icon-delete",
+                  "securityLevel": 5,
+                  "conditionDisabled": "!base.isDetail()",
+                  "eventClick": "dtl.delete()"
+                },
+                {
+                  "id": 31,
+                  "type": "BTN",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "conditionDisabled": "base.isDetail()",
+                  "eventClick": "dtl.submit()"
+                },
+                {
+                  "id": 32,
+                  "type": "BTN",
+                  "label": "global.reset",
+                  "icon": "icon-reset",
+                  "conditionDisabled": "base.isDetail()",
+                  "eventClick": "dtl.reset()"
+                },
+                {
+                  "id": 27,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "conditionDisabled": "base.isDetail()",
+                  "eventClick": "base.resetBaseFields()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 49,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "conditionShow": "!base.setCustomerRules",
+                  "children": [
+                    {
+                      "id": 50,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 51,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 13,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.oesfaddchg.custno",
+                              "label": "global.customer.number",
+                              "meta": "Customer",
+                              "conditionShow": "dtl.oesfaddchg.recordtype.toLowerCase() === 'cl'",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionRequired": "dtl.oesfaddchg.recordtype.toLowerCase() === 'cl'",
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 44,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "conditionDisabled": "!dtl.oesfaddchg.custno",
+                                  "stateRef": "aric.detail ({pk: dtl.oesfaddchg.custno})"
+                                }
+                              }
+                            },
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.oesfaddchg.autosubmitcd",
+                              "label": "global.auto.submit.ecommerce.fulfillment.orders",
+                              "type3": "SET",
+                              "metaGroup": "OE",
+                              "meta": "FulfillmenteCommerceSubmit",
+                              "conditionShow": "dtl.oesfaddchg.recordtype.toLowerCase() === 'fr'",
+                              "blankOption": false,
+                              "conditionRequired": "dtl.oesfaddchg.recordtype.toLowerCase() === 'fr'",
+                              "conditionReadonly": "!base.isEdit() && !base.isCreate()"
+                            },
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.oesfaddchg.mainwhse",
+                              "label": "global.banner.warehouse",
+                              "meta": "Warehouse",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "dtl.oesfaddchg.recordtype.toLowerCase() === 'wl'",
+                              "conditionRequired": "dtl.oesfaddchg.recordtype.toLowerCase() === 'wl'",
+                              "eventChange": "dtl.warehouseChanged()"
+                            },
+                            {
+                              "id": 69,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.region",
+                              "label": "global.region",
+                              "maxLength": 4,
+                              "conditionShow": "dtl.oesfaddchg.recordtype.toLowerCase() === 'wl'",
+                              "readonly": true,
+                              "size": "SM"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 52,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.oesfaddchg.shipto",
+                              "label": "global.ship.to",
+                              "meta": "ShipTo",
+                              "conditionShow": "dtl.oesfaddchg.recordtype.toLowerCase() === 'cl'",
+                              "conditionReadonly": "!base.isCreate()",
+                              "options": {
+                                "searchParams": {
+                                  "custno": {
+                                    "type": "REF",
+                                    "value": "dtl.oesfaddchg.custno"
+                                  }
+                                }
+                              },
+                              "controls": {
+                                "actionBtn": {
+                                  "id": 45,
+                                  "type": "BTN",
+                                  "subType": "ICON",
+                                  "label": "global.inquire",
+                                  "icon": "icon-drilldown",
+                                  "isLabelTooltip": true,
+                                  "conditionDisabled": "!dtl.oesfaddchg.shipto",
+                                  "stateRef": "aric.detail ({pk: dtl.oesfaddchg.custno, pk2:dtl.oesfaddchg.shipto})"
+                                }
+                              }
+                            },
+                            {
+                              "id": 14,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.oesfaddchg.billingcd",
+                              "label": "global.billing.code",
+                              "type3": "SET",
+                              "metaGroup": "OE",
+                              "meta": "FulfillmentBillingCode",
+                              "blankOption": false,
+                              "conditionShow": "dtl.oesfaddchg.recordtype.toLowerCase() === 'fr' &&  base.isFulfillmentBillingOn",
+                              "conditionRequired": "dtl.oesfaddchg.recordtype.toLowerCase() === 'fr'",
+                              "conditionReadonly": "!base.isEdit() && !base.isCreate()"
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.oesfaddchg.whselistcd",
+                              "label": "global.warehouse.list",
+                              "conditionShow": "dtl.oesfaddchg.recordtype.toLowerCase() === 'wl' && !base.setCopyRecord",
+                              "type3": "SET",
+                              "metaGroup": "OE",
+                              "meta": "FulfillmentWarehouseList",
+                              "blankOption": false,
+                              "conditionReadonly": "!base.isEdit() && !base.isCreate()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 54,
+                  "type": "EXP_AREA",
+                  "label": "global.add.to.list",
+                  "conditionShow": "!base.setCopyRecord",
+                  "children": [
+                    {
+                      "id": 57,
+                      "type": "SWAP_LIST",
+                      "conditionShow": "dtl.oesfaddchg.recordtype.toLowerCase() === 'wl' && dtl.oesfaddchg.whselistcd.toLowerCase() === 'sw'",
+                      "conditionReadonly": "!base.isEdit() && !base.isCreate()",
+                      "children": [
+                        {
+                          "id": 58,
+                          "type": "SWAP_LIST_LIST",
+                          "model": "base.whseList",
+                          "label": "global.all.warehouses",
+                          "labelField": "label",
+                          "valueField": "value"
+                        },
+                        {
+                          "id": 59,
+                          "type": "SWAP_LIST_LIST",
+                          "model": "base.whseSelected",
+                          "label": "global.action.range.add.to.warehouse.list",
+                          "labelField": "label",
+                          "valueField": "value"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 60,
+                      "type": "SWAP_LIST",
+                      "conditionReadonly": "!base.isEdit() && !base.isCreate()",
+                      "conditionShow": "dtl.oesfaddchg.recordtype.toLowerCase() === 'wl' && dtl.oesfaddchg.whselistcd.toLowerCase() === 'rg'",
+                      "children": [
+                        {
+                          "id": 61,
+                          "type": "SWAP_LIST_LIST",
+                          "model": "base.regionList",
+                          "label": "global.regions",
+                          "labelField": "label",
+                          "valueField": "value"
+                        },
+                        {
+                          "id": 62,
+                          "type": "SWAP_LIST_LIST",
+                          "model": "base.regionSelected",
+                          "label": "global.action.range.add.to.region.list",
+                          "labelField": "label",
+                          "valueField": "value"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 63,
+                      "type": "SWAP_LIST",
+                      "conditionReadonly": "!base.isEdit() && !base.isCreate()",
+                      "conditionShow": "dtl.oesfaddchg.recordtype.toLowerCase() === 'wl' && dtl.oesfaddchg.whselistcd.toLowerCase() === 'wg'",
+                      "children": [
+                        {
+                          "id": 64,
+                          "type": "SWAP_LIST_LIST",
+                          "model": "base.groupList",
+                          "label": "global.warehouse.group",
+                          "labelField": "label",
+                          "valueField": "value"
+                        },
+                        {
+                          "id": 65,
+                          "type": "SWAP_LIST_LIST",
+                          "model": "base.groupSelected",
+                          "label": "global.add.group",
+                          "labelField": "label",
+                          "valueField": "value"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 66,
+                      "type": "SWAP_LIST",
+                      "conditionReadonly": "!base.isEdit() && !base.isCreate()",
+                      "conditionShow": "dtl.oesfaddchg.recordtype.toLowerCase() !== 'wl'",
+                      "children": [
+                        {
+                          "id": 67,
+                          "type": "SWAP_LIST_LIST",
+                          "model": "base.rulesList",
+                          "label": "global.rules",
+                          "labelField": "label",
+                          "valueField": "value"
+                        },
+                        {
+                          "id": 68,
+                          "type": "SWAP_LIST_LIST",
+                          "model": "base.rulesSelected",
+                          "label": "global.hierarchy",
+                          "labelField": "label",
+                          "valueField": "value"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 47,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "conditionShow": "!base.setCustomerRules && !base.setCopyRecord",
+                  "children": [
+                    {
+                      "id": 48,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "oesf",
+                        "objectRef": "dtl.oesfaddchg",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

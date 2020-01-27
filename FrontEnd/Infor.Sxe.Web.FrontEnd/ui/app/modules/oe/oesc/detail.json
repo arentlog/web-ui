@@ -1,0 +1,508 @@
+{
+  "viewId": "oe-oesc-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.commission",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 26,
+                  "type": "EXP_AREA",
+                  "label": "global.commission.settings",
+                  "children": [
+                    {
+                      "id": 27,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 28,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.oesc.refer",
+                              "label": "global.reference",
+                              "maxLength": 24,
+                              "meta": "Reference",
+                              "eventChange": "dtl.referenceLookupChanged()",
+                              "options": {
+                                "allowEntry": true,
+                                "autoSelect": false
+                              }
+                            },
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.oesc.steprate",
+                              "label": "global.step.rate",
+                              "dataFormat": "LOGICAL"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 41,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.oesc.interval",
+                              "label": "global.interval",
+                              "type3": "SET",
+                              "metaGroup": "OE",
+                              "meta": "CommissionIntervalsType",
+                              "blankOption": true,
+                              "eventChange": "dtl.changeCommissionData()"
+                            },
+                            {
+                              "id": 43,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.oesc.targettype",
+                              "label": "global.target.type",
+                              "type3": "SET",
+                              "metaGroup": "OE",
+                              "meta": "CommissionTargetType",
+                              "blankOption": true,
+                              "eventChange": "dtl.changeCommissionData()"
+                            },
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.oesc.commbasedon",
+                              "label": "global.based.on",
+                              "type3": "SET",
+                              "metaGroup": "OE",
+                              "meta": "CommissionBasedOnType",
+                              "blankOption": true,
+                              "eventChange": "dtl.changeCommissionData()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 29,
+                  "type": "EXP_AREA",
+                  "label": "{{dtl.expandLabel}}",
+                  "children": [
+                    {
+                      "id": 30,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 44,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.oesc.saleamt1",
+                              "label": "global.month",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionDisabled": "",
+                              "conditionReadonly": "base.isDetail() || (!dtl.oesc.targettype && !dtl.oesc.interval)",
+                              "readonly": false,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 45,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.oesc.saleamt2",
+                              "label": "global.quarter",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionDisabled": "",
+                              "conditionReadonly": "base.isDetail() || (!dtl.oesc.targettype && !dtl.oesc.interval)",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 46,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.oesc.saleamt3",
+                              "label": "global.year",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionDisabled": "",
+                              "conditionReadonly": "base.isDetail() || (!dtl.oesc.targettype && !dtl.oesc.interval)",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 57,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 58,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.salesMonthYear",
+                              "label": "global.last.update",
+                              "maxLength": 5,
+                              "readonly": true
+                            },
+                            {
+                              "id": 59,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.salesQuarterYear",
+                              "label": "global.last.update",
+                              "maxLength": 5,
+                              "readonly": true
+                            },
+                            {
+                              "id": 60,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.salesYear",
+                              "label": "global.last.update",
+                              "maxLength": 4,
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 32,
+                  "type": "EXP_AREA",
+                  "label": "global.commission.earned",
+                  "children": [
+                    {
+                      "id": 33,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 34,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 47,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.oesc.commamt1",
+                              "label": "global.month",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 48,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.oesc.commamt2",
+                              "label": "global.quarter",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 49,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.oesc.commamt3",
+                              "label": "global.year",
+                              "dataFormat": "DECIMAL",
+                              "digits": 9,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 61,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 62,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.commMonthYear",
+                              "label": "global.last.update",
+                              "maxLength": 5,
+                              "readonly": true
+                            },
+                            {
+                              "id": 63,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.commQuarterYear",
+                              "label": "global.last.update",
+                              "maxLength": 5,
+                              "readonly": true
+                            },
+                            {
+                              "id": 64,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.commYear",
+                              "label": "global.last.update",
+                              "maxLength": 4,
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 35,
+                  "type": "EXP_AREA",
+                  "label": "global.breaks",
+                  "children": [
+                    {
+                      "id": 36,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 37,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 50,
+                              "type": "GRID",
+                              "model": "dtl.commissionBreaks",
+                              "controlRef": "dtl.grid",
+                              "options": {
+                                "editable": true
+                              },
+                              "controls": {
+                                "toolbar": {
+                                  "id": 51,
+                                  "type": "TOOLBAR",
+                                  "label": "global.commission.breaks"
+                                }
+                              },
+                              "children": [
+                                {
+                                  "id": 52,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.breaks",
+                                  "model": "seqno",
+                                  "dataFormat": "INTEGER_TEXT"
+                                },
+                                {
+                                  "id": 53,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "targetamt",
+                                  "label": "{{dtl.targetLabel}}",
+                                  "editable": true,
+                                  "digits": 9,
+                                  "decimals": 2,
+                                  "cellEditable": "dtl.isTargetCellEditable()",
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 54,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "commpctout",
+                                  "label": "global.split.outside.percent",
+                                  "editable": true,
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "cellEditable": "dtl.isFirstCellEditable()",
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 55,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "commpctin",
+                                  "label": "global.split.inside.percent",
+                                  "editable": true,
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "cellEditable": "dtl.isFirstCellEditable()",
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 56,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "commpctouto",
+                                  "label": "global.single.percent.only",
+                                  "editable": true,
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "cellEditable": "dtl.isFirstCellEditable()",
+                                  "dataFormat": "DECIMAL",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,574 @@
+{
+  "viewId": "oe-oeet-selectproducts-lineentrychildstates-manualrebate-manualrebatedetails",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "aleMrD.isManualRebateDetails()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.manual.rebate",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 130,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "conditionShow": "aleMrD.isInquiryMode",
+                      "eventClick": "!aleMrD.back()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 93,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.submit",
+                  "icon": "icon-confirm",
+                  "eventClick": "aleMrD.submit()",
+                  "conditionShow": "!aleMrD.isInquiryMode"
+                },
+                {
+                  "id": 94,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "aleMrD.cancel()",
+                  "conditionShow": "!aleMrD.isInquiryMode"
+                },
+                {
+                  "id": 95,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.remove",
+                  "eventClick": "aleMrD.remove()",
+                  "icon": "icon-delete"
+                },
+                {
+                  "id": 127,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.sheet.prices",
+                  "conditionShow": "aleMrD.rebInit.rebcalcty !== '$' && !aleMrD.isInquiryMode",
+                  "eventClick": "aleMrD.sheetPrices()"
+                },
+                {
+                  "id": 128,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.to.sheet.prices",
+                  "conditionShow": "aleMrD.rebInit.rebcalcty.toLowerCase() === 'n' && !aleMrD.isInquiryMode",
+                  "eventClick": "aleMrD.toSheetPrices()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 78,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 79,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 59,
+                          "type": "MESSAGE",
+                          "text": "global.vendor.on.sale",
+                          "icon": "icon-confirm"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 71,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 72,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 77,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleMrD.rebInit.rebrecno",
+                          "label": "global.rebate.record.number"
+                        },
+                        {
+                          "id": 96,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleMrD.selectedManReb.rebsubty",
+                          "label": "global.rebate.sub.type",
+                          "conditionShow": "aleMr.widgetDetailsResults.lSubRebtypefl"
+                        },
+                        {
+                          "id": 136,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleMrD.rebInit.contractlineno",
+                          "label": "global.contract.line.number",
+                          "conditionShow": "aleMrD.rebInit.contractlineokfl"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 73,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 75,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleMrD.selectedManReb.levelcd",
+                          "label": "global.level",
+                          "dataFormat": "PdPricingRecordTypeForPDSRToName"
+                        },
+                        {
+                          "id": 76,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleMrD.selectedManReb.levelkey",
+                          "label": "{{aleMrD.levelKeyLabel}}"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 142,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 138,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleMrD.rebInit.whse",
+                          "label": "global.whse.regn"
+                        },
+                        {
+                          "id": 141,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "aleMrD.rebInit.dropshipty",
+                          "label": "global.drop.ship.type",
+                          "dataFormat": "PdManualRebateDropShipTypeToName"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 131,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 132,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 134,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleMrD.rebInit.custno",
+                          "label": "global.customer.number",
+                          "meta": "Customer",
+                          "readonly": true
+                        },
+                        {
+                          "id": 135,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleMrD.rebInit.shipto",
+                          "label": "global.ship.to",
+                          "conditionShow": "aleMrD.rebInit.shipto !== ''",
+                          "meta": "ShipTo",
+                          "readonly": true,
+                          "options": {
+                            "searchParams": {
+                              "custno": {
+                                "type": "REF",
+                                "value": "aleMrD.rebInit.custno"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 140,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "aleMrD.rebInit.startdt",
+                          "label": "global.start.date",
+                          "dataFormat": "DATE",
+                          "readonly": true
+                        }
+                      ]
+                    },
+                    {
+                      "id": 133,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 137,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleMrD.rebInit.vendno",
+                          "label": "global.vendor.number",
+                          "meta": "Vendor",
+                          "readonly": true
+                        },
+                        {
+                          "id": 144,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "aleMrD.rebInit.currencyty",
+                          "label": "global.currency",
+                          "type3": "CODES",
+                          "meta": "Currency",
+                          "conditionShow": "aleMrD.rebInit.currencyty",
+                          "readonly": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 82,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 83,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 85,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "aleMrD.rebInit.enddt",
+                          "label": "global.end.date",
+                          "dataFormat": "DATE",
+                          "autoFocus": true,
+                          "conditionReadonly": "aleMrD.isInquiryMode"
+                        },
+                        {
+                          "id": 86,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleMrD.rebInit.refer",
+                          "label": "global.reference",
+                          "meta": "Reference",
+                          "conditionReadonly": "aleMrD.isInquiryMode"
+                        },
+                        {
+                          "id": 97,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleMrD.rebInit.contractno",
+                          "label": "global.contract.number",
+                          "eventChange": "aleMrD.contractNumberChanged()",
+                          "conditionReadonly": "aleMrD.isInquiryMode || aleMrD.rebInit.contractlineokfl"
+                        },
+                        {
+                          "id": 91,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "aleMrD.rebInit.manualfl",
+                          "label": "global.manual.rebate",
+                          "disabled": true,
+                          "dataFormat": "LOGICAL"
+                        },
+                        {
+                          "id": 98,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "aleMrD.rebInit.caprebfl",
+                          "label": "global.capitalize.rebate",
+                          "dataFormat": "LOGICAL",
+                          "conditionShow": "aleMrD.selectedManReb.rebatecd.toLowerCase() === 'p'",
+                          "conditionDisabled": "aleMrD.isInquiryMode"
+                        },
+                        {
+                          "id": 92,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "aleMrD.rebInit.contractlineokfl",
+                          "label": "global.use.contract.line.number",
+                          "dataFormat": "LOGICAL",
+                          "conditionShow": "aleMr.aoProduct.pDContractLineNoOptionFl && aleMrD.selectedManReb.rebatecd.toLowerCase() === 's'",
+                          "disabled": true
+                        },
+                        {
+                          "id": 90,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "aleMrD.rebInit.sharefl",
+                          "label": "global.share.rebate",
+                          "dataFormat": "LOGICAL",
+                          "conditionShow": "(aleMrD.rebInit.rebcalcty && aleMrD.rebInit.rebcalcty.toLowerCase() !== 'm') && aleMrD.selectedManReb.rebatecd.toLowerCase() === 's'",
+                          "conditionDisabled": "aleMrD.isInquiryMode || !aleMrD.rebInit.shareokfl"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 84,
+                      "type": "COL",
+                      "subType": "2/3",
+                      "children": [
+                        {
+                          "id": 99,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 87,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "aleMrD.rebInit.rebcalcty",
+                              "label": "global.rebate.calc.type",
+                              "type3": "MANUAL",
+                              "optionsModel": "aleMrD.rebateCalcTypes",
+                              "optionLabelField": "label",
+                              "optionValueField": "value",
+                              "eventChange": "aleMrD.rebateCalcTypeChanged()",
+                              "blankOption": false,
+                              "conditionReadonly": "aleMrD.isInquiryMode"
+                            },
+                            {
+                              "id": 102,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "aleMrD.rebInit.rebatecostty",
+                              "label": "{{aleMrD.rebateCalcTypeDescrip()}}",
+                              "type3": "MANUAL",
+                              "optionsModel": "aleMrD.rebateCostTypes",
+                              "optionLabelField": "label",
+                              "optionValueField": "value",
+                              "conditionShow": "aleMrD.rebInit.rebcalcty === '%' || aleMrD.rebInit.rebcalcty.toLowerCase() === 'n'",
+                              "blankOption": false,
+                              "conditionReadonly": "aleMrD.isInquiryMode"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 104,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 103,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "aleMrD.rebInit.margincostty",
+                              "label": "global.margin.cost",
+                              "type3": "MANUAL",
+                              "optionsModel": "aleMrD.marginCostTypes",
+                              "optionLabelField": "label",
+                              "optionValueField": "value",
+                              "conditionShow": "aleMrD.rebInit.rebcalcty.toLowerCase() === 'm'",
+                              "blankOption": false,
+                              "conditionReadonly": "aleMrD.isInquiryMode"
+                            },
+                            {
+                              "id": 105,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "aleMrD.rebInit.rebdowntoty",
+                              "label": "{{aleMrD.marginCostDescrip()}}",
+                              "type3": "MANUAL",
+                              "optionsModel": "aleMrD.rebateDownToTypes",
+                              "optionLabelField": "label",
+                              "optionValueField": "value",
+                              "conditionShow": "aleMrD.rebInit.rebcalcty.toLowerCase() === 'n'",
+                              "blankOption": false,
+                              "conditionReadonly": "aleMrD.isInquiryMode"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 107,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 106,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "aleMrD.rebInit.pricesheet",
+                              "label": "global.price.sheet",
+                              "meta": "PriceSheet",
+                              "conditionShow": "aleMrD.rebInit.rebcalcty !== '$'",
+                              "conditionReadonly": "aleMrD.isInquiryMode"
+                            },
+                            {
+                              "id": 108,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "aleMrD.rebInit.priceeffectivedate",
+                              "label": "global.sheet.date",
+                              "dataFormat": "DATE",
+                              "conditionShow": "aleMrD.rebInit.rebcalcty !== '$'",
+                              "conditionReadonly": "aleMrD.isInquiryMode"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 109,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 110,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "aleMrD.rebInit.pricesheetto",
+                              "label": "global.to.sheet",
+                              "meta": "PriceSheet",
+                              "conditionShow": "aleMrD.rebInit.rebcalcty.toLowerCase() === 'n'",
+                              "conditionReadonly": "aleMrD.isInquiryMode"
+                            },
+                            {
+                              "id": 111,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "aleMrD.rebInit.priceeffectivedateto",
+                              "label": "global.to.sheet.date",
+                              "dataFormat": "DATE",
+                              "conditionShow": "aleMrD.rebcalcty.toLowerCase() === 'n'",
+                              "conditionReadonly": "aleMrD.isInquiryMode"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 88,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleMrD.rebInit.rebateamt",
+                          "label": "{{aleMrD.rebateAmountPercentLabel}}",
+                          "dataFormat": "CURRENCY",
+                          "digits": 7,
+                          "decimals": 5,
+                          "dataDesc": "aleMrD.rebateAmountUnitPerDescrip()",
+                          "conditionShow": "aleMrD.rebInit.rebcalcty === '$'",
+                          "conditionReadonly": "aleMrD.isInquiryMode",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 112,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleMrD.rebInit.rebatepct",
+                          "label": "{{aleMrD.rebateAmountPercentLabel}}",
+                          "dataFormat": "PERCENT",
+                          "conditionShow": "aleMrD.rebInit.rebcalcty !== '$'",
+                          "digits": 5,
+                          "decimals": 5,
+                          "conditionReadonly": "aleMrD.isInquiryMode",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 117,
+                  "type": "EXP_AREA",
+                  "label": "global.share.rebate.settings",
+                  "conditionShow": "aleMrD.rebInit.shareokfl",
+                  "children": [
+                    {
+                      "id": 118,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 119,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 123,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "aleMrD.rebInit.sharepct",
+                              "label": "global.share.percent",
+                              "dataFormat": "PERCENT",
+                              "decimals": 2,
+                              "digits": 3,
+                              "conditionReadonly": "aleMrD.isInquiryMode"
+                            },
+                            {
+                              "id": 124,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "aleMrD.rebInit.capsellamount",
+                              "label": "global.cap.sell.amount",
+                              "dataFormat": "CURRENCY",
+                              "digits": 9,
+                              "decimals": 2,
+                              "conditionReadonly": "aleMrD.isInquiryMode"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 122,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 125,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "aleMrD.rebInit.capselltypefl",
+                              "label": "global.cap.sell.type",
+                              "type3": "SET",
+                              "blankOption": false,
+                              "metaGroup": "COMMON",
+                              "meta": "AmountPercentType",
+                              "conditionReadonly": "aleMrD.isInquiryMode"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 126,
+      "type": "VIEW_CNTR",
+      "viewName": "priceSheet"
+    }
+  ]
+}

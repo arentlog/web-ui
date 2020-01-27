@@ -1,0 +1,343 @@
+{
+  "viewId": "pd-pdin-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.pdin",
+          "children": [
+            {
+              "id": 10,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.search",
+              "icon": "icon-search",
+              "eventClick": "mst.search()"
+            },
+            {
+              "id": 48,
+              "type": "BTN",
+              "label": "global.delete.payment",
+              "icon": "icon-delete",
+              "securityLevel": 5,
+              "conditionDisabled": "base.grid.isNoRowSelected()",
+              "eventClick": "mst.buttonAction('DP')"
+            },
+            {
+              "id": 49,
+              "type": "BTN",
+              "label": "global.pay.in.full",
+              "icon": "icon-check",
+              "securityLevel": 3,
+              "conditionDisabled": "base.grid.isNoRowSelected()",
+              "eventClick": "mst.buttonAction('PF')"
+            },
+            {
+              "id": 50,
+              "type": "BTN",
+              "label": "global.partial.payment",
+              "icon": "icon-check",
+              "securityLevel": 3,
+              "conditionDisabled": "base.grid.isNoRowSelected()",
+              "eventClick": "mst.buttonAction('PP')"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 30,
+              "type": "EXP_AREA",
+              "label": "global.search.parameters",
+              "children": [
+                {
+                  "id": 31,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 32,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 34,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.criteria.vendno",
+                          "label": "global.vendor.number",
+                          "meta": "Vendor"
+                        },
+                        {
+                          "id": 35,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.criteria.claimno",
+                          "label": "global.claim.number",
+                          "maxLength": 30
+                        },
+                        {
+                          "id": 46,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.criteria.tolexpfl",
+                          "label": "global.tolerance.exception.only",
+                          "dataFormat": "LOGICAL"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 33,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 41,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.criteria.origordno",
+                          "label": "global.original.order.number",
+                          "meta": "OEOrders",
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 42,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.criteria.origordpo",
+                          "label": "global.original.order.po.number",
+                          "maxLength": 22
+                        },
+                        {
+                          "id": 47,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.criteria.statusty",
+                          "label": "global.status",
+                          "blankOption": false,
+                          "type3": "SET",
+                          "metaGroup": "PD",
+                          "meta": "NationalAccountStatus"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 43,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 44,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "base.criteria.invfrdt",
+                              "label": "global.from.inv.date",
+                              "dataFormat": "DATE"
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "base.criteria.invtodt",
+                              "label": "global.to.invoice.date",
+                              "dataFormat": "DATE"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 45,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "base.criteria.paidfrdt",
+                              "label": "global.from.paid.date",
+                              "dataFormat": "DATE"
+                            },
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "base.criteria.paidtodt",
+                              "label": "global.to.paid.date",
+                              "dataFormat": "DATE"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 7,
+              "type": "GRID",
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showDrilldown": true,
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                },
+                "showCheckboxes": true
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 8,
+                  "type": "TOOLBAR",
+                  "label": "global.orders",
+                  "children": []
+                }
+              },
+              "children": [
+                {
+                  "id": 9,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "vendno",
+                  "label": "global.vendor.number",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "eventClick": "mst.onVendorInquiry()"
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "label": "global.order.number",
+                  "model": "orderno",
+                  "eventClick": "mst.orderInquiryHyperlink()"
+                },
+                {
+                  "id": 36,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.claim.number",
+                  "model": "claimno",
+                  "eventClick": "mst.orderInquiryHyperlink()"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.sequence.number",
+                  "model": "seqno",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.status",
+                  "model": "statusty"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.invoice.date",
+                  "model": "invdt",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "label": "global.paid.date",
+                  "model": "paiddt",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totclmamt",
+                  "label": "global.total.claim.amount",
+                  "dataFormat": "CURRENCY",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "totpaidamt",
+                  "label": "global.total.paid.amount",
+                  "dataFormat": "CURRENCY",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "varamt",
+                  "label": "global.variance",
+                  "dataFormat": "CURRENCY",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "varpct",
+                  "label": "global.percent",
+                  "dataFormat": "PERCENT",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "tolexpfl",
+                  "label": "global.tolerance.exception",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "origordno",
+                  "label": "global.original.order.number"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "origcustomer",
+                  "label": "global.customer.name"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "viewId": "twl-twlip-detail-header",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "TAB",
+  "children": [
+    {
+      "id": 55,
+      "type": "TOOLBAR",
+      "label": "",
+      "children": [
+        {
+          "id": 54,
+          "type": "BTN",
+          "subType": "PRI",
+          "label": "global.save",
+          "icon": "icon-save",
+          "securityLevel": 3,
+          "submitForm": true,
+          "eventValidated": "dtl.submit()",
+          "conditionDisabled": "!dtl.rtmst.isUpdateAllowed"
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 57,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 33,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "dtl.rtmst.truckId",
+              "label": "global.trailer",
+              "maxLength": 20
+            },
+            {
+              "id": 35,
+              "type": "FIELD",
+              "subType": "LOOKUP",
+              "model": "dtl.rtmst.carrier",
+              "label": "global.carrier",
+              "maxLength": 20,
+              "meta": "TWLCarrier",
+              "options": {
+                "searchParams": {
+                  "coNum": {
+                    "type": "REF",
+                    "value": "base.criteria.coNum"
+                  },
+                  "whNum": {
+                    "type": "REF",
+                    "value": "base.criteria.whNum"
+                  }
+                }
+              }
+            },
+            {
+              "id": 59,
+              "type": "FIELD",
+              "subType": "TEXT_AREA",
+              "model": "dtl.rtmst.cargoControl",
+              "label": "global.cargo.control",
+              "maxLength": 48,
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": 58,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 60,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "dtl.rtmst.numCartons",
+              "label": "global.number.of.cartons",
+              "digits": 7,
+              "dataFormat": "INTEGER",
+              "sign": "+"
+            },
+            {
+              "id": 63,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "dtl.rtmst.planned",
+              "label": "global.planned.receipt",
+              "dataFormat": "LOGICAL",
+              "conditionDisabled": "dtl.isPOAssigned",
+              "eventChange": "dtl.plannedChanged();"
+            },
+            {
+              "id": 62,
+              "type": "FIELD",
+              "subType": "CHECKBOX",
+              "model": "dtl.rtmst.clearanceRequired",
+              "label": "global.customs.required",
+              "dataFormat": "LOGICAL",
+              "conditionDisabled": "dtl.isPOAssigned || dtl.rtmst.planned"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

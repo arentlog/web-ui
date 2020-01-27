@@ -1,0 +1,139 @@
+{
+  "viewId": "ic-icsd-detail-taxing",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isDetail() || dtl.isTaxingTabReadonly",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.taxing.information",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 5,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsd.statecd",
+                  "label": "global.taxing.state",
+                  "type3": "CODES",
+                  "meta": "State",
+                  "conditionShow": "dtl.taxMethodType.toUpperCase() === 'S'",
+                  "required": false,
+                  "eventChange": "dtl.changeTaxingStateCd()"
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsd.statecd",
+                  "label": "global.state",
+                  "type3": "CODES",
+                  "meta": "Province",
+                  "conditionShow": "dtl.taxMethodType.toUpperCase() === 'V'"
+                },
+                {
+                  "id": 7,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsd.countycd",
+                  "label": "global.county",
+                  "type3": "MANUAL",
+                  "optionLabelField": "descrip",
+                  "optionValueField": "countycd",
+                  "optionsModel": "dtl.taxingCounties",
+                  "conditionShow": "dtl.taxMethodType.toUpperCase() === 'S'",
+                  "eventChange": "dtl.changeTaxingCountyCd()",
+                  "conditionReadonly": "!dtl.icsd.statecd || base.isDetail() || dtl.isTaxingTabReadonly"
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsd.statecd",
+                  "label": "global.province",
+                  "type3": "CODES",
+                  "conditionShow": "dtl.taxMethodType.toUpperCase() === 'G'",
+                  "meta": "Province",
+                  "eventChange": "dtl.changeTaxingStateCd()"
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsd.citycd",
+                  "label": "global.city",
+                  "type3": "MANUAL",
+                  "optionLabelField": "descrip",
+                  "optionValueField": "citycd",
+                  "optionsModel": "dtl.taxingCities",
+                  "conditionShow": "dtl.taxMethodType.toUpperCase() === 'S'",
+                  "eventChange": "dtl.changeTaxingCityCd()",
+                  "conditionReadonly": "!dtl.icsd.countycd || base.isDetail() || dtl.isTaxingTabReadonly"
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsd.taxauth",
+                  "label": "global.authority",
+                  "type3": "MANUAL",
+                  "optionLabelField": "descrip",
+                  "optionValueField": "taxauth",
+                  "optionsModel": "dtl.taxingAuthorities",
+                  "conditionShow": "dtl.taxMethodType.toUpperCase() === 'G'"
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsd.other1cd",
+                  "label": "global.other.1",
+                  "type3": "MANUAL",
+                  "optionLabelField": "descrip",
+                  "optionValueField": "othercd",
+                  "optionsModel": "dtl.taxingOthers",
+                  "conditionShow": "dtl.taxMethodType.toUpperCase() === 'S'",
+                  "conditionReadonly": "!dtl.icsd.citycd || base.isDetail() || dtl.isTaxingTabReadonly"
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsd.other2cd",
+                  "label": "global.other.2",
+                  "type3": "MANUAL",
+                  "optionLabelField": "descrip",
+                  "optionValueField": "othercd",
+                  "optionsModel": "dtl.taxingOthers",
+                  "conditionShow": "dtl.taxMethodType.toUpperCase() === 'S'",
+                  "conditionReadonly": "!dtl.icsd.citycd || base.isDetail() || dtl.isTaxingTabReadonly"
+                },
+                {
+                  "id": 17,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icsd.spectaxcd",
+                  "label": "global.special.tax.code",
+                  "type3": "SET",
+                  "metaGroup": "OE",
+                  "meta": "SpecialTaxCodeTypes",
+                  "conditionShow": "dtl.isSpecialTaxCodeEnabled && (dtl.taxMethodType.toUpperCase() === 'S' || dtl.taxMethodType.toUpperCase() === 'G');"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

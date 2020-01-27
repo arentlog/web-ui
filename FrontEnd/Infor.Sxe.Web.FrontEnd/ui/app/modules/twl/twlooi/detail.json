@@ -1,0 +1,202 @@
+{
+  "viewId": "twl-twlooi-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 12,
+      "type": "FORM",
+      "conditionShow": "base.isDetail()",
+      "children": [
+        {
+          "id": 2,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 3,
+              "type": "TOOLBAR",
+              "label": "title.twlooi",
+              "subLabel": "{{dtl.subTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 4,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 5,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 18,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-comment",
+                  "label": "global.comments",
+                  "securityLevel": 3,
+                  "eventClick": "dtl.viewComments()",
+                  "conditionShow": "dtl.isCommentsVisible"
+                }
+              ]
+            },
+            "content": {
+              "id": 6,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "type": "TAB_SET",
+                  "id": 7,
+                  "children": [
+                    {
+                      "type": "TAB",
+                      "id": 8,
+                      "label": "global.header",
+                      "tabId": "header",
+                      "children": [
+                        {
+                          "id": 9,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "twl/twlooi/tabs/header.json",
+                          "controller": "TwlooiDetailHeaderCtrl as hdr"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 14,
+                      "type": "TAB",
+                      "label": "global.lines",
+                      "conditionSelected": "dtl.showLinesTabFirst",
+                      "tabId": "lines",
+                      "children": [
+                        {
+                          "id": 17,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "twl/twlooi/tabs/lines.json",
+                          "controller": "TwlooiDetailLineCtrl as lines"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 15,
+                      "type": "TAB",
+                      "label": "global.cartons",
+                      "conditionShow": "dtl.order.isCartons",
+                      "tabId": "cartons",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "twl/twlooi/tabs/cartons.json",
+                          "controller": "TwlooiCartonInquiryCtrl as dtlc"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 20,
+                      "type": "TAB",
+                      "label": "global.transactions",
+                      "tabId": "transactions",
+                      "children": [
+                        {
+                          "id": 21,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "twl/twlooi/tabs/transactions.json",
+                          "controller": "TwlooiTransactionsCtrl as trans"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 22,
+                      "type": "TAB",
+                      "label": "global.manifest",
+                      "conditionShow": "dtl.manifests",
+                      "tabId": "manifest",
+                      "children": [
+                        {
+                          "id": 23,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "controller": "TwlooiManifestInquiryCtrl as dtlm",
+                          "viewPath": "twl/twlooi/tabs/manifests.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 24,
+                      "type": "TAB",
+                      "label": "global.availability",
+                      "tabId": "availability",
+                      "children": [
+                        {
+                          "id": 25,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "twl/twlooi/tabs/availability.json",
+                          "controller": "TwlooiDetailAvailabilityCtrl as dtlavail"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 26,
+                      "type": "TAB",
+                      "label": "global.predictive.shipping",
+                      "tabId": "predictive-shipping",
+                      "children": [
+                        {
+                          "id": 27,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "twl/twlooi/tabs/predictive.json",
+                          "controller": "TwlooiDetailPredictiveShippingCtrl as dtlpred"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 28,
+                      "type": "TAB",
+                      "label": "global.wave",
+                      "conditionShow": "dtl.order.batch",
+                      "tabId": "wave",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "twl/twlooi/tabs/wave.json",
+                          "controller": "TwlooiDetailWaveCtrl as dtlwave"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "type": "VIEW_CNTR",
+      "viewName": "subDetailViewContainer"
+    },
+    {
+      "id": 19,
+      "type": "VIEW_CNTR",
+      "viewName": "notesComments"
+    }
+  ]
+}

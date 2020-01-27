@@ -1,0 +1,245 @@
+{
+  "viewId": "ic-icean-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "conditionShow": "base.isJournalState()",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isMaster()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.icean",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 6,
+              "type": "GRID",
+              "model": "base.dataset",
+              "controlRef": "base.grid",
+              "options": {
+                "showCheckboxes": true,
+                "selectable": "multiple",
+                "showDrilldown": true,
+                "events": {
+                  "drilldown": "mst.drilldown()",
+                  "selected": "mst.rowSelected()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 5,
+                  "type": "TOOLBAR",
+                  "label": "global.adjust.non-stock.direct.order",
+                  "children": [
+                    {
+                      "id": 27,
+                      "type": "BTN",
+                      "label": "global.adjust",
+                      "conditionDisabled": "!base.grid.isOneRowSelected()",
+                      "eventClick": "mst.adjust('A')",
+                      "securityLevel": 3
+                    },
+                    {
+                      "id": 28,
+                      "type": "BTN",
+                      "label": "global.write.off",
+                      "conditionDisabled": "!base.grid.isOneRowSelected()",
+                      "eventClick": "mst.adjust('W')",
+                      "securityLevel": 3
+                    },
+                    {
+                      "id": 29,
+                      "type": "BTN",
+                      "label": "global.inventory",
+                      "icon": "icon-inventory",
+                      "conditionDisabled": "!base.grid.isOneRowSelected()",
+                      "eventClick": "mst.inventory('I')",
+                      "securityLevel": 3
+                    },
+                    {
+                      "id": 30,
+                      "type": "BTN",
+                      "label": "global.mass.update",
+                      "conditionDisabled": "!mst.canMassUpdateEnabled",
+                      "eventClick": "mst.inventory('M')",
+                      "securityLevel": 3
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "prod",
+                  "label": "global.product",
+                  "eventClick": "mst.poInquiryHyperlink()"
+                },
+                {
+                  "id": 8,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prodnote"
+                },
+                {
+                  "id": 9,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whse",
+                  "label": "global.warehouse"
+                },
+                {
+                  "id": 10,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "prodcat",
+                  "label": "global.category"
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "order",
+                  "label": "global.order.number",
+                  "eventClick": "mst.orderInquiryHyperlink()"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "vendno",
+                  "label": "global.vendor.number",
+                  "dataFormat": "DECIMAL_TEXT"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "jrnlno",
+                  "label": "global.journal.number",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "disptypecd",
+                  "label": "global.type"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "opendt",
+                  "label": "global.date.opened",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "closedt",
+                  "label": "global.date.closed",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "module",
+                  "label": "global.module"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "closety",
+                  "label": "global.closed"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "activefl",
+                  "label": "global.active",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "binloc1",
+                  "label": "global.default.bin.location",
+                  "dataFormat": "BinLoc"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "tiedqty",
+                  "label": "global.tied.qty",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "tiedval",
+                  "label": "global.tied.val",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "availqty",
+                  "label": "global.avail.qty",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 26,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "availval",
+                  "label": "global.avail.val",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 31,
+      "type": "VIEW_CNTR",
+      "viewName": "inventoryView"
+    }
+  ]
+}

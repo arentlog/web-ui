@@ -1,0 +1,276 @@
+{
+  "viewId": "va-vasp-lineitems-create",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SUB_DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.includesLineItemsCreate()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "va.setup.product.defaults.add.va.line",
+              "subLabel": "global.new",
+              "controls": {
+                "navBtns": {
+                  "id": 30,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 61,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "linecr.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 37,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "eventClick": "",
+                  "submitForm": true,
+                  "eventValidated": "linecr.submit()"
+                },
+                {
+                  "id": 39,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "icon": "icon-reset",
+                  "eventClick": "linecr.reset()"
+                },
+                {
+                  "id": 38,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "linecr.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 62,
+                  "type": "EXP_AREA",
+                  "label": "global.details",
+                  "children": [
+                    {
+                      "id": 63,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 64,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 66,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "linecr.vaspLineAdd.groupprodty",
+                              "label": "global.entry.type",
+                              "type3": "SET",
+                              "metaGroup": "VA",
+                              "meta": "VaLinesEntryType",
+                              "conditionDisabled": "!linecr.radioBtnsEnabled",
+                              "blankOption": false
+                            }
+                          ]
+                        },
+                        {
+                          "id": 65,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 69,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "linecr.vaspLineAdd.groupnm",
+                              "label": "global.group.name",
+                              "meta": "KitGroup",
+                              "conditionShow": "linecr.vaspLineAdd.groupprodty === 1"
+                            },
+                            {
+                              "id": 67,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "linecr.vaspLineAdd.nonstockty",
+                              "label": "global.line.type",
+                              "type3": "SET",
+                              "metaGroup": "VA",
+                              "meta": "NonStockType",
+                              "blankOption": false,
+                              "conditionShow": "linecr.vaspLineAdd.groupprodty === 2",
+                              "eventChange": "linecr.nonStockTypeChanged()"
+                            },
+                            {
+                              "id": 68,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "linecr.vaspLineAdd.shipprod",
+                              "label": "global.product",
+                              "meta": "ProdAll",
+                              "conditionShow": "linecr.vaspLineAdd.groupprodty === 2",
+                              "eventChange": "linecr.leaveField('shipprod')",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 70,
+                  "type": "EXP_AREA",
+                  "label": "global.extend.details",
+                  "children": [
+                    {
+                      "id": 71,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 72,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 74,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "linecr.vaspLineAdd.qtybasetotfl",
+                              "label": "global.quantity.based.on.total",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 76,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "linecr.vaspLineAdd.qtyneeded",
+                              "label": "global.quantity.needed",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "decimals": 2,
+                              "digits": 8,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 78,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "linecr.vaspLineAdd.unit",
+                              "label": "global.unit",
+                              "meta": "StockingUnit",
+                              "conditionShow": "linecr.vaspLineAdd.groupprodty === 2",
+                              "eventChange": "linecr.leaveField('unit')",
+                              "options": {
+                                "searchParams": {
+                                  "prod": {
+                                    "type": "REF",
+                                    "value": "linecr.vaspLineAdd.shipprod"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 73,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 75,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "linecr.vaspLineAdd.lgthcompfl",
+                              "label": "global.variable.length.component",
+                              "dataFormat": "LOGICAL",
+                              "conditionShow": "linecr.detailFieldsVisible"
+                            },
+                            {
+                              "id": 77,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "linecr.vaspLineAdd.scrapfctr",
+                              "label": "global.scrap.factor.percent",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "decimals": 2,
+                              "digits": 3,
+                              "conditionShow": "linecr.detailFieldsVisible",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 79,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "linecr.vaspLineAdd.cutoffty",
+                              "label": "global.cutoff",
+                              "type3": "SET",
+                              "metaGroup": "VA",
+                              "meta": "CutOffType",
+                              "blankOption": false,
+                              "conditionShow": "linecr.detailFieldsVisible"
+                            },
+                            {
+                              "id": 82,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "linecr.vaspLineAdd.cutofflength",
+                              "label": "global.cutoff.length",
+                              "dataFormat": "DECIMAL",
+                              "conditionShow": "linecr.detailFieldsVisible",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 83,
+      "type": "VIEW_CNTR",
+      "viewName": "nonstock"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+<div class="contextual-action-panel" initialize>
+   <div class="modal-content">
+      <div class="modal-header">
+         <div class="toolbar">
+            <div class="title">
+               <span translate>wysiwyg.edit.control</span>
+            </div>
+            <div class="buttonset">
+               <button class="btn" type="button" ng-click="base.applyEdit()">
+                  <svg class="icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon-confirm"></use></svg>
+                  <span translate>global.ok</span>
+               </button>
+               <button class="btn" type="button" ng-click="base.cancelEdit()">
+                  <svg class="icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon-cancel"></use></svg>
+                  <span translate>global.cancel</span>
+               </button>
+            </div>
+         </div>
+      </div>
+
+      <div class="modal-body-wrapper">
+         <div class="modal-body" style="min-width: 450px;">
+
+            <!-- Warning messages -->
+            <div class="row">
+               <div class="twelve columns">
+                  <div ng-if="base.change.extra" class="message" style="padding-top: 2px;">
+                     <svg class="icon icon-alert"><use xlink:href="#icon-alert"></use></svg><span translate>wysiwyg.excluded.warning</span>
+                  </div>
+                  <div ng-if="base.isLabelDynamic" class="message" style="padding-top: 2px;">
+                     <svg class="icon icon-alert"><use xlink:href="#icon-alert"></use></svg><span translate>wysiwyg.dynamic.label.warning</span>
+                  </div>
+               </div>
+            </div>
+
+            <div class="row">
+               <div class="six columns">
+                  <!-- Default Label -->
+                  <div class="field">
+                     <label class="inline">
+                        <span class="label-text" translate>global.label</span>
+                        <input type="text" ng-model="base.defaultLabel" readonly="readonly" />
+                     </label>
+                  </div>
+
+                  <!-- Custom Label -->
+                  <div class="field">
+                     <label class="inline">
+                        <span class="label-text" translate>wysiwyg.custom.label</span>
+                        <input type="text" ng-model="base.change.label" ng-readonly="base.isLabelDynamic || base.isType(['CHART', 'CUSTOM', 'GRID', 'IMAGE'])" ng-change="base.deleteIfBlank('label')" />
+                     </label>
+                  </div>
+               </div>
+
+               <div class="six columns">
+                  <!-- Size -->
+                  <div class="field" ng-show="base.isSizeAllowed()">
+                     <label class="label inline inline-dropdown">
+                        <span class="label-text" translate>wysiwyg.size</span>
+                        <select dropdown class="dropdown dropdown-sm" ng-model="base.change.size">
+                           <option value="XS" translate>wysiwyg.size.extra.small</option>
+                           <option value="SM" translate>wysiwyg.size.small</option>
+                           <option value="MD" translate>wysiwyg.size.medium</option>
+                           <option value="LG" translate>wysiwyg.size.large</option>
+                           <option value="FULL" ng-show="base.isFieldType(['TEXT_AREA'])" translate>wysiwyg.size.full.width</option>
+                        </select>
+                     </label>
+                  </div>
+
+                  <div class="compound-field">
+                     <!-- Width (Grid Column) -->
+                     <div class="field" ng-show="base.isType(['GRID_COL'])">
+                        <label class="inline">
+                           <span class="label-text" translate>wysiwyg.width</span>
+                           <input type="text" class="input-xs" ng-model="base.change.width" field-format="INTEGER" data-digits="4" data-sign="+" />
+                        </label>
+                     </div>
+
+                     <!-- Default Sort (Grid Column) -->
+                     <div class="field" ng-show="base.isType(['GRID_COL'])">
+                        <label class="label inline inline-dropdown">
+                           <span class="label-text" translate>wysiwyg.default.sort</span>
+                           <select dropdown class="dropdown dropdown-sm" ng-model="base.change.defaultSort" is-readonly="base.control.sortable === false">
+                              <option value=""></option>
+                              <option value="asc" translate>global.ascending</option>
+                              <option value="desc" translate>global.descending</option>
+                           </select>
+                        </label>
+                     </div>
+                  </div>
+
+                  <!-- Auto Focus -->
+                  <div class="field" ng-show="base.isAutoFocusAllowed()">
+                     <label class="inline inline-checkbox checkbox-label">
+                        <input type="checkbox" class="checkbox" ng-model="base.change.autoFocus" />
+                        <span class="label-text" translate>wysiwyg.auto.focus</span>
+                     </label>
+                  </div>
+
+                  <!-- Hidden (extra flag) -->
+                  <div class="field" ng-show="base.isHiddenAllowed()">
+                     <label class="inline inline-checkbox checkbox-label">
+                        <input type="checkbox" class="checkbox" ng-model="base.change.extra" ng-disabled="base.isFieldRequired" />
+                        <span class="label-text" translate>wysiwyg.hidden</span>
+                     </label>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

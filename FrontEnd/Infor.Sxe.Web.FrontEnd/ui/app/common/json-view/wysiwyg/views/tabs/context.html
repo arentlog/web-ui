@@ -1,0 +1,68 @@
+<div class="row" initialize>
+   <div class="one-third column">
+      <fieldset>
+         <legend>Entity</legend>
+
+         <!-- Context Entity -->
+         <div class="field" ng-show="!isFieldType('LOOKUP')">
+            <label class="inline">
+               <span class="label-text">Context Entity</span>
+               <select dropdown class="dropdown" ng-model="activeControl.contextEntity" ng-change="contextEntityChanged(); deleteIfBlank('contextEntity');">
+                  <option value=""></option>
+                  <option ng-repeat="opt in ::contextEntityList" ng-value="opt.value">{{opt.label}}</option>
+               </select>
+            </label>
+         </div>
+
+         <!-- Readonly Display of Entity (lookup fields have entity defined on lookup type) -->
+         <div class="field" ng-show="isFieldType('LOOKUP')" title="Lookup fields have the context entity defined on the lookup type in the lookups.js file.">
+            <label class="inline">
+               <span class="label-text">Context Entity</span>
+               <input type="text" ng-model="contextEntity.displayName" readonly="readonly" />
+            </label>
+         </div>
+      </fieldset>
+   </div>
+
+   <!-- Key Values -->
+   <div class="one-third column">
+      <fieldset>
+         <legend>Key Values</legend>
+         <context-key-fields data-field-list="contextEntity.keyFields" />
+      </fieldset>
+   </div>
+
+   <!-- Options -->
+   <div class="one-third column">
+      <fieldset>
+         <legend>Options</legend>
+
+         <!-- Deactivated -->
+         <div class="compound-field">
+            <div class="field" ng-show="!isString(activeControl.contextOptions.deactivated)" title="Deactivate this field from publishing context info. This should normally be left as Default.">
+               <label class="label inline">
+                  <span class="label-text">Deactivated</span>
+                  <select dropdown class="dropdown dropdown-sm" ng-model="activeControl.contextOptions.deactivated" ng-options="opt.value as opt.label for opt in yesNoDefaultConditionOptions" data-is-readonly="!contextEntity"></select>
+               </label>
+            </div>
+
+            <!-- Deactivated Condition (show when is a string) -->
+            <div class="field" ng-show="isString(activeControl.contextOptions.deactivated)" title="Deactivate this field from publishing context info (i.e. base.isCreate()).">
+               <label class="inline">
+                  <span class="label-text">Deactivated Condition</span>
+                  <input type="text" ng-model="activeControl.contextOptions.deactivated" ng-change="forceDeleteIfBlank('contextOptions.deactivated')" ng-model-options='{"updateOn": "blur"}' />
+               </label>
+            </div>
+         </div>
+         
+         <!-- Override Drillback Lookups and Context Fields -->
+         <div class="field" title="Override the default drillback state">
+            <label class="inline">
+               <span class="label-text">Override Drillback</span>
+               <input type="text" ng-model="activeControl.contextOptions.overrideDrillBack" ng-change="deleteIfBlank('contextOptions.overrideDrillBack')" />
+            </label>
+         </div>
+
+      </fieldset>
+   </div>
+</div>

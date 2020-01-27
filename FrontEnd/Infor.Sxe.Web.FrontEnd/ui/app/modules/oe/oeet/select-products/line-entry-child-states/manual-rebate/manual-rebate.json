@@ -1,0 +1,538 @@
+{
+  "viewId": "oe-oeet-selectproducts-lineentrychildstates-manualrebate-manualrebate",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ale.isManualRebate()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.manual.rebate",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "",
+                      "label": "special.button.back",
+                      "stateRef": "^"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 45,
+                  "type": "BTN",
+                  "label": "global.search",
+                  "icon": "icon-search",
+                  "eventClick": "aleMr.search()"
+                },
+                {
+                  "id": 46,
+                  "type": "BTN",
+                  "label": "global.create",
+                  "icon": "icon-new-document",
+                  "securityLevel": 4,
+                  "eventClick": "aleMr.create()",
+                  "conditionDisabled": "aleMr.selectedLevel === 'all'"
+                },
+                {
+                  "id": 48,
+                  "type": "BTN",
+                  "label": "global.reset",
+                  "icon": "icon-reset",
+                  "eventClick": "aleMr.reset()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 24,
+                  "type": "EXP_AREA",
+                  "label": "global.search",
+                  "conditionCollapsed": "aleMr.isSearchCollapsed",
+                  "conditionShow": "aleMr.isSearchVisible",
+                  "children": [
+                    {
+                      "id": 25,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 26,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "aleMr.selectedLevel",
+                              "label": "global.level",
+                              "autoFocus": true,
+                              "type3": "SET",
+                              "metaGroup": "COMMON",
+                              "meta": "RebateLevelTypes",
+                              "blankOption": false,
+                              "eventChange": "aleMr.rebateLevelChanged()",
+                              "blankOptionLabel": "global.select.level",
+                              "required": true
+                            },
+                            {
+                              "id": 58,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "self.recordNumber",
+                              "label": "global.pd.record.number",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 8,
+                              "conditionShow": "aleMr.widgetResults.lPDRecnofl",
+                              "conditionReadonly": "aleMr.selectedLevel === 'all' && (aleMr.selectedLevel !== 'c0' || aleMr.selectedLevel !== 'v0' || aleMr.selectedLevel !== 'r0')"
+                            },
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "aleMr.criteria.rebtype",
+                              "label": "global.rebate.type",
+                              "meta": "ProductRebateType",
+                              "readonly": true,
+                              "conditionShow": "aleMr.widgetResults.lRebTypefl"
+                            },
+                            {
+                              "id": 72,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "aleMr.widgetResults.lUseContractvfl",
+                              "label": "global.use.rebate.sub.type.or.contract.line.number",
+                              "conditionShow": "aleMr.widgetResults.lUseRebSubTypefl",
+                              "eventChange": "aleMr.getWidgetResults()",
+                              "type3": "SET",
+                              "metaGroup": "OE",
+                              "meta": "ManualRebateUseSubOrContract",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "aleMr.criteria.rebsubty",
+                              "label": "global.rebate.sub.type",
+                              "meta": "ProductRebateSubType",
+                              "conditionShow": "aleMr.widgetResults.lSubRebtypefl"
+                            },
+                            {
+                              "id": 44,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "aleMr.criteria.contractno",
+                              "label": "global.contract.number",
+                              "conditionShow": "aleMr.widgetResults.lContractNofl",
+                              "maxLength": 30
+                            },
+                            {
+                              "id": 43,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "aleMr.criteria.contractline",
+                              "label": "global.contract.line.number",
+                              "conditionShow": "aleMr.widgetResults.lContractlineno && aleMr.criteria.rebatecd === 's' && aleMr.aoProduct.pDContractLineNoOptionFl",
+                              "dataFormat": "INTEGER_TEXT",
+                              "sign": "+",
+                              "eventChange": "ale.getWidgetResults()",
+                              "digits": 30
+                            },
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "aleMr.criteria.startdt",
+                              "label": "global.start.date",
+                              "dataFormat": "DATE",
+                              "conditionShow": "aleMr.widgetResults.lStartdtfl"
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "aleMr.criteria.shiptype",
+                              "label": "global.ship.type",
+                              "type3": "SET",
+                              "metaGroup": "PD",
+                              "meta": "RebatesDropShipTypes",
+                              "blankOption": false,
+                              "conditionShow": "aleMr.widgetResults.lShiptypefl",
+                              "readonly": true
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "aleMr.criteria.whse",
+                              "label": "global.warehouse",
+                              "meta": "Warehouse",
+                              "conditionShow": "aleMr.widgetResults.lWhsefl && aleMr.aoProduct.pdrebwhsefl",
+                              "eventChange": "aleMr.warehouseChanged()"
+                            },
+                            {
+                              "id": 64,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "aleMr.rebateRegion",
+                              "label": "global.rebate.region",
+                              "conditionShow": "aleMr.widgetResults.lWhsefl && aleMr.aoProduct.pdrebwhsefl && aleMr.aoProduct.pDRebateByRegionFl && (aleMr.selectedLevel !== 'all' && aleMr.selectedLevel !== 'c0' && aleMr.selectedLevel !== 'v0' && aleMr.selectedLevel !== 'r0') && (aleMr.selectedLevel !== 'c2l' && aleMr.selectedLevel !== 'r4')",
+                              "type3": "MANUAL",
+                              "optionsModel": "aleMr.rebateRegionTypes",
+                              "optionLabelField": "label",
+                              "optionValueField": "value"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 28,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 59,
+                              "type": "MESSAGE",
+                              "text": "global.vendor.on.sale",
+                              "icon": "icon-confirm",
+                              "conditionShow": "aleMr.criteria.rebatecd === 's'"
+                            },
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "aleMr.criteria.prod",
+                              "label": "global.product",
+                              "meta": "ProdAll",
+                              "conditionShow": "aleMr.widgetResults.lProdfl",
+                              "readonly": true
+                            },
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "aleMr.criteria.prodpricety",
+                              "label": "global.product.price.type",
+                              "meta": "ProdPriceTy",
+                              "conditionShow": "aleMr.widgetResults.lProdPricetypefl",
+                              "readonly": true
+                            },
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "aleMr.criteria.prodcat",
+                              "label": "global.product.category",
+                              "meta": "ProdCat",
+                              "conditionShow": "aleMr.widgetResults.lProdCatfl",
+                              "readonly": true
+                            },
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "aleMr.criteria.prodline",
+                              "label": "global.product.line",
+                              "meta": "ProdLine",
+                              "conditionShow": "aleMr.widgetResults.lProdLinefl",
+                              "readonly": true,
+                              "options": {
+                                "searchParams": {
+                                  "vendno": {
+                                    "value": "aleMr.criteria.vendno",
+                                    "type": "REF"
+                                  },
+                                  "whse": {
+                                    "value": "aleMr.criteria.whse",
+                                    "type": "REF"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "aleMr.criteria.custno",
+                              "label": "global.customer",
+                              "meta": "Customer",
+                              "readonly": true,
+                              "conditionShow": "aleMr.widgetResults.lCustNofl"
+                            },
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "aleMr.criteria.vendno",
+                              "label": "global.vendor",
+                              "meta": "Vendor",
+                              "readonly": true,
+                              "conditionShow": "aleMr.widgetResults.lVendNofl"
+                            },
+                            {
+                              "id": 63,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "aleMr.criteria.shipto",
+                              "label": "global.ship.to",
+                              "conditionShow": "aleMr.widgetResults.lShipTofl",
+                              "eventChange": "aleMr.shipToChanged()",
+                              "meta": "ShipTo",
+                              "options": {
+                                "searchParams": {
+                                  "custno": {
+                                    "type": "REF",
+                                    "value": "aleMr.criteria.custno"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 71,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "aleMr.widgetResults.lUseContractvfl",
+                              "label": "global.use.contract.line.number",
+                              "dataFormat": "LOGICAL",
+                              "conditionShow": "!aleMr.widgetResults.lUseRebSubTypefl && aleMr.widgetResults.lUseContractsfl",
+                              "eventChange": "aleMr.getWidgetResults()"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 10,
+                  "type": "GRID",
+                  "model": "aleMr.manualRebateCollection",
+                  "controlRef": "aleMr.grid",
+                  "options": {
+                    "showCheckboxes": true,
+                    "editable": false,
+                    "selectable": "single",
+                    "showDrilldown": true,
+                    "events": {
+                      "drilldown": "aleMr.drilldown()"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 11,
+                      "type": "TOOLBAR",
+                      "label": "global.results",
+                      "children": [
+                        {
+                          "id": 47,
+                          "type": "BTN",
+                          "label": "global.attach",
+                          "icon": "icon-attach",
+                          "eventClick": "aleMr.attach()",
+                          "conditionDisabled": "!aleMr.grid.isAnyRowSelected()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 19,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "rebrecno",
+                      "label": "global.record.number",
+                      "editable": false
+                    },
+                    {
+                      "id": 12,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "custno",
+                      "label": "global.customer.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 13,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "shipto",
+                      "label": "global.ship.to"
+                    },
+                    {
+                      "id": 14,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prod",
+                      "label": "global.product"
+                    },
+                    {
+                      "id": 15,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prodcat",
+                      "label": "global.product.category",
+                      "editable": false
+                    },
+                    {
+                      "id": 16,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prodline",
+                      "label": "global.product.line",
+                      "editable": false
+                    },
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "rebatety",
+                      "label": "global.rebate.type",
+                      "editable": false,
+                      "cellEditable": ""
+                    },
+                    {
+                      "id": 18,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prodprcty",
+                      "label": "global.product.price.type"
+                    },
+                    {
+                      "id": 50,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.vendor.number",
+                      "dataFormat": "INTEGER_TEXT",
+                      "model": "vendno"
+                    },
+                    {
+                      "id": 51,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.contract.number",
+                      "model": "contractno",
+                      "conditionInclude": "aleMr.criteria.rebatecd === 's' && aleMr.aoProduct.pDContractLineNoOptionFl"
+                    },
+                    {
+                      "id": 52,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.contract.line.number",
+                      "dataFormat": "INTEGER_TEXT",
+                      "model": "contractline"
+                    },
+                    {
+                      "id": 53,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.whse.regn",
+                      "model": "whse"
+                    },
+                    {
+                      "id": 54,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.rebate.calc.type",
+                      "model": "rebcalcty",
+                      "dataFormat": "PdRebateCalcTypeToName"
+                    },
+                    {
+                      "id": 55,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.rebate.amount",
+                      "dataFormat": "CURRENCY",
+                      "model": "rebateamt"
+                    },
+                    {
+                      "id": 65,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "sharepct",
+                      "label": "global.share.rebate.percent",
+                      "dataFormat": "PERCENT"
+                    },
+                    {
+                      "id": 66,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "sharecapamt",
+                      "label": "global.share.cap.amount",
+                      "dataFormat": "CURRENCY"
+                    },
+                    {
+                      "id": 67,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "startdt",
+                      "label": "global.start.date",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 68,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "enddt",
+                      "label": "global.end.date",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 69,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "cRebateDesc",
+                      "label": "global.rebate.description"
+                    },
+                    {
+                      "id": 70,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "cDropShipty",
+                      "label": "global.drop.ship.type"
+                    },
+                    {
+                      "id": 73,
+                      "type": "GRID_COL",
+                      "subType": "DROP_DOWN",
+                      "model": "currencyty",
+                      "label": "global.vendor.currency",
+                      "type3": "CODES",
+                      "meta": "Currency"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "type": "VIEW_CNTR",
+      "viewName": "manualRebateChildView"
+    }
+  ]
+}

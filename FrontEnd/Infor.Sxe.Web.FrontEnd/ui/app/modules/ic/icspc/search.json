@@ -1,0 +1,110 @@
+{
+  "viewId": "ic-icspc-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.setuptype",
+                  "label": "global.setup.type",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "RecordTypeICSPC",
+                  "blankOption": false
+                },
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.whse",
+                  "label": "global.warehouse",
+                  "autoFocus": true,
+                  "meta": "Warehouse",
+                  "required": true
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.custno",
+                  "label": "global.customer",
+                  "meta": "Customer",
+                  "eventChange": "base.loadDefaultWhse()"
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.shipto",
+                  "label": "global.ship.to",
+                  "meta": "ShipTo",
+                  "eventChange": "base.loadDefaultWhse()",
+                  "options": {
+                    "searchParams": {
+                      "custno": {
+                        "type": "REF",
+                        "value": "base.criteria.custno"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.shiptogrp",
+                  "label": "global.ship.to.group",
+                  "meta": "ShipToGroup",
+                  "conditionShow": "base.criteria.setuptype === 'F'",
+                  "options": {
+                    "searchParams": {
+                      "custno": {
+                        "type": "REF",
+                        "value": "base.criteria.custno"
+                      },
+                      "shiptogrp": {
+                        "type": "REF",
+                        "value": "base.criteria.shiptogrp"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

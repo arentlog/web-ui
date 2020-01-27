@@ -1,0 +1,105 @@
+{
+  "viewId": "sa-sastt-detail-udetail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isDetail()",
+  "children": [
+    {
+      "id": 13,
+      "type": "EXP_AREA",
+      "label": "global.extended",
+      "conditionShow": "!base.isCreate()",
+      "children": [
+        {
+          "id": 14,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 15,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 30,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.extend.unittype",
+                  "label": "global.unit.conversion.type",
+                  "type3": "SET",
+                  "metaGroup": "IC",
+                  "meta": "ExtendedUnitConversionType",
+                  "eventChange": "dtl.reCalcUnitConv(false)",
+                  "blankOption": false
+                },
+                {
+                  "id": 28,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.extend.unitdec",
+                  "label": "{{base.translateLabel(dtl.extend.unitlabel)}}",
+                  "dataFormat": "DECIMAL",
+                  "decimals": 5,
+                  "digits": 6,
+                  "required": false,
+                  "eventChange": "dtl.reCalcUnitConv(true)",
+                  "conditionRequired": "!base.isCreate()",
+                  "sign": "+",
+                  "formatOptions": {
+                    "maximumFractionDigits": 5,
+                    "minimumFractionDigits": 5
+                  }
+                },
+                {
+                  "id": 31,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 29,
+                      "type": "FIELD",
+                      "subType": "TEXT_BOX",
+                      "model": "dtl.extend.unitconv",
+                      "label": "global.conversion.factor",
+                      "dataFormat": "DECIMAL",
+                      "decimals": 5,
+                      "digits": 6,
+                      "readonly": true,
+                      "formatOptions": {
+                        "minimumFractionDigits": 5,
+                        "maximumFractionDigits": 5
+                      }
+                    },
+                    {
+                      "id": 32,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.recalculate",
+                      "eventClick": "dtl.reCalcUnitConv(true)",
+                      "conditionDisabled": "!base.isEdit()"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 33,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 27,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "dtl.extend.unitediuom",
+                  "label": "edi.unit.of.measure",
+                  "maxLength": 2,
+                  "size": "XS"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

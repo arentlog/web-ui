@@ -1,0 +1,891 @@
+{
+  "viewId": "ap-apsd-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.vendor.setup.defaults",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.criteria",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.apsd.vendno",
+                              "label": "global.vendor",
+                              "readonly": true
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.apsd.shipviaty",
+                              "label": "global.ship.via",
+                              "readonly": true
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.apsd.shipfmno",
+                              "label": "global.ship.from",
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 21,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 23,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.apsd.minleaddays",
+                              "label": "global.min.lead.days",
+                              "dataFormat": "INTEGER",
+                              "digits": 4
+                            },
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.apsd.deliverycd",
+                              "label": "global.delivery.handling.code",
+                              "maxLength": 4
+                            },
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.apsd.shipsrvcd",
+                              "label": "global.ship.service.code",
+                              "maxLength": 4
+                            }
+                          ]
+                        },
+                        {
+                          "id": 32,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 74,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 36,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.apsd.wodiscpct",
+                                  "label": "global.order.discount",
+                                  "dataFormat": "DECIMAL",
+                                  "size": "SM",
+                                  "digits": 8,
+                                  "decimals": 2,
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 73,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.apsd.wodisctype",
+                                  "label": "global.discount.type",
+                                  "type3": "SET",
+                                  "metaGroup": "OE",
+                                  "meta": "AmountPercentType",
+                                  "blankOption": false,
+                                  "size": "SM",
+                                  "labelHidden": true
+                                }
+                              ]
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.apsd.usewodisc",
+                              "label": "global.use.ship.via.discount",
+                              "dataFormat": "LOGICAL"
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.apsd.useaddons",
+                              "label": "global.use.ship.via.addons",
+                              "dataFormat": "LOGICAL"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 24,
+                  "type": "EXP_AREA",
+                  "label": "global.expensed",
+                  "children": [
+                    {
+                      "id": 99,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 100,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 101,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 80,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.apsd.addonno1",
+                                  "label": "global.addon.1",
+                                  "type3": "CODES",
+                                  "meta": "POAddon"
+                                },
+                                {
+                                  "id": 56,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.apsd.addonamt1",
+                                  "label": "global.addon.amount.1",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 8,
+                                  "decimals": 2,
+                                  "size": "SM",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 58,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.apsd.addontype1",
+                                  "label": "global.amount.type",
+                                  "type3": "SET",
+                                  "metaGroup": "OE",
+                                  "meta": "AmountPercentType",
+                                  "blankOption": false,
+                                  "size": "SM"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 102,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 54,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.apsd.addonno2",
+                                  "label": "global.addon.2",
+                                  "type3": "CODES",
+                                  "meta": "POAddon"
+                                },
+                                {
+                                  "id": 57,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.apsd.addonamt2",
+                                  "label": "global.addon.amount.2",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 8,
+                                  "decimals": 2,
+                                  "size": "SM",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 59,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.apsd.addontype2",
+                                  "label": "global.amount.type",
+                                  "type3": "SET",
+                                  "metaGroup": "OE",
+                                  "meta": "AmountPercentType",
+                                  "blankOption": false,
+                                  "size": "SM"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 27,
+                  "type": "EXP_AREA",
+                  "label": "global.capitalized",
+                  "children": [
+                    {
+                      "id": 103,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 104,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 105,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 60,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.apsd.capaddonno1",
+                                  "label": "global.addon.1",
+                                  "type3": "CODES",
+                                  "meta": "POAddon"
+                                },
+                                {
+                                  "id": 65,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.apsd.capaddonamt1",
+                                  "label": "global.addon.amount.1",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 8,
+                                  "decimals": 2,
+                                  "size": "SM",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 69,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.apsd.capaddontype1",
+                                  "label": "global.amount.type",
+                                  "size": "SM",
+                                  "blankOption": false,
+                                  "type3": "SET",
+                                  "meta": "AmountPercentType",
+                                  "metaGroup": "OE"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 106,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 61,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.apsd.capaddonno2",
+                                  "label": "global.addon.2",
+                                  "type3": "CODES",
+                                  "meta": "POAddon"
+                                },
+                                {
+                                  "id": 66,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.apsd.capaddonamt2",
+                                  "label": "global.addon.amount.2",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 8,
+                                  "decimals": 2,
+                                  "size": "SM",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 70,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.apsd.capaddontype2",
+                                  "label": "global.amount.type",
+                                  "size": "SM",
+                                  "type3": "SET",
+                                  "meta": "AmountPercentType",
+                                  "blankOption": false,
+                                  "metaGroup": "OE"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 107,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 62,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.apsd.capaddonno3",
+                                  "label": "global.addon.3",
+                                  "type3": "CODES",
+                                  "meta": "POAddon"
+                                },
+                                {
+                                  "id": 67,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.apsd.capaddonamt3",
+                                  "label": "global.addon.amount.3",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 8,
+                                  "decimals": 2,
+                                  "size": "SM",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 71,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.apsd.capaddontype3",
+                                  "label": "global.amount.type",
+                                  "size": "SM",
+                                  "blankOption": false,
+                                  "type3": "SET",
+                                  "meta": "AmountPercentType",
+                                  "metaGroup": "OE"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 108,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 63,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.apsd.capaddonno4",
+                                  "label": "global.addon.4",
+                                  "type3": "CODES",
+                                  "meta": "POAddon"
+                                },
+                                {
+                                  "id": 68,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.apsd.capaddonamt4",
+                                  "label": "global.addon.amount.4",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 8,
+                                  "decimals": 2,
+                                  "size": "SM",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 72,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtl.apsd.capaddontype4",
+                                  "label": "global.amount.type",
+                                  "size": "SM",
+                                  "blankOption": false,
+                                  "type3": "SET",
+                                  "meta": "AmountPercentType",
+                                  "metaGroup": "OE"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 41,
+                  "type": "EXP_AREA",
+                  "label": "global.direct.po.addons",
+                  "children": [
+                    {
+                      "id": 42,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 43,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 46,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.apsd.dirpoaddonfl",
+                              "label": "global.direct.po.addons",
+                              "dataFormat": "LOGICAL"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 47,
+                      "type": "EXP_AREA",
+                      "label": "global.expensed",
+                      "conditionShow": "dtl.apsd.dirpoaddonfl == true",
+                      "children": [
+                        {
+                          "id": 109,
+                          "type": "ROW",
+                          "children": [
+                            {
+                              "id": 110,
+                              "type": "COL",
+                              "subType": "1",
+                              "children": [
+                                {
+                                  "id": 111,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 81,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dtl.apsd.diraddonno1",
+                                      "label": "global.addon.1",
+                                      "type3": "CODES",
+                                      "meta": "POAddon"
+                                    },
+                                    {
+                                      "id": 87,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dtl.apsd.diraddonamt1",
+                                      "label": "global.addon.amount.1",
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 8,
+                                      "size": "SM",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 93,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dtl.apsd.diraddontype1",
+                                      "label": "global.amount.type",
+                                      "type3": "SET",
+                                      "metaGroup": "OE",
+                                      "meta": "AmountPercentType",
+                                      "blankOption": false,
+                                      "size": "SM"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 112,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 82,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dtl.apsd.diraddonno2",
+                                      "label": "global.addon.2",
+                                      "type3": "CODES",
+                                      "meta": "POAddon"
+                                    },
+                                    {
+                                      "id": 88,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dtl.apsd.diraddonamt2",
+                                      "label": "global.addon.amount.2",
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 8,
+                                      "decimals": 2,
+                                      "size": "SM",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 94,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dtl.apsd.diraddontype2",
+                                      "label": "global.amount.type",
+                                      "type3": "SET",
+                                      "metaGroup": "OE",
+                                      "meta": "AmountPercentType",
+                                      "blankOption": false,
+                                      "size": "SM"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 50,
+                      "type": "EXP_AREA",
+                      "label": "global.capitalized",
+                      "conditionShow": "dtl.apsd.dirpoaddonfl == true",
+                      "children": [
+                        {
+                          "id": 113,
+                          "type": "ROW",
+                          "children": [
+                            {
+                              "id": 114,
+                              "type": "COL",
+                              "subType": "1",
+                              "children": [
+                                {
+                                  "id": 115,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 83,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dtl.apsd.dircapaddonno1",
+                                      "label": "global.addon.1",
+                                      "type3": "CODES",
+                                      "meta": "POAddon"
+                                    },
+                                    {
+                                      "id": 89,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dtl.apsd.dircapaddonamt1",
+                                      "label": "global.addon.amount.1",
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 8,
+                                      "decimals": 2,
+                                      "size": "SM",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 95,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dtl.apsd.dircapaddontype1",
+                                      "label": "global.addon.type",
+                                      "type3": "SET",
+                                      "metaGroup": "OE",
+                                      "meta": "AmountPercentType",
+                                      "blankOption": false,
+                                      "size": "SM"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 116,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 84,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dtl.apsd.dircapaddonno2",
+                                      "label": "global.addon.2",
+                                      "type3": "CODES",
+                                      "meta": "POAddon"
+                                    },
+                                    {
+                                      "id": 90,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dtl.apsd.dircapaddonamt2",
+                                      "label": "global.addon.amount.2",
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 8,
+                                      "decimals": 2,
+                                      "size": "SM",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 96,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dtl.apsd.dircapaddontype2",
+                                      "label": "global.amount.type",
+                                      "type3": "SET",
+                                      "metaGroup": "OE",
+                                      "meta": "AmountPercentType",
+                                      "size": "SM"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 118,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 85,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dtl.apsd.dircapaddonno3",
+                                      "label": "global.addon.3",
+                                      "type3": "CODES",
+                                      "meta": "POAddon"
+                                    },
+                                    {
+                                      "id": 91,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dtl.apsd.dircapaddonamt3",
+                                      "label": "global.addon.amount.3",
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 8,
+                                      "decimals": 2,
+                                      "size": "SM",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 97,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dtl.apsd.dircapaddontype3",
+                                      "label": "global.amount.type",
+                                      "type3": "SET",
+                                      "metaGroup": "OE",
+                                      "meta": "AmountPercentType",
+                                      "size": "SM"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 119,
+                                  "type": "COMP_FLD",
+                                  "children": [
+                                    {
+                                      "id": 86,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dtl.apsd.dircapaddonno4",
+                                      "label": "global.addon.4",
+                                      "type3": "CODES",
+                                      "meta": "POAddon"
+                                    },
+                                    {
+                                      "id": 92,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dtl.apsd.dircapaddonamt4",
+                                      "label": "global.addon.amount.4",
+                                      "dataFormat": "DECIMAL",
+                                      "digits": 8,
+                                      "decimals": 2,
+                                      "size": "SM",
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    },
+                                    {
+                                      "id": 98,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dtl.apsd.dircapaddontype4",
+                                      "label": "global.amount.type",
+                                      "type3": "SET",
+                                      "metaGroup": "OE",
+                                      "meta": "AmountPercentType",
+                                      "size": "SM"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "apsd",
+                        "objectRef": "dtl.apsd",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

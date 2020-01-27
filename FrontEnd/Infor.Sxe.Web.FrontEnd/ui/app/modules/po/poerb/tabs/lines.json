@@ -1,0 +1,132 @@
+{
+  "viewId": "po-poerb-detail-lines",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "TAB",
+  "conditionReadonly": "base.isDetail()",
+  "children": [
+    {
+      "id": 2,
+      "type": "GRID",
+      "model": "dtl.datasetLines",
+      "controlRef": "dtl.grid",
+      "conditionEditable": "!dtl.isLineItemsTabReadonly",
+      "options": {
+        "showExpander": false,
+        "showCheckboxes": true,
+        "selectable": "single",
+        "editable": true,
+        "showDrilldown": false,
+        "events": {
+          "cellchange": ""
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 4,
+          "type": "TOOLBAR",
+          "label": "global.lines",
+          "children": [
+            {
+              "id": 21,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.update.by.release",
+              "conditionDisabled": "!dtl.grid.isOneRowSelected() || !dtl.canUpdateByRelease",
+              "eventClick": "dtl.updateByRelease()",
+              "securityLevel": 3
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 6,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "lineno",
+          "label": "global.line.number",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 7,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "nonstockty",
+          "label": "global.non.stock"
+        },
+        {
+          "id": 9,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "shipprod",
+          "label": "global.product"
+        },
+        {
+          "id": 12,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "descrip",
+          "label": "global.description"
+        },
+        {
+          "id": 11,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "unit",
+          "label": "global.units"
+        },
+        {
+          "id": 15,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "ordered",
+          "label": "global.quantity.ordered",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 16,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qtyremain",
+          "label": "{{dtl.poblanketlinessingle.qtyremainlabel}}",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 13,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qtyord",
+          "label": "{{dtl.poblanketlinessingle.qtyordlabel}}",
+          "editable": true,
+          "sign": "+",
+          "digits": 7,
+          "decimals": 2,
+          "eventChange": "dtl.onCellChange()",
+          "cellEditable": "dtl.isAllowEdit()",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 20,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "msdsfl",
+          "label": "global.hazardous",
+          "dataFormat": "LOGICAL"
+        }
+      ]
+    }
+  ]
+}

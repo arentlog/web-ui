@@ -1,0 +1,304 @@
+{
+  "viewId": "shared-serials-sharedserialsview",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "controlRef": "ser.view",
+  "children": [
+    {
+      "id": 10,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 11,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 14,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "ser.criteria.prod",
+              "label": "global.product"
+            },
+            {
+              "id": 21,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "ser.criteria.linenochar",
+              "label": "global.line.number"
+            },
+            {
+              "id": 23,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "ser.criteria.seqnochar",
+              "label": "global.sequence.number.poundsign",
+              "conditionShow": "ser.criteria.seqno !== 0"
+            },
+            {
+              "id": 24,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "ser.criteria.proddesc",
+              "label": "global.description"
+            },
+            {
+              "id": 41,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "ser.criteria.wonosuf",
+              "label": "global.work.order.number",
+              "conditionShow": "ser.criteria.currproc === 'kpew'"
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "type": "COL",
+          "subType": "1/2",
+          "children": [
+            {
+              "id": 15,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "ser.criteria.ordqty",
+              "label": "global.ordered",
+              "dataFormat": "DECIMAL",
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            },
+            {
+              "id": 18,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "ser.criteria.origqty",
+              "label": "{{ser.criteria.origqtylabel}}",
+              "dataFormat": "DECIMAL",
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            },
+            {
+              "id": 17,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "ser.criteria.proofqty",
+              "label": "global.quantity.to.allocate",
+              "dataFormat": "DECIMAL",
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            },
+            {
+              "id": 40,
+              "type": "MESSAGE",
+              "text": "{{ser.criteria.rettext}}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 49,
+          "type": "COMP_FLD",
+          "children": [
+            {
+              "id": 47,
+              "type": "FIELD",
+              "subType": "TEXT_BOX",
+              "model": "ser.scannedSerial",
+              "label": "global.serial.number",
+              "autoFocus": true,
+              "conditionReadonly": "ser.isReadOnly"
+            },
+            {
+              "id": 51,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-confirm",
+              "label": "{{ser.scanSerialButtonLabel}}",
+              "eventClick": "ser.scanSerialProcessing()",
+              "conditionDisabled": "ser.isReadOnly"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "type": "GRID",
+      "controlRef": "ser.grid",
+      "model": "ser.dataset",
+      "conditionEditable": "!ser.isReadOnly",
+      "options": {
+        "showCheckboxes": false,
+        "editable": true,
+        "events": {
+          "selected": ""
+        },
+        "selectable": "single"
+      },
+      "controls": {
+        "toolbar": {
+          "id": 30,
+          "type": "TOOLBAR",
+          "label": "global.serial.entry",
+          "subLabel": "",
+          "children": [
+            {
+              "id": 33,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-new-document",
+              "label": "global.new",
+              "securityLevel": 4,
+              "eventClick": "ser.newSerial()",
+              "conditionDisabled": "!ser.criteria.btncreateenabled || ser.isReadOnly",
+              "conditionShow": "ser.criteria.btncreateenabled"
+            },
+            {
+              "id": 38,
+              "type": "BTN",
+              "label": "global.lookup",
+              "icon": "icon-search",
+              "eventClick": "ser.lookupSerial()",
+              "conditionDisabled": "ser.isReadOnly"
+            },
+            {
+              "id": 32,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-save",
+              "label": "global.save",
+              "submitForm": false,
+              "eventValidated": "",
+              "securityLevel": 3,
+              "eventClick": "ser.saveAllCheck()",
+              "conditionDisabled": "ser.isReadOnly"
+            },
+            {
+              "id": 34,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-cancel",
+              "label": "global.cancel",
+              "eventClick": "ser.cancel()",
+              "conditionDisabled": "ser.isReadOnly"
+            },
+            {
+              "id": 35,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.requery",
+              "eventClick": "ser.requerySerialEntry()",
+              "conditionDisabled": "ser.isReadOnly"
+            },
+            {
+              "id": 36,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.oldest",
+              "eventClick": "ser.oldest()",
+              "conditionDisabled": "!ser.criteria.btnoldestenabled || ser.isReadOnly",
+              "conditionShow": "!ser.criteria.btnoldesthidden"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 20,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "label": "{{ser.columnLabel1}}",
+          "model": "lSelected",
+          "editable": true,
+          "eventChange": "ser.selected()",
+          "dataFormat": "LOGICAL",
+          "cellEditable": "ser.editColumnEnabled()",
+          "conditionInclude": "!ser.editColumnHidden('1')"
+        },
+        {
+          "id": 25,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "{{ser.columnLabel2}}",
+          "model": "cSerialNo",
+          "editable": true,
+          "cellEditable": "ser.editColumnEnabled()",
+          "conditionInclude": "!ser.editColumnHidden('2')"
+        },
+        {
+          "id": 39,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "{{ser.columnLabel3}}",
+          "model": "cBinLoc",
+          "editable": true,
+          "cellEditable": "ser.editColumnEnabled()",
+          "dataFormat": "BinLoc",
+          "conditionInclude": "!ser.editColumnHidden('3')"
+        },
+        {
+          "id": 29,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "label": "{{ser.columnLabel4}}",
+          "model": "cReasUnavTy",
+          "editable": true,
+          "cellEditable": "ser.editColumnEnabled()",
+          "conditionInclude": "!ser.editColumnHidden('4')",
+          "type3": "CODES",
+          "meta": "ReasonUnavailable"
+        },
+        {
+          "id": 28,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "label": "{{ser.columnLabel5}}",
+          "model": "dtReceipt",
+          "dataFormat": "DATE",
+          "editable": true,
+          "cellEditable": "ser.editColumnEnabled()",
+          "conditionInclude": "!ser.editColumnHidden('5')"
+        },
+        {
+          "id": 26,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dCost",
+          "label": "{{ser.columnLabel6}}",
+          "editable": true,
+          "cellEditable": "ser.editColumnEnabled()",
+          "digits": 7,
+          "decimals": 5,
+          "dataFormat": "CURRENCY",
+          "conditionInclude": "!ser.editColumnHidden('6')",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 27,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cComment",
+          "label": "{{ser.columnLabel7}}",
+          "editable": true,
+          "cellEditable": "ser.editColumnEnabled()",
+          "conditionInclude": "!ser.editColumnHidden('7')"
+        }
+      ]
+    }
+  ]
+}

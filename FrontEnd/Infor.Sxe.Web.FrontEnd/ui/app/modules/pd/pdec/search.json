@@ -1,0 +1,102 @@
+{
+  "viewId": "pd-pdec-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isInContinueMode",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.getProdCriteria.whse",
+                  "label": "global.warehouse",
+                  "meta": "Warehouse",
+                  "conditionRequired": "base.getProdCriteria.vendno",
+                  "eventChange": "base.warehouseSelected()",
+                  "autoFocus": true
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.getProdCriteria.vendno",
+                  "label": "global.vendor.number",
+                  "meta": "Vendor"
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.getProdCriteria.prod",
+                  "label": "global.product",
+                  "meta": "ProdAll",
+                  "eventChange": "base.productSelected()",
+                  "conditionRequired": "!base.getProdCriteria.vendno"
+                },
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "base.isAutomaticallyLoadNextProduct",
+                  "label": "global.automatically.load.next.product"
+                },
+                {
+                  "id": 129,
+                  "type": "COMP_FLD",
+                  "children": [
+                    {
+                      "id": 19,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "base.updatePricecostCriteria.effectdt",
+                      "label": "global.effective.date",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 130,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "base.updatePricecostCriteria.pricetxt",
+                      "dataFormat": "DECIMAL"
+                    }
+                  ]
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "conditionDisabled": "base.isInContinueMode",
+                  "eventValidated": "srch.submit()"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "conditionDisabled": "base.isInContinueMode",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

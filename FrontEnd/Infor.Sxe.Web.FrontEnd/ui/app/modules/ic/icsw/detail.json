@@ -1,0 +1,289 @@
+{
+  "viewId": "ic-icsw-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isDetail() || base.isEdit()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.warehouse.products",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "label": "special.button.back",
+                      "eventClick": "dtl.exitDetail()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3,
+                  "stateRef": ".edit"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 46,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.recalculate",
+                  "submitForm": true,
+                  "eventValidated": "dtl.callRecalculate()",
+                  "conditionDisabled": "!base.isEdit() || dtl.statustype.toLowerCase() !== 's'",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 19,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "TAB",
+                      "label": "global.general",
+                      "tabId": "general",
+                      "subFunction": "General",
+                      "children": [
+                        {
+                          "id": 21,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ic/icsw/tabs/general.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 22,
+                      "type": "TAB",
+                      "label": "global.ordering",
+                      "conditionSelected": "dtl.activeTab === 'ordering'",
+                      "tabId": "ordering",
+                      "subFunction": "Ordering",
+                      "children": [
+                        {
+                          "id": 23,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ic/icsw/tabs/ordering.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 26,
+                      "type": "TAB",
+                      "label": "global.taxing",
+                      "tabId": "taxing",
+                      "subFunction": "Taxing",
+                      "children": [
+                        {
+                          "id": 27,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ic/icsw/tabs/taxing.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 30,
+                      "type": "TAB",
+                      "label": "global.costs",
+                      "tabId": "costs",
+                      "subFunction": "Cost & Pricing",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ic/icsw/tabs/cost.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 32,
+                      "type": "TAB",
+                      "label": "global.warehouse.logistics",
+                      "conditionShow": "dtl.wlloc",
+                      "tabId": "warehouse-logistics",
+                      "subFunction": "WL Setup",
+                      "children": [
+                        {
+                          "id": 33,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ic/icsw/tabs/wl.json",
+                          "controller": "IcswWLSetupCtrl as wls"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 34,
+                      "type": "TAB",
+                      "label": "global.custom",
+                      "tabId": "custom",
+                      "subFunction": "Custom",
+                      "children": [
+                        {
+                          "id": 35,
+                          "type": "CUSTOM",
+                          "subType": "UserFields",
+                          "options": {
+                            "tableName": "icsw",
+                            "objectRef": "dtl.icsw",
+                            "conditionReadonly": "base.isDetail() || dtl.isCustomTabReadonly"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 36,
+                      "type": "TAB",
+                      "label": "global.storeroom",
+                      "conditionShow": "dtl.SRWhseFl",
+                      "tabId": "storeroom",
+                      "subFunction": "Storeroom",
+                      "children": [
+                        {
+                          "id": 37,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ic/icsw/tabs/storeroom.json"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "type": "VIEW_CNTR",
+      "viewName": "usage"
+    },
+    {
+      "id": 39,
+      "type": "VIEW_CNTR",
+      "viewName": "leadtime"
+    },
+    {
+      "id": 40,
+      "type": "VIEW_CNTR",
+      "viewName": "trendInfo"
+    },
+    {
+      "id": 42,
+      "type": "VIEW_CNTR",
+      "viewName": "adjusters"
+    },
+    {
+      "id": 43,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsd",
+      "contextValues": {
+        "key1": "dtl.icsw.whse"
+      }
+    },
+    {
+      "id": 44,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsp",
+      "contextValues": {
+        "key1": "dtl.icsw.prod"
+      }
+    },
+    {
+      "id": 45,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsw",
+      "contextOptions": {
+        "overrideDrillBack": "icsw.detail"
+      },
+      "contextValues": {
+        "key1": "dtl.icsw.prod",
+        "key2": "dtl.icsw.whse"
+      }
+    }
+  ]
+}

@@ -1,0 +1,436 @@
+{
+  "viewId": "ar-arece-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isMaster()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.arece",
+          "children": [
+            {
+              "id": 5,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.previous",
+              "icon": "icon-left-arrow",
+              "eventClick": "base.workflowBack()",
+              "conditionDisabled": "!base.isBackActive"
+            },
+            {
+              "id": 6,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.next",
+              "icon": "icon-right-arrow",
+              "conditionDisabled": "!base.isInitiateViewVisible",
+              "eventClick": "base.workflowNext()"
+            },
+            {
+              "id": 7,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.finish",
+              "icon": "icon-save",
+              "eventClick": "base.workflowNext()",
+              "conditionDisabled": "!base.isLastScreenActive"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 9,
+              "type": "EXP_AREA",
+              "label": "global.transaction",
+              "children": [
+                {
+                  "id": 12,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 13,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.checkData.posttype",
+                          "label": "global.type",
+                          "type3": "SET",
+                          "metaGroup": "AR",
+                          "meta": "CashReceiptsPostType",
+                          "blankOption": false,
+                          "autoFocus": false,
+                          "conditionReadonly": "!base.checkData.posttypeenabled",
+                          "eventChange": "mst.postTypeChanged()"
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.checkData.checkno",
+                          "label": "global.check.number",
+                          "dataFormat": "INTEGER_TEXT",
+                          "sign": "+",
+                          "digits": 8,
+                          "size": "SM",
+                          "autoFocus": true,
+                          "conditionReadonly": "!base.checkData.checknoenabled",
+                          "conditionShow": "base.checkData.checknovisible",
+                          "conditionFocus": "base.focusOnCheckno"
+                        },
+                        {
+                          "id": 45,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "type3": "MANUAL",
+                          "model": "base.globalData.pymttranscd",
+                          "label": "global.payment.type",
+                          "conditionShow": "base.checkData.posttype.toLowerCase() === 'p' && base.isAllowPaymentType",
+                          "optionsModel": "mst.paymentTypes",
+                          "optionLabelField": "descrip",
+                          "optionValueField": "codeval",
+                          "conditionRequired": "base.checkData.posttype.toLowerCase() === 'p' && base.isAllowPaymentType"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 16,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.checkData.checkamt",
+                          "label": "global.amount",
+                          "dataFormat": "DECIMAL",
+                          "sign": "+",
+                          "decimals": 2,
+                          "digits": 7,
+                          "size": "SM",
+                          "conditionReadonly": "!base.checkData.checkamtenabled",
+                          "conditionShow": "base.checkData.checkamtvisible",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.checkData.checkdt",
+                          "label": "global.date",
+                          "dataFormat": "DATE",
+                          "conditionReadonly": "!base.checkData.checkdtenabled",
+                          "conditionShow": "base.checkData.checkdtvisible"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 10,
+              "type": "EXP_AREA",
+              "label": "global.apply.to",
+              "children": [
+                {
+                  "id": 19,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.checkData.findtype",
+                          "label": "global.type",
+                          "type3": "SET",
+                          "metaGroup": "AR",
+                          "meta": "CashReceiptsFindType",
+                          "blankOption": false,
+                          "conditionReadonly": "!base.checkData.findtypeenabled",
+                          "eventChange": "mst.checkFieldChanged('findtype')"
+                        },
+                        {
+                          "id": 22,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.checkData.lockbox",
+                          "label": "global.lock.box",
+                          "maxLength": 30,
+                          "conditionReadonly": "!base.checkData.lockboxenabled",
+                          "conditionShow": "base.checkData.lockboxenabled",
+                          "eventChange": "mst.checkFieldChanged('lockbox')",
+                          "conditionFocus": "base.focusOnLockbox",
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          }
+                        },
+                        {
+                          "id": 23,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.checkData.groupno",
+                          "label": "global.group",
+                          "meta": "Group",
+                          "conditionShow": "base.checkData.groupnoenabled",
+                          "conditionReadonly": "!base.checkData.groupnoenabled",
+                          "conditionFocus": "base.focusOnGroup",
+                          "eventChange": "mst.checkFieldChanged('groupno')"
+                        },
+                        {
+                          "id": 26,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.checkData.invno",
+                              "label": "global.invoice.number",
+                              "dataFormat": "INTEGER_TEXT",
+                              "size": "SM",
+                              "conditionShow": "base.checkData.invnoenabled",
+                              "conditionReadonly": "!base.checkData.invnoenabled",
+                              "eventChange": "mst.checkFieldChanged('invno')",
+                              "digits": 8,
+                              "conditionFocus": "base.focusOnInvoiceNumber",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.checkData.invsuf",
+                              "label": "global.suffix",
+                              "dataFormat": "SuffixInput",
+                              "size": "XS",
+                              "conditionShow": "base.checkData.invnoenabled",
+                              "conditionReadonly": "!base.checkData.invsufenabled",
+                              "eventChange": "mst.checkFieldChanged('invsuf')",
+                              "maxLength": 2,
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 25,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.checkData.custno",
+                          "label": "global.customer.number",
+                          "meta": "Customer",
+                          "conditionReadonly": "!base.checkData.custnoenabled",
+                          "conditionFocus": "base.focusOnCustomer",
+                          "eventChange": "mst.checkFieldChanged('custno')"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 24,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 29,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.checkData.shipto",
+                          "label": "global.ship.to",
+                          "meta": "ShipTo",
+                          "conditionReadonly": "!base.checkData.shiptoenabled",
+                          "eventChange": "mst.checkFieldChanged('shipto')",
+                          "options": {
+                            "searchParams": {
+                              "custno": {
+                                "type": "REF",
+                                "value": "base.checkData.custno"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 30,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.checkData.bankno",
+                          "label": "global.bank",
+                          "type3": "MANUAL",
+                          "conditionReadonly": "!base.checkData.banknoenabled",
+                          "eventChange": "mst.bankNoChanged()",
+                          "optionsModel": "mst.banknoDropDownOptions",
+                          "options": {
+                            "searchParams": {
+                              "custno": {
+                                "type": "REF",
+                                "value": "{{base.checkData.custno}}"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 11,
+              "type": "EXP_AREA",
+              "label": "global.proofs.totals",
+              "children": [
+                {
+                  "id": 31,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 32,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 33,
+                          "type": "FIELD_SET",
+                          "label": "global.proofs",
+                          "children": [
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.stringToDecimal(base.mainData.txtproofcr)",
+                              "label": "global.credit",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 35,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.stringToDecimal(base.mainData.txtproofdr)",
+                              "label": "global.debit",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.stringToDecimal(base.mainData.txtprfck)",
+                              "label": "global.checks",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.stringToDecimal(base.mainData.txttothash)",
+                              "label": "global.customer.hash.total",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 38,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 39,
+                          "type": "FIELD_SET",
+                          "label": "global.totals",
+                          "children": [
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.stringToDecimal(base.mainData.txttotcr)",
+                              "label": "global.credit",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.stringToDecimal(base.mainData.txttotdr)",
+                              "label": "global.debit",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "base.stringToDecimal(base.mainData.txttotck)",
+                              "label": "global.checks",
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 43,
+      "type": "VIEW_CNTR",
+      "viewName": "subDetail"
+    }
+  ]
+}

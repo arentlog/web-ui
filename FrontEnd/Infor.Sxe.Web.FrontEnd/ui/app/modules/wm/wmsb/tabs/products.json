@@ -1,0 +1,128 @@
+{
+  "viewId": "wm-wmsb-detail-products",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isDetail()",
+  "children": [
+    {
+      "id": 2,
+      "type": "EXP_AREA",
+      "label": "global.product.detail",
+      "children": [
+        {
+          "id": 8,
+          "type": "GRID",
+          "model": "prods.wmsbpList",
+          "controlRef": "prods.grid",
+          "options": {
+            "showCheckboxes": true,
+            "showDrilldown": true,
+            "events": {
+              "drilldown": "prods.drilldown()"
+            }
+          },
+          "controls": {
+            "toolbar": {
+              "id": 9,
+              "type": "TOOLBAR",
+              "label": "global.bin.products",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "stateRef": "",
+                  "securityLevel": 4,
+                  "conditionDisabled": "prods.grid.isAnyRowSelected() || ((!base.isMultipleProductsAllowed) && (prods.wmsbpList.length >= 1))",
+                  "eventClick": "prods.create()"
+                },
+                {
+                  "id": 22,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "prods.delete()",
+                  "securityLevel": 5,
+                  "conditionDisabled": "!prods.grid.isAnyRowSelected()"
+                }
+              ]
+            }
+          },
+          "children": [
+            {
+              "id": 23,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "prod",
+              "label": "global.product"
+            },
+            {
+              "id": 24,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyonhand",
+              "label": "global.on.hand",
+              "dataFormat": "DECIMAL",
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            },
+            {
+              "id": 25,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtycommitted",
+              "label": "global.committed",
+              "dataFormat": "DECIMAL",
+              "formatOptions": {
+                "maximumFractionDigits": 2,
+                "minimumFractionDigits": 2
+              }
+            },
+            {
+              "id": 26,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "qtyreceived",
+              "label": "global.received",
+              "dataFormat": "DECIMAL",
+              "formatOptions": {
+                "maximumFractionDigits": 2,
+                "minimumFractionDigits": 2
+              }
+            },
+            {
+              "id": 27,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "maxqty",
+              "label": "global.maximum.quantity",
+              "dataFormat": "INTEGER"
+            },
+            {
+              "id": 28,
+              "type": "GRID_COL",
+              "subType": "TEXT",
+              "model": "minqty",
+              "label": "global.min.qty",
+              "dataFormat": "INTEGER"
+            },
+            {
+              "id": 29,
+              "type": "GRID_COL",
+              "subType": "CHECKBOX",
+              "model": "msdsfl",
+              "label": "global.hazardous",
+              "dataFormat": "LOGICAL"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

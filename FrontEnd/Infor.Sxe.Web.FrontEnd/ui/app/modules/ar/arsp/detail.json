@@ -1,0 +1,290 @@
+{
+  "viewId": "ar-arsp-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.payment.history",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 32,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 33,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 34,
+                                      "type": "FIELD",
+                                      "subType": "LOOKUP",
+                                      "model": "dtl.arsp.custno",
+                                      "label": "global.customer.number",
+                                      "meta": "Customer",
+                                      "required": true,
+                                      "conditionReadonly": "!base.isCreate()",
+                                      "autoFocus": true
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": 21,
+                              "type": "GRID",
+                              "model": "dtl.paymentHistory",
+                              "controlRef": "dtl.paymentHistoryGrid",
+                              "options": {
+                                "editable": true,
+                                "events": {
+                                  "cellchange": "dtl.calculateTotals()"
+                                },
+                                "paging": false,
+                                "showRowCount": false
+                              },
+                              "controls": {
+                                "toolbar": {
+                                  "id": 22,
+                                  "type": "TOOLBAR",
+                                  "label": "global.payment.history"
+                                }
+                              },
+                              "children": [
+                                {
+                                  "id": 23,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.month",
+                                  "model": "month",
+                                  "width": 2
+                                },
+                                {
+                                  "id": 24,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.period.1",
+                                  "model": "per1bal",
+                                  "editable": true,
+                                  "digits": 8,
+                                  "cellEditable": "base.isCellEditable",
+                                  "dataFormat": "INTEGER"
+                                },
+                                {
+                                  "id": 25,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.period.2",
+                                  "model": "per2bal",
+                                  "editable": true,
+                                  "digits": 8,
+                                  "cellEditable": "base.isCellEditable",
+                                  "dataFormat": "INTEGER"
+                                },
+                                {
+                                  "id": 26,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.period.3",
+                                  "model": "per3bal",
+                                  "editable": true,
+                                  "digits": 8,
+                                  "cellEditable": "base.isCellEditable",
+                                  "dataFormat": "INTEGER"
+                                },
+                                {
+                                  "id": 27,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.period.4",
+                                  "model": "per4bal",
+                                  "editable": true,
+                                  "digits": 8,
+                                  "cellEditable": "base.isCellEditable",
+                                  "dataFormat": "INTEGER"
+                                },
+                                {
+                                  "id": 28,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.period.5",
+                                  "model": "per5bal",
+                                  "editable": true,
+                                  "digits": 8,
+                                  "cellEditable": "base.isCellEditable",
+                                  "dataFormat": "INTEGER"
+                                },
+                                {
+                                  "id": 29,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.service.charge",
+                                  "model": "servbal",
+                                  "editable": true,
+                                  "digits": 8,
+                                  "cellEditable": "base.isCellEditable",
+                                  "conditionInclude": "base.sasc.arrollcd.toUpperCase() === 'N' || base.sasc.arrollcd.toUpperCase() === 'M'",
+                                  "dataFormat": "INTEGER"
+                                },
+                                {
+                                  "id": 30,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.credits",
+                                  "model": "credbal",
+                                  "editable": true,
+                                  "digits": 8,
+                                  "cellEditable": "base.isCellEditable",
+                                  "conditionInclude": "base.sasc.arrollcd.toUpperCase() === 'N' || base.sasc.arrollcd.toUpperCase() === 'S'",
+                                  "dataFormat": "INTEGER"
+                                },
+                                {
+                                  "id": 31,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "label": "global.totals",
+                                  "model": "ttl",
+                                  "dataFormat": "INTEGER"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "arsp",
+                        "objectRef": "dtl.arsp",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

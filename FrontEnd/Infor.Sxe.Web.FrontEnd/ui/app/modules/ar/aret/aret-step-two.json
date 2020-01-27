@@ -1,0 +1,285 @@
+{
+  "viewId": "ar-aret-aretsteptwo",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isStepTwo()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "menu.aret",
+              "subLabel": "global.step.2",
+              "controls": {
+                "navBtns": {
+                  "id": 29,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 30,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "two.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "label": "global.next",
+                  "icon": "icon-right-arrow",
+                  "eventClick": "",
+                  "submitForm": true,
+                  "eventValidated": "two.continue()"
+                },
+                {
+                  "id": 26,
+                  "type": "BTN",
+                  "subType": "MENU",
+                  "label": "global.manual",
+                  "children": [
+                    {
+                      "id": 27,
+                      "type": "MENU_OPT",
+                      "label": "global.terms.details.entry",
+                      "eventClick": "two.goToManualTerms()"
+                    },
+                    {
+                      "id": 28,
+                      "type": "MENU_OPT",
+                      "label": "global.split.pay",
+                      "eventClick": "two.goToManualSplitPay()"
+                    }
+                  ]
+                },
+                {
+                  "id": 25,
+                  "type": "BTN",
+                  "label": "global.clear",
+                  "icon": "icon-cancel",
+                  "eventClick": "two.clear()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 8,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 9,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.invoiceNumberSuffix",
+                          "label": "global.reversal.invoice",
+                          "meta": "Invoices",
+                          "type3": "STANDARD",
+                          "conditionReadonly": "!base.aret.invnoenabled",
+                          "autoFocus": true,
+                          "eventChange": "two.invoiceSelected()",
+                          "conditionFocus": "base.aret.invnoenabled",
+                          "conditionShow": "base.aret.transcd === base.TRANSCD_REVERSAL",
+                          "conditionRequired": "base.aret.transcd === base.TRANSCD_REVERSAL && base.aret.sourcecd !== base.TRANSCD_UNAPPLIEDCASH",
+                          "contextOptions": {
+                            "deactivated": true
+                          },
+                          "contextValues": {
+                            "key1": "",
+                            "key2": "",
+                            "key3": ""
+                          },
+                          "options": {
+                            "searchParams": {
+                              "custno": {
+                                "type": "REF",
+                                "value": "base.aret.custno"
+                              },
+                              "transcd": {
+                                "type": "REF",
+                                "value": "base.forTransCode"
+                              },
+                              "statustype": {
+                                "type": "REF",
+                                "value": "base.activeStatus"
+                              }
+                            },
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 32,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.invoiceNumberSuffix",
+                          "label": "global.invoice",
+                          "meta": "Invoices99Suffix",
+                          "type3": "STANDARD",
+                          "conditionReadonly": "!base.aret.invnoenabled",
+                          "autoFocus": true,
+                          "eventChange": "two.invoiceSelected()",
+                          "conditionFocus": "base.aret.invnoenabled",
+                          "conditionShow": "base.aret.transcd !== base.TRANSCD_REVERSAL",
+                          "conditionRequired": "base.aret.transcd !== base.TRANSCD_REVERSAL",
+                          "contextOptions": {
+                            "deactivated": true
+                          },
+                          "contextValues": {
+                            "key1": "",
+                            "key2": "",
+                            "key3": ""
+                          },
+                          "options": {
+                            "searchParams": {
+                              "custno": {
+                                "type": "REF",
+                                "value": "base.aret.custno"
+                              },
+                              "transcd": {
+                                "type": "REF",
+                                "value": "base.forTransCode"
+                              },
+                              "statustype": {
+                                "type": "REF",
+                                "value": "base.activeStatus"
+                              }
+                            },
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 10,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.aret.amount",
+                          "label": "global.amount",
+                          "dataFormat": "CURRENCY",
+                          "conditionReadonly": "!base.aret.amountenabled",
+                          "digits": 9,
+                          "decimals": 2,
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.aret.shipto",
+                          "label": "global.ship.to",
+                          "meta": "ShipTo",
+                          "type3": "STANDARD",
+                          "conditionReadonly": "!base.aret.shiptoenabled",
+                          "contextValues": {
+                            "key1": "base.aret.custno",
+                            "key2": "base.aret.shipto"
+                          },
+                          "options": {
+                            "searchParams": {
+                              "custno": {
+                                "type": "REF",
+                                "value": "base.aret.custno"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.aret.divno",
+                          "label": "global.division",
+                          "conditionReadonly": "!base.aret.divnoenabled",
+                          "type3": "MANUAL",
+                          "optionsModel": "base.divnoDropDownOptions"
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.aret.refer",
+                          "label": "global.reference",
+                          "conditionReadonly": "!base.aret.referenabled",
+                          "maxLength": 24
+                        }
+                      ]
+                    },
+                    {
+                      "id": 7,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.aret.disputefl",
+                          "label": "global.disputed",
+                          "conditionDisabled": "!base.aret.disputeflenabled"
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.aret.invdt",
+                          "label": "global.date",
+                          "dataFormat": "DATE",
+                          "conditionReadonly": "!base.aret.invdtenabled"
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.aret.termstype",
+                          "label": "global.terms",
+                          "meta": "Terms",
+                          "type3": "STANDARD",
+                          "conditionReadonly": "!base.aret.termstypeenabled",
+                          "eventChange": "two.termsTypeChanged()"
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.aret.slsytdfl",
+                          "label": "global.sales.year.to.date",
+                          "conditionDisabled": "!base.aret.slsytdflenabled"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "type": "VIEW_CNTR",
+      "viewName": "aretChildView"
+    }
+  ]
+}

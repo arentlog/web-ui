@@ -1,0 +1,583 @@
+{
+  "viewId": "ic-icseg-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.extended.gl.distributions",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 67,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.accttypedisplay",
+                              "label": "global.account.type"
+                            },
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsegprodcat",
+                              "label": "global.product.category",
+                              "required": false,
+                              "conditionShow": "base.prodcathiddenfl === false",
+                              "readonly": true,
+                              "maxLength": 4
+                            },
+                            {
+                              "id": 49,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsegwhse",
+                              "label": "global.warehouse",
+                              "conditionShow": "base.whsehiddenfl === false",
+                              "readonly": true,
+                              "maxLength": 4
+                            },
+                            {
+                              "id": 50,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsegcusttype",
+                              "label": "global.customer.type",
+                              "conditionShow": "base.custtypehiddenfl === false",
+                              "readonly": true,
+                              "maxLength": 3
+                            },
+                            {
+                              "id": 51,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsegsalesrep",
+                              "label": "global.sales.rep",
+                              "conditionShow": "base.salesrephiddenfl === false",
+                              "readonly": true,
+                              "maxLength": 4
+                            },
+                            {
+                              "id": 52,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsegcogsadj",
+                              "label": "global.cogs.adjust",
+                              "conditionShow": "base.cogsadjhiddenfl === false",
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 26,
+                  "type": "EXP_AREA",
+                  "label": "gl.accounts",
+                  "children": [
+                    {
+                      "id": 31,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glinventory",
+                              "label": "global.inventory",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === true",
+                              "eventChange": "dtl.glaccountChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 34,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glnsinventory",
+                              "label": "global.non.stock.inventory",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === true",
+                              "eventChange": "dtl.glaccountChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glwipwriteoff",
+                              "label": "global.work.in.process.write.off",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === true",
+                              "eventChange": "dtl.glaccountChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glcorechrg",
+                              "label": "global.core.charge",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === true",
+                              "eventChange": "dtl.glaccountChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 40,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glphysicaladj",
+                              "label": "global.physical.adjustment",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === true",
+                              "eventChange": "dtl.glaccountChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glcustcoredue",
+                              "label": "global.customer.core.due",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === true",
+                              "eventChange": "dtl.glaccountChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glvendcoreliab",
+                              "label": "global.vendor.core.liability",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === true",
+                              "eventChange": "dtl.glaccountChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 43,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.gltallyvariance",
+                              "label": "global.tally.variance",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === true",
+                              "eventChange": "dtl.glaccountChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 53,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glgrosssales",
+                              "label": "global.gross.sales",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === false",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 54,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.gllinedisc",
+                              "label": "global.line.discounts",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === false",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 55,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glcogs",
+                              "label": "global.cost.of.goods",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === false",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 56,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glcogadj",
+                              "label": "global.cost.of.goods.adjustment",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === false",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 57,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glwtcogadj",
+                              "label": "wt.cost.adjustments",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === false",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 58,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glsalesreturns",
+                              "label": "global.sales.returns.allow",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === false",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 66,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glrebatewriteoff",
+                              "label": "ic.rebate.writeoff",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === false",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 35,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.gldirinventory",
+                              "label": "global.direct.order.inventory",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === true",
+                              "eventChange": "dtl.glaccountChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glwipinventory",
+                              "label": "global.work.in.process.inventory",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === true",
+                              "eventChange": "dtl.glaccountChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 44,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.gluninvoicedinv",
+                              "label": "global.uninvoiced.inventory",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === true",
+                              "eventChange": "dtl.glaccountChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 45,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.gliccostadj",
+                              "label": "ic.cost.adjustments",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === true",
+                              "eventChange": "dtl.glaccountChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 46,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glrebatedue",
+                              "label": "global.rebate.due",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === true",
+                              "eventChange": "dtl.glaccountChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 47,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glcustcoreliab",
+                              "label": "global.customer.core.liability",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === true",
+                              "eventChange": "dtl.glaccountChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 48,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glcorevariance",
+                              "label": "global.core.variance",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === true",
+                              "eventChange": "dtl.glaccountChanged()",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 60,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.gldirgrosssales",
+                              "label": "global.direct.order.sales",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === false",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 61,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glorderdisc",
+                              "label": "global.order.discount",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === false",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 62,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.gldircogs",
+                              "label": "global.dir.order.cost.of.goods",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === false",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 63,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glrestockchrg",
+                              "label": "global.restock.charge",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === false",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 64,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glrebatecostadj",
+                              "label": "global.rebate.cost.adjust",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === false",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 65,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glcoreconv",
+                              "label": "global.core.conversion",
+                              "meta": "GlAccount",
+                              "conditionShow": "base.criteria.accttype === false",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "icseg",
+                        "objectRef": "dtl.icseg",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

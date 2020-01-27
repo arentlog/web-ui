@@ -1,0 +1,688 @@
+{
+  "viewId": "oe-oeet-initiate-copy-copy",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "copy.isCopy()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.order.entry",
+              "subLabel": "global.copy",
+              "children": [
+                {
+                  "id": 50,
+                  "type": "BTN",
+                  "label": "global.continue",
+                  "icon": "icon-right-arrow",
+                  "eventClick": "",
+                  "submitForm": true,
+                  "eventValidated": "copy.continue()",
+                  "conditionShow": "copy.isCopyOrderSelected()"
+                },
+                {
+                  "id": 51,
+                  "type": "BTN",
+                  "label": "global.new.revision",
+                  "icon": "icon-duplicate",
+                  "eventClick": "copy.newRevision()",
+                  "conditionShow": "copy.isCopyOrderSelected() && copy.copyType === 's'"
+                },
+                {
+                  "id": 52,
+                  "type": "BTN",
+                  "label": "global.clear",
+                  "icon": "icon-cancel",
+                  "eventClick": "copy.clear()",
+                  "conditionShow": "copy.isCopyOrderSelected()"
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "label": "global.create",
+                  "icon": "icon-new-document",
+                  "eventClick": "copy.create()",
+                  "conditionShow": "!copy.isCopyOrderSelected()"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "label": "global.maintain",
+                  "icon": "icon-edit",
+                  "eventClick": "copy.maintain()",
+                  "securityLevel": 3,
+                  "conditionShow": "!copy.isCopyOrderSelected()"
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-delete",
+                  "eventClick": "copy.delete()",
+                  "securityLevel": 3,
+                  "conditionShow": "!copy.isCopyOrderSelected()"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "label": "global.print",
+                  "icon": "icon-print",
+                  "eventClick": "copy.print()",
+                  "conditionShow": "!copy.isCopyOrderSelected()"
+                },
+                {
+                  "id": 82,
+                  "type": "BTN",
+                  "label": "global.order.entry.defaults",
+                  "icon": "icon-genealogy",
+                  "eventClick": "copy.orderEntryDefaultsClicked()",
+                  "conditionShow": "!copy.isCopyOrderSelected()"
+                },
+                {
+                  "id": 77,
+                  "type": "BTN",
+                  "label": "global.receive.on.account",
+                  "conditionShow": "!copy.isCopyOrderSelected()",
+                  "eventClick": "copy.receiveOnAccount()",
+                  "icon": "icon-payment-request"
+                },
+                {
+                  "id": 78,
+                  "type": "BTN",
+                  "label": "wl.counter.sales.shipping",
+                  "conditionShow": "!copy.isCopyOrderSelected() && base.sasa.modwlfl !== 'no'",
+                  "icon": "icon-travel-plan",
+                  "eventClick": "copy.counterSalesShipping()"
+                },
+                {
+                  "id": 79,
+                  "type": "BTN",
+                  "label": "global.maintain.customer.po",
+                  "conditionShow": "!copy.isCopyOrderSelected()",
+                  "eventClick": "copy.maintainPo()",
+                  "icon": "icon-edit"
+                },
+                {
+                  "id": 80,
+                  "type": "BTN",
+                  "label": "wt.billing.orders",
+                  "conditionShow": "!copy.isCopyOrderSelected()",
+                  "icon": "icon-script",
+                  "eventClick": "copy.billingOrders()"
+                },
+                {
+                  "id": 81,
+                  "type": "BTN",
+                  "label": "global.import.from.excel",
+                  "conditionShow": "!copy.isCopyOrderSelected()",
+                  "icon": "icon-tree-xls",
+                  "eventClick": "copy.importFromExcel()"
+                },
+                {
+                  "id": 89,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.sales.order.fulfillment",
+                  "icon": "icon-script",
+                  "conditionShow": "base.isOrderFulfillmentOn && !copy.isCopyOrderSelected()",
+                  "conditionDisabled": "!base.isSASOFulfillmentOn",
+                  "securityLevel": 3,
+                  "eventClick": "copy.orderFulfillmentClicked()"
+                },
+                {
+                  "id": 90,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reassign.customer.slash.ship.to",
+                  "icon": "icon-edit",
+                  "conditionShow": "base.pvUser.oereassignarfl",
+                  "securityLevel": 3,
+                  "eventClick": "copy.maintCustShipTo()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 11,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 12,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "copy.copyType",
+                          "label": "global.copy.type",
+                          "type3": "INLINE",
+                          "blankOption": false,
+                          "conditionReadonly": "!copy.copyOrder.btnordlistenabled",
+                          "eventChange": "copy.copyTypeChanged()",
+                          "children": [
+                            {
+                              "id": 16,
+                              "type": "OPT",
+                              "label": "global.single.order",
+                              "value": "s"
+                            },
+                            {
+                              "id": 53,
+                              "type": "OPT",
+                              "label": "global.multiple.orders",
+                              "value": "m"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 75,
+                      "type": "COL",
+                      "subType": "2/3",
+                      "children": [
+                        {
+                          "id": 76,
+                          "type": "MESSAGE",
+                          "text": "{{copy.copyCompleteMessage}}"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 14,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "copy.copyOrderNumber",
+                          "label": "global.order.number.to.process",
+                          "meta": "OEOrders",
+                          "conditionShow": "copy.copyType === 's'",
+                          "autoFocus": true,
+                          "conditionReadonly": "!copy.copyOrder.ordernoenabled",
+                          "conditionFocus": "copy.copyOrderFocused",
+                          "eventChange": "copy.copyOrderNumberChanged()"
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "copy.copyOrder.type",
+                          "label": "global.convert.to",
+                          "conditionShow": "copy.copyType === 's'",
+                          "conditionReadonly": "!copy.copyOrder.typeenabled",
+                          "type3": "MANUAL",
+                          "optionsModel": "copy.transactionTypes",
+                          "optionLabelField": "transtypedesc",
+                          "optionValueField": "transtype",
+                          "blankOption": false,
+                          "eventChange": "copy.typeChanged()"
+                        },
+                        {
+                          "id": 60,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "copy.copyOrder.reason",
+                          "label": "global.return.adjust.reason",
+                          "conditionReadonly": "!copy.copyOrder.reasonenabled",
+                          "conditionShow": "!copy.copyOrder.reasonhidden",
+                          "type3": "CODES",
+                          "meta": "ReturnAdjustReason"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 17,
+                      "type": "COL",
+                      "subType": "2/3",
+                      "children": [
+                        {
+                          "id": 23,
+                          "type": "FIELD_SET",
+                          "label": "global.selected.order.info",
+                          "conditionShow": "copy.copyType === 's'",
+                          "children": [
+                            {
+                              "id": 56,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 57,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 55,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.copyOrder.custno",
+                                      "label": "global.customer",
+                                      "dataDesc": "copy.copyOrder.custname",
+                                      "conditionShow": "copy.copyType === 's'"
+                                    },
+                                    {
+                                      "id": 20,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.copyOrder.transtype",
+                                      "label": "global.type",
+                                      "conditionShow": "copy.copyType === 's'",
+                                      "dataFormat": "OeOrderType"
+                                    },
+                                    {
+                                      "id": 21,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.copyOrder.stage",
+                                      "label": "global.stage",
+                                      "conditionShow": "copy.copyType === 's'",
+                                      "dataFormat": "OeStage"
+                                    },
+                                    {
+                                      "id": 83,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.copyOrder.oefulfillmentordfl",
+                                      "label": "global.fulfillment.order",
+                                      "conditionShow": "copy.copyType === 's' && copy.isOrderFulfillmentOn",
+                                      "conditionDisabled": "!copy.copyOrder.typeenabled",
+                                      "dataFormat": "BooleanToYesNo"
+                                    },
+                                    {
+                                      "id": 87,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.copyOrder.saleswhse",
+                                      "label": "global.sales.warehouse",
+                                      "conditionShow": "copy.copyType === 's' && copy.isAOSalesWhseOn",
+                                      "conditionDisabled": "!copy.copyOrder.typeenabled"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 58,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 70,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.copyOrder.promisedt",
+                                      "label": "global.promise.date",
+                                      "dataFormat": "DATE",
+                                      "conditionShow": "copy.copyType === 's'"
+                                    },
+                                    {
+                                      "id": 59,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.copyOrder.custpo",
+                                      "label": "global.customer.po.number",
+                                      "conditionShow": "copy.copyType === 's'"
+                                    },
+                                    {
+                                      "id": 22,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.copyOrder.refer",
+                                      "label": "global.reference",
+                                      "conditionShow": "copy.copyType === 's'"
+                                    },
+                                    {
+                                      "id": 84,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.copyOrder.oefulfillmenttiedfl",
+                                      "label": "global.fulfillment.tied.order",
+                                      "conditionShow": "copy.copyType === 's' && copy.isOrderFulfillmentOn",
+                                      "conditionDisabled": "!copy.copyOrder.typeenabled",
+                                      "dataFormat": "BooleanToYesNo"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 24,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 25,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 26,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "copy.listOrderNumber",
+                          "label": "global.order.number",
+                          "meta": "OEOrders",
+                          "conditionShow": "copy.copyType === 'm'",
+                          "conditionFocus": "copy.listCopyOrderFocused",
+                          "eventChange": "copy.copyOrderNumberListChanged()",
+                          "controls": {
+                            "actionBtn": {
+                              "id": 34,
+                              "type": "BTN",
+                              "subType": "ICON",
+                              "label": "global.add",
+                              "icon": "icon-add",
+                              "isLabelTooltip": true,
+                              "eventClick": "copy.addOrderToList()",
+                              "conditionDisabled": "!copy.listOrderNumber"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 72,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 29,
+                          "type": "FIELD_SET",
+                          "label": "global.lines",
+                          "conditionShow": "copy.copyType === 'm'",
+                          "children": [
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "copy.useAllLines",
+                              "label": "global.all.lines",
+                              "dataFormat": "LOGICAL",
+                              "conditionShow": "copy.copyType === 'm'"
+                            },
+                            {
+                              "id": 28,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 31,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "copy.listBeginLineNo",
+                                  "label": "global.from.line.number",
+                                  "size": "XS",
+                                  "conditionShow": "copy.copyType === 'm'",
+                                  "conditionReadonly": "copy.useAllLines"
+                                },
+                                {
+                                  "id": 32,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "copy.listEndLineNo",
+                                  "label": "global.to.line.number",
+                                  "size": "XS",
+                                  "conditionShow": "copy.copyType === 'm'",
+                                  "conditionReadonly": "copy.useAllLines"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 73,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 74,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 61,
+                          "type": "FIELD_SET",
+                          "label": "global.selected.order.info",
+                          "conditionShow": "copy.copyType === 'm'",
+                          "children": [
+                            {
+                              "id": 62,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 63,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 65,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.listOrder.custno",
+                                      "label": "global.customer",
+                                      "dataDesc": "copy.listOrder.custname",
+                                      "conditionShow": "copy.copyType === 'm'"
+                                    },
+                                    {
+                                      "id": 66,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.listOrder.transtype",
+                                      "label": "global.type",
+                                      "conditionShow": "copy.copyType === 'm'",
+                                      "dataFormat": "OeOrderType"
+                                    },
+                                    {
+                                      "id": 67,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.listOrder.stage",
+                                      "label": "global.stage",
+                                      "conditionShow": "copy.copyType === 'm'",
+                                      "dataFormat": "OeStage"
+                                    },
+                                    {
+                                      "id": 85,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.listOrder.oefulfillmentordfl",
+                                      "label": "global.fulfillment.order",
+                                      "conditionShow": "copy.copyType === 'm' && copy.isOrderFulfillmentOn",
+                                      "conditionDisabled": "!copy.copyOrder.typeenabled",
+                                      "dataFormat": "BooleanToYesNo"
+                                    },
+                                    {
+                                      "id": 88,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.listOrder.saleswhse",
+                                      "label": "global.sales.warehouse",
+                                      "conditionShow": "copy.copyType === 'm' && copy.isAOSalesWhseOn",
+                                      "conditionDisabled": "!copy.copyOrder.typeenabled"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 64,
+                                  "type": "COL",
+                                  "subType": "1/2",
+                                  "children": [
+                                    {
+                                      "id": 71,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.listOrder.promisedt",
+                                      "label": "global.promise.date",
+                                      "dataFormat": "DATE",
+                                      "conditionShow": "copy.copyType === 'm'"
+                                    },
+                                    {
+                                      "id": 69,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.listOrder.custpo",
+                                      "label": "global.customer.po.number",
+                                      "conditionShow": "copy.copyType === 'm'"
+                                    },
+                                    {
+                                      "id": 68,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.listOrder.refer",
+                                      "label": "global.reference",
+                                      "conditionShow": "copy.copyType === 'm'"
+                                    },
+                                    {
+                                      "id": 86,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "copy.listOrder.oefulfillmenttiedfl",
+                                      "label": "global.fulfillment.tied.order",
+                                      "conditionShow": "copy.copyType === 'm' && copy.isOrderFulfillmentOn",
+                                      "conditionDisabled": "!copy.copyOrder.typeenabled",
+                                      "dataFormat": "BooleanToYesNo"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 39,
+                  "type": "GRID",
+                  "conditionShow": "copy.copyType === 'm'",
+                  "controlRef": "copy.listCopyGrid",
+                  "model": "copy.copyOrderList",
+                  "options": {
+                    "showCheckboxes": true,
+                    "selectable": "multiple"
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 40,
+                      "type": "TOOLBAR",
+                      "label": "global.orders",
+                      "conditionShow": "copy.copyType === 'm'",
+                      "children": [
+                        {
+                          "id": 42,
+                          "type": "BTN",
+                          "label": "global.remove",
+                          "icon": "icon-delete",
+                          "eventClick": "copy.removeOrder()",
+                          "conditionDisabled": "!copy.listCopyGrid.isAnyRowSelected()"
+                        },
+                        {
+                          "id": 43,
+                          "type": "BTN",
+                          "label": "global.clear.all",
+                          "icon": "icon-cancel",
+                          "eventClick": "copy.clearAllOrders()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 41,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.order.number",
+                      "model": "disporderno"
+                    },
+                    {
+                      "id": 44,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.begin.line.number",
+                      "model": "beglineno",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 45,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.end.line.number",
+                      "model": "endlineno",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 46,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.stage",
+                      "model": "dispstagecd",
+                      "dataFormat": "OeStage"
+                    },
+                    {
+                      "id": 47,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.customer.number",
+                      "model": "custno",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 48,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.type",
+                      "model": "transtype",
+                      "dataFormat": "OeOrderType"
+                    },
+                    {
+                      "id": 49,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "label": "global.promise.date",
+                      "model": "promisedt",
+                      "dataFormat": "DATE"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "type": "VIEW_CNTR",
+      "viewName": "copyChildView"
+    }
+  ]
+}

@@ -1,0 +1,428 @@
+{
+  "viewId": "gl-glet-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.transaction.entry",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 27,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "securityLevel": 3,
+                  "conditionDisabled": "!base.isDetail()"
+                },
+                {
+                  "id": 28,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "securityLevel": 5,
+                  "conditionDisabled": "!base.isDetail()"
+                },
+                {
+                  "id": 29,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3,
+                  "eventClick": "dtl.submit()"
+                },
+                {
+                  "id": 30,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 31,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 33,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 34,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 36,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.glet.cAcctno",
+                          "label": "global.account",
+                          "meta": "GlAccount",
+                          "required": true,
+                          "type3": "STANDARD",
+                          "eventChange": "base.glAccountChanged()",
+                          "autoFocus": true,
+                          "modelOptions": {
+                            "updateOn": "blur"
+                          },
+                          "controls": {
+                            "actionBtn": {
+                              "id": 115,
+                              "type": "BTN",
+                              "subType": "ICON",
+                              "label": "global.inquire",
+                              "icon": "icon-drilldown",
+                              "isLabelTooltip": true,
+                              "eventClick": "base.glInquiryHyperlink()",
+                              "conditionDisabled": "!base.glet.cAcctno"
+                            }
+                          }
+                        },
+                        {
+                          "id": 38,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.glet.transcd",
+                          "label": "global.type",
+                          "meta": "AccountEntryTransType",
+                          "type3": "SET",
+                          "metaGroup": "GL",
+                          "required": true,
+                          "eventChange": "base.transTypeChanged()"
+                        },
+                        {
+                          "id": 40,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.glet.refer",
+                          "label": "global.reference",
+                          "maxLength": 24
+                        },
+                        {
+                          "id": 81,
+                          "type": "FIELD",
+                          "subType": "TEXT_AREA",
+                          "model": "base.glet.extref",
+                          "label": "global.extended.reference",
+                          "maxLength": 600
+                        }
+                      ]
+                    },
+                    {
+                      "id": 35,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 37,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.glet.amount",
+                          "label": "global.amount",
+                          "dataFormat": "DECIMAL",
+                          "digits": 9,
+                          "decimals": 2,
+                          "required": true,
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 39,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.glet.seqno",
+                          "label": "global.sequence.number"
+                        },
+                        {
+                          "id": 41,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "base.glet.postdt",
+                          "label": "global.date",
+                          "dataFormat": "DATE"
+                        },
+                        {
+                          "id": 111,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.glet.crthist",
+                          "label": "global.correct.ar.or.ap.history",
+                          "dataFormat": "LOGICAL",
+                          "conditionShow": "base.isHistoryVisible"
+                        },
+                        {
+                          "id": 112,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.glet.jrnlno",
+                          "label": "global.journal.number",
+                          "dataFormat": "INTEGER_TEXT",
+                          "maxLength": 8,
+                          "sign": "+",
+                          "digits": 8,
+                          "conditionShow": "base.glet.crthist",
+                          "conditionRequired": "base.glet.crthist"
+                        },
+                        {
+                          "id": 113,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.glet.setno",
+                          "label": "global.set.number",
+                          "dataFormat": "INTEGER_TEXT",
+                          "maxLength": 5,
+                          "sign": "+",
+                          "digits": 5,
+                          "conditionShow": "base.glet.crthist"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 82,
+                  "type": "EXP_AREA",
+                  "label": "global.customer",
+                  "collapsed": true,
+                  "children": [
+                    {
+                      "id": 83,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 84,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 95,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 94,
+                                  "type": "FIELD",
+                                  "subType": "LOOKUP",
+                                  "model": "base.glet.custno",
+                                  "label": "global.customer.number",
+                                  "meta": "Customer"
+                                },
+                                {
+                                  "id": 96,
+                                  "type": "FIELD",
+                                  "subType": "LOOKUP",
+                                  "model": "base.glet.invoice",
+                                  "label": "global.invoice.number",
+                                  "meta": "Invoices"
+                                },
+                                {
+                                  "id": 98,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.glet.checkno",
+                                  "label": "global.check.number",
+                                  "maxLength": 8,
+                                  "dataFormat": "INTEGER_TEXT",
+                                  "sign": "+",
+                                  "digits": 8
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 87,
+                  "type": "EXP_AREA",
+                  "label": "global.vendor",
+                  "collapsed": true,
+                  "children": [
+                    {
+                      "id": 88,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 89,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 100,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 101,
+                                  "type": "FIELD",
+                                  "subType": "LOOKUP",
+                                  "model": "base.glet.vendno",
+                                  "label": "global.vendor.number",
+                                  "meta": "Vendor"
+                                },
+                                {
+                                  "id": 102,
+                                  "type": "FIELD",
+                                  "subType": "LOOKUP",
+                                  "model": "base.glet.apinvno",
+                                  "label": "ap.invoice.number",
+                                  "meta": "ApInvoices"
+                                },
+                                {
+                                  "id": 103,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "base.glet.checkno",
+                                  "label": "global.check.number",
+                                  "maxLength": 8,
+                                  "dataFormat": "INTEGER_TEXT",
+                                  "digits": 8,
+                                  "sign": "+"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 91,
+                  "type": "EXP_AREA",
+                  "label": "global.check.reconciliation",
+                  "collapsed": true,
+                  "conditionShow": "dtl.isCheckRecVisible",
+                  "children": [
+                    {
+                      "id": 92,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 93,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 105,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "base.glet.bankno",
+                              "label": "global.bank.number",
+                              "type3": "MANUAL",
+                              "optionsModel": "base.banknoDropDownOptions"
+                            },
+                            {
+                              "id": 108,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "base.glet.clearfl",
+                              "label": "global.cleared",
+                              "type3": "SET",
+                              "metaGroup": "COMMON",
+                              "meta": "YesNo"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 110,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 106,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "base.glet.crtype",
+                              "label": "global.type",
+                              "type3": "MANUAL",
+                              "optionsModel": "base.checkReconTypes",
+                              "optionLabelField": "value",
+                              "optionValueField": "key"
+                            },
+                            {
+                              "id": 109,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.glet.checkno",
+                              "label": "global.check.number",
+                              "dataFormat": "INTEGER_TEXT",
+                              "maxLength": 8,
+                              "sign": "+",
+                              "digits": 8,
+                              "conditionReadonly": "base.isDetail() || (base.glet.crtype !== 1 && base.isEdit())"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 114,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Glet",
+      "contextValues": {
+        "key1": "base.glet.jrnlno",
+        "key2": "base.glet.setno",
+        "key3": "base.glet.seqno"
+      }
+    }
+  ]
+}

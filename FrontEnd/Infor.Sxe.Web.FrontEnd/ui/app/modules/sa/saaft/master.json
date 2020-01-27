@@ -1,0 +1,124 @@
+{
+  "viewId": "sa-saaft-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.saaft",
+          "children": [
+            {
+              "id": 13,
+              "type": "BTN",
+              "subType": "PRI",
+              "label": "global.transfer.file",
+              "eventClick": "mst.transferFile()",
+              "conditionDisabled": "!mst.fileName || mst.fileName.length === 0 || !mst.targetType || mst.fileTransferInProgress"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 8,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "FIELD",
+                      "subType": "FILE",
+                      "model": "mst.fileName",
+                      "label": "global.data.fiele",
+                      "maxLength": 100,
+                      "eventChange": "mst.fileSelected()",
+                      "multiple": true,
+                      "conditionDisabled": "mst.fileTransferInProgress"
+                    }
+                  ]
+                },
+                {
+                  "id": 10,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 12,
+                      "type": "FIELD",
+                      "subType": "DROP_DOWN",
+                      "model": "mst.targetType",
+                      "label": "global.target.type",
+                      "type3": "SET",
+                      "metaGroup": "SA",
+                      "meta": "TargetType",
+                      "blankOption": false,
+                      "conditionDisabled": "mst.fileTransferInProgress"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 18,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 19,
+                  "type": "COL",
+                  "subType": "1",
+                  "children": [
+                    {
+                      "id": 34,
+                      "type": "TOOLBAR",
+                      "label": "{{mst.fileTransferHeader}}",
+                      "children": []
+                    },
+                    {
+                      "id": 22,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 31,
+                              "type": "MESSAGE",
+                              "text": "{{mst.fileTransferMessage}}",
+                              "conditionShow": "mst.fileTransferInProgress",
+                              "icon": "icon-in-progress"
+                            },
+                            {
+                              "id": 33,
+                              "type": "MESSAGE",
+                              "text": "{{mst.fileTransferMessage}}",
+                              "conditionShow": "!mst.fileTransferInProgress && mst.fileTransferMessage",
+                              "icon": "icon-confirm"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

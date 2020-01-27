@@ -1,0 +1,467 @@
+{
+  "viewId": "oe-shared-line-details-line",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "!line.isKitOrKitSubComponent()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "global.line.detail",
+          "subLabel": "{{line.subTitle}}",
+          "controls": {
+            "navBtns": {
+              "id": 4,
+              "type": "BTN_SET",
+              "subType": "TBAR_NAV",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "BTN",
+                  "subType": "ICON",
+                  "icon": "icon-left-arrow",
+                  "stateRef": "^",
+                  "label": "special.button.back"
+                }
+              ]
+            }
+          }
+        },
+        "content": {
+          "id": 6,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "type": "TAB_SET",
+              "id": 7,
+              "children": [
+                {
+                  "id": 11,
+                  "type": "TAB",
+                  "label": "global.extended",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.extendedfl",
+                  "conditionSelected": "line.extendedTabSelected",
+                  "tabId": "extended",
+                  "children": [
+                    {
+                      "id": 26,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/shared/line-details/tabs/extended.json",
+                      "controller": "OeLineDetailsExtendedCtrl as ext"
+                    }
+                  ]
+                },
+                {
+                  "id": 10,
+                  "type": "TAB",
+                  "label": "global.non.stock",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.nonstockfl",
+                  "tabId": "non-stock",
+                  "children": [
+                    {
+                      "id": 27,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/shared/line-details/tabs/nonstock.json",
+                      "controller": "OeLineDetailsNonstockCtrl as ns"
+                    }
+                  ]
+                },
+                {
+                  "id": 18,
+                  "type": "TAB",
+                  "label": "global.ties",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.tiesfl",
+                  "tabId": "ties",
+                  "children": [
+                    {
+                      "id": 28,
+                      "type": "CUSTOM",
+                      "subType": "Ties",
+                      "options": {
+                        "modeModel": "Inquiry Only",
+                        "tieTypeModel": "Order Entry",
+                        "orderNumberModel": "line.orderno",
+                        "orderSuffixModel": "line.ordersuf",
+                        "lineNumberModel": "line.lineno"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 17,
+                  "type": "TAB",
+                  "label": "global.serial",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.serialfl",
+                  "tabId": "serial",
+                  "children": [
+                    {
+                      "id": 29,
+                      "type": "CUSTOM",
+                      "subType": "SerialsInquiry",
+                      "options": {
+                        "ordertypeModel": "o",
+                        "ordernoModel": "line.orderno",
+                        "ordersufModel": "line.ordersuf",
+                        "linenoModel": "line.lineno"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 12,
+                  "type": "TAB",
+                  "label": "global.lot",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.lotfl",
+                  "tabId": "lot",
+                  "children": [
+                    {
+                      "id": 30,
+                      "type": "CUSTOM",
+                      "subType": "LotsInquiry",
+                      "options": {
+                        "ordertypeModel": "o",
+                        "ordernoModel": "line.orderno",
+                        "ordersufModel": "line.ordersuf",
+                        "linenoModel": "line.lineno"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "TAB",
+                  "id": 8,
+                  "label": "global.return",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.returnfl",
+                  "tabId": "return",
+                  "children": [
+                    {
+                      "id": 31,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/shared/line-details/tabs/return.json",
+                      "controller": "OeLineDetailsReturnCtrl as ret"
+                    }
+                  ]
+                },
+                {
+                  "id": 20,
+                  "type": "TAB",
+                  "label": "global.kit",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.kitfl",
+                  "tabId": "kit",
+                  "children": [
+                    {
+                      "id": 41,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "shared/line-kit-inquiry/kit.json",
+                      "controller": "OeLineDetailKitCtrl as oeLdKit"
+                    }
+                  ]
+                },
+                {
+                  "id": 15,
+                  "type": "TAB",
+                  "label": "global.configurator",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.configuratorfl",
+                  "tabId": "configurator",
+                  "children": [
+                    {
+                      "id": 32,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/shared/line-details/tabs/configurator.json",
+                      "controller": "OeLineDetailsConfiguratorCtrl as cfg"
+                    }
+                  ]
+                },
+                {
+                  "id": 22,
+                  "type": "TAB",
+                  "label": "global.tally",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.mixfl",
+                  "tabId": "tally",
+                  "children": [
+                    {
+                      "id": 45,
+                      "type": "CUSTOM",
+                      "subType": "OETally",
+                      "options": {
+                        "functionNameModel": "oeio",
+                        "inquiryModeModel": true,
+                        "orderNumberModel": "line.orderno",
+                        "orderSuffixModel": "line.ordersuf",
+                        "lineNumberModel": "line.lineno",
+                        "customerModel": "line.oeel.custno",
+                        "shipToModel": "line.oeel.shipto",
+                        "warehouseModel": "line.oeel.whse",
+                        "productModel": "line.oeel.shipprod",
+                        "unitModel": "line.oeel.unit",
+                        "quantityOrderedModel": "line.oeel.qtyord",
+                        "controlRef": "line.tallyControl",
+                        "menuSecurityModel": "line.menuSecurity"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 24,
+                  "type": "TAB",
+                  "label": "global.bundles",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.bundlesfl",
+                  "tabId": "bundles",
+                  "children": [
+                    {
+                      "id": 46,
+                      "type": "CUSTOM",
+                      "subType": "OEBundles",
+                      "options": {
+                        "functionNameModel": "oeio",
+                        "inquiryModeModel": true,
+                        "orderNumberModel": "line.orderno",
+                        "orderSuffixModel": "line.ordersuf",
+                        "lineNumberModel": "line.lineno",
+                        "customerModel": "line.oeel.custno",
+                        "shipToModel": "line.oeel.shipto",
+                        "warehouseModel": "line.oeel.whse",
+                        "productModel": "line.oeel.shipprod",
+                        "unitModel": "line.oeel.unit",
+                        "quantityOrderedModel": "line.oeel.qtyord",
+                        "controlRef": "line.bundleControl",
+                        "menuSecurityModel": "line.menuSecurity"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 23,
+                  "type": "TAB",
+                  "label": "global.core.allocations",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.coreallocationsfl",
+                  "tabId": "core-allocations",
+                  "children": [
+                    {
+                      "id": 35,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/shared/line-details/tabs/coreallocations.json",
+                      "controller": "OeLineDetailsCoreAllocationsCtrl as coralloc"
+                    }
+                  ]
+                },
+                {
+                  "id": 25,
+                  "type": "TAB",
+                  "label": "global.core.returns",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.corereturnsfl",
+                  "tabId": "core-returns",
+                  "children": [
+                    {
+                      "id": 34,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/shared/line-details/tabs/corereturns.json",
+                      "controller": "OeLineDetailsCoreReturnsCtrl as corret"
+                    }
+                  ]
+                },
+                {
+                  "id": 13,
+                  "type": "TAB",
+                  "label": "global.extended.line.comments",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.extendedlinecommentsfl",
+                  "tabId": "extended-line-comments",
+                  "children": [
+                    {
+                      "id": 36,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/shared/line-details/tabs/extendedlinecomments.json",
+                      "controller": "OeLineDetailsExtendedLineCommentsCtrl as exlncom"
+                    }
+                  ]
+                },
+                {
+                  "id": 9,
+                  "type": "TAB",
+                  "label": "global.internal.external.comments.sub.total.lines",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.commentssubtotalfl",
+                  "conditionSelected": "line.comTabSelected",
+                  "tabId": "comments-sub-total",
+                  "children": [
+                    {
+                      "id": 39,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/shared/line-details/tabs/subtotallines.json",
+                      "controller": "OeLineDetailsSubTotalLinesCtrl as subtot"
+                    }
+                  ]
+                },
+                {
+                  "id": 16,
+                  "type": "TAB",
+                  "label": "global.original.line.history",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.linehistoryfl",
+                  "tabId": "original-line-history",
+                  "children": [
+                    {
+                      "id": 37,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/shared/line-details/tabs/origlinehistory.json",
+                      "controller": "OeLineDetailsOrigLineHistoryCtrl as ohist"
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "TAB",
+                  "label": "global.actual.line.history",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.linehistoryfl",
+                  "tabId": "actual-line-history",
+                  "children": [
+                    {
+                      "id": 38,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/shared/line-details/tabs/actlinehistory.json",
+                      "controller": "OeLineDetailsActLineHistoryCtrl as ahist"
+                    }
+                  ]
+                },
+                {
+                  "id": 14,
+                  "type": "TAB",
+                  "label": "global.custom",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.customfl",
+                  "tabId": "custom",
+                  "children": [
+                    {
+                      "id": 33,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "oeel",
+                        "conditionReadonly": "true",
+                        "objectRef": "line.oeel"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 21,
+                  "type": "TAB",
+                  "label": "global.comments",
+                  "subFunction": "",
+                  "conditionShow": "line.tabs.commentsfl",
+                  "tabId": "comments",
+                  "children": [
+                    {
+                      "id": 40,
+                      "type": "CUSTOM",
+                      "subType": "LineComments",
+                      "options": {
+                        "lineNumberModel": "line.lineno",
+                        "orderNumberModel": "line.orderno",
+                        "commentTypeModel": "oe",
+                        "tableNameModel": "oeel",
+                        "orderSuffixModel": "line.ordersuf",
+                        "isAutoFocus": true
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 43,
+                  "type": "TAB",
+                  "label": "global.correction.date",
+                  "conditionShow": "line.tabs.correctiondatefl",
+                  "tabId": "correction-date",
+                  "children": [
+                    {
+                      "id": 44,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/shared/line-details/tabs/correction-date.json",
+                      "controller": "OeLineDetailsCorrectionDateCtrl as ocdate"
+                    }
+                  ]
+                },
+                {
+                  "id": 47,
+                  "type": "TAB",
+                  "label": "global.returns.and.correction.history",
+                  "tabId": "returns-and-correction-history",
+                  "children": [
+                    {
+                      "id": 48,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/shared/line-details/tabs/return-correction.json",
+                      "controller": "OELineDetailsCorrectionHistoryCtrl as corhist"
+                    }
+                  ]
+                },
+                {
+                  "id": 49,
+                  "type": "TAB",
+                  "label": "global.rebate",
+                  "tabId": "rebate",
+                  "children": [
+                    {
+                      "id": 50,
+                      "type": "SUB_VIEW",
+                      "subType": "JSON",
+                      "viewPath": "oe/shared/line-details/tabs/rebate.json",
+                      "controller": "OELineDetailsRebateCtrl as reb"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 42,
+      "type": "VIEW_CNTR",
+      "viewName": "kitComponentViewContainer"
+    },
+    {
+      "id": 51,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Oeel",
+      "contextValues": {
+        "key1": "line.orderno",
+        "key2": "line.ordersuf",
+        "key3": "line.lineno"
+      }
+    }
+  ]
+}

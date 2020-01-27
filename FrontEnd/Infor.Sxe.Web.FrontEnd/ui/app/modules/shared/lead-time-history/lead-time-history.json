@@ -1,0 +1,334 @@
+{
+  "viewId": "shared-lead-time-history-leadtimehistory",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.lead.time.history",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 32,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 33,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "lth.back()"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "lth.recalcCriteria.receiptdate",
+                          "label": "global.starting.receipt.date",
+                          "dataFormat": "DATE"
+                        },
+                        {
+                          "id": 31,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "lth.recalcCriteria.noreceipts",
+                          "label": "global.number.of.receipts",
+                          "dataFormat": "INTEGER",
+                          "sign": "+",
+                          "digits": 4,
+                          "size": "SM"
+                        },
+                        {
+                          "id": 34,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "lth.recalcCriteria.ltmonths",
+                          "label": "global.number.of.months",
+                          "dataFormat": "INTEGER",
+                          "sign": "+",
+                          "digits": 3,
+                          "size": "SM"
+                        },
+                        {
+                          "id": 42,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "lth.recalcCriteria.inclrushfl",
+                          "label": "global.rush.lines",
+                          "dataFormat": "LOGICAL"
+                        },
+                        {
+                          "id": 43,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "lth.recalcCriteria.incldirectfl",
+                          "label": "global.direct.order.lines",
+                          "dataFormat": "LOGICAL"
+                        },
+                        {
+                          "id": 44,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "lth.recalcCriteria.inclreleasefl",
+                          "label": "global.blanket.release.lines",
+                          "dataFormat": "LOGICAL"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 36,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 37,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "lth.prodWhseInfo.leadtmavg",
+                          "label": "global.current.lead.time.average",
+                          "dataFormat": "INTEGER",
+                          "sign": "+",
+                          "digits": 4,
+                          "size": "SM",
+                          "readonly": true
+                        },
+                        {
+                          "id": 38,
+                          "type": "FIELD",
+                          "subType": "DATE",
+                          "model": "lth.prodWhseInfo.leadtmavgdt",
+                          "label": "global.average.lead.time.date",
+                          "dataFormat": "DATE",
+                          "readonly": true
+                        },
+                        {
+                          "id": 39,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "lth.prodWhseInfo.frozenltty",
+                          "label": "global.current.frozen.lt.code",
+                          "size": "SM",
+                          "readonly": true,
+                          "dataFormat": "INTEGER",
+                          "sign": "+",
+                          "digits": 3
+                        },
+                        {
+                          "id": 40,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "lth.recalcCriteria.calcLTAvg",
+                          "label": "global.calculated.lt.average",
+                          "dataFormat": "INTEGER",
+                          "sign": "+",
+                          "digits": 4,
+                          "readonly": true,
+                          "size": "SM"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 14,
+                  "type": "GRID",
+                  "model": "lth.leadtimeresults",
+                  "options": {
+                    "editable": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 15,
+                      "type": "TOOLBAR",
+                      "label": "global.lead.time.history",
+                      "children": [
+                        {
+                          "id": 45,
+                          "type": "BTN",
+                          "subType": "PRI",
+                          "label": "global.refresh",
+                          "icon": "icon-refresh",
+                          "eventClick": "lth.loadLeadTime()"
+                        },
+                        {
+                          "id": 46,
+                          "type": "BTN",
+                          "subType": "PRI",
+                          "label": "global.recalculate.lead.time",
+                          "eventClick": "lth.recalcLeadTime(false,true, false)",
+                          "icon": "icon-refresh"
+                        },
+                        {
+                          "id": 47,
+                          "type": "BTN",
+                          "subType": "PRI",
+                          "label": "global.update.lead.time.po.lines",
+                          "icon": "icon-save",
+                          "eventClick": "lth.recalcLeadTime(false, false, true)",
+                          "securityLevel": 3,
+                          "conditionDisabled": "!lth.isUpdateSecure"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 16,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "model": "receiptdt",
+                      "label": "global.receipt.date",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "HYPERLINK",
+                      "model": "pono",
+                      "label": "global.purchase.order.number",
+                      "width": 11,
+                      "eventClick": "lth.purchaseOrderInquiryHyperlink()",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 18,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "posuf",
+                      "label": "global.suffix",
+                      "dataFormat": "Suffix"
+                    },
+                    {
+                      "id": 19,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "notesfl",
+                      "label": "global.notes",
+                      "dataFormat": "NotesFlag"
+                    },
+                    {
+                      "id": 20,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "lineno",
+                      "label": "global.line.number",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 21,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "leadtime",
+                      "label": "global.lead.time",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 22,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "lnignoreltfl",
+                      "label": "global.ignore.lead.time.line",
+                      "editable": true,
+                      "cellEditable": "lth.isLineLTEditable()",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 23,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "hdrignoreltfl",
+                      "label": "global.hdr.ignore.lt",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 24,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "model": "orderdt",
+                      "label": "global.order.date",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 25,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyrcv",
+                      "label": "global.quantity.received",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "unit",
+                      "label": "global.unit"
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "transtype",
+                      "label": "global.type",
+                      "dataFormat": "OrderType"
+                    },
+                    {
+                      "id": 28,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "rushfl",
+                      "label": "global.rush",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 29,
+                      "type": "GRID_COL",
+                      "subType": "HYPERLINK",
+                      "model": "vendno",
+                      "label": "global.vendor.number",
+                      "eventClick": "lth.vendorInquiryHyperlink()",
+                      "dataFormat": "INTEGER_TEXT"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

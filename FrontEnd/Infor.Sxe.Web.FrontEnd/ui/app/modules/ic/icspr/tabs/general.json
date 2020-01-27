@@ -1,0 +1,227 @@
+{
+  "viewId": "ic-icspr-detail-general",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "conditionReadonly": "base.isDetail() || dtl.isGeneralTabReadonly",
+  "children": [
+    {
+      "id": 13,
+      "type": "EXP_AREA",
+      "label": "global.general",
+      "children": [
+        {
+          "id": 14,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 15,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icspraddchg.restricttype",
+                  "label": "global.restriction.type",
+                  "required": true,
+                  "conditionReadonly": "!base.isCreate()",
+                  "type3": "MANUAL",
+                  "optionsModel": "base.restrictTypeList",
+                  "blankOption": false
+                },
+                {
+                  "id": 24,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icspraddchg.product",
+                  "label": "global.product",
+                  "meta": "ProdAll",
+                  "conditionReadonly": "!base.isCreate()",
+                  "conditionShow": "dtl.icspraddchg.restricttype.toUpperCase() === 'PR'",
+                  "required": false,
+                  "conditionRequired": "dtl.icspraddchg.restricttype.toUpperCase() === 'PR'",
+                  "controls": {
+                    "actionBtn": {
+                      "id": 31,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "global.inquire",
+                      "icon": "icon-drilldown",
+                      "isLabelTooltip": true,
+                      "conditionDisabled": "!dtl.icspraddchg.product",
+                      "stateRef": "icip.detail({pk: dtl.icspraddchg.product, pk2: dtl.icspraddchg.whse})"
+                    }
+                  }
+                },
+                {
+                  "id": 25,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icspraddchg.prodline",
+                  "label": "global.product.line",
+                  "conditionReadonly": "!base.isCreate()",
+                  "conditionShow": "dtl.icspraddchg.restricttype.toUpperCase() === 'PL'",
+                  "meta": "ProdLine",
+                  "options": {
+                    "searchParams": {
+                      "prodline": {
+                        "type": "REF",
+                        "value": "dtl.icspraddchg.prodline"
+                      },
+                      "vendno": {
+                        "type": "REF",
+                        "value": "dtl.icspraddchg.vendno"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 26,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icspraddchg.vendno",
+                  "label": "global.vendor.number",
+                  "conditionShow": "dtl.icspraddchg.restricttype.toUpperCase() === 'PL'",
+                  "conditionReadonly": "!base.isCreate()",
+                  "required": false,
+                  "meta": "Vendor",
+                  "controls": {
+                    "actionBtn": {
+                      "id": 27,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "global.inquire",
+                      "icon": "icon-drilldown",
+                      "isLabelTooltip": true,
+                      "conditionDisabled": "!dtl.icspraddchg.vendno",
+                      "stateRef": "apiv.detail ({pk: dtl.icspraddchg.vendno})"
+                    }
+                  }
+                },
+                {
+                  "id": 28,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icspraddchg.prodcat",
+                  "label": "global.product.category",
+                  "meta": "ProdCat",
+                  "conditionShow": "dtl.icspraddchg.restricttype.toUpperCase() === 'PC'",
+                  "conditionReadonly": "!base.isCreate()",
+                  "required": false,
+                  "conditionRequired": "dtl.icspraddchg.restricttype.toUpperCase() === 'PC'"
+                },
+                {
+                  "id": 29,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icspraddchg.prodprctype",
+                  "label": "global.product.price.type",
+                  "conditionShow": "dtl.icspraddchg.restricttype.toUpperCase() === 'PT'",
+                  "conditionReadonly": "!base.isCreate()",
+                  "required": false,
+                  "meta": "ProdPriceTy",
+                  "conditionRequired": "dtl.icspraddchg.restricttype.toUpperCase() === 'PT'"
+                },
+                {
+                  "id": 30,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icspraddchg.brandcd",
+                  "label": "global.brand.code",
+                  "conditionShow": "dtl.icspraddchg.restricttype.toUpperCase() === 'BC'",
+                  "conditionReadonly": "!base.isCreate()",
+                  "required": false,
+                  "meta": "BrandCode",
+                  "conditionRequired": "dtl.icspraddchg.restricttype.toUpperCase() === 'BC'"
+                },
+                {
+                  "id": 22,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.icspraddchg.startdt",
+                  "label": "global.start.date",
+                  "dataFormat": "DATE",
+                  "conditionReadonly": "!base.isCreate()",
+                  "readonly": false,
+                  "required": true
+                },
+                {
+                  "id": 23,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icspraddchg.whse",
+                  "label": "global.warehouse",
+                  "conditionReadonly": "!base.isCreate()",
+                  "meta": "Warehouse",
+                  "conditionShow": "base.allowWhseField()"
+                }
+              ]
+            },
+            {
+              "id": 16,
+              "type": "COL",
+              "subType": "1/2",
+              "children": [
+                {
+                  "id": 2,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "dtl.icspraddchg.restrictcd",
+                  "label": "global.restriction.code",
+                  "meta": "ProdRestrictions",
+                  "required": true
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "dtl.icspraddchg.statuscd",
+                  "label": "global.status.code",
+                  "type3": "SET",
+                  "blankOption": false,
+                  "metaGroup": "IC",
+                  "meta": "ProductRestrictionsStatusCode",
+                  "required": true
+                },
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "dtl.icspraddchg.expiredt",
+                  "label": "global.expire.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icspraddchg.activefl",
+                  "label": "global.active",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icspraddchg.certrequiredfl",
+                  "label": "message.certificate/license.required",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "dtl.icspraddchg.restrictovrfl",
+                  "label": "global.allow.restriction.override",
+                  "dataFormat": "LOGICAL"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

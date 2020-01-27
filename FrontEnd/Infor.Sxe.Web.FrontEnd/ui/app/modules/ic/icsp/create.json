@@ -1,0 +1,219 @@
+{
+  "viewId": "ic-icsp-create",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.add.product",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()"
+                },
+                {
+                  "id": 19,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "EXP_AREA",
+                  "label": "global.required",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 23,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 9,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsp.prod",
+                              "label": "global.product",
+                              "maxLength": "{{base.prodMaxLength}}",
+                              "required": true,
+                              "eventChange": "dtl.productChange()",
+                              "modelOptions": {
+                                "updateOn": "blur"
+                              }
+                            },
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.icsp.statustype",
+                              "label": "global.status",
+                              "type3": "SET",
+                              "metaGroup": "IC",
+                              "meta": "ProductStatusType",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 10,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsp.prodcat",
+                              "label": "global.product.category",
+                              "required": true,
+                              "meta": "ProdCat"
+                            },
+                            {
+                              "id": 11,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsp.unitstock",
+                              "label": "global.stocking.unit",
+                              "required": true,
+                              "meta": "Units",
+                              "options": {
+                                "allowEntry": true,
+                                "searchParams": {
+                                  "prod": {
+                                    "type": "REF",
+                                    "value": "dtl.icsp.prod"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 27,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsp.length",
+                              "label": "global.length",
+                              "required": false,
+                              "conditionShow": "base.showLWH",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 6,
+                              "decimals": 5,
+                              "eventChange": "",
+                              "conditionRequired": "dtl.icsp.lwhrequiredfl && dtl.icsp.statustype !== 'L'",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsp.width",
+                              "label": "global.width",
+                              "required": false,
+                              "conditionShow": "base.showLWH",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 6,
+                              "decimals": 5,
+                              "eventChange": "",
+                              "conditionRequired": "dtl.icsp.lwhrequiredfl && dtl.icsp.statustype !== 'L'",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            },
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.icsp.height",
+                              "label": "global.height",
+                              "required": false,
+                              "conditionShow": "base.showLWH",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 6,
+                              "decimals": 5,
+                              "eventChange": "",
+                              "conditionRequired": "dtl.icsp.lwhrequiredfl && dtl.icsp.statustype !== 'L'",
+                              "formatOptions": {
+                                "minimumFractionDigits": 5,
+                                "maximumFractionDigits": 5
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 24,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 28,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "icsp",
+                        "objectRef": "dtl.icsp"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

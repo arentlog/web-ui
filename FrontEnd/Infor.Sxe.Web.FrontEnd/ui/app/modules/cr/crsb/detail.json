@@ -1,0 +1,695 @@
+{
+  "viewId": "cr-crsb-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.bank.number",
+              "subLabel": "{{dtl.crsb.bankno + ' | ' + dtl.crsb.name}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 81,
+                  "type": "BTN",
+                  "subType": "SEC",
+                  "label": "global.clear.check.run",
+                  "icon": "icon-reset",
+                  "securityLevel": 3,
+                  "eventClick": "dtl.clearCheckRun()",
+                  "conditionDisabled": "!base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.bank.information",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.name",
+                              "label": "global.name",
+                              "required": true,
+                              "maxLength": 30
+                            },
+                            {
+                              "id": 75,
+                              "type": "CUSTOM",
+                              "subType": "AddressForm",
+                              "options": {
+                                "addr1Model": "dtl.crsb.addr1",
+                                "addr2Model": "dtl.crsb.addr2",
+                                "addr3Model": "dtl.crsb.addr3",
+                                "cityModel": "dtl.crsb.city",
+                                "stateModel": "dtl.crsb.state",
+                                "zipCodeModel": "dtl.crsb.zipcd",
+                                "addressLabel": "global.address",
+                                "conditionReadonly": "base.isDetail()",
+                                "controlRef": "dtl.addressControl",
+                                "addr2Visible": true,
+                                "addr3Visible": true
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 28,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.phoneno",
+                              "label": "global.phone",
+                              "dataFormat": "PHONE"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 38,
+                  "type": "EXP_AREA",
+                  "label": "global.balances",
+                  "children": [
+                    {
+                      "id": 39,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 40,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 48,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.curbookbal",
+                              "label": "global.current.balance",
+                              "dataFormat": "DECIMAL",
+                              "decimals": 2,
+                              "digits": 11,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 49,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.crsb.lastverbal",
+                              "label": "global.last.verified.balance",
+                              "readonly": true,
+                              "dataFormat": "DECIMAL",
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 50,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "dtl.crsb.lastbaldt",
+                              "label": "global.last.balance",
+                              "dataFormat": "DATE"
+                            },
+                            {
+                              "id": 51,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.lastbalno",
+                              "label": "global.last.bank.balance.number",
+                              "dataFormat": "DECIMAL",
+                              "digits": 8,
+                              "decimals": 0
+                            }
+                          ]
+                        },
+                        {
+                          "id": 47,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 52,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.lastbnkbal",
+                              "label": "global.bank.balance",
+                              "dataFormat": "DECIMAL",
+                              "digits": 11,
+                              "decimals": 2,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 53,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "dtl.crsb.lastchkdt",
+                              "label": "global.last.check",
+                              "dataFormat": "DATE"
+                            },
+                            {
+                              "id": 54,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.lasttrialno",
+                              "label": "global.last.trial.balance.number",
+                              "dataFormat": "DECIMAL",
+                              "digits": 8,
+                              "decimals": 0
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 41,
+                  "type": "EXP_AREA",
+                  "label": "global.account.information",
+                  "children": [
+                    {
+                      "id": 42,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 43,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 56,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.bankacct",
+                              "label": "global.bank.account.number",
+                              "maxLength": 20
+                            },
+                            {
+                              "id": 57,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.transrouteno",
+                              "label": "global.transit.routing.number",
+                              "maxLength": 9
+                            },
+                            {
+                              "id": 58,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.crsb.currencyty",
+                              "label": "global.currency",
+                              "type3": "CODES",
+                              "meta": "Currency"
+                            },
+                            {
+                              "id": 59,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.crsb.bacsfrmt",
+                              "label": "bacs.format",
+                              "type3": "SET",
+                              "metaGroup": "CR",
+                              "meta": "BacsFormatType"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 55,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 60,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dtl.crsb.statustype",
+                              "label": "global.active"
+                            },
+                            {
+                              "id": 61,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.crsb.divno",
+                              "label": "global.division.number",
+                              "type3": "MANUAL",
+                              "conditionRequired": "dtl.isGlDivFl",
+                              "optionsModel": "dtl.divnoDropDownOptions"
+                            },
+                            {
+                              "id": 62,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.glAccountNumber",
+                              "label": "gl.account.number",
+                              "meta": "GlAccount",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 44,
+                  "type": "EXP_AREA",
+                  "label": "global.last.numbers.used",
+                  "children": [
+                    {
+                      "id": 45,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 46,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 64,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.lastchkno",
+                              "label": "global.check.number",
+                              "dataFormat": "INTEGER_TEXT",
+                              "digits": 8,
+                              "sign": "+"
+                            },
+                            {
+                              "id": 65,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.lastdepno",
+                              "label": "global.deposit.number",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 8
+                            },
+                            {
+                              "id": 66,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.lastchgeno",
+                              "label": "global.charge.number",
+                              "dataFormat": "INTEGER",
+                              "digits": 8,
+                              "sign": "+"
+                            },
+                            {
+                              "id": 67,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.lastintno",
+                              "label": "global.interest.number",
+                              "dataFormat": "INTEGER",
+                              "digits": 8,
+                              "sign": "+"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 63,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 68,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.lastadjno",
+                              "label": "global.adjustment.number",
+                              "dataFormat": "INTEGER",
+                              "digits": 8,
+                              "sign": "+"
+                            },
+                            {
+                              "id": 69,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.lastoutno",
+                              "label": "global.transfer.out.number",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 8
+                            },
+                            {
+                              "id": 70,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.lastinno",
+                              "label": "global.transfer.in",
+                              "dataFormat": "INTEGER",
+                              "sign": "+",
+                              "digits": 8
+                            },
+                            {
+                              "id": 71,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.crsb.chkopeninit",
+                              "label": "global.check.open.init",
+                              "readonly": true,
+                              "maxLength": 15
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 96,
+                  "type": "EXP_AREA",
+                  "label": "global.cenpos.processing",
+                  "children": [
+                    {
+                      "id": 97,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 98,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 91,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.merchantid",
+                              "label": "global.merchant.id",
+                              "maxLength": 8,
+                              "conditionRequired": "dtl.crsb.pospaytype.toLowerCase() === 'c'"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 99,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 88,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.merchantuserid",
+                              "label": "global.merchant.user.id",
+                              "maxLength": 30,
+                              "conditionRequired": "dtl.crsb.pospaytype.toLowerCase() === 'c'"
+                            },
+                            {
+                              "id": 89,
+                              "type": "FIELD",
+                              "subType": "PASSWORD",
+                              "model": "dtl.crsb.merchantuserpw",
+                              "label": "global.merchant.user.pw",
+                              "maxLength": 30,
+                              "conditionRequired": "dtl.crsb.pospaytype.toLowerCase() === 'c'"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 82,
+                  "type": "EXP_AREA",
+                  "label": "global.credit.ach",
+                  "conditionShow": "dtl.allowAPCreditACH === 'yes'",
+                  "children": [
+                    {
+                      "id": 83,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 84,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 87,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.crsb.paymentty",
+                              "label": "global.payment.type",
+                              "type3": "CODES",
+                              "meta": "ACHPayment"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 86,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 90,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "dtl.crsb.lastachdt",
+                              "label": "global.last.credit.ach.date",
+                              "dataFormat": "DATE"
+                            },
+                            {
+                              "id": 85,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.lastachno",
+                              "label": "global.last.credit.ach.number",
+                              "dataFormat": "INTEGER",
+                              "digits": 8,
+                              "sign": "+"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 101,
+                  "type": "EXP_AREA",
+                  "label": "global.positive.pay",
+                  "children": [
+                    {
+                      "id": 102,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 103,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 92,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "type3": "SET",
+                              "model": "dtl.crsb.pospaytype",
+                              "label": "global.positive.pay.output.method",
+                              "blankOption": false,
+                              "metaGroup": "CR",
+                              "meta": "PositivePayType",
+                              "children": [
+                                {
+                                  "id": 93,
+                                  "type": "OPT",
+                                  "label": "No Positive Pay",
+                                  "value": "blank"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 105,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.crsb.pospayurl",
+                              "label": "global.positive.pay.processing.url",
+                              "conditionShow": "dtl.crsb.pospaytype.toLowerCase() === 'c'"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 104,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 94,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "type3": "SET",
+                              "model": "dtl.crsb.pospayvoid",
+                              "label": "global.positive.pay.void.processing",
+                              "blankOption": false,
+                              "metaGroup": "CR",
+                              "meta": "PositivePayVoid",
+                              "children": [
+                                {
+                                  "id": 95,
+                                  "type": "OPT",
+                                  "label": "Include",
+                                  "value": "I"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 77,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 78,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 79,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 80,
+                              "type": "CUSTOM",
+                              "subType": "UserFields",
+                              "options": {
+                                "tableName": "crsb",
+                                "objectRef": "dtl.crsb",
+                                "conditionReadonly": "base.isDetail()"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

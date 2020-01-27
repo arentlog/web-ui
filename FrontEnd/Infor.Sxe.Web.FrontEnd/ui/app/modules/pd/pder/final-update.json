@@ -1,0 +1,166 @@
+{
+  "viewId": "pd-pder-finalupdate",
+  "id": 1,
+  "type": "VIEW",
+  "conditionShow": "base.isfinalUpdate()",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "pd.entry.rebate.reconciliation.update",
+              "subLabel": "{{fudc.subtitle}}",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "eventClick": "fudc.submit()"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "fudc.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 20,
+                  "type": "MESSAGE",
+                  "text": "{{fudc.errorMessage}}",
+                  "icon": "icon-error",
+                  "conditionShow": "fudc.errorMessage"
+                },
+                {
+                  "id": 19,
+                  "type": "MESSAGE",
+                  "text": "{{fudc.warningMessage}}",
+                  "icon": "icon-info",
+                  "conditionShow": "fudc.warningMessage"
+                },
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "fudc.selectedUpdateMode",
+                          "label": "global.update",
+                          "dataFormat": "LOGICAL",
+                          "conditionDisabled": "!fudc.isAllowUpdate",
+                          "autoFocus": true
+                        },
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.pderFinalEditResults.proofAmt",
+                          "label": "global.proof.amount",
+                          "dataFormat": "CURRENCY"
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.pderFinalEditResults.postAmt",
+                          "label": "global.post.amount",
+                          "dataFormat": "CURRENCY"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.pderFinalEditResults.aPCreditAmt",
+                          "label": "ap.credit",
+                          "dataFormat": "CURRENCY"
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "base.pderFinalEditResults.writeOffAmt",
+                          "label": "global.write.off.amount",
+                          "dataFormat": "CURRENCY"
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "fudc.currencyDescription",
+                          "label": "global.currency",
+                          "conditionShow": "base.pderFinalEditResults.currencytyenabled"
+                        },
+                        {
+                          "id": 22,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.pderFinalEditResults.reconexrate",
+                              "label": "global.exchange.rate",
+                              "dataFormat": "DECIMAL",
+                              "sign": "+",
+                              "digits": 6,
+                              "decimals": 7,
+                              "conditionShow": "base.pderFinalEditResults.currencytyenabled",
+                              "conditionReadonly": "!fudc.isAllowUpdate",
+                              "size": "SM"
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "base.reconExRateUpdateFl",
+                              "label": "global.update.currency.rate.table",
+                              "dataFormat": "LOGICAL",
+                              "conditionShow": "base.pderFinalEditResults.currencytyenabled",
+                              "conditionReadonly": "!fudc.isAllowUpdate",
+                              "conditionDisabled": "!fudc.isAllowUpdate || !base.pderFinalEditResults.reconexrateenabled"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

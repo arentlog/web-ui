@@ -1,0 +1,492 @@
+{
+  "viewId": "va-vaet-detail-lines",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 5,
+      "type": "GRID",
+      "controlRef": "base.lineGrid",
+      "model": "base.lineList",
+      "options": {
+        "showExpander": true,
+        "showCheckboxes": true,
+        "rowDetailOptions": {
+          "template": "va/vaet/tabs/lineitems/custom.json",
+          "controller": "VaetLineCustomCtrl as linecust",
+          "paramsReference": "cust.rowParams"
+        },
+        "selectable": "multiple",
+        "events": {
+          "selected": "line.setCurrentLine()"
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 6,
+          "type": "TOOLBAR",
+          "label": "global.line.items.for.section.number",
+          "subLabel": "{{base.sectionSelectedData}}",
+          "children": [
+            {
+              "id": 45,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.add",
+              "icon": "icon-add",
+              "eventClick": "line.lineAdd()",
+              "conditionDisabled": "(!base.sctnGrid || !base.sctnGrid.isOneRowSelected()) || !base.lineGrid.isNoRowSelected() || base.sectionSelectedRecord.completefl || base.sectionSelectedRecord.sctntype.toLowerCase() === 'sp'"
+            },
+            {
+              "id": 46,
+              "type": "BTN",
+              "subType": "SEC",
+              "label": "global.edit",
+              "icon": "icon-edit",
+              "securityLevel": 3,
+              "eventClick": "line.lineEdit()",
+              "conditionDisabled": "!base.lineGrid.isOneRowSelected() || base.lineSelectedRecord.completefl"
+            },
+            {
+              "id": 47,
+              "type": "BTN",
+              "subType": "SEC",
+              "label": "global.extend",
+              "icon": "icon-compose",
+              "securityLevel": 3,
+              "eventClick": "line.lineExtend()",
+              "conditionDisabled": "!base.lineGrid.isOneRowSelected() || base.lineSelectedRecord.completefl || base.lineSelectedRecord.sctntype.toLowerCase() === 'sp'"
+            },
+            {
+              "id": 48,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.labor.product.info",
+              "icon": "icon-inventory",
+              "conditionDisabled": "!base.lineGrid.isOneRowSelected() || base.lineSelectedRecord.completefl || base.lineSelectedRecord.sctntype.toLowerCase() === 'sp' || base.lineSelectedRecord.sctntype.toLowerCase() === 'ii' || base.lineSelectedRecord.sctntype.toLowerCase() === 'in' || base.lineSelectedRecord.icspstatus.toLowerCase() !== 'l'",
+              "eventClick": "line.lineLabor()"
+            },
+            {
+              "id": 49,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.delete",
+              "icon": "icon-delete",
+              "securityLevel": 3,
+              "eventClick": "line.lineDelete()",
+              "conditionDisabled": "!base.lineGrid.isOneRowSelected() || base.lineSelectedRecord.sctntype.toLowerCase() === 'sp' || !base.lineSelectedRecord.allowdelete"
+            },
+            {
+              "id": 50,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.comments",
+              "icon": "icon-notes",
+              "eventClick": "line.lineComments()",
+              "conditionDisabled": "!base.lineGrid.isOneRowSelected() || base.lineSelectedRecord.sctntype.toLowerCase() === 'sp'"
+            },
+            {
+              "id": 51,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.serial.lot",
+              "icon": "icon-info-field",
+              "eventClick": "line.lineSerialLot()",
+              "conditionDisabled": "!base.lineGrid.isOneRowSelected() || base.lineSelectedRecord.completefl || base.lineSelectedRecord.sctntype.toLowerCase() === 'sp' || base.lineSelectedRecord.sctntype.toLowerCase() === 'ex' || base.lineSelectedRecord.sctntype.toLowerCase() === 'is' || (base.lineSelectedRecord.serlottype.toLowerCase() !== 's' && base.lineSelectedRecord.serlottype.toLowerCase() !== 'l')"
+            },
+            {
+              "id": 52,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.warehouse.manager",
+              "icon": "icon-home",
+              "eventClick": "line.lineWhseManager()",
+              "conditionDisabled": "base.lineGrid.isNoRowSelected() || base.lineSelectedRecord.completefl || !base.lineSelectedRecord.wmfl || base.lineSelectedRecord.sctntype.toLowerCase() === 'sp' || base.lineSelectedRecord.sctntype.toLowerCase() === 'ex' || base.lineSelectedRecord.sctntype.toLowerCase() === 'is'"
+            },
+            {
+              "id": 53,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.sourcing",
+              "icon": "icon-cart",
+              "eventClick": "line.lineSourcing()",
+              "conditionDisabled": "base.lineGrid.isNoRowSelected() || base.lineSelectedRecord.completefl || base.lineSelectedRecord.sctntype.toLowerCase() === 'sp' || base.lineSelectedRecord.sctntype.toLowerCase() === 'it' || base.lineSelectedRecord.sctntype.toLowerCase() === 'is'"
+            },
+            {
+              "id": 54,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.mark.as.wip",
+              "icon": "icon-check",
+              "eventClick": "line.lineMarkAsWip()",
+              "conditionDisabled": "base.lineGrid.isNoRowSelected() || !base.lineSelectedRecord.allowmarkfl || base.sectionSelectedRecord.completefl || base.sectionSelectedRecord.sctntype.toLowerCase() === 'sp' || base.sectionSelectedRecord.sctntype.toLowerCase() === 'in' || base.sectionSelectedRecord.sctntype.toLowerCase() === 'ii' || base.sectionSelectedRecord.sctntype.toLowerCase() === 'ex'"
+            },
+            {
+              "id": 55,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.line.history",
+              "icon": "icon-cascade",
+              "eventClick": "line.lineHistory()",
+              "conditionDisabled": "!base.lineGrid.isOneRowSelected() || base.lineSelectedRecord.sctntype.toLowerCase() !== 'in'"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 7,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "lineno",
+          "label": "global.line.number"
+        },
+        {
+          "id": 8,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "commentfl",
+          "label": "global.comment",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 38,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "wipsetfl",
+          "label": "global.checked.for.wip",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 9,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "nonstockty",
+          "label": "global.line.type",
+          "type3": "SET",
+          "metaGroup": "VA",
+          "meta": "FinishedProductLineType"
+        },
+        {
+          "id": 10,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "shipprod",
+          "label": "global.product",
+          "eventClick": "line.productInquiryHyperlink()"
+        },
+        {
+          "id": 11,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "notesfl",
+          "label": "global.notes",
+          "dataFormat": "NotesFlag"
+        },
+        {
+          "id": 12,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "proddesc",
+          "label": "global.description"
+        },
+        {
+          "id": 13,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "qtybasetotfl",
+          "label": "global.quantity.based.on.total",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 16,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qtyneeded",
+          "label": "global.quantity.needed",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 14,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "unit",
+          "label": "global.units"
+        },
+        {
+          "id": 15,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "qtyord",
+          "label": "global.quantity.ordered",
+          "dataFormat": "DECIMAL",
+          "eventClick": "line.productAvailabilityHyperlink()",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 17,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "qtyship",
+          "label": "global.quantity.shipped",
+          "dataFormat": "DECIMAL",
+          "eventClick": "line.productAvailabilityHyperlink()",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 18,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "prodcost",
+          "label": "global.cost",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 19,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "netamt",
+          "label": "global.net.amount",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 20,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "statustype",
+          "label": "global.status",
+          "dataFormat": "BooleanToString",
+          "formatOptions": {
+            "trueString": "global.active",
+            "falseString": "global.inactive"
+          }
+        },
+        {
+          "id": 21,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qtyshort",
+          "label": "global.quantity.short",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 22,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "netavail",
+          "label": "global.net.available",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 23,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qtyonorder",
+          "label": "global.on.order",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 24,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "leadtm",
+          "label": "global.lead.time",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 25,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "rushfl",
+          "label": "global.rush",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 26,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "orderalttype",
+          "label": "global.source.type",
+          "dataFormat": "OrderType"
+        },
+        {
+          "id": 27,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "orderaltno",
+          "label": "global.related.order.number",
+          "dataFormat": "INTEGER_TEXT",
+          "eventClick": "line.tiedorderInquiryHyperlink()"
+        },
+        {
+          "id": 40,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "vaverno",
+          "label": "global.version.number",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 28,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "orderduedt",
+          "label": "global.due.date",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 29,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "labordata",
+          "label": "global.labor.data"
+        },
+        {
+          "id": 30,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "builderdspl",
+          "label": "global.builder"
+        },
+        {
+          "id": 31,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "timeelapseddspl",
+          "label": "global.elapsed.time"
+        },
+        {
+          "id": 32,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "scrapfctr",
+          "label": "global.scrap",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 33,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cutoffty",
+          "label": "global.cutoff.type"
+        },
+        {
+          "id": 34,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cutofflength",
+          "label": "global.cutoff.length",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 35,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "brandcode",
+          "label": "global.brand"
+        },
+        {
+          "id": 36,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "mfgprod",
+          "label": "global.manufacturer.product"
+        },
+        {
+          "id": 37,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "vendprod",
+          "label": "global.vendor.product"
+        },
+        {
+          "id": 39,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "msdsfl",
+          "label": "global.hazardous",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 41,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "qtyunavail",
+          "label": "global.quantity.unavailable",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 42,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "reasunavty",
+          "label": "global.unavailable.reason",
+          "type3": "CODES",
+          "meta": "ReasonUnavailable"
+        },
+        {
+          "id": 43,
+          "type": "GRID_COL",
+          "subType": "DROP_DOWN",
+          "model": "powtorderalttype",
+          "label": "global.back.tie.type",
+          "type3": "SET",
+          "metaGroup": "VA",
+          "meta": "VASourceBackTieTypes"
+        },
+        {
+          "id": 44,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "powtorderaltno",
+          "label": "global.back.tie.order.number",
+          "dataFormat": "INTEGER_TEXT",
+          "eventClick": "line.backtieInquiryHyperlink()"
+        }
+      ]
+    }
+  ]
+}

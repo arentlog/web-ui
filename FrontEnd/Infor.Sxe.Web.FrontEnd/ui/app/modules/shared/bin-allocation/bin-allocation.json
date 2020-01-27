@@ -1,0 +1,212 @@
+{
+  "viewId": "shared-bin-allocation-binallocation",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "conditionShow": "",
+  "children": [
+    {
+      "id": 3,
+      "type": "MOD_CNTR",
+      "conditionShow": "bac.isBinAllocationMaster()",
+      "controls": {
+        "toolbar": {
+          "id": 4,
+          "type": "TOOLBAR",
+          "label": "global.bin.allocation",
+          "subLabel": "{{bac.assignment.prod}}",
+          "controls": {
+            "navBtns": {
+              "id": 48,
+              "type": "BTN_SET",
+              "subType": "TBAR_NAV",
+              "children": [
+                {
+                  "id": 49,
+                  "type": "BTN",
+                  "subType": "ICON",
+                  "icon": "icon-left-arrow",
+                  "label": "special.button.back",
+                  "eventClick": "bac.cancel()"
+                }
+              ]
+            }
+          },
+          "children": [
+            {
+              "id": 24,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.submit",
+              "icon": "icon-save",
+              "eventClick": "bac.save()",
+              "conditionDisabled": "bac.binAllocationDisabled"
+            }
+          ]
+        },
+        "content": {
+          "id": 5,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 36,
+              "type": "ROW",
+              "children": [
+                {
+                  "id": 41,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 40,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "bac.allocationActionLabel",
+                      "label": "global.blank.label.string.for.space"
+                    }
+                  ]
+                },
+                {
+                  "id": 38,
+                  "type": "COL",
+                  "subType": "1/2",
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "bac.assignment.proofqty",
+                      "label": "global.qty.to.allocate"
+                    },
+                    {
+                      "id": 33,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "bac.assignment.stkqtyship",
+                      "label": "global.stock.qty",
+                      "conditionShow": "!bac.isWmadjtypeBuy()",
+                      "dataFormat": "DECIMAL"
+                    },
+                    {
+                      "id": 22,
+                      "type": "FIELD",
+                      "subType": "INFO",
+                      "model": "bac.assignment.stkqtyrcv",
+                      "label": "global.stock.qty",
+                      "conditionShow": "bac.isWmadjtypeBuy()",
+                      "dataFormat": "DECIMAL"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 23,
+              "type": "GRID",
+              "htmlId": "bin-allocation-binallocation-grid",
+              "controlRef": "bac.grid",
+              "model": "bac.assignmenttrans",
+              "options": {
+                "showCheckboxes": false,
+                "editable": true,
+                "selectable": "single",
+                "showExpander": false,
+                "events": {
+                  "cellchange": "bac.gridCellChange()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 32,
+                  "type": "TOOLBAR",
+                  "label": "global.bin.locations",
+                  "children": [
+                    {
+                      "id": 39,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.new",
+                      "icon": "icon-new-document",
+                      "eventClick": "bac.create()",
+                      "conditionDisabled": "bac.binAllocationDisabled"
+                    },
+                    {
+                      "id": 46,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.auto.assign",
+                      "eventClick": "bac.autoAssign()",
+                      "icon": "icon-send",
+                      "conditionDisabled": "!bac.assignment.autoassignenabled"
+                    },
+                    {
+                      "id": 47,
+                      "type": "BTN",
+                      "subType": "TER",
+                      "label": "global.deallocate",
+                      "icon": "icon-reset",
+                      "eventClick": "bac.deAllocate()",
+                      "conditionDisabled": "!bac.assignment.deallocateenabled"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "binloc",
+                  "label": "global.bin.location",
+                  "dataFormat": "BinLoc"
+                },
+                {
+                  "id": 31,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "stockqty",
+                  "label": "global.stock.quantity",
+                  "editable": true,
+                  "digits": 9,
+                  "decimals": 5,
+                  "dataFormat": "DECIMAL"
+                },
+                {
+                  "id": 30,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "stockunit",
+                  "label": "global.stock.unit"
+                },
+                {
+                  "id": 29,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "buysellqty",
+                  "label": "global.ship.quantity",
+                  "editable": true,
+                  "digits": 9,
+                  "decimals": 5,
+                  "cellEditable": "bac.isSellQtyCellEditable()",
+                  "dataFormat": "DECIMAL"
+                },
+                {
+                  "id": 28,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "buysellunit",
+                  "label": "global.ship.unit"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 50,
+      "type": "VIEW_CNTR",
+      "viewName": "create"
+    }
+  ]
+}

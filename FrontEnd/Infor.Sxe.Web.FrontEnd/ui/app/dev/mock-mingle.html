@@ -1,0 +1,272 @@
+﻿<!doctype html>
+<html lang="en-US">
+<head>
+   <!-- App title for browser (can't be translated easily) -->
+   <title>Mock Ming.le</title>
+
+   <!-- Meta Info -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <!-- Turn off caching -->
+   <meta http-equiv="cache-control" content="no-cache" />
+   <meta http-equiv="pragma" content="no-cache" />
+
+   <link rel="stylesheet" id="sohoxi-stylesheet" href="../../lib/soho/css/light-theme.min.css" type="text/css">
+
+   <script src="../../lib/jquery/dist/jquery-3.1.1.js"></script>
+   <script src="../../lib/angular/angular.js"></script>
+   <script src="../../lib/soho/js/sohoxi.js"></script>
+
+   <script type="text/javascript">
+      // A mini angular app to handle settings, etc.
+      var app = angular.module('mockMingleApp', []);
+
+      // Controller
+      app.controller('MockMingleCtrl', function ($sce) {
+         var self = this;
+         var baseUrl = localStorage.SXE_MOCK_BASE_URL || 'http://uscswdev01/sxeh5Wp';
+         self.baseUrl = baseUrl;
+         self.showSettings = false;
+
+         self.applySettings = function () {
+            baseUrl = self.baseUrl;
+            localStorage.SXE_MOCK_BASE_URL = self.baseUrl;
+            self.showSettings = false;
+
+            // Reload the WebUI window so that it sends login info to web parts for proper initialization
+            window.frames[0].location.reload();
+            $('body').toast({ title: 'Reloading...', message: '', position: 'bottom right' });
+         };
+
+         self.getUrl = function (webPartPath) {
+            return baseUrl ? $sce.trustAsResourceUrl(baseUrl + '/#/' + webPartPath) : null;
+         };
+      });
+
+      // Act like Ming.le by propagating messages to all the frames
+      window.addEventListener('message', function handleMessage(event) {
+         var messageData, eventData = event.data;
+
+         if (eventData && typeof eventData === 'string') {
+            eventData = JSON.parse(eventData);
+         }
+
+         if (eventData) {
+            messageData = eventData.data;
+         }
+
+         // Proceed if message looks like an infor companyon message
+         if (messageData && messageData.type) {
+            var frames = window.frames;
+
+            // Pass message to all frames (WebUI and web parts)
+            for (var i = 0; i < frames.length; i++) {
+               frames[i].postMessage(JSON.stringify(messageData), '*');
+            }
+         }
+      }, false);
+   </script>
+
+   <style type="text/css">
+      .mast-body {
+         height: calc(100% - 38px);
+      }
+
+      .main-app-container {
+         position: absolute;
+         height: calc(100% - 38px);
+         width: calc(100% - 310px);
+      }
+
+      .main-app-container.full-width {
+         width: 100%;
+         padding: 0;
+      }
+
+      .main-app-container iframe {
+         position: absolute;
+         height: 100%;
+         width: 100%
+      }
+
+      .context-app-container iframe {
+         border: none;
+         height: 300px;
+         width: 100%
+      }
+
+      .context-app-container {
+         position: absolute;
+         height: calc(100% - 38px);
+         width: 310px;
+         right: 0;
+         overflow-y: auto;
+      }
+
+      .context-app-header {
+         background-color: #f5f5f5;
+         padding: 7px 20px;
+         border-top: 1px solid #d8d8d8;
+         border-bottom: 1px solid #d8d8d8;
+         position: relative;
+      }
+
+      .context-app-header h3 {
+         font-size: 16px;
+         color: #737373;
+         vertical-align: middle;
+         margin: 0;
+         display: inline-block;
+         max-width: 85%;
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+      }
+   </style>
+</head>
+<body ng-app="mockMingleApp" ng-controller="MockMingleCtrl as mock" class="no-scroll" style="height: 100%;">
+
+<div class="svg-icons">
+   <svg xmlns="http://www.w3.org/2000/svg" class="svg-icons" style="display: none;">
+      <symbol id="icon-logo" viewBox="0 0 34 34">
+         <path fill="#D52027" d="M0 0h34v34h-34z"></path><g fill="#fff"><path d="M3.035 14.038h2.151v6.97h-2.151zM6.334 14.038h2.065v.64s.358-.812 2.065-.812c2.18 0 2.581 1.434 2.581 3.299v3.843h-2.151v-3.413c0-.803-.014-1.836-1.119-1.836-1.119 0-1.291.875-1.291 1.778v3.471h-2.15v-6.97zM14.194 12.805c0-1.521.387-2.811 2.725-2.811.43 0 .861.028 1.262.129l-.101 1.821c-.244-.086-.445-.144-.703-.144-.688 0-1.033.215-1.033 1.133v1.104h1.592v1.721h-1.592v5.249h-2.151v-8.202zM22.089 13.866c2.15 0 3.872 1.434 3.872 3.657 0 2.222-1.722 3.657-3.872 3.657-2.151 0-3.872-1.435-3.872-3.657 0-2.223 1.721-3.657 3.872-3.657m0 5.421c1.075 0 1.721-.718 1.721-1.764 0-1.047-.646-1.764-1.721-1.764-1.076 0-1.721.717-1.721 1.764 0 1.046.645 1.764 1.721 1.764"></path><path d="M26.804 14.038h2.15v.609s.562-.88 2.754-.786v1.888c-.302-.086-.603-.143-.918-.143-1.635 0-1.836 1.176-1.836 2.567v2.835h-2.15v-6.97zM3.035 11.741l2.151-1.474v2.623h-2.151z"></path></g>
+      </symbol>
+      <symbol id="icon-user" viewBox="0 0 18 18">
+         <path d="M15.95 15.746c0-3.866-3.134-7-7-7s-7 3.134-7 7c0 0 0 1.728 2 1.728h10c2 0 2-1.728 2-1.728m-7-8.221c-1.933 0-3.5-1.567-3.5-3.5 0-1.932 1.567-3.5 3.5-3.5 1.934 0 3.5 1.568 3.5 3.5 0 1.933-1.566 3.5-3.5 3.5"></path>
+      </symbol>
+      <symbol id="icon-expand-app-tray" viewBox="0 0 18 18">
+         <path d="M4 15c-.256 0-.512-.098-.707-.293-.391-.391-.391-1.023 0-1.414l4.293-4.293-4.293-4.293c-.391-.391-.391-1.023 0-1.414s1.023-.391 1.414 0l5 5c.391.391.391 1.023 0 1.414l-5 5c-.195.195-.451.293-.707.293zm6 0c-.256 0-.512-.098-.707-.293-.391-.391-.391-1.023 0-1.414l4.293-4.293-4.293-4.293c-.391-.391-.391-1.023 0-1.414s1.023-.391 1.414 0l5 5c.391.391.391 1.023 0 1.414l-5 5c-.195.195-.451.293-.707.293z"></path>
+      </symbol>
+      <symbol id="icon-collapse-app-tray" viewBox="0 0 18 18">
+         <path d="M14 15c-.256 0-.512-.098-.707-.293l-5-5c-.391-.391-.391-1.023 0-1.414l5-5c.391-.391 1.023-.391 1.414 0s.391 1.023 0 1.414l-4.293 4.293 4.293 4.293c.391.391.391 1.023 0 1.414-.195.195-.451.293-.707.293zm-6 0c-.256 0-.512-.098-.707-.293l-5-5c-.391-.391-.391-1.023 0-1.414l5-5c.391-.391 1.023-.391 1.414 0s.391 1.023 0 1.414l-4.293 4.293 4.293 4.293c.391.391.391 1.023 0 1.414-.195.195-.451.293-.707.293z"></path>
+      </symbol>
+      <symbol id="icon-search" viewBox="0 0 18 18">
+         <path d="M17.707 16.293l-5.108-5.109c.876-1.169 1.401-2.615 1.401-4.184 0-3.86-3.141-7-7-7s-7 3.14-7 7 3.141 7 7 7c1.569 0 3.016-.526 4.185-1.402l5.108 5.109c.195.195.451.293.707.293.256 0 .512-.098.707-.293.391-.391.391-1.023 0-1.414zm-10.707-4.293c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path>
+      </symbol>
+      <symbol id="icon-settings" viewBox="0 0 18 18">
+         <path d="M17.1 7.49l-1.39-.284c-.133-.026-.237-.125-.277-.254-.116-.363-.262-.715-.439-1.052-.064-.12-.06-.263.015-.377l.784-1.184c.295-.446.235-1.038-.143-1.416l-.572-.573c-.379-.378-.971-.438-1.416-.143l-1.185.784c-.114.074-.257.078-.378.015-.336-.178-.687-.323-1.051-.439-.129-.041-.227-.144-.254-.277l-.284-1.39c-.107-.524-.568-.9-1.102-.9h-.816c-.534 0-.995.376-1.102.9l-.284 1.39c-.027.133-.125.236-.254.277-.364.116-.715.261-1.051.439-.121.063-.264.059-.378-.015l-1.185-.784c-.445-.295-1.037-.235-1.416.143l-.572.573c-.378.378-.438.97-.143 1.416l.784 1.184c.075.114.079.257.015.377-.177.337-.323.689-.439 1.052-.04.129-.144.228-.277.254l-1.39.284c-.524.107-.9.568-.9 1.103v.814c0 .535.376.996.9 1.103l1.39.284c.133.026.237.125.277.254.116.363.262.715.439 1.051.064.121.06.264-.015.378l-.784 1.184c-.295.446-.235 1.038.143 1.416l.572.573c.378.378.971.438 1.416.143l1.185-.784c.114-.075.257-.078.378-.015.336.178.687.323 1.051.439.129.04.227.144.254.276l.284 1.391c.107.524.568.9 1.102.9h.816c.534 0 .995-.376 1.102-.9l.284-1.391c.027-.132.125-.236.254-.276.364-.116.715-.261 1.051-.439.121-.063.264-.06.378.015l1.185.784c.445.295 1.038.235 1.416-.143l.572-.573c.378-.378.438-.97.143-1.416l-.784-1.184c-.075-.114-.079-.257-.015-.378.177-.336.323-.688.439-1.051.04-.129.144-.228.277-.254l1.39-.284c.524-.107.9-.568.9-1.103v-.814c0-.535-.376-.996-.9-1.103zm-8.1 4.51c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"></path>
+      </symbol>
+   </svg>
+</div>
+
+<section class="masthead">
+   <div class="toolbar no-actions-button" data-options="{maxVisibleButtons: 6}">
+      <div class="title">
+         <button id="logo-homepage" class="masthead-icon">
+            <svg class="icon icon-logo" focusable="false" aria-hidden="true" role="presentation">
+               <use xlink:href="#icon-logo"></use>
+            </svg>
+            <span class="audible">Go To Home</span>
+         </button>
+         <h1 class="masthead-appname">Mock Ming.le &nbsp;|&nbsp; CloudSuite Distribution</h1>
+      </div>
+
+      <div class="buttonset">
+         <button type="button" class="btn" ng-click="mock.showSettings = !mock.showSettings" title="Settings">
+            <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+               <use xlink:href="#icon-settings"></use>
+            </svg>
+            <span class="audible">Settings</span>
+         </button>
+
+         <button type="button" class="btn" ng-click="mock.appTrayCollapsed = true;" ng-if="!mock.appTrayCollapsed" title="Collapse">
+            <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+               <use xlink:href="#icon-expand-app-tray"></use>
+            </svg>
+            <span class="audible">Collapse App Tray</span>
+         </button>
+
+         <button type="button" class="btn" ng-click="mock.appTrayCollapsed = false;" ng-if="mock.appTrayCollapsed" title="Expand">
+            <svg class="icon" focusable="false" aria-hidden="true" role="presentation">
+               <use xlink:href="#icon-collapse-app-tray"></use>
+            </svg>
+            <span class="audible">Expand App Tray</span>
+         </button>
+      </div>
+   </div>
+</section>
+
+<div class="mast-body">
+   <!-- Main App -->
+   <div class="main-app-container" ng-class="{'full-width': mock.appTrayCollapsed}">
+      <iframe src="/" frameborder="0"></iframe>
+   </div>
+
+   <!-- App Tray -->
+   <div class="context-app-container" ng-show="!mock.appTrayCollapsed">
+
+      <!-- Settings -->
+      <div class="row" style="padding-top: 15px; padding-bottom: 15px;" ng-show="mock.showSettings">
+         <div class="twelve columns">
+            <h4 style="margin-bottom: 18px">Settings</h4>
+
+            <div class="field" title="The location of the web parts to run. For your local machine it will be something like http://localhost:53508">
+               <label for="base-url">Base URL</label>
+               <input type="text" id="base-url" ng-model="mock.baseUrl" />
+            </div>
+            <button type="button" class="btn-primary" ng-click="mock.applySettings()">Save</button>
+         </div>
+      </div>
+
+      <div class="context-app-header">
+         <h3>Contacts</h3>
+      </div>
+      <iframe ng-src="{{mock.getUrl('contacts')}}" frameborder="0"></iframe>
+
+      <div class="context-app-header">
+         <h3>Notes</h3>
+      </div>
+      <iframe ng-src="{{mock.getUrl('notes')}}" frameborder="0"></iframe>
+
+      <div class="context-app-header">
+         <h3>Activities</h3>
+      </div>
+      <iframe ng-src="{{mock.getUrl('activities')}}" frameborder="0"></iframe>
+
+      <div class="context-app-header">
+         <h3>Supplier</h3>
+      </div>
+      <iframe ng-src="{{mock.getUrl('supplier')}}" frameborder="0"></iframe>
+
+      <div class="context-app-header">
+         <h3>Tiers</h3>
+      </div>
+      <iframe ng-src="{{mock.getUrl('tiers')}}" frameborder="0"></iframe>
+
+      <div class="context-app-header">
+         <h3>Reports</h3>
+      </div>
+      <iframe ng-src="{{mock.getUrl('reports')}}" frameborder="0"></iframe>
+
+      <div class="context-app-header">
+         <h3>Calculator</h3>
+      </div>
+      <iframe ng-src="{{mock.getUrl('calculator')}}" frameborder="0"></iframe>
+
+      <!-- This one was throwing errors -->
+      <!--<div class="context-app-header">-->
+      <!--<h3>Advisor</h3>-->
+      <!--</div>-->
+      <!--<iframe ng-src="{{mock.getUrl('advisor')}}" frameborder="0"></iframe>-->
+
+      <!-- This one was throwing errors -->
+      <!--<div class="context-app-header">-->
+      <!--<h3>Max Recall</h3>-->
+      <!--</div>-->
+      <!--<iframe ng-src="{{mock.getUrl('maxrecall')}}" frameborder="0"></iframe>-->
+
+      <div class="context-app-header">
+         <h3>Help</h3>
+      </div>
+      <iframe ng-src="{{mock.getUrl('help')}}" frameborder="0"></iframe>
+   </div>
+</div>
+
+<script type="text/javascript">
+   $('body').initialize({locale: 'en-US'});
+</script>
+
+</body>
+</html>

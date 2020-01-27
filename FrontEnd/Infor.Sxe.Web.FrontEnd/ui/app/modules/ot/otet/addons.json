@@ -1,0 +1,127 @@
+{
+  "viewId": "ot-otet-detail-totals-addons",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 4,
+      "type": "ROW",
+      "children": [
+        {
+          "id": 5,
+          "type": "COL",
+          "subType": "1",
+          "children": [
+            {
+              "id": 9,
+              "type": "FIELD",
+              "subType": "INFO",
+              "model": "add.total",
+              "label": "global.addon.total",
+              "dataFormat": "DECIMAL",
+              "formatOptions": {
+                "minimumFractionDigits": 2,
+                "maximumFractionDigits": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "GRID",
+      "controlRef": "add.grid",
+      "options": {
+        "showCheckboxes": true,
+        "selectable": "multiple",
+        "showExpander": true,
+        "rowDetailOptions": {
+          "template": "ot/otet/addon-detail.json",
+          "controller": "OtetAddonDetailCtrl as adddtl",
+          "paramsReference": "add.rowParams"
+        }
+      },
+      "controls": {
+        "toolbar": {
+          "id": 7,
+          "type": "TOOLBAR",
+          "label": "global.addons",
+          "children": [
+            {
+              "id": 10,
+              "type": "BTN",
+              "label": "global.new",
+              "icon": "icon-new-document",
+              "securityLevel": 4,
+              "eventClick": "add.newAddon()",
+              "conditionDisabled": "dtlc.otet.otettrackdetail.afterrcvstg === true"
+            },
+            {
+              "id": 11,
+              "type": "BTN",
+              "label": "global.delete",
+              "icon": "icon-delete",
+              "eventClick": "add.deleteAddons()",
+              "conditionDisabled": "add.isDeleteAddonsDisabled()"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 22,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "addonno",
+          "label": "global.addon",
+          "customFormatter": "add.addonNoFormatter()"
+        },
+        {
+          "id": 16,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "addondesc",
+          "label": "global.description"
+        },
+        {
+          "id": 17,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "addonamt",
+          "label": "global.amount",
+          "dataFormat": "CURRENCY",
+          "customFormatter": "add.addonAmountsFormatter()"
+        },
+        {
+          "id": 18,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "addontype",
+          "label": "global.type",
+          "dataFormat": "OtAddOnType",
+          "customFormatter": "add.addonTypeFormatter()"
+        },
+        {
+          "id": 21,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "addondistr",
+          "label": "global.distribute.by",
+          "dataFormat": "OtDistributeBy",
+          "customFormatter": "add.addonDistributedByFormatter()"
+        },
+        {
+          "id": 19,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "addonnet",
+          "label": "global.net.amount",
+          "dataFormat": "CURRENCY",
+          "customFormatter": "add.addonAmountsFormatter()"
+        }
+      ]
+    }
+  ]
+}

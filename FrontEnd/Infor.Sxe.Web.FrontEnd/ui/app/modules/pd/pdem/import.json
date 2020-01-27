@@ -1,0 +1,327 @@
+{
+  "viewId": "pd-pdem-import",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isImport()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "pd.entry.mass.maintenance.excel.import",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "imp.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 28,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.ok",
+                  "icon": "icon-confirm",
+                  "eventClick": "imp.import()"
+                },
+                {
+                  "id": 29,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "imp.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 77,
+                          "type": "FIELD",
+                          "subType": "RADIO_SET",
+                          "model": "imp.pdemExcelImportNewCriteria.dropdowntype",
+                          "label": "global.record.type",
+                          "type3": "SET",
+                          "metaGroup": "PD",
+                          "meta": "PDEMRecordTypes",
+                          "size": "SM",
+                          "eventChange": "imp.loadRecordTypeDefault (imp.pdemExcelImportNewCriteria.dropdowntype)",
+                          "required": true,
+                          "conditionDisabled": "!imp.importNewFileSingle.cbDestinationSensitive"
+                        },
+                        {
+                          "id": 78,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 14,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "imp.pdemExcelImportNewCriteria.cDestination",
+                              "label": "global.price.records",
+                              "type3": "MANUAL",
+                              "eventChange": "imp.recordTypeChanged()",
+                              "blankOption": false,
+                              "conditionReadonly": "!imp.importNewFileSingle.cbDestinationSensitive",
+                              "optionsModel": "base.levelCodePDSC",
+                              "conditionShow": "imp.pdemExcelImportNewCriteria.dropdowntype === 'P'"
+                            },
+                            {
+                              "id": 76,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "imp.pdemExcelImportNewCriteria.cDestination",
+                              "label": "global.rebate.records",
+                              "type3": "MANUAL",
+                              "eventChange": "imp.recordTypeChanged()",
+                              "blankOption": false,
+                              "conditionReadonly": "!imp.importNewFileSingle.cbDestinationSensitive",
+                              "conditionShow": "imp.pdemExcelImportNewCriteria.dropdowntype === 'R'",
+                              "optionsModel": "base.levelCodePDSR"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 35,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 15,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "imp.pdemExcelImportNewCriteria.dtStartDt",
+                              "label": "global.default.start.date",
+                              "dataFormat": "DATE",
+                              "conditionReadonly": "!imp.importNewFileSingle.fiStartDtSensitive"
+                            },
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "imp.pdemExcelImportNewCriteria.dtEndDt",
+                              "label": "global.default.end.date",
+                              "dataFormat": "DATE",
+                              "conditionReadonly": "!imp.importNewFileSingle.fiEndDtSensitive"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 13,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "FILE",
+                          "model": "imp.importedFile",
+                          "label": "global.import.file",
+                          "multiple": false,
+                          "conditionReadonly": "!imp.importNewFileSingle.fiImportFileSensitive"
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "imp.pdemExcelImportNewCriteria.cWhse",
+                          "label": "global.warehouse",
+                          "meta": "Warehouse",
+                          "conditionReadonly": "!imp.importNewFileSingle.btnLookupWhseSensitive"
+                        },
+                        {
+                          "id": 81,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "imp.pdemExcelImportNewCriteria.lPriceRebFl",
+                          "label": "global.rebate.by.price",
+                          "dataFormat": "LOGICAL",
+                          "conditionShow": "base.isRebateByPriceAoFl && imp.pdemExcelImportNewCriteria.dropdowntype === 'R' && (imp.pdemExcelImportNewCriteria.cDestination.toLowerCase() === 'r1' || imp.pdemExcelImportNewCriteria.cDestination.toLowerCase() === 'r3')",
+                          "conditionDisabled": "!imp.importNewFileSingle.tgPriceRebFlSensitive"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 10,
+                  "type": "GRID",
+                  "conditionShow": "",
+                  "controlRef": "base.defaultGrid",
+                  "model": "base.excelNewSetResultsDefault",
+                  "options": {
+                    "showCheckboxes": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 11,
+                      "type": "TOOLBAR",
+                      "label": "global.sets",
+                      "children": [
+                        {
+                          "id": 19,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "label": "global.new",
+                          "icon": "icon-new-document",
+                          "securityLevel": 4,
+                          "eventClick": "imp.create()"
+                        },
+                        {
+                          "id": 20,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "label": "global.delete",
+                          "icon": "icon-delete",
+                          "securityLevel": 5,
+                          "eventClick": "imp.delete()",
+                          "conditionDisabled": "!base.defaultGrid.isAnyRowSelected()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 12,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "iSeqNo",
+                      "label": "global.sequence.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 21,
+                      "type": "GRID_COL",
+                      "subType": "HYPERLINK",
+                      "model": "iCustNo",
+                      "label": "global.customer.number",
+                      "dataFormat": "DECIMAL_TEXT",
+                      "conditionInclude": "!base.pdemExcelNewsetUpdtCInit.fiCustnoHidden",
+                      "eventClick": "imp.customerHyperlink()"
+                    },
+                    {
+                      "id": 22,
+                      "type": "GRID_COL",
+                      "subType": "HYPERLINK",
+                      "model": "cShipTo",
+                      "label": "global.ship.to",
+                      "conditionInclude": "!base.pdemExcelNewsetUpdtCInit.fiShipToHidden",
+                      "eventClick": "imp.shiptoHyperlink()"
+                    },
+                    {
+                      "id": 79,
+                      "type": "GRID_COL",
+                      "subType": "HYPERLINK",
+                      "model": "iCustNo",
+                      "label": "global.vendor.number",
+                      "conditionInclude": "base.isRebateType",
+                      "eventClick": "imp.vendorHyperlink()"
+                    },
+                    {
+                      "id": 23,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "cSetID",
+                      "label": "global.set.id"
+                    },
+                    {
+                      "id": 24,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "cDesc",
+                      "label": "global.description"
+                    },
+                    {
+                      "id": 25,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "cCustType",
+                      "label": "global.customer.price.type",
+                      "conditionInclude": "!base.pdemExcelNewsetUpdtCInit.fiCustTypeHidden",
+                      "meta": null
+                    },
+                    {
+                      "id": 26,
+                      "type": "GRID_COL",
+                      "subType": "HYPERLINK",
+                      "model": "cProd",
+                      "label": "global.product",
+                      "conditionInclude": "!base.pdemExcelNewsetUpdtCInit.fiProductHidden",
+                      "eventClick": "imp.productHyperlink()"
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "cProdPrcTy",
+                      "label": "global.product.price.type",
+                      "conditionInclude": "!base.pdemExcelNewsetUpdtCInit.fiProdPrcTypeHidden",
+                      "meta": null
+                    },
+                    {
+                      "id": 82,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "lPriceRebFl",
+                      "label": "global.rebate.by.price",
+                      "dataFormat": "LOGICAL",
+                      "conditionInclude": "base.isRebateByPriceAoFl && imp.pdemExcelImportNewCriteria.dropdowntype === 'R' && (imp.pdemExcelImportNewCriteria.cDestination.toLowerCase() === 'r1' || imp.pdemExcelImportNewCriteria.cDestination.toLowerCase() === 'r3')"
+                    },
+                    {
+                      "id": 80,
+                      "type": "GRID_COL",
+                      "subType": "DROP_DOWN",
+                      "model": "cCustType",
+                      "label": "global.rebate.code",
+                      "conditionInclude": "base.isRebateType",
+                      "type3": "SET",
+                      "metaGroup": "PD",
+                      "meta": "RebateCodeTypes"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "type": "VIEW_CNTR",
+      "viewName": "addSet"
+    }
+  ]
+}

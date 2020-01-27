@@ -1,0 +1,19 @@
+<div ng-controller="AoTreeCtrl as tree" initialize>
+   <ul role="tree" aria-label="Asset Types" class="tree">
+      <li ng-repeat="item in tree.menu">
+         <div ng-show="item.secfl">
+            <a href="#" ng-click="base.goToGroup(item.name)">{{ tree.getLabel(item.name) }}</a>
+            <ul ng-if="item.children.length > 0" class="root">
+               <li ng-repeat="sub in item.children">
+                  <a href="#" ng-click="base.goToGroup(item.name + '.' + sub.name)">{{ tree.getLabel(sub.name) }}</a>
+                  <ul ng-if="sub.children.length > 0">
+                     <li ng-repeat="subchild in sub.children">
+                        <a href="#" ng-click="base.goToGroup(item.name + '.' + sub.name + '.' + subchild.name)">{{ tree.getLabel(subchild.name) }}</a>
+                     </li>
+                  </ul>
+               </li>
+            </ul>
+         </div>
+      </li>
+   </ul>
+</div>

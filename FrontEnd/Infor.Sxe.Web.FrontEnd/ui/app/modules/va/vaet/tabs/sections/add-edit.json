@@ -1,0 +1,132 @@
+{
+  "viewId": "va-vaet-addedit",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "{{sctnaddedit.detailTitle}}",
+              "subLabel": "{{sctnaddedit.detailSubTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 11,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 12,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "sctnaddedit.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "stateRef": "",
+                  "eventClick": "sctnaddedit.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 13,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 14,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 8,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.sectionUpdateRecord.dseqno",
+                          "label": "global.sequence.number.poundsign",
+                          "dataFormat": "DECIMAL",
+                          "sign": "+",
+                          "digits": 3,
+                          "decimals": 1,
+                          "conditionReadonly": "sctnaddedit.addMode",
+                          "formatOptions": {
+                            "minimumFractionDigits": 1,
+                            "maximumFractionDigits": 1
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 15,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 9,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.sectionUpdateRecord.sctntype",
+                          "label": "global.section.type",
+                          "type3": "SET",
+                          "metaGroup": "VA",
+                          "meta": "SectionType",
+                          "blankOption": false,
+                          "conditionReadonly": "!sctnaddedit.addMode",
+                          "eventChange": "sctnaddedit.sectionTypeChanged()"
+                        },
+                        {
+                          "id": 10,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.sectionUpdateRecord.sctncode",
+                          "label": "global.section.description",
+                          "type3": "MANUAL",
+                          "blankOption": false,
+                          "optionsModel": "sctnaddedit.sectionCodes",
+                          "optionLabelField": "descrip",
+                          "optionValueField": "codeval",
+                          "required": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

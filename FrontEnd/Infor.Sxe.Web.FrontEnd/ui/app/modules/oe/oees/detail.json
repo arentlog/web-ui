@@ -1,0 +1,205 @@
+{
+  "viewId": "oe-oees-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.shipping.details",
+              "subLabel": "{{dtl.record.ordernox +' | ' + dtl.record.name}}",
+              "controls": {
+                "navBtns": {
+                  "id": 19,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "label": "special.button.back",
+                      "eventClick": "dtl.navbacktomaster()"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.record.ordernox",
+                          "label": "global.order.number"
+                        },
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.record.custno",
+                          "label": "global.customer.number",
+                          "contextEntity": "Arsc"
+                        },
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.record.whse",
+                          "label": "global.warehouse"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 241,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.record.name",
+                          "label": "global.name"
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.record.transtype",
+                          "label": "global.type",
+                          "dataFormat": "OeOrderType"
+                        },
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.record.shipto",
+                          "label": "global.ship.to",
+                          "contextEntity": "Arss",
+                          "contextValues": {
+                            "key1": "dtl.record.custno",
+                            "key2": "dtl.record.shipto"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.record.custpo",
+                          "label": "global.purchase.order"
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtl.record.stagecd",
+                          "label": "global.stage",
+                          "dataFormat": "OeStage"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 21,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "TAB",
+                      "label": "global.header",
+                      "conditionSelected": "base.defaultTab === 0",
+                      "conditionShow": "dtl.isDetailHeaderTabVisible",
+                      "tabId": "header",
+                      "subFunction": "Header",
+                      "children": [
+                        {
+                          "id": 239,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "oe/oees/oeesheader-view.json",
+                          "controller": "",
+                          "conditionShow": "dtl.isDetailHeaderTabVisible"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 23,
+                      "type": "TAB",
+                      "label": "global.line.items",
+                      "conditionSelected": "base.defaultTab === 1",
+                      "conditionShow": "dtl.isDetailLinesTabVisible",
+                      "tabId": "line-items",
+                      "subFunction": "Line Items",
+                      "children": [
+                        {
+                          "id": 240,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "oe/oees/oeeslineitems-view.json",
+                          "controller": "",
+                          "conditionShow": "dtl.isDetailLinesTabVisible"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 242,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Oeeh",
+      "contextValues": {
+        "key1": "dtl.record.orderno",
+        "key2": "dtl.record.ordersuf"
+      }
+    },
+    {
+      "id": 244,
+      "type": "VIEW_CNTR",
+      "viewName": "subDetail"
+    },
+    {
+      "id": 243,
+      "type": "VIEW_CNTR",
+      "viewName": "binAllocation"
+    }
+  ]
+}

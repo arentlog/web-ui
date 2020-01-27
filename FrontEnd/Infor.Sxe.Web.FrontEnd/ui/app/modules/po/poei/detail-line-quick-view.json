@@ -1,0 +1,1107 @@
+{
+  "viewId": "po-poei-detaillinequickview",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "dlqv.isDetailLineQuickView()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.quick.view",
+              "subLabel": "{{dlqv.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dlqv.back()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 136,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.bin.allocation",
+                  "conditionShow": "dlqv.isWarehouseManagerBinAllocationVisible",
+                  "eventClick": "dlqv.launchBinAllocationFunction()"
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "eventClick": "dlqv.back()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "EXP_AREA",
+                  "label": "global.extended",
+                  "collapsed": true,
+                  "children": [
+                    {
+                      "id": 35,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 36,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 37,
+                              "type": "TOOLBAR",
+                              "label": "global.blank.label.string.for.space",
+                              "children": [
+                                {
+                                  "id": 34,
+                                  "type": "BTN",
+                                  "subType": "TER",
+                                  "icon": "icon-save",
+                                  "label": "global.save",
+                                  "securityLevel": 3,
+                                  "eventClick": "dlqv.saveExtend()",
+                                  "conditionDisabled": "!dlqv.poeiLineDetail.extendSensitive || !dlqv.poeiLineExtend.btnOKSensitive || base.securitySubLevelLines  < 3"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 12,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dlqv.poeiLineExtend.shipprod",
+                              "label": "global.product"
+                            },
+                            {
+                              "id": 16,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dlqv.poeiLineExtend.descrip",
+                              "label": "global.description"
+                            },
+                            {
+                              "id": 166,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dlqv.poeiLineExtend.upcid",
+                              "label": "global.upc.number"
+                            },
+                            {
+                              "id": 13,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dlqv.poeiLineExtend.vendprod",
+                              "label": "global.vendor.product"
+                            },
+                            {
+                              "id": 31,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dlqv.poeiLineExtend.binloc1",
+                              "label": "global.bin.location.number1",
+                              "meta": "BinLocation",
+                              "conditionReadonly": "!dlqv.poeiLineDetail.extendSensitive || !dlqv.poeiLineExtend.fiBinLocation1Sensitive",
+                              "conditionDisabled": "",
+                              "dataFormat": "BinLoc",
+                              "options": {
+                                "allowEntry": true
+                              }
+                            },
+                            {
+                              "id": 32,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dlqv.poeiLineExtend.binloc2",
+                              "label": "global.bin.location.number2",
+                              "meta": "BinLocation",
+                              "conditionReadonly": "!dlqv.poeiLineDetail.extendSensitive || !dlqv.poeiLineExtend.fiBinLocation2Sensitive",
+                              "conditionDisabled": "",
+                              "dataFormat": "BinLoc",
+                              "conditionShow": "dlqv.poeiLineDetail.nonstockty!=='n'"
+                            },
+                            {
+                              "id": 33,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dlqv.poeiLineExtend.copybinlocsfl",
+                              "label": "global.copy.bin.loc.to.remaining.lines",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!dlqv.poeiLineDetail.extendSensitive || !dlqv.poeiLineExtend.tgCopyBinLocsSensitive",
+                              "conditionShow": "!dlqv.poeiLineExtend.tgCopyBinLocsHidden"
+                            },
+                            {
+                              "id": 164,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dlqv.poeiLineExtend.netbillty",
+                              "label": "global.net.billed",
+                              "conditionDisabled": "!dlqv.poeiLineExtend.netbilltySensitive",
+                              "conditionShow": "!dlqv.poeiLineExtend.netbilltyHidden",
+                              "type3": "SET",
+                              "metaGroup": "PO",
+                              "meta": "PONetBillType",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 165,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dlqv.poeiLineExtend.rebamtnetbill",
+                              "label": "global.rebate.amount.net.billed",
+                              "dataFormat": "DECIMAL",
+                              "conditionDisabled": "!dlqv.poeiLineExtend.rebamtnetbillSensitive",
+                              "conditionShow": "!dlqv.poeiLineExtend.rebamtnetbillHidden",
+                              "type3": "SET",
+                              "metaGroup": "COMMON",
+                              "meta": "NetBillType",
+                              "decimals": 2,
+                              "digits": 5,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": 17,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dlqv.poeiLineExtend.qtyord",
+                              "label": "global.ordered",
+                              "dataFormat": "DECIMAL",
+                              "dataDesc": "dlqv.poeiLineExtend.unit"
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dlqv.poeiLineExtend.stkqtyord",
+                              "label": "global.stocking.ordered",
+                              "dataFormat": "DECIMAL"
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dlqv.poeiLineExtend.stkqtyrcv",
+                              "label": "global.receive.stocking.quantity",
+                              "dataFormat": "DECIMAL",
+                              "dataDesc": "dlqv.poeiLineExtend.rcvunit"
+                            },
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dlqv.poeiLineExtend.qtyassign",
+                              "label": "global.quantity.assigned.to.orders",
+                              "dataFormat": "DECIMAL"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dlqv.poeiLineExtend.qtyunavail",
+                              "label": "global.unavailable.quantity",
+                              "dataFormat": "DECIMAL",
+                              "conditionDisabled": "",
+                              "conditionReadonly": "!dlqv.poeiLineDetail.extendSensitive || !dlqv.poeiLineExtend.fiQtyUnavailSensitive",
+                              "decimals": 2,
+                              "digits": 7,
+                              "formatOptions": {
+                                "minimumFractionDigits": 2,
+                                "maximumFractionDigits": 2
+                              }
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dlqv.poeiLineExtend.reasunavty",
+                              "label": "global.unavailable.reason",
+                              "conditionReadonly": "!dlqv.poeiLineDetail.extendSensitive || !dlqv.poeiLineExtend.cbReasUnAvTySensitive",
+                              "type3": "CODES",
+                              "meta": "ReasonUnavailable",
+                              "conditionShow": "!dlqv.isInspectionUnavailReasonsVisible",
+                              "conditionDisabled": ""
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dlqv.poeiLineExtend.reasunavty",
+                              "label": "global.inspection.unavailable.reason",
+                              "conditionReadonly": "!dlqv.poeiLineDetail.extendSensitive || !dlqv.poeiLineExtend.cbReasUnAvTySensitive",
+                              "type3": "CODES",
+                              "meta": "ReasonUnavailableStoreroomInspection",
+                              "conditionShow": "dlqv.isInspectionUnavailReasonsVisible",
+                              "conditionDisabled": ""
+                            },
+                            {
+                              "id": 30,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "dlqv.poeiLineDetail.ignoreltfl",
+                              "label": "global.ignore.lead.time",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!dlqv.poeiLineDetail.extendSensitive || !dlqv.poeiLineExtend.tgIgnoreLTFlSensitive"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 160,
+                  "type": "EXP_AREA",
+                  "label": "global.comments",
+                  "collapsed": true,
+                  "conditionCollapsed": "dlqv.poeiLineDetail.commentty === ''",
+                  "children": [
+                    {
+                      "id": 161,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 162,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 163,
+                              "type": "CUSTOM",
+                              "subType": "LineComments",
+                              "options": {
+                                "commentTypeModel": "po",
+                                "tableNameModel": "poel",
+                                "orderNumberModel": "dlqv.poeiLineDetail.pono",
+                                "orderSuffixModel": "dlqv.poeiLineDetail.posuf",
+                                "lineNumberModel": "dlqv.poeiLineDetail.lineno",
+                                "conditionReadonly": "base.securitySubLevelLines  < 3"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 39,
+                  "type": "EXP_AREA",
+                  "label": "global.addons",
+                  "conditionShow": "dlqv.poeiLineDetail.addonsSensitive",
+                  "collapsed": true,
+                  "children": [
+                    {
+                      "id": 109,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 110,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 111,
+                              "type": "TOOLBAR",
+                              "label": "global.blank.label.string.for.space",
+                              "children": [
+                                {
+                                  "id": 126,
+                                  "type": "BTN",
+                                  "subType": "MENU",
+                                  "label": "global.actions",
+                                  "conditionDisabled": "base.securitySubLevelLines  < 3",
+                                  "children": [
+                                    {
+                                      "id": 127,
+                                      "type": "MENU_OPT",
+                                      "label": "global.recalculate.whole.order.discount",
+                                      "icon": "icon-calculator",
+                                      "eventClick": "dlqv.addonsFieldChanged('disccalc',0)",
+                                      "conditionShow": "",
+                                      "conditionDisabled": "!dlqv.poeiLineAddons.wodiscSensitive"
+                                    },
+                                    {
+                                      "id": 128,
+                                      "type": "MENU_OPT",
+                                      "label": "global.recalculate.addon.1",
+                                      "icon": "icon-calculator",
+                                      "conditionShow": "",
+                                      "conditionDisabled": "!dlqv.poeiLineAddons.addonchg1Sensitive",
+                                      "eventClick": "dlqv.addonsFieldChanged('addoncalc',1)"
+                                    },
+                                    {
+                                      "id": 129,
+                                      "type": "MENU_OPT",
+                                      "label": "global.recalculate.addon.2",
+                                      "conditionDisabled": "!dlqv.poeiLineAddons.addonchg2Sensitive",
+                                      "icon": "icon-calculator",
+                                      "eventClick": "dlqv.addonsFieldChanged('addoncalc',2)"
+                                    },
+                                    {
+                                      "id": 130,
+                                      "type": "MENU_OPT",
+                                      "label": "global.recalculate.addon.3",
+                                      "conditionDisabled": "!dlqv.poeiLineAddons.addonchg3Sensitive",
+                                      "eventClick": "dlqv.addonsFieldChanged('addoncalc',3)",
+                                      "icon": "icon-calculator"
+                                    },
+                                    {
+                                      "id": 131,
+                                      "type": "MENU_OPT",
+                                      "label": "global.recalculate.addon.4",
+                                      "conditionDisabled": "!dlqv.poeiLineAddons.addonchg4Sensitive",
+                                      "eventClick": "dlqv.addonsFieldChanged('addoncalc',4)",
+                                      "icon": "icon-calculator"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 112,
+                                  "type": "BTN",
+                                  "subType": "TER",
+                                  "icon": "icon-save",
+                                  "label": "global.save",
+                                  "securityLevel": 3,
+                                  "eventClick": "dlqv.saveAddons()",
+                                  "conditionDisabled": "!dlqv.poeiLineAddons.wodiscSensitive && !dlqv.poeiLineAddons.addonchg1Sensitive && !dlqv.poeiLineAddons.addonchg2Sensitive && !dlqv.poeiLineAddons.addonchg3Sensitive &&  !dlqv.poeiLineAddons.addonchg4Sensitive || base.securitySubLevelLines  < 3"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 40,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 41,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 45,
+                              "type": "FIELD_SET",
+                              "label": "global.whole.order.discount",
+                              "children": [
+                                {
+                                  "id": 51,
+                                  "type": "ROW",
+                                  "children": [
+                                    {
+                                      "id": 52,
+                                      "type": "COL",
+                                      "subType": "1/2",
+                                      "children": [
+                                        {
+                                          "id": 49,
+                                          "type": "COMP_FLD",
+                                          "children": [
+                                            {
+                                              "id": 46,
+                                              "type": "FIELD",
+                                              "subType": "TEXT_BOX",
+                                              "model": "dlqv.poeiLineAddons.wodiscamt",
+                                              "label": "global.allocation",
+                                              "dataFormat": "DECIMAL",
+                                              "conditionReadonly": "!dlqv.poeiLineAddons.wodiscSensitive",
+                                              "size": "SM",
+                                              "eventChange": "dlqv.addonsFieldChanged('discamt',0)",
+                                              "digits": 7,
+                                              "decimals": 2,
+                                              "formatOptions": {
+                                                "minimumFractionDigits": 2,
+                                                "maximumFractionDigits": 2
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": 53,
+                                      "type": "COL",
+                                      "subType": "1/2",
+                                      "children": [
+                                        {
+                                          "id": 54,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "dlqv.poeiLineAddons.wodiscentered",
+                                          "label": "global.entered",
+                                          "dataFormat": "CURRENCY"
+                                        },
+                                        {
+                                          "id": 55,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "dlqv.poeiLineAddons.wodiscproof",
+                                          "label": "global.proof",
+                                          "dataFormat": "CURRENCY"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 56,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 57,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 58,
+                              "type": "FIELD_SET",
+                              "label": "global.addon.1",
+                              "children": [
+                                {
+                                  "id": 60,
+                                  "type": "ROW",
+                                  "children": [
+                                    {
+                                      "id": 61,
+                                      "type": "COL",
+                                      "subType": "1/3",
+                                      "children": [
+                                        {
+                                          "id": 62,
+                                          "type": "FIELD",
+                                          "subType": "DROP_DOWN",
+                                          "model": "dlqv.poeiLineAddons.addonno1",
+                                          "label": "global.type",
+                                          "conditionReadonly": "",
+                                          "type3": "CODES",
+                                          "size": "SM",
+                                          "meta": "POAddon",
+                                          "readonly": true
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": 132,
+                                      "type": "COL",
+                                      "subType": "1/3",
+                                      "children": [
+                                        {
+                                          "id": 63,
+                                          "type": "FIELD",
+                                          "subType": "TEXT_BOX",
+                                          "model": "dlqv.poeiLineAddons.addonamt1",
+                                          "label": "global.amount",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionReadonly": "!dlqv.poeiLineAddons.addonchg1Sensitive",
+                                          "size": "SM",
+                                          "eventChange": "dlqv.addonsFieldChanged('addonamt',1)",
+                                          "digits": 7,
+                                          "decimals": 2,
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 2,
+                                            "maximumFractionDigits": 2
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": 64,
+                                      "type": "COL",
+                                      "subType": "1/3",
+                                      "children": [
+                                        {
+                                          "id": 68,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "dlqv.poeiLineAddons.addonentered1",
+                                          "label": "global.entered",
+                                          "dataFormat": "CURRENCY"
+                                        },
+                                        {
+                                          "id": 69,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "dlqv.poeiLineAddons.addonproof1",
+                                          "label": "global.proof",
+                                          "dataFormat": "CURRENCY"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 70,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 71,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 72,
+                              "type": "FIELD_SET",
+                              "label": "global.addon.2",
+                              "children": [
+                                {
+                                  "id": 73,
+                                  "type": "ROW",
+                                  "children": [
+                                    {
+                                      "id": 74,
+                                      "type": "COL",
+                                      "subType": "1/3",
+                                      "children": [
+                                        {
+                                          "id": 78,
+                                          "type": "FIELD",
+                                          "subType": "DROP_DOWN",
+                                          "model": "dlqv.poeiLineAddons.addonno2",
+                                          "label": "global.type",
+                                          "conditionReadonly": "",
+                                          "type3": "CODES",
+                                          "size": "SM",
+                                          "meta": "POAddon",
+                                          "readonly": true
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": 133,
+                                      "type": "COL",
+                                      "subType": "1/3",
+                                      "children": [
+                                        {
+                                          "id": 79,
+                                          "type": "FIELD",
+                                          "subType": "TEXT_BOX",
+                                          "model": "dlqv.poeiLineAddons.addonamt2",
+                                          "label": "global.amount",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionReadonly": "!dlqv.poeiLineAddons.addonchg2Sensitive",
+                                          "size": "SM",
+                                          "eventChange": "dlqv.addonsFieldChanged('addonamt',2)",
+                                          "digits": 7,
+                                          "decimals": 2,
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 2,
+                                            "maximumFractionDigits": 2
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": 75,
+                                      "type": "COL",
+                                      "subType": "1/3",
+                                      "children": [
+                                        {
+                                          "id": 81,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "dlqv.poeiLineAddons.addonentered2",
+                                          "label": "global.entered",
+                                          "dataFormat": "CURRENCY"
+                                        },
+                                        {
+                                          "id": 82,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "dlqv.poeiLineAddons.addonproof2",
+                                          "label": "global.proof",
+                                          "dataFormat": "CURRENCY"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 83,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 84,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 85,
+                              "type": "FIELD_SET",
+                              "label": "global.addon.3"
+                            },
+                            {
+                              "id": 86,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 87,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 91,
+                                      "type": "FIELD",
+                                      "subType": "DROP_DOWN",
+                                      "model": "dlqv.poeiLineAddons.addonno3",
+                                      "label": "global.type",
+                                      "conditionReadonly": "",
+                                      "type3": "CODES",
+                                      "size": "SM",
+                                      "meta": "POAddon",
+                                      "readonly": true
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 134,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 92,
+                                      "type": "FIELD",
+                                      "subType": "TEXT_BOX",
+                                      "model": "dlqv.poeiLineAddons.addonamt3",
+                                      "label": "global.amount",
+                                      "dataFormat": "DECIMAL",
+                                      "conditionReadonly": "!dlqv.poeiLineAddons.addonchg3Sensitive",
+                                      "size": "SM",
+                                      "eventChange": "dlqv.addonsFieldChanged('addonamt',3)",
+                                      "digits": 7,
+                                      "decimals": 2,
+                                      "formatOptions": {
+                                        "minimumFractionDigits": 2,
+                                        "maximumFractionDigits": 2
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 88,
+                                  "type": "COL",
+                                  "subType": "1/3",
+                                  "children": [
+                                    {
+                                      "id": 94,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "dlqv.poeiLineAddons.addonentered3",
+                                      "label": "global.entered",
+                                      "dataFormat": "CURRENCY"
+                                    },
+                                    {
+                                      "id": 95,
+                                      "type": "FIELD",
+                                      "subType": "INFO",
+                                      "model": "dlqv.poeiLineAddons.addonproof3",
+                                      "label": "global.proof",
+                                      "dataFormat": "CURRENCY"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 96,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 97,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 98,
+                              "type": "FIELD_SET",
+                              "label": "global.addon.4",
+                              "children": [
+                                {
+                                  "id": 99,
+                                  "type": "ROW",
+                                  "children": [
+                                    {
+                                      "id": 100,
+                                      "type": "COL",
+                                      "subType": "1/3",
+                                      "children": [
+                                        {
+                                          "id": 104,
+                                          "type": "FIELD",
+                                          "subType": "DROP_DOWN",
+                                          "model": "dlqv.poeiLineAddons.addonno4",
+                                          "label": "global.type",
+                                          "conditionReadonly": "",
+                                          "type3": "CODES",
+                                          "size": "SM",
+                                          "meta": "POAddon",
+                                          "readonly": true
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": 135,
+                                      "type": "COL",
+                                      "subType": "1/3",
+                                      "children": [
+                                        {
+                                          "id": 105,
+                                          "type": "FIELD",
+                                          "subType": "TEXT_BOX",
+                                          "model": "dlqv.poeiLineAddons.addonamt4",
+                                          "label": "global.amount",
+                                          "dataFormat": "DECIMAL",
+                                          "conditionReadonly": "!dlqv.poeiLineAddons.addonchg4Sensitive",
+                                          "size": "SM",
+                                          "eventChange": "dlqv.addonsFieldChanged('addonamt',4)",
+                                          "digits": 7,
+                                          "decimals": 2,
+                                          "formatOptions": {
+                                            "minimumFractionDigits": 2,
+                                            "maximumFractionDigits": 2
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": 101,
+                                      "type": "COL",
+                                      "subType": "1/3",
+                                      "children": [
+                                        {
+                                          "id": 107,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "dlqv.poeiLineAddons.addonentered4",
+                                          "label": "global.entered",
+                                          "dataFormat": "CURRENCY"
+                                        },
+                                        {
+                                          "id": 108,
+                                          "type": "FIELD",
+                                          "subType": "INFO",
+                                          "model": "dlqv.poeiLineAddons.addonproof4",
+                                          "label": "global.proof",
+                                          "dataFormat": "CURRENCY"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 122,
+                  "type": "EXP_AREA",
+                  "label": "global.ties",
+                  "collapsed": true,
+                  "conditionShow": "dlqv.poeiLineDetail.tiesSensitive",
+                  "children": [
+                    {
+                      "id": 123,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 124,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 125,
+                              "type": "CUSTOM",
+                              "subType": "Ties",
+                              "options": {
+                                "modeModel": "Inquiry Only",
+                                "tieTypeModel": "Purchase Order",
+                                "companyNumberModel": "",
+                                "orderNumberModel": "dlqv.poeiLineDetail.pono",
+                                "orderSuffixModel": "dlqv.poeiLineDetail.posuf",
+                                "lineNumberModel": "dlqv.poeiLineDetail.lineno",
+                                "sequenceNumberModel": "",
+                                "prodModel": "",
+                                "nonStockTypeModel": "",
+                                "conditionReadonly": "base.securitySubLevelLines < 3"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 138,
+                  "type": "EXP_AREA",
+                  "label": "global.tally",
+                  "collapsed": true,
+                  "conditionShow": "dlqv.isTallyVisible",
+                  "children": [
+                    {
+                      "id": 139,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 140,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 145,
+                              "type": "CUSTOM",
+                              "subType": "PurchaseOrderTally",
+                              "options": {
+                                "functionNameModel": "poei",
+                                "purchaseOrderNumberModel": "dlqv.poeiLineDetail.pono",
+                                "purchaseOrderSuffixModel": "dlqv.poeiLineDetail.posuf",
+                                "lineNumberModel": "dlqv.poeiLineDetail.lineno",
+                                "productModel": "dlqv.poeiLineDetail.shipprod",
+                                "unitModel": "dlqv.poeiLineDetail.unit",
+                                "quantityReceivedModel": "dlqv.poeiLineDetail.qtyrcv",
+                                "priceModel": "dlqv.poeiLineDetail.price",
+                                "menuSecurityModel": "base.securityTopLevel",
+                                "warehouseModel": "dlqv.poeiListResult.whse",
+                                "saveCallbackModel": "dlqv.acceptTallyUpdate"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 141,
+                  "type": "EXP_AREA",
+                  "label": "global.bundles",
+                  "collapsed": true,
+                  "conditionShow": "dlqv.isBundlesVisible",
+                  "children": [
+                    {
+                      "id": 142,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 143,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 146,
+                              "type": "CUSTOM",
+                              "subType": "PurchaseOrderBundles",
+                              "options": {
+                                "functionNameModel": "poei",
+                                "saveCallbackModel": "dlqv.acceptBundlesUpdate",
+                                "purchaseOrderNumberModel": "dlqv.poeiLineDetail.pono",
+                                "purchaseOrderSuffixModel": "dlqv.poeiLineDetail.posuf",
+                                "lineNumberModel": "dlqv.poeiLineDetail.lineno",
+                                "productModel": "dlqv.poeiLineDetail.shipprod",
+                                "warehouseModel": "dlqv.poeiListResult.whse",
+                                "unitModel": "dlqv.poeiLineDetail.unit",
+                                "quantityReceivedModel": "dlqv.poeiLineDetail.qtyrcv",
+                                "priceModel": "dlqv.poeiLineDetail.price",
+                                "menuSecurityModel": "base.securityTopLevel"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 147,
+                  "type": "EXP_AREA",
+                  "label": "global.serials",
+                  "conditionShow": "dlqv.isSerialsVisible",
+                  "collapsed": true,
+                  "children": [
+                    {
+                      "id": 148,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 149,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 150,
+                              "type": "CUSTOM",
+                              "subType": "Serials",
+                              "options": {
+                                "controlRef": "dlqv.serialControl",
+                                "eventReady": "dlqv.serialControlReady()",
+                                "doneCallback": "dlqv.serialDoneCallback()",
+                                "conditionReadonly": "base.securitySubLevelLines < 3"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 151,
+                  "type": "EXP_AREA",
+                  "label": "global.lots",
+                  "conditionShow": "dlqv.isLotsVisible",
+                  "collapsed": true,
+                  "children": [
+                    {
+                      "id": 152,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 153,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 154,
+                              "type": "CUSTOM",
+                              "subType": "Lots",
+                              "options": {
+                                "controlRef": "dlqv.lotControl",
+                                "eventReady": "dlqv.lotControlReady()",
+                                "doneCallback": "dlqv.lotDoneCallback()",
+                                "conditionReadonly": "base.securitySubLevelLines < 3"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 156,
+                  "type": "EXP_AREA",
+                  "label": "global.return.allocation",
+                  "collapsed": true,
+                  "conditionShow": "dlqv.isReturnAllocationVisible",
+                  "children": [
+                    {
+                      "id": 157,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 158,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 159,
+                              "type": "CUSTOM",
+                              "subType": "PurchaseOrderCoreReturnAllocation",
+                              "options": {
+                                "functionNameModel": "poei",
+                                "purchaseOrderModel": "dlqv.poeiListResult",
+                                "purchaseOrderLineModel": "dlqv.poeiLineDetail",
+                                "submitCallbackModel": "dlqv.returnAllocationSubmitCallback",
+                                "cancelCallbackModel": "dlqv.returnAllocationCancelCallback"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 137,
+      "type": "VIEW_CNTR",
+      "viewName": "binAllocation"
+    },
+    {
+      "id": 155,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsp",
+      "contextValues": {
+        "key1": "dlqv.poeiLineDetail.shipprod"
+      }
+    }
+  ]
+}

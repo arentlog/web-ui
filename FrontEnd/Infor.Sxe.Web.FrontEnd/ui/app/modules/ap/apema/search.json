@@ -1,0 +1,88 @@
+{
+  "viewId": "ap-apema-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 4,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 5,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.vendorNumber",
+                  "label": "global.vendor.number",
+                  "autoFocus": true,
+                  "meta": "Vendor",
+                  "required": true,
+                  "conditionDisabled": "base.totCredits || base.totInvoices"
+                },
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "DATE",
+                  "model": "base.criteria.postDate",
+                  "label": "global.post.date",
+                  "dataFormat": "DATE",
+                  "conditionReadonly": "base.isGLDivSet || base.totCredits || base.totInvoices",
+                  "eventChange": "srch.postDateChanged()",
+                  "modelOptions": {
+                    "updateOn": "blur"
+                  }
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.criteria.currbal",
+                  "label": "global.current.balance",
+                  "dataFormat": "DECIMAL",
+                  "dataDesc": "",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2,
+                    "maximumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "INFO",
+                  "model": "base.criteria.currencyty",
+                  "label": "global.currency",
+                  "conditionShow": "base.criteria.currencyty"
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()",
+                  "conditionDisabled": "base.totCredits || base.totInvoices"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "viewId": "wt-wtet-selectproducts-lineentrychildstates-nonstock",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ale.isNonStock()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.non.stock.entry",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "aleNs.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "label": "global.submit",
+                  "icon": "icon-save",
+                  "submitForm": true,
+                  "eventValidated": "aleNs.submit()"
+                },
+                {
+                  "id": 15,
+                  "type": "BTN",
+                  "label": "global.default.fields",
+                  "conditionDisabled": "!aleNs.wtlineNonStock.defaultbuttonenabled",
+                  "conditionShow": "!aleNs.wtlineNonStock.defaultbuttonhidden",
+                  "eventClick": "aleNs.defaultFields()"
+                },
+                {
+                  "id": 16,
+                  "type": "BTN",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "eventClick": "aleNs.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 9,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.wtlineNonStock.prod",
+                          "label": "global.product",
+                          "meta": "ProdAllNonStock",
+                          "maxLength": 50,
+                          "size": "LG",
+                          "autoFocus": true,
+                          "eventChange": "aleNs.fieldChangedWithProductCheck()",
+                          "conditionReadonly": "!aleNs.wtlineNonStock.prodenabled",
+                          "contextOptions": {
+                            "deactivated": true
+                          },
+                          "options": {
+                            "allowEntry": true
+                          }
+                        },
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleNs.wtlineNonStock.proddesc1",
+                          "label": "global.description",
+                          "maxLength": 24,
+                          "conditionReadonly": "!aleNs.wtlineNonStock.proddescenabled"
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleNs.wtlineNonStock.proddesc2",
+                          "label": "global.description",
+                          "maxLength": 24,
+                          "labelHidden": true,
+                          "attachUp": true,
+                          "conditionReadonly": "!aleNs.wtlineNonStock.proddescenabled"
+                        },
+                        {
+                          "id": 21,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.wtlineNonStock.prodcati",
+                          "label": "global.category.in",
+                          "meta": "ProdCat",
+                          "conditionReadonly": "!aleNs.wtlineNonStock.prodcatienabled"
+                        },
+                        {
+                          "id": 57,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.wtlineNonStock.prodcato",
+                          "label": "global.category.out",
+                          "meta": "ProdCat",
+                          "conditionReadonly": "!aleNs.wtlineNonStock.prodcatoenabled"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "aleNs.wtlineNonStock.prodcost",
+                          "label": "global.cost",
+                          "dataFormat": "CURRENCY",
+                          "digits": 7,
+                          "decimals": 5,
+                          "conditionReadonly": "!aleNs.wtlineNonStock.prodcostenabled"
+                        },
+                        {
+                          "id": 58,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.wtlineNonStock.vendno",
+                          "label": "global.vendor.number",
+                          "conditionReadonly": "!aleNs.wtlineNonStock.vendnoenabled",
+                          "meta": "Vendor"
+                        },
+                        {
+                          "id": 59,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.wtlineNonStock.prodline",
+                          "label": "global.product.line",
+                          "conditionReadonly": "!aleNs.wtlineNonStock.prodlineenabled",
+                          "meta": "ProdLine",
+                          "options": {
+                            "searchParams": {
+                              "vendno": {
+                                "type": "REF",
+                                "value": "aleNs.wtlineNonStock.vendno"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 60,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "aleNs.wtlineNonStock.arpwhse",
+                          "label": "global.warehouse",
+                          "conditionReadonly": "!aleNs.wtlineNonStock.arpwhseenabled",
+                          "meta": "Warehouse"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "type": "VIEW_CNTR",
+      "viewName": "nonStockChildView"
+    }
+  ]
+}

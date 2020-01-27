@@ -1,0 +1,331 @@
+{
+  "viewId": "wt-wtet-initiate-importfromexcel",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "ife.isImportFromExcel()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.warehouse.transfers",
+              "subLabel": "global.import.from.excel",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.initiate"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.submit",
+                  "eventClick": "",
+                  "conditionShow": "ife.importDataCollection && ife.isFileImported",
+                  "submitForm": true,
+                  "eventValidated": "ife.submit()"
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "label": "global.import.file",
+                  "icon": "icon-tree-xls",
+                  "eventClick": "ife.importFile()",
+                  "conditionShow": "!ife.isFileImported"
+                },
+                {
+                  "id": 52,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.cancel",
+                  "icon": "icon-cancel",
+                  "conditionShow": "ife.isFileImported",
+                  "eventClick": "ife.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 49,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 50,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 48,
+                          "type": "FIELD",
+                          "subType": "FILE",
+                          "model": "ife.importedFile",
+                          "label": "global.file.to.import",
+                          "autoFocus": true,
+                          "multiple": false,
+                          "conditionShow": "!ife.isFileImported"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 51,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "ife.maxLines",
+                          "label": "global.max.lines",
+                          "dataFormat": "INTEGER",
+                          "sign": "+",
+                          "digits": 3,
+                          "size": "SM",
+                          "conditionShow": "!ife.isFileImported"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 13,
+                  "type": "MESSAGE",
+                  "text": "{{ife.importedFile.name}}",
+                  "icon": "icon-tree-xls",
+                  "conditionShow": "ife.importedFile.name && ife.isFileImported"
+                },
+                {
+                  "id": 8,
+                  "type": "GRID",
+                  "controlRef": "ife.grid",
+                  "model": "ife.importDataCollection",
+                  "conditionShow": "ife.isFileImported",
+                  "options": {
+                    "showDrilldown": true,
+                    "events": {
+                      "drilldown": "ife.drilldown()"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 9,
+                      "type": "TOOLBAR",
+                      "label": "global.lines"
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "label": "global.ok.to.process",
+                      "model": "processfl",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 15,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "worksheetno",
+                      "label": "global.worksheet.number"
+                    },
+                    {
+                      "id": 16,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "seqno",
+                      "label": "global.row.number"
+                    },
+                    {
+                      "id": 17,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "lineno",
+                      "label": "global.line.number"
+                    },
+                    {
+                      "id": 18,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "whse",
+                      "label": "global.from.warehouse"
+                    },
+                    {
+                      "id": 19,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "towhse",
+                      "label": "global.to.warehouse"
+                    },
+                    {
+                      "id": 20,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "tocono",
+                      "label": "global.to.company.number"
+                    },
+                    {
+                      "id": 25,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "shipviaty",
+                      "label": "global.ship.via"
+                    },
+                    {
+                      "id": 65,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "reasoncode",
+                      "label": "global.reason.code"
+                    },
+                    {
+                      "id": 55,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "model": "reqshipdt",
+                      "label": "global.requested.ship.date",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 57,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "model": "orderdt",
+                      "label": "global.order.date",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 29,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "addoncamt",
+                      "label": "global.addon.amt.cap",
+                      "dataFormat": "CURRENCY"
+                    },
+                    {
+                      "id": 58,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "addoncty",
+                      "label": "global.addon.cap.type"
+                    },
+                    {
+                      "id": 60,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "addoneamt",
+                      "label": "global.addon.amt.exp",
+                      "dataFormat": "CURRENCY"
+                    },
+                    {
+                      "id": 59,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "addonety",
+                      "label": "global.addon.exp.type"
+                    },
+                    {
+                      "id": 61,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "instruct",
+                      "label": "global.shipping.instructions"
+                    },
+                    {
+                      "id": 27,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "refer",
+                      "label": "global.reference"
+                    },
+                    {
+                      "id": 62,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "prod",
+                      "label": "global.product"
+                    },
+                    {
+                      "id": 30,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "descrip",
+                      "label": "global.product.description"
+                    },
+                    {
+                      "id": 31,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyord",
+                      "label": "global.quantity.ordered"
+                    },
+                    {
+                      "id": 56,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "unit",
+                      "label": "global.unit"
+                    },
+                    {
+                      "id": 45,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "requirefl",
+                      "label": "global.required",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 63,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "printfl",
+                      "label": "global.print",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 64,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "name",
+                      "label": "global.name"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "type": "VIEW_CNTR",
+      "viewName": "importFromExcelChildView"
+    }
+  ]
+}

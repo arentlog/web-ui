@@ -1,0 +1,152 @@
+{
+  "viewId": "ar-araos-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.araos",
+          "children": []
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "type": "GRID",
+              "id": 11,
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "selectable": "multiple",
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 5,
+                  "type": "TOOLBAR",
+                  "label": "global.service.charge.administration",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-new-document",
+                      "label": "global.new",
+                      "eventClick": "mst.create()",
+                      "securityLevel": 4,
+                      "conditionDisabled": "base.grid.isAnyRowSelected()"
+                    },
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-edit",
+                      "label": "global.edit",
+                      "eventClick": "mst.edit()",
+                      "conditionDisabled": "!base.grid.isOneRowSelected()",
+                      "securityLevel": 3
+                    },
+                    {
+                      "id": 9,
+                      "type": "BTN",
+                      "subType": "",
+                      "icon": "icon-delete",
+                      "label": "global.delete",
+                      "eventClick": "mst.delete()",
+                      "conditionDisabled": "base.grid.isNoRowSelected()",
+                      "securityLevel": 5
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "DROP_DOWN",
+                  "model": "recty",
+                  "label": "global.type",
+                  "type3": "SET",
+                  "metaGroup": "AR",
+                  "meta": "AdministratorServiceChargeType"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "arscnotesfl",
+                  "label": "global.notes",
+                  "dataFormat": "NotesFlag",
+                  "conditionInclude": "base.includeCustomer === true"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "custno",
+                  "label": "global.customer.number",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "conditionInclude": "base.includeCustomer === true",
+                  "eventClick": "mst.customerHyperlink()"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "custname",
+                  "label": "global.name",
+                  "conditionInclude": "base.includeShipTo === true"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "arssnotesfl",
+                  "label": "global.notes",
+                  "dataFormat": "NotesFlag",
+                  "conditionInclude": "base.includeShipTo === true"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "shipto",
+                  "label": "global.ship.to",
+                  "conditionInclude": "base.includeShipTo === true",
+                  "eventClick": "mst.shiptoHyperlink()"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "state",
+                  "label": "global.state",
+                  "conditionInclude": "base.includeState === true"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "groupid",
+                  "label": "global.group.id",
+                  "conditionInclude": "base.includeGroup === true"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

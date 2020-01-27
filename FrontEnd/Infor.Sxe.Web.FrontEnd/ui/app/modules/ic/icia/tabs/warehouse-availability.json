@@ -1,0 +1,300 @@
+{
+  "viewId": "ic-icia-detail-tabs-warehouse-availability",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 4,
+      "type": "COMP_FLD",
+      "children": [
+        {
+          "id": 2,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "wha.whseAvailCriteria.unit",
+          "label": "global.unit",
+          "meta": "Units",
+          "options": {
+            "searchParams": {
+              "prod": {
+                "type": "REF",
+                "value": "base.prod"
+              }
+            }
+          }
+        },
+        {
+          "id": 5,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "wha.whseAvailCriteria.cono",
+          "label": "global.company",
+          "type3": "CODES",
+          "meta": "Company"
+        },
+        {
+          "id": 6,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "wha.whseAvailCriteria.zone",
+          "label": "global.zone",
+          "size": "SM",
+          "maxLength": 2
+        },
+        {
+          "id": 7,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "wha.whseAvailCriteria.region",
+          "label": "global.region",
+          "size": "SM",
+          "maxLength": 4
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "COMP_FLD",
+      "children": [
+        {
+          "id": 9,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "wha.whseAvailCriteria.consigncustno",
+          "label": "global.consign.cust.number",
+          "meta": "Customer",
+          "controls": {
+            "actionBtn": {
+              "id": 35,
+              "type": "BTN",
+              "subType": "ICON",
+              "label": "global.inquire",
+              "icon": "icon-drilldown",
+              "isLabelTooltip": true,
+              "eventClick": "wha.consignCustomerHyperlink()",
+              "conditionDisabled": "!wha.whseAvailCriteria.consigncustno"
+            }
+          }
+        },
+        {
+          "id": 11,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "wha.whseAvailCriteria.whsetype",
+          "label": "global.warehouse.type",
+          "type3": "CODES",
+          "meta": "WarehouseTypes"
+        },
+        {
+          "id": 10,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "wha.whseAvailCriteria.whsegroup",
+          "label": "global.warehouse.group",
+          "meta": "WarehouseGroup"
+        },
+        {
+          "id": 12,
+          "type": "FIELD",
+          "subType": "CHECKBOX",
+          "model": "wha.whseAvailCriteria.surplusonlyfl",
+          "label": "global.surplus.only",
+          "dataFormat": "LOGICAL"
+        },
+        {
+          "id": 13,
+          "type": "BTN",
+          "subType": "PRI",
+          "label": "global.filter",
+          "eventClick": "wha.whseAvailFilter()"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "type": "GRID",
+      "model": "wha.whseAvailCollection",
+      "controls": {
+        "toolbar": {
+          "id": 15,
+          "type": "TOOLBAR",
+          "label": "global.warehouse.availability",
+          "children": [
+            {
+              "id": 36,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.refresh",
+              "eventClick": "wha.getWarehouseAvailability()"
+            }
+          ]
+        }
+      },
+      "children": [
+        {
+          "id": 17,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "iCoNo",
+          "label": "global.company",
+          "dataFormat": "INTEGER_TEXT"
+        },
+        {
+          "id": 18,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "cWhse",
+          "label": "global.warehouse"
+        },
+        {
+          "id": 26,
+          "type": "GRID_COL",
+          "subType": "HYPERLINK",
+          "model": "dConsignCustno",
+          "label": "global.consign.cust.number",
+          "dataFormat": "DECIMAL",
+          "eventClick": "wha.gridConsignCustomerHyperlink()"
+        },
+        {
+          "id": 20,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "iSurplus",
+          "label": "global.surplus",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 21,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dNetAvail",
+          "label": "global.net.availability",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 22,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dUsageRate",
+          "label": "global.non.forecast.rate",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 19,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dCost",
+          "label": "global.cost",
+          "dataFormat": "DECIMAL",
+          "contentVisible": "base.canSeeCost()",
+          "formatOptions": {
+            "minimumFractionDigits": 5,
+            "maximumFractionDigits": 5
+          }
+        },
+        {
+          "id": 23,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "iLeadTmAvg",
+          "label": "global.lead.days",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 24,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "iQtyOnOrder",
+          "label": "global.on.order",
+          "dataFormat": "INTEGER"
+        },
+        {
+          "id": 25,
+          "type": "GRID_COL",
+          "subType": "DATE",
+          "model": "dtNextRcv",
+          "label": "global.due.in",
+          "dataFormat": "DATE"
+        },
+        {
+          "id": 27,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dQtyOnhand",
+          "label": "global.on.hand",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 28,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dreserved",
+          "label": "global.reserved",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 29,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dCommited",
+          "label": "global.committed",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 30,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "model": "dQtyBO",
+          "label": "global.back.order",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        },
+        {
+          "id": 33,
+          "type": "GRID_COL",
+          "subType": "CHECKBOX",
+          "model": "cCritical",
+          "label": "global.critical",
+          "dataFormat": "LOGICAL",
+          "subFormat": "YesNo"
+        },
+        {
+          "id": 34,
+          "type": "GRID_COL",
+          "subType": "TEXT",
+          "label": "global.total.rate",
+          "model": "dTotUsageRate",
+          "dataFormat": "DECIMAL",
+          "formatOptions": {
+            "minimumFractionDigits": 2,
+            "maximumFractionDigits": 2
+          }
+        }
+      ]
+    }
+  ]
+}

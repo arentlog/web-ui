@@ -1,0 +1,609 @@
+{
+  "viewId": "ic-icsabc-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.abc.stratification",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.icsabc.whse",
+                              "label": "global.warehouse",
+                              "required": true,
+                              "meta": "Warehouse",
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 79,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.icsabc.stkoan",
+                              "label": "global.stock.type",
+                              "type3": "SET",
+                              "metaGroup": "IC",
+                              "meta": "ABCStockType",
+                              "blankOption": false,
+                              "conditionReadonly": "!base.isCreate()",
+                              "required": true
+                            },
+                            {
+                              "id": 108,
+                              "type": "MESSAGE",
+                              "text": "global.relative.importance.of.each.ranking"
+                            },
+                            {
+                              "id": 70,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 76,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.relwtsales",
+                                  "label": "global.sales.percent",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 78,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.relwtgmroi",
+                                  "label": "gmroi.percent",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 77,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.relwthits",
+                                  "label": "global.hits.percent",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 3,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "readonly": true
+                                }
+                              ]
+                            },
+                            {
+                              "id": 107,
+                              "type": "MESSAGE",
+                              "text": "global.relative.abc.weighting.between.groups"
+                            },
+                            {
+                              "id": 69,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 71,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.relimpa",
+                                  "label": "global.letter.a.percent",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 73,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.relimpb",
+                                  "label": "global.bpercent",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 72,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.relimpc",
+                                  "label": "global.cpercent",
+                                  "size": "XS",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 74,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.relimpd",
+                                  "label": "global.dpercent",
+                                  "size": "XS",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 3,
+                                  "decimals": 2,
+                                  "required": false,
+                                  "readonly": true
+                                }
+                              ]
+                            },
+                            {
+                              "id": 106,
+                              "type": "MESSAGE",
+                              "text": "global.relative.spread.of.products.across.ranks"
+                            },
+                            {
+                              "id": 105,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 82,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.relsprda",
+                                  "label": "global.letter.a.percent",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 83,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.relsprdb",
+                                  "label": "global.bpercent",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 84,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.relsprdc",
+                                  "label": "global.cpercent",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 86,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.relsprdd",
+                                  "label": "global.dpercent",
+                                  "size": "XS",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 3,
+                                  "decimals": 2,
+                                  "readonly": true
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 75,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 109,
+                              "type": "MESSAGE",
+                              "text": "global.sales.percent.by.rank"
+                            },
+                            {
+                              "id": 87,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 89,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.salespcta",
+                                  "label": "global.letter.a.percent",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 90,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.salespctb",
+                                  "label": "global.bpercent",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 91,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.salespctc",
+                                  "label": "global.cpercent",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 92,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.salespctd",
+                                  "label": "global.dpercent",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 3,
+                                  "decimals": 2,
+                                  "readonly": true,
+                                  "size": "XS"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 110,
+                              "type": "MESSAGE",
+                              "text": "gmroi.percent.for.rank"
+                            },
+                            {
+                              "id": 93,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 95,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.gmroipcta",
+                                  "label": "global.letter.percent.greater.than",
+                                  "size": "XS",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 4,
+                                  "decimals": 2,
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 96,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.gmroipctb",
+                                  "label": "global.bpercentgreater.than",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 4,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 97,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.gmroipctc",
+                                  "label": "global.cpercent.greater.thanequals",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 3,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 98,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.gmroipctd",
+                                  "label": "global.dpercentless.than",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 3,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "required": false,
+                                  "readonly": true
+                                }
+                              ]
+                            },
+                            {
+                              "id": 111,
+                              "type": "MESSAGE",
+                              "text": "global.hits.percent.by.rank"
+                            },
+                            {
+                              "id": 99,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 101,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.hitspcta",
+                                  "label": "global.letter.a.percent",
+                                  "size": "XS",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 102,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.hitspctb",
+                                  "label": "global.bpercent",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 103,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.icsabc.hitspctc",
+                                  "label": "global.cpercent",
+                                  "dataFormat": "DECIMAL",
+                                  "sign": "+",
+                                  "digits": 2,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "eventChange": "dtl.calculatePercents()",
+                                  "formatOptions": {
+                                    "minimumFractionDigits": 2,
+                                    "maximumFractionDigits": 2
+                                  }
+                                },
+                                {
+                                  "id": 104,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.hitspctd",
+                                  "label": "global.dpercent",
+                                  "dataFormat": "DECIMAL",
+                                  "digits": 3,
+                                  "decimals": 2,
+                                  "size": "XS",
+                                  "readonly": true
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "icsabc",
+                        "objectRef": "dtl.icsabc",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

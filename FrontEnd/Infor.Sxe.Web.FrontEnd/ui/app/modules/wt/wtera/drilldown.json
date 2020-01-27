@@ -1,0 +1,105 @@
+{
+  "viewId": "wt-wtera-drilldown",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isDrillDown()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "{{base.drillDownLabel}}",
+              "controls": {
+                "navBtns": {
+                  "id": 19,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 21,
+                  "type": "BTN",
+                  "label": "global.save",
+                  "icon": "icon-save",
+                  "securityLevel": 3,
+                  "conditionDisabled": "!drldwn.isSaveButtonEnabled()",
+                  "eventClick": "drldwn.saveHeaderData()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 6,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "TAB",
+                      "label": "global.header",
+                      "subFunction": "",
+                      "eventActivated": "drldwn.activate('header')",
+                      "conditionSelected": "drldwn.headerTabSelected",
+                      "tabId": "header",
+                      "children": [
+                        {
+                          "id": 10,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "wt/wtera/tabs/header.json",
+                          "controller": "WteraDrillDownHeaderCtrl as hdr"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 8,
+                      "type": "TAB",
+                      "label": "global.line.items",
+                      "eventActivated": "drldwn.activate('lines')",
+                      "conditionSelected": "drldwn.lineItemTabSelected",
+                      "tabId": "line-items",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "wt/wtera/tabs/lineitems.json"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "type": "VIEW_CNTR",
+      "viewName": "linedetail"
+    }
+  ]
+}

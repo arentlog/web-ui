@@ -1,0 +1,291 @@
+{
+  "viewId": "oe-oeet-selectproducts-shoppinglist-customerreservations",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.shopping.list",
+              "subLabel": "global.customer.reservations",
+              "controls": {
+                "navBtns": {
+                  "id": 233,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 234,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "slCr.back()",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 246,
+                  "type": "BTN",
+                  "label": "global.search",
+                  "icon": "icon-search",
+                  "submitForm": true,
+                  "eventValidated": "slCr.search()"
+                },
+                {
+                  "id": 250,
+                  "type": "BTN",
+                  "label": "global.ok",
+                  "icon": "icon-check",
+                  "eventClick": "slCr.ok()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 235,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 236,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 238,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "slCr.criteria.whse",
+                          "label": "global.warehouse",
+                          "meta": "Warehouse",
+                          "autoFocus": true
+                        },
+                        {
+                          "id": 239,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "slCr.criteria.shipto",
+                          "label": "global.ship.to",
+                          "meta": "ShipTo",
+                          "eventChange": "slCr.shipToChanged()",
+                          "options": {
+                            "searchParams": {
+                              "custno": {
+                                "type": "REF",
+                                "value": "slCr.criteria.custno"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "id": 240,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "slCr.criteria.custno",
+                          "label": "global.customer",
+                          "meta": "Customer"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 237,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 245,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "slCr.criteria.product",
+                          "label": "global.product",
+                          "meta": "ProdAll"
+                        },
+                        {
+                          "id": 241,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "slCr.criteria.statuscd",
+                          "label": "global.status",
+                          "type3": "INLINE",
+                          "blankOption": true,
+                          "blankOptionLabel": "global.all",
+                          "children": [
+                            {
+                              "id": 242,
+                              "type": "OPT",
+                              "label": "global.active",
+                              "value": "a"
+                            },
+                            {
+                              "id": 243,
+                              "type": "OPT",
+                              "label": "global.inactive",
+                              "value": "i"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 244,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "slCr.criteria.contractno",
+                          "label": "global.contract",
+                          "readonly": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 247,
+                  "type": "GRID",
+                  "model": "slCr.dataset",
+                  "controlRef": "slCr.grid",
+                  "options": {
+                    "showCheckboxes": true,
+                    "selectable": "single",
+                    "events": {
+                      "selected": "slCr.rowSelected()"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 248,
+                      "type": "TOOLBAR",
+                      "label": "global.customer.reservations"
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 249,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "custno",
+                      "label": "global.customer",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 251,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "custnoname",
+                      "label": "global.customer.name"
+                    },
+                    {
+                      "id": 252,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "shipto",
+                      "label": "global.ship.to",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 253,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "shiptoname",
+                      "label": "global.ship.to.name"
+                    },
+                    {
+                      "id": 254,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "whse",
+                      "label": "global.warehouse",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 255,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "model": "startdt",
+                      "label": "global.start.date",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 256,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "model": "expiredt",
+                      "label": "global.expire.date",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 257,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "activefl",
+                      "label": "global.status",
+                      "subFormat": "AI",
+                      "dataFormat": "LOGICAL"
+                    },
+                    {
+                      "id": 258,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "refer",
+                      "label": "global.reference"
+                    },
+                    {
+                      "id": 259,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "contractno",
+                      "label": "global.contract.number",
+                      "dataFormat": "INTEGER_TEXT"
+                    },
+                    {
+                      "id": 260,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "fillpriority",
+                      "label": "global.fill.priority"
+                    },
+                    {
+                      "id": 261,
+                      "type": "GRID_COL",
+                      "subType": "DATE",
+                      "model": "createdt",
+                      "label": "global.create.date",
+                      "dataFormat": "DATE"
+                    },
+                    {
+                      "id": 262,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyreserved",
+                      "label": "global.qty.reserved",
+                      "dataFormat": "DECIMAL"
+                    },
+                    {
+                      "id": 263,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "qtyrequired",
+                      "label": "message.qty.required",
+                      "dataFormat": "DECIMAL"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

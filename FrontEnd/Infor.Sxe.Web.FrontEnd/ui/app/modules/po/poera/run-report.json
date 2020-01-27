@@ -1,0 +1,321 @@
+{
+  "viewId": "po-poera-runreport",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.demand.center.run.po.rrar.report",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 40,
+                  "type": "BTN",
+                  "label": "global.run",
+                  "icon": "icon-document",
+                  "submitForm": true,
+                  "eventValidated": "runrpt.submit()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 11,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.runReport.vendno",
+                          "label": "global.vendor.number",
+                          "conditionDisabled": "!base.isRunReportSelectionFieldsEnabled()",
+                          "meta": "Vendor"
+                        },
+                        {
+                          "id": 12,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.runReport.whse",
+                          "label": "global.warehouse",
+                          "conditionDisabled": "!base.isRunReportSelectionFieldsEnabled()",
+                          "meta": "Warehouse"
+                        },
+                        {
+                          "id": 15,
+                          "type": "COMP_FLD",
+                          "children": [
+                            {
+                              "id": 13,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "base.runReport.prodline",
+                              "label": "global.product.line",
+                              "conditionDisabled": "!base.isRunReportSelectionFieldsEnabled()",
+                              "meta": "ProdLine",
+                              "options": {
+                                "searchParams": {
+                                  "vendno": {
+                                    "type": "REF",
+                                    "value": "base.runReport.vendno"
+                                  },
+                                  "whse": {
+                                    "type": "REF",
+                                    "value": "base.runReport.whse"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 14,
+                              "type": "FIELD",
+                              "subType": "CHECKBOX",
+                              "model": "base.runReport.useplinefl",
+                              "label": "global.all",
+                              "dataFormat": "LOGICAL",
+                              "conditionDisabled": "!base.isRefreshAllPLinesEnabled()"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": 16,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 18,
+                          "type": "EXP_AREA",
+                          "label": "global.report.options",
+                          "children": [
+                            {
+                              "id": 19,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 20,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 21,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "base.runReport.printusagehistfl",
+                                      "label": "question.print.usage.history",
+                                      "dataFormat": "LOGICAL"
+                                    },
+                                    {
+                                      "id": 22,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "base.runReport.printaltvendorsfl",
+                                      "label": "question.print.alternate.vendors",
+                                      "dataFormat": "LOGICAL"
+                                    },
+                                    {
+                                      "id": 28,
+                                      "type": "COMP_FLD",
+                                      "children": [
+                                        {
+                                          "id": 29,
+                                          "type": "FIELD",
+                                          "subType": "CHECKBOX",
+                                          "model": "base.runReport.printsubsfl",
+                                          "label": "question.print.substitutes.&.supersedes",
+                                          "dataFormat": "LOGICAL"
+                                        },
+                                        {
+                                          "id": 30,
+                                          "type": "FIELD",
+                                          "subType": "DROP_DOWN",
+                                          "model": "base.runReport.whsesurplus",
+                                          "label": "global.warehouse.surplus",
+                                          "meta": "RunRRARReportSurplus",
+                                          "type3": "SET",
+                                          "metaGroup": "WT",
+                                          "blankOption": false
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": 31,
+                                      "type": "COMP_FLD",
+                                      "children": [
+                                        {
+                                          "id": 32,
+                                          "type": "FIELD",
+                                          "subType": "CHECKBOX",
+                                          "model": "base.runReport.printblfl",
+                                          "label": "question.print.entered.blanket.releases",
+                                          "dataFormat": "LOGICAL"
+                                        },
+                                        {
+                                          "id": 33,
+                                          "type": "FIELD",
+                                          "subType": "DROP_DOWN",
+                                          "model": "base.runReport.processtype",
+                                          "label": "global.type",
+                                          "meta": "RunRRARReportProcessType",
+                                          "type3": "SET",
+                                          "metaGroup": "WT",
+                                          "blankOption": false
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": 34,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "base.runReport.printrushfl",
+                                      "label": "global.print.only.specials.nonstk.rush.lines",
+                                      "dataFormat": "LOGICAL"
+                                    },
+                                    {
+                                      "id": 35,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "base.runReport.prodlinefl",
+                                      "label": "question.honor.product.line.for.special.ns",
+                                      "dataFormat": "LOGICAL"
+                                    },
+                                    {
+                                      "id": 36,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "base.runReport.printdnrfl",
+                                      "label": "global.print.do.not.re.order.products",
+                                      "dataFormat": "LOGICAL"
+                                    },
+                                    {
+                                      "id": 37,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "base.runReport.printlnignorefl",
+                                      "label": "question.report.all.products.ignoring.guidelines",
+                                      "dataFormat": "LOGICAL"
+                                    },
+                                    {
+                                      "id": 38,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "base.runReport.printcommentsfl",
+                                      "label": "global.print.comments.for.spec.nonstk",
+                                      "dataFormat": "LOGICAL"
+                                    },
+                                    {
+                                      "id": 39,
+                                      "type": "FIELD",
+                                      "subType": "CHECKBOX",
+                                      "model": "base.runReport.halfwayfl",
+                                      "label": "global.apply.halfway.rounding.rules",
+                                      "dataFormat": "LOGICAL"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 41,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 42,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 43,
+                          "type": "EXP_AREA",
+                          "label": "global.printing.information",
+                          "children": [
+                            {
+                              "id": 44,
+                              "type": "ROW",
+                              "children": [
+                                {
+                                  "id": 45,
+                                  "type": "COL",
+                                  "subType": "1",
+                                  "children": [
+                                    {
+                                      "id": 46,
+                                      "type": "CUSTOM",
+                                      "subType": "Printer",
+                                      "options": {
+                                        "controlRef": "runrpt.printerControl",
+                                        "functionName": "poera",
+                                        "defaultPrintType": "p"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

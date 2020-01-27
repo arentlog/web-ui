@@ -1,0 +1,292 @@
+{
+  "viewId": "sa-sassa-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.system.authorization.points",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sassa.ourproc",
+                              "label": "global.function",
+                              "required": true,
+                              "maxLength": 5,
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sassa.key1",
+                              "label": "global.screen",
+                              "required": false,
+                              "maxLength": 24,
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sassa.key2",
+                              "label": "global.field",
+                              "required": false,
+                              "maxLength": 24,
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 24,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 22,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.sassa.mode",
+                                  "label": "global.mode",
+                                  "required": false,
+                                  "maxLength": 1,
+                                  "size": "XS",
+                                  "conditionReadonly": "!base.isCreate()"
+                                },
+                                {
+                                  "id": 25,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.sassa.transtype",
+                                  "label": "global.transaction.type",
+                                  "required": false,
+                                  "maxLength": 2,
+                                  "size": "XS",
+                                  "conditionReadonly": "!base.isCreate()"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.sassa.trmgrlang",
+                              "label": "global.language",
+                              "required": false,
+                              "type3": "MANUAL",
+                              "optionLabelField": "descrip",
+                              "optionValueField": "trmgrlang",
+                              "blankOption": false,
+                              "optionsModel": "base.languageTypes",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "base.sasc.langcd !== ''"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.sassa.authdesc",
+                              "label": "global.point.description",
+                              "required": true,
+                              "maxLength": 40,
+                              "size": "LG"
+                            },
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.sassa.standardty",
+                              "label": "global.standard",
+                              "required": false,
+                              "type3": "SET",
+                              "metaGroup": "SA",
+                              "meta": "StandardTypes",
+                              "blankOption": false
+                            },
+                            {
+                              "id": 32,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 30,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.sassa.transdt",
+                                  "label": "global.last.updated",
+                                  "required": false,
+                                  "size": "SM",
+                                  "dataFormat": "DATE",
+                                  "readonly": true,
+                                  "conditionShow": "!base.isCreate()"
+                                },
+                                {
+                                  "id": 31,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.sassa.transtm",
+                                  "label": "global.at",
+                                  "required": false,
+                                  "size": "SM",
+                                  "dataFormat": "TIME",
+                                  "readonly": true,
+                                  "conditionShow": "!base.isCreate()",
+                                  "subFormat": "hhmm"
+                                },
+                                {
+                                  "id": 33,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.sassa.operinit",
+                                  "label": "global.by",
+                                  "required": false,
+                                  "size": "XS",
+                                  "readonly": true,
+                                  "conditionShow": "!base.isCreate()"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 20,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "authpoints",
+                        "objectRef": "dtl.sassa",
+                        "conditionReadonly": "base.isDetail()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

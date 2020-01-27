@@ -1,0 +1,227 @@
+{
+  "viewId": "ic-icspc-master-advancedcriteria",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "",
+  "children": [
+    {
+      "id": 2,
+      "type": "COMP_FLD",
+      "children": [
+        {
+          "id": 8,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.setuptype",
+          "label": "global.setup.type",
+          "type3": "SET",
+          "metaGroup": "IC",
+          "meta": "RecordTypeICSPC",
+          "blankOption": false,
+          "conditionShow": "advsrch.isSelected('setuptype') || mst.advCriteria.setuptype === 'R' || mst.advCriteria.setuptype === 'F'",
+          "required": true
+        },
+        {
+          "id": 3,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.whse",
+          "label": "global.warehouse",
+          "meta": "Warehouse",
+          "conditionShow": "advsrch.isSelected('whse')",
+          "required": true
+        },
+        {
+          "id": 4,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.shiptogrp",
+          "label": "global.ship.to.group",
+          "meta": "ShipToGroup",
+          "conditionShow": "advsrch.isSelected('shiptogrp') && mst.advCriteria.setuptype === 'F'",
+          "options": {
+            "searchParams": {
+              "custno": {
+                "type": "REF",
+                "value": "mst.advCriteria.custno"
+              },
+              "shiptogrp": {
+                "type": "REF",
+                "value": "mst.advCriteria.shiptogrp"
+              }
+            }
+          }
+        },
+        {
+          "id": 5,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.custno",
+          "label": "global.customer.number",
+          "meta": "Customer",
+          "conditionShow": "advsrch.isSelected('custno')",
+          "eventChange": "mst.loadDefaultWhse()",
+          "controls": {
+            "actionBtn": {
+              "id": 18,
+              "type": "BTN",
+              "subType": "ICON",
+              "label": "global.inquire",
+              "icon": "icon-drilldown",
+              "isLabelTooltip": true,
+              "conditionDisabled": "!mst.advCriteria.custno",
+              "stateRef": "aric.detail({pk: mst.advCriteria.custno})"
+            }
+          }
+        },
+        {
+          "id": 6,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.shipto",
+          "label": "global.ship.to",
+          "meta": "ShipTo",
+          "conditionShow": "advsrch.isSelected('shipto')",
+          "eventChange": "mst.loadDefaultWhse()",
+          "options": {
+            "searchParams": {
+              "custno": {
+                "type": "REF",
+                "value": "mst.advCriteria.custno"
+              }
+            }
+          },
+          "controls": {
+            "actionBtn": {
+              "id": 19,
+              "type": "BTN",
+              "subType": "ICON",
+              "label": "global.inquire",
+              "icon": "icon-drilldown",
+              "isLabelTooltip": true,
+              "conditionDisabled": "!mst.advCriteria.shipto",
+              "stateRef": "aric.detail({pk: mst.advCriteria.custno, pk2: mst.advCriteria.shipto})"
+            }
+          }
+        },
+        {
+          "id": 7,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.statuscd",
+          "label": "global.status",
+          "type3": "SET",
+          "metaGroup": "IC",
+          "meta": "CustomerReservationsStatusCode",
+          "blankOption": false,
+          "conditionShow": "advsrch.isSelected('statuscd')"
+        },
+        {
+          "id": 15,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.contractno",
+          "label": "global.contract",
+          "maxLength": 24,
+          "conditionShow": "advsrch.isSelected('contractno')"
+        },
+        {
+          "id": 10,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.begstartdt",
+          "label": "global.from.start.date",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('begstartdt')"
+        },
+        {
+          "id": 11,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.endstartdt",
+          "label": "global.to.start.date",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('endstartdt')"
+        },
+        {
+          "id": 12,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.begexpiredt",
+          "label": "global.from.expire.date",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('begexpiredt')"
+        },
+        {
+          "id": 13,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.criteria.endexpiredt",
+          "label": "global.to.expire.date",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('endexpiredt')"
+        },
+        {
+          "id": 14,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.refer",
+          "label": "global.reference",
+          "meta": "Reference",
+          "maxLength": 48,
+          "conditionShow": "advsrch.isSelected('refer')",
+          "eventChange": "mst.referenceLookupChanged()",
+          "options": {
+            "allowEntry": true,
+            "autoSelect": false
+          }
+        },
+        {
+          "id": 16,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.product",
+          "label": "global.product",
+          "meta": "ProdAll",
+          "conditionShow": "advsrch.isSelected('product')",
+          "controls": {
+            "actionBtn": {
+              "id": 20,
+              "type": "BTN",
+              "subType": "ICON",
+              "label": "global.inquire",
+              "icon": "icon-drilldown",
+              "isLabelTooltip": true,
+              "conditionDisabled": "!mst.advCriteria.product",
+              "stateRef": "icip.detail({pk: mst.advCriteria.product, pk2: mst.advCriteria.whse})"
+            }
+          }
+        },
+        {
+          "id": 9,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.pullqtycd",
+          "label": "global.pull.quantity",
+          "type3": "SET",
+          "metaGroup": "IC",
+          "meta": "CustomerReservationsPullQtyCode",
+          "blankOption": false,
+          "conditionShow": "advsrch.isSelected('pullqtycd') && mst.advCriteria.setuptype === 'R'"
+        },
+        {
+          "id": 17,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.recordlimit",
+          "label": "global.record.limit",
+          "dataFormat": "INTEGER",
+          "sign": "+",
+          "conditionShow": "advsrch.isSelected('recordlimit')",
+          "digits": 4,
+          "size": "SM"
+        }
+      ]
+    }
+  ]
+}

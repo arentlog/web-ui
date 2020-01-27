@@ -1,0 +1,203 @@
+{
+  "viewId": "ap-apiv-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 62,
+      "type": "FORM",
+      "conditionShow": "base.isDetail()",
+      "children": [
+        {
+          "id": 2,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 3,
+              "type": "TOOLBAR",
+              "label": "global.vendor",
+              "subLabel": "{{dtl.subTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 4,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 5,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master"
+                    }
+                  ]
+                }
+              }
+            },
+            "content": {
+              "id": 6,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 67,
+                  "type": "MESSAGE",
+                  "text": "global.disputed",
+                  "icon": "icon-error",
+                  "conditionShow": "dtl.apsv.disputevndfl"
+                },
+                {
+                  "type": "TAB_SET",
+                  "id": 7,
+                  "children": [
+                    {
+                      "type": "TAB",
+                      "id": 8,
+                      "label": "global.general",
+                      "eventActivated": "dtl.isVendorTabSelected()",
+                      "tabId": "general",
+                      "subFunction": "Vendor",
+                      "children": [
+                        {
+                          "id": 57,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ap/apiv/tabs/general.json",
+                          "controller": ""
+                        }
+                      ]
+                    },
+                    {
+                      "id": 9,
+                      "type": "TAB",
+                      "label": "global.ship.from",
+                      "tabId": "ship-from",
+                      "subFunction": "Ship From",
+                      "children": [
+                        {
+                          "id": 53,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ap/apiv/tabs/shipfrom.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 11,
+                      "type": "TAB",
+                      "label": "global.transactions",
+                      "conditionSelected": "dtl.canSelectTransactionTab",
+                      "tabId": "transactions",
+                      "subFunction": "Transactions",
+                      "children": [
+                        {
+                          "id": 56,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ap/apiv/tabs/transactions.json",
+                          "controller": ""
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "type": "TAB",
+                      "label": "global.custom",
+                      "tabId": "custom",
+                      "subFunction": "Custom",
+                      "children": [
+                        {
+                          "id": 59,
+                          "type": "FIELD",
+                          "subType": "RADIO_SET",
+                          "model": "dtl.userfieldtype",
+                          "label": "global.user.fields",
+                          "type3": "INLINE",
+                          "labelHidden": true,
+                          "eventChange": "",
+                          "children": [
+                            {
+                              "id": 60,
+                              "type": "OPT",
+                              "label": "global.vendor",
+                              "value": "v"
+                            },
+                            {
+                              "id": 61,
+                              "type": "OPT",
+                              "label": "global.ship.from",
+                              "value": "s"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 13,
+                          "type": "CUSTOM",
+                          "subType": "UserFields",
+                          "conditionShow": "dtl.userfieldtype==='v'",
+                          "options": {
+                            "tableName": "apsv",
+                            "objectRef": "dtl.apsv",
+                            "conditionReadonly": "true"
+                          }
+                        },
+                        {
+                          "id": 58,
+                          "type": "CUSTOM",
+                          "subType": "UserFields",
+                          "conditionShow": "dtl.userfieldtype==='s'",
+                          "options": {
+                            "tableName": "apss",
+                            "objectRef": "dtl.apss",
+                            "conditionReadonly": "true"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 54,
+                      "type": "TAB",
+                      "label": "global.history",
+                      "tabId": "history",
+                      "subFunction": "History",
+                      "children": [
+                        {
+                          "id": 55,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "ap/apiv/tabs/history.json",
+                          "controller": ""
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 65,
+      "type": "VIEW_CNTR",
+      "viewName": "Transactions",
+      "conditionShow": "base.istransactionDetail()"
+    },
+    {
+      "id": 64,
+      "type": "VIEW_CNTR",
+      "viewName": "APHistory",
+      "conditionShow": "base.ishistDetail()"
+    },
+    {
+      "id": 66,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Apsv",
+      "contextValues": {
+        "key1": "dtl.apsv.vendno"
+      }
+    }
+  ]
+}

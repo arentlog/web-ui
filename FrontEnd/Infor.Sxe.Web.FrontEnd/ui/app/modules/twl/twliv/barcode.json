@@ -1,0 +1,261 @@
+{
+  "viewId": "twl-twliv-barcode",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "bc.isTwlivBarcodeMaster()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.vendor.barcode",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "bc.back()"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 9,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "bc.criteria.coNum",
+                          "label": "global.company"
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "bc.criteria.vendorId",
+                          "label": "global.vendor"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 18,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "bc.criteria.whNum",
+                          "label": "global.warehouse"
+                        },
+                        {
+                          "id": 45,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "bc.criteria.vendName",
+                          "label": "global.vendor.name"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 49,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 50,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 48,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "bc.criteria.barcodeId",
+                          "label": "global.barcode.template.id",
+                          "type3": "MANUAL",
+                          "optionsModel": "bc.barcodeTemplates",
+                          "optionLabelField": "descrip",
+                          "optionValueField": "type",
+                          "blankOption": false,
+                          "eventChange": "bc.barcodeIdChanged()"
+                        },
+                        {
+                          "id": 53,
+                          "type": "BTN",
+                          "subType": "SEC",
+                          "label": "global.create.new",
+                          "eventClick": "bc.createNew()"
+                        },
+                        {
+                          "id": 58,
+                          "type": "BTN",
+                          "subType": "SEC",
+                          "label": "global.delete.all",
+                          "eventClick": "bc.deleteAll()"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 57,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 55,
+                          "type": "BTN",
+                          "subType": "SEC",
+                          "label": "global.test",
+                          "eventClick": "bc.testBarcode()"
+                        },
+                        {
+                          "id": 56,
+                          "type": "BTN",
+                          "subType": "SEC",
+                          "label": "global.clear.test",
+                          "eventClick": "bc.clearTest()"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 19,
+                  "type": "GRID",
+                  "model": "bc.dataset",
+                  "controlRef": "bc.grid",
+                  "options": {
+                    "showDrilldown": true,
+                    "showExpander": false,
+                    "showCheckboxes": true,
+                    "events": {
+                      "drilldown": "bc.drilldown()"
+                    }
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 20,
+                      "type": "TOOLBAR",
+                      "label": "global.barcode.layouts",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-new-document",
+                          "label": "global.new",
+                          "securityLevel": 4,
+                          "conditionDisabled": "bc.grid.isAnyRowSelected()",
+                          "eventClick": "bc.create()"
+                        },
+                        {
+                          "id": 31,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-edit",
+                          "label": "global.edit",
+                          "stateRef": "",
+                          "securityLevel": 3,
+                          "eventClick": "bc.edit()",
+                          "conditionDisabled": "!bc.grid.isOneRowSelected()"
+                        },
+                        {
+                          "id": 32,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "icon": "icon-delete",
+                          "label": "global.delete",
+                          "eventClick": "bc.delete()",
+                          "securityLevel": 5,
+                          "conditionDisabled": "bc.grid.isNoRowSelected()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 21,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.barcode.template.id",
+                      "model": "barcodeId"
+                    },
+                    {
+                      "id": 34,
+                      "type": "GRID_COL",
+                      "subType": "DROP_DOWN",
+                      "label": "global.field.name",
+                      "model": "attributeName",
+                      "type3": "SET",
+                      "metaGroup": "TWL",
+                      "meta": "BarcodeField"
+                    },
+                    {
+                      "id": 35,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.starting",
+                      "model": "valueStart",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 51,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.length",
+                      "model": "valueLength",
+                      "dataFormat": "INTEGER"
+                    },
+                    {
+                      "id": 52,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "label": "global.test.value",
+                      "model": "testResults"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "type": "VIEW_CNTR",
+      "viewName": "bcDetail"
+    }
+  ]
+}

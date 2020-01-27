@@ -1,0 +1,292 @@
+{
+  "viewId": "oe-oeir-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.credit.release.detail",
+              "subLabel": "{{dtl.subtitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 17,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 18,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtl.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 40,
+                  "type": "EXP_AREA",
+                  "label": "global.info",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 7,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 19,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.oeeh.custno",
+                              "label": "global.customer.number"
+                            },
+                            {
+                              "id": 21,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.oeeh.shipto",
+                              "label": "global.ship.to"
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.oeeh.shiptonm",
+                              "label": "global.name"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 8,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 20,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.oeeh.transtype",
+                              "label": "global.type",
+                              "dataFormat": "OeOrderType"
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.oeeh.whse",
+                              "label": "global.warehouse"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 43,
+                          "type": "COL",
+                          "subType": "1/3",
+                          "children": [
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.oeeh.stagecd",
+                              "label": "global.stage",
+                              "dataFormat": "OeStage"
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "INFO",
+                              "model": "dtl.oeeh.custpo",
+                              "label": "global.customer.purchase.order.number"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 9,
+                  "type": "TAB_SET",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "TAB",
+                      "label": "global.header",
+                      "tabId": "header",
+                      "children": [
+                        {
+                          "id": 29,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "oe/oeir/tabs/header.json",
+                          "controller": "OeirDetailHeaderCtrl as hdr"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 11,
+                      "type": "TAB",
+                      "label": "global.line.detail",
+                      "tabId": "line-detail",
+                      "children": [
+                        {
+                          "id": 27,
+                          "type": "CUSTOM",
+                          "subType": "OELineDetails",
+                          "options": {
+                            "headerModel": "dtl.oeeh"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "type": "TAB",
+                      "label": "global.customer",
+                      "tabId": "customer",
+                      "children": [
+                        {
+                          "id": 26,
+                          "type": "CUSTOM",
+                          "subType": "CustomerInquiryGeneral",
+                          "options": {
+                            "arscFunction": "dtl.getCustomerForCustomerTab",
+                            "shiptoFunction": "dtl.getShiptoForCustomerTab()"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 13,
+                      "type": "TAB",
+                      "label": "global.payments",
+                      "tabId": "payments",
+                      "children": [
+                        {
+                          "id": 30,
+                          "type": "CUSTOM",
+                          "subType": "CustomerInquiryHistory",
+                          "options": {
+                            "arscFunction": "dtl.getCustomerForCustomerTab"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 15,
+                      "type": "TAB",
+                      "label": "global.transactions",
+                      "conditionSelected": "dtl.canSelecteTransactionTab",
+                      "tabId": "transactions",
+                      "children": [
+                        {
+                          "id": 33,
+                          "type": "CUSTOM",
+                          "subType": "CustomerInquiryTransactions",
+                          "options": {
+                            "arscFunction": "dtl.getCustomerForCustomerTab",
+                            "duedateModel": "dtl.duedateModel"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 16,
+                      "type": "TAB",
+                      "label": "global.customer.credit",
+                      "tabId": "customer-credit",
+                      "children": [
+                        {
+                          "id": 31,
+                          "type": "SUB_VIEW",
+                          "subType": "JSON",
+                          "viewPath": "oe/oeir/tabs/customer-credit.json",
+                          "controller": "OeirDetailCustomerCreditCtrl as cust"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 14,
+                      "type": "TAB",
+                      "label": "global.dnbi.integration",
+                      "tabId": "dnbi-integration",
+                      "children": [
+                        {
+                          "id": 32,
+                          "type": "CUSTOM",
+                          "subType": "CustomerInquiryDnbi",
+                          "options": {
+                            "arscFunction": "dtl.getCustomerForCustomerTab",
+                            "ordernoModel": "base.selectedOeirItem.orderno",
+                            "ordersufModel": "base.selectedOeirItem.ordersuf"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "type": "VIEW_CNTR",
+      "viewName": "lineDetail"
+    },
+    {
+      "id": 36,
+      "type": "VIEW_CNTR",
+      "viewName": "transactionDetail"
+    },
+    {
+      "id": 37,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Arsc",
+      "contextValues": {
+        "key1": "dtl.oeeh.custno"
+      }
+    },
+    {
+      "id": 38,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Icsd",
+      "contextValues": {
+        "key1": "dtl.oeeh.whse"
+      }
+    },
+    {
+      "id": 39,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Oeeh",
+      "contextValues": {
+        "key1": "dtl.oeeh.orderno",
+        "key2": "dtl.oeeh.ordersuf"
+      }
+    }
+  ]
+}

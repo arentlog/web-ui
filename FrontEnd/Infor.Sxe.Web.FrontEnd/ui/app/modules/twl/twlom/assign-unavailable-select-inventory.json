@@ -1,0 +1,324 @@
+{
+  "viewId": "twl-twlom-assign-unavailable-select-inventory",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionShow": "dtlusi.isSelectInventory()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.return.to.vendor.inventory.assignment",
+              "subLabel": "{{dtlusi.subTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 74,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "dtlusi.return()"
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 21,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 22,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 20,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlusi.pickdetailsummary.absNum",
+                          "label": "global.item"
+                        },
+                        {
+                          "id": 19,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlusi.pickdetailsummary.itemDesc",
+                          "label": "global.item.description"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 64,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 41,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlusi.pickdetailsummary.reqQty",
+                          "label": "global.original",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 42,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlusi.pickdetailsummary.allocatedQty",
+                          "label": "global.allocated",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 43,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlusi.displayRemaining",
+                          "label": "global.remaining",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": 23,
+                      "type": "COL",
+                      "subType": "1/3",
+                      "children": [
+                        {
+                          "id": 44,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlusi.pickdetailsummary.itemCaseQuantity",
+                          "label": "global.case.quantity",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        },
+                        {
+                          "id": 45,
+                          "type": "FIELD",
+                          "subType": "INFO",
+                          "model": "dtlusi.pickdetailsummary.itemPalletQuantity",
+                          "label": "global.pallet.quantity",
+                          "dataFormat": "DECIMAL",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 70,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 71,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 73,
+                          "type": "FIELD_SET",
+                          "label": "global.quick.allocation",
+                          "children": [
+                            {
+                              "id": 69,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 46,
+                                  "type": "FIELD",
+                                  "subType": "DROP_DOWN",
+                                  "model": "dtlusi.pickdetailsummary.requestedStockStatus",
+                                  "label": "global.stock.status",
+                                  "maxLength": 2,
+                                  "type3": "SET",
+                                  "metaGroup": "TWL",
+                                  "meta": "StockStatus"
+                                },
+                                {
+                                  "id": 68,
+                                  "type": "BTN",
+                                  "subType": "SEC",
+                                  "label": "global.auto.allocate",
+                                  "conditionDisabled": "!dtlusi.pickdetailsummary.requestedStockStatus",
+                                  "eventClick": "dtlusi.autoAllocate()"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "GRID",
+                  "id": 10,
+                  "controlRef": "dtlusi.grid",
+                  "model": "dtlusi.dataset",
+                  "options": {
+                    "editable": true
+                  },
+                  "controls": {
+                    "toolbar": {
+                      "id": 65,
+                      "type": "TOOLBAR",
+                      "label": "global.inventory",
+                      "children": [
+                        {
+                          "id": 66,
+                          "type": "BTN",
+                          "subType": "TER",
+                          "label": "global.allocate.requested",
+                          "securityLevel": 3,
+                          "eventClick": "dtlusi.submit()"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": 54,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "stockStat",
+                      "label": "global.stock.status",
+                      "dataFormat": "TwlStockStatusToName"
+                    },
+                    {
+                      "id": 51,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "binNum",
+                      "label": "global.location"
+                    },
+                    {
+                      "id": 52,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "palletId",
+                      "label": "global.pallet"
+                    },
+                    {
+                      "id": 53,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "lot",
+                      "label": "global.lot"
+                    },
+                    {
+                      "id": 55,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "totalQty",
+                      "label": "global.total.quantity",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 56,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "totalQtyAvail",
+                      "label": "global.avail.qty",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 57,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "totalQtyRequested",
+                      "label": "global.requested",
+                      "editable": true,
+                      "sign": "+",
+                      "decimals": 2,
+                      "eventChange": "dtlusi.adjustDisplayRemaining()",
+                      "dataFormat": "DECIMAL",
+                      "formatOptions": {
+                        "minimumFractionDigits": 2,
+                        "maximumFractionDigits": 2
+                      }
+                    },
+                    {
+                      "id": 58,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "poNumber",
+                      "label": "global.purchase.order.number"
+                    },
+                    {
+                      "id": 59,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "poSuffix",
+                      "label": "global.suffix"
+                    },
+                    {
+                      "id": 61,
+                      "type": "GRID_COL",
+                      "subType": "TEXT",
+                      "model": "dateTime",
+                      "label": "global.created",
+                      "dataFormat": "TwlCharDateConversion"
+                    },
+                    {
+                      "id": 60,
+                      "type": "GRID_COL",
+                      "subType": "CHECKBOX",
+                      "model": "cycleFlag",
+                      "label": "global.cycle.count.flag",
+                      "dataFormat": "LOGICAL"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

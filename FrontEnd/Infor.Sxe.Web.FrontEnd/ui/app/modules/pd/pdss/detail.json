@@ -1,0 +1,289 @@
+{
+  "viewId": "pd-pdss-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.special.price.type.discounts",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 14,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 15,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 17,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.pdss.whse",
+                              "label": "global.warehouse",
+                              "required": false,
+                              "meta": "Warehouse",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionShow": "base.sasc.pdwhsefl",
+                              "conditionRequired": "base.sasc.pdwhsefl"
+                            },
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.pdss.custptype",
+                              "label": "global.customer.price.type",
+                              "required": false,
+                              "meta": "CustomerPriceType",
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.pdss.pricetype",
+                              "label": "global.product.price.type",
+                              "required": true,
+                              "meta": "ProdPriceTy",
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 23,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "dtl.pdss.startdt",
+                              "label": "global.begin.date",
+                              "required": true,
+                              "dataFormat": "DATE",
+                              "conditionReadonly": "!base.isCreate()"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 18,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 25,
+                              "type": "FIELD",
+                              "subType": "DATE",
+                              "model": "dtl.pdss.enddt",
+                              "label": "global.end.date",
+                              "required": false,
+                              "dataFormat": "DATE"
+                            },
+                            {
+                              "id": 26,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.pdss.refer",
+                              "label": "global.reference",
+                              "required": false,
+                              "maxLength": 24
+                            },
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.pdss.statustype",
+                              "label": "global.status",
+                              "required": false,
+                              "type3": "SET",
+                              "metaGroup": "PD",
+                              "meta": "ActiveType",
+                              "blankOption": false,
+                              "size": "SM"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.pdss.disctype",
+                              "label": "global.break.on",
+                              "required": false,
+                              "type3": "SET",
+                              "metaGroup": "PD",
+                              "meta": "BreakOn",
+                              "blankOption": false,
+                              "size": "SM",
+                              "eventChange": "dtl.setBreakOnLabel()"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 35,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 36,
+                          "type": "COL",
+                          "subType": "1",
+                          "children": [
+                            {
+                              "id": 37,
+                              "type": "GRID",
+                              "model": "dtl.qtyBreak",
+                              "options": {
+                                "editable": true,
+                                "showDrilldown": false,
+                                "paging": false
+                              },
+                              "controls": {
+                                "toolbar": {
+                                  "id": 38,
+                                  "type": "TOOLBAR",
+                                  "label": "global.quantity.breaks"
+                                }
+                              },
+                              "children": [
+                                {
+                                  "id": 39,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "seqno",
+                                  "label": "global.sequence.number",
+                                  "dataFormat": "INTEGER"
+                                },
+                                {
+                                  "id": 41,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "qtybrk",
+                                  "label": "{{dtl.breakOnLabel}}",
+                                  "editable": true,
+                                  "sign": "+",
+                                  "digits": 7,
+                                  "cellEditable": "base.isCellEditable",
+                                  "dataFormat": "INTEGER"
+                                },
+                                {
+                                  "id": 40,
+                                  "type": "GRID_COL",
+                                  "subType": "TEXT",
+                                  "model": "prcdisc",
+                                  "label": "global.discount",
+                                  "editable": true,
+                                  "sign": "+",
+                                  "digits": 3,
+                                  "decimals": 3,
+                                  "dataFormat": "DECIMAL"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

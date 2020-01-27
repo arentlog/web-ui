@@ -1,0 +1,268 @@
+{
+  "viewId": "sa-sastt-detail",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "base.isDetail()",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "title.sastt",
+              "subLabel": "{{dtl.getSubTitle()}}",
+              "controls": {
+                "navBtns": {
+                  "id": 5,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 6,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-new-document",
+                  "label": "global.new",
+                  "eventClick": "dtl.create()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 4
+                },
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-edit",
+                  "label": "global.edit",
+                  "stateRef": ".edit",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-delete",
+                  "label": "global.delete",
+                  "eventClick": "dtl.delete()",
+                  "conditionDisabled": "!base.isDetail()",
+                  "securityLevel": 5
+                },
+                {
+                  "id": 10,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.customSubmit()",
+                  "conditionDisabled": "base.isDetail()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 11,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-reset",
+                  "label": "global.reset",
+                  "eventClick": "dtl.reset()",
+                  "conditionDisabled": "base.isDetail()"
+                },
+                {
+                  "id": 12,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()",
+                  "conditionDisabled": "base.isDetail()"
+                }
+              ]
+            },
+            "content": {
+              "id": 13,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 23,
+                  "type": "EXP_AREA",
+                  "label": "global.general",
+                  "children": [
+                    {
+                      "id": 24,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 25,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 34,
+                              "type": "COMP_FLD",
+                              "children": [
+                                {
+                                  "id": 35,
+                                  "type": "FIELD",
+                                  "subType": "TEXT_BOX",
+                                  "model": "dtl.detail.codeval",
+                                  "label": "{{base.translateLabel(base.sasttcodes.fieldlabel)}}",
+                                  "conditionReadonly": "!base.isCreate()",
+                                  "conditionFocus": "base.sasttcodes.fieldtype === 'a' && base.sasttcodes.vendfl !== 'y'",
+                                  "conditionShow": "base.sasttcodes.fieldtype === 'a' && base.sasttcodes.vendfl !== 'y'",
+                                  "conditionRequired": "base.sasttcodes.fieldtype === 'a' && base.sasttcodes.vendfl !== 'y'",
+                                  "maxLength": "{{base.sasttcodes.fieldsize}}"
+                                },
+                                {
+                                  "id": 33,
+                                  "type": "FIELD",
+                                  "subType": "CHECKBOX",
+                                  "model": "dtl.detail.codelog2",
+                                  "label": "{{base.translateLabel(base.sasttcodes.fieldlabel2)}}",
+                                  "dataFormat": "LOGICAL",
+                                  "conditionShow": "base.sasttcodes.codeval2fl === 'y' && base.sasttcodes.fieldtype2 === 'l'",
+                                  "conditionDisabled": "!base.isCreate()"
+                                }
+                              ]
+                            },
+                            {
+                              "id": 38,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.detail.vendno",
+                              "label": "{{base.translateLabel(base.sasttcodes.fieldlabel)}}",
+                              "meta": "Vendor",
+                              "conditionShow": "base.sasttcodes.vendfl === 'y'",
+                              "conditionFocus": "base.sasttcodes.vendfl === 'y'",
+                              "conditionRequired": "base.sasttcodes.vendfl === 'y'",
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 39,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.detail.codechar2",
+                              "label": "{{base.translateLabel(base.sasttcodes.fieldlabel2)}}",
+                              "conditionShow": "base.sasttcodes.vendfl === 'y'",
+                              "conditionRequired": "base.sasttcodes.vendfl === 'y'",
+                              "maxLength": "{{base.sasttcodes.fieldsize2}}",
+                              "conditionReadonly": "!base.isCreate()"
+                            },
+                            {
+                              "id": 37,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.detail.codeint",
+                              "label": "{{base.translateLabel(base.sasttcodes.fieldlabel)}}",
+                              "conditionReadonly": "!base.isCreate()",
+                              "conditionFocus": "base.sasttcodes.fieldtype === 'n' && base.sasttcodes.vendfl !== 'y'",
+                              "conditionShow": "base.sasttcodes.fieldtype === 'n' && base.sasttcodes.vendfl !== 'y'",
+                              "conditionRequired": "base.sasttcodes.fieldtype === 'n' && base.sasttcodes.vendfl !== 'y'",
+                              "dataFormat": "INTEGER_TEXT",
+                              "mask": "{{ base.buildMask('#',base.sasttcodes.fieldsize) }}",
+                              "digits": 0
+                            },
+                            {
+                              "id": 36,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.detail.codeval2",
+                              "label": "{{base.translateLabel(base.sasttcodes.fieldlabel2)}}",
+                              "maxLength": "{{base.sasttcodes.fieldsize2}}",
+                              "conditionShow": "base.sasttcodes.codeval2fl === 'y' && base.sasttcodes.fieldtype2 === 'a' && base.sasttcodes.vendfl !== 'y'",
+                              "conditionReadonly": "!base.isCreate() && base.sasttcodes.filename === 'cts'"
+                            },
+                            {
+                              "id": 28,
+                              "type": "FIELD",
+                              "subType": "TEXT_AREA",
+                              "model": "dtl.detail.descrip",
+                              "label": "{{base.translateLabel(base.sasttcodes.desclabel)}}",
+                              "maxLength": "{{base.sasttcodes.descsize}}",
+                              "conditionShow": "base.sasttcodes.pricefl !== 'y'  && base.sasttcodes.filename !== 'cts'",
+                              "conditionDisabled": "base.sasttcodes.codeid === 'vg'"
+                            },
+                            {
+                              "id": 42,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "dtl.detail.descrip",
+                              "label": "{{base.translateLabel(base.sasttcodes.desclabel)}}",
+                              "maxLength": "{{base.sasttcodes.descsize}}",
+                              "conditionShow": "base.sasttcodes.pricefl !== 'y' && base.sasttcodes.filename === 'cts'"
+                            },
+                            {
+                              "id": 41,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.detail.pricetype",
+                              "label": "{{base.translateLabel(base.sasttcodes.desclabel)}}",
+                              "meta": "ProdPriceTy",
+                              "conditionShow": "base.sasttcodes.pricefl === 'y'",
+                              "conditionRequired": "base.sasttcodes.pricefl === 'y'"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 26,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "model": "base.criteria.codeid",
+                              "label": "global.id",
+                              "readonly": true,
+                              "size": "XS"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 21,
+                  "type": "SUB_VIEW",
+                  "subType": "JSON",
+                  "viewPath": "{{dtl.detailSubView}}",
+                  "controller": "",
+                  "conditionInclude": "base.sasttcodes.extendedfl === 'y'"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "type": "CONTEXT_FIELD",
+      "contextEntity": "Sasta",
+      "contextValues": {
+        "key1": "dtl.detail.codeid",
+        "key2": "dtl.detail.codeval"
+      }
+    }
+  ]
+}

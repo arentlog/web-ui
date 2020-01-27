@@ -1,0 +1,283 @@
+{
+  "viewId": "ic-icspr-advancedcriteria",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 6,
+      "type": "COMP_FLD",
+      "children": [
+        {
+          "id": 20,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.restricttype",
+          "label": "global.restriction.type",
+          "type3": "MANUAL",
+          "blankOption": false,
+          "optionsModel": "mst.restrictTypeList",
+          "required": true
+        },
+        {
+          "id": 21,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.whse",
+          "label": "global.warehouse",
+          "meta": "Warehouse",
+          "conditionShow": "advsrch.isSelected('whse') && base.allowWhseField()"
+        },
+        {
+          "id": 22,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.product",
+          "label": "global.product",
+          "conditionShow": "mst.advCriteria.restricttype === 'PR'",
+          "meta": "ProdAll",
+          "controls": {
+            "actionBtn": {
+              "id": 33,
+              "type": "BTN",
+              "subType": "ICON",
+              "label": "global.inquire",
+              "icon": "icon-drilldown",
+              "isLabelTooltip": true,
+              "conditionDisabled": "!mst.advCriteria.product",
+              "stateRef": "icip.detail({pk: mst.advCriteria.product, pk2: mst.advCriteria.whse})"
+            }
+          }
+        },
+        {
+          "id": 23,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.prodline",
+          "label": "global.product.line",
+          "meta": "ProdLine",
+          "conditionShow": "mst.advCriteria.restricttype === 'PL'",
+          "options": {
+            "searchParams": {
+              "prodline": {
+                "type": "REF",
+                "value": "mst.advCriteria.prodline"
+              },
+              "vendno": {
+                "type": "REF",
+                "value": "mst.advCriteria.vendno"
+              }
+            }
+          }
+        },
+        {
+          "id": 24,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.vendno",
+          "label": "global.vendor.number",
+          "meta": "Vendor",
+          "conditionShow": "mst.advCriteria.restricttype === 'PL'",
+          "controls": {
+            "actionBtn": {
+              "id": 31,
+              "type": "BTN",
+              "subType": "ICON",
+              "label": "global.inquire",
+              "icon": "icon-drilldown",
+              "isLabelTooltip": true,
+              "conditionDisabled": "!mst.advCriteria.vendno",
+              "stateRef": "apiv.detail ({pk: mst.advCriteria.vendno})"
+            }
+          }
+        },
+        {
+          "id": 25,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.prodcat",
+          "label": "global.product.category",
+          "meta": "ProdCat",
+          "conditionShow": "mst.advCriteria.restricttype === 'PC'"
+        },
+        {
+          "id": 26,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.prodprctype",
+          "label": "global.product.price.type",
+          "meta": "ProdPriceTy",
+          "conditionShow": "mst.advCriteria.restricttype === 'PT'"
+        },
+        {
+          "id": 27,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.brandcd",
+          "label": "global.brand.code",
+          "meta": "BrandCode",
+          "conditionShow": "mst.advCriteria.restricttype === 'BC'"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "type": "COMP_FLD",
+      "children": [
+        {
+          "id": 7,
+          "type": "FIELD",
+          "subType": "DROP_DOWN",
+          "model": "mst.advCriteria.statuscd",
+          "label": "global.status",
+          "type3": "SET",
+          "metaGroup": "IC",
+          "meta": "ProductRestrictionsActive",
+          "blankOption": false,
+          "size": "SM",
+          "conditionShow": "advsrch.isSelected('statuscd')"
+        },
+        {
+          "id": 11,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.begexpiredt",
+          "label": "global.from.expire.date",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('begexpiredt')"
+        },
+        {
+          "id": 12,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.endexpiredt",
+          "label": "global.to.expire.date",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('endexpiredt')"
+        },
+        {
+          "id": 13,
+          "type": "FIELD",
+          "subType": "DATE",
+          "model": "mst.advCriteria.startdt",
+          "label": "global.start.date",
+          "dataFormat": "DATE",
+          "conditionShow": "advsrch.isSelected('startdt')"
+        },
+        {
+          "id": 19,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.restrictcd",
+          "label": "global.restriction.code",
+          "meta": "ProdRestrictions",
+          "conditionShow": "advsrch.isSelected('restrictcd')"
+        },
+        {
+          "id": 32,
+          "type": "FIELD",
+          "subType": "TEXT_BOX",
+          "model": "mst.advCriteria.recordlimit",
+          "label": "global.record.limit",
+          "dataFormat": "INTEGER",
+          "sign": "+",
+          "size": "SM",
+          "conditionShow": "advsrch.isSelected('recordlimit')",
+          "digits": 4
+        },
+        {
+          "id": 8,
+          "type": "FIELD",
+          "subType": "CHECKBOX",
+          "model": "mst.advCriteria.expiredactivefl",
+          "label": "global.expired.active",
+          "dataFormat": "LOGICAL",
+          "conditionShow": "advsrch.isSelected('expiredactivefl')"
+        },
+        {
+          "id": 9,
+          "type": "FIELD",
+          "subType": "CHECKBOX",
+          "model": "mst.advCriteria.certrequiredfl",
+          "label": "message.certificate/license.required",
+          "dataFormat": "LOGICAL",
+          "conditionShow": "advsrch.isSelected('certrequiredfl')"
+        },
+        {
+          "id": 10,
+          "type": "FIELD",
+          "subType": "CHECKBOX",
+          "model": "mst.advCriteria.restrictovrfl",
+          "label": "global.restriction.override",
+          "dataFormat": "LOGICAL",
+          "conditionShow": "advsrch.isSelected('restrictovrfl')"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "type": "COMP_FLD",
+      "children": [
+        {
+          "id": 14,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.custno",
+          "label": "global.customer.number",
+          "meta": "Customer",
+          "conditionShow": "advsrch.isSelected('custno')",
+          "controls": {
+            "actionBtn": {
+              "id": 15,
+              "type": "BTN",
+              "subType": "ICON",
+              "label": "global.inquire",
+              "icon": "icon-drilldown",
+              "isLabelTooltip": true,
+              "stateRef": "aric.detail ({pk: mst.advCriteria.custno})",
+              "conditionDisabled": "!mst.advCriteria.custno"
+            }
+          }
+        },
+        {
+          "id": 16,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.shipto",
+          "label": "global.ship.to",
+          "meta": "ShipTo",
+          "conditionShow": "advsrch.isSelected('shipto')",
+          "options": {
+            "searchParams": {
+              "custno": {
+                "type": "REF",
+                "value": "mst.advCriteria.custno"
+              }
+            }
+          },
+          "controls": {
+            "actionBtn": {
+              "id": 17,
+              "type": "BTN",
+              "subType": "ICON",
+              "label": "global.inquire",
+              "icon": "icon-drilldown",
+              "isLabelTooltip": true,
+              "conditionDisabled": "!mst.advCriteria.shipto",
+              "stateRef": "aric.detail ({pk: mst.advCriteria.custno, pk2: mst.advCriteria.shipto})"
+            }
+          }
+        },
+        {
+          "id": 18,
+          "type": "FIELD",
+          "subType": "LOOKUP",
+          "model": "mst.advCriteria.certcode",
+          "label": "global.certificate.license.id",
+          "meta": "CertificateLicense",
+          "conditionShow": "advsrch.isSelected('certcode')"
+        }
+      ]
+    }
+  ]
+}

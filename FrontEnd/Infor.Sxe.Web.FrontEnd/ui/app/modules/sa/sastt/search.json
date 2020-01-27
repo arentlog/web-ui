@@ -1,0 +1,159 @@
+{
+  "viewId": "sa-sastt-search",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "SEARCH",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "conditionReadonly": "!base.isMaster()",
+      "children": [
+        {
+          "id": 16,
+          "type": "ROW",
+          "children": [
+            {
+              "id": 17,
+              "type": "COL",
+              "subType": "1",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "FIELD",
+                  "subType": "DROP_DOWN",
+                  "model": "base.criteria.codeid",
+                  "label": "global.table.list",
+                  "type3": "MANUAL",
+                  "blankOption": false,
+                  "optionsModel": "base.sasttTableData",
+                  "optionLabelField": "descrip",
+                  "optionValueField": "codeid",
+                  "eventChange": "srch.changeTableList()",
+                  "autoFocus": true
+                },
+                {
+                  "id": 9,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.id",
+                  "label": "global.id",
+                  "readonly": true,
+                  "size": "XS",
+                  "conditionShow": "false"
+                },
+                {
+                  "id": 19,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.vendno",
+                  "label": "global.vendor",
+                  "meta": "Vendor",
+                  "conditionShow": "base.sasttcodes.vendfl === 'y'"
+                },
+                {
+                  "id": 10,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.codeval",
+                  "label": "{{base.translateLabel(base.sasttcodes.fieldlabel)}}",
+                  "conditionShow": "base.sasttcodes.fieldtype === 'a' && base.sasttcodes.vendfl !== 'y'",
+                  "maxLength": "{{base.sasttcodes.fieldsize}}"
+                },
+                {
+                  "id": 11,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.codeint",
+                  "label": "{{base.translateLabel(base.sasttcodes.fieldlabel)}}",
+                  "conditionShow": "base.sasttcodes.fieldtype === 'n' && base.sasttcodes.vendfl !== 'y'",
+                  "eventChange": "",
+                  "mask": "{{ base.buildMask('#',base.sasttcodes.fieldsize) }}",
+                  "dataFormat": "INTEGER_TEXT",
+                  "digits": 0
+                },
+                {
+                  "id": 14,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "base.criteria.codelog",
+                  "label": "{{base.translateLabel(base.sasttcodes.fieldlabel)}}",
+                  "conditionShow": "base.sasttcodes.fieldtype === 'l' && base.sasttcodes.vendfl !== 'y'",
+                  "dataFormat": "LOGICAL",
+                  "eventChange": "srch.changeNumCodeVal()"
+                },
+                {
+                  "id": 13,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.codeval2",
+                  "label": "{{base.translateLabel(base.sasttcodes.fieldlabel2)}}",
+                  "conditionShow": "base.sasttcodes.fieldtype2 === 'a' && base.sasttcodes.codeval2fl === 'y'",
+                  "maxLength": "{{base.sasttcodes.fieldsize2}}"
+                },
+                {
+                  "id": 12,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.codeint2",
+                  "label": "{{base.translateLabel(base.sasttcodes.fieldlabel2)}}",
+                  "conditionShow": "base.sasttcodes.fieldtype === 'n' && base.sasttcodes.codeval2fl === 'y'",
+                  "eventChange": "srch.changeNumCodeVal()",
+                  "dataFormat": "INTEGER_TEXT",
+                  "digits": 0,
+                  "mask": "{{ base.buildMask('#',base.sasttcodes.fieldsize) }}"
+                },
+                {
+                  "id": 15,
+                  "type": "FIELD",
+                  "subType": "CHECKBOX",
+                  "model": "base.criteria.codelog2",
+                  "label": "{{base.translateLabel(base.sasttcodes.fieldlabel2)}}",
+                  "conditionShow": "base.sasttcodes.fieldtype2 === 'l' && base.sasttcodes.codeval2fl === 'y'",
+                  "dataFormat": "LOGICAL",
+                  "eventChange": "srch.changeNumCodeVal()"
+                },
+                {
+                  "id": 20,
+                  "type": "FIELD",
+                  "subType": "LOOKUP",
+                  "model": "base.criteria.slsrep",
+                  "label": "global.sales.rep",
+                  "meta": "SalesRep",
+                  "conditionShow": "base.showSalesRep()",
+                  "conditionDisabled": "true"
+                },
+                {
+                  "id": 18,
+                  "type": "FIELD",
+                  "subType": "TEXT_BOX",
+                  "model": "base.criteria.desc",
+                  "label": "{{base.translateLabel(base.sasttcodes.desclabel)}}",
+                  "conditionShow": "base.sasttcodes.filename.toLowerCase() === 'cts'",
+                  "maxLength": "{{base.sasttcodes.descsize}}"
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "PRI",
+                  "label": "global.search",
+                  "submitForm": true,
+                  "eventValidated": "srch.submit()",
+                  "conditionDisabled": "(base.isDetail()) || (base.isCreate())"
+                },
+                {
+                  "id": 7,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "label": "global.reset",
+                  "eventClick": "srch.clear()",
+                  "conditionDisabled": "(base.isDetail()) || (base.isCreate())"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

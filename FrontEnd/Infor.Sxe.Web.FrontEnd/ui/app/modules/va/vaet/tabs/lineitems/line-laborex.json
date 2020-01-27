@@ -1,0 +1,148 @@
+{
+  "viewId": "va-vaet-tabs-lineitems-linelaborex",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "DETAIL",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.labor.product.estimated.actual",
+              "subLabel": "{{linelaborex.detailSubTitle}}",
+              "controls": {
+                "navBtns": {
+                  "id": 6,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 7,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "label": "special.button.back",
+                      "icon": "icon-left-arrow",
+                      "eventClick": "linelaborex.cancel()"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 8,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-confirm",
+                  "label": "global.ok",
+                  "submitForm": true,
+                  "eventValidated": "linelaborex.submit()"
+                },
+                {
+                  "id": 9,
+                  "type": "BTN",
+                  "subType": "TER",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "linelaborex.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 5,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 10,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 11,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 13,
+                          "type": "FIELD",
+                          "subType": "LOOKUP",
+                          "model": "base.lineUpdateRecord.shipprod",
+                          "label": "global.product",
+                          "meta": "ProdIcspOnly",
+                          "eventChange": "linelaborex.fieldChange('shipprod')"
+                        },
+                        {
+                          "id": 14,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.lineUpdateRecord.prodcost",
+                          "label": "global.charge",
+                          "dataFormat": "DECIMAL",
+                          "sign": "+",
+                          "digits": 7,
+                          "decimals": 5,
+                          "formatOptions": {
+                            "minimumFractionDigits": 5,
+                            "maximumFractionDigits": 5
+                          }
+                        },
+                        {
+                          "id": 15,
+                          "type": "FIELD",
+                          "subType": "CHECKBOX",
+                          "model": "base.lineUpdateRecord.laborflatrtfl",
+                          "label": "global.flat.rate",
+                          "dataFormat": "LOGICAL"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "type": "COL",
+                      "subType": "1/2",
+                      "children": [
+                        {
+                          "id": 16,
+                          "type": "FIELD",
+                          "subType": "DROP_DOWN",
+                          "model": "base.lineUpdateRecord.labortype",
+                          "label": "global.charge.method",
+                          "type3": "SET",
+                          "metaGroup": "VA",
+                          "meta": "LaborType",
+                          "blankOption": false,
+                          "conditionShow": "!base.lineUpdateRecord.laborflatrtfl"
+                        },
+                        {
+                          "id": 17,
+                          "type": "FIELD",
+                          "subType": "TEXT_BOX",
+                          "model": "base.lineUpdateRecord.laborunits",
+                          "label": "global.based.on.finished.product.amount",
+                          "dataFormat": "DECIMAL",
+                          "sign": "+",
+                          "digits": 7,
+                          "decimals": 2,
+                          "conditionShow": "!base.lineUpdateRecord.laborflatrtfl",
+                          "formatOptions": {
+                            "minimumFractionDigits": 2,
+                            "maximumFractionDigits": 2
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

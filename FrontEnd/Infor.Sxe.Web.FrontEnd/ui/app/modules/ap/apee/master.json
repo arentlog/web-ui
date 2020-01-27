@@ -1,0 +1,211 @@
+{
+  "viewId": "ap-apee-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.apee",
+          "children": [
+            {
+              "id": 17,
+              "type": "BTN",
+              "subType": "MENU",
+              "label": "global.invoice.actions",
+              "conditionDisabled": "!base.grid.isAnyRowSelected()",
+              "children": [
+                {
+                  "id": 18,
+                  "type": "MENU_OPT",
+                  "label": "global.pay.invoice.s",
+                  "icon": "icon-payment-request",
+                  "conditionDisabled": "",
+                  "eventClick": "mst.doInvoiceAction('Pay')"
+                },
+                {
+                  "id": 19,
+                  "type": "MENU_OPT",
+                  "label": "global.do.not.pay.invoice.s",
+                  "icon": "icon-cancel",
+                  "conditionDisabled": "",
+                  "eventClick": "mst.doInvoiceAction('Remove')"
+                },
+                {
+                  "id": 20,
+                  "type": "MENU_OPT",
+                  "label": "global.dispute.invoice.s",
+                  "icon": "icon-reject",
+                  "eventClick": "mst.doInvoiceAction('Dispute')"
+                }
+              ]
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 6,
+              "type": "GRID",
+              "htmlId": "apee-master-grid",
+              "model": "base.dataset",
+              "controlRef": "base.grid",
+              "options": {
+                "showCheckboxes": true,
+                "selectable": "multiple"
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 5,
+                  "type": "TOOLBAR",
+                  "label": "global.edit.payment.selection",
+                  "children": [
+                    {
+                      "id": 10,
+                      "type": "BTN",
+                      "label": "global.split.schedule.payment",
+                      "eventClick": "mst.splitPayFunction()",
+                      "conditionDisabled": "!base.grid.isOneRowSelected()"
+                    },
+                    {
+                      "id": 14,
+                      "type": "BTN",
+                      "label": "global.open.item.maintenance",
+                      "eventClick": "mst.openitem()",
+                      "conditionDisabled": "!base.grid.isOneRowSelected()"
+                    },
+                    {
+                      "id": 11,
+                      "type": "BTN",
+                      "label": "global.save",
+                      "conditionDisabled": "",
+                      "eventClick": "mst.print()",
+                      "icon": "icon-save"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "apstatus",
+                  "label": "global.status"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "HYPERLINK",
+                  "model": "vendno",
+                  "label": "global.vendor.number",
+                  "dataFormat": "DECIMAL_TEXT",
+                  "eventClick": "mst.vendorHyperlink()"
+                },
+                {
+                  "id": 31,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "vendnotesfl",
+                  "label": "global.vendor.notes",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "vendname",
+                  "label": "global.vendor.name"
+                },
+                {
+                  "id": 24,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "invoiceno",
+                  "label": "ap.invoice.number"
+                },
+                {
+                  "id": 32,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "invoicenotesfl",
+                  "label": "global.invoice.notes",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 25,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "invoicedate",
+                  "label": "global.invoice.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 26,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "transtype",
+                  "label": "global.type",
+                  "customFormatter": "",
+                  "dataFormat": "ApTransactionType"
+                },
+                {
+                  "id": 33,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "amount",
+                  "label": "global.amount",
+                  "dataFormat": "CURRENCY",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 27,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "duedate",
+                  "label": "global.due.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 28,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "discdate",
+                  "label": "global.discount.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 29,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "disc",
+                  "label": "global.discount",
+                  "dataFormat": "DECIMAL",
+                  "formatOptions": {
+                    "minimumFractionDigits": 2
+                  }
+                },
+                {
+                  "id": 30,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "refer",
+                  "label": "global.reference"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

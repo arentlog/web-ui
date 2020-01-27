@@ -1,0 +1,213 @@
+{
+  "viewId": "ap-apsv-create",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "CREATE",
+  "children": [
+    {
+      "id": 2,
+      "type": "FORM",
+      "children": [
+        {
+          "id": 3,
+          "type": "MOD_CNTR",
+          "controls": {
+            "toolbar": {
+              "id": 4,
+              "type": "TOOLBAR",
+              "label": "global.vendor",
+              "subLabel": "global.new",
+              "controls": {
+                "navBtns": {
+                  "id": 16,
+                  "type": "BTN_SET",
+                  "subType": "TBAR_NAV",
+                  "children": [
+                    {
+                      "id": 17,
+                      "type": "BTN",
+                      "subType": "ICON",
+                      "icon": "icon-left-arrow",
+                      "stateRef": "^.master",
+                      "label": "special.button.back"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 5,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-save",
+                  "label": "global.save",
+                  "submitForm": true,
+                  "eventValidated": "dtl.submit()",
+                  "securityLevel": 3
+                },
+                {
+                  "id": 6,
+                  "type": "BTN",
+                  "subType": "",
+                  "icon": "icon-cancel",
+                  "label": "global.cancel",
+                  "eventClick": "dtl.cancel()"
+                }
+              ]
+            },
+            "content": {
+              "id": 7,
+              "type": "MOD_CONTENT",
+              "children": [
+                {
+                  "id": 8,
+                  "type": "EXP_AREA",
+                  "label": "global.required",
+                  "children": [
+                    {
+                      "type": "ROW",
+                      "id": 9,
+                      "children": [
+                        {
+                          "type": "COL",
+                          "subType": "1/2",
+                          "id": 10,
+                          "children": [
+                            {
+                              "id": 11,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "label": "global.vendor.number",
+                              "required": false,
+                              "model": "dtl.apsv.vendno",
+                              "dataFormat": "INTEGER_TEXT",
+                              "sign": "+",
+                              "digits": 12
+                            }
+                          ]
+                        },
+                        {
+                          "type": "COL",
+                          "subType": "1/2",
+                          "id": 13,
+                          "children": [
+                            {
+                              "id": 18,
+                              "type": "FIELD",
+                              "subType": "TEXT_BOX",
+                              "label": "global.name",
+                              "required": true,
+                              "model": "dtl.apsv.name",
+                              "maxLength": 30
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 19,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 20,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 22,
+                              "type": "FIELD",
+                              "subType": "LOOKUP",
+                              "model": "dtl.apsv.termstype",
+                              "label": "global.terms",
+                              "meta": "Terms",
+                              "required": true
+                            }
+                          ]
+                        },
+                        {
+                          "id": 21,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 24,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.apsv.bankno",
+                              "label": "global.bank",
+                              "type3": "MANUAL",
+                              "required": true,
+                              "optionsModel": "dtl.banknoDropDownOptions"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 25,
+                      "type": "ROW",
+                      "children": [
+                        {
+                          "id": 26,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 27,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.apsv.statecd",
+                              "label": "global.state",
+                              "type3": "CODES",
+                              "meta": "Province",
+                              "conditionShow": "dtl.taxMethodType.toLowerCase() === 'v'",
+                              "conditionRequired": "dtl.taxMethodType.toLowerCase() === 'v'"
+                            }
+                          ]
+                        },
+                        {
+                          "id": 28,
+                          "type": "COL",
+                          "subType": "1/2",
+                          "children": [
+                            {
+                              "id": 29,
+                              "type": "FIELD",
+                              "subType": "DROP_DOWN",
+                              "model": "dtl.apsv.taxgroupno",
+                              "label": "global.tax.group",
+                              "type3": "CODES",
+                              "meta": "TaxGroup",
+                              "conditionShow": "dtl.taxMethodType.toLowerCase() === 'v' && dtl.taxInterfaceType.toLowerCase() === 's'",
+                              "conditionRequired": "dtl.taxMethodType.toLowerCase() === 'v' && dtl.taxInterfaceType.toLowerCase() === 's'"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 30,
+                  "type": "EXP_AREA",
+                  "label": "global.user.fields",
+                  "children": [
+                    {
+                      "id": 34,
+                      "type": "CUSTOM",
+                      "subType": "UserFields",
+                      "options": {
+                        "tableName": "apsv",
+                        "objectRef": "dtl.apsv"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,322 @@
+{
+  "viewId": "po-poei-master",
+  "id": 1,
+  "type": "VIEW",
+  "subType": "MASTER_LIST",
+  "children": [
+    {
+      "id": 2,
+      "type": "MOD_CNTR",
+      "conditionShow": "base.isMaster()",
+      "controls": {
+        "toolbar": {
+          "id": 3,
+          "type": "TOOLBAR",
+          "label": "title.poei",
+          "children": [
+            {
+              "id": 25,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.quick.receive",
+              "eventClick": "mst.launchQuickReceive()",
+              "icon": "icon-compose"
+            },
+            {
+              "id": 36,
+              "type": "BTN",
+              "subType": "TER",
+              "icon": "icon-send-submit",
+              "label": "global.final.update",
+              "securityLevel": 3,
+              "eventClick": "mst.finalUpdate()"
+            },
+            {
+              "id": 37,
+              "type": "BTN",
+              "subType": "MENU",
+              "label": "global.tracking",
+              "conditionDisabled": "",
+              "conditionShow": "mst.isReceiveCancelTrackingEnabled()",
+              "children": [
+                {
+                  "id": 38,
+                  "type": "MENU_OPT",
+                  "label": "global.receive.purchase.orders.for.tracking.number",
+                  "conditionDisabled": "!mst.isReceiveCancelTrackingEnabled()",
+                  "eventClick": "mst.receiveTracking()"
+                },
+                {
+                  "id": 39,
+                  "type": "MENU_OPT",
+                  "label": "global.cancel.purchase.orders.for.tracking.number",
+                  "conditionDisabled": "!mst.isReceiveCancelTrackingEnabled()",
+                  "eventClick": "mst.cancelTracking()"
+                }
+              ]
+            },
+            {
+              "id": 35,
+              "type": "BTN",
+              "subType": "TER",
+              "label": "global.receiving.report",
+              "icon": "icon-report",
+              "eventClick": "mst.receivingReport()"
+            }
+          ]
+        },
+        "content": {
+          "id": 4,
+          "type": "MOD_CONTENT",
+          "children": [
+            {
+              "id": 45,
+              "type": "EXP_AREA",
+              "label": "global.advanced.search",
+              "collapsed": true,
+              "children": [
+                {
+                  "id": 46,
+                  "type": "ROW",
+                  "children": [
+                    {
+                      "id": 47,
+                      "type": "COL",
+                      "subType": "1",
+                      "children": [
+                        {
+                          "id": 44,
+                          "type": "CUSTOM",
+                          "subType": "AdvancedSearch",
+                          "options": {
+                            "criteria": "base.advCriteria",
+                            "criteriaList": "mst.criteriaList",
+                            "criteriaView": "po/poei/advanced-criteria.json",
+                            "defaultSelectedCriteria": "mst.defaultSelectedCriteria",
+                            "searchFunction": "mst.advancedSearch"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "type": "GRID",
+              "controlRef": "base.grid",
+              "model": "base.dataset",
+              "options": {
+                "showCheckboxes": true,
+                "showDrilldown": true,
+                "events": {
+                  "drilldown": "mst.drilldown()"
+                }
+              },
+              "controls": {
+                "toolbar": {
+                  "id": 6,
+                  "type": "TOOLBAR",
+                  "label": "global.product.orders",
+                  "children": [
+                    {
+                      "id": 26,
+                      "type": "BTN",
+                      "subType": "SEC",
+                      "label": "global.quick.view",
+                      "eventClick": "mst.launchQuickView()",
+                      "conditionDisabled": "!base.grid.isOneRowSelected()",
+                      "icon": "icon-amend"
+                    },
+                    {
+                      "id": 24,
+                      "type": "BTN",
+                      "subType": "MENU",
+                      "label": "global.actions",
+                      "children": [
+                        {
+                          "id": 40,
+                          "type": "MENU_OPT",
+                          "label": "global.full.receipt",
+                          "conditionDisabled": "!mst.isFullReceiptEnabled()",
+                          "eventClick": "mst.fullReceiving()",
+                          "icon": "icon-save",
+                          "securityLevel": 3
+                        },
+                        {
+                          "id": 41,
+                          "type": "MENU_OPT",
+                          "label": "global.cancel.receiving.work",
+                          "conditionDisabled": "!mst.isCancelReceivingEnabled()",
+                          "eventClick": "mst.cancelReceiving()",
+                          "icon": "icon-cancel"
+                        },
+                        {
+                          "id": 29,
+                          "type": "MENU_OPT",
+                          "label": "global.receiving.labels",
+                          "conditionDisabled": "!mst.isReceivingLabelsEnabled()",
+                          "eventClick": "mst.receivingLabels()",
+                          "icon": "icon-create-report"
+                        },
+                        {
+                          "id": 34,
+                          "type": "MENU_OPT",
+                          "label": "global.receive.by.ready.asn",
+                          "conditionDisabled": "!mst.isReceivingByReadyEnabled()",
+                          "eventClick": "mst.receiveByReady()",
+                          "icon": "icon-create-report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "id": 7,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "pono",
+                  "label": "global.purchase.order.number"
+                },
+                {
+                  "id": 8,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "posuf",
+                  "label": "global.suffix",
+                  "dataFormat": "Suffix"
+                },
+                {
+                  "id": 9,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "ponotesfl",
+                  "label": "global.blank.label.string.for.space",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 10,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "transtype",
+                  "label": "global.type",
+                  "dataFormat": "PoOrderType"
+                },
+                {
+                  "id": 12,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "stagecdx",
+                  "label": "global.stage"
+                },
+                {
+                  "id": 11,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "enterdt",
+                  "label": "global.enter.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 13,
+                  "type": "GRID_COL",
+                  "subType": "DATE",
+                  "model": "duedt",
+                  "label": "global.due.date",
+                  "dataFormat": "DATE"
+                },
+                {
+                  "id": 14,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "vendno",
+                  "label": "global.vendor.number"
+                },
+                {
+                  "id": 15,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "vendnotesfl",
+                  "label": "global.blank.label.string.for.space",
+                  "dataFormat": "NotesFlag"
+                },
+                {
+                  "id": 16,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "shipfmno",
+                  "label": "global.ship.from",
+                  "dataFormat": "INTEGER_TEXT"
+                },
+                {
+                  "id": 17,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "name",
+                  "label": "global.name"
+                },
+                {
+                  "id": 18,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "whse",
+                  "label": "global.warehouse"
+                },
+                {
+                  "id": 19,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "amounti",
+                  "label": "global.purchase.order.amount",
+                  "dataFormat": "CURRENCY"
+                },
+                {
+                  "id": 20,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "batchdatcd",
+                  "label": "global.ready.asn",
+                  "dataFormat": "LOGICAL",
+                  "formatOptions": {
+                    "trueValue": "r-yes",
+                    "falseValue": "no"
+                  }
+                },
+                {
+                  "id": 21,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "statusinfo",
+                  "label": "global.status.information"
+                },
+                {
+                  "id": 22,
+                  "type": "GRID_COL",
+                  "subType": "CHECKBOX",
+                  "model": "trackfl",
+                  "label": "global.tracking.use",
+                  "dataFormat": "LOGICAL"
+                },
+                {
+                  "id": 23,
+                  "type": "GRID_COL",
+                  "subType": "TEXT",
+                  "model": "freightexpx",
+                  "label": "global.freight.expected"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 43,
+      "type": "VIEW_CNTR",
+      "viewName": "valueAddSurplus"
+    }
+  ]
+}
